@@ -1,0 +1,26 @@
+name: Delete workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: workflow-id, workflow-name or filename
+        required: true
+        type: string
+
+jobs:
+  delete:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 1
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      WORKFLOW: ${{ github.event.inputs.workflow }}
+
+    steps:
+      - run: gh workflow view "${WORKFLOW}"
+      - run: |
+          gh run list --workflow "${WORKFLOW}" --limit 1000 --json databaseId,status --jq '.[] | select(.status == "completed") | .databaseId' \
+            | xargs -n 1 -I {} gh api -X DELETE repos/${REPOSITORY}/actions/runs/{}
+        env:
+          REPOSITORY: ${{ github.repository }}

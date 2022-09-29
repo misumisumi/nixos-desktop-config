@@ -3,6 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config
 , lib
+, pkgs
 , modulesPath
 , ...
 }: {
@@ -21,29 +22,36 @@
         };
       };
     };
+    kernelModules = [ "kvm-amd" ];
+    resumeDevice = "/dev/mapper/VolGroup00-lvolroot";
+    kernelParams = [ "resume_offset=27234304" ];
   };
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/mother-root";
+      device = "/dev/disk/by-label/zephyrus-root";
       fsType = "ext4";
     };
     "/nix" = {
-      device = "/dev/disk/by-label/mother-nix";
+      device = "/dev/disk/by-label/zephyrus-nix";
       fsType = "ext4";
     };
     "/var" = {
-      device = "/dev/disk/by-label/mother-var";
+      device = "/dev/disk/by-label/zephyrus-var";
       fsType = "ext4";
     };
     "/home" = {
-      device = "/dev/disk/by-label/mother-home";
+      device = "/dev/disk/by-label/zephyrus-home";
       fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-label/mo-boot";
+      device = "/dev/disk/by-label/ze-boot";
       fsType = "vfat";
     };
   };
+  # lower image_size
+  systemd.tmpfiles.rules = [
+    "w    /sys/power/image_size - - - - 0"
+  ];
   swapDevices = [
     {
       device = "/dev/mapper/VolGroup00-lvolswap";

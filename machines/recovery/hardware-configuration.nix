@@ -3,53 +3,61 @@
 # to /etc/nixos/configuration.nix instead.
 { config
 , lib
+, pkgs
 , modulesPath
 , ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
   boot = {
     initrd = {
-      availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
+      availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
       kernelModules = [ "dm-snapshot" ];
       luks.devices = {
         luksroot = {
-          device = "/dev/disk/by-partlabel/LUKSROOT";
+          device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
           preLVM = true;
           allowDiscards = true;
         };
       };
     };
+    # kernelModules = [ "kvm-amd" "kvm-intel" ];
+    # extraModulePackages = [ ];
+    # resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
+    # kernelParams = [ "resume_offset=resume_size" ];
   };
+
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/mother-root";
+      label = "general-root";
       fsType = "ext4";
     };
     "/nix" = {
-      device = "/dev/disk/by-label/mother-nix";
+      label = "general-nix";
       fsType = "ext4";
     };
     "/var" = {
-      device = "/dev/disk/by-label/mother-var";
+      label = "general-var";
       fsType = "ext4";
     };
     "/home" = {
-      device = "/dev/disk/by-label/mother-home";
+      label = "general-home";
       fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-label/mo-boot";
+      label = "ge-boot";
       fsType = "vfat";
     };
   };
   swapDevices = [
     {
-      device = "/dev/mapper/VolGroup00-lvolswap";
+      device = "/dev/mapper/VolGroupGeneral-swap";
       priority = 10;
     }
   ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

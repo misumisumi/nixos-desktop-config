@@ -14,7 +14,6 @@
     ../../system/musnix
     ../../apps/documentation
     ../../apps/nix-ld
-    ../../apps/openfortivpn
     ../../apps/pkgs
     ../../apps/printer
     ../../apps/programs

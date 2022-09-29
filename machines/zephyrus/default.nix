@@ -1,5 +1,7 @@
+{ inputs, ... }:
 {
   imports = [
+    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
@@ -11,7 +13,6 @@
     ../../system
     ../../system/bluetooth
     ../../system/pipewire
-    ../../system/musnix
     ../../apps/documentation
     ../../apps/nix-ld
     ../../apps/openfortivpn

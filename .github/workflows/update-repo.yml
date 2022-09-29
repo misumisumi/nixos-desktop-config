@@ -1,0 +1,47 @@
+name: Update repository
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: "0 19 * * 5" # runs weekly on Saturday at 04:00 (JST)
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+    outputs:
+      pr-number: ${{ steps.update.outputs.pull-request-number }}
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Generate GitHub Apps token
+        id: generate
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - uses: cachix/install-nix-action@v20
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - uses: cachix/cachix-action@v12
+        with:
+          name: misumisumi
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          skipPush: true
+
+      - name: Update package version
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          nix develop --command nvfetcher -c pkgs/packages.toml --commit-changes
+
+      - name: Update flake lock
+        id: update
+        uses: DeterminateSystems/update-flake-lock@v20
+        with:
+          token: ${{ steps.generate.outputs.token }}
+          commit-msg: "Update flake and package version"
+          pr-title: "Update repository" # Title of PR to be created
+          pr-labels: | # Labels to be set on the PR
+            dependencies
+            automated

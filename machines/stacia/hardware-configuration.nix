@@ -3,6 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config
 , lib
+, pkgs
 , modulesPath
 , ...
 }: {
@@ -21,32 +22,35 @@
         };
       };
     };
+    #resumeDevice = "/.swapfile";
+    #kernelParams = [ "resume_offset=27234304" ];
   };
+
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/mother-root";
+      device = "/dev/disk/by-label/stacia-root";
       fsType = "ext4";
     };
     "/nix" = {
-      device = "/dev/disk/by-label/mother-nix";
+      device = "/dev/disk/by-label/stacia-nix";
       fsType = "ext4";
     };
     "/var" = {
-      device = "/dev/disk/by-label/mother-var";
+      device = "/dev/disk/by-label/stacia-var";
       fsType = "ext4";
     };
     "/home" = {
-      device = "/dev/disk/by-label/mother-home";
+      device = "/dev/disk/by-label/stacia-home";
       fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-label/mo-boot";
+      device = "/dev/disk/by-label/st-boot";
       fsType = "vfat";
     };
   };
   swapDevices = [
     {
-      device = "/dev/mapper/VolGroup00-lvolswap";
+      device = "/dev/mapper/VolGroupStacia-lvolswap";
       priority = 10;
     }
   ];

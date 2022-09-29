@@ -1,56 +1,84 @@
-#  These are the different profiles that can be used when building NixOS.
-#
-#  flake.nix 
-#   └─ ./machines  
-#       ├─ default.nix *
-#       ├─ configuration.nix
-#       ├─ home.nix
-#       └─ ./aegis OR ku-dere OR ./mother OR ./tsundere OR ./yandere OR ./vm OR ./zephyrus
-#            ├─ ./default.nix
-#            └─ ./home.nix
-#
-# aegis is Jetson Nano. ku-dere is Rasberry Pi 3B.
-# aegis and ku-dere and yandere is server.
-
-{ inputs, nixpkgs, home-manager, nur, user, location, ... }: # Multipul arguments
-
+{ inputs
+, stateVersion
+, user
+, ...
+}:
 let
-  choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
-  type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
-
-  # pkgs = import nixpkgs {
-  #   inherit system;
-  #   config.allowUnfree = true;  # Allow proprietary software
-  # };
-
-  lib = nixpkgs.lib;
-  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location }: lib.nixosSystem {    # Common profile
-    system = choiceSystem hostname;
-    specialArgs = { inherit inputs user location; }; # specialArgs give some args to modules
-    modules = [
-      nur.nixosModules.nur
-      ./configuration.nix    # TZ and console settings and so on...
-      (./. + "/${hostname}")
-
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; };
-        home-manager.users.${user} = {
-          # Common and each machine configuration
-          import = [(import ./home.nix)] ++ [(import ./. + "/${hostname}" + /home.nix)];
-        };
-      }
-    ];
-  };
-
+  inherit (inputs.nixpkgs) lib;
+  settings =
+    { hostname
+    , user
+    , rootDir ? ""
+    , system ? "x86_64-linux"
+    , homeDirectory ? ""
+    , scheme ? "minimal"
+    , useNixOSWallpaper ? false
+    , wm ? "qtile"
+    ,
+    }:
+      with lib;
+      nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs hostname user stateVersion useNixOSWallpaper wm; }; # specialArgs give some args to modules
+        modules =
+          [
+            ../modules
+            inputs.home-manager.nixosModules.home-manager
+            inputs.musnix.nixosModules.musnix
+            inputs.nur.nixosModules.nur
+            inputs.sops-nix.nixosModules.sops
+            (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
+                };
+                sharedModules = [
+                  inputs.flakes.nixosModules.for-hm
+                  inputs.nvimdots.nixosModules.nvimdots
+                  inputs.dotfiles.homeManagerModules.dotfiles
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
+                users."${user}" = {
+                  dotfilesActivation = true;
+                };
+              };
+            }
+          ];
+      };
 in
 {
-  aegis = settings { hostname="aegis"; inherit inputs nixpkgs home-manager nur user location; };
-  ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs home-manager nur user location; };
-  mother = settings { hostname="mother"; inherit inputs nixpkgs home-manager nur user location; };
-  tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs home-manager nur user location; };
-  yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user location; };
-  vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user location; };
-  zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user location; };
+  recovery-gui = settings {
+    hostname = "recovery";
+    user = "nixos";
+    wm = "gnome";
+    scheme = "full";
+  };
+  recovery-cui = settings {
+    hostname = "recovery";
+    user = "nixos";
+    wm = "";
+    scheme = "small";
+  };
+  mother = settings {
+    hostname = "mother";
+    scheme = "full";
+    inherit user;
+  };
+  zephyrus =
+    settings
+      {
+        hostname = "zephyrus";
+        scheme = "full";
+        inherit user;
+      };
+  stacia =
+    settings
+      {
+        hostname = "stacia";
+        scheme = "full";
+        inherit user;
+      };
 }

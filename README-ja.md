@@ -1,29 +1,27 @@
-[English](./README.md)|[日本語](./README-ja.md)
-
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-Welcome to the nix environment!  
-This is [misumisumi](https://github.com/misumisumi)'s machine setup.
+nix の環境へようこそ!!  
+これは[misumisumi](https://github.com/misumisumi)のマシン設定です。
 
-You can try NixOS using some of my setup.  
-Currently, only the NixOS environment is supported.  
-In the future, other distributions (user home config) and macOS will be supported.
+私の設定の一部を利用して NixOS を試すことができます。  
+現在、NixOS 環境のみサポートしています。  
+将来的にmacOS をサポートする予定です。
 
-## Description
+## 説明
 
-- This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes).
-- You can try out the environment created for recovery (gnome or CLI only).
-- The settings of packages installed on the system are managed in [apps](./apps).
-- Configuration of packages installed by users is managed in a separate repository: [home-manager-config]().
-- Settings for each machine are located in [machines](./machines).
+- このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
+- リカバリー用に作成した環境(gnome or CLI only)を試用することができます。
+- システムにインストールされるパッケージの設定は[apps](./apps)で管理されています。
+- ユーザーにインストールされるパッケージの設定は別リポジトリ: [home-manager-config]()で管理されています。
+- 各マシンの設定は[machines](./machines)にあります。
 
 ```
 machines
-├── init      # common settings
-├── mother    # Main desktop
-├── recovery  # For recovery
-├── stacia    # Work desktop
-└── zephyrus  # Laptop
+├── init      # 共通設定
+├── mother    # メインPC
+├── recovery  # リカバリー用
+├── stacia    # 研究室PC
+└── zephyrus  # ラップトップ
 ```
 
 ## Installation Guide
@@ -91,7 +89,7 @@ sudo nixos-install --flake . #{gnome|tty-only}
 |              |       Linux       |       macOS       |
 | :----------: | :---------------: | :---------------: |
 |    Shell     |        Zsh        |        Zsh        |
-|   Terminal   | Kitty & Alacritty | Kitty & Alacritty |
+|   Terminal   | wezterm && kitty  | wezterm && kitty  |
 |    Editor    |      Neovim       |      Neovim       |
 |   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
 | Input Method | Fcitx5+mozc & skk |        \-         |
@@ -105,8 +103,6 @@ sudo nixos-install --flake . #{gnome|tty-only}
 | gnome | Wayland or Xorg |
 | QTile |      Xorg       |
 | Yabai |      macOS      |
-
-- Tilling WM Key Map
 
 ## ToDO
 
