@@ -10,4 +10,4 @@
 
   figlet    # Make AA from character
   cmatrix   # Lain of character
-];
+]
