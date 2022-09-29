@@ -1,6 +1,6 @@
 
 {
-  cui = [
+  systemPkgs = [
     coreutils-full  # GNU coreutils
     neovim          # Editor
     git             # Version control system

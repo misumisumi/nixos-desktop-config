@@ -15,9 +15,7 @@
 #
 
 { config, lib, pkgs, user, ... }:
-let
-  commonPkgs = (import ../apps/common);
-in
+
 { 
   imports =                                   # Home Manager Modules
     (import ../apps/ide) ++
@@ -27,7 +25,6 @@ in
     username = "${user}";
     homeDirectory = "/home/${user}";
 
-    packages = with pkgs; commonPkgs;
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       name = "Dracula-cursors";

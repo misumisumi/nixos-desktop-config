@@ -78,7 +78,8 @@ in
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
-    systemPackages = with pkgs; commonPkgs.cui ++ systemWidePython; # System wide pacakges
+
+    systemPackages = with pkgs; commonPkgs.systemPkgs ++ systemWidePython; # System wide pacakges
   };
 
   # sound = {                                 # ALSA sound enable(pipewireを有効にするときは消すかfalseにする)
