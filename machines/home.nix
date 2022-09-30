@@ -14,7 +14,7 @@
 #               └─ default.nix
 #
 
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, user, stateVersion, ... }:
 
 { 
   imports =                                   # Home Manager Modules
@@ -32,7 +32,25 @@
       size = 16;
     };
 
-    stateVersion = "22.05";
+    sessionVariables = {
+      CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
+      EDITOR=nvim;
+    };
+
+    shellAliases = {
+      ls="ls --color=auto";
+      grep = "grep --color=auto";
+      fgrep = "grep -F --color=auto";
+      egrep = "grep -E --color=auto";
+      tp = "trash-put";
+      tls = "trash-list";
+      tre = "trash-restore";
+      temp = "trash-empty";
+      trm = "trash-rm";
+      tty-clock = "tty-clock -s -c -C 6";
+    };
+
+    stateVersion = "stateVersion";
   };
 
   programs = {
