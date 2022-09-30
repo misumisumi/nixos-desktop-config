@@ -9,7 +9,7 @@
 #           └─ ./neovim
 #               └─ default.nix
 #
-{ config, lib, pkgs, inputs, user, location, ... }:
+{ config, lib, pkgs, inputs, user, location, stateVersion, ... }:
 
 let 
   commonPkgs = (import ../common);
@@ -144,6 +144,6 @@ in
       channel = "https://nixos.org/channels/nixos-unstable";
       # flakes = "github+ssh";  # リモートflakeの変更に自動で対応する
     };
-    stateVersion = "22.05";
+    stateVersion = "${stateVersion}";
   };
 }
