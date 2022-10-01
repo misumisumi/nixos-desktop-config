@@ -1,44 +1,42 @@
-{ config, lib, pkgs, ... }:
-
+{ conifg, lib, pkgs, ... }:
+let
+  userDir = ( import ../../../machines/home.nix ).home.homeDirectory;
+in
 {
-  services = {
-    xserver = {
-      enable = true;
+  imports = [
+    ../../apps/system
+  ];
 
-      layout = "us";
-      xkbOptions = "caps:control_l, super_l:alt_l, alt_l:super_l";
+  xsession = {
+    enable = true;
 
-      libinput = {
-        enable = true;
-        mouse.naturalScrolling = true;
-        touchpad = {
-          tapping = true;
-          naturalScrolling = true;
-        };
-      };
-
-      displayManager = {
-        lightdm = {
-          enable = true;
-          greeters.enso = true;
-        };
-        defaultSession = "none+qtile";
-      };
-      windowManager.qtile.enable = true;
-
-      serverFlagsSection = ''
-        Option "BlankTime" "0"
-        Option "StandbyTime" "0"
-        Option "SuspendTime" "0"
-        Option "OffTime" "0"
-      '';
+    windowManager = {
+      command = "${pkgs.qtile}/bin/qtile start -c ${userDir}/.dotfiles/apps/desktop/wm/qtile/config.py ";
     };
-    environment.systemPackages = with pkgs; [
-      xclip
-      xorg.xev
-      xorg.xkill
-      xorg.xrandr
-      xterm
-    ];
+
+    initExtra = ''
+      exec dbus-launch qtile
+    '';
+
+    profileExtra=''
+      export GTK_IM_MODULE=fcitx
+      export QT_IM_MODULE=fcitx
+      export XMODIFIERS=@im=fcitx
+      export GLFW_IM_MODULE=ibus
+      export QT_STYLE_OVERRIDE=gtk2
+      export XDG_CONFIG_HOME=~/.config
+      export SDL_JOYSTICK_HIDAPI=0
+      xhost si:localuser:$USER &
+      devmon &
+      thunar --daemon &
+      if [ $(hostname) = "zephyrus" ]; then
+          asusctltray &
+      fi
+    '';
   };
+
+  xresources = {
+    extraConfig = "Xft.dpi:110";
+  };
+
 }
