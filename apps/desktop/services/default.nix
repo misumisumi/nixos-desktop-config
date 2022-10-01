@@ -16,6 +16,15 @@
   };
 
   services = {
+    screen-locker = {
+      enable = true;
+      inactiveInterval = 30;
+      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ../wm/wallpapers/archlinux.png";
+      xautolock = {
+        enable = true;
+      };
+    };
+
     picom = {
       enable = true;
       backend = "glx";
