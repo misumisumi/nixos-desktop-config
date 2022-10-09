@@ -17,7 +17,7 @@
     };
   };
 
-  outputs = {self, nixpkgs, flake-utils, nur}: 
+  outputs = inputs @ {self, nixpkgs, flake-utils, nur}: 
     let
       user = "sumi";
       location = "$HOME/.dotfiles";
