@@ -1,5 +1,6 @@
 {
   description = "Each my machine NixOS System Flake Configuration";
+
   inputs = 
   {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -26,7 +27,7 @@
         import ./machines {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager nur user location;
-        };
+        }
       );
     };
 }
