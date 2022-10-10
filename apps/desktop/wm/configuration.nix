@@ -20,7 +20,7 @@
         lightdm = {
           enable = true;
           greeters = {
-            pantheon = {
+            enso = {
               enable = true;
             };
           };
