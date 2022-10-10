@@ -36,8 +36,8 @@
 
       coc = {
         enable = true;
-        pluginConfig = ''
-        '';
+        # pluginConfig = ''
+        # '';
         # settings = ''
         #   "languageserver": {
         #     "efm": {
