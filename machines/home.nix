@@ -18,7 +18,7 @@
 
 { 
   imports =                                   # Home Manager Modules
-    (import ../apps/ide) ++
+    (import ../apps/neovim) ++
     (import ../apps/shell);
 
   home = {
