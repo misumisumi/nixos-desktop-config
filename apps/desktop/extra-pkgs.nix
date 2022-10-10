@@ -44,6 +44,6 @@ pkgs: with pkgs; [
   copyq
   conky
 
-  polkit-gnome
+  polkit_gnome
 ]
 
