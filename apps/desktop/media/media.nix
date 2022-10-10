@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  prgrams = {
+  programs = {
     feh = {
       enable = true;
     };
