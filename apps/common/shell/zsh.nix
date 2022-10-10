@@ -52,17 +52,17 @@
         {
           name = "powerlevel10k";
           src = pkgs.zsh-powerlevel10k;
-          file = "powerlevel10k.zsh-theme";
+          file = "share/powerlevel10k/powerlevel10k.zsh-theme";
         }
         {
           name = "zsh-vi-mode";
           src = pkgs.zsh-vi-mode;
-          file="zsh-vi-mode.plugin.zsh";
+          file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
         }
         {
           name = "zsh-history-search-multi-word";
           src = pkgs.zsh-history-search-multi-word;
-          file = "history-search-multi-word.plugin.zsh";
+          file = "share/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
         }
       ];
 
