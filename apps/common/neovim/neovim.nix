@@ -22,12 +22,12 @@
       extraPackages = with pkgs; [
         efm-langserver
         rnix-lsp
-        diagnostic-languageserver
         black
         pylint
         vim-vint
         yamllint
-      ];
+        nodePackages.diagnostic-languageserver
+      ] 
 
       extraPython3Packages = ps: with ps; [
         isort
