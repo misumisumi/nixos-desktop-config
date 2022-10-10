@@ -16,16 +16,15 @@
           naturalScrolling = true;
         };
       };
-      desktopManager.pantheon.enable = true;
       displayManager = {
-        # lightdm = {
-        #   enable = true;
-        #   greeters = {
-        #     pantheon = {
-        #       enable = true;
-        #     };
-        #   };
-        # };
+        lightdm = {
+          enable = true;
+          greeters = {
+            pantheon = {
+              enable = true;
+            };
+          };
+        };
         defaultSession = "none+qtile";
       };
       windowManager.qtile.enable = true;
