@@ -22,12 +22,6 @@
     username = "${user}";
     homeDirectory = "/home/${user}";
 
-    # xdg系のフォルダの作製
-    xdg = {
-      enable = true;
-      createDirectories = true;
-    };
-
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       name = "Dracula-cursors";
       package = pkgs.dracula-theme;
@@ -52,6 +46,12 @@
       tty-clock = "tty-clock -s -c -C 6";
     };
 
+  };
+
+  # xdg系のフォルダの作製
+  xdg = {
+    enable = true;
+    createDirectories = true;
   };
 
   programs = {
