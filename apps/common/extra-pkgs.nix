@@ -1,4 +1,6 @@
 pkgs: with pkgs; [
+    dconf
+
     bottom    # System monitor
     duf       # Show storage usage
     neofetch  # Fetch system info
