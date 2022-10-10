@@ -23,7 +23,6 @@
           horizontal_padding = 8;
           frame_width = 3;
           frame_color = "#02adc7";
-          separator_color = frame;
           sort = true;
           markup = "full";
           format = "%a:\n<b>%s</b>\n%b";
