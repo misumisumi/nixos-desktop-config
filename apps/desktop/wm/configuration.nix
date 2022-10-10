@@ -16,9 +16,8 @@
           naturalScrolling = true;
         };
       };
-
+      desktopManager.pantheon.enable = true;
       displayManager = {
-        pantheon.enable = true;
         # lightdm = {
         #   enable = true;
         #   greeters = {
