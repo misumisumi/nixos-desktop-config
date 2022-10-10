@@ -1,7 +1,5 @@
-{ conifg, lib, user, pkgs, ... }:
-let
-  userDir = "/home/${user}";
-in
+{ config, lib, user, pkgs, ... }:
+
 {
   xsession = {
     enable = true;
