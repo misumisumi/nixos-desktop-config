@@ -37,12 +37,12 @@
         Option "OffTime" "0"
       '';
     };
-    environment.systemPackages = with pkgs; [
-      xclip
-      xorg.xev
-      xorg.xkill
-      xorg.xrandr
-      xterm
-    ];
   };
+  environment.systemPackages = with pkgs; [
+    xclip
+    xorg.xev
+    xorg.xkill
+    xorg.xrandr
+    xterm
+  ];
 }
