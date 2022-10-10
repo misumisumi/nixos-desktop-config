@@ -38,7 +38,9 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    udevil
     xclip
+    xorg.xhost
     xorg.xev
     xorg.xkill
     xorg.xrandr
