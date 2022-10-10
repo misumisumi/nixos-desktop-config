@@ -18,14 +18,15 @@
       };
 
       displayManager = {
-        lightdm = {
-          enable = true;
-          greeters = {
-            pantheon = {
-              enable = true;
-            };
-          };
-        };
+        pantheon = true;
+        # lightdm = {
+        #   enable = true;
+        #   greeters = {
+        #     pantheon = {
+        #       enable = true;
+        #     };
+        #   };
+        # };
         defaultSession = "none+qtile";
       };
       windowManager.qtile.enable = true;
