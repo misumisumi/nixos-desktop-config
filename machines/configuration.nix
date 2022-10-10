@@ -144,9 +144,4 @@ in
     };
     stateVersion = "${stateVersion}";
   };
-  # xdg系のフォルダの作製
-  xdg = {
-    enable = true;
-    createDirectories = true;
-  };
 }
