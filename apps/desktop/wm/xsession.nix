@@ -7,7 +7,7 @@ in
     enable = true;
 
     windowManager = {
-      command = "${pkgs.qtile}/bin/qtile start -c ${userDir}/.dotfiles/apps/desktop/wm/qtile/config.py ";
+      command = "${pkgs.qtile}/bin/qtile start -c ${HOME}/nix-config/apps/desktop/wm/qtile/config.py ";
     };
 
     initExtra = ''
