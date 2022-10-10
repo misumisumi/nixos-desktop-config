@@ -1,4 +1,4 @@
-[
+pkgs: with pkgs; [
   nomacs
 
   thunar
