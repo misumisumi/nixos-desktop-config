@@ -65,8 +65,8 @@
         }
         {
           name = "zsh-history-search-multi-word";
-          src = pkgs.zsh-history-search-multi-word-unstable;
-          file = "${pkgs.zsh-history-search-multi-word-unstable}/share/history-search-multi-word/history-search-multi-word.plugin.zsh";
+          src = pkgs.zsh-history-search-multi-word;
+          file = "${pkgs.zsh-history-search-multi-word}/share/history-search-multi-word/history-search-multi-word.plugin.zsh";
         }
       ];
 
