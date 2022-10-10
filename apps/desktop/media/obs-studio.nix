@@ -5,16 +5,15 @@
     obs-studio = {
       enable = true;
       plugins = [
+        pkgs.obs-studio.plugins.obs-ndi
+        pkgs.obs-studio.plugins.looking-glass-obs
+        pkgs.obs-studio.plugins.obs-pipewire-audio-capture
         pkgs.fetchFromGitHub {
           owner = "dev47apps";
           repo = "droidcam-obs-plugin";
           rev = "1.6.0";
           sha256 = "083pv2l8d1hnfz00y0dfaid87qxwzn23077ciz5z4rn118rxkfr0";
         }
-      ] ++ with pkgs.obs-studio-plugins; [
-        obs-ndi
-        looking-glass-obs
-        obs-pipewire-audio-capture
       ];
     };
   };
