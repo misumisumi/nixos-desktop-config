@@ -28,7 +28,7 @@ let
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: nixpkgs.lib.nixosSystem {    # Common profile
     system = choiceSystem hostname;
     specialArgs = { inherit inputs user location stateVersion; }; # specialArgs give some args to modules
-    host-conf = ./. + "/${hostname}" + /home.nix
+    host-conf = ./. + "/${hostname}" + /home.nix;
     modules = [
       nur.nixosModules.nur
       ./configuration.nix    # TZ and console settings and so on...
