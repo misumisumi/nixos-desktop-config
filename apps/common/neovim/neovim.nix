@@ -2,6 +2,7 @@
 
 {
   xdg = {
+    enable = true;
     configFile = {
       "nvim".source = ./nvim;    # windowsとconfigを共有するため.config/nvimで管理する
     };
