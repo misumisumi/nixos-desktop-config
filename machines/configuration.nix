@@ -63,7 +63,7 @@ in
     (nerdfonts.override {                   # Nerdfont Icons override
       fonts = [
         "FiraCode"
-        "HackNerd"
+        "Hack"
       ];
     })
 
