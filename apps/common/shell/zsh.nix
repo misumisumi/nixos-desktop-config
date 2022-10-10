@@ -32,15 +32,10 @@
         ];
         extraModules = [
           "attr"
-          "history"
-          "environment"
-          "terminal"
-          "editor"
-          "directory"
-          "spectrum"
-          "utility"
-          "completion"
         ];
+        extraConfig = ''
+          zstyle ':prezto:load' pmodule 'history' 'environment' 'terminal' 'editor' 'directory' 'spectrum' 'utility' 'completion'
+        '';
       };
 
       plugins = [
