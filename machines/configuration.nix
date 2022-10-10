@@ -101,7 +101,7 @@ in
 
     openssh = {                             # SSH: secure shell (remote connection to shell of server)
       enable = true;                        # local: $ ssh <user>@<ip>
-      ports = 12511;                        # public:
+      ports = [ 12511 ];                        # public:
                                             #   - in case you want to use the domain name insted of the ip:
                                             #       - for me, via cloudflare, create an A record with name "ssh" to the correct ip without proxy
                                             #   - connect via ssh <user>@<ip or ssh.domain>
