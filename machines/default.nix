@@ -42,7 +42,6 @@ let
         home-manager.users."${user}" = {
           # Common and each machine configuration
           imports = [(import ./home.nix)] ++ [(import hostConf)];
-          stateVersion = stateVersion;
         };
       }
     ];
