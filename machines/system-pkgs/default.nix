@@ -1,6 +1,6 @@
 
 {
-  systemPkgs = [
+  systemPkgs = pkgs: with pkgs; [
     coreutils-full  # GNU coreutils
     neovim          # Editor
     git             # Version control system
@@ -12,7 +12,7 @@
     curl
     traceroute      # Track the network route
   ];
-  systemWidePythonPkgs = [
+  systemWidePythonPkgs = ps: with ps.python3Packages [
     numpy           # For calculate
   ];
 }

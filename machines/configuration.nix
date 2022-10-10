@@ -12,9 +12,7 @@
 { config, lib, pkgs, inputs, user, location, stateVersion, ... }:
 
 let 
-  commonPkgs = (import ./system-pkgs);
-  systemWidePythonPkgs = pythonPkgs: with pythonPkgs; commonPkgs.systemWidePythonPkgs;
-  systemWidePython = pkgs.python3.withPackages systemWidePythonPkgs;
+  systemPkgs = (import ./system-pkgs);
 in
 {
   imports = [];                             # Import window or display manager.
@@ -79,7 +77,7 @@ in
       VISUAL = "nvim";
     };
 
-    systemPackages = with pkgs; commonPkgs.systemPkgs ++ systemWidePython; # System wide pacakges
+    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs;
   };
 
   # sound = {                                 # ALSA sound enable(pipewireを有効にするときは消すかfalseにする)
