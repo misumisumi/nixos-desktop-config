@@ -17,10 +17,6 @@
 { config, lib, pkgs, user, stateVersion, ... }:
 
 { 
-  imports =                                   # Home Manager Modules
-    (import ../apps/common/neovim) ++
-    (import ../apps/common/shell) ++
-    (import ../apps/common/cui);
 
   home = {
     username = "${user}";
