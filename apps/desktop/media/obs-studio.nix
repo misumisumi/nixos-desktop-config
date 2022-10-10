@@ -4,11 +4,11 @@
   programs = {
     obs-studio = {
       enable = true;
-      plugins = [
-        pkgs.obs-studio.plugins.obs-ndi
-        pkgs.obs-studio.plugins.looking-glass-obs
-        pkgs.obs-studio.plugins.obs-pipewire-audio-capture
-        pkgs.fetchFromGitHub {
+      plugins = with pkgs; [
+        obs-studio.plugins.obs-ndi
+        obs-studio.plugins.looking-glass-obs
+        obs-studio.plugins.obs-pipewire-audio-capture
+        fetchFromGitHub {
           owner = "dev47apps";
           repo = "droidcam-obs-plugin";
           rev = "1.6.0";
