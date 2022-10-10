@@ -12,7 +12,7 @@
     curl
     traceroute      # Track the network route
   ];
-  systemWidePythonPkgs = ps: with ps.python3Packages [
+  systemWidePythonPkgs = ps: with ps.python3Packages; [
     numpy           # For calculate
   ];
 }
