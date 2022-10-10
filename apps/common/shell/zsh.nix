@@ -74,6 +74,11 @@
         if [[ -r "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh ]]; then
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
+
+        ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+        ZVM_VI_VISUAL_ESCAPE_BINDKEY=jj
+        ZVM_VI_OPPEND_ESCAPE_BINDKEY=jj
+        ZVM_LINE_INIT_MODE=$ZVM_MODE_LAST
       '';
 
       initExtra = ''
