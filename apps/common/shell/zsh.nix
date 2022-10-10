@@ -47,22 +47,22 @@
                 rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
                 sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
               };
-	  file = "addrev-alias.plugin.zsh";
+          file = "addrev-alias.plugin.zsh";
         }
         {
           name = "powerlevel10k";
           src = pkgs.zsh-powerlevel10k;
-          file = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          file = "powerlevel10k.zsh-theme";
         }
         {
           name = "zsh-vi-mode";
           src = pkgs.zsh-vi-mode;
-          file="${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+          file="zsh-vi-mode.plugin.zsh";
         }
         {
           name = "zsh-history-search-multi-word";
           src = pkgs.zsh-history-search-multi-word;
-          file = "${pkgs.zsh-history-search-multi-word}/share/history-search-multi-word/history-search-multi-word.plugin.zsh";
+          file = "history-search-multi-word.plugin.zsh";
         }
       ];
 
