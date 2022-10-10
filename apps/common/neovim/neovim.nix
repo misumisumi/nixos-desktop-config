@@ -27,7 +27,7 @@
         vim-vint
         yamllint
         nodePackages.diagnostic-languageserver
-      ] 
+      ];
 
       extraPython3Packages = ps: with ps; [
         isort
