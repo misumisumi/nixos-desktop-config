@@ -18,9 +18,7 @@
       };
 
       displayManager = {
-        pantheon = {
-          enable = true;
-        };
+        pantheon.enable = true;
         # lightdm = {
         #   enable = true;
         #   greeters = {
