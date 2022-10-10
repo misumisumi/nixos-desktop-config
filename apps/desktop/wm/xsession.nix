@@ -1,6 +1,6 @@
-{ conifg, lib, pkgs, ... }:
+{ conifg, lib, user, pkgs, ... }:
 let
-  userDir = ( import ../../../machines/home.nix ).home.homeDirectory;
+  userDir = "/home/${user}";
 in
 {
   xsession = {
