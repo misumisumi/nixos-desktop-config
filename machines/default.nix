@@ -37,7 +37,7 @@ let
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user stateVersion; };
-        home-manager.users.${user} = {
+        home-manager.users."${user}" = {
           # Common and each machine configuration
           imports = [(import ./home.nix)] ++ [(import ./. + "/${hostname}" + /home.nix)];
         };
