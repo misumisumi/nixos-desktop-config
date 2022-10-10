@@ -12,7 +12,7 @@
 { config, lib, pkgs, inputs, user, location, stateVersion, ... }:
 
 let 
-  commonPkgs = (import ../common);
+  commonPkgs = (import ./system-pkgs);
   systemWidePythonPkgs = pythonPkgs: with pythonPkgs; commonPkgs.systemWidePythonPkgs;
   systemWidePython = pkgs.python3.withPackages systemWidePythonPkgs;
 in
