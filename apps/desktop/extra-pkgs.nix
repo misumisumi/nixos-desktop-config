@@ -1,10 +1,10 @@
 pkgs: with pkgs; [
   nomacs
 
-  thunar
-  thunar-volman
-  thunar-archive-plugin
-  thunar-media-tags-plugin
+  xfce.thunar
+  xfce.thunar-volman
+  xfce.thunar-archive-plugin
+  xfce.thunar-media-tags-plugin
 
   discord
   slack
