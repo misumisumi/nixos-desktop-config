@@ -26,6 +26,9 @@
           };
         };
         defaultSession = "none+qtile";
+        sessionCommands = ''
+          xrandr --auto
+        '';
       };
       windowManager.qtile.enable = true;
 
