@@ -18,8 +18,9 @@
 
 { 
   imports =                                   # Home Manager Modules
-    (import ../apps/neovim) ++
-    (import ../apps/shell);
+    (import ../apps/common/neovim) ++
+    (import ../apps/common/shell) ++
+    (import ../apps/common/cui);
 
   home = {
     username = "${user}";
