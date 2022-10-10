@@ -17,11 +17,9 @@
 { config, lib, pkgs, user, stateVersion, ... }:
 
 { 
-
   home = {
     username = "${user}";
     homeDirectory = "/home/${user}";
-
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       name = "Dracula-cursors";

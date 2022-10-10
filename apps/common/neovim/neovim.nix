@@ -10,8 +10,7 @@
 
   programs = {
     neovim = {
-      enable = true;
-      # Replace from vi&vim to neovim
+      enable = true; # Replace from vi&vim to neovim
       viAlias = true; 
       vimAlias = true;
       vimdiffAlias = true;
