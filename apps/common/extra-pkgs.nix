@@ -1,13 +1,17 @@
-[
-  "bottom"    # System monitor
-  "duf"       # Show storage usage
-  "neofetch"  # Fetch system info
+{ pkgs, ... }:
 
-  "ranger"    # Filer
-  "tree"      # Show file tree
+{
+  extra-pkgs = with pkgs; [
+    bottom    # System monitor
+    duf       # Show storage usage
+    neofetch  # Fetch system info
 
-  "ffmpeg"    # Multi media solution
+    ranger    # Filer
+    tree      # Show file tree
 
-  "figlet"    # Make AA from character
-  "cmatrix"   # Lain of character
-]
+    ffmpeg    # Multi media solution
+
+    figlet    # Make AA from character
+    cmatrix   # Lain of character
+  ];
+}
