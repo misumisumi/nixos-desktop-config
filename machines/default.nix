@@ -32,6 +32,7 @@ let
     specialArgs = { inherit inputs user location stateVersion; }; # specialArgs give some args to modules
     modules = [
       nur.nixosModules.nur
+      ./boot-common.nix
       ./configuration.nix    # TZ and console settings and so on...
       (./. + "/${hostname}")
 
