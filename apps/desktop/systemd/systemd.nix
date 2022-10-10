@@ -60,7 +60,7 @@
           };
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.thunar}/bin/thunar --daemon";
+            ExecStart = "${pkgs.xfce.thunar}/bin/thunar --daemon";
             Restart = "on-failure";
             RestartSec = 1;
             TimeoutStopSec = 10;
