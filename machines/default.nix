@@ -39,7 +39,7 @@ let
         home-manager.extraSpecialArgs = { inherit user stateVersion; };
         home-manager.users.${user} = {
           # Common and each machine configuration
-          import = [(import ./home.nix)] ++ [(import ./. + "/${hostname}" + /home.nix)];
+          imports = [(import ./home.nix)] ++ [(import ./. + "/${hostname}" + /home.nix)];
         };
       }
     ];
