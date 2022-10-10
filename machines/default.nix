@@ -23,11 +23,10 @@ let
   #   config.allowUnfree = true;  # Allow proprietary software
   # };
 
-  stateVersion = "22.05";
-
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
+    stateVersion = "22.05";
   in
   nixpkgs.lib.nixosSystem {    # Common profile
     system = choiceSystem hostname;
@@ -44,6 +43,7 @@ let
         home-manager.users."${user}" = {
           # Common and each machine configuration
           imports = [(import ./home.nix)] ++ [(import hostConf)];
+          stateVersion = stateVersion;
         };
       }
     ];
