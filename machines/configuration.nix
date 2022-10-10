@@ -127,7 +127,7 @@ in
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    package = pkgs.nixFlakes;               # Enable nixFlakes on system
+    package = pkgs.nixVersions.stable;               # Enable nixFlakes on system
     registry.nixpkgs.flake = inputs.nixpkgs;
 
 # flakeの有効化とビルド時の依存関係を維持(オフラインでも再ビルド可能にする)
