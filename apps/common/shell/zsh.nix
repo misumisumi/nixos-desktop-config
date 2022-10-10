@@ -52,7 +52,7 @@
         {
           name = "powerlevel10k";
           src = pkgs.zsh-powerlevel10k;
-          file = "share/powerlevel10k/powerlevel10k.zsh-theme";
+          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
         {
           name = "zsh-vi-mode";
