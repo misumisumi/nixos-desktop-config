@@ -10,6 +10,6 @@
             (import ../../apps/common/shell);
 
   home = {
-    packages = (import ../../apps/common/extra-pkgs.nix).extra-pkgs;
+    packages = with ../../apps/common/extra-pkgs.nix; extra-pkgs;
   };
 }
