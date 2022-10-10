@@ -22,7 +22,6 @@
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
       devmon &
-      thunar --daemon &
       if [ $(hostname) = "zephyrus" ]; then
           asusctltray &
       fi
