@@ -51,7 +51,9 @@
   # xdg系のフォルダの作製
   xdg = {
     enable = true;
-    createDirectories = true;
+    userDirs = {
+      createDirectories = true;
+    };
   };
 
   programs = {
