@@ -44,6 +44,8 @@ pkgs: with pkgs; [
   copyq
   conky
 
+  scream
+
   polkit_gnome
 ]
 
