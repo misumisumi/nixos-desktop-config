@@ -29,8 +29,7 @@
           };
           Service = {
             Type = "simple";
-            ExecStartPre = "truncate -s 0 /dev/shm/scream-ivshmem";
-            ExecStartPre = "dd if=/dev/zero of=/dev/shm/scream-ivshmem bs=1M count=2";
+            ExecStartPre = "truncate -s 0 /dev/shm/scream-ivshmem & dd if=/dev/zero of=/dev/shm/scream-ivshmem bs=1M count=2";
             ExecStart = "${pkgs.scream}/bin/scream -m /dev/shm/scream-ivshmem";
           };
 
