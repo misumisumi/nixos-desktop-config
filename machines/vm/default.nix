@@ -4,6 +4,7 @@
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./network.nix
+    ../../apps/desktop/wm/configuration.nix
   ];
   
   nix = {
