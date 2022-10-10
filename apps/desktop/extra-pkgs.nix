@@ -17,7 +17,7 @@ pkgs: with pkgs; [
   krita
   gmic-qt-krita
   gpick
-  inkscace
+  inkscape
   unityhub
 
   android-tools
