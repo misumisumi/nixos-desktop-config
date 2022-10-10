@@ -25,10 +25,13 @@ let
 
   stateVersion = "22.05";
 
-  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: nixpkgs.lib.nixosSystem {    # Common profile
+  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
+  let
+    hostConf = ./. + "/${hostname}" + /home.nix;
+  in
+  nixpkgs.lib.nixosSystem {    # Common profile
     system = choiceSystem hostname;
     specialArgs = { inherit inputs user location stateVersion; }; # specialArgs give some args to modules
-    hostConf = ./. + "/${hostname}" + /home.nix;
     modules = [
       nur.nixosModules.nur
       ./configuration.nix    # TZ and console settings and so on...
