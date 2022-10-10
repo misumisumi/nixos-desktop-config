@@ -51,7 +51,7 @@
       tty-clock = "tty-clock -s -c -C 6";
     };
 
-    stateVersion = "stateVersion";
+    stateVersion = stateVersion;
   };
 
   programs = {
