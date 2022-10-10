@@ -35,7 +35,7 @@
       ];
 
       coc = {
-        enable = false;
+        enable = true;
         pluginConfig = ''
         '';
         settings = ''
