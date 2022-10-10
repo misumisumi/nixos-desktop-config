@@ -50,7 +50,7 @@
                 owner = "mono-lab";
                 repo = "zsh-abbrev-alias";
                 rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
-                sha256 = "2193dfab08e9578d7ef0ee41e259b95188f65f2cd0f590b8ccac39f4232f5ee0";
+                sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
               };
         }
         {
