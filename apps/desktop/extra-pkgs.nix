@@ -41,7 +41,7 @@ pkgs: with pkgs; [
 
   baobab
 
-  CopyQ
+  copyq
   conky
 
   polkit-gnome
