@@ -47,11 +47,12 @@
         {
           name = "zsh-abbrev-alias";
           src = pkgs.fetchFromGitHub {
-                owner = "mono-lab";
+                owner = "momo-lab";
                 repo = "zsh-abbrev-alias";
                 rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
                 sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
               };
+	  file = "addrev-alias.plugin.zsh";
         }
         {
           name = "powerlevel10k";
