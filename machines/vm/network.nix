@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   networking = {
-    useDHCP = true;
+    useDHCP = lib.mkDefault true;
     # bridges = {
     #   interfaces = [ "" ];
     # };
