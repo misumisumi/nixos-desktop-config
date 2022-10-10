@@ -94,7 +94,7 @@
         "_GTK_FRAME_EXTENTS@:c"
         "class_g = 'rofi'"
       ];
-      shadowOffsets = [ -7 -7 ];
+      shadowOffsets = [ (-7) (-7) ];
       shadowOpacity = 0.75;
 
       settings = {
