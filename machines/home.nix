@@ -18,6 +18,7 @@
 
 { 
   home = {
+    stateVersion = stateVersion;
     username = "${user}";
     homeDirectory = "/home/${user}";
 
@@ -45,7 +46,6 @@
       tty-clock = "tty-clock -s -c -C 6";
     };
 
-    stateVersion = stateVersion;
   };
 
   programs = {
