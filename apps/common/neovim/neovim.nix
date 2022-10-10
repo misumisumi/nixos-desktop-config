@@ -3,7 +3,7 @@
 {
   xdg = {
     configFile = {
-      "nvim".source = "./nvim";    # windowsとconfigを共有するため.config/nvimで管理する
+      "nvim".source = ./nvim;    # windowsとconfigを共有するため.config/nvimで管理する
     };
   };
 
