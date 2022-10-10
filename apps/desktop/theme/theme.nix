@@ -12,7 +12,7 @@
       package = pkgs.noto-fonts-cjk-sans;
       size = 12;
     };
-    iconTehme = {
+    iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
