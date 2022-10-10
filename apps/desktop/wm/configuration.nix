@@ -20,7 +20,11 @@
       displayManager = {
         lightdm = {
           enable = true;
-          greeters.enso = true;
+          greeters = {
+            pantheon = {
+              enable = true;
+            };
+          };
         };
         defaultSession = "none+qtile";
       };
