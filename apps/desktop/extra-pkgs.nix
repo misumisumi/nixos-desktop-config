@@ -37,7 +37,7 @@ pkgs: with pkgs; [
   spotify
   spotify-tui
 
-  zathura-with-plugins
+  zathura
 
   baobab
 
