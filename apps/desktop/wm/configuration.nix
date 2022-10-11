@@ -7,7 +7,7 @@
   services = {
     xserver = {
       enable = true;
-      autorun = true;
+      autorun = false;
 
       layout = "us";
       xkbOptions = "caps:control_l, super_l:alt_l, alt_l:super_l";
@@ -24,10 +24,13 @@
         lightdm = {
           enable = true;
           greeters = {
-            gtk = {
+            pantheon = {
               enable = true;
             };
           };
+        };
+        startx = {
+          enable = true;
         };
         defaultSession = "none+xsession";
         sessionCommands = ''
