@@ -29,13 +29,18 @@
             };
           };
         };
-        defaultSession = "none+qtile";
+        defaultSession = "qtile";
         sessionCommands = ''
           ${pkgs.xorg.xrandr}/bin/xrandr --auto
         '';
+        session = [
+          { 
+            manage = "window";
+            name = "qtile";
+            start = "";
+          }
+        ];
       };
-      windowManager.qtile.enable = true;
-      desktopManager.plasma5.enable = true;
 
       serverFlagsSection = ''
         Option "BlankTime" "0"
