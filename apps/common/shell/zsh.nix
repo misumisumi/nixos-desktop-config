@@ -67,14 +67,9 @@
           file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
         }
         {
-          name = "H-S-MW";
-          src = pkgs.fetchFromGitHub {
-                owner = "z-shell";
-                repo = "H-S-MW";
-                rev = "de9f239bbf360b00efc1ca36211d16390c63cf50";
-                sha256 = "tc6INYnpHxXEIH6oF70KQkxLblnvXoq9EAp4Ys92s90=";
-              };
-          file = "j";
+          name = "zsh-history-search-multi-word";
+          src = pkgs.zsh-history-search-multi-word;
+          file = "share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
         }
       ];
 
@@ -94,7 +89,6 @@
 
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
-
         ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
         ZVM_VI_VISUAL_ESCAPE_BINDKEY=jj
         ZVM_VI_OPPEND_ESCAPE_BINDKEY=jj
