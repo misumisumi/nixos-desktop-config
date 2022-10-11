@@ -31,7 +31,7 @@
         };
         defaultSession = "none+xsession";
         sessionCommands = ''
-          ${pkgs.xorg.xrandr}/bin/xrandr --auto
+          ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
         '';
         session = [
           { 
