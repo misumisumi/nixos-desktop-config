@@ -55,7 +55,7 @@
 
     picom = {
       enable = true;
-      backend = "glx";
+      backend = "xrandr";
       experimentalBackends = true;
       vSync = false;
 
@@ -103,8 +103,8 @@
           method = "dual_kawase";
           size = 8;
           strength = 5;
-          background = false;
-          background-frame = false;
+          background = true;
+          background-frame = true;
           bluer-kern = "3x3box";
           background-exclude = [
             "window_type = 'dock'"
