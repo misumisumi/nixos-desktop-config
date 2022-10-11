@@ -2,6 +2,13 @@
 
 {
   programs = {
+    atuin = {
+      enable = true;
+    };
+    fzf = {
+      enable = true;
+    };
+
     zsh = {
       enable = true;
       dotDir = ".config/zsh";
@@ -65,11 +72,6 @@
           name = "zsh-vi-mode";
           src = pkgs.zsh-vi-mode;
           file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        }
-        {
-          name = "zsh-history-search-multi-word";
-          src = pkgs.zsh-history-search-multi-word;
-          file = "share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
         }
       ];
 
