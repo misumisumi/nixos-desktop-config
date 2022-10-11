@@ -22,7 +22,6 @@ in
   users.users.${user} = {                   # System User
     isNormalUser = true;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
-    shell = pkgs.zsh;                       # Default shell
     subUidRanges = [
       {
         count = 100000;
