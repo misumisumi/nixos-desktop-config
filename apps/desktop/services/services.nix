@@ -54,7 +54,7 @@
     };
 
     picom = {
-      enable = true;
+      enable = false;
       backend = "glx";
       experimentalBackends = true;
       vSync = false;
