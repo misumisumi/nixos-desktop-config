@@ -18,7 +18,6 @@ let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
   stateVersion = "22.05";
-  nixpkgs.overlays = [ nur.overlay ];
 
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
