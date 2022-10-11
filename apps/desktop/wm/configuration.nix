@@ -29,14 +29,14 @@
             };
           };
         };
-        defaultSession = "none+qtile";
+        defaultSession = "none+xsession";
         sessionCommands = ''
           ${pkgs.xorg.xrandr}/bin/xrandr --auto
         '';
         session = [
           { 
             manage = "window";
-            name = "qtile";
+            name = "xsession";
             start = ''
               ${pkgs.runtimeShell} $HOME/.xsession &
               waitPID=$!
