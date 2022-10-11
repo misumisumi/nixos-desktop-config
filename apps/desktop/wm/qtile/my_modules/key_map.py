@@ -85,13 +85,13 @@ keys = [
     Key([PARAM.mod], 's', lazy.layout.toggle_split(), desc='Launch terminal'),
     Key([PARAM.mod, 'shift'], 'Return', lazy.spawn(PARAM.terminal), desc='Launch terminal'),
 
-    Key([PARAM.mod, 'shift'], 'c', lazy.window.kill(), desc='Kill focused window'),
+    Key([PARAM.mod, 'shift'], 'q', lazy.window.kill(), desc='Kill focused window'),
 
     Key([PARAM.mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
     Key([PARAM.mod, 'control'], 'e', lazy.shutdown(), desc='Shutdown Qtile'),
 
     Key([PARAM.mod], 'p', lazy.spawn('rofi -combi-modi window,drun -show combi'), desc='show rofi'),
-    Key([PARAM.mod, 'shift'], 'p', lazy.spawn('rofi -combi-modi run,calc -show combi'), desc='run rofi script & calc'),
+    Key([PARAM.mod, 'shift'], 'p', lazy.spawn('rofi -show run'), desc='run rofi script PARAM.mode'),
     Key([PARAM.mod, 'control'], 'p', lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc='show power-menu'),
 
     Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -i ./Pictures/archlinux_resize.png -t'), desc='lock PC'),
@@ -102,7 +102,8 @@ keys = [
     Key([PARAM.mod], "period", float_cycle(forward=True)),
     Key([PARAM.mod], "comma", float_cycle(forward=True, focus=True)),
 
-    Key([PARAM.mod], 'q', lazy.spawn('copyq toggle')),
+    Key([PARAM.mod], 'c', lazy.spawn('copyq toggle')),
+    Key([PARAM.mod, 'shift'], 'c', lazy.spawn('rofi -show calc -modi calc -no-show-match -no-sort')),
 
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +5%')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -5%')),
