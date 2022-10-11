@@ -22,11 +22,11 @@ let
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
+    nixpkgs.overlays = [ nur.overlay ];
   in
     nixpkgs.lib.nixosSystem {    # Common profile
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
-      nixpkgs.overlays = [ nur.overlay ];
       modules = [
         nur.nixosModules.nur
         ./boot-common.nix
