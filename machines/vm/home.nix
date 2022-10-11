@@ -2,7 +2,7 @@
 # Home-manager configuration for mother
 #
 # flake.nix
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = (import ../../apps/common/cui) ++
