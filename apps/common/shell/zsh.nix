@@ -82,16 +82,18 @@
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
+      '';
+
+      initExtra = ''
+        zstyle :plugin:history-search-multi-word reset-prompt-protect 1
+
+        setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
+        setopt inc_append_history    # 履歴をインクリメンタルに追加
 
         ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
         ZVM_VI_VISUAL_ESCAPE_BINDKEY=jj
         ZVM_VI_OPPEND_ESCAPE_BINDKEY=jj
         ZVM_LINE_INIT_MODE=$ZVM_MODE_LAST
-      '';
-
-      initExtra = ''
-        setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
-        setopt inc_append_history    # 履歴をインクリメンタルに追加
       '';
     };
   };
