@@ -78,7 +78,10 @@
           file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
         }
       ];
-
+      envExtra = ''
+        echo $PWD
+        echo $ZDOTDIR
+      '';
       initExtraBeforeCompInit = ''
         # p10k instant prompt
         P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
