@@ -62,7 +62,7 @@ def make_widgets(is_tray=False):
                         active=PARAM.c_normal['white']),
         _rignt_corner(**_colorset4),
         ]
-    if not PARAM.laptop:
+    if not PARAM.laptop or not PARAM.vm:
         top_widgets += [
             _separator(),
             _left_corner(**_colorset1),
@@ -83,7 +83,7 @@ def make_widgets(is_tray=False):
         widget.Clock(format='%Y-%m-%d %a %H:%M:%S', **_colorset2),
         _rignt_corner(**_colorset1),
         ]
-    if PARAM.laptop:
+    if PARAM.laptop or PARAM.vm:
         top_widgets += [
             widget.Spacer()
         ]
@@ -126,7 +126,7 @@ def make_widgets(is_tray=False):
             _separator(),
         ]
 
-    if PARAM.laptop:
+    if PARAM.laptop or PARAM.vm:
         bottom_widgets = [
             _separator(),
             _left_corner(**_colorset7),
