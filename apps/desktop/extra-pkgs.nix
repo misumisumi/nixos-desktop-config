@@ -13,6 +13,10 @@ pkgs: with pkgs; [
   sox
   gnuplot
 
+  firefox
+  vivaldi
+  vivaldi-ffmpeg-codecs
+
   blender
   krita
   gmic-qt-krita
