@@ -36,7 +36,7 @@ let
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit user stateVersion; };
+          home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
           home-manager.users."${user}" = {
             # Common and each machine configuration
             imports = [(import ./home.nix)] ++ [(import hostConf)];
