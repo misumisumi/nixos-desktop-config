@@ -3,7 +3,7 @@
 {
   networking = {
     useDHCP = lib.mkDefault true;
-    hostname = "${hostname}";
+    hostName = "${hostname}";
     # bridges = {
     #   interfaces = [ "" ];
     # };
