@@ -32,6 +32,7 @@
         '';
       };
       windowManager.qtile.enable = true;
+      desktopManager.pantheon.enable = true;
       # windowManager.i3 = {
       #   enable = true;
       #   package = pkgs.i3-gaps;
