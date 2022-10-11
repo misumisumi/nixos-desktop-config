@@ -16,7 +16,7 @@
   };
 
   xresources = {
-    extraConfig = "Xft.dpi:100";
+    extraConfig = "Xft.dpi:88";
   };
 
 }
