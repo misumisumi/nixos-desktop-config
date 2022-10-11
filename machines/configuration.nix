@@ -22,10 +22,11 @@ in
   environment.pathsToLink = [ "/share/zsh" ];
   programs.zsh.enable = true;
 
+  users.useDefaultShell = "/run/current-system/sw/bin/zsh";
   users.users.${user} = {                   # System User
     isNormalUser = true;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
-    useDefaultShell = "/run/current-system/sw/bin/zsh";
+    useDefaultShell = true;
     subUidRanges = [
       {
         count = 100000;
