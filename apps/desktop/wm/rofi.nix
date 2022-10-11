@@ -20,10 +20,9 @@
   programs = {
     rofi = {
       enable = true;
-      plugins = with pkgs; [ 
-        rofi-power-menu
-        rofi-calc
-      ];
+      package = pkgs.rofi.override { plugins = with pkgs; [ rofi-power-menu
+                                                            rofi-calc
+                                                          ];  };
 
       font = "Ricty Diminished with Fira Code 24";
       terminal = "${pkgs.alacritty}/bin/alacritty";
