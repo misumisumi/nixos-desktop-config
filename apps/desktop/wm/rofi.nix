@@ -1,14 +1,9 @@
 { pkgs, ... }:
 
 {
-  programs = {
-    rofi = {
-      enable = true;
-      plugins = [ pkgs.rofi-power-menu ];
-
-      font = "Ricty Diminished with Fira Code 24";
-      terminal = "${pkgs.alacritty}/bin/alacritty";
-      theme = ''
+  xdg = {
+    configFile = {
+      "rofi/my_theme.rasi".text = ''
         @theme "Adapta-Nokto"
 
         window {
@@ -19,6 +14,17 @@
             size: 1.65ch;
         }
       '';
+    };
+  };
+
+  programs = {
+    rofi = {
+      enable = true;
+      plugins = [ pkgs.rofi-power-menu ];
+
+      font = "Ricty Diminished with Fira Code 24";
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+      theme = "$XDG_CONFIG_HOME/rofi/my_theme.rasi";
 
       extraConfig = {
         modi = "window,run,ssh,drun";
