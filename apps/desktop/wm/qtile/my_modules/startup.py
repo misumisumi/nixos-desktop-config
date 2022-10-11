@@ -23,8 +23,10 @@ def init_screen_and_group():
 @hook.subscribe.startup_once
 def autostart():
     if PARAM.laptop:
-        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.home.joinpath('Pictures', 'wallpapers', 'main01.jpg'),
-                                                              PARAM.home.joinpath('Pictures', 'wallpapers', 'main02.jpg')), shell=True)
+        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.wallpapers[0],
+                                                              PARAM.wallpapers[1]), shell=True)
+    if PARAM.vm:
+        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.wallpapers[0]), shell=True)
     else:
         # subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1])), shell=True)
         subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1]), str(PARAM.wallpapers[MONITOR2])), shell=True)

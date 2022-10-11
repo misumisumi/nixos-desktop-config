@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [ qtile ];
-
+  home.file."${config.home.homeDirectory}/Pictures".source = ./qtile/wallpapers;
   xdg = {
     configFile = {
       "qtile".source = ./qtile;    # windowsとconfigを共有するため.config/nvimで管理する
