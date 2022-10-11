@@ -87,12 +87,11 @@
         if [[ -r "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh ]]; then
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
+        autoload -Uz promptinit
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
       '';
 
       initExtra = ''
-        autoload -U promptinit; promptinit
-
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
         ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
