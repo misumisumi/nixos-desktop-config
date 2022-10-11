@@ -99,6 +99,13 @@
       settings = {
         shadow-radius = 16;
         frame-opacity = 0.8;
+        corner-radius = 16;
+        rounded-corners-exclude = [
+          "window_type = 'dock'",
+          "window_type = 'desktop'",
+          "class_g = 'fcitx'",
+          "class_g = 'dunst'",
+        ];
         blur = {
           method = "dual_kawase";
           size = 8;
