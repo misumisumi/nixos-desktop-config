@@ -12,7 +12,8 @@
 
   home = {
     packages = (import ../../apps/common/extra-pkgs.nix) pkgs ++
-               (import ../../apps/desktop/extra-pkgs.nix) pkgs;
+               (import ../../apps/desktop/extra-pkgs.nix) pkgs ++
+               [ pkgs.spice-vdagent ];
   };
 
   xresources = {
