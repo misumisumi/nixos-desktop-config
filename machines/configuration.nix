@@ -25,7 +25,7 @@ in
   users.users.${user} = {                   # System User
     isNormalUser = true;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
-    useDefaultShell = = "/run/current-system/sw/bin/zsh";
+    useDefaultShell = "/run/current-system/sw/bin/zsh";
     subUidRanges = [
       {
         count = 100000;
