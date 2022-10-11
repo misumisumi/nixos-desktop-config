@@ -23,26 +23,29 @@ let
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
-    nixpkgs.overlays = [ nur.overlay ];
-    nixpkgs.lib.nixosSystem {    # Common profile
-      system = choiceSystem hostname;
-      specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
-      modules = [
-        nur.nixosModules.nur
-        ./boot-common.nix
-        ./configuration.nix    # TZ and console settings and so on...
-        (./. + "/${hostname}")
+    nixpkgs = {
+      overlays = [ nur.overlay ];
 
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit user stateVersion; };
-          home-manager.users."${user}" = {
-            # Common and each machine configuration
-            imports = [(import ./home.nix)] ++ [(import hostConf)];
-          };
-        }
-      ];
+      lib.nixosSystem {    # Common profile
+        system = choiceSystem hostname;
+        specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
+        modules = [
+          nur.nixosModules.nur
+          ./boot-common.nix
+          ./configuration.nix    # TZ and console settings and so on...
+          (./. + "/${hostname}")
+
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit user stateVersion; };
+            home-manager.users."${user}" = {
+              # Common and each machine configuration
+              imports = [(import ./home.nix)] ++ [(import hostConf)];
+            };
+          }
+        ];
+      };
     };
 in
 {
