@@ -12,7 +12,7 @@ class Param:
     vm = 'vm' == os.uname()[1]
 
     mod = 'mod4' # super key
-    terminal = 'alacitty'
+    terminal = 'alacritty'
 
     home = Path.home()
     capture_path = home.joinpath('Pictures', 'screenshot')
