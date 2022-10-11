@@ -14,4 +14,9 @@
     packages = (import ../../apps/common/extra-pkgs.nix) pkgs ++
                (import ../../apps/desktop/extra-pkgs.nix) pkgs;
   };
+
+  xresources = {
+    extraConfig = "Xft.dpi:110";
+  };
+
 }

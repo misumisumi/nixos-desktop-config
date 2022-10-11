@@ -24,9 +24,4 @@
       fi
     '';
   };
-
-  xresources = {
-    extraConfig = "Xft.dpi:110";
-  };
-
 }
