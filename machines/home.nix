@@ -54,6 +54,9 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+      extraConfig = {
+        XDG_GAME_DIR = "${config.home.homeDirectory}/Game";
+      };
     };
   };
 
