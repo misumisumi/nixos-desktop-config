@@ -15,7 +15,7 @@ class Param:
 
     home = Path.home()
     capture_path = home.joinpath('Pictures', 'screenshot')
-    wallpapers = list(home.joinpath('Pictures', 'wallpapers').glob('*.jpg'))
+    wallpapers = list(home.joinpath('nix-configs', 'apps', 'desktop', 'wm', 'qtile', 'wallpapers').glob('*.jpg'))
     wallpapers.sort()
 
     num_screen = 2
