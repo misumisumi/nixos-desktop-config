@@ -26,6 +26,7 @@ let
     nixpkgs.lib.nixosSystem {    # Common profile
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
+      nixpkgs.overlays = [ nur.overlay ];
       modules = [
         nur.nixosModules.nur
         ./boot-common.nix
@@ -35,7 +36,7 @@ let
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit nur user stateVersion; };
+          home-manager.extraSpecialArgs = { inherit user stateVersion; };
           home-manager.users."${user}" = {
             # Common and each machine configuration
             imports = [(import ./home.nix)] ++ [(import hostConf)];
