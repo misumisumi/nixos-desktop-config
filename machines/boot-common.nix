@@ -12,4 +12,7 @@
       };
     };
   };
+  console = {
+    useXkbConfig = true;
+  };
 }
