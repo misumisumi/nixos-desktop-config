@@ -3,7 +3,7 @@
 {
   programs = {
     rofi = {
-      enalbe = true;
+      enable = true;
       plugins = [ pkgs.rofi-power-menu ];
 
       font = "Ricty Diminished with Fira Code 24";
