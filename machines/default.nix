@@ -22,6 +22,7 @@ let
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
+    nixpkgs.overlays = [ nur.overlay ];
   in
     nixpkgs.lib.nixosSystem {    # Common profile
       system = choiceSystem hostname;
