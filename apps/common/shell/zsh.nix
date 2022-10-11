@@ -90,7 +90,7 @@
       '';
 
       initExtra = ''
-        zstyle :plugin:history-search-multi-word reset-prompt-protect 1
+        autoload -U promptinit; promptinit
 
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
