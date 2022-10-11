@@ -1,4 +1,4 @@
-{ config, nur, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   i18n = {
