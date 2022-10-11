@@ -20,12 +20,11 @@ in
   nixpkgs.config.allowUnfree = true;        # Allow proprietary software.
 
   environment.pathsToLink = [ "/share/zsh" ];
-  programs.zsh.enable = true;
 
   users.users.${user} = {                   # System User
     isNormalUser = true;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
-    shell = pkgs.zsh;                       # Default shell
+    shell = pkgs.bash;                       # Default shell
     subUidRanges = [
       {
         count = 100000;
