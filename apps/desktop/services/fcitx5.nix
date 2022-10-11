@@ -10,7 +10,7 @@
           libsForQt5.fcitx5-qt
           fcitx5-mozc
           fcitx5-configtool
-          fcitx5-breeze-2.0.0
+          fcitx5-breeze
         ];
       };
     };
