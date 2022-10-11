@@ -10,7 +10,8 @@
       autorun = true;
 
       layout = "us";
-      xkbOptions = "caps:nocaps,super_l:alt_l,alt_l:super_l";
+      # xkbOptions = "caps:nocaps,super_l:alt_l,alt_l:super_l";
+      xkbOptions = "caps:nocaps";
 
       libinput = {
         enable = true;
