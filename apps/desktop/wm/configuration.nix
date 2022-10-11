@@ -28,17 +28,13 @@
             };
           };
         };
-        # defaultSession = "none+i3";
+        defaultSession = "none+qtile";
         sessionCommands = ''
           ${pkgs.xorg.xrandr}/bin/xrandr --auto
         '';
       };
       windowManager.qtile.enable = true;
       desktopManager.plasma5.enable = true;
-      # windowManager.i3 = {
-      #   enable = true;
-      #   package = pkgs.i3-gaps;
-      # };
 
       serverFlagsSection = ''
         Option "BlankTime" "0"

@@ -6,10 +6,6 @@
 
     windowManager = {
       command = "${pkgs.qtile}/bin/qtile start -c ${config.home.homeDirectory}/nix-config/apps/desktop/wm/qtile/config.py ";
-      # i3 = {
-      #   enable = true;
-      #   package = pkgs.i3-gaps;
-      # };
     };
 
     initExtra = ''
