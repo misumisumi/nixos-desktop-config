@@ -54,7 +54,7 @@
     };
 
     picom = {
-      enable = false;
+      enable = true;
       backend = "glx";
       experimentalBackends = true;
       vSync = false;
@@ -103,8 +103,8 @@
           method = "dual_kawase";
           size = 8;
           strength = 5;
-          background = true;
-          background-frame = true;
+          background = false;
+          background-frame = false;
           bluer-kern = "3x3box";
           background-exclude = [
             "window_type = 'dock'"
