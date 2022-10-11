@@ -21,14 +21,6 @@
         "nouveau"
         "modesetting"
       ];
-      libinput = {
-        enable = true;
-        mouse.naturalScrolling = false;
-        touchpad = {
-          tapping = true;
-          naturalScrolling = false;
-        };
-      };
     };
   };
 }
