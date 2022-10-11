@@ -32,6 +32,7 @@
         # '';
       };
       windowManager.qtile.enable = true;
+      desktopManager.xterm.enable = true;
 
       serverFlagsSection = ''
         Option "BlankTime" "0"
