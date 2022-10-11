@@ -67,9 +67,14 @@
           file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
         }
         {
-          name = "zsh-history-search-multi-word";
-          src = pkgs.zsh-history-search-multi-word;
-          file = "share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
+          name = "H-S-MW";
+          src = pkgs.fetchFromGitHub {
+                owner = "z-shell";
+                repo = "H-S-MW";
+                rev = "de9f239bbf360b00efc1ca36211d16390c63cf50";
+                sha256 = "tc6INYnpHxXEIH6oF70KQkxLblnvXoq9EAp4Ys92s90=";
+              };
+          file = "j";
         }
       ];
 
