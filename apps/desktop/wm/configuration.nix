@@ -6,6 +6,7 @@
   services = {
     xserver = {
       enable = true;
+      exportConfiguration = true;
       autorun = true;
 
       layout = "us";
