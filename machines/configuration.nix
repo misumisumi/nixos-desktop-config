@@ -77,7 +77,7 @@ in
       VISUAL = "nvim";
     };
 
-    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs ++ [ config.nur.repos.mic92.hello-nur ];
+    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs;
   };
 
   # sound = {                                 # ALSA sound enable(pipewireを有効にするときは消すかfalseにする)
