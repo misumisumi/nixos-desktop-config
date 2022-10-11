@@ -35,7 +35,6 @@
     sessionVariables = {
       CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
       EDITOR="nvim";
-      ZDOTDIR = "${config.home.homeDirectory}/.config/zsh";
     };
 
     shellAliases = {
