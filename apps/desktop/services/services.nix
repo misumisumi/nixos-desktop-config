@@ -55,7 +55,7 @@
 
     picom = {
       enable = true;
-      backend = "xrandr";
+      backend = "xr_glx_hybrid";
       experimentalBackends = true;
       vSync = false;
 
