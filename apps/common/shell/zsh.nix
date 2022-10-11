@@ -18,6 +18,7 @@
 
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
+      enableCompletion = true;
       autocd = true;
 
       history = {
