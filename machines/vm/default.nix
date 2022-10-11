@@ -15,7 +15,7 @@
   services = {
     xserver = {
       videoDrivers = [
-        "virtio"
+        "virtio-pci"
         "qxl"
         "amdgpu"
         "nouveau"
