@@ -16,9 +16,9 @@
       enable = true;
       dotDir = ".config/zsh";
 
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-      enableCompletion = true;
+      enableAutosuggestions = false;
+      enableSyntaxHighlighting = false;
+      enableCompletion = false;
       autocd = true;
 
       history = {
@@ -79,9 +79,8 @@
         }
       ];
       envExtra = ''
-        echo $PWD
-        echo $ZDOTDIR
       '';
+
       initExtraBeforeCompInit = ''
         # p10k instant prompt
         P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
@@ -95,8 +94,6 @@
       '';
 
       initExtra = ''
-        echo $PWD
-        echo "Souce .zshrc"
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
         ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
