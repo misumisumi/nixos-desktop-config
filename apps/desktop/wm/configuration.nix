@@ -37,7 +37,10 @@
           { 
             manage = "window";
             name = "qtile";
-            start = "";
+            start = ''
+              ${pkgs.runtimeShell} $HOME/.xsession &
+              waitPID=$!
+            '';
           }
         ];
       };
