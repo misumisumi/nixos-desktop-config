@@ -27,7 +27,7 @@
           };
           extraSeatDefaults = ''
             user-session = ${config.services.xserver.displayManager.defaultSession}
-          ''
+          '';
         };
         defaultSession = "none+i3";
         # sessionCommands = ''
