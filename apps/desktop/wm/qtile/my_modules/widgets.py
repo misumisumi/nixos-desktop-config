@@ -62,7 +62,7 @@ def make_widgets(is_tray=False):
                         active=PARAM.c_normal['white']),
         _rignt_corner(**_colorset4),
         ]
-    if not PARAM.laptop or not PARAM.vm:
+    if not (PARAM.laptop or PARAM.vm):
         top_widgets += [
             _separator(),
             _left_corner(**_colorset1),
