@@ -8,6 +8,9 @@
     fzf = {
       enable = true;
     };
+    dircolors = {
+      enable = true;
+    };
 
     zsh = {
       enable = true;
