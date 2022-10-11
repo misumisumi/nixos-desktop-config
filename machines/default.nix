@@ -29,7 +29,7 @@ let
   in
   nixpkgs.lib.nixosSystem {    # Common profile
     system = choiceSystem hostname;
-    specialArgs = { inherit inputs user location stateVersion; }; # specialArgs give some args to modules
+    specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
     modules = [
       nur.nixosModules.nur
       ./boot-common.nix
