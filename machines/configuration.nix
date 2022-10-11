@@ -50,7 +50,7 @@ in
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";	                    # or us/azerty/etc
+    useXkbConfig = true;
   };
 
   fonts.fonts = with pkgs; [                # Fonts
