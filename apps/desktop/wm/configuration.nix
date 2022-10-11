@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+  programs.dconf.enable = true;
   security.pam.services.login.enableGnomeKeyring = true; 
   security.pam.services.lightdm.enableGnomeKeyring = true; 
   services = {
