@@ -20,6 +20,7 @@ in
   nixpkgs.config.allowUnfree = true;        # Allow proprietary software.
 
   environment.pathsToLink = [ "/share/zsh" ];
+  programs.bash.enable = true;
 
   users.users.${user} = {                   # System User
     isNormalUser = true;
