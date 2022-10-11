@@ -5,7 +5,7 @@
     enable = true;
 
     windowManager = {
-      command = "${pkgs.qtile}/bin/qtile start";
+      command = "${pkgs.qtile}/bin/qtile start -c '${config.home.homeDirectory}/nix-config/apps/desktop/wm/qtile/config.py' ";
     };
 
     initExtra = ''
