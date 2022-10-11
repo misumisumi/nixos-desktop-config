@@ -1,11 +1,6 @@
 { config, lib, user, pkgs, ... }:
 
 {
-  programs = {
-    dconf = {
-      enable = true;
-    };
-  };
   xsession = {
     enable = true;
 
