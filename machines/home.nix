@@ -17,6 +17,10 @@
 { config, lib, pkgs, user, stateVersion, ... }:
 
 { 
+  programs = {
+    home-manager.enable = true;
+  };
+
   home = {
     stateVersion = stateVersion;
     username = "${user}";
@@ -31,6 +35,7 @@
     sessionVariables = {
       CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
       EDITOR="nvim";
+      ZDOTDIR = "${config.home.homeDirectory}/.config/zsh";
     };
 
     shellAliases = {
@@ -61,7 +66,4 @@
     };
   };
 
-  programs = {
-    home-manager.enable = true;
-  };
 }
