@@ -24,7 +24,7 @@
         lightdm = {
           enable = true;
           greeters = {
-            pantheon = {
+            gtk = {
               enable = true;
             };
           };
