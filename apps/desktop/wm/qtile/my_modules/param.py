@@ -19,9 +19,9 @@ class Param:
     if not capture_path.exists():
         os.mkdir(capture_path)
     if laptop or vm:
-        wallpapers = list(home.joinpath('Pictures', 'fixed', 'wallpapers').glob('*.jpg'))
+        wallpapers = list(home.joinpath('Pictures', 'wallpapers', 'fixed').glob('*.jpg'))
     else:
-        wallpapers = list(home.joinpath('Pictures', 'unfixed', 'wallpapers').glob('*.jpg'))
+        wallpapers = list(home.joinpath('Pictures', 'wallpapers', 'unfixed').glob('*.jpg'))
     wallpapers.sort()
 
     num_screen = 1 if os.uname()[1] == 'vm' else 2
