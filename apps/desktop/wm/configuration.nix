@@ -31,8 +31,11 @@
         #   xrandr --auto
         # '';
       };
-      windowManager.qtile.enable = true;
-      desktopManager.xterm.enable = true;
+      # windowManager.qtile.enable = true;
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
 
       serverFlagsSection = ''
         Option "BlankTime" "0"
