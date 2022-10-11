@@ -18,35 +18,31 @@ let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
   stateVersion = "22.05";
-  # pkgs = import nixpkgs {
-  #   inherit system;
-  #   config.allowUnfree = true;  # Allow proprietary software
-  # };
 
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
-  nixpkgs.lib.nixosSystem {    # Common profile
-    system = choiceSystem hostname;
-    specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
-    modules = [
-      nur.nixosModules.nur
-      ./boot-common.nix
-      ./configuration.nix    # TZ and console settings and so on...
-      (./. + "/${hostname}")
+    nixpkgs.lib.nixosSystem {    # Common profile
+      system = choiceSystem hostname;
+      specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
+      modules = [
+        nur.nixosModules.nur
+        ./boot-common.nix
+        ./configuration.nix    # TZ and console settings and so on...
+        (./. + "/${hostname}")
 
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user stateVersion; };
-        home-manager.users."${user}" = {
-          # Common and each machine configuration
-          imports = [(import ./home.nix)] ++ [(import hostConf)];
-        };
-      }
-    ];
-  };
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit user stateVersion; };
+          home-manager.users."${user}" = {
+            # Common and each machine configuration
+            imports = [(import ./home.nix)] ++ [(import hostConf)];
+          };
+        }
+      ];
+    };
 in
 {
   aegis = settings { hostname="aegis"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
