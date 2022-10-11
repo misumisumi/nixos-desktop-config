@@ -2,11 +2,18 @@
 
 {
   home.packages = with pkgs; [ qtile ];
+
+  xdg = {
+    configFile = {
+      "qtile".source = ./qtile;    # windowsとconfigを共有するため.config/nvimで管理する
+    };
+  };
+
   xsession = {
     enable = true;
 
     windowManager = {
-      command = "${pkgs.qtile}/bin/qtile start -c '${config.home.homeDirectory}/nix-config/apps/desktop/wm/qtile/config.py' ";
+      command = "${pkgs.qtile}/bin/qtile start";
     };
 
     profileExtra=''
