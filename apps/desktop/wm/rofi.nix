@@ -33,7 +33,6 @@
         kb-row-right = "Control+l";
         kb-row-up = "Up,Control+k";
         kb-row-down = "Down,Control+j";
-        };
       };
     };
   };
