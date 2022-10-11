@@ -26,6 +26,16 @@
 
       prezto = {
         enable = true;
+        pmodules = [
+          "environment"
+          "terminal"
+          "editor"
+          "directory"
+          "spectrum"
+          "utility"
+          "completion"
+          "prompt"
+        ];
         extraFunctions = [
           "zargs"
           "zmv"
@@ -33,9 +43,6 @@
         extraModules = [
           "attr"
         ];
-        extraConfig = ''
-          zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'directory' 'spectrum' 'utility' 'completion'
-        '';
       };
 
       plugins = [
