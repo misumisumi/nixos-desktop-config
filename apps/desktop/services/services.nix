@@ -68,6 +68,8 @@
       opacityRules = [
         "85:class_g = 'kitty' && focused"
         "85:class_g = 'kitty' && !focused"
+        "85:class_g = 'alacritty' && focused"
+        "85:class_g = 'alacritty' && !focused"
         "100:class_g = 'krita' && focused"
         "100:class_g = 'krita' && !focused"
         "100:class_g = 'Blender' && focused"
