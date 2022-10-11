@@ -2,15 +2,14 @@
 
 {
   programs.dconf.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true; 
-  security.pam.services.lightdm.enableGnomeKeyring = true; 
+
   services = {
     xserver = {
       enable = true;
       autorun = true;
 
       layout = "us";
-      xkbOptions = "caps:nocaps, super_l:alt_l, alt_l:super_l";
+      xkbOptions = "caps:nocaps,super_l:alt_l,alt_l:super_l";
 
       libinput = {
         enable = true;
