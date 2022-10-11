@@ -26,7 +26,7 @@ def autostart():
         subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.wallpapers[0],
                                                               PARAM.wallpapers[1]), shell=True)
     if PARAM.vm:
-        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.wallpapers[0]), shell=True)
+        subprocess.run('feh --bg-fill {}'.format(PARAM.wallpapers[0]), shell=True)
     else:
         # subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1])), shell=True)
         subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1]), str(PARAM.wallpapers[MONITOR2])), shell=True)
