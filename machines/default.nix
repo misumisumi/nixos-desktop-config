@@ -22,8 +22,8 @@ let
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
-    nixpkgs.overlays = [ nur.overlay ];
   in
+    nixpkgs.overlays = [ nur.overlay ];
     nixpkgs.lib.nixosSystem {    # Common profile
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
