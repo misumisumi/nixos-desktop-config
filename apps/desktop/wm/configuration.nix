@@ -7,7 +7,7 @@
   services = {
     xserver = {
       enable = true;
-      autorun = false;
+      autorun = true;
 
       layout = "us";
       xkbOptions = "caps:control_l, super_l:alt_l, alt_l:super_l";
@@ -24,14 +24,14 @@
         lightdm = {
           enable = true;
           greeters = {
-            pantheon = {
+            gtk = {
               enable = true;
             };
           };
         };
-        startx = {
-          enable = true;
-        };
+        # startx = {
+        #   enable = true;
+        # };
         defaultSession = "none+xsession";
         sessionCommands = ''
           ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
