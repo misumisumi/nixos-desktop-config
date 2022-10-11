@@ -10,4 +10,6 @@ pkgs: with pkgs; [
 
     figlet    # Make AA from character
     cmatrix   # Lain of character
+
+    xdg-user-dirs
 ]
