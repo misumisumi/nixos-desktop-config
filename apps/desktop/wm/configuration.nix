@@ -25,14 +25,11 @@
               enable = true;
             };
           };
-          extraSeatDefaults = ''
-            user-session = ${config.services.xserver.displayManager.defaultSession}
-          '';
         };
         defaultSession = "none+i3";
-        # sessionCommands = ''
-        #   xrandr --auto
-        # '';
+        sessionCommands = ''
+          ${pkgs.xorg.xrandr}/bin/xrandr --auto
+        '';
       };
       # windowManager.qtile.enable = true;
       windowManager.i3 = {
