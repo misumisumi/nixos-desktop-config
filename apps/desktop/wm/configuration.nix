@@ -29,7 +29,7 @@
             };
           };
         };
-        defaultSession = "qtile";
+        defaultSession = "none+qtile";
         sessionCommands = ''
           ${pkgs.xorg.xrandr}/bin/xrandr --auto
         '';
