@@ -34,7 +34,7 @@
           "attr"
         ];
         extraConfig = ''
-          zstyle ':prezto:load' pmodule 'history' 'environment' 'terminal' 'editor' 'directory' 'spectrum' 'utility' 'completion'
+          zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'directory' 'spectrum' 'utility' 'completion'
         '';
       };
 
