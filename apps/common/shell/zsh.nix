@@ -95,6 +95,8 @@
       '';
 
       initExtra = ''
+        echo $PWD
+        echo "Souce .zshrc"
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
         ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
