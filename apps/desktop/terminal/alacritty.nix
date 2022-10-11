@@ -7,15 +7,15 @@
       settings = {
         font = {
           normal = {
-            family = "Ricty Diminished";
+            family = "Ricty Diminished with Fira Code";
             style = "Regular";
           };
           bold = {
-            family = "Ricty Diminished";
+            family = "Ricty Diminished with Fira Code";
             style = "Bold";
           };
           italic = {
-            family = "Ricty Diminished";
+            family = "Ricty Diminished with Fira Code";
             style = "Oblique";
           };
           size = 16.0;
