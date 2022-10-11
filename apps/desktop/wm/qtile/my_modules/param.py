@@ -16,7 +16,12 @@ class Param:
 
     home = Path.home()
     capture_path = home.joinpath('Pictures', 'screenshot')
-    wallpapers = list(home.joinpath('nix-configs', 'apps', 'desktop', 'wm', 'qtile', 'wallpapers').glob('*.jpg'))
+    if not capture_path.exists():
+        os.mkdir(capture_path)
+    if laptop or vm:
+        wallpapers = list(home.joinpath('Pictures', 'fixed', 'wallpapers').glob('*.jpg'))
+    else:
+        wallpapers = list(home.joinpath('Pictures', 'unfixed', 'wallpapers').glob('*.jpg'))
     wallpapers.sort()
 
     num_screen = 1 if os.uname()[1] == 'vm' else 2
