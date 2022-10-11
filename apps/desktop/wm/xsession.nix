@@ -1,6 +1,7 @@
 { config, lib, user, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ qtile ];
   xsession = {
     enable = true;
 
