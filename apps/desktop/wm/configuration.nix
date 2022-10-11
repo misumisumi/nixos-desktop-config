@@ -26,12 +26,11 @@
             };
           };
         };
-        defaultSession = "none+i3";
+        # defaultSession = "none+i3";
         sessionCommands = ''
           ${pkgs.xorg.xrandr}/bin/xrandr --auto
         '';
       };
-      windowManager.startx.enable = true;
       windowManager.qtile.enable = true;
       # windowManager.i3 = {
       #   enable = true;
