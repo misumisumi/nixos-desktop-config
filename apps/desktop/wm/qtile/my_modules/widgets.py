@@ -144,13 +144,16 @@ def make_widgets(is_tray=False):
             widget.TaskList(border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, max_title_width=120, **_colorset6),
             _rignt_corner(**_colorset5),
             widget.Spacer(),
-            _left_corner(**_colorset1),
-            widget.Net(format='{down} ↓↑ {up}', **_colorset2),
-            _rignt_corner(**_colorset1),
-            widget.PulseVolume(fmt=' {}', limit_max_volume=True, volume_app='pavucontrol',
-                               update_interval=0.1, **_colorset1),
-            _rignt_corner(**_colorset2),
             ]
+        if PARAM.vm:
+            bottom_widgets += [
+                _left_corner(**_colorset1),
+                widget.Net(format='{down} ↓↑ {up}', **_colorset2),
+                _rignt_corner(**_colorset1),
+                widget.PulseVolume(fmt=' {}', limit_max_volume=True, volume_app='pavucontrol',
+                                   update_interval=0.1, **_colorset1),
+                _rignt_corner(**_colorset2),
+                ]
     else:
         bottom_widgets = None
 
