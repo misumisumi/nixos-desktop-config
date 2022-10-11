@@ -8,10 +8,6 @@
       command = "${pkgs.qtile}/bin/qtile start -c '${config.home.homeDirectory}/nix-config/apps/desktop/wm/qtile/config.py' ";
     };
 
-    # initExtra = ''
-    #   exec dbus-launch qtile
-    # '';
-
     profileExtra=''
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
