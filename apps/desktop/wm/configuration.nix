@@ -20,6 +20,7 @@
           naturalScrolling = true;
         };
       };
+      desktopManager.plasma5.enable = true;
       displayManager = {
         lightdm = {
           enable = true;
@@ -29,9 +30,6 @@
             };
           };
         };
-        # startx = {
-        #   enable = true;
-        # };
         defaultSession = "none+xsession";
         sessionCommands = ''
           ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
