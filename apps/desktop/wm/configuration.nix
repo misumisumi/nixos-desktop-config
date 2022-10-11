@@ -26,7 +26,7 @@
             };
           };
         };
-        defaultSession = "none+qtile";
+        defaultSession = "none+i3";
         # sessionCommands = ''
         #   xrandr --auto
         # '';
