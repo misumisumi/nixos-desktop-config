@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ nur, pkgs, ... }:
 
 {
   i18n = {
@@ -10,7 +10,7 @@
           pkgs.libsForQt5.fcitx5-qt
           pkgs.fcitx5-mozc
           pkgs.fcitx5-configtool
-          config.nur.repos.xddxdd.fcitx5-breeze
+          nur.repos.xddxdd.fcitx5-breeze
         ];
       };
     };
