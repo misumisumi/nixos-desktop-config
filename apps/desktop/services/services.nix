@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ hostname, pkgs, ... }:
 
 {
   services = {
@@ -55,7 +55,7 @@
 
     picom = {
       enable = true;
-      backend = "xr_glx_hybrid";
+      backend = if "${hostname}" == "vm" then "xrender" else "glx";
       experimentalBackends = true;
       vSync = false;
 
