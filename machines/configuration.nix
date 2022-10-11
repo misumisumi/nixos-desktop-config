@@ -22,7 +22,7 @@ in
   environment.pathsToLink = [ "/share/zsh" ];
   programs.zsh.enable = true;
 
-  users.useDefaultShell = "/run/current-system/sw/bin/zsh";
+  users.defaultUserShell= "/run/current-system/sw/bin/zsh";
   users.users.${user} = {                   # System User
     isNormalUser = true;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
