@@ -38,7 +38,7 @@ let
           home-manager.extraSpecialArgs = { inherit nur user stateVersion; };
           home-manager.users."${user}" = {
             # Common and each machine configuration
-            imports = [(import ./home.nix)] ++ [(import hostConf)] ++ lib.attrValues nur-no-pkgs.repos.moredhel.hmModules.modules;
+            imports = [(import ./home.nix)] ++ [(import hostConf)];
           };
         }
       ];
