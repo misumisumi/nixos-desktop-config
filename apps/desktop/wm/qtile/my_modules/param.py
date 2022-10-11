@@ -8,7 +8,7 @@ from libqtile.log_utils import logger
 
 @dataclasses.dataclass
 class Param:
-    laptop = 'sumi-zephyrus' == os.uname()[1]
+    laptop = 'zephyrus' == os.uname()[1] or 'vm' == os.uname()[1]
 
     mod = 'mod4' # super key
     terminal = 'kitty'
@@ -18,7 +18,7 @@ class Param:
     wallpapers = list(home.joinpath('nix-configs', 'apps', 'desktop', 'wm', 'qtile', 'wallpapers').glob('*.jpg'))
     wallpapers.sort()
 
-    num_screen = 2
+    num_screen = 1 if os.uname()[1] == 'vm' else 2
 
     border = 2
 
