@@ -25,6 +25,7 @@ in
   users.defaultUserShell= "/run/current-system/sw/bin/zsh";
   users.users.${user} = {                   # System User
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
     useDefaultShell = true;
     subUidRanges = [
