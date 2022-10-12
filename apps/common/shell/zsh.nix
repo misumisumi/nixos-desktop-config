@@ -71,12 +71,11 @@
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
+        autoload -Uz compinit && compinit
+        autoload -Uz promptinit
       '';
 
       initExtra = ''
-        autoload -Uz compinit && compinit
-        autoload -Uz promptinit
-
         zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         zinit ice wait"!0"; zi light zsh-users/zsh-autosuggestions
         zinit ice wait"!0"; zi light zdharma-continuum/fast-syntax-highlighting
