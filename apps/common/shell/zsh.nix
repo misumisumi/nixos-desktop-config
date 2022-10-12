@@ -81,7 +81,7 @@
         [[ -r ''${ZINIT_HOME} ]] || mkdir -p ''${ZINIT_HOME}
         if [[ ! -f ''${ZINIT_HOME}/completions/_zinit ]]; then
           mkdir -p ''${ZINIT_HOME}/completions/ 
-          ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zinit/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
+          ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
         fi
       '';
 
