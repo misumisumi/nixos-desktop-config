@@ -87,7 +87,7 @@
         autoload -Uz promptinit
 
         autoload -Uz _zinit
-        (( ${+_comps} )) && _comps[zinit]=_zinit
+        (( ''${+_comps} )) && _comps[zinit]=_zinit
 
         zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         zinit ice wait"!0"; zi light zsh-users/zsh-autosuggestions
