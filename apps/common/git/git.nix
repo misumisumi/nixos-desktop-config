@@ -187,7 +187,7 @@
         "cabal.project.local"
         "cabal.project.local~"
         ".HTF/"
-        ".ghc.environment.*""
+        ".ghc.environment.*"
       ];
     };
   };
