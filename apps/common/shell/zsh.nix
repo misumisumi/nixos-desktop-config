@@ -103,10 +103,12 @@
         autoload -Uz compinit && compinit
         autoload -Uz promptinit
 
-        zstyle ":history-search-multi-word" page-size "8"
-        zstyle ":history-search-multi-word" highlight-color "fg=yellow,bold"
-        zstyle ":plugin:history-search-multi-word" synhl "yes"
-        zstyle ":plugin:history-search-multi-word" clear-on-cancel "no"
+        autoload history-search-multi-word
+        zle -N history-search-multi-word
+        zle -N history-search-multi-word-backwards history-search-multi-word
+        zle -N history-search-multi-word-pbackwards history-search-multi-word
+        zle -N history-search-multi-word-pforwards history-search-multi-word
+        bindkey "^R" history-search-multi-word
 
         # zi ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         # zi ice wait"!0"; zi light zsh-users/zsh-autosuggestions
