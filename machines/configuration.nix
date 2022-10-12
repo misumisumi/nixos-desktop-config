@@ -12,6 +12,7 @@
 {
   imports = [
     ./common/boot.nix
+    ./common/network.nix
     ./common/default-user.nix
     ./common/nix-conf.nix
     ./common/services.nix
