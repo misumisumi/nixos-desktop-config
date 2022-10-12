@@ -23,23 +23,21 @@ let
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
-    nixpkgs.lib.nixosSystem {    # Common profile
+    nixpkgs.lib.nixosSystem {
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
       modules = [
         ({ config, pkgs, ... }: { nixpkgs.overlays = [ nur.overlay ]; })
         nur.nixosModules.nur
-        ./boot-common.nix
-        ./configuration.nix    # TZ and console settings and so on...
-        (./. + "/${hostname}")
+        ./configuration.nix       # Common system conf
+        (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
           home-manager.users."${user}" = {
-            # Common and each machine configuration
-            imports = [(import ./home.nix)] ++ [(import hostConf)];
+            imports = [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
           };
         }
       ];
