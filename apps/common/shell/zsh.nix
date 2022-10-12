@@ -89,10 +89,10 @@
         autoload -Uz _zinit
         (( ''${+_comps} )) && _comps[zinit]=_zinit
 
-        zinit ice wait"1"; zi load zdharma-continuum/history-search-multi-word
+        zinit ice wait"!1a"; zi load zdharma-continuum/history-search-multi-word
         zinit ice wait"!0b"; zi light zsh-users/zsh-autosuggestions
         zinit ice wait"!0a"; zi light zdharma-continuum/fast-syntax-highlighting
-        zinit ice wait"!2"; zi load momo-lab/zsh-abbrev-alias
+        zinit ice wait"!1b"; zi load momo-lab/zsh-abbrev-alias
         zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
         zinit snippet PZT::modules/helper/init.zsh
