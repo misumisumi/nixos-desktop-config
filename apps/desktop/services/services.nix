@@ -4,7 +4,7 @@
   services = {
     screen-locker = {
       enable = true;
-      inactiveInterval = 30;
+      inactiveInterval = 40;
       lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ${config.home.homeDirectory}/Pictures/wallpapers/screen_saver.png";
 
       xautolock = {

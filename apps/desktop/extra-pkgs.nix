@@ -1,4 +1,6 @@
 pkgs: with pkgs; [
+  i3lock
+
   nomacs
 
   xfce.thunar
