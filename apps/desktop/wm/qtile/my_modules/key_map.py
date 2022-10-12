@@ -94,9 +94,9 @@ keys = [
     Key([PARAM.mod, 'shift'], 'p', lazy.spawn('rofi -show run'), desc='run rofi script PARAM.mode'),
     Key([PARAM.mod, 'control'], 'p', lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc='show power-menu'),
 
-    Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -i {} -t'.format(str(PARAM.wallpapers[-1]))), desc='lock PC'),
+    Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -i {} -t'.format(str(PARAM.screen_saver))), desc='lock PC'),
 
-    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(PARAM.screen_saver))),
+    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(str(PARAM.capture_path)))),
     Key([PARAM.mod], 'Print', capture_screen(is_clipboard=False)),
     Key([PARAM.mod, 'shift'], 'Print', capture_screen(is_clipboard=True)),
     Key([PARAM.mod], "period", float_cycle(forward=True)),
