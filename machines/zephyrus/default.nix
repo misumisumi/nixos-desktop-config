@@ -4,9 +4,9 @@
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./network.nix
-    ../../apps/common/virtualisation
     ../../apps/desktop/wm/configuration.nix
-  ];
+  ] ++
+  (import ../../apps/common/virtualisation);
   
   nix = {
     extraOptions = ''
