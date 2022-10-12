@@ -72,6 +72,7 @@
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
 
+        declare -A ZINIT
         ZINIT[HOME_DIR]=''${HOME}/.zinit
         if [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
       '';
