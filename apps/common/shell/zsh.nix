@@ -14,8 +14,9 @@
       dotDir = ".config/zsh";
 
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      # enableSyntaxHighlighting = true;
       enableCompletion = true;
+      completionInit = "autoload -Uz compinit && compinit";
       autocd = true;
 
       history = {
@@ -54,30 +55,35 @@
       };
 
       plugins = [
+        # {
+        #   name = "zsh-abbrev-alias";
+        #   src = pkgs.fetchFromGitHub {
+        #         owner = "momo-lab";
+        #         repo = "zsh-abbrev-alias";
+        #         rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
+        #         sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
+        #       };
+        #   file = "addrev-alias.plugin.zsh";
+        # }
+        # {
+        #   name = "powerlevel10k";
+        #   src = pkgs.zsh-powerlevel10k;
+        #   file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        # }
+        # {
+        #   name = "zsh-vi-mode";
+        #   src = pkgs.zsh-vi-mode;
+        #   file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        # }
+        # {
+        #   name = "zsh-history-search-multi-word";
+        #   src = pkgs.zsh-history-search-multi-word;
+        #   file="share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
+        # }
         {
-          name = "zsh-abbrev-alias";
-          src = pkgs.fetchFromGitHub {
-                owner = "momo-lab";
-                repo = "zsh-abbrev-alias";
-                rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
-                sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
-              };
-          file = "addrev-alias.plugin.zsh";
-        }
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
-        {
-          name = "zsh-vi-mode";
-          src = pkgs.zsh-vi-mode;
-          file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        }
-        {
-          name = "zsh-history-search-multi-word";
-          src = pkgs.zsh-history-search-multi-word;
-          file="share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
+          name = "zinit";
+          src = pkgs.zinit;
+          file="share/zinit/zinit.zsh";
         }
       ];
       envExtra = ''
@@ -97,12 +103,11 @@
         #     sh -c "$(curl -fsSL https://git.io/get-zi)" --
         # fi
         # source "$HOME/.zi/bin/zi.zsh"
+        ZINIT_HOME=''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zinit
       '';
 
       initExtra = ''
-        autoload -Uz compinit && compinit
         autoload -Uz promptinit
-        PATH+=$HOME/.config/zsh/plugins
 
         # zi ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         # zi ice wait"!0"; zi light zsh-users/zsh-autosuggestions
