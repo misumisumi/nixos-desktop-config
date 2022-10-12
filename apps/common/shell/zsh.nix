@@ -103,20 +103,20 @@
         #     sh -c "$(curl -fsSL https://git.io/get-zi)" --
         # fi
         # source "$HOME/.zi/bin/zi.zsh"
-        ZINIT_HOME=''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zinit
+        ZINIT_HOME=''${HOME}/.zinit
       '';
 
       initExtra = ''
         autoload -Uz promptinit
 
-        # zi ice wait"0"; zi load zdharma-continuum/history-search-multi-word
-        # zi ice wait"!0"; zi light zsh-users/zsh-autosuggestions
-        # zi ice wait"!0"; zi light zdharma-continuum/fast-syntax-highlighting
-        # zi ice wait"!0"; zi load momo-lab/zsh-abbrev-alias
-        # zi ice depth=1; zi light jeffreytse/zsh-vi-mode
+        zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
+        zinit ice wait"!0"; zi light zsh-users/zsh-autosuggestions
+        zinit ice wait"!0"; zi light zdharma-continuum/fast-syntax-highlighting
+        zinit ice wait"!0"; zi load momo-lab/zsh-abbrev-alias
+        zinit ice depth=1; zi light jeffreytse/zsh-vi-mode
 
-        # zi snippet PZT::modules/helper/init.zsh
-        # zi ice depth=1; zi light romkatv/powerlevel10k
+        zinit snippet PZT::modules/helper/init.zsh
+        zinit ice depth=1; zi light romkatv/powerlevel10k
 
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
