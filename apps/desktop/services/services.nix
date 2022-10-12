@@ -1,11 +1,13 @@
 { hostname, pkgs, ... }:
-
+let
+  picture_path = if hostname == "vm" || hostname == "zephyrus" then "fixed" else "unfixed";
+in
 {
   services = {
     screen-locker = {
       enable = true;
       inactiveInterval = 40;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ${config.home.homeDirectory}/Pictures/wallpapers/screen_saver.png";
+      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ${config.home.homeDirectory}/Pictures/wallpapers/${picture_path}/screen_saver.png";
 
       xautolock = {
         enable = true;
