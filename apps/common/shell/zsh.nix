@@ -72,18 +72,15 @@
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
 
+        autoload -Uz compinit && compinit
+        autoload -Uz promptinit
+
         declare -A ZINIT
         ZINIT[HOME_DIR]=''${HOME}/.zinit
         [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
       '';
 
       initExtra = ''
-        autoload -Uz compinit && compinit
-        autoload -Uz promptinit
-
-        autoload -Uz _zinit
-        (( ''${+_comps} )) && _comps[zinit]=_zinit
-
         zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         zinit ice wait"!0"; zi light zsh-users/zsh-autosuggestions
         zinit ice wait"!0"; zi light zdharma-continuum/fast-syntax-highlighting
