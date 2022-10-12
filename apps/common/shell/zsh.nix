@@ -78,6 +78,10 @@
         declare -A ZINIT
         ZINIT[HOME_DIR]=''${HOME}/.zinit
         [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
+        if [[ ! -f ZINIT[HOME_DIR]/completions/_zinit ]]; then
+          mkdir ZINIT[HOME_DIR]/completions/ 
+          ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zinit/zsh/site-functions/_zinit ZINIT[HOME_DIR]/completions/
+        fi
       '';
 
       initExtra = ''
