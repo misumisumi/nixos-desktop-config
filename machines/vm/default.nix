@@ -5,6 +5,8 @@
     /etc/nixos/hardware-configuration.nix
     ./network.nix
     ../../apps/desktop/wm/configuration.nix
+    ../../apps/common/virtualisation/podman.nix
+    ../../apps/common/virtualisation/libvirt.nix
   ];
   
   nix = {
