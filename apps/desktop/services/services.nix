@@ -5,7 +5,8 @@
     screen-locker = {
       enable = true;
       inactiveInterval = 30;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ../wm/wallpapers/archlinux.png";
+      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -t -i ${config.home.homeDirectory}/Pictures/wallpapers/screen_saver.png";
+
       xautolock = {
         enable = true;
       };
