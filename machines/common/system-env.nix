@@ -20,7 +20,7 @@ in
   };
 
   fonts.fonts = with pkgs; [
-    noto-Fonts                              # Normal usage
+    noto-fonts                              # Normal usage
     noto-fonts-emoji
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
