@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.dconf.enable = true;
+  programs.light.enable = true;
 
   services = {
     xserver = {

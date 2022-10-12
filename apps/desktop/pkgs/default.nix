@@ -1,5 +1,4 @@
 pkgs: with pkgs; [
-  light
   i3lock
 
   nomacs

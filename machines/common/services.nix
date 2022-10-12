@@ -1,6 +1,7 @@
 { hostname, pkgs, ... }:
 
 {
+  programs.dconf.enable = true;
   security.rtkit.enable = true;
   nixpkgs.config.pulseaudio = true;             # 一部パッケージのビルド時にpulseaudioを使うように指示する
   hardware = {
