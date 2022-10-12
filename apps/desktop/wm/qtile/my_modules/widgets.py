@@ -119,27 +119,28 @@ def make_widgets(is_tray=False):
                       partition='/home', **_colorset2),
             _rignt_corner(**_colorset7),
             widget.Spacer(),
-            # _left_corner(**_colorset5),
-            # widget.TaskList(border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, max_title_width=120, **_colorset6),
-            # _rignt_corner(**_colorset5),
-            # widget.Spacer(),
 
             _left_corner(**_colorset7),
             widget.Net(format='{down} ↓↑ {up}', **_colorset2),
             _rignt_corner(**_colorset1),
             widget.PulseVolume(fmt=' {}', limit_max_volume=True, volume_app='pavucontrol',
                                update_interval=0.1, **_colorset1),
-            _rignt_corner(**_colorset2),
-            widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2),
-            _rignt_corner(**_colorset1),
-            widget.Battery(format='{char} {percent:2.0%}', charge_char='', discharge_char='',
-                           empty_char='', full_chal='', unknown_char='', **_colorset1),
-            _rignt_corner(**_colorset2),
+            _rignt_corner(**_colorset2)
+        ]
+        if PARAM.laptop:
+            bottom_widgets += [
+                widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2),
+                _rignt_corner(**_colorset1),
+                widget.Battery(format='{char} {percent:2.0%}', charge_char='', discharge_char='',
+                               empty_char='', full_chal='', unknown_char='', **_colorset1),
+                _rignt_corner(**_colorset2),
+            ]
+        bottom_widgets += [
             widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                  inactive_color=PARAM.c_normal['BGbase'],
                                  inactive_text='N', **_colorset2),
             _rignt_corner(**_colorset7)
-            ]
+        ]
     else:
         bottom_widgets = None
 
