@@ -104,12 +104,13 @@ def make_widgets(is_tray=False):
                            empty_char='', full_chal='', unknown_char='', **_colorset1),
             _rignt_corner(**_colorset2),
         ]
-    top_widgets += [
-        widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
-                             inactive_color=PARAM.c_normal['BGbase'],
-                             inactive_text='N', **_colorset2),
-        _rignt_corner(**_colorset1)
-        ]
+    if not PARAM.vm:
+        top_widgets += [
+            widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
+                                 inactive_color=PARAM.c_normal['BGbase'],
+                                 inactive_text='N', **_colorset2),
+            _rignt_corner(**_colorset1)
+            ]
     if is_tray:
         top_widgets += [
             _separator(),
