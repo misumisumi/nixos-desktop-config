@@ -1,4 +1,4 @@
-{ hostname, pkgs, ... }:
+{ config, hostname, pkgs, ... }:
 let
   picture_path = if hostname == "vm" || hostname == "zephyrus" then "fixed" else "unfixed";
 in
