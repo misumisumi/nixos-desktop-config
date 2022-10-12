@@ -103,6 +103,9 @@
         autoload -Uz compinit && compinit
         autoload -Uz promptinit
 
+        if [[ $HOME/.config/zsh/plugins/zsh-history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh" ]]; then
+          echo TRUE
+        fi
         autoload history-search-multi-word
         zle -N history-search-multi-word
         zle -N history-search-multi-word-backwards history-search-multi-word
