@@ -8,4 +8,13 @@
     };
   };
 
+  services = {
+    nscd = {
+      enable = false;
+    };
+    resolved = {
+      enable = true;
+    };
+  };
+
 }
