@@ -11,8 +11,8 @@
             (import ../../apps/desktop);
 
   home = {
-    packages = (import ../../apps/common/extra-pkgs.nix) pkgs ++
-               (import ../../apps/desktop/extra-pkgs.nix) pkgs ++
+    packages = (import ../../apps/common/pkgs) pkgs ++
+               (import ../../apps/desktop/pkgs) pkgs ++
                [ pkgs.spice-vdagent ];
   };
 
