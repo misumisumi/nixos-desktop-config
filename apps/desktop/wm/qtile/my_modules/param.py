@@ -23,6 +23,7 @@ class Param:
     else:
         wallpapers = list(home.joinpath('Pictures', 'wallpapers', 'unfixed').glob('*.jpg'))
     wallpapers.sort()
+    screen_saver = str(home.joinpath('Pictures', 'wallpapers', 'screen_saver.png'))
 
     num_screen = 1 if os.uname()[1] == 'vm' else 2
 

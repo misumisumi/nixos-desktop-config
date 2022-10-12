@@ -96,7 +96,7 @@ keys = [
 
     Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -i {} -t'.format(str(PARAM.wallpapers[-1]))), desc='lock PC'),
 
-    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(str(PARAM.capture_path)))),
+    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(PARAM.screen_saver))),
     Key([PARAM.mod], 'Print', capture_screen(is_clipboard=False)),
     Key([PARAM.mod, 'shift'], 'Print', capture_screen(is_clipboard=True)),
     Key([PARAM.mod], "period", float_cycle(forward=True)),
