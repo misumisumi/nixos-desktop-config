@@ -46,16 +46,6 @@ def _separator():
 
 def make_widgets(is_tray=False):
     top_widgets = [
-        _left_corner(**_colorset1),
-        widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
-                             inactive_color=PARAM.c_normal['BGbase'],
-                             inactive_text='N', **_colorset2),
-        _rignt_corner(**_colorset1),
-        _separator(),
-        # _left_corner(**_colorset1),
-        # widget.CurrentLayout(fmt='{:.3}', **_colorset2),
-        # _rignt_corner(**_colorset1),
-        _separator(),
         _left_corner(**_colorset4),
         widget.GroupBox(this_current_screen_border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, **_colorset3,
                         font='Hack Nerd Font', fontsize=PARAM.font_size+2,
@@ -80,7 +70,8 @@ def make_widgets(is_tray=False):
         widget.Chord(**_colorset8),
         widget.Spacer(),
         _left_corner(**_colorset1),
-        widget.Clock(format='%Y-%m-%d %a %H:%M:%S', **_colorset2),
+        widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2),
+        widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2),
         _rignt_corner(**_colorset1),
         ]
     if PARAM.laptop or PARAM.vm:
@@ -113,9 +104,10 @@ def make_widgets(is_tray=False):
                            empty_char='', full_chal='', unknown_char='', **_colorset1),
             _rignt_corner(**_colorset2),
         ]
-    top_widgets += [widget.CheckUpdates(display_format=' {updates}', distro='Arch_checkupdates',
-                        colour_have_updates=PARAM.c_normal['magenta'], colour_no_updates=PARAM.c_normal['BGbase'],
-                        update_interval=60*60, no_update_string='  0', **_colorset2),
+    top_widgets += [
+        widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
+                             inactive_color=PARAM.c_normal['BGbase'],
+                             inactive_text='N', **_colorset2),
         _rignt_corner(**_colorset1)
         ]
     if is_tray:
