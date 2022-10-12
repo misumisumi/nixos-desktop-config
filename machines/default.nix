@@ -51,4 +51,5 @@ in
   yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
   vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
   zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
+  extra = settings { hostname="extra"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
 }
