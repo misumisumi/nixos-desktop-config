@@ -89,14 +89,14 @@
         autoload -Uz _zinit
         (( ''${+_comps} )) && _comps[zinit]=_zinit
 
-        zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
-        zinit ice wait"!0"; zi light zsh-users/zsh-autosuggestions
-        zinit ice wait"!0"; zi light zdharma-continuum/fast-syntax-highlighting
-        zinit ice wait"!0"; zi load momo-lab/zsh-abbrev-alias
-        zinit ice depth=1; zi light jeffreytse/zsh-vi-mode
+        zinit ice wait"1"; zi load zdharma-continuum/history-search-multi-word
+        zinit ice wait"!0b"; zi light zsh-users/zsh-autosuggestions
+        zinit ice wait"!0a"; zi light zdharma-continuum/fast-syntax-highlighting
+        zinit ice wait"!2"; zi load momo-lab/zsh-abbrev-alias
+        zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
         zinit snippet PZT::modules/helper/init.zsh
-        zinit ice depth=1; zi light romkatv/powerlevel10k
+        zinit ice depth=1; zinit light romkatv/powerlevel10k
 
         setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
         setopt inc_append_history    # 履歴をインクリメンタルに追加
