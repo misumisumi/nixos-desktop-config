@@ -26,6 +26,7 @@ in
   users.users.${user} = {                   # System User
     isNormalUser = true;
     shell = pkgs.zsh;
+    initialHashedPassword = "$6$viPBN7o74kK3JdGw$4zKIuVEbgqvTqLIae/G5rOgrYXWSccB5MQp9/0HgeitQIocLg2.GeG7TWYYfNhZdgs4FNHJuPg5SqSrrIkpr51";
     extraGroups = [ "wheel" "lxd" "libvirt" "uucp" "kvm" "input" ];
     useDefaultShell = true;
     subUidRanges = [
