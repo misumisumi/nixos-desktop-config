@@ -71,6 +71,9 @@
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
+
+        ZINIT[HOME_DIR]=''${HOME}/.zinit
+        if [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
       '';
 
       initExtra = ''
