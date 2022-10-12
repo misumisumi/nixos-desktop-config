@@ -1,20 +1,20 @@
 { pkgs, user, ... }:
 
 {
-  boot = {
-  extraModprobeConfig = ''
-    options kvm_amd nested=1
-    options kvm ignore_nsrs=1
-  '';
-  # kernelParams = [ "amd_iommu=on" "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ]; 
-  # kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
-  # extraModprobeConfig = "options vfio-pci ids=1002:67DF,1002:AAF0";
-  };
+  # boot = {
+  # extraModprobeConfig = ''
+  #   options kvm_amd nested=1
+  #   options kvm ignore_nsrs=1
+  # '';
+  # # kernelParams = [ "amd_iommu=on" "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ]; 
+  # # kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
+  # # extraModprobeConfig = "options vfio-pci ids=1002:67DF,1002:AAF0";
+  # };
 
   users = {
     groups = {
       libvirtd = {
-        members = [ "root", "${user}" ];
+        members = [ "root" "${user}" ];
       };
     };
   };
