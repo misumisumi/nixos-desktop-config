@@ -28,6 +28,10 @@
       # driSupport32Bit = true;
     };
   };
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+    paprefs
+  ];
 
   services = {
   #   pipewire = {

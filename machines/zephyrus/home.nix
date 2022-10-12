@@ -6,6 +6,7 @@
 
 {
   imports = (import ../../apps/common/cui) ++
+            (import ../../apps/common/git) ++
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
             (import ../../apps/desktop);

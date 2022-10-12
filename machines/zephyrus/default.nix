@@ -18,7 +18,6 @@
     xserver = {
       videoDrivers = [
         "amdgpu"
-        "nvidia"
       ];
     };
   };
