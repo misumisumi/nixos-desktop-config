@@ -77,7 +77,7 @@
         {
           name = "zsh-history-search-multi-word";
           src = pkgs.zsh-history-search-multi-word;
-          file="share/zsh/zsh-history-search-multi-word/zsh-history-search-multi-word.plugin.zsh";
+          file="share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
         }
       ];
       envExtra = ''
