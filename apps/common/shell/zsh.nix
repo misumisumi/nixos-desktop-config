@@ -55,31 +55,6 @@
       };
 
       plugins = [
-        # {
-        #   name = "zsh-abbrev-alias";
-        #   src = pkgs.fetchFromGitHub {
-        #         owner = "momo-lab";
-        #         repo = "zsh-abbrev-alias";
-        #         rev = "33fe094da0a70e279e1cc5376a3d7cb7a5343df5";
-        #         sha256 = "1cvgvb1q0bwwnnvkd7yjc7sq9fgghbby1iffzid61gi9j895iblf";
-        #       };
-        #   file = "addrev-alias.plugin.zsh";
-        # }
-        # {
-        #   name = "powerlevel10k";
-        #   src = pkgs.zsh-powerlevel10k;
-        #   file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        # }
-        # {
-        #   name = "zsh-vi-mode";
-        #   src = pkgs.zsh-vi-mode;
-        #   file="share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        # }
-        # {
-        #   name = "zsh-history-search-multi-word";
-        #   src = pkgs.zsh-history-search-multi-word;
-        #   file="share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh";
-        # }
         {
           name = "zinit";
           src = pkgs.zinit;
@@ -98,12 +73,6 @@
           source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
         fi
         source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
-
-        # if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
-        #     sh -c "$(curl -fsSL https://git.io/get-zi)" --
-        # fi
-        # source "$HOME/.zi/bin/zi.zsh"
-        ZINIT_HOME=''${HOME}/.zinit
       '';
 
       initExtra = ''
