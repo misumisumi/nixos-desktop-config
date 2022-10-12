@@ -104,13 +104,8 @@
         autoload -Uz promptinit
 
         if [[ -f "$HOME/.config/zsh/plugins/zsh-history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh" ]]; then
-          echo TRUE
+          source $HOME/.config/zsh/plugins/zsh-history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh
         fi
-        autoload history-search-multi-word
-        zle -N history-search-multi-word
-        zle -N history-search-multi-word-backwards history-search-multi-word
-        zle -N history-search-multi-word-pbackwards history-search-multi-word
-        zle -N history-search-multi-word-pforwards history-search-multi-word
         bindkey "^R" history-search-multi-word
 
         # zi ice wait"0"; zi load zdharma-continuum/history-search-multi-word
