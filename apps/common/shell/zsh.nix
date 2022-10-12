@@ -74,7 +74,7 @@
 
         declare -A ZINIT
         ZINIT[HOME_DIR]=''${HOME}/.zinit
-        if [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
+        [[ ! -r ZINIT[HOME_DIR] ]] || mkdir ZINIT[HOME_DIR]
       '';
 
       initExtra = ''
