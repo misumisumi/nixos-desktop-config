@@ -54,8 +54,8 @@
     };
 
     picom = {
-      enable = true;
-      backend = if "${hostname}" == "vm" then "xrender" else "glx";
+      enable = if "${hostname}" == "vm" then false else true;
+      backend = "glx";
       experimentalBackends = true;
       vSync = false;
 
