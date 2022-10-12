@@ -23,7 +23,6 @@ class Param:
     else:
         wallpapers = list(home.joinpath('Pictures', 'wallpapers', 'unfixed').glob('*.jpg'))
     wallpapers.sort()
-    logger.warning(wallpapers)
 
     num_screen = 1 if os.uname()[1] == 'vm' else 2
 
