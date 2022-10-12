@@ -14,9 +14,7 @@
       dotDir = ".config/zsh";
 
       enableAutosuggestions = true;
-      # enableSyntaxHighlighting = true;
-      enableCompletion = true;
-      completionInit = "autoload -Uz compinit && compinit";
+      enableCompletion = false;
       autocd = true;
 
       history = {
@@ -76,6 +74,7 @@
       '';
 
       initExtra = ''
+        autoload -Uz compinit && compinit
         autoload -Uz promptinit
 
         zinit ice wait"0"; zi load zdharma-continuum/history-search-multi-word
