@@ -16,7 +16,7 @@ MONITOR2=0
 
 @hook.subscribe.setgroup
 def change_wallpaper():
-    if not PARAM.laptop:
+    if not (PARAM.laptop and PARAM.vm):
         global MONITOR0
         global MONITOR1
         global MONITOR2
