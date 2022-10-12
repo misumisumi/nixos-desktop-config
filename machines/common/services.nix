@@ -23,6 +23,10 @@
         };
       };
     };
+    opengl = {
+      driSupport = true;
+      # driSupport32Bit = true;
+    };
   };
 
   services = {
