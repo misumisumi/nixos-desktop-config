@@ -102,11 +102,7 @@
       initExtra = ''
         autoload -Uz compinit && compinit
         autoload -Uz promptinit
-
-        if [[ -f "$HOME/.config/zsh/plugins/zsh-history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh" ]]; then
-          source $HOME/.config/zsh/plugins/zsh-history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh
-        fi
-        bindkey "^R" history-search-multi-word
+        PATH+=$HOME/.config/zsh/plugins
 
         # zi ice wait"0"; zi load zdharma-continuum/history-search-multi-word
         # zi ice wait"!0"; zi light zsh-users/zsh-autosuggestions
