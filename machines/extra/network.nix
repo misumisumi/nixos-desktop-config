@@ -4,21 +4,37 @@
   networking = {
     wireless = {
       enable = true;
-      userControlled = {
-        enable = true;
+    };
+    useDHCP = lib.mkDefault true;
+    dhcpcd = {
+      enable = true;
+      wait = "background";
+    };
+    hostName = "${hostname}";
+  };
+
+  systemd = {
+    network = {
+      netdevs = {
+        "br0".netdevConfig = {
+          Kind = "bridge";
+          Name = "br0";
+        };
       };
       networks = {
-        "ASUS_RT-AC85U_5G" = {
-          pskRaw = "5376215bf67d31cac4df819ad719699b95f5e1c6986ffe84b0237c895caf23f5";
-          priority = 10;
+        "10-wireless" = {
+          name = "wlp2s0";
+          DHCP = "ipv4";
+        };
+        "20-br0" = {
+          DHCP = "ipv4";
+        };
+        "20-wired" = {
+          name = "enp4s0f4u1u3";
+          bridge = [ "br0" ];
         };
       };
     };
-    useDHCP = lib.mkDefault true;
-    hostName = "${hostname}";
-    # bridges = {
-    #   interfaces = [ "" ];
-    # };
   };
 }
 # WiFi setting
