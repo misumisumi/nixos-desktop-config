@@ -38,7 +38,7 @@
   ];
 
   services = {
-    udisk2.enable = true;
+    udisk2s.enable = true;
     openssh = {
       enable = true;
       ports = [ 12511 ];
