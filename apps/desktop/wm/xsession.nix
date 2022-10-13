@@ -5,7 +5,7 @@
   home.file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
   xdg = {
     configFile = {
-      "qtile".source = ./qtile;    # windowsとconfigを共有するため.config/nvimで管理する
+      "qtile".source = ./qtile;
     };
   };
 
@@ -25,7 +25,6 @@
       export XDG_CONFIG_HOME=~/.config
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
-      devmon &
       if [ $(hostname) = "zephyrus" ]; then
           asusctltray &
       fi
