@@ -75,7 +75,7 @@ keys = [
         Key([], 'd', attach_screen('delete')),
         Key([], 'space', lazy.ungrab_chord()),
         ],
-        mode='attach'
+        name='attach'
     ),
 
     # Change other layout
@@ -128,7 +128,7 @@ keys = [
         Key([], 'h', move_pinp('left')),
         Key([], 'space', lazy.ungrab_chord()),
         ],
-        mode='pinp'
+        name='pinp'
     )
 
 ]
