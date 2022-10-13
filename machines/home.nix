@@ -58,9 +58,6 @@
     userDirs = {
       enable = true;
       createDirectories = true;
-      desktop = "";
-      templates = "";
-      publicShare = "";
       extraConfig = {
         XDG_GAME_DIR = "${config.home.homeDirectory}/Game";
         XDG_BIN_DIR = "${config.home.homeDirectory}/bin";
