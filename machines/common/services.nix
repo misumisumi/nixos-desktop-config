@@ -1,7 +1,10 @@
 { hostname, pkgs, ... }:
 
 {
-  programs.dconf.enable = true;
+  programs = {
+    dconf.enable = true;
+    udevil.enable = true;
+  };
   security.rtkit.enable = true;
   nixpkgs.config.pulseaudio = true;             # 一部パッケージのビルド時にpulseaudioを使うように指示する
   hardware = {
@@ -35,15 +38,7 @@
   ];
 
   services = {
-  #   pipewire = {
-  #     enable = true;
-  #     alsa = {
-  #       enable = true;
-  #       support32Bit = true;
-  #     };
-  #     pulse.enable = true;
-  #   };
-
+    udisk2.enable = true;
     openssh = {
       enable = true;
       ports = [ 12511 ];
@@ -54,6 +49,15 @@
         UsePAM yes
       '';
     };
+  #   pipewire = {
+  #     enable = true;
+  #     alsa = {
+  #       enable = true;
+  #       support32Bit = true;
+  #     };
+  #     pulse.enable = true;
+  #   };
+
   };
 
 }
