@@ -25,9 +25,9 @@
       export XDG_CONFIG_HOME=~/.config
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
-      if [ $(hostname) = "zephyrus" ]; then
-          asusctltray &
-      fi
+      # if [ $(hostname) = "zephyrus" ]; then
+      #     asusctltray &
+      # fi
     '';
   };
 }
