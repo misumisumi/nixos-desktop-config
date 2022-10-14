@@ -42,6 +42,7 @@
       temp = "trash-empty";
       trm = "trash-rm";
       tty-clock = "tty-clock -s -c -C 6";
+      ranger = "ranger --clean";  # ranger cannot launch without --clean
     };
 
   };
