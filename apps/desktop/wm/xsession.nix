@@ -1,12 +1,21 @@
 { config, lib, user, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ qtile ];
-  home.file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
-  xdg = {
-    configFile = {
-      "qtile".source = ./qtile;
+  home = {
+    packages = with pkgs; [ qtile ];
+    file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
+    xdg = {
+      configFile = {
+        "qtile".source = ./qtile;
+      };
     };
+
+    keyboard = {
+      layout = "us";
+      model = "pc10";
+      options = [ "caps:nocaps" ];
+    };
+
   };
 
   xsession = {
