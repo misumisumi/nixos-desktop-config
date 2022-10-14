@@ -21,6 +21,9 @@
       name = "Adapta-Nokto-Eta";
       package = pkgs.adapta-gtk-theme;
     };
+    extraConfig = ''
+      xft-dpi = 120
+    '';
   };
   qt = {
     enable = true;
