@@ -3,11 +3,6 @@
 {
   gtk = {
     enable = true;
-    cursorTheme = {
-      name = "Dracula-cursors";
-      package = pkgs.dracula-theme;
-      size = 32;
-    };
     font = {
       name = "Noto Sans CJK JP";
       package = pkgs.noto-fonts-cjk-sans;

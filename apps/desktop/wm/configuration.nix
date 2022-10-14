@@ -27,9 +27,9 @@
             gtk = {
               enable = true;
               cursorTheme = {
-                name = "Capitaine Cursors";
-                package = pkgs.capitaine-cursors;
-                size=32;    # Use default size
+                name = "Dracula-cursors";
+                package = pkgs.dracula-theme;
+                size = 24;
               };
               iconTheme = {
                 name = "Papirus-Dark";
@@ -39,10 +39,6 @@
                 name = "Adapta-Nokto-Eta";
                 package = pkgs.adapta-gtk-theme;
               };
-              extraConfig = ''
-                xft-dpi = 110
-              '';
-
             };
           };
         };

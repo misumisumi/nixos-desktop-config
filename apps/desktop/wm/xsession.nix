@@ -14,7 +14,7 @@
       gtk.enable = true;
       name = "Dracula-cursors";
       package = pkgs.dracula-theme;
-      size = 32;
+      size = 24;
     };
 
   };
