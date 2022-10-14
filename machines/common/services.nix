@@ -1,7 +1,7 @@
 { hostname, pkgs, ... }:
 
 {
-  security.rtkit.enable = false;
+  security.rtkit.enable = true;
   programs = {
     dconf.enable = true;
     udevil.enable = true;
