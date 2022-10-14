@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  nvidia-offload = pkgs.writeShellScriptBin "prime-run" ''
+  prime-run = pkgs.writeShellScriptBin "prime-run" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
@@ -9,6 +9,7 @@ let
   '';
 in
 {
+  environment.systemPackages = [ prime-run ];
   services = {
     xserver = {
       videoDrivers = [
