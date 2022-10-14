@@ -6,6 +6,7 @@
     dconf.enable = true;
     udevil.enable = true;
   };
+
   hardware = {
     bluetooth = {
       enable = if hostname == "tsundere" || hostname == "vm" then false else true;
