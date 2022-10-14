@@ -16,6 +16,9 @@
       "qtile".source = ./qtile;
     };
   };
+  xresources.extraConfig = ''
+    Xft.dpi: 110
+  '';
 
   xsession = {
     enable = true;
@@ -23,6 +26,13 @@
     windowManager = {
       command = "${pkgs.qtile}/bin/qtile start";
     };
+    
+    pointerCursor = {
+      name = "Capitaine Cursors";
+      package = pkgs.capitaine-cursors;
+    };
+
+    preferStatusNotifierItems = true;
 
     profileExtra=''
       export GTK_IM_MODULE=fcitx
