@@ -50,9 +50,5 @@
       #     asusctltray &
       # fi
     '';
-
-    initExtra = ''
-      exec dbus-launch qtile
-    '';
   };
 }
