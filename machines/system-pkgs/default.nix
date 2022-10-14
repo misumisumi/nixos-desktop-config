@@ -11,6 +11,7 @@
     wget            # Downloader
     curl
     traceroute      # Track the network route
+    gptfdisk        # GPT partition tools
   ];
   systemWidePythonPkgs = ps: with ps.python3Packages; [
     numpy           # For calculate
