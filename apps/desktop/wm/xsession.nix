@@ -4,18 +4,17 @@
   home = {
     packages = with pkgs; [ qtile ];
     file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
-    xdg = {
-      configFile = {
-        "qtile".source = ./qtile;
-      };
-    };
-
     keyboard = {
       layout = "us";
       model = "pc10";
       options = [ "caps:nocaps" ];
     };
+  };
 
+  xdg = {
+    configFile = {
+      "qtile".source = ./qtile;
+    };
   };
 
   xsession = {
