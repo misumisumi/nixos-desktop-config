@@ -35,8 +35,6 @@
       command = "${pkgs.qtile}/bin/qtile start";
     };
 
-    preferStatusNotifierItems = true;
-
     profileExtra=''
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
