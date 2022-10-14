@@ -9,7 +9,7 @@
       autorun = true;
 
       layout = "us";
-      xkbOptions = "caps:nocaps,super_l:alt_l,alt_l:super_l";
+      xkbOptions = "caps:nocaps";
 
       libinput = {
         enable = true;
@@ -26,6 +26,20 @@
           greeters = {
             gtk = {
               enable = true;
+                cursorTheme = {
+                  name = "Breeze-Adapta-Cursor";
+                  package = pkgs.capitaine-cursors;
+                  size=0;    # Use default size
+                };
+                iconTheme = {
+                  name = "Papirus-Dark";
+                  package = pkgs.papirus-icon-theme;
+                };
+                theme = {
+                  name = "Adapta-Nokto-Eta";
+                  package = pkgs.adapta-gtk-theme;
+                };
+
             };
           };
         };

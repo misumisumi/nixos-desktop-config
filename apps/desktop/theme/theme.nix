@@ -6,6 +6,7 @@
     cursorTheme = {
       name = "Breeze-Adapta-Cursor";
       package = pkgs.capitaine-cursors;
+      size=0;    # Use default size
     };
     font = {
       name = "Noto Sans CJK JP";
