@@ -19,7 +19,9 @@
     };
   };
 
-  networking.wireless = {
+  networking = {
+    useDHCP = lib.mkDefault false;    # Setting each network interafces
+    wireless = {
       networks = {
         "ASUS_RT-AC85U_5G" = {
           pskRaw = "5376215bf67d31cac4df819ad719699b95f5e1c6986ffe84b0237c895caf23f5";
@@ -37,6 +39,7 @@
         };
       };
     };
+  };
 
   system.nssModules = lib.mkForce [];
 }
