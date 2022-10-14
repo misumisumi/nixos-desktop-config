@@ -1,7 +1,4 @@
 pkgs: with pkgs; [
-  gnome.gnome-themes-extra
-  gnome.adwaita-icon-theme
-
   font-manager
 
   i3lock
