@@ -39,7 +39,6 @@
           Unit = {
             Description = "polkit-gnome-authentication-agent-1";
             Wants = [ "graphical-session.target" ];
-            WantedBy = [ "graphical-session.target" ];
             After = [ "graphical-session.target" ];
           };
           Service = {
@@ -55,7 +54,6 @@
           Unit = {
             Description = "Start thunar daemon mode";
             Wants = [ "graphical-session.target" ];
-            WantedBy = [ "graphical-session.target" ];
             After = [ "graphical-session.target" ];
           };
           Service = {
