@@ -5,7 +5,6 @@ pkgs: with pkgs; [
   duf       # Show storage usage
   neofetch  # Fetch system info
 
-  ranger    # Filer
   tree      # Show file tree
 
   ffmpeg    # Multi media solution
