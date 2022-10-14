@@ -21,7 +21,7 @@ in
             family = font;
             style = "Oblique";
           };
-          size = 16.0;
+          size = 12.0;
         };
         colors = {
           primary = {
