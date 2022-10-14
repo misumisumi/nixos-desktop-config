@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ hostname, pkgs, ... }:
 
 {
   services = {
