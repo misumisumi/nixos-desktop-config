@@ -14,17 +14,4 @@
       binary-caches-parallel-connections = 24
     '';
   };
-
-  services = {
-    xserver = {
-      videoDrivers = [
-        "amdgpu"
-        "nvidia"
-      ];
-    };
-  };
-
-  hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
-  ];
 }
