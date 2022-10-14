@@ -24,10 +24,10 @@
       networks = {
         "10-wireless" = {
           name = "wlp2s0";
-          DHCP = "ipv4";
+          DHCP = "yes";
         };
         "20-br0" = {
-          DHCP = "ipv4";
+          DHCP = "yes";
         };
         "20-wired" = {
           name = "enp4s0f4u1u3";

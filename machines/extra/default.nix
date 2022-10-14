@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./network.nix
+    ../common/pipewire.nix
     ../../apps/desktop/wm/configuration.nix
   ] ++
   (import ../../apps/common/virtualisation);
