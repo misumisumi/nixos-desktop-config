@@ -1,5 +1,8 @@
 { pkgs, ... }:
-
+let
+  font = "FiraCode Nerd Font";
+  # font = "Ricty Diminished with Fira Code";
+in
 {
   programs = {
     alacritty = {
@@ -7,15 +10,15 @@
       settings = {
         font = {
           normal = {
-            family = "Ricty Diminished with Fira Code";
+            family = font;
             style = "Regular";
           };
           bold = {
-            family = "Ricty Diminished with Fira Code";
+            family = font;
             style = "Bold";
           };
           italic = {
-            family = "Ricty Diminished with Fira Code";
+            family = font;
             style = "Oblique";
           };
           size = 16.0;
