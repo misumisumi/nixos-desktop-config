@@ -1,4 +1,7 @@
 pkgs: with pkgs; [
+  gnome.gnome-themes-extra
+  gnome.adwaita-icon-theme
+
   i3lock
 
   nomacs
