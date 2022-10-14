@@ -9,6 +9,11 @@
       model = "pc104";
       options = [ "ctrl:nocaps" ];
     };
+    pointerCursor = {
+      name = "Capitaine Cursors";
+      package = pkgs.capitaine-cursors;
+    };
+
   };
 
   xdg = {
@@ -27,11 +32,6 @@
       command = "${pkgs.qtile}/bin/qtile start";
     };
     
-    pointerCursor = {
-      name = "Capitaine Cursors";
-      package = pkgs.capitaine-cursors;
-    };
-
     preferStatusNotifierItems = true;
 
     profileExtra=''
