@@ -9,7 +9,7 @@
       autorun = true;
 
       layout = "us";
-      xkbOptions = "caps:nocaps";
+      xkbOptions = "caps:nocaps";  # keyboard is managed home-manager
 
       libinput = {
         enable = true;
