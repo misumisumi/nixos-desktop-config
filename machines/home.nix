@@ -26,12 +26,6 @@
     username = "${user}";
     homeDirectory = "/home/${user}";
 
-    pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
-      name = "Dracula-cursors";
-      package = pkgs.dracula-theme;
-      size = 16;
-    };
-
     sessionVariables = {
       CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
       EDITOR="nvim";
