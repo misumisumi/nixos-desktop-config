@@ -6,8 +6,8 @@
     file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
     keyboard = {
       layout = "us";
-      model = "pc10";
-      options = [ "caps:nocaps" ];
+      model = "pc104";
+      options = [ "ctrl:nocaps" ];
     };
   };
 
