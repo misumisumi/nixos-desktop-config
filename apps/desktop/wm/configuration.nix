@@ -29,7 +29,7 @@
               cursorTheme = {
                 name = "Capitaine Cursors";
                 package = pkgs.capitaine-cursors;
-                size=0;    # Use default size
+                size=32;    # Use default size
               };
               iconTheme = {
                 name = "Papirus-Dark";
