@@ -10,6 +10,8 @@
       options = [ "ctrl:nocaps" ];
     };
     pointerCursor = {
+      x11.enable = true;
+      gtk.enable = true;
       name = "Capitaine Cursors";
       package = pkgs.capitaine-cursors;
     };
