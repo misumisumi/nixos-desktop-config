@@ -4,9 +4,9 @@
   gtk = {
     enable = true;
     cursorTheme = {
-      name = "Breeze-Adapta-Cursor";
+      name = "Capitaine Cursors";
       package = pkgs.capitaine-cursors;
-      size=0;    # Use default size
+      size=32;    # Use default size
     };
     font = {
       name = "Noto Sans CJK JP";
