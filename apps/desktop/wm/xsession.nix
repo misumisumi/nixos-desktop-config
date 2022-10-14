@@ -34,7 +34,7 @@
     windowManager = {
       command = "${pkgs.qtile}/bin/qtile start";
     };
-    
+
     preferStatusNotifierItems = true;
 
     profileExtra=''
@@ -49,6 +49,10 @@
       # if [ $(hostname) = "zephyrus" ]; then
       #     asusctltray &
       # fi
+    '';
+
+    initExtra = ''
+      exec dbus-launch qtile
     '';
   };
 }
