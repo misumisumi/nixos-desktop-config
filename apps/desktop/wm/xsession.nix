@@ -24,9 +24,9 @@
       "qtile".source = ./qtile;
     };
   };
-  xresources.extraConfig = ''
-    Xft.dpi: 110
-  '';
+  xresources.properties = {
+    "Xft.dpi" = 110;
+  };
 
   xsession = {
     enable = true;
