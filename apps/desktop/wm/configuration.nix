@@ -26,19 +26,22 @@
           greeters = {
             gtk = {
               enable = true;
-                cursorTheme = {
-                  name = "Capitaine Cursors";
-                  package = pkgs.capitaine-cursors;
-                  size=0;    # Use default size
-                };
-                iconTheme = {
-                  name = "Papirus-Dark";
-                  package = pkgs.papirus-icon-theme;
-                };
-                theme = {
-                  name = "Adapta-Nokto-Eta";
-                  package = pkgs.adapta-gtk-theme;
-                };
+              cursorTheme = {
+                name = "Capitaine Cursors";
+                package = pkgs.capitaine-cursors;
+                size=0;    # Use default size
+              };
+              iconTheme = {
+                name = "Papirus-Dark";
+                package = pkgs.papirus-icon-theme;
+              };
+              theme = {
+                name = "Adapta-Nokto-Eta";
+                package = pkgs.adapta-gtk-theme;
+              };
+              extraConfig = ''
+                xft-dpi = 120
+              '';
 
             };
           };
