@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ gnome.dconf-editor ];
   gtk = {
     enable = true;
     font = {
@@ -22,10 +23,6 @@
   };
   qt = {
     enable = true;
-    style = {
-      name = "gtk2";
-      package = pkgs.libsForQt5.qtstyleplugins;
-    };
-    # platformTheme = "gtk";
+    platformTheme = "gtk";
   };
 }
