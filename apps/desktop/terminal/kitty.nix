@@ -17,7 +17,7 @@
       settings = {
         foreground = "#d8e1e6";
         background = "#1f292e";
-        background_opacity = 0.85;
+        background_opacity = "0.85";
       };
     };
   };
