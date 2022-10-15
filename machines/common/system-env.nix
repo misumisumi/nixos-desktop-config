@@ -19,23 +19,33 @@ in
     useXkbConfig = true;
   };
 
-  fonts.fonts = with pkgs; [
-    noto-fonts                              # Normal usage
-    noto-fonts-emoji
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
+  fonts = {
+    fontconfig = {
+      defaultFonts = {
+        serif = "Noto Serif CJK JP";
+        sansSerif = "Noto Sans CJK JP";
+        monospace = "Noto Sans Mono CJK JP";
+        emoji = "Noto Color Emoji";
+      };
+    };
+    fonts = with pkgs; [
+      noto-fonts                              # Normal usage
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
 
-    rictydiminished-with-firacode           # Programing
-    (nerdfonts.override {                   # Nerdfont override
-      fonts = [
-        "FiraCode"
-        "Hack"
-        "Terminus"
-      ];
-    })
+      rictydiminished-with-firacode           # Programing
+      (nerdfonts.override {                   # Nerdfont override
+        fonts = [
+          "FiraCode"
+          "Hack"
+          "Terminus"
+        ];
+      })
 
-    papirus-icon-theme                      # Icons
-  ];
+      papirus-icon-theme                      # Icons
+    ];
+  };
 
   environment = {
     variables = {
