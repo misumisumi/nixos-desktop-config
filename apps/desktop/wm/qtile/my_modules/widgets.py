@@ -1,10 +1,15 @@
 """widgets for qtile bar"""
 from pathlib import Path
 from libqtile import bar, widget
+from xdg import IconTheme
 
 from my_modules.param import PARAM
 
 from libqtile.log_utils import logger
+
+logger.warning("-"*50)
+logger.warning(IconTheme.getIconPath("flameshot", 32))
+logger.warning("-"*50)
 
 
 _colorset1 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_normal['cyan']}
