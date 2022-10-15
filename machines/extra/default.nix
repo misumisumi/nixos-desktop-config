@@ -7,7 +7,7 @@
     ./gpu.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
-    ../../apps/desktop/wm/configuration.nix
+    ../../apps/desktop/wm/xserver.nix
   ] ++
   (import ../../apps/common/virtualisation);
   
