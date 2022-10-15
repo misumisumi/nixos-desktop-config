@@ -27,9 +27,9 @@ in
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Serif CJK JP"];
-        sansSerif = ["Noto Sans CJK JP"];
-        monospace = ["Noto Sans Mono CJK JP"];
+        serif = [ "Source Han Serif" "Noto Serif CJK JP" ];
+        sansSerif = [ "Source Han Sans" "Noto Sans CJK JP" ];
+        monospace = [ "Source Han Mono" "Noto Sans Mono CJK JP" ];
         emoji = ["Noto Color Emoji"];
       };
     };
@@ -38,6 +38,10 @@ in
       noto-fonts-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+
+      source-han-sans
+      source-han-serif
+      source-han-mono
 
       rictydiminished-with-firacode           # Programing
       (nerdfonts.override {                   # Nerdfont override
