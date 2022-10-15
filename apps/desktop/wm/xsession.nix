@@ -22,7 +22,7 @@
   xdg = {
     configFile = {
       "qtile".source = ./qtile;
-      "libinput-gestures.conf" = ./libinput-gestures.conf;
+      "libinput-gestures.conf".source = ./libinput-gestures.conf;
     };
   };
   xresources.properties = {
