@@ -18,6 +18,7 @@
           tapping = true;
           naturalScrolling = true;
         };
+      gdk-pixbuf.modulePackages = [ pkgs.gdk-pixbuf ];
       };
 
       displayManager = {
