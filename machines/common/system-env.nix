@@ -24,6 +24,7 @@ in
   };
 
   fonts = {
+    enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
         serif = ["Noto Serif CJK JP"];
