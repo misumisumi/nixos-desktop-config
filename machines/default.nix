@@ -48,7 +48,7 @@ in
   mother = settings { hostname="mother"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
+  vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   extra = settings { hostname="extra"; inherit inputs nixpkgs home-manager nur user stateVersion; };
 }
