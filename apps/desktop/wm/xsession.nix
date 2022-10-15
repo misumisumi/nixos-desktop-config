@@ -32,7 +32,8 @@
     enable = true;
 
     windowManager = {
-      command = "${pkgs.qtile}/bin/qtile start";
+      # command = "${pkgs.qtile}/bin/qtile start";
+      command = "exec ${pkgs.dbus}/bin/dbus-launch qtile start";
     };
 
     profileExtra=''
