@@ -106,7 +106,8 @@ def make_widgets(is_tray=False):
         top_widgets += [
             _separator(),
             _left_corner(**_colorset4),
-            widget.Systray(**_colorset3),
+            # widget.Systray(**_colorset3),
+            widget.StatusNotifier(**_colorset3),
             _rignt_corner(**_colorset4),
             _separator(),
         ]
