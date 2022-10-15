@@ -2,7 +2,7 @@
 
 {
   home = {
-    packages = with pkgs; [ qtile ];
+    packages = with pkgs; [ qtile libinput-gestures ];
     file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./qtile/wallpapers;
     keyboard = {
       layout = "us";
@@ -22,6 +22,7 @@
   xdg = {
     configFile = {
       "qtile".source = ./qtile;
+      "libinput-gestures.conf" = ./libinput-gestures.conf;
     };
   };
   xresources.properties = {
@@ -43,6 +44,7 @@
       export GLFW_IM_MODULE=ibus
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
+      libinput-gestures &
       # if [ $(hostname) = "zephyrus" ]; then
       #     asusctltray &
       # fi
