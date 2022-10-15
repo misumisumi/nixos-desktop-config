@@ -18,6 +18,7 @@
         touchpad = {
           tapping = true;
           naturalScrolling = true;
+          accelSpeed = "0.6";
         };
       };
 
