@@ -7,7 +7,7 @@
       # name = "Noto Sans CJK JP";
       # package = pkgs.noto-fonts-cjk-sans;
       # size = 12;
-      name = "Source Han Sans JP";
+      name = "Source Han Sans";       # Noto Sans CJKを使うとdiscordで文字化けが起こる問題の回避 (https://github.com/NixOS/nixpkgs/issues/171976)
       package = pkgs.source-han-sans;
       size = 12;
     };
@@ -22,6 +22,10 @@
   };
   qt = {
     enable = true;
+    style = {
+      name = "gtk2";
+      package = pkgs.libsForQt5.qtstyleplugins;
+    };
     # platformTheme = "gtk";
   };
 }
