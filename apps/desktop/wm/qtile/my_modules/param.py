@@ -39,6 +39,7 @@ class Param:
 
     font = 'Noto Sans CJK JP'
     font_size = 18
+    icon_size = 22
 
     bar_font_size = 28
 
