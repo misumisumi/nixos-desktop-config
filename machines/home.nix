@@ -22,7 +22,7 @@
   };
 
   home = {
-    stateVersion = stateVersion;
+    inherit stateVersion;
     username = "${user}";
     homeDirectory = "/home/${user}";
     activation = {

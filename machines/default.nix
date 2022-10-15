@@ -12,12 +12,11 @@
 # aegis is Jetson Nano. ku-dere is Rasberry Pi 3B.
 # aegis and ku-dere and yandere is server.
 
-{ inputs, nixpkgs, home-manager, nur, user, location, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, home-manager, nur, user, location, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
-  stateVersion = "22.05";
 
   settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
   let

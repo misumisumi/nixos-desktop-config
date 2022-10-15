@@ -1,9 +1,13 @@
+let
+  stateVersion = "22.05";       # For Homa Manager
+  channelVersion = "unstable";  # For nixpkgs channel
+in
 {
   description = "Each my machine NixOS System Flake Configuration";
 
   inputs = 
   {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-${channelVersion}";
 
     flake-utils.url = "github:numtide/flake-utils";
 
