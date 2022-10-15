@@ -7,6 +7,7 @@
     xserver = {
       enable = true;
       autorun = true;
+      gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
       layout = "us";
       xkbOptions = "caps:nocaps";  # keyboard is managed home-manager
