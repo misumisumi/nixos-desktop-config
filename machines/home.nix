@@ -53,6 +53,7 @@
     };
 
   };
+  fonts.fontconfig.enable = true;
 
   # xdg系のフォルダの作製
   xdg = {
