@@ -4,8 +4,11 @@
   gtk = {
     enable = true;
     font = {
-      name = "Noto Sans CJK JP";
-      package = pkgs.noto-fonts-cjk-sans;
+      # name = "Noto Sans CJK JP";
+      # package = pkgs.noto-fonts-cjk-sans;
+      # size = 12;
+      name = "Source Han Sans JP";
+      package = pkgs.source-han-sans;
       size = 12;
     };
     iconTheme = {
