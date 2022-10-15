@@ -12,7 +12,7 @@
                     ];
                   });
         name = "FiraCode Nerd Font";
-        size = 14.0;
+        size = 14;
       };
       settings = {
         foreground = "#d8e1e6";
