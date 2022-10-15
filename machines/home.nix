@@ -25,6 +25,14 @@
     stateVersion = stateVersion;
     username = "${user}";
     homeDirectory = "/home/${user}";
+    activation = {
+      myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        if [ ! -d ${config.home.homeDirectory}/.config/ranger ]; then
+          mkdir ${config.home.homeDirectory}/.config/ranger
+        fi
+      '';
+    };
+
 
     sessionVariables = {
       CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
