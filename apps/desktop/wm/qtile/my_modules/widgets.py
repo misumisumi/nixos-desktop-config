@@ -7,12 +7,6 @@ from my_modules.param import PARAM
 
 from libqtile.log_utils import logger
 
-logger.warning("-"*50)
-logger.warning(IconTheme.getIconPath("flameshot", 32))
-logger.warning(IconTheme.getIconPath("alacritty", 32))
-logger.warning("-"*50)
-
-
 _colorset1 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_normal['cyan']}
 _colorset2 = {'background': PARAM.c_normal['cyan'], 'foreground': PARAM.c_normal['BGbase']}
 _colorset3 = {'background': PARAM.c_normal['blue'], 'foreground': PARAM.c_normal['BGbase']}
@@ -33,7 +27,9 @@ df = widget.DF(format = " {uf}{m}/{s}{m} ({r:.0f}%)", visible_on_warn=False,
 chrod = widget.Chord(**_colorset8)
 wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2)
 clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2)
-tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="preferred", theme_path="Papirus-Dark", icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
+tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="fallback", theme_path="Papirus-Dark",
+                           txt_floating="🗗", txt_floatingp="🗖", txt_minimized="🗕",
+                           icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
 net = widget.Net(format='{down} ↓↑ {up}', **_colorset2)
 volume = widget.Volume(fmt=' {}',   
                        get_volume_command = ["sh", "-c", "if [ -z \"$(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g')\" ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi"],
