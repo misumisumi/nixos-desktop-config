@@ -30,9 +30,9 @@
 
   xsession = {
     enable = true;
+    preferStatusNotifierItems = true;
 
     windowManager = {
-      # command = "${pkgs.qtile}/bin/qtile start";
       command = "exec ${pkgs.dbus}/bin/dbus-launch qtile start";
     };
 
