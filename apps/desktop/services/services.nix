@@ -12,13 +12,11 @@
       };
     };
 
-    blueman-applet = {
-      enable = true;
-    };
+    udiskie.enable = true;
 
-    flameshot = {
-      enable = true;
-    };
+    blueman-applet.enable = true;
+
+    flameshot.enable = true;
 
     kdeconnect = {
       enable = true;
