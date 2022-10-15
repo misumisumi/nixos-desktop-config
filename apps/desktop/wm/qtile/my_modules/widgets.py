@@ -33,7 +33,7 @@ df = widget.DF(format = " {uf}{m}/{s}{m} ({r:.0f}%)", visible_on_warn=False,
 chrod = widget.Chord(**_colorset8)
 wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2)
 clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2)
-tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="preferred", theme_path="/run/current-system/sw/share/icons/Papirus-Dark", icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
+tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="preferred", theme_path="Papirus-Dark", icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
 net = widget.Net(format='{down} ↓↑ {up}', **_colorset2)
 volume = widget.Volume(fmt=' {}',   
                        get_volume_command = ["sh", "-c", "if [ -z \"$(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g')\" ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi"],
