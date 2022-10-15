@@ -1,24 +1,20 @@
 {
   description = "Each my machine NixOS System Flake Configuration";
 
-  inputs = 
-    let
-      channelVersion = "unstable";  # For nixpkgs channel
-    in
-    {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-${channelVersion}";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-      flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
 
-      home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      nur = {
-        url = "github:nix-community/NUR";
-      };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur = {
+      url = "github:nix-community/NUR";
+    };
+  };
 
   outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur}: 
     let
