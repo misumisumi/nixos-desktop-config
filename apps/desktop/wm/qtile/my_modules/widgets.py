@@ -9,6 +9,7 @@ from libqtile.log_utils import logger
 
 logger.warning("-"*50)
 logger.warning(IconTheme.getIconPath("flameshot", 32))
+logger.warning(IconTheme.getIconPath("alacritty", 32))
 logger.warning("-"*50)
 
 
