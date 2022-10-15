@@ -24,31 +24,31 @@ _colorset8 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_norm
 
 groupbox = widget.GroupBox(this_current_screen_border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, **_colorset3,
                            font='Hack Nerd Font', fontsize=PARAM.font_size+2,
-                           active=PARAM.c_normal['white']),
-cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2),
+                           active=PARAM.c_normal['white'])
+cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2)
 memory = widget.Memory(format=' {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}',
-                       measure_mem='G', measure_swap='G', **_colorset1),
+                       measure_mem='G', measure_swap='G', **_colorset1)
 df = widget.DF(format = " {uf}{m}/{s}{m} ({r:.0f}%)", visible_on_warn=False,
-               partition='/home', **_colorset2),
-chrod = widget.Chord(**_colorset8),
-wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2),
-clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2),
-tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="prefeered", theme_path="/run/current-system/sw/share/icons/Papirus-Dark", icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3),
-net = widget.Net(format='{down} ↓↑ {up}', **_colorset2),
+               partition='/home', **_colorset2)
+chrod = widget.Chord(**_colorset8)
+wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2)
+clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2)
+tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="prefeered", theme_path="/run/current-system/sw/share/icons/Papirus-Dark", icon_size=PARAM.font_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
+net = widget.Net(format='{down} ↓↑ {up}', **_colorset2)
 volume = widget.Volume(fmt=' {}',   
                        get_volume_command = ["sh", "-c", "if [ -z \"$(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g')\" ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi"],
                        mute_command = ["pactl set-source-mute @DEFAULT_SOURCE@ toggle"],
                        volume_up_command = ["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
                        volume_down_command = ["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
-                       **_colorset1),
+                       **_colorset1)
 current_screen = widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                       inactive_color=PARAM.c_normal['BGbase'],
-                                      inactive_text='N', **_colorset2),
-systray = widget.Systray(**_colorset3),
+                                      inactive_text='N', **_colorset2)
+systray = widget.Systray(**_colorset3)
 backlight = list(Path('/sys/class/backlight/').glob('*'))
-backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2),
+backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2)
 battery = widget.Battery(format='{char} {percent:2.0%}', charge_char='', discharge_char='',
-                         empty_char='', full_chal='', unknown_char='', **_colorset1),
+                         empty_char='', full_chal='', unknown_char='', **_colorset1)
 
 def _left_corner(background, foreground):
     return widget.TextBox(
@@ -79,26 +79,26 @@ def _separator():
 def make_widgets(is_tray=False):
     top_widgets = [
         _left_corner(**_colorset4),
-        groupbox
+        groupbox,
         _rignt_corner(**_colorset4),
         ]
     if not (PARAM.laptop or PARAM.vm):
         top_widgets += [
             _separator(),
             _left_corner(**_colorset1),
-            cpu
+            cpu,
             _rignt_corner(**_colorset1),
-            memory
+            memory,
             _rignt_corner(**_colorset2),
-            df
+            df,
             _rignt_corner(**_colorset1),
         ]
     top_widgets += [
         _separator(),
-        chrod
+        chrod,
         widget.Spacer(),
         _left_corner(**_colorset1),
-        wttr
+        wttr,
         clock
         _rignt_corner(**_colorset1),
         ]
@@ -106,7 +106,7 @@ def make_widgets(is_tray=False):
     top_widgets += [
         _separator(),
         _left_corner(**_colorset4),
-        tasklist
+        tasklist,
         _rignt_corner(**_colorset4),
         _separator()
     ]
@@ -114,18 +114,18 @@ def make_widgets(is_tray=False):
     if not (PARAM.laptop or PARAM.vm):
         top_widgets += [
             _left_corner(**_colorset1),
-            net
+            net,
             _rignt_corner(**_colorset1),
-            volume
+            volume,
             _rignt_corner(**_colorset2),
-            current_screen
+            current_screen,
             _rignt_corner(**_colorset1)
             ]
     if is_tray:
         top_widgets += [
             _separator(),
             _left_corner(**_colorset4),
-            systray
+            systray,
             _rignt_corner(**_colorset4),
             _separator(),
         ]
@@ -134,29 +134,29 @@ def make_widgets(is_tray=False):
         bottom_widgets = [
             _separator(),
             _left_corner(**_colorset7),
-            cpu
+            cpu,
             _rignt_corner(**_colorset1),
-            memory
+            memory,
             _rignt_corner(**_colorset2),
-            df
+            df,
             _rignt_corner(**_colorset7),
             widget.Spacer(),
 
             _left_corner(**_colorset7),
-            net
+            net,
             _rignt_corner(**_colorset1),
-            volume
+            volume,
             _rignt_corner(**_colorset2)
         ]
         if PARAM.laptop:
             bottom_widgets += [
-                backlight
+                backlight,
                 _rignt_corner(**_colorset1),
-                battery
+                battery,
                 _rignt_corner(**_colorset2),
             ]
         bottom_widgets += [
-            current_screen
+            current_screen,
             _rignt_corner(**_colorset7)
         ]
     else:
