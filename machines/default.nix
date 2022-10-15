@@ -12,19 +12,19 @@
 # aegis is Jetson Nano. ku-dere is Rasberry Pi 3B.
 # aegis and ku-dere and yandere is server.
 
-{ inputs, stateVersion, nixpkgs, home-manager, nur, user, location, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, home-manager, nur, user, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
 
-  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, location, stateVersion }: 
+  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
     nixpkgs.lib.nixosSystem {
       system = choiceSystem hostname;
-      specialArgs = { inherit hostname inputs user location stateVersion; }; # specialArgs give some args to modules
+      specialArgs = { inherit hostname inputs user stateVersion; }; # specialArgs give some args to modules
       modules = [
         ({ config, pkgs, ... }: { nixpkgs.overlays = [ nur.overlay ]; })
         nur.nixosModules.nur
@@ -43,12 +43,12 @@ let
     };
 in
 {
-  aegis = settings { hostname="aegis"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  mother = settings { hostname="mother"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
+  aegis = settings { hostname="aegis"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  mother = settings { hostname="mother"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
-  extra = settings { hostname="extra"; inherit inputs nixpkgs home-manager nur user location stateVersion; };
+  zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  extra = settings { hostname="extra"; inherit inputs nixpkgs home-manager nur user stateVersion; };
 }
