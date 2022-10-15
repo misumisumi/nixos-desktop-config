@@ -41,8 +41,6 @@
       export QT_IM_MODULE=fcitx
       export XMODIFIERS=@im=fcitx
       export GLFW_IM_MODULE=ibus
-      export QT_STYLE_OVERRIDE=gtk2
-      export XDG_CONFIG_HOME=~/.config
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
       # if [ $(hostname) = "zephyrus" ]; then
