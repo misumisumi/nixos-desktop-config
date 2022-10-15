@@ -43,7 +43,6 @@ in
       source-han-serif
       source-han-mono
 
-      rictydiminished-with-firacode           # Programing
       (nerdfonts.override {                   # Nerdfont override
         fonts = [
           "FiraCode"
