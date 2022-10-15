@@ -22,10 +22,10 @@ in
   fonts = {
     fontconfig = {
       defaultFonts = {
-        serif = "Noto Serif CJK JP";
-        sansSerif = "Noto Sans CJK JP";
-        monospace = "Noto Sans Mono CJK JP";
-        emoji = "Noto Color Emoji";
+        serif = ["Noto Serif CJK JP"];
+        sansSerif = ["Noto Sans CJK JP"];
+        monospace = ["Noto Sans Mono CJK JP"];
+        emoji = ["Noto Color Emoji"];
       };
     };
     fonts = with pkgs; [
