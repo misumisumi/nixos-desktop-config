@@ -16,7 +16,7 @@ in
   home.packages = [ pkgs.ueberzug ranger ];
   xdg = {
     configFile = {
-      "ranger".source = ./ranger;
+      "ranger/rifle.conf".source = ./ranger/rifle.conf;
     };
   };
 }
