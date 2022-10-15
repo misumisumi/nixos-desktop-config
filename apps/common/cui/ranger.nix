@@ -13,7 +13,7 @@ ranger = pkgs.ranger.overrideAttrs (r: {
   });
 in
 {
-  home.packages = with pkgs; [ ueberzug ranger ];
+  home.packages = [ pkgs.ueberzug ranger ];
   xdg = {
     configFile = {
       "ranger".source = ./ranger;
