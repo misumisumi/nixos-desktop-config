@@ -99,7 +99,7 @@ def make_widgets(is_tray=False):
         widget.Spacer(),
         _left_corner(**_colorset1),
         wttr,
-        clock
+        clock,
         _rignt_corner(**_colorset1),
         ]
 
