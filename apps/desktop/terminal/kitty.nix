@@ -5,7 +5,7 @@
     kitty = {
       enable = true;
       font = {
-        package = (nerdfonts.override {                   # Nerdfont override
+        package = (pkgs.nerdfonts.override {                   # Nerdfont override
                     fonts = [
                       "FiraCode"
                       "Hack"
