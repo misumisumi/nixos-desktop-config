@@ -17,15 +17,19 @@ book_add = '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
+on_event = 'BufRead'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+on_event = 'BufRead'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+on_event = 'BufRead'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+on_event = 'BufRead'
 
 [[plugins]]
 repo = 'lervag/vimtex'
