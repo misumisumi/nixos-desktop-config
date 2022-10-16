@@ -17,24 +17,13 @@
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
-  pkgs_overlay = { inputs, config, nixpkgs, ... }: {
-    nixpkgs.overlays = [ 
-      (self: super:
-        let
-          vim-dein = super.vimUtils.buildVimPlugin {
-            name = "vim-dein";
-            src = inputs.vim-dein;
-          };
-        in
-        {
-          vimPlugins = super.vimPlugins { inherit vim-dein; };
-        })
+  overlay = { inputs, nixpkgs, ... }: {
+    nixpkgs.overlays = [
       nur.overlay
     ];
   };
-  nixpkgs = pkgs_overlay { inherit inputs config nixpkgs; };
 
-  settings = { hostname, inputs, pkgs_overlay, nixpkgs, home-manager, nur, user, stateVersion }: 
+  settings = { hostname, inputs, nixpkgs, overlay, home-manager, nur, user, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
@@ -42,9 +31,9 @@ let
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user stateVersion; }; # specialArgs give some args to modules
       modules = [
-        nixpkgs
-        nur.nixosModules.nur
         ./configuration.nix       # Common system conf
+        (overlay { inherit inputs nixpkgs; })
+        nur.nixosModules.nur
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
@@ -66,5 +55,5 @@ in
   yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user stateVersion; };
   zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  extra = settings { hostname="extra"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  extra = settings { hostname="extra"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
 }
