@@ -42,7 +42,7 @@ let
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user stateVersion; }; # specialArgs give some args to modules
       modules = [
-        nixpkgs {  }
+        nixpkgs
         nur.nixosModules.nur
         ./configuration.nix       # Common system conf
         (./. + "/${hostname}")    # Each machine conf
