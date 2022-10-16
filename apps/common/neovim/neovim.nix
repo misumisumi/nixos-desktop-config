@@ -23,7 +23,8 @@ I use conf sourcing ./nvim but you can manager from home manager.
       withRuby = true;
 
       extraPackages = with pkgs; [
-        efm-langserver
+        gcc              # For nvim-treesitter
+        efm-langserver   # Language servers
         rnix-lsp
         black
         pylint
