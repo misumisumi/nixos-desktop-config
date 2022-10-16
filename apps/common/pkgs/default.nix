@@ -1,17 +1,23 @@
 pkgs: with pkgs; [
-  nix-prefetch
+  nix-prefetch      # Prefetch checkers
+  nix-prefetch-git
+  nvfetcher         # Tool of automate nix package updates
 
-  tree      # Show file tree
+  zip               # Archives
+  unzip
 
-  bottom    # System monitor
-  duf       # Show storage usage
-  neofetch  # Fetch system info
+  tree              # Show file tree
 
-  mosh      # Mobile Shell
+  bottom            # System monitor
+  duf               # Show storage usage
+  neofetch          # Fetch system info
 
-  trash-cli # Command Line Interface to FreeDesktop.org Trash
-  ffmpeg    # Multi media solution
+  mosh              # Mobile Shell
 
-  figlet    # Make AA from character
-  cmatrix   # Lain of character
+  trash-cli         # Command Line Interface to FreeDesktop.org Trash
+  ffmpeg            # Multi media solution
+
+  figlet            # Make AA from character
+  cmatrix           # Lain of character
+
 ]
