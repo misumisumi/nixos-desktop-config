@@ -44,7 +44,7 @@
       grep = "grep --color=auto";
       fgrep = "grep -F --color=auto";
       egrep = "grep -E --color=auto";
-      tp = "trash-put";
+      tm = "trash-put";
       tls = "trash-list";
       tre = "trash-restore";
       temp = "trash-empty";
