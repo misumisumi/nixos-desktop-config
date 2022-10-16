@@ -1,3 +1,6 @@
+/*
+System Monitor
+*/
 { pkgs, ... }:
 
 {

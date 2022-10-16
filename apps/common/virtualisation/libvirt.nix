@@ -1,3 +1,6 @@
+/*
+libvirt conf
+*/
 { pkgs, user, ... }:
 
 {

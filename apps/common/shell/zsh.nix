@@ -1,3 +1,9 @@
+/*
+Zsh conf
+I have some plugins problem when managin nix, so I manage zsh plugins from zinit.
+When you put zinit in nixpkgs, you need to create a symbolic link manually because the path to completions is different.
+You can watch this solution at (machines/home.nix home.activation.myActivationAction)
+*/
 { pkgs, ... }:
 
 {
@@ -76,10 +82,6 @@
         ZINIT_HOME=''${HOME}/.zinit
         ZINIT[HOME_DIR]=''${ZINIT_HOME}
         [[ -r ''${ZINIT_HOME} ]] || mkdir -p ''${ZINIT_HOME}
-        if [[ ! -f ''${ZINIT_HOME}/completions/_zinit ]]; then
-          mkdir -p ''${ZINIT_HOME}/completions/ 
-          ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
-        fi
       '';
 
       initExtra = ''

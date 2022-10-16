@@ -1,3 +1,6 @@
+/*
+waydroid (Android emulater) conf
+*/
 { pkgs, ... }:
 
 {
