@@ -30,8 +30,8 @@
         if [ ! -d ${config.home.homeDirectory}/.config/ranger ]; then
           mkdir ${config.home.homeDirectory}/.config/ranger
         fi
-        if [[ ! -f ${config.home.homeDirectory}.zinit/completions/_zinit ]]; then
-          mkdir -p ${config.home.homeDirectory}.zinit/completions/ 
+        if [[ ! -f ${config.home.homeDirectory}/.zinit/completions/_zinit ]]; then
+          mkdir -p ${config.home.homeDirectory}/.zinit/completions/ 
           ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
         fi
       '';
