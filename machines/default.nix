@@ -17,8 +17,24 @@
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
   type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
+  pkgs_overlay = { inputs, config, nixpkgs, ... }: {
+    nixpkgs.overlays = [ 
+      (self: super:
+        let
+          vim-dein = super.vimUtils.buildVimPlugin {
+            name = "vim-dein";
+            src = inputs.vim-dein;
+          };
+        in
+        {
+          vimPlugins = super.vimPlugins { inherit vim-dein; };
+        })
+      nur.overlay
+    ];
+  };
+  nixpkgs = pkgs_overlay { inherit inputs config nixpkgs; };
 
-  settings = { hostname, inputs, nixpkgs, home-manager, nur, user, stateVersion }: 
+  settings = { hostname, inputs, pkgs_overlay, nixpkgs, home-manager, nur, user, stateVersion }: 
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
@@ -26,7 +42,7 @@ let
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user stateVersion; }; # specialArgs give some args to modules
       modules = [
-        ({ config, pkgs, ... }: { nixpkgs.overlays = [ nur.overlay ]; })
+        nixpkgs {  }
         nur.nixosModules.nur
         ./configuration.nix       # Common system conf
         (./. + "/${hostname}")    # Each machine conf

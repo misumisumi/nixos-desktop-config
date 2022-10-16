@@ -14,6 +14,11 @@
     nur = {
       url = "github:nix-community/NUR";
     };
+
+    vim-dein = {
+      url = "github:Shougo/dein.vim";  # Plugin Manager for neovim
+      flake = false;
+    };
   };
 
   outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur}: 
