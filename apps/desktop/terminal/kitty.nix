@@ -1,5 +1,11 @@
+/*
+Kitty conf
+*/
 { pkgs, ... }:
-
+let
+  font = "FiraCode Nerd Font";
+  size = 12;
+in
 {
   programs = {
     kitty = {
@@ -11,8 +17,8 @@
                       "Hack"
                     ];
                   });
-        name = "FiraCode Nerd Font";
-        size = 14;
+        name = font;
+        size = size;
       };
       settings = {
         foreground = "#d8e1e6";

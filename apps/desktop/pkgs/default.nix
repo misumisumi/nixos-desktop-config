@@ -1,59 +1,57 @@
+/*
+My need packages.
+*/
 pkgs: with pkgs; [
+  scream                          # Audio Recivier (For windows VM)
+  polkit_gnome                    # polkit
+
+  gnuplot                         # CLI Plotter
+  pandoc                          # Document Converter
+  texlive.combined.scheme-full    # TexLive
+  conky
+  android-tools
+
+  mesa-demos                      # Graphics utility
+  vulkan-tools
+
   font-manager
 
-  i3lock
+  i3lock                          # Screen Locker
 
-  nomacs
+  nomacs                          # Image Viewer
 
-  xfce.thunar
+  xfce.thunar                     # GUI Filer and Plugins
   xfce.thunar-volman
   xfce.thunar-archive-plugin
   xfce.thunar-media-tags-plugin
 
-  discord
+  discord                         # Communicate
   slack
 
-  audacity
-  sox
-  gnuplot
+  audacity                        # GUI Sound Editor
+  sox                             # CLI Sound Editor
 
-  firefox
+  firefox                         # Browser
   vivaldi
   vivaldi-ffmpeg-codecs
 
-  blender
+  spotify                         # Music Streaming
+  spotify-tui                     # CLI tools for spotify
+
+  blender                         # Creative Utility
   krita
   gmic-qt-krita
   gpick
   inkscape
   unityhub
 
-  android-tools
-  sidequest
-
-  gnome.simple-scan
-
-  mosh
+  gnome.simple-scan               # Scaner
+  baobab                          # Disk Usage Analyzer
 
   nextcloud-client
+  zathura                         # Paper Manager
 
-  mesa-demos
-  vulkan-tools
-
-  pandoc
-
-  spotify
-  spotify-tui
-
-  zathura
-
-  baobab
-
-  copyq
-  conky
-
-  scream
-
-  polkit_gnome
+  copyq                           # Clipboard Manager
+  # sidequest                     # Meta Quest side loading tool
 ]
 

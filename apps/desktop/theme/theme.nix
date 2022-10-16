@@ -1,3 +1,6 @@
+/*
+Uniformed look for Qt and GTK applications
+*/
 { pkgs, ... }:
 
 {
@@ -7,7 +10,7 @@
       # name = "Noto Sans CJK JP";
       # package = pkgs.noto-fonts-cjk-sans;
       # size = 12;
-      name = "Source Han Sans";       # Noto Sans CJKを使うとdiscordで文字化けが起こる問題の回避 (https://github.com/NixOS/nixpkgs/issues/171976)
+      name = "Source Han Sans";       # Discord have CJK character render problem if you use Noto Font CJK. (https://github.com/NixOS/nixpkgs/issues/171976)
       package = pkgs.source-han-sans;
       size = 12;
     };

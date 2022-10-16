@@ -1,3 +1,6 @@
+/*
+Picom (compositor for Xorg) conf
+*/
 { hostname, pkgs, ... }:
 
 {
@@ -5,8 +8,8 @@
     picom = {
       enable = if "${hostname}" == "vm" then false else true;
       backend = "glx";
-      experimentalBackends = true;
-      vSync = false;
+      experimentalBackends = true;  # enable blur and rounded corner
+      vSync = false;  # When vSync=true, Picom have problem if you use Nvidia 
 
       fade = true;
       fadeDelta = 10;

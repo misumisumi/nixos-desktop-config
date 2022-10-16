@@ -1,10 +1,11 @@
+/*
+CLI Image Viewer and Movie Player and Downloader
+*/
 { pkgs, ... }:
 
 {
   programs = {
-    feh = {
-      enable = true;
-    };
+    feh.enable = true;
 
     mpv = {
       enable = true;

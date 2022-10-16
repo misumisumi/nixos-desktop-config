@@ -1,3 +1,6 @@
+/*
+Rofi (App launcher) conf
+*/
 { pkgs, ... }:
 
 {

@@ -1,3 +1,6 @@
+/*
+Auto launch apps
+*/
 { config, hostname, pkgs, ... }:
 
 {

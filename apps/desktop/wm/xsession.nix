@@ -1,3 +1,9 @@
+/*
+Manage xsession from home-manager.
+NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
+However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
+*/
+
 { config, lib, user, pkgs, ... }:
 
 {

@@ -1,7 +1,12 @@
+/*
+Alacritty conf
+*/
 { pkgs, ... }:
 let
   font = "FiraCode Nerd Font";
+  size = 12.0;
   # font = "Ricty Diminished with Fira Code";
+  # size = 14.0
 in
 {
   programs = {
@@ -21,7 +26,7 @@ in
             family = font;
             style = "Oblique";
           };
-          size = 14.0;
+          size = size;
         };
         colors = {
           primary = {

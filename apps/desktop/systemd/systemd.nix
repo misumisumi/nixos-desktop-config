@@ -1,3 +1,7 @@
+/*
+User level systemd-unit
+Please read each description
+*/
 { pkgs, ... }:
 
 {
@@ -6,7 +10,7 @@
       services = {
         scream = {
           Unit = {
-            Description = "Scream Receiver";
+            Description = "Scream Receiver (For windows VM)";
             After = [ "network-online.target" "pulseaudio.service" ];
           };
           Service = {
@@ -38,7 +42,7 @@
 
         thunar-daemon = {
           Unit = {
-            Description = "Start thunar daemon mode";
+            Description = "Start thunar (GUI Filer) daemon mode";
             Wants = [ "graphical-session.target" ];
             After = [ "graphical-session.target" ];
           };

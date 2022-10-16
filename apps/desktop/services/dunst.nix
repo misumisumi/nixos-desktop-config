@@ -1,3 +1,6 @@
+/*
+Dunst (notification-daemons) conf
+*/
 { pkgs, ... }:
 
 {

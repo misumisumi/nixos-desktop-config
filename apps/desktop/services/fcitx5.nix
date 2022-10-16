@@ -1,3 +1,6 @@
+/*
+Fcitx5 (IME) conf
+*/
 { pkgs, ... }:
 
 {

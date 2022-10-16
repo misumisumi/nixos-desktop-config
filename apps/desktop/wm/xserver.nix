@@ -1,3 +1,8 @@
+/*
+Keyboard is not managed from xserver.
+You must edit home.xsession.keyboard. (conf is ./xsession.nix)
+*/
+
 { config, lib, pkgs, ... }:
 
 {

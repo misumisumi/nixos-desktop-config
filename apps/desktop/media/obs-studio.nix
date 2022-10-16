@@ -1,3 +1,6 @@
+/*
+Streaming/Recording app
+*/
 { pkgs, ... }:
 
 {
