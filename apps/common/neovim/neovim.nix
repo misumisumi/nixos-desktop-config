@@ -21,9 +21,6 @@ I use conf sourcing ./nvim but you can manager from home manager.
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
-      plugins = with pkgs.vimPlugins; [
-        vim-dein
-      ];
 
       extraPackages = with pkgs; [
         efm-langserver
