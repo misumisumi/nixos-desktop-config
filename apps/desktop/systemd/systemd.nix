@@ -21,20 +21,6 @@
           };
         };
 
-        scream-ivshmem-pulse = {
-          Unit = {
-            Description = "Scream IVSHMEM pulse receiver";
-            After = [ "pulseaudio.service" ];
-            Wants = [ "pulseaudio.service" ];
-          };
-          Service = {
-            Type = "simple";
-            ExecStartPre = "truncate -s 0 /dev/shm/scream-ivshmem & dd if=/dev/zero of=/dev/shm/scream-ivshmem bs=1M count=2";
-            ExecStart = "${pkgs.scream}/bin/scream -m /dev/shm/scream-ivshmem";
-          };
-
-        };
-
         polkit-gnome-authentication-agent-1 = {
           Unit = {
             Description = "polkit-gnome-authentication-agent-1";

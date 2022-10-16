@@ -7,6 +7,8 @@ pkgs: with pkgs; [
 
   tree      # Show file tree
 
+  trash-cli # Command Line Interface to FreeDesktop.org Trash
+
   ffmpeg    # Multi media solution
 
   figlet    # Make AA from character
