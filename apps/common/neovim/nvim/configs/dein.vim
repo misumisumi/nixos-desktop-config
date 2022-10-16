@@ -15,6 +15,15 @@ if dein#load_state('~/.cache/dein')
   call dein#save_state()
 endif
 
+" auto install dein.vim
+let s:dein_dir = "~/.cache/dein"
+let s:dein_url = "https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh"
+if !filereadable(s:dein_dir)
+  call system(printf('mkdir -p %s', s:dein_dir))
+  call system(printf('curl %s > %s/install.sh', s:dein_url, s:dein_dir))
+  call system(printf('sh %s/install.sh %s', s:dein_dir, s:dein_dir))
+endif
+
 if dein#check_install()
     call dein#install()
 endif
