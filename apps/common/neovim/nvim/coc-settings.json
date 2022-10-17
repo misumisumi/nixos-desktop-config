@@ -8,7 +8,11 @@
     "filetypes": ["vim"]
       }
     },
- "diagnostic-languageserver.formatFiletypes": {
+  "nix": {
+    "command": "rnix-lsp",
+    "filetypes": ["nix"]
+  },
+  "diagnostic-languageserver.formatFiletypes": {
     "python": ["black", "isort", "docformatter"]
   },
   "diagnostic-languageserver.formatters": {
