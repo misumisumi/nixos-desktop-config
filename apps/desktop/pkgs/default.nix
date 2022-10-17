@@ -4,7 +4,7 @@ My need packages.
 pkgs: 
 let
   tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
-      inherit (pkgs.texlive) scheme-small collection-langjapanese
+      inherit (pkgs.texlive) scheme-small collection-langjapanese;
   });
 in
 with pkgs; [
