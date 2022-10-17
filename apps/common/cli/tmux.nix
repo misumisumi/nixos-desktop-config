@@ -38,7 +38,7 @@ tmux (terminal multiplexer) conf
       shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
-        set -ag terminal-overrides ",alacritty:RGB"
+        set -ag terminal-overrides ",xterm-256color:RGB"
         set -g mouse on
 
         # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
