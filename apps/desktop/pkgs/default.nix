@@ -7,7 +7,9 @@ pkgs: with pkgs; [
 
   gnuplot                         # CLI Plotter
   pandoc                          # Document Converter
-  texlive.combined.scheme-full    # TexLive
+  texlive.combined {              # TexLive(Japanese support)
+    inherit (texlive) scheme-small collection-langjapanese
+  }
   conky
   android-tools
 
@@ -24,6 +26,7 @@ pkgs: with pkgs; [
   xfce.thunar-volman
   xfce.thunar-archive-plugin
   xfce.thunar-media-tags-plugin
+  haskellPackages.thumbnail
 
   discord                         # Communicate
   slack
