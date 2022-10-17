@@ -85,7 +85,7 @@ keys = [
     Key([PARAM.mod], 's', lazy.layout.toggle_split(), desc='Launch terminal'),
     Key([PARAM.mod, 'shift'], 'Return', lazy.spawn(PARAM.terminal), desc='Launch terminal'),
 
-    Key([PARAM.mod, 'shift'], 'q', lazy.window.kill(), desc='Kill focused window'),
+    Key([PARAM.mod, 'control'], 'q', lazy.window.kill(), desc='Kill focused window'),
 
     Key([PARAM.mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
     Key([PARAM.mod, 'control'], 'e', lazy.shutdown(), desc='Shutdown Qtile'),

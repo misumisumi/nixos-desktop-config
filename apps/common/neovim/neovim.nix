@@ -26,6 +26,7 @@ I use conf sourcing ./nvim but you can manager from home manager.
         gcc              # For nvim-treesitter
         efm-langserver   # Language servers
         rnix-lsp
+        nixpkgs-fmt      # use rnix-lsp
         black
         pylint
         vim-vint
