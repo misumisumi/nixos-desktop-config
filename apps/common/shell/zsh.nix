@@ -65,8 +65,9 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
           file="share/zinit/zinit.zsh";
         }
       ];
-      envExtra = ''
-      '';
+      shellAliases = {
+        nix = "noglob nix";
+      }
 
       initExtraBeforeCompInit = ''
         # p10k instant prompt
@@ -85,7 +86,6 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
       '';
 
       initExtra = ''
-        autoload -Uz compinit && compinit
         autoload -Uz promptinit
 
         autoload -Uz _zinit
