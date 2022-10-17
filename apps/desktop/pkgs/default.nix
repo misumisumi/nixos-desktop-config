@@ -3,9 +3,9 @@ My need packages.
 */
 pkgs: 
 let
-  tex = (texlive.combined {       # TexLive(Japanese support)
-      inherit (texlive) scheme-small collection-langjapanese
-    });
+  tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
+      inherit (pkgs.texlive) scheme-small collection-langjapanese
+  });
 in
 with pkgs; [
   scream                          # Audio Recivier (For windows VM)
