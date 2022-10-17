@@ -29,7 +29,7 @@ tmux (terminal multiplexer) conf
 
       prefix = "C-j";
 
-      terminal = "screen-256color";
+      terminal = "tmux-256color";
       clock24 = true;
       historyLimit = 10000;
       customPaneNavigationAndResize = true;
@@ -38,6 +38,8 @@ tmux (terminal multiplexer) conf
       shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
+        set -g default-terminal "tmux-256color"
+        set -ag terminal-overrides ",alacritty:RGB"
         set -g mouse on
 
         # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
