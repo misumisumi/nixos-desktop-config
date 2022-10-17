@@ -67,7 +67,7 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
       ];
       shellAliases = {
         nix = "noglob nix";
-      }
+      };
 
       initExtraBeforeCompInit = ''
         # p10k instant prompt
