@@ -6,11 +6,11 @@
     // custom config path
     // "args": ["-c", "/path/to/your/config.yaml"],
     "filetypes": ["vim"]
-      }
     },
   "nix": {
     "command": "rnix-lsp",
     "filetypes": ["nix"]
+    }
   },
   "diagnostic-languageserver.formatFiletypes": {
     "python": ["black", "isort", "docformatter"]
