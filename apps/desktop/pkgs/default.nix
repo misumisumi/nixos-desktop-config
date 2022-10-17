@@ -1,15 +1,19 @@
 /*
 My need packages.
 */
-pkgs: with pkgs; [
+pkgs: 
+let
+  tex = (texlive.combined {       # TexLive(Japanese support)
+      inherit (texlive) scheme-small collection-langjapanese
+    });
+in
+with pkgs; [
   scream                          # Audio Recivier (For windows VM)
   polkit_gnome                    # polkit
 
   gnuplot                         # CLI Plotter
   pandoc                          # Document Converter
-  (texlive.combined {             # TexLive(Japanese support)
-    inherit (texlive) scheme-small collection-langjapanese
-  })
+  tex
   conky
   android-tools
 
