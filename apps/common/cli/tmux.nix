@@ -38,7 +38,6 @@ tmux (terminal multiplexer) conf
       shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
-        set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",alacritty:RGB"
         set -g mouse on
 

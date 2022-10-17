@@ -24,6 +24,8 @@ I use conf sourcing ./nvim but you can manager from home manager.
 
       extraPackages = with pkgs; [
         gcc              # For nvim-treesitter
+        silver-searcher  # ToDO どっちか消す
+        ripgrep
         efm-langserver   # Language servers
         rnix-lsp
         nixpkgs-fmt      # use rnix-lsp
