@@ -2,7 +2,7 @@
 
 { pkgs, ... }:
 let
-  systemPkgs = (import ../system-pkgs);
+  systemPkgs = (import ../../apps/system-pkgs);
 in
 {
   time.timeZone = "Asia/Tokyo";             # Time zone and internationalisation
