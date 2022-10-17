@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = (import ../../apps/common/cui) ++
+  imports = (import ../../apps/common/cli) ++
             (import ../../apps/common/git) ++
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
