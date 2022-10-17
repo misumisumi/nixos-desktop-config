@@ -7,9 +7,9 @@ pkgs: with pkgs; [
 
   gnuplot                         # CLI Plotter
   pandoc                          # Document Converter
-  texlive.combined {              # TexLive(Japanese support)
+  (texlive.combined {              # TexLive(Japanese support)
     inherit (texlive) scheme-small collection-langjapanese
-  }
+  })
   conky
   android-tools
 
