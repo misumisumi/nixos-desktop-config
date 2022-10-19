@@ -17,7 +17,7 @@
 
   };
 
-  outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur, ...}: 
+  outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur}:
     let
       user = "sumi";
       stateVersion = "22.05";       # For Homa Manager
