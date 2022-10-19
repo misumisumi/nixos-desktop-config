@@ -19,6 +19,10 @@
           Kind = "bridge";
           Name = "br0";
         };
+        "univ".netdevConfig = {
+          Kind = "bridge";
+          Name = "univ";
+        };
       };
       networks = {
         "10-wireless" = {
@@ -27,19 +31,21 @@
         };
         "20-wired" = {
           name = "enp4s0f4u1u3";
-          bridge = [ "br0" ];
+          bridge = [ "br0" "univ" ];
         };
         "20-usb" = {
           name = "enp4s0f4u1u2";
           DHCP = "yes";
         };
         "30-univ" = {
+          name = "univ";
           DHCP = "yes";
           address = [ "172.24.154.84" "172.24.154.70" ];
           gateway = [ "172.24.154.65" ];
           dns = [ "172.24.185.203" "172.24.185.204" ];
         };
         "30-br0" = {
+          name = "br0";
           DHCP = "yes";
         };
       };
