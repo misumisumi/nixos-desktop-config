@@ -28,11 +28,12 @@ Rofi (App launcher) conf
                              rofi-calc
                            ];
 
-      font = "Ricty Diminished with Fira Code 24";
+      font = "FiraCode Nerd Font 16";
       terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = "my_theme.rasi";
 
       extraConfig = {
+        lines = 12;
         modi = "window,run,ssh,drun";
         show-icons = true;
         icon-theme = "Papirus-Dark";
