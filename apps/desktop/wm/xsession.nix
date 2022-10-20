@@ -47,10 +47,23 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
       export GLFW_IM_MODULE=ibus
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
-      libinput-gestures &
       # if [ $(hostname) = "zephyrus" ]; then
       #     asusctltray &
       # fi
     '';
+  };
+
+  systemd.user.services = {
+    libinput-gestures = {
+      Unit = {
+        Description = "Launch libinput-gestures";
+        Partof = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.libinput-gestures}/bin/libinput-gestures";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
   };
 }
