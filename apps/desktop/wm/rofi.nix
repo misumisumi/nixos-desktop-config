@@ -28,7 +28,7 @@ Rofi (App launcher) conf
                              rofi-calc
                            ];
 
-      font = "FiraCode Nerd Font 16";
+      font = "FiraCode Nerd Font 20";
       terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = "my_theme.rasi";
 

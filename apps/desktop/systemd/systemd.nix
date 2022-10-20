@@ -28,7 +28,6 @@ Please read each description
         polkit-gnome-authentication-agent-1 = {
           Unit = {
             Description = "polkit-gnome-authentication-agent-1";
-            Wants = [ "graphical-session.target" ];
             After = [ "graphical-session.target" ];
           };
           Service = {
@@ -43,7 +42,6 @@ Please read each description
         thunar-daemon = {
           Unit = {
             Description = "Start thunar (GUI Filer) daemon mode";
-            Wants = [ "graphical-session.target" ];
             After = [ "graphical-session.target" ];
           };
           Service = {
@@ -54,7 +52,6 @@ Please read each description
             TimeoutStopSec = 10;
           };
         };
-
       };
     };
   };
