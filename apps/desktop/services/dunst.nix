@@ -29,13 +29,13 @@ Dunst (notification-daemons) conf
         urgency_low = {
           background = "#222222";
           foreground = "#888888";
-          timeout = 20;
+          timeout = 10;
         };
 
         urgency_normal = {
           background = "#222d32";
           foreground = "#cfd8dc";
-          timeout = 30;
+          timeout = 10;
         };
 
         urgency_critical = {
