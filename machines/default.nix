@@ -20,6 +20,16 @@ let
   overlay = { inputs, nixpkgs, ... }: {
     nixpkgs.overlays = [
       nur.overlay
+      (final: prev: {
+        python3 = prev.python3.override {
+          packageOverrides = self: super: {
+            # https://github.com/NixOS/nixpkgs/issues/197408
+            dbus-next = super.dbus-next.overridePythonAttrs (old: {
+              checkPhase = builtins.replaceStrings ["not test_peer_interface"] ["not test_peer_interface and not test_tcp_connection_with_forwarding"] old.checkPhase;
+            });
+          };
+        };
+      })
     ];
   };
 
