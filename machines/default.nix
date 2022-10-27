@@ -1,17 +1,3 @@
-#  These are the different profiles that can be used when building NixOS.
-#
-#  flake.nix 
-#   └─ ./machines  
-#       ├─ default.nix *
-#       ├─ configuration.nix
-#       ├─ home.nix
-#       └─ ./aegis OR ku-dere OR ./mother OR ./tsundere OR ./yandere OR ./vm OR ./zephyrus
-#            ├─ ./default.nix
-#            └─ ./home.nix
-#
-# aegis is Jetson Nano. ku-dere is Rasberry Pi 3B.
-# aegis and ku-dere and yandere is server.
-
 { inputs, stateVersion, nixpkgs, home-manager, nur, user, ... }: # Multipul arguments
 
 let
@@ -21,15 +7,15 @@ let
     nixpkgs.overlays = [
       nur.overlay
       (final: prev: {
-        python3 = prev.python3.override {
-          packageOverrides = self: super: {
-            # https://github.com/NixOS/nixpkgs/issues/197408
-            dbus-next = super.dbus-next.overridePythonAttrs (old: {
-              checkPhase = builtins.replaceStrings ["not test_peer_interface"] ["not test_peer_interface and not test_tcp_connection_with_forwarding"] old.checkPhase;
-            });
+          python3Packages = prev.python3Packages.override {
+            overrides = pfinal: pprev: {
+              dbus-next = pprev.dbus-next.overridePythonAttrs (old: { # dbus-nest have issue in test so remove some test.
+                # temporary fix for https://github.com/NixOS/nixpkgs/issues/197408
+                checkPhase = builtins.replaceStrings ["not test_peer_interface"] ["not test_peer_interface and not test_tcp_connection_with_forwarding"] old.checkPhase;
+              });
+            };
           };
-        };
-      })
+        })
     ];
   };
 
