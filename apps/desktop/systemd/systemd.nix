@@ -14,7 +14,7 @@ Please read each description
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
-        Restart = "no";
+        Restart = "noon-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
