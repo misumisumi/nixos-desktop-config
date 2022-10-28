@@ -29,7 +29,11 @@ with pkgs; [
 
   # thunar-with-plugins             # GUI Filer and Plugins
   pcmanfm
-  shared-mine-info
+  shared-mime-info
+  ffmpegthumbnailer
+  evince
+  gnome.file-roller
+  lxde.lxmenu-data
   haskellPackages.thumbnail
 
   discord                         # Communicate

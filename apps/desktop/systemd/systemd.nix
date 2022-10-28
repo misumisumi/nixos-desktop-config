@@ -23,31 +23,31 @@ Please read each description
       };
     };
 
-    # polkit-gnome-authentication-agent-1 = {
-    #   Unit = {
-    #     Description = "polkit-gnome-authentication-agent-1";
-    #     After = [ "graphical-session.target" ];
-    #   };
-    #   Service = {
-    #     Type = "simple";
-    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    #     Restart = "on-failure";
-    #     RestartSec = 1;
-    #     TimeoutStopSec = 10;
-    #   };
-    #   Install = {
-    #     WantedBy = [ "default.target" ];
-    #   };
-    # };
+    polkit-gnome-authentication-agent-1 = {
+      Unit = {
+        Description = "polkit-gnome-authentication-agent-1";
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
 
-    thunar-daemon = {
+    pcmanfm-daemon = {
       Unit = {
         Description = "Start thunar (GUI Filer) daemon mode";
         After = [ "graphical-session.target" ];
       };
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.xfce.thunar}/bin/thunar --daemon";
+        ExecStart = "${pkgs.pcmanfm}/bin/pcmanfm -d";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
