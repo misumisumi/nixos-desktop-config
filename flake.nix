@@ -15,9 +15,14 @@
       url = "github:nix-community/NUR";
     };
 
+    flakes = {
+      url = "github:Sumi-Sumi/flakes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur}:
+  outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur, flakes}:
     let
       user = "sumi";
       stateVersion = "22.05";       # For Homa Manager
@@ -26,7 +31,7 @@
       nixosConfigurations = (
         import ./machines {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager nur user stateVersion;
+          inherit inputs nixpkgs home-manager nur flakes user stateVersion;
         }
       );
     };
