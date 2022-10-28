@@ -14,7 +14,7 @@ Please read each description
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
-        Restart = "on-failure";
+        Restart = "no";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
@@ -42,13 +42,13 @@ Please read each description
 
     pcmanfm-daemon = {
       Unit = {
-        Description = "Start thunar (GUI Filer) daemon mode";
+        Description = "Start pcmanfm (GUI Filer) daemon mode";
         After = [ "graphical-session.target" ];
       };
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.pcmanfm}/bin/pcmanfm -d";
-        Restart = "on-failure";
+        Restart = "no";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
