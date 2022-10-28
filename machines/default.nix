@@ -1,4 +1,4 @@
-{ inputs, stateVersion, nixpkgs, home-manager, nur, user, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, home-manager, nur, flakes, user, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
@@ -6,6 +6,7 @@ let
   overlay = { inputs, nixpkgs, ... }: {
     nixpkgs.overlays = [
       nur.overlay
+      flakes.overlays.default
       (final: prev: {
           python3Packages = prev.python3Packages.override {
             overrides = pfinal: pprev: {
@@ -30,6 +31,8 @@ let
         ./configuration.nix       # Common system conf
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
+        # flakes.nixosModules.asusd
+        # flakes.nixosModules.asus-notify
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {

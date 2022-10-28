@@ -36,7 +36,10 @@ with pkgs; [
   slack
 
   audacity                        # GUI Sound Editor
+  wavesurfer
   sox                             # CLI Sound Editor
+
+  imagemagick                     # CLI Image Editor
 
   firefox                         # Browser
   vivaldi

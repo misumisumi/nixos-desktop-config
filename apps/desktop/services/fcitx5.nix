@@ -14,6 +14,7 @@ Fcitx5 (IME) conf
           fcitx5-mozc
           fcitx5-configtool
           nur.repos.xddxdd.fcitx5-breeze
+          fcitx5-nord
         ];
       };
     };
