@@ -6,6 +6,7 @@ let
   tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
       inherit (pkgs.texlive) scheme-small collection-langjapanese;
   });
+  # thunar-with-plugins = with pkgs.xfce; (thunar.override { thunarPlugins = [ thunar-volman thunar-archive-plugin thunar-media-tags-plugin ]; });
 in
 with pkgs; [
   scream                          # Audio Recivier (For windows VM)
@@ -26,10 +27,9 @@ with pkgs; [
 
   nomacs                          # Image Viewer
 
-  xfce.thunar                     # GUI Filer and Plugins
-  xfce.thunar-volman
-  xfce.thunar-archive-plugin
-  xfce.thunar-media-tags-plugin
+  # thunar-with-plugins             # GUI Filer and Plugins
+  pcmanfm
+  shared-mine-info
   haskellPackages.thumbnail
 
   discord                         # Communicate
