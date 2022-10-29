@@ -19,7 +19,6 @@
       url = "github:Sumi-Sumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur, flakes}:

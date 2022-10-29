@@ -34,12 +34,12 @@ I use conf sourcing ./nvim but you can manager from home manager.
         vim-vint
         yamllint
         nodePackages.diagnostic-languageserver
+        python-doq
       ];
 
       extraPython3Packages = ps: with ps; [
         isort
         docformatter
-        # python-doq
       ];
     };
   };
