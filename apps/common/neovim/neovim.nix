@@ -39,6 +39,7 @@ I use conf sourcing ./nvim but you can manager from home manager.
       extraPython3Packages = ps: with ps; [
         isort
         docformatter
+        # python-doq
       ];
     };
   };
