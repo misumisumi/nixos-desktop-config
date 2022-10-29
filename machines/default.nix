@@ -31,8 +31,9 @@ let
         ./configuration.nix       # Common system conf
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
-        # flakes.nixosModules.asusd
-        # flakes.nixosModules.asus-notify
+        flakes.nixosModules.asusd
+        flakes.nixosModules.asus-notify
+        flakes.nixosModules.supergfxd
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
@@ -47,12 +48,12 @@ let
     };
 in
 {
-  aegis = settings { hostname="aegis"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  mother = settings { hostname="mother"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  yandere = settings { hostname="yandere"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager nur user stateVersion; };
-  zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs home-manager nur user stateVersion; };
+  # aegis = settings { hostname="aegis"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # mother = settings { hostname="mother"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # yandere = settings { hostname="yandere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager overlay nur user stateVersion; };
+  # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   extra = settings { hostname="extra"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
 }
