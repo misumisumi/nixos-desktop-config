@@ -15,7 +15,6 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
   xdg = {
     configFile = {
       "qtile".source = ./conf;
-      "libinput-gestures.conf".source = ./libinput-gestures.conf;
     };
   };
   xsession = {

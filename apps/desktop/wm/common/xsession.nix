@@ -22,7 +22,12 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
       package = pkgs.dracula-theme;
       size = 32;
     };
+  };
 
+  xdg = {
+    configFile = {
+      "libinput-gestures.conf".source = ./libinput-gestures.conf;
+    };
   };
 
   xresources.properties = {
