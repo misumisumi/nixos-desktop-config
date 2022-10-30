@@ -3,4 +3,4 @@
 (import ./systemd) ++ 
 (import ./terminal) ++ 
 (import ./theme) ++ 
-(import ./wm)
+(import ./wm/common)

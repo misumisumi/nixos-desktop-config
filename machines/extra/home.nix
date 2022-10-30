@@ -9,7 +9,8 @@
             (import ../../apps/common/git) ++
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
-            (import ../../apps/desktop);
+            (import ../../apps/desktop) ++
+            (import ../../apps/desktop/wm/qtile);
 
   home = {
     packages = (import ../../apps/common/pkgs) pkgs ++
