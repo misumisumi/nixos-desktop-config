@@ -9,7 +9,6 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 {
   home = {
     packages = with pkgs; [ qtile libinput-gestures ];
-    file."${config.home.homeDirectory}/Pictures/wallpapers".source = ./conf/wallpapers;
   };
 
   xdg = {
