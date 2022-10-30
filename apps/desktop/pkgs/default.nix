@@ -9,6 +9,9 @@ let
   # thunar-with-plugins = with pkgs.xfce; (thunar.override { thunarPlugins = [ thunar-volman thunar-archive-plugin thunar-media-tags-plugin ]; });
 in
 with pkgs; [
+  wavesurfer                      # pkgs from Sumi-Sumi/flakes
+  prime-run
+
   scream                          # Audio Recivier (For windows VM)
   polkit_gnome                    # polkit
 
@@ -40,7 +43,6 @@ with pkgs; [
   slack
 
   audacity                        # GUI Sound Editor
-  wavesurfer
   sox                             # CLI Sound Editor
 
   imagemagick                     # CLI Image Editor
