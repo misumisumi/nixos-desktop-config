@@ -40,12 +40,10 @@ let
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
+          home-manager.extraSpecialArgs = { inherit hostname user stateVersion private-conf; };
           home-manager.users."${user}" = {
-            imports = [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
-            modules = [
-              private-conf.nixosModules.ssh_my_conf
-            ];
+            imports = [ (private-conf.nixosModules.ssh_my_conf) ] ++ 
+              [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
           };
         }
       ];
