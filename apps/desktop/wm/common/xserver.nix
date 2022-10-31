@@ -37,11 +37,11 @@ You must edit home.xsession.keyboard. (conf is ./xsession.nix)
           greeters = {
             slick = {
               enable = true;
-              cursorTheme = {
-                name = "Dracula-cursors";
-                package = pkgs.dracula-theme;
-                size = 32;
-              };
+              # cursorTheme = {                # for lightdm-gtk-greeter
+              #   name = "Dracula-cursors";
+              #   package = pkgs.dracula-theme;
+              #   size = 32;
+              # };
               iconTheme = {
                 name = "Papirus-Dark";
                 package = pkgs.papirus-icon-theme;
