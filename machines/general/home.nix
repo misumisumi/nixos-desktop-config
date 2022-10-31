@@ -1,7 +1,5 @@
-#
-# Home-manager configuration for mother
-#
-# flake.nix
+# Home-manager configuration for general
+
 { config, pkgs, ... }:
 
 {
