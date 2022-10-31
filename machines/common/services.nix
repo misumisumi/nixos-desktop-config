@@ -1,7 +1,13 @@
 { hostname, pkgs, ... }:
 
 {
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    sudo.extraConfig = ''
+      Defaults insults
+    '';
+  };
+
   programs = {
     dconf.enable = true;
     udevil.enable = true;
