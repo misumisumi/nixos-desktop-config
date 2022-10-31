@@ -32,7 +32,7 @@
         fi
         if [[ ! -f ${config.home.homeDirectory}/.zinit/completions/_zinit ]]; then
           mkdir -p ${config.home.homeDirectory}/.zinit/completions/ 
-          ln -sf ''${XDG_CONFIG_HOME}/zsh/plugins/zinit/share/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
+          ln -sf ${config.xdg.configHome}/zsh/plugins/zinit/share/zsh/site-functions/_zinit ''${ZINIT_HOME}/completions/
         fi
       '';
     };
