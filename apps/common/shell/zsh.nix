@@ -67,6 +67,9 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
       ];
       shellAliases = {
         nix = "noglob nix";
+        nixos-rebuild = "noglob nix-rebuild";
+        nixos-install = "noglob nix-install";
+        nixos-container = "noglob nix-container";
       };
 
       initExtraBeforeCompInit = ''
