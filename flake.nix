@@ -22,7 +22,6 @@
     private-conf = {
       url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
   };
 
