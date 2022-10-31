@@ -25,6 +25,8 @@ let
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
     pModules = private-conf.nixosModules;
+    extra-modules = if hostname != "general" then [ pModules.lab-network ] else [];
+    extra-hm-modules = if hostname != "general" then [ pModules.ssh_my_conf pModules.put_wallpapers ] else [];
   in
     nixpkgs.lib.nixosSystem {
       system = choiceSystem hostname;
@@ -38,8 +40,6 @@ let
         flakes.nixosModules.asus-notify
         flakes.nixosModules.supergfxd
 
-        private-conf.nixosModules.lab-network
-
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
@@ -47,11 +47,11 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion private-conf; };
           home-manager.users."${user}" = {
-            imports = [ (pModules.ssh_my_conf) (pModules.put_wallpapers) ] ++ 
-              [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
+            imports = [(import ./home.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
+              ++ extra-hm-modules;
           };
         }
-      ];
+      ] ++ extra-modules;
     };
 in
 {
