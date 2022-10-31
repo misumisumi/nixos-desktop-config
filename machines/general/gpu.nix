@@ -19,7 +19,6 @@
       vaapiVdpau
       intel-ocl
       rocm-opencl-icd
-      rocm-oepncl-runtime
     ];
   };
 }
