@@ -5,6 +5,7 @@
     xserver = {
       videoDrivers = [
         "amdgpu"
+        "radeon"
         "nvidia"
         "modesetting"
       ];
