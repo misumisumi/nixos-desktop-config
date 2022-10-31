@@ -8,11 +8,9 @@ Supported platform is NixOS, other linux distributions (e.g. ubuntu, archlinux..
 Let's try NixOS!!
 
 ## Common Installation Guide
-- You must edit some files befor you install.
-
-1. Edit [flake.nix](./flake.nix) & Update [flake.lock](./flake.lock)
-  - comment `private-conf` (in `inputs`)
-  - commentout new `outputs` and comment old one
+1. Run `preprocess.sh`
+    - Patch to `flake.nix`.
+    - If you want to restore, you can run `preprocess.sh --restore`
 
 ## ToDO
 - [ ] add description of this repository
