@@ -28,7 +28,7 @@
   outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, private-conf}:
     let
       user = "sumi";
-      stateVersion = "22.05";       # For Homa Manager
+      stateVersion = "22.05";       # For Home Manager
     in
     { 
       nixosConfigurations = (
