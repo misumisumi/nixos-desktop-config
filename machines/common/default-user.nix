@@ -7,8 +7,6 @@
 
   users.users.${user} = {
     isNormalUser = true;
-    home="/home/${user}";
-    createHome = true;
     shell = pkgs.zsh;
     initialHashedPassword = if user == "general"
       then "$6$HhoKyaJgibvjdoPO$swxNlcV6CJTxyKR/I.3o4a1utr2eSLgVjsogNKeo58jY/eFpRciLr8emsCmPxaSa5jwzHnz74RLlXEEYXIoQq/" # general
