@@ -85,11 +85,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1667098568,
-        "narHash": "sha256-shuJcEfScMbiKGDvZJDJxW7CoUJy7CfHd65vpyGkxYo=",
+        "lastModified": 1667219931,
+        "narHash": "sha256-4PDdH47nD9UABDVoenAcKNjjI5+9boq8NOQUl9AzoAQ=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "7ee1f9e457e6caf6fae0a968f4a5bd55a549a87f",
+        "rev": "4e6a59e55703defdf6e14b8d577007e25bffc4c7",
         "type": "github"
       },
       "original": {
@@ -106,11 +106,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1667216156,
-        "narHash": "sha256-J9uqnr4YShrExUg7ce+dnGRgVchpQZSNGKfcZuKrzGg=",
+        "lastModified": 1667218146,
+        "narHash": "sha256-MoyNz+TfyML+BYkJ8TtiLDmQcvbrSdoFWcT4Gf31EcM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fad4e7c79cb6668e9c2f90f008ee3522d9cd298f",
+        "rev": "2464c21ab2b3607bed3c206a436855c487f35f55",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1667217993,
-        "narHash": "sha256-K3XPbWFvlY+iQZDuhC6O7HEirPapCLpYGVEa204pxto=",
+        "lastModified": 1667224525,
+        "narHash": "sha256-Ay1FDKJ+3bSq6AaXD9ZeIxyNsMDQf8SryREATfuV9Gw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "fd26ab4a1a965e731f59bb5af28b6cb08887a16c",
+        "rev": "7c04e37b2300b4077a42be70ac7b703735edcb20",
         "type": "github"
       },
       "original": {
@@ -207,6 +207,29 @@
         "type": "github"
       }
     },
+    "private-conf": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1667225265,
+        "narHash": "sha256-xElAP/3PtbRQvK9zWVJ1jD0i5rLIJD1XrB7Gzzfng8A=",
+        "ref": "refs/heads/main",
+        "rev": "9dece12c8abf5fd95299b17a98338dce636577f3",
+        "revCount": 7,
+        "type": "git",
+        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -214,7 +237,8 @@
         "home-manager": "home-manager",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
-        "nur": "nur"
+        "nur": "nur",
+        "private-conf": "private-conf"
       }
     },
     "utils": {
