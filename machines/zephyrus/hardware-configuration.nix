@@ -13,7 +13,7 @@
       kernelModules = [ "dm-snapshot" ];
       luks.devices = {
         luksroot = {
-          device = "/dev/disk/by-partlabel/Linux\x20LVM";
+          device = "/dev/disk/by-partlabel/LUKSROOT";
           preLVM = true;
           allowDiscards = true;
         };
