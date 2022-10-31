@@ -7,7 +7,7 @@ Git conf
   programs = {
     git = {
       enable = true;
-      userEmail = "dragon511southern@gmai.com";
+      userEmail = "dragon511southern@gmail.com";
       userName = "Kobayashi Sumiharu";
       ignores = [
 # Byte-compiled / optimized / DLL files
