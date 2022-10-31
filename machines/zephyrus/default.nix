@@ -8,7 +8,7 @@
     ./asusd.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
-    ../../apps/desktop/wm/common/xserver.nix
+    ../../apps/desktop/wm/qtile/xserver.nix
   ] ++
   (import ../../apps/common/virtualisation);
   
