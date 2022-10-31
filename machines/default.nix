@@ -24,6 +24,7 @@ let
   settings = {hostname, user}:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
+    pModules = private-conf.nixosModules;
   in
     nixpkgs.lib.nixosSystem {
       system = choiceSystem hostname;
@@ -46,7 +47,7 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion private-conf; };
           home-manager.users."${user}" = {
-            imports = [ (private-conf.nixosModules.ssh_my_conf) ] ++ 
+            imports = [ pModules.ssh_my_conf pModules.put_wallpapers ] ++ 
               [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
           };
         }
