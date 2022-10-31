@@ -29,7 +29,6 @@
     let
       user = "sumi";
       stateVersion = "22.05";       # For Home Manager
-      wm = "plasma5";               # only use for 'machines/general'
     in
     { 
       nixosConfigurations = (

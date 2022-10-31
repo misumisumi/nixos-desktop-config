@@ -1,4 +1,4 @@
-{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, wm, private-conf ? null, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
@@ -21,7 +21,7 @@ let
     ];
   };
 
-  settings = {hostname, user}:
+  settings = {hostname, user, wm ? "plasma5"}:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
     pModules = if hostname != "general" then private-conf.nixosModules else null;
