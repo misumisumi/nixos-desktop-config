@@ -33,15 +33,5 @@
     dbus.packages = with pkgs; [ xfce.xfconf ];
     gvfs.enable = true;       # Mount, trash, and other functions
     tumbler.enable = true;    # Thumbnail supoport for images
-    openssh = {
-      enable = true;
-      ports = [ 12511 ];
-      kbdInteractiveAuthentication = true;
-      forwardX11 = true;
-      extraConfig = 
-      ''
-        UsePAM yes
-      '';
-    };
   };
 }
