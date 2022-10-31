@@ -1,4 +1,4 @@
-{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, private-conf, user, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
