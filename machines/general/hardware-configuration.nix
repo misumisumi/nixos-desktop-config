@@ -11,6 +11,8 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  # boot.resumeDevice = "/.swapfile";
+  # boot.kernelParams = [ "resume_offset=964608" ];
   boot.extraModulePackages = [ ];
   boot.initrd.luks.devices = {
     luksroot = {
@@ -42,7 +44,12 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [
+    {
+      device = "/.swapfile";
+      size = 1024*2; # swap size is 2GB
+    }
+  ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
