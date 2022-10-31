@@ -1,6 +1,6 @@
 # Home-manager configuration for general
 
-{ config, pkgs, useTilngWM, ... }:
+{ config, pkgs, wm, ... }:
 
 {
   imports = (import ../../apps/common/cli) ++
