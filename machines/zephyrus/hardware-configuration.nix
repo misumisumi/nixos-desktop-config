@@ -10,7 +10,7 @@
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
-      kernelModules = [ "dm-snapshot" ];
+      kernelModules = [ "dm-snapshot" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
       luks.devices = {
         luksroot = {
           device = "/dev/disk/by-partlabel/LUKSROOT";
