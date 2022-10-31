@@ -32,9 +32,13 @@ let
         ./configuration.nix       # Common system conf
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
+
         flakes.nixosModules.asusd
         flakes.nixosModules.asus-notify
         flakes.nixosModules.supergfxd
+
+        private-conf.nixosModules.lab-network
+
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
