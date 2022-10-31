@@ -19,9 +19,14 @@
       url = "github:Sumi-Sumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    private-conf = {
+      url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes}:
+  outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, private-conf}:
     let
       user = "sumi";
       stateVersion = "22.05";       # For Homa Manager
@@ -30,7 +35,8 @@
       nixosConfigurations = (
         import ./machines {
           inherit (nixpkgs) lib;
-          inherit inputs stateVersion nixpkgs nur nixgl home-manager flakes user;
+          inherit inputs stateVersion user;
+          inherit nixpkgs nur nixgl home-manager flakes private-conf;
         }
       );
     };

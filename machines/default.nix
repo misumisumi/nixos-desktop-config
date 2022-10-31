@@ -1,4 +1,4 @@
-{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, private-conf, user, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
@@ -21,7 +21,7 @@ let
     ];
   };
 
-  settings = { hostname, inputs, nixpkgs, overlay, home-manager, nur, user, stateVersion }: 
+  settings = {hostname, user}:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
@@ -43,6 +43,9 @@ let
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
           home-manager.users."${user}" = {
             imports = [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
+            modules = [
+              private-conf.nixosModules.ssh_my_conf
+            ];
           };
         }
       ];
@@ -55,6 +58,8 @@ in
   # tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # yandere = settings { hostname="yandere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager overlay nur user stateVersion; };
-  zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  # general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  zephyrus = settings { hostname = "zephyrus"; inherit user; };
+  general = settings { hostname = "zephyrus"; inherit user; };
 }
