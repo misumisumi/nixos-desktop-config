@@ -24,7 +24,7 @@ let
   settings = {hostname, user}:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
-    pModules = private-conf.nixosModules;
+    pModules = if hostname != "general" then private-conf.nixosModules else null;
     extra-modules = if hostname != "general" then [ pModules.lab-network ] else [];
     extra-hm-modules = if hostname != "general" then [ pModules.ssh_my_conf pModules.put_wallpapers ] else [];
   in
@@ -45,7 +45,7 @@ let
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit hostname user stateVersion private-conf; };
+          home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
           home-manager.users."${user}" = {
             imports = [(import ./home.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
               ++ extra-hm-modules;
