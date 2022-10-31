@@ -35,7 +35,7 @@ You must edit home.xsession.keyboard. (conf is ./xsession.nix)
         lightdm = {
           enable = true;
           greeters = {
-            gtk = {
+            slick = {
               enable = true;
               cursorTheme = {
                 name = "Dracula-cursors";
