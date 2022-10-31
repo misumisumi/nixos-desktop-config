@@ -1,0 +1,30 @@
+--- flake.nix	2022-11-01 02:58:00.247022459 +0900
++++ _flake.nix	2022-11-01 03:04:23.837241161 +0900
+@@ -19,13 +19,13 @@
+       url = "github:Sumi-Sumi/flakes";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
+-    private-conf = {
+-      url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
+-      inputs.nixpkgs.follows = "nixpkgs";
+-    };
++    # private-conf = {
++    #   url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
++    #   inputs.nixpkgs.follows = "nixpkgs";
++    # };
+   };
+ 
+-  outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, private-conf}:
++  outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes}:
+     let
+       user = "sumi";
+       stateVersion = "22.05";       # For Home Manager
+@@ -35,7 +35,7 @@
+         import ./machines {
+           inherit (nixpkgs) lib;
+           inherit inputs stateVersion user;
+-          inherit nixpkgs nur nixgl home-manager flakes private-conf;
++          inherit nixpkgs nur nixgl home-manager flakes;
+         }
+       );
+     };
