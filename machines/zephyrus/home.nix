@@ -1,15 +1,15 @@
-#
-# Home-manager configuration for mother
-#
-# flake.nix
+# Home-manager configuration for general
+
 { config, pkgs, ... }:
 
 {
-  imports = (import ../../apps/common/cui) ++
+  imports = (import ../../apps/common/cli) ++
             (import ../../apps/common/git) ++
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
-            (import ../../apps/desktop);
+            (import ../../apps/common/ssh) ++
+            (import ../../apps/desktop) ++
+            (import ../../apps/desktop/wm/qtile);
 
   home = {
     packages = (import ../../apps/common/pkgs) pkgs ++

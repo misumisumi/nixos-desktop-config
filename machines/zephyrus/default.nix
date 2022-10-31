@@ -2,9 +2,13 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./network.nix
-    ../../apps/desktop/wm/configuration.nix
+    ./gpu.nix
+    ./asusd.nix
+    ../common/pulseaudio.nix
+    ../common/printer.nix
+    ../../apps/desktop/wm/common/xserver.nix
   ] ++
   (import ../../apps/common/virtualisation);
   
@@ -13,17 +17,4 @@
       binary-caches-parallel-connections = 24
     '';
   };
-
-  services = {
-    xserver = {
-      videoDrivers = [
-        "amdgpu"
-        "nvidia"
-      ];
-    };
-  };
-
-  hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
-  ];
 }
