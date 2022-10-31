@@ -4,4 +4,4 @@
 (import ./terminal) ++ 
 (import ./theme) ++ 
 (import ./wm/common) ++
-(import ./xdg)
+(import ./xdg-mime)
