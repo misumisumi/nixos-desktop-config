@@ -1,6 +1,6 @@
 # Home-manager configuration for general
 
-{ config, pkgs, ... }:
+{ config, pkgs, useTilngWM, ... }:
 
 {
   imports = (import ../../apps/common/cli) ++
@@ -8,7 +8,7 @@
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
             (import ../../apps/desktop) ++
-            (import ../../apps/desktop/wm/qtile);
+            (import ../../apps/desktop/wm/${wm});
 
   home = {
     packages = (import ../../apps/common/pkgs) pkgs ++

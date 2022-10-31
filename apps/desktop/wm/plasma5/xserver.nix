@@ -1,6 +1,8 @@
 { config, lib, user, pkgs, ... }:
 
 {
+  imports = [ ../common/xserver.nix ];
+
   home = {
     file."${config.home.homeDirectory}/.background-image".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
   };

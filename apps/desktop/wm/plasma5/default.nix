@@ -1,3 +1,2 @@
-[
-  ./plasma5.nix
-]
+# dummy
+[]

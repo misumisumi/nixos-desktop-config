@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, wm, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
     ./gpu.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
-    ../../apps/desktop/wm/common/xserver.nix
+    ../../apps/desktop/wm/${wm}/xserver.nix
   ] ++
   (import ../../apps/common/virtualisation);
   

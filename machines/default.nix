@@ -21,7 +21,7 @@ let
     ];
   };
 
-  settings = {hostname, user}:
+  settings = {hostname, user, wm ? "plasma5"}:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
     pModules = if hostname != "general" then private-conf.nixosModules else null;
@@ -30,7 +30,7 @@ let
   in
     nixpkgs.lib.nixosSystem {
       system = choiceSystem hostname;
-      specialArgs = { inherit hostname inputs user stateVersion; }; # specialArgs give some args to modules
+      specialArgs = { inherit hostname inputs user stateVersion wm; }; # specialArgs give some args to modules
       modules = [
         ./configuration.nix       # Common system conf
         (overlay { inherit inputs nixpkgs; })
@@ -45,7 +45,7 @@ let
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit hostname user stateVersion; };
+          home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
             imports = [(import ./home.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
               ++ extra-hm-modules;
