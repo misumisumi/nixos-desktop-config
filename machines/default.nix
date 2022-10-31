@@ -47,7 +47,7 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion private-conf; };
           home-manager.users."${user}" = {
-            imports = [ pModules.ssh_my_conf pModules.put_wallpapers ] ++ 
+            imports = [ (pModules.ssh_my_conf) (pModules.put_wallpapers) ] ++ 
               [(import ./home.nix)] ++ [(import hostConf)];  # Common home conf + Each machine conf
           };
         }
