@@ -1,4 +1,4 @@
-{ inputs, stateVersion, nixpkgs, home-manager, nur, flakes, user, ... }: # Multipul arguments
+{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
@@ -6,6 +6,7 @@ let
   overlay = { inputs, nixpkgs, ... }: {
     nixpkgs.overlays = [
       nur.overlay
+      nixgl.overlay
       flakes.overlays.default
       (final: prev: {
           python3Packages = prev.python3Packages.override {

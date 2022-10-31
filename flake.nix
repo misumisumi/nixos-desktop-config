@@ -6,13 +6,13 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    nur.url = "github:nix-community/NUR";
+
+    nixgl.url = "github:guibou/nixGL";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/NUR";
     };
 
     flakes = {
@@ -21,7 +21,7 @@
     };
   };
 
-  outputs = inputs @ {self, nixpkgs, flake-utils, home-manager, nur, flakes}:
+  outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes}:
     let
       user = "sumi";
       stateVersion = "22.05";       # For Homa Manager
@@ -30,7 +30,7 @@
       nixosConfigurations = (
         import ./machines {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager nur flakes user stateVersion;
+          inherit inputs stateVersion nixpkgs nur nixgl home-manager flakes user;
         }
       );
     };
