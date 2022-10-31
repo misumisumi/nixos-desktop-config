@@ -55,5 +55,5 @@ in
   # yandere = settings { hostname="yandere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # vm = settings { hostname="vm"; inherit inputs nixpkgs home-manager overlay nur user stateVersion; };
   zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  general = settings { hostname="general"; user="general"; inherit inputs nixpkgs overlay home-manager nur stateVersion; };
 }
