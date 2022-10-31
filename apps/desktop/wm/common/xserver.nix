@@ -56,7 +56,6 @@ You must edit home.xsession.keyboard. (conf is ./xsession.nix)
             };
           };
         };
-        defaultSession = "none+xsession";
         sessionCommands = ''
           ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
         '';
