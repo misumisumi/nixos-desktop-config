@@ -64,5 +64,6 @@ in
   # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   zephyrus = settings { hostname = "zephyrus"; inherit user; };
-  general = settings { hostname = "general"; user = "general"; };
+  plasma5 = settings { hostname = "general"; user = "general"; wm = "plasma5"; };
+  qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
 }
