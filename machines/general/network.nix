@@ -11,10 +11,6 @@
       firewallBackend = "nftables";
     };
 
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-    };
     dhcpcd = {
       enable = true;
       wait = "background";
