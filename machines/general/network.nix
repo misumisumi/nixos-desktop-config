@@ -2,7 +2,6 @@
 
 {
   networking = {
-    enable = true;
     wait-online = {
       timeout = 0;  # Disable wait online
     };
