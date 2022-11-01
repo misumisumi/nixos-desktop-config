@@ -47,6 +47,5 @@
       };
     };
   };
-
-  system.nssModules = lib.mkForce [];
+  # system.nssModules = lib.mkForce [];
 }
