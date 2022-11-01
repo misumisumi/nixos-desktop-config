@@ -29,10 +29,6 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
     };
   };
 
-  xresources.properties = {
-    "Xft.dpi" = 100;
-  };
-
   xsession = {
     enable = true;
     preferStatusNotifierItems = true;
