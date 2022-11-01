@@ -7,6 +7,9 @@ Supported platform is NixOS, other linux distributions (e.g. ubuntu, archlinux..
 
 Let's try NixOS!!
 
+## Note
+This repository is now working.
+
 ## Common Installation Guide
 1. Run `preprocess.sh`
     - Patch to `flake.nix`.
