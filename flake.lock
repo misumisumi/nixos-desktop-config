@@ -119,24 +119,6 @@
         "type": "github"
       }
     },
-    "home-manager_2": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "utils": "utils_2"
-      },
-      "locked": {
-        "lastModified": 1667218146,
-        "narHash": "sha256-MoyNz+TfyML+BYkJ8TtiLDmQcvbrSdoFWcT4Gf31EcM=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "2464c21ab2b3607bed3c206a436855c487f35f55",
-        "type": "github"
-      },
-      "original": {
-        "id": "home-manager",
-        "type": "indirect"
-      }
-    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -187,29 +169,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1667142599,
-        "narHash": "sha256-OLJxsg9VqfKjFkerOxWtNIkibsCvxsv5A8wNWO1MeWk=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "412b9917cea092f3d39f9cd5dead4effd5bc4053",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "locked": {
-        "lastModified": 1667298483,
-        "narHash": "sha256-7yMpYpQw+8MguIaauAJxSHqJNt+aKlmsGItQfSSGQv8=",
+        "lastModified": 1667304434,
+        "narHash": "sha256-d/PPwZLft3WmIEpKZq00ZVU3CqUKsOuSVP6r8ez/RW8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "59d0e6b51b62951784465ce6c75246c3f2a1b90b",
+        "rev": "6e6aabf41212eed186b9633916e4526d20e0a104",
         "type": "github"
       },
       "original": {
@@ -243,17 +209,19 @@
     },
     "private-conf": {
       "inputs": {
-        "home-manager": "home-manager_2",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1667286837,
-        "narHash": "sha256-7SNjUK1O5xx0oBX2HyfiAeQJFnl6fo+1osdXbDD1Ey4=",
+        "lastModified": 1667308921,
+        "narHash": "sha256-EPga8PFN2UCAvaccmQe2Q3l70WQtWmoCYBKki36D4mU=",
         "ref": "refs/heads/main",
-        "rev": "b0d1be75ae17e77dcbaf62edc56681b9365c4cbb",
-        "revCount": 21,
+        "rev": "ed4cab23d9394c514dcc697d07fbfac1e76912be",
+        "revCount": 35,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
@@ -274,21 +242,6 @@
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1667077288,
-        "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1667077288,
         "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
