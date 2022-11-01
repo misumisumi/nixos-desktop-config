@@ -14,6 +14,7 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
     dircolors = {
       enable = true;
     };
+    home.packages = [ pkgs.nix-zsh-completions ];
 
     zsh = {
       enable = true;
