@@ -6,7 +6,7 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 { config, lib, hostname, pkgs, ... }:
 with lib; 
 let
-  cfg = config.xsession.qtile.nixosWallpapers;
+  cfg = config.home.nixosWallpapers;
   use_my = if hostname != "general" then true else false;
 in
 {
@@ -28,11 +28,11 @@ in
   };
 
   options = {
-    xsession.qtile.nixosWallpapers = mkEnableOption ''
+    home.nixosWallpapers = mkEnableOption ''
         Get wallpaper from nixos-artwork.
       '';
   };
-  config = mkIf cfg.enable {
+  config = mkIf cfg.nixosWallpapers {
     home = {
       file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/0_main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
       file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/1_main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
