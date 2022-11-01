@@ -4,7 +4,7 @@
 
 {
   environment.pathsToLink = [ "/share/zsh" ];
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
   users.users.${user} = {
     isNormalUser = true;
