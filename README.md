@@ -14,6 +14,12 @@ This repository is now working.
 - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
 - See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
 - See [Nix-Darwin Installation Guide](#Nix-Darwin-Installation-Guide) if you use nix on macOS.
+- Apps settings in './apps'
+    - `./apps/common` is CUI apps settings.
+    - `./apps/desktop` is GUI apps settings.
+- Machine setting in './machines/general/'
+    - e.g. Change `imports = [ ../common/pulseaudio.nix ]` to `imports = [ ../common/pipewire.nix ]`
+      in `./machines/general/default.nix` if you want to use `pipewire` 
 
 ## NixOS Installation Guide
 This flakes currently has 2Disktop Environments.
