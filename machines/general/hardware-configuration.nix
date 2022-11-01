@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   # boot.resumeDevice = "/.swapfile";
-  # boot.kernelParams = [ "resume_offset=964608" ];
+  # boot.kernelParams = [ "resume_offset=resume_size" ];
   boot.extraModulePackages = [ ];
   boot.initrd.luks.devices = {
     luksroot = {
