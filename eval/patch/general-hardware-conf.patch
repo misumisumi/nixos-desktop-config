@@ -1,5 +1,5 @@
---- _hardware-configuration.nix	2022-11-01 13:19:01.856356490 +0900
-+++ hardware-configuration.nix	2022-11-01 11:45:37.381207933 +0900
+--- _hardware-configuration.nix	2022-11-01 13:26:22.588073193 +0900
++++ hardware-configuration.nix	2022-11-01 13:21:14.832270482 +0900
 @@ -9,19 +9,19 @@
      ];
  
