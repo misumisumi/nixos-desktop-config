@@ -11,13 +11,9 @@ Let's try NixOS!!
 This repository is now working.
 
 ## Common Installation Guide
-1. Run `try_nixos/preprocess.sh --run` befor install.
-    - Remove my private repository and some pkgs
-    - If you want to restore, you can run `try_nixos/preprocess.sh --restore`
-2. Choice install target
-    - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
-    - See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
-    - See [Nix-Darwin Installation Guide](#Nix-Darwin-Installation-Guide) if you use nix on macOS.
+- See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
+- See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
+- See [Nix-Darwin Installation Guide](#Nix-Darwin-Installation-Guide) if you use nix on macOS.
 
 ## NixOS Installation Guide
 This flakes currently has 2Disktop Environments.
