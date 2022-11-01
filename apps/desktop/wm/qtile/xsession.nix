@@ -8,6 +8,7 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 with lig; 
 let
   cfg = config.xsession.qtile.nixosWallpapers;
+  use_my = if hostname != "general" then true else false;
 in
 {
   home = {
@@ -20,8 +21,8 @@ in
     };
   };
   xsession = {
-    putWallpapers.enable = true;
-    qtile.nixosWallpapers = true;
+    putWallpapers.enable = use_my;
+    qtile.nixosWallpapers = use_my == false;
     windowManager = {             # Not launch using dbus-launch because systemd manage dbus-user-mesage since ver.226
       command = "qtile start";    # You maybe have some probrem (ex fcitx5...) if you launch using it.
     };                            # You can see this in ArchWiki https://wiki.archlinux.jp/index.php/Systemd/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC#D-Bus
@@ -34,7 +35,8 @@ in
   };
   config = mkIf cfg.enable {
     home = {
-      file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
+      file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/0_main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
+      file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/1_main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
       file."${config.home.homeDirectory}/Pictures/wallpapers/unfixed/main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
     };
   };
