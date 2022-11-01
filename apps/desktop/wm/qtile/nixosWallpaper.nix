@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 with lib; 
 let
-  cfg = config.home.nixosWallpapers;
+  cfg = config.xsession.putWallpapers;
 in
 {
   options = {
-    home.nixosWallpapers = {
+    xsession.putWallpapers = {
       enable = mkEnableOption ''
         Get wallpaper from nixos-artwork.
       '';

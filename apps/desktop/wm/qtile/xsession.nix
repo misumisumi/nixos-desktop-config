@@ -6,12 +6,12 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 { config, lib, hostname, pkgs, ... }:
 let
   use_my = if hostname != "general" then true else false;
+  use_private_module = if use_my then [] else [ ./nixosWallpaper.nix ];
 in
 {
-  imports = [ ./nixosWallpaper.nix ];
+  imports = use_private_module;
   home = {
     packages = with pkgs; [ qtile libinput-gestures ];
-    nixosWallpapers.enable = use_my == false;
   };
 
   xdg = {
