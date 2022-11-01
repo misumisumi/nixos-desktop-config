@@ -56,7 +56,7 @@ parse_params() {
     case "${1-}" in
     -h | --help) usage ;;
     -v | --verbose) set -x ;;
-    --run) RUN=0 ;;
+    --run) RUN=1 ;;
     --restore) RESTORE=1 ;; # example flag
     --lvm-only) LVMONLY=1 ;; # example flag
     -?*) die "Unknown option: $1" ;;
