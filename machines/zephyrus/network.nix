@@ -1,6 +1,9 @@
 { hostname, lib, pkgs, ... }:
 
 {
+  imports = [
+    ../common/network.nix
+  ];
   networking = {
     wireless = {
       enable = true;

@@ -2,28 +2,32 @@
 
 {
   networking = {
+    enable = true;
+    wait-online = {
+      timeout = 0;  # Disable wait online
+    };
+    hostName = "${hostname}";
+
+    networkmanager = {
+      enable = true;
+      dhcp = "dhcpcd";
+      wifi.powersave = false;
+      firewallBackend = "nftables";
+    };
+
     wireless = {
       enable = true;
+      userControlled.enable = true;
     };
     dhcpcd = {
       enable = true;
       wait = "background";
     };
-    hostName = "${hostname}";
   };
 
-  systemd = {
-    network = {
-      networks = {
-        "10-wireless" = {
-          name = "wlp2s0";
-          DHCP = "yes";
-        };
-        "20-wired" = {
-          name = "enp4s0f4u1u3";
-          DHCP = "yes";
-        };
-      };
+  services = {
+    nscd = {
+      enable = false;
     };
   };
 }
