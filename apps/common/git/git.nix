@@ -8,7 +8,7 @@ Git conf
     git = {
       enable = true;
       userEmail = "dragon511southern@gmail.com";
-      userName = "Kobayashi Sumiharu";
+      userName = "Sumi-Sumi";
       ignores = [
 # Byte-compiled / optimized / DLL files
         "__pycache__/"

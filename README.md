@@ -86,6 +86,10 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   sudo nixos-install --flake .#<flake-url>
   ```
 
+6. Restart!
+    - Initial login password is `general`.
+    - Please change git account info. (edit `apps/common/git/git.nix`)
+
 ## Appendix
 ### System Compornents
 
