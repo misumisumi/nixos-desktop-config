@@ -9,8 +9,7 @@
             (import ../../apps/common/shell) ++
             (import ../../apps/common/ssh) ++
             (import ../../apps/desktop) ++
-            (import ../../apps/desktop/theme) ++
-            (import ../../apps/desktop/wm/qtile);
+            (import ../../apps/desktop/theme);
 
   home = {
     packages = (import ../../apps/common/pkgs) ++
@@ -20,5 +19,4 @@
   xresources = {
     extraConfig = "Xft.dpi:100";
   };
-
 }
