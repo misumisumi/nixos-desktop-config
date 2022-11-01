@@ -35,6 +35,7 @@ in
   config = mkIf cfg.enable {
     home = {
       file."${config.home.homeDirectory}/Pictures/wallpapers/fixed/main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
+      file."${config.home.homeDirectory}/Pictures/wallpapers/unfixed/main.png".source = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
     };
   };
 }
