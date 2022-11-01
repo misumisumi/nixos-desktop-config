@@ -12,6 +12,7 @@ in
 {
   home = {
     packages = with pkgs; [ qtile libinput-gestures ];
+    nixosWallpapers = use_my == false;
   };
 
   xdg = {
@@ -21,7 +22,6 @@ in
   };
   xsession = {
     putWallpapers.enable = use_my;
-    qtile.nixosWallpapers = use_my == false;
     windowManager = {             # Not launch using dbus-launch because systemd manage dbus-user-mesage since ver.226
       command = "qtile start";    # You maybe have some probrem (ex fcitx5...) if you launch using it.
     };                            # You can see this in ArchWiki https://wiki.archlinux.jp/index.php/Systemd/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC#D-Bus
