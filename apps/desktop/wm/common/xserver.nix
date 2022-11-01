@@ -43,8 +43,8 @@ You must edit home.xsession.keyboard. (conf is ./xsession.nix)
                 package = pkgs.papirus-icon-theme;
               };
               theme = {
-                name = "Adapta-Nokto-Eta";
-                package = pkgs.adapta-gtk-theme;
+                name = "Dracula";
+                package = pkgs.dracula-theme;
               };
               extraConfig = ''
                 xft-dpi = 110
