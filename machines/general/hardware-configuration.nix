@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   # boot.resumeDevice = "/.swapfile";
