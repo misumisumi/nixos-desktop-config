@@ -2,9 +2,6 @@
 
 {
   networking = {
-    wait-online = {
-      timeout = 0;  # Disable wait online
-    };
     hostName = "${hostname}";
 
     networkmanager = {
