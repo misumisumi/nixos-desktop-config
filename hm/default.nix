@@ -1,5 +1,5 @@
 # Home-manager configuration for general
-{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
 let
   choiceSystem = x: if ( x == "dummy" ) then "aarch64-linux" else "x86_64-linux";
 
