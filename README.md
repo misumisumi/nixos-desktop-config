@@ -11,8 +11,8 @@ Let's try NixOS!!
 This repository is now working.
 
 ## Common Installation Guide
-1. Run `try_nixos/preprocess.sh` befor install.
-    - Remove my private repository
+1. Run `try_nixos/preprocess.sh --run` befor install.
+    - Remove my private repository and some pkgs
     - If you want to restore, you can run `try_nixos/preprocess.sh --restore`
 2. Choice install target
     - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
@@ -78,8 +78,8 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   ------
 
   cd /mnt/etc/nixos/config/try_nixos
-  (LVM on LUKS): sudo ./preprocess.sh
-  (LVM only): sudo ./preprocess.sh --lvm-only
+  (LVM on LUKS): sudo ./preprocess.sh --run
+  (LVM only): sudo ./preprocess.sh --run --lvm-only
   cd ..
   sudo nix flake update
   sudo nixos-install --flake .#<flake-url>

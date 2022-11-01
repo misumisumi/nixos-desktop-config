@@ -42,7 +42,8 @@ current_screen = widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                       inactive_text='N', **_colorset2)
 systray = widget.Systray(**_colorset3)
 backlight = list(Path('/sys/class/backlight/').glob('*'))
-backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2)
+if not len(backlight) == 0:
+    backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2)
 battery = widget.Battery(format='{char} {percent:2.0%}', charge_char='', discharge_char='',
                          empty_char='', full_chal='', unknown_char='', **_colorset1)
 
