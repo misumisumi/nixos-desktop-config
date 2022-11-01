@@ -14,7 +14,7 @@ This repository is now working.
 - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
 - See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
 - See [Nix-Darwin Installation Guide](#Nix-Darwin-Installation-Guide) if you use nix on macOS.
-- Apps settings in './apps'
+- Apps settings in `./apps`
     - `./apps/common` is CUI apps settings.
     - `./apps/desktop` is GUI apps settings.
 - Machine setting in './machines/general/'
