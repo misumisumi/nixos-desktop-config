@@ -47,12 +47,14 @@ die() {
 parse_params() {
   # default values of variables set from params
   RESTORE=0
+  LVMONLY=0
 
   while :; do
     case "${1-}" in
     -h | --help) usage ;;
     -v | --verbose) set -x ;;
     --restore) RESTORE=1 ;; # example flag
+    --lvm-only) LVMONLY=1 ;; # example flag
     -?*) die "Unknown option: $1" ;;
     *) break ;;
     esac
@@ -73,4 +75,8 @@ if [ ${RESTORE} -eq 1 ]; then
 else
     patch ../flake.nix ./patch/commit.patch
     msg "- Please README for next step."
+fi
+
+if [ ${LVMONLY} -eq 1 ]; then
+    patch ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
 fi
