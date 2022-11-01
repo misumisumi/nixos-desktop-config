@@ -85,11 +85,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1667299123,
-        "narHash": "sha256-SGvUY+iyGgR8FczR8HbhFetnfSJSHgRS+9826UHpVEA=",
+        "lastModified": 1667299800,
+        "narHash": "sha256-YnFK9wE7fvc7/QfZSfFvC+vBbt6lgdPIafFQfdSH4F0=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "ea956b2b99b45ec5b2ca5201549a2a19fcd894ae",
+        "rev": "89f6b808d2228126759a70df2f791e376096b992",
         "type": "github"
       },
       "original": {
