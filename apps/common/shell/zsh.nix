@@ -74,6 +74,10 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
       };
 
       initExtraBeforeCompInit = ''
+        # This is solusion of issue https://github.com/NixOS/nixpkgs/pull/197503
+        # Is zsh-nix-completion broken ??? 
+        fpath = ( /run/current-system/sw/share/zsh/site-functions/ "''${fpath[@]}" )
+
         # p10k instant prompt
         P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
         [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
