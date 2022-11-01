@@ -1,16 +1,18 @@
---- flake.nix	2022-11-01 13:27:57.829012490 +0900
-+++ _flake.nix	2022-11-01 14:07:44.135055123 +0900
-@@ -19,13 +19,13 @@
+--- flake.nix	2022-11-01 22:10:13.168846715 +0900
++++ _flake.nix	2022-11-01 22:25:23.657855815 +0900
+@@ -19,14 +19,14 @@
        url = "github:Sumi-Sumi/flakes";
        inputs.nixpkgs.follows = "nixpkgs";
      };
 -    private-conf = {
 -      url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
 -      inputs.nixpkgs.follows = "nixpkgs";
+-      inputs.flake-utils.follows = "flake-utils";
 -    };
 +    # private-conf = {
 +    #   url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
 +    #   inputs.nixpkgs.follows = "nixpkgs";
++    #   inputs.flake-utils.follows = "flake-utils";
 +    # };
    };
  
@@ -19,12 +21,28 @@
      let
        user = "sumi";
        stateVersion = "22.05";       # For Home Manager
-@@ -35,7 +35,7 @@
+@@ -36,7 +36,7 @@
+           nur.overlay
+           nixgl.overlay
+           flakes.overlays.default
+-          private-conf.overlays.default
++          # private-conf.overlays.default
+ 
+           (final: prev: {
+               python3Packages = prev.python3Packages.override {
+@@ -56,13 +56,13 @@
          import ./machines {
            inherit (nixpkgs) lib;
-           inherit inputs stateVersion user;
+           inherit inputs overlay stateVersion user;
 -          inherit nixpkgs nur nixgl home-manager flakes private-conf;
 +          inherit nixpkgs nur nixgl home-manager flakes;
-         }
-       );
+         });
+       homeConfigurations = (
+         import ./hm {
+           inherit (nixpkgs) lib;
+           inherit inputs overlay stateVersion user;
+-          inherit nixpkgs nur nixgl home-manager flakes private-conf;
++          inherit nixpkgs nur nixgl home-manager flakes;
+         });
      };
+ }
