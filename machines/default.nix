@@ -1,27 +1,9 @@
-{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
 
 let
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
-  type = x: if ( x == "aegis" || x == "ku-dere" || x == "yandere") then "server" else "desktop";
-  overlay = { inputs, nixpkgs, ... }: {
-    nixpkgs.overlays = [
-      nur.overlay
-      nixgl.overlay
-      flakes.overlays.default
-      (final: prev: {
-          python3Packages = prev.python3Packages.override {
-            overrides = pfinal: pprev: {
-              dbus-next = pprev.dbus-next.overridePythonAttrs (old: { # dbus-nest have issue in test so remove some test.
-                # temporary fix for https://github.com/NixOS/nixpkgs/issues/197408
-                checkPhase = builtins.replaceStrings ["not test_peer_interface"] ["not test_peer_interface and not test_tcp_connection_with_forwarding"] old.checkPhase;
-              });
-            };
-          };
-        })
-    ];
-  };
 
-  settings = {hostname, user, wm ? "plasma5"}:
+  settings = { hostname, user, wm ? "plasma5" }:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
     pModules = if hostname != "general" then private-conf.nixosModules else null;

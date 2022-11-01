@@ -1,22 +1,25 @@
 # Home-manager configuration for general
+{ inputs, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
+let
+  choiceSystem = x: if ( x == "dummy" ) then "aarch64-linux" else "x86_64-linux";
 
-{ config, pkgs, ... }:
+  settings = { hostname, user }:
+    let
+      system = choiceSystem hostname;
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+      home-manger.lib.hjomeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          (overlay { inherit inputs nixpkgs; })
+          nur.nixosModules.nur
 
+          ./hm.nix
+          ./${hostname}
+        ];
+      };
+in
 {
-  imports = (import ../../apps/common/cli) ++
-            (import ../../apps/common/git) ++
-            (import ../../apps/common/neovim) ++
-            (import ../../apps/common/shell) ++
-            (import ../../apps/common/ssh) ++
-            (import ../../apps/desktop) ++
-            (import ../../apps/desktop/theme);
-
-  home = {
-    packages = (import ../../apps/common/pkgs) ++
-               (import ../../apps/desktop/pkgs);
-  };
-
-  xresources = {
-    extraConfig = "Xft.dpi:100";
-  };
+  arch = settings { hostname = "arch"; inherit user; };
+  general = settings { hostname = "general"; user = "general"; };
 }
