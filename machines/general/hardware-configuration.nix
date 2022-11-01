@@ -47,7 +47,7 @@
   swapDevices = [
     {
       device = "/.swapfile";
-      size = 1024*4; # swap size is 2GB
+      size = 1024*4; # swap size is 4GB
     }
   ];
 
