@@ -8,8 +8,8 @@ from libqtile.log_utils import logger
 
 @dataclasses.dataclass
 class Param:
-    laptop = os.uname()[1] in [ 'zephyrus', 'general', 'vm' ]
-    vm = 'vm' == os.uname()[1]
+    laptop = os.uname()[1] in [ 'zephyrus' ]
+    vm = 'general' == os.uname()[1]
 
     mod = 'mod4' # super key
     terminal = 'kitty'
