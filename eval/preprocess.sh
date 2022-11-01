@@ -69,7 +69,7 @@ setup_colors
 
 msg "- restore: ${RESTORE}"
 if [ ${RESTORE} -eq 1 ]; then
-    patch ./flake.nix ../patch/restore.patch
+    patch ../flake.nix ./patch/restore.patch
 else
-    patch ./flake.nix ../patch/commit.patch
+    patch ../flake.nix ./patch/commit.patch
 fi
