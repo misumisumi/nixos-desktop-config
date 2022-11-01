@@ -205,11 +205,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1667225965,
-        "narHash": "sha256-nbBuYU0I7zeJ9pxFa8siEEfgxjWUa1ovSQA3hr9e8IM=",
+        "lastModified": 1667283849,
+        "narHash": "sha256-271CRkDOmMhZufSbGQ2SA4XN+/pfD9lCseBbLM5Za5k=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "70955c1528c5fadf8f9664dbae92c96bcaeebba0",
+        "rev": "0915dff7dfadb8beba54b8ee6ab5698a18998d79",
         "type": "github"
       },
       "original": {
@@ -249,11 +249,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1667235118,
-        "narHash": "sha256-lpMQWeHkOCVCddspWAMtSuwdlyc9BrPoHWa+a1foamk=",
+        "lastModified": 1667286837,
+        "narHash": "sha256-7SNjUK1O5xx0oBX2HyfiAeQJFnl6fo+1osdXbDD1Ey4=",
         "ref": "refs/heads/main",
-        "rev": "4618b55419c5b5a64323cbb092e7dd21556fa4f0",
-        "revCount": 20,
+        "rev": "b0d1be75ae17e77dcbaf62edc56681b9365c4cbb",
+        "revCount": 21,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
