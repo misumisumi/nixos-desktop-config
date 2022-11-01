@@ -12,6 +12,5 @@
       enable = true;
       useQtScaling = true;
     };
-    wallpaper.mode = "scale";
   };
 }
