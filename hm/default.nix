@@ -8,7 +8,7 @@ let
       system = choiceSystem hostname;
       pkgs = nixpkgs.legacyPackages.${system};
     in
-      home-manger.lib.hjomeManagerConfiguration {
+      home-manager.lib.hjomeManagerConfiguration {
         inherit pkgs;
         modules = [
           (overlay { inherit inputs nixpkgs; })
