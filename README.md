@@ -11,9 +11,9 @@ Let's try NixOS!!
 This repository is now working.
 
 ## Common Installation Guide
-1. Run `preprocess.sh`
+1. Run `try_nixos/preprocess.sh`
     - Patch to `flake.nix`.
-    - If you want to restore, you can run `preprocess.sh --restore`
+    - If you want to restore, you can run `try_nixos/preprocess.sh --restore`
 2. Choice install target
     - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
     - See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
@@ -27,7 +27,7 @@ All environments are configured with UEFI/systemd-boot.
 You can boot from external disk (e.g USB, other SSD/HDD...).     
 Details of the system configuration can be found in the [Appendix](#Appendix)    
 Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)    
-You run `preprocess.sh --lvm-only` if you use only LVM.
+You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
 
 1. Get install Mmdia from [Official Site](https://nixos.org/download.html) and Launch live environments
 2. Check network connection
