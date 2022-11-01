@@ -71,13 +71,13 @@ setup_colors
 # script logic here
 
 if [ ${RESTORE} -eq 1 ]; then
-    patch -R ../flake.nix ./patch/restore.patch
+    patch ../flake.nix ./patch/restore.patch
     msg "- restored"
 else
-    patch -R ../flake.nix ./patch/commit.patch
+    patch ../flake.nix ./patch/commit.patch
     msg "- Please README for next step."
 fi
 
 if [ ${LVMONLY} -eq 1 ]; then
-    patch -R ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
+    patch ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
 fi

@@ -1,31 +1,31 @@
---- _hardware-configuration.nix	2022-11-01 13:26:22.588073193 +0900
-+++ hardware-configuration.nix	2022-11-01 13:21:14.832270482 +0900
+--- hardware-configuration.nix	2022-11-01 13:29:22.185958827 +0900
++++ _hardware-configuration.nix	2022-11-01 14:08:40.754014045 +0900
 @@ -9,19 +9,19 @@
      ];
  
    boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
--  # boot.initrd.kernelModules = [ "dm-snapshot" ];
-+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+-  boot.initrd.kernelModules = [ "dm-snapshot" ];
++  # boot.initrd.kernelModules = [ "dm-snapshot" ];
    boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
    # boot.resumeDevice = "/.swapfile";
    # boot.kernelParams = [ "resume_offset=resume_size" ];
    boot.extraModulePackages = [ ];
--  # boot.initrd.luks.devices = {
--  #   luksroot = {
--  #     # device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
--  #     device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
--  #     preLVM = true;
--  #     allowDiscards = true;
--  #   };
--  # };
-+  boot.initrd.luks.devices = {
-+    luksroot = {
-+      # device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
-+      device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
-+      preLVM = true;
-+      allowDiscards = true;
-+    };
-+  };
+-  boot.initrd.luks.devices = {
+-    luksroot = {
+-      # device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
+-      device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
+-      preLVM = true;
+-      allowDiscards = true;
+-    };
+-  };
++  # boot.initrd.luks.devices = {
++  #   luksroot = {
++  #     # device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
++  #     device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
++  #     preLVM = true;
++  #     allowDiscards = true;
++  #   };
++  # };
  
    fileSystems."/" =
      { 
