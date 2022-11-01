@@ -47,7 +47,7 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
-            imports = [(import ./home.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
+            imports = [(import ./hm.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
               ++ extra-hm-modules;
           };
         }
