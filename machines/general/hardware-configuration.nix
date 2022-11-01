@@ -16,8 +16,8 @@
   boot.extraModulePackages = [ ];
   boot.initrd.luks.devices = {
     luksroot = {
-      device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
-      # device = "/dev/disk/by-partlabel/LUKSROOT";
+      # device = "/dev/disk/by-uuid/48e1f8a2-7909-4132-afd8-e135d3d007be";
+      device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
       preLVM = true;
       allowDiscards = true;
     };
@@ -25,29 +25,29 @@
 
   fileSystems."/" =
     { 
-      device = "/dev/disk/by-uuid/1fa63c95-3076-487c-9eb0-f6c59ab290a1";
-      # device = "/dev/disk/by-label/root";
+      # device = "/dev/disk/by-uuid/1fa63c95-3076-487c-9eb0-f6c59ab290a1";
+      device = "/dev/disk/by-label/general-root";
       fsType = "ext4";
     };
 
   fileSystems."/home" =
     { 
-      device = "/dev/disk/by-uuid/1f3ddc85-9ce9-4b53-a545-45f9b6f065af";
-      # device = "/dev/disk/by-label/home";
+      # device = "/dev/disk/by-uuid/1f3ddc85-9ce9-4b53-a545-45f9b6f065af";
+      device = "/dev/disk/by-label/general-home";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     { 
-      device = "/dev/disk/by-uuid/13C6-DFD1";
-      # device = "/dev/disk/by-label/boot";
+      # device = "/dev/disk/by-uuid/13C6-DFD1";
+      device = "/dev/disk/by-label/ge-boot";
       fsType = "vfat";
     };
 
   swapDevices = [
     {
       device = "/.swapfile";
-      size = 1024*2; # swap size is 2GB
+      size = 1024*4; # swap size is 2GB
     }
   ];
 
