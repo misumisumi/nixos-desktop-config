@@ -12,9 +12,9 @@ Let's try NixOS!!
     - Patch to `flake.nix`.
     - If you want to restore, you can run `preprocess.sh --restore`
 2. Choice install target
-    - See [NixOS Installation Guide](##NixOS Installation Guide) if you use nix as linux distribution.
-    - See [Non NixOS Installation Guide](##Non NixOS Installation Guide) if you use nix as package and .dotfiles manager on other linux distribution.
-    - See [Nix-Darwin Installation Guide](##Nix-Darwin Installation Guide) if you use nix on macOS.
+    - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
+    - See [Non NixOS Installation Guide](#Non-NixOS-Installation-Guide) if you use nix as package and .dotfiles manager on other linux distribution.
+    - See [Nix-Darwin Installation Guide](#Nix-Darwin-Installation-Guide) if you use nix on macOS.
 
 ## NixOS Installation Guide
 This flakes currently has 2Disktop Environments.
