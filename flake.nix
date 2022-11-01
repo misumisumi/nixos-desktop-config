@@ -55,7 +55,7 @@
           inherit inputs overlay stateVersion user;
           inherit nixpkgs nur nixgl home-manager flakes private-conf;
         });
-      homeManagerConfiguration = ( 
+      homeConfigurations = (
         import ./hm {
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;

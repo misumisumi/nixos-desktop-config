@@ -10,6 +10,7 @@ let
   in
     home-manager.lib.hjomeManagerConfiguration {
       inherit pkgs;
+      extraSpecialArgs = { inherit hostname user stateVersion; };
       modules = [
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
