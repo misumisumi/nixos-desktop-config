@@ -16,6 +16,7 @@ Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
 --restore       Restore flake.nix
+--lvm-only      Install only using LVM (Default LVM on LUKS)
 EOF
   exit
 }
