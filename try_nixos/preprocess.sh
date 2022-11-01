@@ -73,12 +73,14 @@ setup_colors
 
 # script logic here
 if [ ${RUN} -eq 1 ]; then
-    patch ../flake.nix ./patch/commit.patch
+    patch ../flake.nix ./patch/flake.patch
+    patch ../apps/desktop/media/obs-studio.nix ./patch/obs-studio.patch
     msg "- Please README for next step."
 fi
 
 if [ ${RESTORE} -eq 1 ]; then
-    patch -R ../flake.nix ./patch/restore.patch
+    patch -R ../flake.nix ./patch/flake.patch
+    patch -R ../apps/desktop/media/obs-studio.nix ./patch/obs-studio.patch
     patch -R ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
     msg "- restored"
 fi

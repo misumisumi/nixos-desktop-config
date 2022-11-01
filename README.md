@@ -22,7 +22,7 @@ This repository is now working.
 ## NixOS Installation Guide
 This flakes currently has 2Disktop Environments.
   1. KDE Plasma5
-  2. QTile
+  2. QTile (Can not use in VM)
 All environments are configured with UEFI/systemd-boot.    
 You can boot from external disk (e.g USB, other SSD/HDD...) or launch in VM.     
 Details of the system configuration can be found in the [Appendix](#Appendix)    
