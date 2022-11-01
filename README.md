@@ -54,10 +54,10 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
     | /home | ext4        | general-home | `e2label /dev/XXX general-home`
 4. Mount the file systems.
   ```
-  mount /dev/<for-root> /mnt
-  mkdir -p /mnt/{boot,home}
-  mount /dev/<for-home> /mnt/home
-  mount /dev/<for-boot> /mnt/boot
+  sudo mount /dev/<for-root> /mnt
+  sudo mkdir -p /mnt/{boot,home}
+  sudo mount /dev/<for-home> /mnt/home
+  sudo mount /dev/<for-boot> /mnt/boot
   ```
 5. Install
   Now, available flake url is
@@ -65,22 +65,22 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
     - `qtile`
 
   ```
-  git clone https://github.com/Sumi-Sumi/nixos-config.git /mnt/etc/nixos/config
+  sudo git clone https://github.com/Sumi-Sumi/nixos-config.git /mnt/etc/nixos/config
 
   ------
   (optional: You use LVM only and want to generate UUID automatically.)
-  dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=$((1024*4))  # swap size is 4GB
-  chmod 600 /mnt/.swapfile
-  mkswap /mnt/.swapfile
-  swapon /mnt/.swapfile
-  nixos-generate-conifg --root /mnt
-  cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/config/machines/general/
+  sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=$((1024*4))  # swap size is 4GB
+  sudo chmod 600 /mnt/.swapfile
+  sudo mkswap /mnt/.swapfile
+  sudo swapon /mnt/.swapfile
+  sudo nixos-generate-conifg --root /mnt
+  sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/config/machines/general/
   ------
 
-  cd /mnt/etc/nixos/config
-  (LVM on LUKS): ./try_nixos/preprocess.sh
-  (LVM only): ./try_nixos/preprocess.sh --lvm-only
-  nixos-install --flake .#<flake-url>
+  sudo cd /mnt/etc/nixos/config
+  (LVM on LUKS): sudo ./try_nixos/preprocess.sh
+  (LVM only): sudo ./try_nixos/preprocess.sh --lvm-only
+  sudo nixos-install --flake .#<flake-url>
   ```
 
 ## Appendix
