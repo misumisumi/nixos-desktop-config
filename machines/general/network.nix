@@ -26,4 +26,5 @@
       enable = false;
     };
   };
+  system.nssModules = lib.mkForce [];
 }
