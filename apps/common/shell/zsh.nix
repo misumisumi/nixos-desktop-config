@@ -97,7 +97,7 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
         zinit ice wait"!0c"; zi load zdharma-continuum/history-search-multi-word
         zinit ice wait"!0b"; zi light zsh-users/zsh-autosuggestions
         zinit ice wait"!0a"; zi light zdharma-continuum/fast-syntax-highlighting
-        zinit ice wait"!0d"; zi load spwhitt/nix-zsh-completions
+        # zinit ice wait"!0d"; zi load spwhitt/nix-zsh-completions
         zinit ice wait"!1a"; zi load momo-lab/zsh-abbrev-alias
         zinit ice wait"!1b"; zi load chisui/zsh-nix-shell
         zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
