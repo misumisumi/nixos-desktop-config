@@ -20,10 +20,10 @@ Let's try NixOS!!
 This flakes currently has 2Disktop Environments.
   1. KDE Plasma5 (url: `.#plasma5`)
   2. QTile (url: `.#qtile`)
-All environments are configured with UEFI/systemd-boot.
-You can boot from external disk (e.g USB, other SSD/HDD...).
-Details of the system configuration can be found in the [Appendix](#Appendix)
-Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)
+All environments are configured with UEFI/systemd-boot.    
+You can boot from external disk (e.g USB, other SSD/HDD...).     
+Details of the system configuration can be found in the [Appendix](#Appendix)    
+Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)    
 You run `preprocess.sh --lvm-only` if you use only LVM.
 
 1. Get install Mmdia from [Official Site](https://nixos.org/download.html) and Launch live environments
