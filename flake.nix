@@ -36,6 +36,8 @@
           nur.overlay
           nixgl.overlay
           flakes.overlays.default
+          private-conf.overlays.default
+
           (final: prev: {
               python3Packages = prev.python3Packages.override {
                 overrides = pfinal: pprev: {
