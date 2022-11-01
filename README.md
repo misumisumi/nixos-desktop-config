@@ -36,15 +36,17 @@ You run `preprocess.sh --lvm-only` if you use only LVM.
     - Only LVM, see [LVM](https://wiki.archlinux.org/title/LVM).
     - You can edit `machines/general/hardware-configuration.nix` if you use other label or UUID.
 
-    | For | Partition Type | Partition label | Suggested size |
-    | /boot | EFI system partition (8300) | \- | 512MB |
-    | Using LVM on LUKS |  Linux LVM (8E00) | GENERALLUKSROOT | Remainder of the device |
+    | For               | Partition Type              | Partition label | Suggested size          |
+    | :-:               | :-:                         | :-:             | :-:                     |
+    | /boot             | EFI system partition (8300) | \-              | 512MB                   |
+    | Using LVM on LUKS | Linux LVM (8E00)            | GENERALLUKSROOT | Remainder of the device |
 
     - disk label
-    | For | file system | label | how to |
-    | /boot | vfat | ge-boot | `mlabel -i /dev/XXX ge-boot` |
-    | /root | ext4 | general-root | `e2label /dev/XXX general-root` |
-    | /home | ext4 | general-home | `e2label /dev/XXX general-home`
+    | For   | file system | label        | how to                          |
+    | :-:   | :-:         | :-:          | :-:                             |
+    | /boot | vfat        | ge-boot      | `mlabel -i /dev/XXX ge-boot`    |
+    | /root | ext4        | general-root | `e2label /dev/XXX general-root` |
+    | /home | ext4        | general-home | `e2label /dev/XXX general-home`
 4. Mount the file systems.
   ```
   mount /dev/<for-root> /mnt
