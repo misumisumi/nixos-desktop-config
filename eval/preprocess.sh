@@ -67,9 +67,10 @@ setup_colors
 
 # script logic here
 
-msg "- restore: ${RESTORE}"
 if [ ${RESTORE} -eq 1 ]; then
     patch ../flake.nix ./patch/restore.patch
+    msg "- restored"
 else
     patch ../flake.nix ./patch/commit.patch
+    msg "- Please README for next step."
 fi
