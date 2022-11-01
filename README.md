@@ -2,7 +2,7 @@
 
 This is configurations for Sumi-Sumi's machines.
 
-You can try nix environment using my configurations.
+You can try nix environment using my configurations.    
 Supported platform is NixOS, other linux distributions (e.g. ubuntu, archlinux...) and macOS.
 
 Let's try NixOS!!
@@ -11,8 +11,8 @@ Let's try NixOS!!
 This repository is now working.
 
 ## Common Installation Guide
-1. Run `try_nixos/preprocess.sh`
-    - Patch to `flake.nix`.
+1. Run `try_nixos/preprocess.sh` befor install.
+    - Remove my private repository
     - If you want to restore, you can run `try_nixos/preprocess.sh --restore`
 2. Choice install target
     - See [NixOS Installation Guide](#NixOS-Installation-Guide) if you use nix as linux distribution.
@@ -21,10 +21,10 @@ This repository is now working.
 
 ## NixOS Installation Guide
 This flakes currently has 2Disktop Environments.
-  1. KDE Plasma5 (url: `.#plasma5`)
-  2. QTile (url: `.#qtile`)
+  1. KDE Plasma5
+  2. QTile
 All environments are configured with UEFI/systemd-boot.    
-You can boot from external disk (e.g USB, other SSD/HDD...).     
+You can boot from external disk (e.g USB, other SSD/HDD...) or launch in VM.     
 Details of the system configuration can be found in the [Appendix](#Appendix)    
 Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)    
 You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
@@ -38,17 +38,18 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
     - How to LVM on LUKS, see [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS).
     - Only LVM, see [LVM](https://wiki.archlinux.org/title/LVM).
     - You can edit `machines/general/hardware-configuration.nix` if you use other label or UUID.
+      - You can generate `hardware-configuration.nix` automatically in next step.
 
     | For            | Partition Type              | Partition label | Suggested size          |
     | :-:            | :-:                         | :-:             | :-:                     |
-    | /boot          | EFI system partition (8300) | \-              | 512MB                   |
+    | /boot          | EFI system partition (ef00) | \-              | 512MB                   |
     | LUKS partition | Linux LVM (8E00)            | GENERALLUKSROOT | Remainder of the device |
 
     - disk label
 
     | For   | file system | label        | how to                          |
     | :-:   | :-:         | :-:          | :-:                             |
-    | /boot | vfat        | ge-boot      | `mlabel -i /dev/XXX ge-boot`    |
+    | /boot | vfat        | ge-boot      | `dosfslabel /dev/XXX ge-boot`    |
     | /root | ext4        | general-root | `e2label /dev/XXX general-root` |
     | /home | ext4        | general-home | `e2label /dev/XXX general-home`
 4. Mount the file systems.
@@ -59,6 +60,28 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   mount /dev/<for-boot> /mnt/boot
   ```
 5. Install
+  Now, available flake url is
+    - `plasma5`
+    - `qtile`
+
+  ```
+  git clone https://github.com/Sumi-Sumi/nixos-config.git /mnt/etc/nixos/config
+
+  ------
+  (optional: You use LVM only and want to generate UUID automatically.)
+  dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=$((1024*4))  # swap size is 4GB
+  chmod 600 /mnt/.swapfile
+  mkswap /mnt/.swapfile
+  swapon /mnt/.swapfile
+  nixos-generate-conifg --root /mnt
+  cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/config/machines/general/
+  ------
+
+  cd /mnt/etc/nixos/config
+  (LVM on LUKS): ./try_nixos/preprocess.sh
+  (LVM only): ./try_nixos/preprocess.sh --lvm-only
+  nixos-install --flake .#<flake-url>
+  ```
 
 ## Appendix
 ### System Compornents
