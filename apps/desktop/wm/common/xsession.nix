@@ -30,7 +30,7 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
   };
 
   xresources.properties = {
-    "Xft.dpi" = 110;
+    "Xft.dpi" = 100;
   };
 
   xsession = {
