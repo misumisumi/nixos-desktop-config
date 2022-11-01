@@ -18,6 +18,7 @@ Available options:
 --run           Generate configs for general machine
 --restore       Restore flake.nix
 --lvm-only      Install only using LVM (Default LVM on LUKS)
+--lvm-on-luks   Install using LVM-on-LUKS
 EOF
   exit
 }
@@ -51,6 +52,7 @@ parse_params() {
   RUN=0
   RESTORE=0
   LVMONLY=0
+  LVMONLUKS=0
 
   while :; do
     case "${1-}" in
@@ -59,6 +61,7 @@ parse_params() {
     --run) RUN=1 ;;
     --restore) RESTORE=1 ;; # example flag
     --lvm-only) LVMONLY=1 ;; # example flag
+    --lvm-on-luks) LVMONLUKS=1 ;; # example flag
     -?*) die "Unknown option: $1" ;;
     *) break ;;
     esac
@@ -81,10 +84,12 @@ fi
 if [ ${RESTORE} -eq 1 ]; then
     patch -R ../flake.nix ./patch/flake.patch
     patch -R ../apps/desktop/media/obs-studio.nix ./patch/obs-studio.patch
-    patch -R ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
     msg "- restored"
 fi
 
 if [ ${LVMONLY} -eq 1 ]; then
     patch ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
+fi
+if [ ${LVMONLUKS} -eq 1 ]; then
+    patch -R ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
 fi
