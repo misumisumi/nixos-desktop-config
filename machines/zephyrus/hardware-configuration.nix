@@ -20,8 +20,8 @@
       };
     };
     kernelModules = [ "kvm-amd" ];
-    boot.resumeDevice = "/.swapfile";
-    boot.kernelParams = [ "resume_offset=27234304" ];
+    resumeDevice = "/.swapfile";
+    kernelParams = [ "resume_offset=27234304" ];
   };
 
   fileSystems."/" =
