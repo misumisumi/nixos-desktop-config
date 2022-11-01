@@ -6,7 +6,9 @@
       videoDrivers = [
         "amdgpu"
         "radeon"
-        "nvidia"
+        "nouveau"      # If you use "nvidia", You must comment this.
+        "modesetting"  # If you use "nvidia", You must comment this.
+        # "nvidia"
       ];
     };
   };

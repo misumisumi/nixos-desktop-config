@@ -77,7 +77,7 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/config/machines/general/
   ------
 
-  sudo cd /mnt/etc/nixos/config/try_nixos
+  cd /mnt/etc/nixos/config/try_nixos
   (LVM on LUKS): sudo ./preprocess.sh
   (LVM only): sudo ./preprocess.sh --lvm-only
   cd ..
