@@ -4,6 +4,7 @@
   services = {
     xserver = {
       videoDrivers = [
+        "qxl"
         "amdgpu"
         "radeon"
         "nouveau"      # If you use "nvidia", You must comment this.
