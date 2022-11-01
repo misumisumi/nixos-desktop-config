@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-with pkgs; [
+pkgs: with pkgs; [
   nix-prefetch      # Prefetch checkers
   nix-prefetch-git
   nvfetcher         # Tool of automate nix package updates

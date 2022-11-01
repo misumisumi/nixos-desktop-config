@@ -13,8 +13,8 @@
             (import ../../apps/desktop/wm/qtile);
 
   home = {
-    packages = (import ../../apps/common/pkgs) ++
-               (import ../../apps/desktop/pkgs);
+    packages = (import ../../apps/common/pkgs) pkgs ++
+               (import ../../apps/desktop/pkgs) pkgs;
   };
 
   xresources = {

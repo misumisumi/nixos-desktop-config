@@ -11,8 +11,8 @@
             (import ../../apps/desktop/wm/${wm});
 
   home = {
-    packages = (import ../../apps/common/pkgs) ++
-               (import ../../apps/desktop/pkgs);
+    packages = (import ../../apps/common/pkgs) pkgs ++
+               (import ../../apps/desktop/pkgs) pkgs;
   };
 
   xresources = {

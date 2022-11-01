@@ -1,8 +1,7 @@
 /*
 My need packages.
 */
-{ pkgs, ... }:
-let
+pkgs: let
   tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
       inherit (pkgs.texlive) scheme-small collection-langjapanese;
   });
