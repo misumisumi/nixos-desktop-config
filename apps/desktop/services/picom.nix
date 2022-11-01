@@ -6,7 +6,7 @@ Picom (compositor for Xorg) conf
 {
   services = {
     picom = {
-      enable = if "${hostname}" == "vm" then false else true;
+      enable = if "${hostname}" == "general" then false else true;
       backend = "glx";
       experimentalBackends = true;  # enable blur and rounded corner
       vSync = false;  # When vSync=true, Picom have problem if you use Nvidia 
@@ -37,7 +37,7 @@ Picom (compositor for Xorg) conf
         "100:name = 'i3lock' && focused"
         "100:name = 'i3lock' && !focused"
       ];
-       
+
       shadow = true;
       shadowExclude = [
         "name = 'Notification'"
