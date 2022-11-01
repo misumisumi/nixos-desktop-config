@@ -4,20 +4,20 @@ let
   choiceSystem = x: if ( x == "dummy" ) then "aarch64-linux" else "x86_64-linux";
 
   settings = { hostname, user }:
-    let
-      system = choiceSystem hostname;
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-      home-manager.lib.hjomeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          (overlay { inherit inputs nixpkgs; })
-          nur.nixosModules.nur
+  let
+    system = choiceSystem hostname;
+    pkgs = nixpkgs.legacyPackages.${system};
+  in
+    home-manager.lib.hjomeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        (overlay { inherit inputs nixpkgs; })
+        nur.nixosModules.nur
 
-          ./hm.nix
-          ./${hostname}
-        ];
-      };
+        ./hm.nix
+        ./${hostname}
+      ];
+    };
 in
 {
   arch = settings { hostname = "arch"; inherit user; };
