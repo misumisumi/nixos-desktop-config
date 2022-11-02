@@ -28,7 +28,7 @@ let
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
             imports = [(import ../hm/hm.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
-              ++ optional hostname != "general" [ pModules.lab-network ];
+              ++ optional hostname != "general" [ pModules.my-network ];
           };
         }
       ] ++ optionals hostname != "general" [ pModules.ssh_my_conf pModules.put_wallpapers ];
