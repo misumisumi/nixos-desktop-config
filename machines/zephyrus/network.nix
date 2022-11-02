@@ -27,7 +27,7 @@
       networks = {
         "10-wireless" = {
           name = "wlp2s0";
-          dns = [ "192.168.1.1" ];
+          DHCP = "yes";
           address = [ "192.168.1.50" ];
           gateway = [ "192.168.1.1" ];
         };
