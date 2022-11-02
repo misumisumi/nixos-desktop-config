@@ -4,12 +4,9 @@ NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard f
 However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 */
 { config, lib, hostname, pkgs, ... }:
-let
-  use_my = if hostname != "general" then true else false;
-  use_private_module = if use_my then [] else [ ./nixosWallpaper.nix ];
-in
-{
-  imports = use_private_module;
+
+with lib; {
+  imports = optional hostname != "general" [ ./nixosWallpaper.nix ];
   home = {
     packages = with pkgs; [ qtile libinput-gestures ];
   };

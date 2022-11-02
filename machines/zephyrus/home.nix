@@ -9,7 +9,6 @@
             (import ../../apps/common/shell) ++
             (import ../../apps/common/ssh) ++
             (import ../../apps/desktop) ++
-            (import ../../apps/desktop/theme) ++
             (import ../../apps/desktop/wm/qtile);
 
   home = {

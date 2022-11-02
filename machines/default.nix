@@ -1,16 +1,14 @@
 { inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
 
 let
+  lib = nixpkgs.lib;
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
 
   settings = { hostname, user, wm ? "plasma5" }:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
-    pModules = if hostname != "general" then private-conf.nixosModules else null;
-    extra-modules = if hostname != "general" then [ pModules.lab-network ] else [];
-    extra-hm-modules = if hostname != "general" then [ pModules.ssh_my_conf pModules.put_wallpapers ] else [];
   in
-    nixpkgs.lib.nixosSystem {
+    with lib; nixosSystem {
       system = choiceSystem hostname;
       specialArgs = { inherit hostname inputs user stateVersion wm; }; # specialArgs give some args to modules
       modules = [
@@ -30,10 +28,10 @@ let
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
             imports = [(import ../hm/hm.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
-              ++ extra-hm-modules;
+              ++ optional hostname != "general" [ pModules.lab-network ];
           };
         }
-      ] ++ extra-modules;
+      ] ++ optionals hostname != "general" [ pModules.ssh_my_conf pModules.put_wallpapers ];
     };
 in
 {
