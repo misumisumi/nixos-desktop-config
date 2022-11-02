@@ -1,6 +1,6 @@
 # Home-manager configuration for general
 
-{ config, pkgs, ... }:
+{ lib, hostname, config, pkgs, ... }:
 
 {
   imports = (import ../../apps/common/cli) ++
@@ -8,7 +8,7 @@
             (import ../../apps/common/neovim) ++
             (import ../../apps/common/shell) ++
             (import ../../apps/common/ssh) ++
-            (import ../../apps/desktop) ++
+            (import ../../apps/desktop { inherit lib hostname; }) ++
             (import ../../apps/desktop/wm/qtile);
 
   home = {

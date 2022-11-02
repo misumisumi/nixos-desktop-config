@@ -28,10 +28,10 @@ let
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
             imports = [(import ../hm/hm.nix)] ++ [(import hostConf)]  # Common home conf + Each machine conf
-              ++ optional hostname != "general" [ private-conf.my-network ];
+              ++ optionals (hostname != "general") (with private-conf.nixosModules; [ ssh_my_conf put_wallpapers ]);
           };
         }
-      ] ++ optionals hostname != "general" [ private-conf.ssh_my_conf private-conf.put_wallpapers ];
+      ] ++ (optional (hostname != "general") private-conf.nixosModules.my-network);
     };
 in
 {
