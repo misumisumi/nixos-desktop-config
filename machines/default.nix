@@ -38,7 +38,7 @@ if isGeneral then
 {
   plasma5 = settings { hostname = "general"; user = "general"; wm = "plasma5"; };
   qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
-  minimal = settings { hostname = "general"; inherit username; };
+  minimal = settings { hostname = "general"; inherit user; };
 }
 else
 {
