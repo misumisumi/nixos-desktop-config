@@ -1,5 +1,3 @@
-# Home-manager configuration for general
-
 { lib, hostname, config, pkgs, ... }:
 
 {

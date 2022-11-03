@@ -1,5 +1,3 @@
-# System configuration for minimal
-
 { lib, hostname, config, pkgs, ... }:
 
 {
