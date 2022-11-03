@@ -13,7 +13,7 @@
   
   nix = {
     extraOptions = ''
-      binary-caches-parallel-connections = 24
+      binary-caches-parallel-connections = 4
     '';
   };
 }

@@ -1,4 +1,4 @@
-{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
 
 let
   lib = nixpkgs.lib;
@@ -34,6 +34,13 @@ let
       ] ++ (optional (hostname != "general") private-conf.nixosModules.my-network);
     };
 in
+if isGeneral then
+{
+  plasma5 = settings { hostname = "general"; user = "general"; wm = "plasma5"; };
+  qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
+  minimal = settings { hostname = "general"; inherit username; };
+}
+else
 {
   # aegis = settings { hostname="aegis"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
@@ -43,6 +50,4 @@ in
   # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   zephyrus = settings { hostname = "zephyrus"; inherit user; };
-  plasma5 = settings { hostname = "general"; user = "general"; wm = "plasma5"; };
-  qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
 }
