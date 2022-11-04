@@ -30,7 +30,7 @@ All environments are configured with UEFI/systemd-boot.
 You can boot from external disk (e.g USB, other SSD/HDD...) or launch in VM.     
 Details of the system configuration can be found in the [Appendix](#Appendix)    
 Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)    
-You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
+You run `preprocess/preprocess.sh --lvm-only` if you use only LVM.
 
 1. Get install Mmdia from [Official Site](https://nixos.org/download.html) and Launch live environments
 2. Check network connection
@@ -66,12 +66,13 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   Now, available flake url is
     - `plasma5`
     - `qtile`
+  You can check `nix flake show` in `./machines`. (flake.nix of root is not available because this is include my private repository.)
 
   ```
   sudo git clone https://github.com/Sumi-Sumi/nixos-config.git /mnt/etc/nixos/config
 
   ------
-  (optional: You use LVM only and want to generate UUID automatically.)
+  (optional: You want to generate UUID and hardware conf automatically.)
   sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=$((1024*4))  # swap size is 4GB
   sudo chmod 600 /mnt/.swapfile
   sudo mkswap /mnt/.swapfile
@@ -80,10 +81,9 @@ You run `try_nixos/preprocess.sh --lvm-only` if you use only LVM.
   sudo cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/config/machines/general/
   ------
 
-  cd /mnt/etc/nixos/config/try_nixos
-  (LVM on LUKS): sudo ./preprocess.sh --run
-  (LVM only): sudo ./preprocess.sh --run --lvm-only
-  cd ..
+  cd /mnt/etc/nixos/config/preprocess
+  (LVM only): sudo ./preprocess.sh --lvm-only
+  cd ../machines
   sudo nix flake update
   sudo nixos-install --flake .#<flake-url>
   ```
