@@ -30,7 +30,7 @@ All environments are configured with UEFI/systemd-boot.
 You can boot from external disk (e.g USB, other SSD/HDD...) or launch in VM.     
 Details of the system configuration can be found in the [Appendix](#Appendix)    
 Now, I assume using [LVM on LUKS](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)    
-You run `preprocess/preprocess.sh --lvm-only` if you use only LVM.
+You run `preprocess.sh --lvm-only` in `preprocess` if you use only LVM.
 
 1. Get install Mmdia from [Official Site](https://nixos.org/download.html) and Launch live environments
 2. Check network connection
