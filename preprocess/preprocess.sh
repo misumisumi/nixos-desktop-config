@@ -15,8 +15,6 @@ Available options:
 
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
---run           Generate configs for general machine
---restore       Restore flake.nix
 --lvm-only      Install only using LVM (Default LVM on LUKS)
 --lvm-on-luks   Install using LVM-on-LUKS
 EOF
@@ -49,8 +47,6 @@ die() {
 
 parse_params() {
   # default values of variables set from params
-  RUN=0
-  RESTORE=0
   LVMONLY=0
   LVMONLUKS=0
 
@@ -58,8 +54,6 @@ parse_params() {
     case "${1-}" in
     -h | --help) usage ;;
     -v | --verbose) set -x ;;
-    --run) RUN=1 ;;
-    --restore) RESTORE=1 ;; # example flag
     --lvm-only) LVMONLY=1 ;; # example flag
     --lvm-on-luks) LVMONLUKS=1 ;; # example flag
     -?*) die "Unknown option: $1" ;;
@@ -75,18 +69,6 @@ parse_params "$@"
 setup_colors
 
 # script logic here
-if [ ${RUN} -eq 1 ]; then
-    patch ../flake.nix ./patch/flake.patch
-    patch ../apps/desktop/media/obs-studio.nix ./patch/obs-studio.patch
-    msg "- Please README for next step."
-fi
-
-if [ ${RESTORE} -eq 1 ]; then
-    patch -R ../flake.nix ./patch/flake.patch
-    patch -R ../apps/desktop/media/obs-studio.nix ./patch/obs-studio.patch
-    msg "- restored"
-fi
-
 if [ ${LVMONLY} -eq 1 ]; then
     patch ../machines/general/hardware-configuration.nix ./patch/general-hardware-conf.patch
 fi
