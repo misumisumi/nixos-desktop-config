@@ -26,6 +26,7 @@ libvirt conf
     libvirtd = {
       enable = true;                          # Virtual drivers
       qemu = {
+        ovmf.packages = with pkgs; [ OVMFFull ];
         verbatimConfig = ''
           nvram = [ 
             "${pkgs.OVMFFull}/FV/OVMF.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
@@ -39,8 +40,6 @@ libvirt conf
 
   environment = {
     systemPackages = with pkgs; [
-      qemu
-      OVMFFull
       virt-manager
       looking-glass-client
     ];
