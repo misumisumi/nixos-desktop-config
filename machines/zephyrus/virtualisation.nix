@@ -2,7 +2,7 @@
   virtualisation = {
     vfio = {
       enable = true;
-      IOMMUType = "both";
+      IOMMUType = "amd";
       blacklistNvidia = false;
       disableEFIfb = false;
       ignoreMSRs = true;

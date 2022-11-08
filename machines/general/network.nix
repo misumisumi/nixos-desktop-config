@@ -1,4 +1,4 @@
-{ hostname, lib, pkgs, ... }:
+{ hostname, ... }:
 
 {
   networking = {
