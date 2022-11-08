@@ -68,5 +68,7 @@ with pkgs; [
 
   copyq                           # Clipboard Manager
   # sidequest                     # Meta Quest side loading tool
+
+  remmina                         # Remote desktop client
 ]
 
