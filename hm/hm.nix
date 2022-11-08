@@ -1,19 +1,3 @@
-#
-#  General Home-manager configuration
-#
-#  flake.nix
-#   ├─ ./hosts
-#   │   └─ home.nix *
-#   └─ ./apps
-#       └─ ./common
-#           ├─ ./cui
-#           │   └─ default.nix
-#           ├─ ./ide
-#           │   └─ default.nix
-#           └─ ./ide
-#               └─ default.nix
-#
-
 { config, lib, pkgs, user, stateVersion, ... }:
 
 { 
@@ -68,8 +52,7 @@
       extraConfig = {
         XDG_GAME_DIR = "${config.home.homeDirectory}/Game";
         XDG_BIN_DIR = "${config.home.homeDirectory}/bin";
-        XDG_3DMODELS_DIR = "${config.home.homeDirectory}/3dModels";
-        XDG_WORK_DIR = "${config.home.homeDirectory}/workspace";
+        XDG_WORKSPACE_DIR = "${config.home.homeDirectory}/workspace";
       };
     };
   };
