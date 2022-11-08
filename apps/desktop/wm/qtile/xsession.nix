@@ -6,7 +6,7 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 { config, lib, hostname, pkgs, ... }:
 
 with lib; {
-  imports = optional (hostname == "general") ./nixosWallpaper.nix;
+  imports = optional (hostname == "general") ../../../../modules/nixosWallpaper.nix;
   home = {
     packages = with pkgs; [ qtile libinput-gestures ];
   };
