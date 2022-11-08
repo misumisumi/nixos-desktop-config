@@ -9,7 +9,7 @@
     ../common/printer.nix
     ../../apps/desktop/wm/${wm}/xserver.nix
   ] ++
-  (import ../../apps/common/virtualisation);
+  (import ../../apps/virtualisation);
   
   nix = {
     extraOptions = ''
