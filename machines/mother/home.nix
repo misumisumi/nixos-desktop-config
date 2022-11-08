@@ -1,14 +1,20 @@
-#
-# Home-manager configuration for mother
-#
-# flake.nix
-
 { pkgs, ... }:
+
 {
-  imports = [
-    ../../apps/desktop/wm/home.nix
-  ];
+  imports = (import ../../apps/common/cli) ++
+            (import ../../apps/common/git) ++
+            (import ../../apps/common/neovim) ++
+            (import ../../apps/common/shell) ++
+            (import ../../apps/desktop { inherit lib hostname; }) ++
+            (import ../../apps/desktop/wm/qtile);
+
   home = {
-    package = with pkgs; [];
+    packages = (import ../../apps/common/pkgs) pkgs ++
+               (import ../../apps/desktop/pkgs) pkgs;
   };
+
+  xresources = {
+    extraConfig = "Xft.dpi:100";
+  };
+
 }
