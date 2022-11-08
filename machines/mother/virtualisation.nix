@@ -15,5 +15,6 @@
       pageSize = "1G";
       numPages = 16;
     };
+    scream.enable = true;
   };
 }

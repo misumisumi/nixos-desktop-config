@@ -54,6 +54,7 @@ in {
         description = "Number of huge pages to allocate at boot.";
       };
     };
+    scream.enable = mkEnableOption "Scream";
   };
 
   config.systemd.tmpfiles.rules =
@@ -64,4 +65,23 @@ in {
     "hugepagesz=${cfg.hugepages.pageSize}"
     "hugepages=${toString cfg.hugepages.numPages}"
   ];
+  config = mkIf cfg.scream.enable {
+    systemd.user = {
+      services.scream = {
+        description = "Scream Receiver (For windows VM)";
+        wantedBy = [ "default.target" ];
+        wants = [ "network-online.target" "pulseaudio.service" ];
+        environment.IS_SERVICE = "1";
+        unitConfig = {
+          StartLimitInterval = 200;
+          StartLimitBurst = 2;
+        };
+        serviceConfig = {
+          Type="simple";
+          ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
+          Restart="on-failure";
+        };
+      };
+    };
+  };
 }

@@ -6,23 +6,6 @@ Please read each description
 
 {
   systemd.user.services = {
-    scream = {
-      Unit = {
-        Description = "Scream Receiver (For windows VM)";
-        After = [ "network-online.target" "pulseaudio.service" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
-        Restart = "noon-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
-
     polkit-gnome-authentication-agent-1 = {
       Unit = {
         Description = "polkit-gnome-authentication-agent-1";
