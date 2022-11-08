@@ -1,23 +1,34 @@
-{ pkgs, ... }:
+{ hostname, lib, pkgs, ... }:
 
 {
+  imports = [
+    ../common/network.nix
+  ];
   networking = {
-    useDHCP = false;
-    bridges = {
-      interfaces = [ "" ];
+    hostName = "${hostname}";
+  };
+
+  systemd = {
+    network = {
+      lab-network.enable = true;
+      netdevs = {
+        "br0".netdevConfig = {
+          Kind = "bridge";
+          Name = "br0";
+        };
+      };
+      networks = {
+        "10-wired" = {
+          name = "enp4s0";
+          bridge = [ "br0" "univ" ];
+        };
+        "20-br0" = {
+          name = "br0";
+          dns = [ "192.168.1.40" "127.0.0.1" ];
+          address = [ "192.168.1.30" ];
+          gateway = [ "192.168.1.1" ];
+        };
+      };
     };
   };
 }
-#  networking.interfaces.enp8s0.useDHCP = true;
-#  networking.interfaces.br0.useDHCP = false;
-#  networking.bridges = {
-#    "br0" = {
-#      interfaces = [ "enp8s0" ];
-#    };
-#  };
-# networking.interfaces.br0.ipv4.addresses = [ {
-#   address = "10.10.10.11";
-#   prefixLength = 24;
-# } ];
-# networking.defaultGateway = "10.10.10.1";
-# networking.nameservers = ["10.10.10.1" "8.8.8.8"];
