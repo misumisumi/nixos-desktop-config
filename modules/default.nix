@@ -1,4 +1,4 @@
 [
   ./vfio.nix
-  ./virtualization.nix
+  ./virtualisation.nix
 ]
