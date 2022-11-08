@@ -20,6 +20,8 @@ let
         flakes.nixosModules.asus-notify
         flakes.nixosModules.supergfxd
 
+        ../modules
+
         (./. + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
