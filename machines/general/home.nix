@@ -1,4 +1,4 @@
-{ pkgs, wm, ... }:
+{ lib, hostname, pkgs, wm, ... }:
 
 {
   imports = (import ../../apps/common/cli) ++
