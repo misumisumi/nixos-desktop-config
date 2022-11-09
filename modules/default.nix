@@ -1,4 +1,6 @@
-[
-  ./vfio.nix
-  ./virtualisation.nix
-]
+{
+  imports = [
+    ./vfio.nix
+    ./virtualisation.nix
+  ];
+}

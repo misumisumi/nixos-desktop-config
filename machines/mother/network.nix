@@ -1,4 +1,4 @@
-{ hostname, ... }:
+{ lib, hostname, ... }:
 
 {
   imports = [
