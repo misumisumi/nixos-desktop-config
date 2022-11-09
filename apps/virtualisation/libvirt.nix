@@ -38,10 +38,12 @@ libvirt conf
     spiceUSBRedirection.enable = true;        # USB passthrough
     onBoot = "ignore";
     onShutdown = "shutdown";
-    looking-glass = {
-      user = "${user}";
-      group = "kvm";
-      mode = "666";
+    sharedMemoryFiles = {
+      looking-glass = {
+        user = "${user}";
+        group = "kvm";
+        mode = "666";
+      };
     };
   };
 
