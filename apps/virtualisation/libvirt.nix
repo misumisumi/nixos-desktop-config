@@ -25,6 +25,8 @@ libvirt conf
   virtualisation = {
     libvirtd = {
       enable = true;                          # Virtual drivers
+      onBoot = "ignore";
+      onShutdown = "shutdown";
       qemu = {
         ovmf.packages = with pkgs; [ OVMFFull ];
         verbatimConfig = ''
@@ -36,8 +38,6 @@ libvirt conf
       };
     };
     spiceUSBRedirection.enable = true;        # USB passthrough
-    onBoot = "ignore";
-    onShutdown = "shutdown";
     sharedMemoryFiles = {
       looking-glass = {
         user = "${user}";
