@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   services = {
     xserver = {
