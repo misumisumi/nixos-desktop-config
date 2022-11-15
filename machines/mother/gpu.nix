@@ -4,8 +4,6 @@
       videoDrivers = [
         "nvidia"
       ];
-<<<<<<< HEAD
-=======
       deviceSection = ''
         Identifier     "Device0"
         Driver         "nvidia"
@@ -38,7 +36,6 @@
             Depth       24
         EndSubSection
       '';
->>>>>>> 58cd9bc (add gpu conf)
     };
   };
 
