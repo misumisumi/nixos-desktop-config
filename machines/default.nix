@@ -46,7 +46,7 @@ else
 {
   # aegis = settings { hostname="aegis"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  # mother = settings { hostname="mother"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
+  mother = settings { hostname="mother"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # yandere = settings { hostname="yandere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
   # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
