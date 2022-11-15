@@ -28,13 +28,16 @@ libvirt conf
       onBoot = "ignore";
       onShutdown = "shutdown";
       qemu = {
-        ovmf.packages = with pkgs; [ OVMFFull ];
-        verbatimConfig = ''
-          nvram = [ 
-            "${pkgs.OVMFFull}/FV/OVMF.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
-            "${pkgs.OVMFFull}/FV/OVMF.secboot.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
-          ]
-        '';
+        ovmf = {
+          enable = true;
+          packages = with pkgs; [ OVMFFull ];
+        };
+        # verbatimConfig = ''
+        #   nvram = [ 
+        #     "${pkgs.OVMFFull}/FV/OVMF.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
+        #     "${pkgs.OVMFFull}/FV/OVMF.secboot.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
+        #   ]
+        # '';
       };
     };
     spiceUSBRedirection.enable = true;        # USB passthrough
