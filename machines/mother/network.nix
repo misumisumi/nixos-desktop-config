@@ -10,7 +10,6 @@
 
   systemd = {
     network = {
-      lab-network.enable = true;
       netdevs = {
         "br0".netdevConfig = {
           Kind = "bridge";
@@ -20,7 +19,7 @@
       networks = {
         "10-wired" = {
           name = "enp4s0";
-          bridge = [ "br0" "univ" ];
+          bridge = [ "br0" ];
         };
         "20-br0" = {
           name = "br0";
