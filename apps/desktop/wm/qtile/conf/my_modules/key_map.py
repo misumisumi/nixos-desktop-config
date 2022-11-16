@@ -10,63 +10,68 @@ from libqtile.log_utils import logger
 
 
 keys = [
-    # Switch between windows
+    Key([PARAM.mod, 'shift'], 'Return', lazy.spawn(PARAM.terminal), desc='Launch terminal'),
+    # Operate window in workspace
     Key([PARAM.mod], 'h', lazy.layout.left(), desc='Move focus to left'),
     Key([PARAM.mod], 'l', lazy.layout.right(), desc='Move focus to right'),
     Key([PARAM.mod], 'j', lazy.layout.down(), desc='Move focus down'),
     Key([PARAM.mod], 'k', lazy.layout.up(), desc='Move focus up'),
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([PARAM.mod, 'shift'], 'h',
-        lazy.layout.shuffle_left(),
-        # lazy.layout.move_left(),
-        desc='Move window to the left'),
-    Key([PARAM.mod, 'shift'], 'l',
-        lazy.layout.shuffle_right(),
-        # lazy.layout.move_right(),
-        desc='Move window to the right'),
-    Key([PARAM.mod, 'shift'], 'j', 
-        lazy.layout.shuffle_down(),
-        lazy.layout.section_down(),
-        desc='Move window down'),
-    Key([PARAM.mod, 'shift'], 'k',
-        lazy.layout.shuffle_up(),
-        lazy.layout.section_up(),
-        desc='Move window up'),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([PARAM.mod, 'control'], 'h',
-        focus_previous_group(),
-        keep_pinp(),
-        desc='focus prev group'),
-    Key([PARAM.mod, 'control'], 'l',
-        focus_next_group(),
-        keep_pinp(),
-        desc='focus next group'),
-
-    Key([PARAM.mod, 'shift', 'control'], 'h', 
-        window_to_previous_group(), keep_pinp(), desc='win to prev group'),
-    Key([PARAM.mod, 'shift', 'control'], 'l',
-        window_to_next_group(), keep_pinp(), desc='win to next group'),
-
+    Key([PARAM.mod, 'shift'], 'h', lazy.layout.shuffle_left(), desc='Move window to the left'),
+    Key([PARAM.mod, 'shift'], 'l', lazy.layout.shuffle_right(), desc='Move window to the right'),
+    Key([PARAM.mod, 'shift'], 'j', lazy.layout.shuffle_down(), lazy.layout.section_down(), desc='Move window down'),
+    Key([PARAM.mod, 'shift'], 'k', lazy.layout.shuffle_up(), lazy.layout.section_up(), desc='Move window up'),
+    Key([PARAM.mod, 'control'], 'c', lazy.window.kill(), desc='Kill focused window'),
+    # Operate floating window
+    Key([PARAM.mod], "period", float_cycle(forward=True)),
+    Key([PARAM.mod], "comma", float_cycle(forward=True, focus=True)),
+    # Operate window between workspaces
+    Key([PARAM.mod, 'control'], 'h', focus_previous_group(), keep_pinp(), desc='focus prev group'),
+    Key([PARAM.mod, 'control'], 'l', focus_next_group(), keep_pinp(), desc='focus next group'),
+    Key([PARAM.mod, 'control'], 'j', window_to_previous_group(), keep_pinp(), desc='window to prev group'),
+    Key([PARAM.mod, 'control'], 'k', window_to_next_group(), keep_pinp(), desc='window to next group'),
+    # Operate screen
     Key([PARAM.mod], 'n', focus_cycle_screen(),  desc='focus next screen'),
-    Key([PARAM.mod], 'o', focus_cycle_screen(backward=True),  desc='focus next screen'),
-    # Key([PARAM.mod, 'shift'], 'p', window_to_previous_screen(), keep_pinp()),
+    Key([PARAM.mod], 'p', focus_cycle_screen(backward=True),  desc='focus prev screen'),
     Key([PARAM.mod, 'shift'], 'n', move_cycle_screen(), keep_pinp(), update_pinp_screen_idx()),
-    Key([PARAM.mod, 'shift'], 'o', move_cycle_screen(backward=True), keep_pinp(), update_pinp_screen_idx()),
-
+    Key([PARAM.mod, 'shift'], 'p', move_cycle_screen(backward=True), keep_pinp(), update_pinp_screen_idx()),
     Key([PARAM.mod, 'shift'], 'd', to_from_display_tablet(), keep_pinp(), update_pinp_screen_idx()),
-
-    # Key([PARAM.mod, 'shift'], 't', move_display_tablet(), keep_pinp()),
-
+    # Toggle Float and FullScreen
     Key([PARAM.mod], 'space', lazy.window.toggle_maximize()),
     Key([PARAM.mod, 'shift'], 'space', lazy.window.toggle_minimize()),
-
     Key([PARAM.mod], 'f', lazy.window.toggle_fullscreen()),
     Key([PARAM.mod, 'shift'], 'f', lazy.window.toggle_floating()),
-
+    # Exit and Reload
+    Key([PARAM.mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
+    Key([PARAM.mod, 'control'], 'q', lazy.shutdown(), desc='Shutdown Qtile'),
+    # Launch rofi
+    Key([PARAM.mod], 'm', lazy.spawn('rofi -combi-modi window,drun -show combi'), desc='show rofi'),
+    Key([PARAM.mod, 'shift'], 'm', lazy.spawn('rofi -show run'), desc='run rofi as shell mode'),
+    Key([PARAM.mod, 'control'], 'm', lazy.spawn('rofi -show mower-menu -modi mower-menu:rofi-mower-menu'), desc='show mower-menu'),
+    # Lock screen
+    Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -t -i {}'.format(PARAM.screen_saver)), desc='lock PC'),
+    # Screenshot
+    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(str(PARAM.capture_path)))),
+    Key([PARAM.mod], 'Print', capture_screen(is_clipboard=False)),
+    Key([PARAM.mod, 'shift'], 'Print', capture_screen(is_clipboard=True)),
+    # Toggle copyq and calculator
+    Key([PARAM.mod], 's', lazy.spawn('copyq toggle')),
+    Key([PARAM.mod, 'shift'], 's', lazy.spawn('rofi -show calc -modi calc -no-show-match -no-sort')),
+    # Function keys
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +5%')),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -5%')),
+    Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute @DEFAULT_SINK@ toggle')),
+    Key([], 'XF86AudioMicMute', lazy.spawn('pactl set-source-mute @DEFAULT_SOURCE@ toggle')),
+    Key([], 'XF86AudioPlay', lazy.spawn('playerctl play-pause')),
+    Key([], 'XF86AudioPause', lazy.spawn('playerctl play-pause')),
+    Key([], 'XF86AudioNext', lazy.spawn('playerctl next')),
+    Key([], 'XF86AudioPrev', lazy.spawn('playerctl previous')),
+    Key([], 'XF86MonBrightnessUp', lazy.spawn('light -A 5')),
+    Key([], 'XF86MonBrightnessDown', lazy.spawn('light -U 5')),
+    Key([], 'XF86KbdBrightnessUp', lazy.spawn('light -Ars {} 1'.format('sysfs/leds/asus::kbd_backlight'))),
+    Key([], 'XF86KbdBrightnessDown', lazy.spawn('light -Urs {} 1'.format('sysfs/leds/asus::kbd_backlight'))),
+    Key([], 'XF86Launch1', lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
+    Key([], 'XF86Launch4', lazy.spawn('asusctl profile -n')),
     # Attach Screen
-    # Key([PARAM.mod], 'a', attach_screen()),
     KeyChord([PARAM.mod], 'a', [
         Key([], 'k', attach_screen('above')),
         Key([], 'j', attach_screen('below')),
@@ -77,49 +82,6 @@ keys = [
         ],
         name='attach'
     ),
-
-    # Change other layout
-    Key([PARAM.mod], 'Tab', lazy.next_layout(),
-        desc='Move window focus to other window'),
-
-    Key([PARAM.mod], 's', lazy.layout.toggle_split(), desc='Launch terminal'),
-    Key([PARAM.mod, 'shift'], 'Return', lazy.spawn(PARAM.terminal), desc='Launch terminal'),
-
-    Key([PARAM.mod, 'control'], 'q', lazy.window.kill(), desc='Kill focused window'),
-
-    Key([PARAM.mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
-    Key([PARAM.mod, 'control'], 'e', lazy.shutdown(), desc='Shutdown Qtile'),
-
-    Key([PARAM.mod], 'p', lazy.spawn('rofi -combi-modi window,drun -show combi'), desc='show rofi'),
-    Key([PARAM.mod, 'shift'], 'p', lazy.spawn('rofi -show run'), desc='run rofi script PARAM.mode'),
-    Key([PARAM.mod, 'control'], 'p', lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc='show power-menu'),
-
-    Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -t -i {}'.format(PARAM.screen_saver)), desc='lock PC'),
-
-    Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(str(PARAM.capture_path)))),
-    Key([PARAM.mod], 'Print', capture_screen(is_clipboard=False)),
-    Key([PARAM.mod, 'shift'], 'Print', capture_screen(is_clipboard=True)),
-    Key([PARAM.mod], "period", float_cycle(forward=True)),
-    Key([PARAM.mod], "comma", float_cycle(forward=True, focus=True)),
-
-    Key([PARAM.mod], 'c', lazy.spawn('copyq toggle')),
-    Key([PARAM.mod, 'shift'], 'c', lazy.spawn('rofi -show calc -modi calc -no-show-match -no-sort')),
-
-    Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +5%')),
-    Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -5%')),
-    Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute @DEFAULT_SINK@ toggle')),
-    Key([], 'XF86AudioMicMute', lazy.spawn('pactl set-source-mute @DEFAULT_SOURCE@ toggle')),
-    Key([], 'XF86AudioPause', lazy.spawn('playerctl play-pause')),
-    Key([], 'XF86AudioPlay', lazy.spawn('playerctl play-pause')),
-    Key([], 'XF86AudioNext', lazy.spawn('playerctl next')),
-    Key([], 'XF86AudioPrev', lazy.spawn('playerctl previous')),
-    Key([], 'XF86MonBrightnessUp', lazy.spawn('light -A 5')),
-    Key([], 'XF86MonBrightnessDown', lazy.spawn('light -U 5')),
-    Key([], 'XF86KbdBrightnessUp', lazy.spawn('light -Ars {} 1'.format('sysfs/leds/asus::kbd_backlight'))),
-    Key([], 'XF86KbdBrightnessDown', lazy.spawn('light -Urs {} 1'.format('sysfs/leds/asus::kbd_backlight'))),
-    Key([], 'XF86Launch1', lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
-    Key([], 'XF86Launch4', lazy.spawn('asusctl profile -n')),
-
     # PinP operationes
     KeyChord([PARAM.mod], 'v', [
         Key([], 'k', move_pinp('up')),
@@ -130,7 +92,6 @@ keys = [
         ],
         name='pinp'
     )
-
 ]
 
 for i in range(GROUP_PER_SCREEN):
