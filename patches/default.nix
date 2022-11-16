@@ -12,7 +12,7 @@
   (final: prev: {
     qtile = prev.qtile.overrideAttrs (old: {
       patches = [
-        ./fix-restart.patch
+        ./fix-restart.patch # https://github.com/NixOS/nixpkgs/issues/139568
         ./fix-monitor.patch
       ];
     });
