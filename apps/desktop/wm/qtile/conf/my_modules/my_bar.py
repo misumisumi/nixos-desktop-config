@@ -16,36 +16,38 @@ _colorset6 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_norm
 _colorset7 = {'background': PARAM.c_normal['clear'], 'foreground': PARAM.c_normal['cyan']}
 _colorset8 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_normal['magenta']}
 
+_font_conf = {'font': PARAM.font, 'fontsize': PARAM.font_size}
+
 groupbox = widget.GroupBox(this_current_screen_border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, **_colorset3,
-                           font='Hack Nerd Font', fontsize=PARAM.font_size+2,
+                           **_font_conf,
                            active=PARAM.c_normal['white'])
-cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2)
+cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2, **_font_conf)
 memory = widget.Memory(format=' {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}',
-                       measure_mem='G', measure_swap='G', **_colorset1)
+                       measure_mem='G', measure_swap='G', **_colorset1, **_font_conf)
 df = widget.DF(format = " {uf}{m}/{s}{m} ({r:.0f}%)", visible_on_warn=False,
-               partition='/home', **_colorset2)
-chrod = widget.Chord(**_colorset8)
-wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2)
+               partition='/home', **_colorset2, **_font_conf)
+chrod = widget.Chord(**_colorset8, **_font_conf)
+wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2, **_font_conf)
 clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2)
 tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="preferred", theme_path="Papirus-Dark",
                            txt_floating="🗗", txt_floatingp="🗖", txt_minimized="🗕",
-                           icon_size=PARAM.icon_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3)
-net = widget.Net(format='{down} ↓↑ {up}', **_colorset2)
+                           icon_size=PARAM.icon_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3, **_font_conf)
+net = widget.Net(format='{down} ↓↑ {up}', **_colorset2, **_font_conf)
 volume = widget.Volume(fmt=' {}',   
                        get_volume_command = ["sh", "-c", "if [ -z \"$(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g')\" ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi"],
                        mute_command = ["pactl set-source-mute @DEFAULT_SOURCE@ toggle"],
                        volume_up_command = ["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
                        volume_down_command = ["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
-                       **_colorset1)
+                       **_colorset1, **_font_conf)
 current_screen = widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                       inactive_color=PARAM.c_normal['BGbase'],
-                                      inactive_text='N', **_colorset2)
+                                      inactive_text='N', **_colorset2, **_font_conf)
 systray = widget.Systray(**_colorset3)
 backlight = list(Path('/sys/class/backlight/').glob('*'))
 if not len(backlight) == 0:
-    backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2)
+    backlight = widget.Backlight(fmt=' {}', backlight_name=backlight[0], **_colorset2, **_font_conf)
 battery = widget.Battery(format='{char} {percent:2.0%}', charge_char='', discharge_char='',
-                         empty_char='', full_chal='', unknown_char='', **_colorset1)
+                         empty_char='', full_chal='', unknown_char='', **_colorset1, **_font_conf)
 
 def _left_corner(background, foreground):
     return widget.TextBox(
@@ -163,8 +165,7 @@ def make_bar(is_tray=False):
 
 
 mybar_default =  dict(
-                    font=PARAM.font,
-                    fontsize=PARAM.font_size,
-                    padding=3
+                    padding=3,
+                    **_font_conf,
                 )
 extension_defaults = mybar_default.copy()
