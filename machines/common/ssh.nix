@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-  # programs.ssh = {
-  #   forwardX11 = true;
-  # };
+  programs.ssh = {
+    askPassword = "";
+  };
   services.openssh = {
     enable = true;
     ports = [ 12511 ];
