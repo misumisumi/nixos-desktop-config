@@ -10,7 +10,7 @@ with lib; {
       plugins = with pkgs.obs-studio-plugins; [
         looking-glass-obs
         obs-pipewire-audio-capture
-      ] 
+      ]
       ++ optional (hostname != "general") obs-ndi;
     };
   };

@@ -42,7 +42,7 @@ keys = [
     Key([PARAM.mod, 'shift'], 'f', lazy.window.toggle_floating()),
     # Exit and Reload
     Key([PARAM.mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
-    Key([PARAM.mod, 'control'], 'q', lazy.shutdown(), desc='Shutdown Qtile'),
+    Key([PARAM.mod, 'control'], 'e', lazy.shutdown(), desc='Shutdown Qtile'),
     # Launch rofi
     Key([PARAM.mod], 'm', lazy.spawn('rofi -combi-modi window,drun -show combi'), desc='show rofi'),
     Key([PARAM.mod, 'shift'], 'm', lazy.spawn('rofi -show run'), desc='run rofi as shell mode'),

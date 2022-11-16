@@ -9,6 +9,7 @@ Dunst (notification-daemons) conf
       enable = true;
       settings = {
         global = {
+          font = "Noto Sans CJK JP 12";
           monitor = 0;
           geometry = "400x50-30+30";
           indicate_hidden = true;
