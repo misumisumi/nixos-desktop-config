@@ -2,7 +2,7 @@
 from my_modules.param import PARAM
 
 from my_modules.groups import groups
-from my_modules.widgets import widget_defaults, extension_defaults
+from my_modules.my_bar import mybar_default, extension_defaults
 from my_modules.key_map import keys, mouse
 from my_modules.my_layouts import floating_layout
 from my_modules.make_screens import screens
