@@ -20,4 +20,5 @@ pkgs: with pkgs; [
   figlet            # Make AA from character
   cmatrix           # Lain of character
 
+  progress          # Show progress of coreutils programs
 ]
