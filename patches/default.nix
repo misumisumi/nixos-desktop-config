@@ -9,4 +9,12 @@
         };
       };
     })
+  (final: prev: {
+    qtile = prev.qtile.overrideAttrs (old: {
+      patches = [
+        ./fix-restart.patch
+        ./fix-monitor.patch
+      ];
+    });
+   })
 ]
