@@ -43,7 +43,7 @@ class Param:
 
     bar_font_size = 28
 
-    is_display_tablet = False
+    is_display_tablet = True if os.uname()[1] in [ 'mother' ] else False
 
     c_normal = {
         'BGbase': '#222d32', 'FGbase': '#475359',

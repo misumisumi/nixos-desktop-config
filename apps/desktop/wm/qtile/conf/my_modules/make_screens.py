@@ -3,7 +3,7 @@ from libqtile import bar
 from libqtile.config import Screen
 
 from my_modules.param import PARAM
-from my_modules.widgets import make_widgets
+from my_modules.my_bar import make_bar
 
 from libqtile.log_utils import logger
 
@@ -12,9 +12,9 @@ def make_screens(num_screen):
     screens = []
     for i in range(num_screen):
         if i == 0:
-            top_widgets, bottom_widgets = make_widgets(is_tray=True)
+            top_widgets, bottom_widgets = make_bar(is_tray=True)
         else:
-            top_widgets, bottom_widgets = make_widgets()
+            top_widgets, bottom_widgets = make_bar()
         if bottom_widgets is None:
             screens.append(
                 Screen(

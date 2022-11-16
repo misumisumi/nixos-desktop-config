@@ -73,7 +73,7 @@ def _separator():
         padding = 2
     )
 
-def make_widgets(is_tray=False):
+def make_bar(is_tray=False):
     top_widgets = [
         _left_corner(**_colorset4),
         groupbox,
@@ -162,9 +162,9 @@ def make_widgets(is_tray=False):
     return top_widgets, bottom_widgets
 
 
-widget_defaults =  dict(
+mybar_default =  dict(
                     font=PARAM.font,
                     fontsize=PARAM.font_size,
                     padding=3
                 )
-extension_defaults = widget_defaults.copy()
+extension_defaults = mybar_default.copy()
