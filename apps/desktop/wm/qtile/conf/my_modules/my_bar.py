@@ -19,7 +19,8 @@ _colorset8 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_norm
 _font_conf = {'font': PARAM.font, 'fontsize': PARAM.font_size}
 
 groupbox = widget.GroupBox(this_current_screen_border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, **_colorset3,
-                           **_font_conf,
+                           font='', fontsize=PARAM.font_size,
+                           font="Hack Nerd Font", fontsize=PARAM.font_size,
                            active=PARAM.c_normal['white'])
 cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2, **_font_conf)
 memory = widget.Memory(format=' {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}',
@@ -28,7 +29,7 @@ df = widget.DF(format = " {uf}{m}/{s}{m} ({r:.0f}%)", visible_on_warn=False,
                partition='/home', **_colorset2, **_font_conf)
 chrod = widget.Chord(**_colorset8, **_font_conf)
 wttr = widget.Wttr(format='%c%t/%p|', location={'Himeji':'Himeji'}, **_colorset2, **_font_conf)
-clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2)
+clock = widget.Clock(format='%y-%m-%d %a %H:%M:%S', **_colorset2, **_font_conf)
 tasklist = widget.TaskList(border=PARAM.c_normal['BGbase'], theme_mode="preferred", theme_path="Papirus-Dark",
                            txt_floating="🗗", txt_floatingp="🗖", txt_minimized="🗕",
                            icon_size=PARAM.icon_size, borderwidth=PARAM.border, max_title_width=120, **_colorset3, **_font_conf)
