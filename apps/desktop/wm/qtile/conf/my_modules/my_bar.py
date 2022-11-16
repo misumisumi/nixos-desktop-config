@@ -19,7 +19,6 @@ _colorset8 = {'background': PARAM.c_normal['BGbase'], 'foreground': PARAM.c_norm
 _font_conf = {'font': PARAM.font, 'fontsize': PARAM.font_size}
 
 groupbox = widget.GroupBox(this_current_screen_border=PARAM.c_normal['cyan'], borderwidth=PARAM.border, **_colorset3,
-                           font='', fontsize=PARAM.font_size,
                            font="Hack Nerd Font", fontsize=PARAM.font_size,
                            active=PARAM.c_normal['white'])
 cpu = widget.CPU(format=' {load_percent:0=4.1f}%', **_colorset2, **_font_conf)
