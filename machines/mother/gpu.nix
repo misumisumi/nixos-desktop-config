@@ -7,15 +7,12 @@
         "nvidia"
       ];
       deviceSection = ''
-        Identifier     "Device0"
         Driver         "nvidia"
         VendorName     "NVIDIA Corporation"
         BoardName      "NVIDIA GeForce GTX 1050 Ti"
         BusID          "PCI:9:0:0"
       '';
       monitorSection = ''
-        # HorizSync source: edid, VertRefresh source: edid
-        Identifier     "Monitor0"
         VendorName     "Unknown"
         ModelName      "IODATA EX-LDGCQ241D"
         HorizSync       15.0 - 90.0
@@ -23,9 +20,6 @@
         Option         "DPMS"
       '';
       screenSection = ''
-        Identifier     "Screen0"
-        Device         "Device0"
-        Monitor        "Monitor0"
         DefaultDepth    24
         Option         "Stereo" "0"
         Option         "nvidiaXineramaInfoOrder" "DFP-2"
