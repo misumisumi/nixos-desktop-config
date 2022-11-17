@@ -9,7 +9,7 @@ Dunst (notification-daemons) conf
       enable = true;
       settings = {
         global = {
-          font = "Noto Sans CJK JP 16";
+          font = "Noto Sans CJK JP 12";
           min_icon_size=64;
           min_max_size=256;
           monitor = 0;
