@@ -39,9 +39,6 @@ volume = widget.Volume(fmt=' {}',
                        volume_up_command = ["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
                        volume_down_command = ["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
                        **_colorset1, **_font_conf)
-current_screen = widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
-                                      inactive_color=PARAM.c_normal['BGbase'],
-                                      inactive_text='N', **_colorset2, **_font_conf)
 systray = widget.Systray(**_colorset3)
 backlight = list(Path('/sys/class/backlight/').glob('*'))
 if not len(backlight) == 0:
@@ -120,7 +117,7 @@ def make_bar(is_tray=False):
             current_screen,
             widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                  inactive_color=PARAM.c_normal['BGbase'],
-                                 inactive_text='N', **_colorset2, **_font_conf)
+                                 inactive_text='N', **_colorset2, **_font_conf),
             _rignt_corner(**_colorset1)
             ]
     if is_tray:
@@ -160,7 +157,7 @@ def make_bar(is_tray=False):
         bottom_widgets += [
             widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
                                  inactive_color=PARAM.c_normal['BGbase'],
-                                 inactive_text='N', **_colorset2, **_font_conf)
+                                 inactive_text='N', **_colorset2, **_font_conf),
             _rignt_corner(**_colorset7)
         ]
     else:
