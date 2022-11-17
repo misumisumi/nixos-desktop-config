@@ -118,6 +118,9 @@ def make_bar(is_tray=False):
             volume,
             _rignt_corner(**_colorset2),
             current_screen,
+            widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
+                                 inactive_color=PARAM.c_normal['BGbase'],
+                                 inactive_text='N', **_colorset2, **_font_conf)
             _rignt_corner(**_colorset1)
             ]
     if is_tray:
@@ -155,7 +158,9 @@ def make_bar(is_tray=False):
                 _rignt_corner(**_colorset2),
             ]
         bottom_widgets += [
-            current_screen,
+            widget.CurrentScreen(active_color=PARAM.c_normal['magenta'],
+                                 inactive_color=PARAM.c_normal['BGbase'],
+                                 inactive_text='N', **_colorset2, **_font_conf)
             _rignt_corner(**_colorset7)
         ]
     else:
