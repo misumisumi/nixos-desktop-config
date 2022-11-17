@@ -45,6 +45,8 @@ with pkgs; [
   audacity                        # GUI Sound Editor
   sox                             # CLI Sound Editor
 
+  playerctl                       # CLI control media
+
   imagemagick                     # CLI Image Editor
 
   firefox                         # Browser
