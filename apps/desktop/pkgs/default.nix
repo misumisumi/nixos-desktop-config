@@ -30,7 +30,7 @@ with pkgs; [
   nomacs                          # Image Viewer
 
   # thunar-with-plugins             # GUI Filer and Plugins
-  pcmanfm
+  pcmanfm                         # GUI Filer
   shared-mime-info
   ffmpegthumbnailer
   evince
