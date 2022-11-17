@@ -4,12 +4,6 @@ libvirt conf
 { pkgs, user, ... }:
 
 {
-  environment = {
-    systemPackages = with pkgs; [
-      swtpm
-    ];
-  };
-
   users = {
     groups = {
       libvirtd = {
@@ -28,6 +22,7 @@ libvirt conf
           enable = true;
           packages = with pkgs; [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
         };
+        swtpm.enable = true;
         # verbatimConfig = ''
         #   nvram = [ 
         #     "${pkgs.OVMFFull}/FV/OVMF.fd:${pkgs.OVMFFull}/FV/OVMF_VARS.fd",
