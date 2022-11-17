@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./network.nix
     ./gpu.nix
+    ./virtualisation.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
     ../../apps/desktop/wm/${wm}/xserver.nix

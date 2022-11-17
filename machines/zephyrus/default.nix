@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ./network.nix
     ./gpu.nix
+    ./virtualisation.nix
     ./asusd.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
