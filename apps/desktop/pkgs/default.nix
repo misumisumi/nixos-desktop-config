@@ -40,6 +40,7 @@ with pkgs; [
 
   discord                         # Communicate
   slack
+  zoom-us
 
   audacity                        # GUI Sound Editor
   sox                             # CLI Sound Editor
