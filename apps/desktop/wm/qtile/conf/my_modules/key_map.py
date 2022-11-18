@@ -46,7 +46,7 @@ keys = [
     # Launch rofi
     Key([PARAM.mod], 'm', lazy.spawn('rofi -combi-modi window,drun -show combi'), desc='show rofi'),
     Key([PARAM.mod, 'shift'], 'm', lazy.spawn('rofi -show run'), desc='run rofi as shell mode'),
-    Key([PARAM.mod, 'control'], 'm', lazy.spawn('rofi -show mower-menu -modi mower-menu:rofi-mower-menu'), desc='show mower-menu'),
+    Key([PARAM.mod, 'control'], 'm', lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc='show power-menu'),
     # Lock screen
     Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -t -i {}'.format(PARAM.screen_saver)), desc='lock PC'),
     # Screenshot
