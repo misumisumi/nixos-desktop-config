@@ -4,6 +4,11 @@ libvirt conf
 { pkgs, user, ... }:
 
 {
+  environment = {
+    systemPackages = with pkgs; [
+      win-virtio
+    ];
+  };
   users = {
     groups = {
       libvirtd = {
@@ -36,7 +41,7 @@ libvirt conf
       looking-glass = {
         user = "${user}";
         group = "kvm";
-        mode = "666";
+        mode = "660";
       };
     };
   };

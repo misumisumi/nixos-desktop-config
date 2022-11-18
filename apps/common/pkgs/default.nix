@@ -21,4 +21,6 @@ pkgs: with pkgs; [
   cmatrix           # Lain of character
 
   progress          # Show progress of coreutils programs
+
+  dmidecode         # Show BIOS info
 ]
