@@ -4,13 +4,12 @@
   imports = [ ../common/xserver.nix ];
 
   services.xserver.displayManager = {
-    defaultSession = "plasma";
+    defaultSession = "gnome";
     lightdm.background = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
   };
   services.xserver.desktopManager = {
-    plasma5 = {
+    gnome = {
       enable = true;
-      useQtScaling = true;
     };
   };
 }
