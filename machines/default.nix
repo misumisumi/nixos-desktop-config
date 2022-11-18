@@ -38,7 +38,7 @@ let
 in
 if isGeneral then
 {
-  plasma5 = settings { hostname = "general"; user = "general"; wm = "plasma5"; };
+  gnome = settings { hostname = "general"; user = "general"; wm = "gnome"; };
   qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
   minimal = settings { hostname = "general"; inherit user; };
 }
