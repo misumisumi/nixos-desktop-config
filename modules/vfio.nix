@@ -84,8 +84,8 @@ in
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel nested=1")
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd nested=1");
 
-    boot.initrd.kernelModules =
-      [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
+    # boot.initrd.kernelModules =
+    #   [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
     boot.blacklistedKernelModules =
       optionals cfg.blacklistNvidia [ "nvidia" "nouveau" ];
 
