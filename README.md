@@ -64,7 +64,7 @@ You run `preprocess.sh --lvm-only` in `preprocess` if you use only LVM.
   ```
 5. Install
   Now, available flake url is
-    - `plasma5`
+    - `gnome`
     - `qtile`
   You can check `nix flake show` in `./machines`. (flake.nix of root is not available because this is include my private repository.)
 
