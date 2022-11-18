@@ -11,7 +11,7 @@ libvirt conf
   };
   users = {
     groups = {
-      libvirtd = {
+      libvirt = {
         members = [ "root" "${user}" ];
       };
     };
