@@ -30,7 +30,6 @@
           name = "wlp2s0";
           DHCP = "yes";
           address = [ "192.168.1.50" ];
-          gateway = [ "192.168.1.1" ];
         };
         "20-wired" = {
           name = "enp4s0f4u1u3";
