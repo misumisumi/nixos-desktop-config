@@ -36,7 +36,7 @@ _match_sns = [Match(wm_class='slack'),
              Match(wm_class='zoom')]
 
 _match_media = [Match(wm_class='pavucontrol'),
-                Match(wm_class='blueman-manager')
+                Match(wm_class='blueman-manager-wrapped')
               ]
 
 _group_and_rule = {'code': ('', (layout2, layout3), _match_code),
