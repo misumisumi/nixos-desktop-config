@@ -38,9 +38,11 @@ with pkgs; [
   lxde.lxmenu-data
   haskellPackages.thumbnail
 
-  discord                         # Communicate
+  discord                         # Communications
   slack
   zoom-us
+  element-desktop
+  ferdium
 
   audacity                        # GUI Sound Editor
   sox                             # CLI Sound Editor
