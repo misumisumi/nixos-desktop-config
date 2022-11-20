@@ -32,8 +32,10 @@ _match_full = [Match(wm_class='Steam'),
              ]
 
 _match_sns = [Match(wm_class='slack'),
-             Match(wm_class='discord'),
-             Match(wm_class='zoom')]
+              Match(wm_class='discord'),
+              Match(wm_class='element'),
+              Match(wm_class='ferdium'),
+              Match(wm_class='zoom')]
 
 _match_media = [Match(wm_class='pavucontrol'),
                 Match(wm_class='blueman-manager-wrapped')
