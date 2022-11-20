@@ -12,7 +12,8 @@
   home = {
     packages = (import ../../apps/common/pkgs) pkgs ++
                (import ../../apps/desktop/pkgs) pkgs ++
-               (import ../../apps/virtualisation/pkgs) pkgs;
+               (import ../../apps/virtualisation/pkgs) pkgs ++
+               (with pkgs; [ powertop ]);
   };
 
   xresources = {
