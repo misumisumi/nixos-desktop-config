@@ -223,11 +223,11 @@
         "rev": "2fca71072dbf557ae77b4433ae4ce773147bc22a",
         "revCount": 38,
         "type": "git",
-        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://github/Sumi-Sumi/nixos-private-config.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://github/Sumi-Sumi/nixos-private-config.git"
       }
     },
     "root": {
