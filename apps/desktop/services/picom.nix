@@ -8,7 +8,6 @@ Picom (compositor for Xorg) conf
     picom = {
       enable = true;
       backend = "glx";
-      experimentalBackends = true;  # enable blur and rounded corner
       vSync = false;  # When vSync=true, Picom have problem if you use Nvidia 
 
       fade = true;
