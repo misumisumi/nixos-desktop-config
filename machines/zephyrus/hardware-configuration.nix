@@ -21,7 +21,7 @@
     };
     kernelModules = [ "kvm-amd" ];
     resumeDevice = "/.swapfile";
-    kernelParams = [ "resume_offset=27234304" ];
+    kernelParams = [ "resume=/dev/mapper/VolGroup00-lvolroot" "resume_offset=27234304" ];
   };
 
   fileSystems."/" =
