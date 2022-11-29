@@ -4,7 +4,7 @@
     ./network.nix
     ./gpu.nix
     ./virtualisation.nix
-    ./asusd.nix
+    ./zephyrus.nix
     ../common/pulseaudio.nix
     ../common/printer.nix
     ../../apps/desktop/wm/qtile/xserver.nix

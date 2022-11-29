@@ -25,6 +25,7 @@
     sessionVariables = {
       CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
       EDITOR="nvim";
+      NIXOS_OZONE_WL = "1";
     };
 
     shellAliases = {

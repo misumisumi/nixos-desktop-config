@@ -106,11 +106,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1668332334,
-        "narHash": "sha256-YT1qcE/MCqBO1Bi/Yr6GcFpNKsvmzrBKh8juyXDbxQc=",
+        "lastModified": 1669573161,
+        "narHash": "sha256-UAOXq+LIX+goAAY2MiC0+zCxdNPaO7NAPTvCQExpIBs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bc90de24d898655542589237cc0a6ada7564cb6c",
+        "rev": "50c9bccb6abc52811a59db620606e016fcde32bd",
         "type": "github"
       },
       "original": {
@@ -155,11 +155,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1668505710,
-        "narHash": "sha256-DulcfsGjpSXL9Ma0iQIsb3HRbARCDcA+CNH67pPyMQ0=",
+        "lastModified": 1669411043,
+        "narHash": "sha256-LfPd3+EY+jaIHTRIEOUtHXuanxm59YKgUacmSzaqMLc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "85d6b3990def7eef45f4502a82496de02a02b6e8",
+        "rev": "5dc7114b7b256d217fe7752f1614be2514e61bb8",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1668658735,
-        "narHash": "sha256-t4b+99ShkeXFXFdlL9oMgAsHus2WHjV24M7VmNii7HI=",
+        "lastModified": 1669613628,
+        "narHash": "sha256-A8HTvJSfloF4B3BzZUQjqghH9L1HDmmLPGZjn87/8sc=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "06f41caa7985fc7b85a72eac96eec37e2401684d",
+        "rev": "a64ea499255bfee211e8e5701e243dcdfea2ea56",
         "type": "github"
       },
       "original": {
@@ -223,11 +223,11 @@
         "rev": "2fca71072dbf557ae77b4433ae4ce773147bc22a",
         "revCount": 38,
         "type": "git",
-        "url": "ssh://github/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://github/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       }
     },
     "root": {

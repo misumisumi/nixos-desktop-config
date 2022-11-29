@@ -8,6 +8,10 @@ pkgs: let
   # thunar-with-plugins = with pkgs.xfce; (thunar.override { thunarPlugins = [ thunar-volman thunar-archive-plugin thunar-media-tags-plugin ]; });
 in
 with pkgs; [
+  man-pages                       # manuals
+  man-db
+  texinfo
+
   wavesurfer                      # pkgs from Sumi-Sumi/flakes
   prime-run
 
