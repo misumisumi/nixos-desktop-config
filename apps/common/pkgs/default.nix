@@ -9,6 +9,7 @@ pkgs: with pkgs; [
   tree              # Show file tree
 
   bottom            # System monitor
+  bpytop            # System monitor
   duf               # Show storage usage
   neofetch          # Fetch system info
 
