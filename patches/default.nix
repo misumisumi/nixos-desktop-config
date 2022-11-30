@@ -21,17 +21,12 @@ in
   })
   (final: prev: {
     xp-pen-deco-01-v2-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
-      desktopItems = [ 
-        (prev.makeDesktopItem {
-          name = "xp-pen-driver";
-          exec = "sudo xp-pen-driver /mini";
-          icon = "pentablet";
-          comment = "XPPen driver";
-          desktopName = "xppentablet";
-          categories = [ "Application" "Utility" ];
-        })
-      ];
-
+      scripts = prev.writeShellApplication {
+        name = "pentablet.sh";
+        text = ''
+          sudo sh -c "xp-pen-driver /mini &"
+        '';
+      };
       installPhase = ''
         runHook preInstall
         mkdir -p $out/{opt,bin,share}
@@ -39,18 +34,17 @@ in
         chmod +x $out/opt/pentablet
         cp -r App/lib $out/lib
         sed -i 's#usr/lib/pentablet#${dataDir}#g' $out/opt/pentablet
+        cp -r $scripts/bin/pentablet.sh $out/opt/
 
-        cp -r $desktopItems/share/applications $out/share/applications
         cp -r App/usr/share/icons $out/share/icons
         runHook postInstall
       '';
 
       postFixup = ''
-        makeWrapper $out/opt/pentablet $out/bin/xp-pen-driver \
+        makeWrapper $out/opt/pentablet.sh $out/bin/xp-pen-driver \
         "''${qtWrapperArgs[@]}" \
-          --run 'if [ "$EUID" -ne 0 ]; then echo "Please run as root."; exit 1; fi' \
           --run 'if [ ! -d /${dataDir} ]; then mkdir -p /${dataDir}; cp -r '$out'/opt/conf /${dataDir}; chmod u+w -R /${dataDir}; fi'
-          '';
+        '';
 
     });
   })
