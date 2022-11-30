@@ -1,7 +1,5 @@
-/*
-My need packages.
-*/
+# use pkg for only mother
 pkgs: with pkgs; [
-  xp-pen-g430-driver
+  evtest
 ]
 

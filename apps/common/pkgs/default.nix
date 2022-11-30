@@ -3,6 +3,8 @@ pkgs: with pkgs; [
   nix-prefetch-git
   nvfetcher         # Tool of automate nix package updates
 
+  bc                # GNU calculater
+
   zip               # Archives
   unzip
 
