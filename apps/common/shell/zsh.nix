@@ -116,7 +116,8 @@ You can watch this solution at (machines/home.nix home.activation.myActivationAc
         ZVM_VI_VISUAL_ESCAPE_BINDKEY=jj
         ZVM_VI_OPPEND_ESCAPE_BINDKEY=jj
         ZVM_LINE_INIT_MODE=$ZVM_MODE_LAST
-        DIRENV_WARN_TIMEOUT=100s     # DIRENVのタイムアウトまでを長くする
+
+        export DIRENV_WARN_TIMEOUT=100s     # DIRENVのタイムアウトまでを長くする
       '';
     };
   };
