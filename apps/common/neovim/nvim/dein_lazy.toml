@@ -11,9 +11,9 @@ source ~/.config/nvim/configs/nvim-treesitter.lua
 repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'sh -c "cd app && yarn install"'
-book_add = '''
-"let g:mkdp_markdown_css='~/github-markdown.css'
-'''
+# hook_add = '''
+# "let g:mkdp_markdown_css='~/github-markdown.css'
+# '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
