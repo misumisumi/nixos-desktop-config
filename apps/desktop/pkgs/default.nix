@@ -76,5 +76,7 @@ with pkgs; [
   # sidequest                     # Meta Quest side loading tool
 
   remmina                         # Remote desktop client
+
+  zotero                          # Paper managiment tool
 ]
 

@@ -14,6 +14,9 @@ let
         width: 1024px;
         background-image: url("${pkgs.my-wallpapers}/wallpapers/background.png", width);
     }
+    button-iggy1, button-iggy2 {
+      content: "";
+    }
     listview, inputbar, message {
       border-color: cyan;
     }
