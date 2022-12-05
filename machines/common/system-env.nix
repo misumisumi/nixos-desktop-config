@@ -56,6 +56,11 @@ in
   };
 
   environment = {
+    shellAliases = {
+      nixos-boot = "nixos-rebuild boot";
+      nixos-switch = "nixos-rebuild switch";
+      nixos-test = "nixos-rebuild test";
+    };
     variables = {
       TERMINAL = "alacritty";
       EDITOR = "nvim";
