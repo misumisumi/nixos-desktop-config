@@ -20,19 +20,6 @@ in
     });
   })
   (final: prev: {
-    unityhub = prev.unityhub.override (old: {
-      extraInstallCommands =
-        let appimageContents = appimageTools.extractType2 { inherit (old) pname version src; }; in
-        ''
-          install -Dm444 ${appimageContents}/unityhub.desktop -t $out/share/applications
-          substituteInPlace $out/share/applications/unityhub.desktop \
-            --replace 'Exec=AppRun' 'Exec=${old.pname}-${old.version}'
-          install -m 444 -D ${appimageContents}/unityhub.png \
-            $out/share/icons/hicolor/64x64/apps/unityhub.png
-        '';
-    });
-  })
-  (final: prev: {
     xp-pen-deco-01-v2-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
       scripts = prev.writeShellApplication {
         name = "pentablet.sh";
