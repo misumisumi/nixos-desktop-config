@@ -3,7 +3,7 @@ My need packages.
 */
 pkgs: let
   tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
-      inherit (pkgs.texlive) scheme-small collection-langjapanese;
+      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese;
   });
 in
 with pkgs; [
@@ -20,6 +20,7 @@ with pkgs; [
   gnuplot                         # CLI Plotter
   pandoc                          # Document Converter
   tex
+  texlab
   conky
   android-tools
 
