@@ -4,7 +4,7 @@ let
   lib = nixpkgs.lib;
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
 
-  settings = { hostname, user, wm ? "plasma5" }:
+  settings = { hostname, user, wm ? "gnome" }:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in

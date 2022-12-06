@@ -1,5 +1,6 @@
 # My need packages.
-pkgs: isMinimal ? false: let
+{ pkgs, isMinimal ? false }:
+let
   lib = pkgs.lib;
   tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
       inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese;
