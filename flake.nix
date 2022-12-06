@@ -29,7 +29,7 @@
   outputs = inputs @ {self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, private-conf}:
     let
       user = "sumi";
-      stateVersion = "22.05";       # For Home Manager
+      stateVersion = "23.05";       # For Home Manager
 
       overlay = { inputs, nixpkgs, ... }: {
         nixpkgs.overlays = [
