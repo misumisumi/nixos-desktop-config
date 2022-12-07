@@ -53,7 +53,7 @@ with pkgs; [
   zathura                         # PDF viewer
 ] ++
 lib.optionals (! isMinimal) [
-  vivaldi                         # Browser
+  (vivaldi.override { proprietaryCodecs = true; })                         # Browser
 
   wavesurfer                      # pkgs from Sumi-Sumi/flakes
   prime-run
