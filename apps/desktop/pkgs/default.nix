@@ -52,7 +52,7 @@ with pkgs; [
 
   zathura                         # PDF viewer
 ] ++
-lib.optional (! isMinimal) [
+lib.optionals (! isMinimal) [
   vivaldi                         # Browser
 
   wavesurfer                      # pkgs from Sumi-Sumi/flakes
