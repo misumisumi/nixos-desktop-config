@@ -20,7 +20,7 @@ in
     });
   })
   (final: prev: {
-    xp-pen-deco-01-v2-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
+    xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
       scripts = prev.writeShellApplication {
         name = "pentablet.sh";
         text = ''

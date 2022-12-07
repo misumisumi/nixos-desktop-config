@@ -43,6 +43,7 @@ def autostart():
 @hook.subscribe.startup_complete
 def afterstart():
     subprocess.run('copyq &', shell=True)
+    subprocess.run('kdeconnect-indicator &', shell=True)
     if PARAM.is_display_tablet:
-        subprocess.run('/usr/lib/pentablet/pentablet /mini &', shell=True)
+        subprocess.run('xp-pen-driver /mini &', shell=True)
 
