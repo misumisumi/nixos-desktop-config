@@ -6,7 +6,7 @@ let
 
   settings = { hostname, user, rootDir, wm ? "gnome" }:
   let
-    hostConf = ./. + "/${hostname}" + /home.nix;
+    hostConf = ./. + "/${rootDir}" + "/${hostname}" + /home.nix;
   in
     with lib; nixosSystem {
       system = choiceSystem hostname;
@@ -44,8 +44,8 @@ if isGeneral then
 }
 else
 {
-  mother = settings { hostname = "mother"; rootDir = "ordinal"; inherit user; };
-  zephyrus = settings { hostname = "zephyrus"; rootDir = "ordinal"; inherit user; };
+  mother = settings { hostname = "mother"; rootDir = "ordinary"; inherit user; };
+  zephyrus = settings { hostname = "zephyrus"; rootDir = "ordinary"; inherit user; };
 
   # metatron = settings { hostname = "metatron"; rootDir = "cardinal"; inherit user; };
   # strea = settings { hostname = "strea"; rootDir = "cardinal"; inherit user; };
