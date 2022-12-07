@@ -1,4 +1,5 @@
 """start up hooks"""
+from pathlib import Path
 import subprocess
 from libqtile import qtile, hook
 
@@ -7,6 +8,11 @@ from my_modules.set_wallpaper import MONITOR0, MONITOR1, MONITOR2
 
 from libqtile.log_utils import logger
 
+
+def check_screen_saver():
+    path = Path.home().joinpath(".cache", "betterlockscreen", "current", "lock_color.png")
+    if not path.exists():
+        subprocess.run("betterlockscreen -u {}".format(PARAM.screen_saver))
 
 # 擬似的に各スクリーンにグループが割り当てられるようにするための初期化
 def init_screen_and_group():
@@ -30,6 +36,7 @@ def autostart():
     else:
         # subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1])), shell=True)
         subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1]), str(PARAM.wallpapers[MONITOR2])), shell=True)
+    check_screen_saver()
     init_screen_and_group()
 
 

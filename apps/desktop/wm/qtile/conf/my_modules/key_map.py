@@ -48,7 +48,7 @@ keys = [
     Key([PARAM.mod, 'shift'], 'm', lazy.spawn('rofi -show run'), desc='run rofi as shell mode'),
     Key([PARAM.mod, 'control'], 'm', lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc='show power-menu'),
     # Lock screen
-    Key([PARAM.mod, 'control'], 'b', lazy.spawn('i3lock -n -t -i {}'.format(PARAM.screen_saver)), desc='lock PC'),
+    Key([PARAM.mod, 'control'], 'b', lazy.spawn('betterlockscreen -l -- -e'), desc='lock PC'),
     # Screenshot
     Key([], 'Print', lazy.spawn('flameshot full -p {}'.format(str(PARAM.capture_path)))),
     Key([PARAM.mod], 'Print', capture_screen(is_clipboard=False)),

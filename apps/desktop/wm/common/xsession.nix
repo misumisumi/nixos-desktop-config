@@ -7,8 +7,20 @@ However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 { config, lib, user, pkgs, ... }:
 
 {
+  services = {
+    screen-locker = {
+      enable = true;
+      inactiveInterval = 40;
+      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l -- -e";
+
+      xautolock = {
+        enable = true;
+      };
+    };
+  };
+
   home = {
-    packages = with pkgs; [ qtile libinput-gestures ];
+    packages = with pkgs; [ betterlockscreen libinput-gestures ];
     keyboard = {
       layout = "us";
       model = "pc104";
