@@ -8,6 +8,28 @@ in
   ];
   networking = {
     hostName = "${hostname}";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        4713                       # PulseAudio
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714; to = 1764;    # KDE-connect
+        }
+        {
+          from = 60000; to = 60011;  # Mosh
+        }
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 1714; to = 1764;    # KDE-connect
+        }
+        {
+          from = 60000; to = 60011;  # Mosh
+        }
+      ];
+    };
   };
 
   systemd = {

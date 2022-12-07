@@ -9,13 +9,13 @@ in
             (import (appDir + "/common/shell")) ++
             (import (appDir + "/common/ssh")) ++
             (import (appDir + "/desktop") { inherit lib hostname; }) ++
-            (import (appDir + "/desktop/wm/qtile"));
+            (import (appDir + "/desktop/wm/qtile")) ++
+            (import ./home-own-conf.nix);
 
   home = {
     packages = (import (appDir + "/common/pkgs") pkgs) ++
                (import (appDir + "/desktop/pkgs") { inherit pkgs; }) ++
-               (import (appDir + "/virtualisation/pkgs") pkgs) ++
-               (import ./pkg.nix) pkgs;
+               (import (appDir + "/virtualisation/pkgs") pkgs);
   };
 
   xresources = {
