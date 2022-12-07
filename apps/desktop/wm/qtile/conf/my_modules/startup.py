@@ -45,5 +45,5 @@ def afterstart():
     subprocess.run('copyq &', shell=True)
     subprocess.run('kdeconnect-indicator &', shell=True)
     if PARAM.is_display_tablet:
-        subprocess.run('xp-pen-driver /mini &', shell=True)
+        subprocess.run('xp-pen-driver-indicator', shell=True)
 
