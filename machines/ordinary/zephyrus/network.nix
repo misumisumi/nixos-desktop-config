@@ -1,8 +1,10 @@
 { lib, hostname, ... }:
-
+let
+  inherit (import ../../path-relove.nix) commonDir;
+in
 {
   imports = [
-    ../common/network.nix
+    (commonDir + "/network.nix")
   ];
   networking = {
     wireless = {

@@ -31,12 +31,12 @@
           nur.overlay
           nixgl.overlay
           flakes.overlays.default
-        ] ++ (import ../patches);
+        ] ++ (import ../../patches);
       };
     in
     { 
       nixosConfigurations = (
-        import ./default.nix {
+        import ../default.nix {
           isGeneral = true;
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;

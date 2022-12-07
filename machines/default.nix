@@ -4,7 +4,7 @@ let
   lib = nixpkgs.lib;
   choiceSystem = x: if ( x == "aegis" || x == "ku-dere" ) then "aarch64-linux" else "x86_64-linux";
 
-  settings = { hostname, user, wm ? "gnome" }:
+  settings = { hostname, user, rootDir, wm ? "gnome" }:
   let
     hostConf = ./. + "/${hostname}" + /home.nix;
   in
@@ -22,7 +22,7 @@ let
 
         ../modules
 
-        (./. + "/${hostname}")    # Each machine conf
+        (./. + "/${rootDir}" + "/${hostname}")    # Each machine conf
 
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
@@ -38,18 +38,16 @@ let
 in
 if isGeneral then
 {
-  gnome = settings { hostname = "general"; user = "general"; wm = "gnome"; };
-  qtile = settings { hostname = "general"; user = "general"; wm = "qtile"; };
-  minimal = settings { hostname = "general"; inherit user; };
+  gnome = settings { hostname = "general"; user = "general"; rootDir = "general"; wm = "gnome"; };
+  qtile = settings { hostname = "general"; user = "general"; rootDir = "general"; wm = "qtile"; };
+  minimal = settings { hostname = "general"; user = "general"; rootDir = "general"; };
 }
 else
 {
-  # aegis = settings { hostname="aegis"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  # ku-dere = settings { hostname="ku-dere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  mother = settings { hostname = "mother"; inherit user; };
-  # tsundere = settings { hostname="tsundere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  # yandere = settings { hostname="yandere"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  # zephyrus = settings { hostname="zephyrus"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  # general = settings { hostname="general"; inherit inputs nixpkgs overlay home-manager nur user stateVersion; };
-  zephyrus = settings { hostname = "zephyrus"; inherit user; };
+  mother = settings { hostname = "mother"; rootDir = "ordinal"; inherit user; };
+  zephyrus = settings { hostname = "zephyrus"; rootDir = "ordinal"; inherit user; };
+
+  # metatron = settings { hostname = "metatron"; rootDir = "cardinal"; inherit user; };
+  # strea = settings { hostname = "strea"; rootDir = "cardinal"; inherit user; };
+  # yui = settings { hostname = "yui"; rootDir = "cardinal"; inherit user; };
 }

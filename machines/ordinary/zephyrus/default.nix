@@ -1,3 +1,6 @@
+let
+  inherit (import ../../path-relove.nix) commonDir appDir;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -5,11 +8,11 @@
     ./gpu.nix
     ./virtualisation.nix
     ./zephyrus.nix
-    ../common/pulseaudio.nix
-    ../common/printer.nix
-    ../../apps/desktop/wm/qtile/xserver.nix
+    (commonDir + "/pulseaudio.nix")
+    (commonDir + "/printer.nix")
+    (appDir + "/desktop/wm/qtile/xserver.nix")
   ] ++
-  (import ../../apps/virtualisation);
+  (import (appDir + "/virtualisation"));
   
   nix = {
     extraOptions = ''
