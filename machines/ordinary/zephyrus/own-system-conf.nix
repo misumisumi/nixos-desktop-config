@@ -19,4 +19,14 @@
     powertop.enable = true;
     cpuFreqGovernor = "ondemand";
   };
+
+  nix = {
+    settings = {
+      cores = "4";
+      max-jobs = "4";
+    };
+    extraOptions = ''
+      binary-caches-parallel-connections = 24
+    '';
+  };
 }

@@ -13,10 +13,4 @@ in
     (appDir + "/desktop/wm/qtile/xserver.nix")
   ] ++
   (import (appDir + "/virtualisation"));
-  
-  nix = {
-    extraOptions = ''
-      binary-caches-parallel-connections = 24
-    '';
-  };
 }

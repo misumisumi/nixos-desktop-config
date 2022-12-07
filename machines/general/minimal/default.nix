@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./network.nix
     ./gpu.nix
+    ./own-system-conf.nix
   ];
 
   nix = {

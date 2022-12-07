@@ -7,6 +7,7 @@ in
     ./hardware-configuration.nix
     ./network.nix
     ./gpu.nix
+    ./own-system-conf.nix
     (commonDir + "/pulseaudio.nix")
     (commonDir + "/printer.nix")
     (appDir + "/desktop/wm/${wm}/xserver.nix")
