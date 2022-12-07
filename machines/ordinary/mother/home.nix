@@ -10,7 +10,7 @@ in
             (import (appDir + "/common/ssh")) ++
             (import (appDir + "/desktop") { inherit lib hostname; }) ++
             (import (appDir + "/desktop/wm/qtile")) ++
-            (import ./home-own-conf.nix);
+            (import ./own-home-conf.nix { inherit pkgs; });
 
   home = {
     packages = (import (appDir + "/common/pkgs") pkgs) ++

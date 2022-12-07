@@ -3,11 +3,11 @@
   security.sudo = {
     extraRules = [
       {
-        runAs = "${user}";
+        users = [ "${user}" ];
         commands = [ 
           { 
             command = "${pkgs.xp-pen-driver}/bin/xp-pen-driver"; 
-            options = [ "NOPASSWD" ];
+            options = [ "SETENV" "NOPASSWD" ];
           } 
         ];
       }

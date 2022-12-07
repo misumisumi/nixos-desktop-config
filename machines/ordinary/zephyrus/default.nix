@@ -7,7 +7,7 @@ in
     ./network.nix
     ./gpu.nix
     ./virtualisation.nix
-    ./system-own-conf.nix
+    ./own-system-conf.nix
     (commonDir + "/pulseaudio.nix")
     (commonDir + "/printer.nix")
     (appDir + "/desktop/wm/qtile/xserver.nix")
