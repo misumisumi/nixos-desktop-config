@@ -28,7 +28,7 @@
     autoUpgrade = {                         # Allow auto update
       enable = true;
       channel = "https://nixos.org/channels/nixos-unstable";
-      # flakes = "github+ssh";  # リモートflakeの変更に自動で対応する
+      flakes = "github:Sumi-Sumi/nixos-config"; # NixOS confのFlakesの自動アプデ
     };
     stateVersion = "${stateVersion}";
   };
