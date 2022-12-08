@@ -28,7 +28,7 @@
     autoUpgrade = {                         # Allow auto update
       enable = true;
       channel = "https://nixos.org/channels/nixos-unstable";
-      flakes = "github:Sumi-Sumi/nixos-config"; # NixOS confのFlakesの自動アプデ
+      flake = "github:Sumi-Sumi/nixos-config"; # NixOS confのFlakesの自動アプデ
     };
     stateVersion = "${stateVersion}";
   };
