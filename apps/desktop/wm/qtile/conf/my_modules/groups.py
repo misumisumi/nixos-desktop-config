@@ -27,6 +27,7 @@ _match_full = [Match(wm_class='Steam'),
                Match(wm_class='unityhub'),
                Match(wm_class='Unity'),
                Match(wm_class='obs'),
+               Match(wm_class='.obs-wrapped_'),
                Match(wm_class='audacity'),
                Match(wm_class='Looking Glass (client)')
              ]

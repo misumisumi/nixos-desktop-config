@@ -16,8 +16,8 @@
 
   nix = {
     settings = {
-      cores = "6";
-      max-jobs = "4";
+      cores = 6;
+      max-jobs = 4;
     };
     extraOptions = ''
       binary-caches-parallel-connections = 24

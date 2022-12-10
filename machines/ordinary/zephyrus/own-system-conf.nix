@@ -2,9 +2,19 @@
 
 {
   services = {
-    asusd.enable = true;
-    asus-notify.enable = true;
-    supergfxd.enable = true;
+    asusd = {
+      enable = true;
+      profileConfig = "quiet";
+    };
+    supergfxd = {
+      enable = true;
+      settings = {
+        mode = "Integrated";
+        vfio_enable = true;
+        vfio_save = false;
+        compute_save = false;
+      };
+    };
   };
   systemd.sleep.extraConfig = ''
     # suspend=hybrid-sleep
@@ -22,8 +32,8 @@
 
   nix = {
     settings = {
-      cores = "4";
-      max-jobs = "4";
+      cores = 4;
+      max-jobs = 4;
     };
     extraOptions = ''
       binary-caches-parallel-connections = 24

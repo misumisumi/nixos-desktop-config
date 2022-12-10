@@ -16,10 +16,6 @@ let
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
 
-        flakes.nixosModules.asusd
-        flakes.nixosModules.asus-notify
-        flakes.nixosModules.supergfxd
-
         ../modules
 
         (./. + "/${rootDir}" + "/${hostname}")    # Each machine conf
