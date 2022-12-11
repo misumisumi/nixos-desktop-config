@@ -17,6 +17,8 @@ Picom (compositor for Xorg) conf
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
+        "0:class_g = 'kdeconnect '&& focused"
+        "0:class_g = 'kdeconnect '&& !focused"
         "85:class_g = 'kitty' && focused"
         "85:class_g = 'kitty' && !focused"
         "85:class_g = 'alacritty' && focused"
