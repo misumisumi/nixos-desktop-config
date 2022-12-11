@@ -69,7 +69,7 @@ Picom (compositor for Xorg) conf
           background-frame = true;
           bluer-kern = "3x3box";
           background-exclude = [
-            "class_g = 'kdeconnect'"
+            "class_g = 'kdeconnectd'"
             "window_type = 'dock'"
             "window_type = 'desktop'"
             "_GTK_FRAME_EXTENTS@:c"
