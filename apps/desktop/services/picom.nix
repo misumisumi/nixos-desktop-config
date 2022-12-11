@@ -17,8 +17,6 @@ Picom (compositor for Xorg) conf
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
-        "0:class_g = 'kdeconnect '&& focused"
-        "0:class_g = 'kdeconnect '&& !focused"
         "85:class_g = 'kitty' && focused"
         "85:class_g = 'kitty' && !focused"
         "85:class_g = 'alacritty' && focused"
@@ -71,6 +69,7 @@ Picom (compositor for Xorg) conf
           background-frame = true;
           bluer-kern = "3x3box";
           background-exclude = [
+            "class_g = 'kdeconnect'"
             "window_type = 'dock'"
             "window_type = 'desktop'"
             "_GTK_FRAME_EXTENTS@:c"
