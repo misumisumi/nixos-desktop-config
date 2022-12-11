@@ -61,15 +61,15 @@ Picom (compositor for Xorg) conf
           "class_g = 'fcitx'"
           "class_g = 'dunst'"
         ];
-        blur = {
-          method = "dual_kawase";
-          size = 8;
-          strength = 5;
-          background = true;
-          background-frame = true;
-          bluer-kern = "3x3box";
-          background-exclude = [
-            "class_g = 'kdeconnectd'"
+        blur-method = "dual_kawase";
+        blur-size = 8;
+        blur-strength = 5;
+        blur-background = false;
+        blur-background-frame = false;
+        blur-bluer-kern = "3x3box";
+        blur-background-exclude = [
+            "class_g = 'kdeconnectd && !focused'"
+            "_NET_WM_NAME@:s *= 'KDE Connect Daemon'"
             "window_type = 'dock'"
             "window_type = 'desktop'"
             "_GTK_FRAME_EXTENTS@:c"
@@ -83,7 +83,6 @@ Picom (compositor for Xorg) conf
         glx-no-rebind-pixmap = true;
         use-damage = true;
         xrender-sync-fence = true;
-        };
       };
     };
   };
