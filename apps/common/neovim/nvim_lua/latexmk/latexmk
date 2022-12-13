@@ -1,0 +1,36 @@
+#!/usr/bin/env perl
+
+# tex options
+$latex = 'uplatex %O -synctex=1 -halt-on-error -interaction=nonstopmode %P';
+$dvipdf         = 'dvipdfmx %O -o %Z%R.pdf %S';
+
+$lualatex     = 'lualatex -shell-escape -synctex=1 -interaction=nonstopmode';
+$pdflualatex  = $lualatex;
+
+$biber        = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
+$bibtex       = 'bibtex %O %B';
+$makeindex    = 'mendex %O -o %D %S';
+$max_repeat   = 5;
+$pdf_mode     = 4; # You set 3 if you use latex
+
+$aux_dir = 'tmp/'
+$out_dir = 'tmp/'
+
+$pvc_view_file_via_temporary = 0;
+
+# default preview
+given ($^O) {
+    when (/MSWin32/) {
+        $pdf_previewer = 'start';
+    }
+    when (/darwin/) {
+        $pdf_previewer = 'open';
+    }
+    default {
+        $pdf_previewer = 'zathura';
+    }
+}
+
+# local config
+$local_latexmkrc_path = './.latexmkrc.local';
+require $local_latexmkrc_path if -e $local_latexmkrc_path;

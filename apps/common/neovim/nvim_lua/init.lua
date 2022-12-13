@@ -1,0 +1,7 @@
+require("modules.coc_list")
+require("modules.dein")
+require("modules.env")
+require("modules.quickrun")
+require("modules.setfiletype")
+require("modules.shortcut")
+require("modules.sudowrite")
