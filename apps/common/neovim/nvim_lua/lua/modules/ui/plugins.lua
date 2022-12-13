@@ -14,7 +14,7 @@ ui["shaunsingh/nord.nvim"] = {
 
 ui["rcarriga/nvim-notify"] = {
     opt = false,
-    config = conf.nvim_notify
+    config = conf.notify
 }
 
 -- Start Menu

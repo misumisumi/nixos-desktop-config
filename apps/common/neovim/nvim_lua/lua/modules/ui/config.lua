@@ -24,7 +24,9 @@ function config.nord()
 end
 
 
-function config.nvim_notify()
+function config.notify()
+    local notify = require("notify")
+    -- local icons = 
 
 end
 
