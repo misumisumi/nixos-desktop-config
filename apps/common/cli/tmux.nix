@@ -41,6 +41,9 @@ tmux (terminal multiplexer) conf
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -g mouse on
 
+        # setw -g window-active-style fg='#c0c5ce',bg='#2b303b'
+        # setw -g window-style fg='#c0c5ce',bg='#27292d'
+
         # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle

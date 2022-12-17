@@ -37,6 +37,9 @@ Picom (compositor for Xorg) conf
         "100:name = 'WaveSurer 1.8.8.p5' && !focused"
         "100:name = 'i3lock' && focused"
         "100:name = 'i3lock' && !focused"
+        "100:name *?= 'Youtube'"
+        "100:name *?= 'Prime Video'"
+        "100:name *?= 'ニコニコ動画'"
       ];
 
       shadow = true;
