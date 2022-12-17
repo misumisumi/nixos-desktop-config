@@ -2,83 +2,118 @@ local utils = {}
 local conf = require("modules.utils.config")
 
 
-utils["vim-jp/vimdoc-ja"] = {
-    opt = true,
-}
-
-
-utils["easymotion/vim-easymotion"] = {
-
-}
-
-
-utils["junegunn/vim-easy-align"] = {
-
-}
-
-
-utils["tyru/open-browser.vim"] = {
-
-}
-
--- Git Utils
-utils["tpope/vim-fugitive"] = {
-
-}
-
-utils["chrisbra/csv.vim"] = {
-
-}
-
-utils["tpope/vim-surround"] = {
-
-}
-
--- 括弧とif..fiなどの強調表示と移動
-utils["andymass/vim-matchup"] = {
-
-}
-
-utils["windwp/nvim-autopairs"] = {
-
-}
-
-utils["windwp/nvim-ts-autotag"] = {
-
-}
-
-utils["nvim-treesitter/nvim-treesitter"] = {
-
-}
-
-utils["folke/todo-comments.nvim:"] = {
-
-}
-
-utils["nvim-treesitter/nvim-treesitter-textobjects"] = {
-
-}
-
--- 対応する括弧の色を変える
-utils["p00f/nvim-ts-rainbow"] = {
-
-}
-
-utils["terrortylor/nvim-comment"] = {
-
-}
-
 utils["rainbowhxch/accelerated-jk.nvim"] = {
+    opt = true,
+    event = "BufWinEnter",
+    config = conf.accelerated_jk
 }
 
-utils["JoosepAlviste/nvim-ts-context-commentstring"] = {
-
+utils["max397574/better-escape.nvim"] = {
+    opt = true,
+    event = "BufReadPost",
+    config = conf.better_escape
 }
 
-utils["mfussenegger/nvim-ts-hint-textobject"] = {
-
+utils["famiu/bufdelete.nvim"] = {
+    opt = true,
+    cmd = {
+        "Bdelete",
+        "Bwipeout",
+        "Bdelete!",
+        "Bwipeout!",
+    },
+    config = conf.bufdelete
 }
 
 utils["rhysd/clever-f"] = {
-
+    opt = true,
+    event = "BufReadPost",
+    config = conf.clever_f
 }
+
+utils["phaazon/hop.nvim"] = {
+    opt = true,
+    branch = "v2",
+    event = "BufReadPost",
+    config = conf.hop
+}
+
+utils["karb94/neoscroll.nvim"] = {
+    opt = true,
+    event = "BufReadPost",
+    config = conf.neoscroll
+}
+
+utils["terrortylor/nvim-comment"] = {
+    opt = true,
+    event = "BufReadPost",
+    config = conf.nvim_comment
+}
+
+utils["windwp/nvim-autopairs"] = {
+    opt = true,
+    event = "BufReadPost",
+    config = conf.nvim_autopairs
+}
+
+utils["tyru/open-browser.vim"] = {
+    opt = true,
+    requires = {
+        { "Shougo/vimproc.vim", opt = true, run = make }
+    },
+    wants = { "vimproc.vim" },
+    cmd = {
+        "OpenBrowser",
+        "OpenBrowserSearch"
+    },
+    config = conf.open_browser
+}
+
+utils["folke/todo-comments.nvim:"] = {
+    opt = true,
+    requires = "nvim-lua/plenary.nvim",
+    wants = { "plenary.nvim" },
+    event = "BufReadPost",
+    config = conf.todo_comments
+}
+
+-- utils["ahmedkhalf/project.nvim"] = {
+--     opt = true,
+--     after = "telescope",
+--     conf = config.project
+-- }
+
+utils["ntpeters/vim-better-whitespace"] = {
+    opt = true,
+    event = "BufWritePre",
+    config = conf.better_whitespace
+}
+
+utils["junegunn/vim-easy-align"] = {
+    opt = true,
+    cmd = "EasyAlign",
+}
+
+utils["tpope/vim-fugitive"] = {
+    opt = true,
+    cmd = {
+        "Git",
+        "G"
+    }
+}
+
+utils["tpope/vim-repeat"] = {
+    opt = true,
+    event = "BufReadPost"
+}
+
+utils["tpope/vim-surround"] = {
+    opt = true,
+    event = "BufReadPost"
+}
+
+utils["vim-jp/vimdoc-ja"] = {
+    opt = true,
+    cmd = "help"
+}
+

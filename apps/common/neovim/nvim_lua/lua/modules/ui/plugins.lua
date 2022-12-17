@@ -2,25 +2,31 @@ local ui = {}
 local conf = require("modules.ui.config")
 
 -- ColorScheme
-ui["sainnhe/edge"] = {
-    opt = false,
-    config=conf.edge
+ui["catppuccin/nvim"] = {
+    opt = true,
+    as = "catppuccin",
+    event = { 
+        "colorscheme catppuccin",
+        "colorscheme catppuccin-latte",
+        "colorscheme catppuccin-frappe",
+        "colorscheme catppuccin-macchiato",
+        "colorscheme catppuccin-mocha",
+    },
+    config = conf.catppuccin
 }
 
-ui["shaunsingh/nord.nvim"] = {
-    opt = false,
-    config=conf.nord
-}
-
-ui["rcarriga/nvim-notify"] = {
-    opt = false,
-    config = conf.notify
+ui["navarasu/onedark.nvim"] = {
+    opt = true,
+    event = {
+        "colorscheme onedark"
+    },
+    config = conf.onedark
 }
 
 -- Start Menu
 ui["goolord/alpha-nvim"] = { 
     opt = true,
-    envent = "BufWinEnter",
+    event = "BufWinEnter",
     config = conf.alpha
 }
 
@@ -38,6 +44,7 @@ ui["j-hui/fidget.nvim"] = {
     config = conf.fidget
 }
 
+-- Gitの差分表示
 ui["lewis6991/gitsigns.nvim"] = {
     opt = true,
     event = { "BufReadPost", "BufNewFile" },
@@ -46,19 +53,18 @@ ui["lewis6991/gitsigns.nvim"] = {
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
     opt = true,
-    event = { "BufReadPost" }
+    event = { "BufReadPost" },
+    config = conf.indent_blankline
 }
 
 ui["hoob3rt/lualine.nvim"] = {
     opt = true,
+    requires = {
+        { "kyazdani42/nvim-web-devicons", opt = true },
+    },
+    wants = { "nvim-web-devicons" },
     after = "nvim-lspconfig",
     config = conf.lualine
-}
-
-ui["zbirenbaum/neodim"] = {
-    opt = true,
-    event = "LspAttach",
-    config = conf.neodim
 }
 
 ui["kevinhwang91/nvim-hlslens"] = {
@@ -67,13 +73,14 @@ ui["kevinhwang91/nvim-hlslens"] = {
     config = conf.nvim_hlslens
 }
 
+ui["rcarriga/nvim-notify"] = {
+    opt = false,
+    config = conf.notify
+}
+
 ui["petertriho/nvim-scrollbar"] = {
     opt = true,
     event = "BufReadPost",
     config = conf.nvim_scrollbar
 }
 
-ui["mbill/undotree"] = {
-    opt = true,
-    cmd = "UndotreeToggle"
-}

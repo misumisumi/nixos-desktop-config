@@ -23,16 +23,20 @@ I use conf sourcing ./nvim but you can manager from home manager.
       withRuby = true;
 
       extraPackages = with pkgs; [
-        gcc              # For nvim-treesitter
-        silver-searcher  # ToDO どっちか消す
-        ripgrep
-        efm-langserver   # Language servers
-        rnix-lsp
-        nixpkgs-fmt      # use rnix-lsp
         black
+        efm-langserver   # Language servers
+        gcc              # For nvim-treesitter
+        nixpkgs-fmt      # use rnix-lsp
         pylint
+        ripgrep
+        rnix-lsp
+        silver-searcher  # ToDO どっちか消す
         vim-vint
         yamllint
+
+        yarn
+
+        luaPackages.lua-lsp
         nodePackages.diagnostic-languageserver
       ];
 
