@@ -375,8 +375,35 @@ end
 
 function lazy_keymap.nvim_cmp(cmp)
     local keymap = {
-
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif require("luasnip").expand_or_jumpable() then
+                vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif require("luasnip").jumpable(-1) then
+                vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     }
+
+    return keymap
 end
 
 return lazy_keymap

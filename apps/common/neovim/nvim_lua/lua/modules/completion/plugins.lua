@@ -28,12 +28,11 @@ cmp["glepnir/lspsaga.nvim"] = {
 
 cmp["ray-x/lsp_signature.nvim"] = {
     opt = true,
-    after = { "nvim-lspconfig" }
 }
 
 cmp["windwp/nvim-autopairs"] = {
     opt = true,
-    after = { "nvim-cmp" }
+    after = { "nvim-cmp" },
     config = conf.nvim_autopairs
 }
 
@@ -48,19 +47,25 @@ cmp["hrsh7th/nvim-cmp"] = {
         { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
         { "hrsh7th/cmp-cmdline", after = "cmp-buffer" },
         { "kdheepak/cmp-latex-symbols", after = "cmp-cmdline" },
-        { "hrsh7th/cmp-nvim-lsp-document-symbol", watns = "cmp-latex-symbols" }
+        { "hrsh7th/cmp-nvim-lsp-document-symbol", watns = "cmp-latex-symbols" },
         { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp-document-symbol" },
         { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
         { "f3fora/cmp-spell", after = "cmp-spell" },
         { "andersevenrud/cmp-tmux", after = "cmp-tmux" },
         { "zbirenbaum/copilot-cmp", after = { "cmp-tmux", "copilot.lua" } },
-    }
+    },
+    config = conf.nvim_cmp
 }
 
 cmp["neovim/nvim-lspconfig"] = {
     opt = true,
     event = "BufReadPre",
-    config = conf.nvim_lsp
+    after = { 
+        { "ray-x/lsp_signature.nvim" },
+        { "glepnir/lspsaga.nvim" },
+        { "hrsh7th/cmp-nvim-lsp" }
+    },
+    config = conf.nvim_lspconfig
 }
 
 cmp["williamboman/mason.nvim"] = {
