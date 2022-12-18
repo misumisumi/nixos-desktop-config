@@ -65,30 +65,20 @@ function config.nvim_comment()
     require("nvim_comment").setup(opt)
 end
 
-function config.nvim_autopairs()
-    local opt = {
-        disabled_filetypes = {
-            "TelescopePrompt",
-        },
-        disable_in_macro = false,
-    }
-    require("nvim-autopairs").setup(opt)
-end
-
 function config.open_browser()
     g.openbrowser_search_engines = {
-		["duckduckgo"] = "https://duckduckgo.com/?q={query}",
-		["fileformat"] = "https://www.fileformat.info/info/unicode/char/{query}/",
-		["github"] = "https://github.com/search?q={query}",
-		["go"] = "https://pkg.go.dev/search?q={query}",
-		["google"] = "https://google.com/search?q={query}",
-		["php"] = "https://php.net/{query}",
-		["python"] = "https://docs.python.org/dev/search.html?q={query}&check_keywords=yes&area=default",
-		["twitter-search"] = "https://twitter.com/search/{query}",
-		["twitter-user"] = "https://twitter.com/{query}",
-		["vim"] = "https://www.google.com/cse?cx=partner-pub-3005259998294962%3Abvyni59kjr1&ie=ISO-8859-1&q={query}&sa=Search&siteurl=www.vim.org%2F#gsc.tab=0&gsc.q={query}&gsc.page=1",
-		["wikipedia"] = "https://en.wikipedia.org/wiki/{query}",
-		["wikipedia-ja"] = "https://ja.wikipedia.org/wiki/{query}",
+        ["duckduckgo"] = "https://duckduckgo.com/?q={query}",
+        ["fileformat"] = "https://www.fileformat.info/info/unicode/char/{query}/",
+        ["github"] = "https://github.com/search?q={query}",
+        ["go"] = "https://pkg.go.dev/search?q={query}",
+        ["google"] = "https://google.com/search?q={query}",
+        ["php"] = "https://php.net/{query}",
+        ["python"] = "https://docs.python.org/dev/search.html?q={query}&check_keywords=yes&area=default",
+        ["twitter-search"] = "https://twitter.com/search/{query}",
+        ["twitter-user"] = "https://twitter.com/{query}",
+        ["vim"] = "https://www.google.com/cse?cx=partner-pub-3005259998294962%3Abvyni59kjr1&ie=ISO-8859-1&q={query}&sa=Search&siteurl=www.vim.org%2F#gsc.tab=0&gsc.q={query}&gsc.page=1",
+        ["wikipedia"] = "https://en.wikipedia.org/wiki/{query}",
+        ["wikipedia-ja"] = "https://ja.wikipedia.org/wiki/{query}",
         ["archwiki"] = "https://wiki.archlinux.jp/index.php/{query}",
         ["nixos"] = " https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={query}",
         ["nixpkgs"] = "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={query}",

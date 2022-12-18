@@ -373,4 +373,10 @@ function lazy_keymap.textobject()
     return keymap
 end
 
+function lazy_keymap.nvim_cmp(cmp)
+    local keymap = {
+
+    }
+end
+
 return lazy_keymap

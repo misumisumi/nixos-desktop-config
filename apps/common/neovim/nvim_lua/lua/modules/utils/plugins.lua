@@ -50,12 +50,6 @@ utils["terrortylor/nvim-comment"] = {
     config = conf.nvim_comment
 }
 
-utils["windwp/nvim-autopairs"] = {
-    opt = true,
-    event = "BufReadPost",
-    config = conf.nvim_autopairs
-}
-
 utils["tyru/open-browser.vim"] = {
     opt = true,
     requires = {
