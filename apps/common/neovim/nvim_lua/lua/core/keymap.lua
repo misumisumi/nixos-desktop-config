@@ -3,7 +3,10 @@ local map_cr, map_cu, map_cmd = bind.map_cr, bind.map_cu, bind.map_cmd
 
 
 local function map_leader()
-    vim.g.mapleader = "\\<Space>"
+    vim.g.mapleader = " "
+    vim.keymap.set("n", " ", "")
+    vim.keymap.set("x", " ", "")
+
 end
 
 
@@ -13,14 +16,14 @@ local default_keymap = {
     ["n|D"] = map_cmd("d$"),
     ["n|n"] = map_cmd("nzzzv"), -- (n):検索結果の移動時に,(zz):カーソルを中央に,(zv):折りたたみに結果があれば折り畳みを開ける
     ["n|N"] = map_cmd("Nzzzv"),
-    ["n:J"] = map_cmd("mzJ`z`"), -- カーソル位置を維持したまま一行にする
+    ["n|J"] = map_cmd("mzJ`z`"), -- カーソル位置を維持したまま一行にする
     ["n|ts"] = map_cr("setlocal spell! spellang=en_us"),
 
-    ["n|<C-n>"] = map_cr("bnext"),
-    ["n|<C-p>"] = map_cr("bprevious"),
-    ["n|<Tab>"] = map_cr("tabnext"),
-    ["n|<S-Tab>"] = map_cr("tabprevious"),
-    ["n|<C-Tab>"] = map_cr("tabnew"),
+    ["n|<C-n>"] = map_cr("bnext"):with_silent(),
+    ["n|<C-p>"] = map_cr("bprevious"):with_silent(),
+    ["n|<Tab>"] = map_cr("tabnext"):with_silent(),
+    ["n|<S-Tab>"] = map_cr("tabprevious"):with_silent(),
+    ["n|<C-Tab>"] = map_cr("tabnew"):with_silent(),
 
 
     ["n|<C-s>"] = map_cr("write"),
@@ -31,18 +34,19 @@ local default_keymap = {
     ["n|<C-l>"] = map_cmd("<C-w>l"),
     ["n|<C-j>"] = map_cmd("<C-w>j"),
     ["n|<C-k>"] = map_cmd("<C-w>k"),
-    ["n|<C-S-H>"] = map_cmd("vertical resize -5"),
-    ["n|<C-S-H>"] = map_cmd("vertical resize +5"),
-    ["n|<C-S-H>"] = map_cmd("resize -2"),
-    ["n|<C-S-H>"] = map_cmd("resize +2"),
+    -- ToDO: ウィンドウの位置を把握して移動とキーを一致させる
+    ["n|<A-h>"] = map_cr("vertical resize -5"):with_silent(),
+    ["n|<A-l>"] = map_cr("vertical resize +5"):with_silent(),
+    ["n|<A-j>"] = map_cr("resize -2"):with_silent(),
+    ["n|<A-k>"] = map_cr("resize +2"):with_silent(),
 
     -- Insert mode
-    ["i|jj"] = map_cmd("<ESC>^i"),
+    ["i|jj"] = map_cmd("<ESC>"),
     ["i|<C-s>"] = map_cmd("<ESC>:w<CR>"),
     ["i|<C-q>"] = map_cmd("<ESC>:wq<CR>"),
 
     -- Visual mode
-    ["v|jj"] = map_cmd("<ESC>"),
+    -- ["v|jj"] = map_cmd("<ESC>"),
     ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
     ["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
     ["v|<"] = map_cmd("<gv"),
@@ -53,5 +57,5 @@ local default_keymap = {
 }
 
 
-set_leader()
-bind.nvim_load_mapping(def_map)
+map_leader()
+bind.nvim_load_mapping(default_keymap)

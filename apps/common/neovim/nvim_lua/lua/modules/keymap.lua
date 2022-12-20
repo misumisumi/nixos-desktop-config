@@ -1,8 +1,13 @@
-local bind = require("keymap.bind")
+local bind = require("utils.keybind")
 local map_cr, map_cu, map_cmd = bind.map_cr, bind.map_cu, bind.map_cmd
 
 
-plug_keymap = {
+local plug_keymap = {
+    -- Packer
+    ["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_nowait(),
+    ["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_nowait(),
+    ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_nowait(),
+    ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_nowait(),
     -- hlslens.nvim
     ["n|n"] = map_cmd([[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]]):with_silent(),
     ["n|N"] = map_cmd([[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]]):with_silent(),
@@ -10,12 +15,10 @@ plug_keymap = {
     ["n|#"] = map_cr("#<Cmd>lua require('hlslens').start()"):with_silent(),
     ["n|g*"] = map_cr("g*<Cmd>lua require('hlslens').start()"):with_silent(),
     ["n|g#"] = map_cr("g#<Cmd>lua require('hlslens').start()"):with_silent(),
-    ["n|<leader>l"] = map_cr("noh"):with_silent(),
-
+    ["n|<leader>h"] = map_cr("noh"):with_silent(),
     -- accelerated_jk.nvim
-    ["n|j"] = mcp_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
-    ["n|k"] = mcp_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
-
+    ["n|j"] = map_cmd("<Plug>(accelerated_jk_gj)"),
+    ["n|k"] = map_cmd("<Plug>(accelerated_jk_gk)"),
     -- bufdelete.nvim
     ["n|<A-q>"] = map_cr(":Bwipeout"),
     -- hop.nvim
@@ -33,8 +36,8 @@ plug_keymap = {
     ["n|]t"] = map_cr("lua require('todo-comments').jump_next()"),
     ["n|[t"] = map_cr("lua require('todo-comments').jump_prev()"),
     -- vim-easy-align
-    ["n|gea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
-    ["x|gea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
+    ["n|gea"] = map_cmd("<Plug>(clever-f-repeat-forward)"):with_expr(),
+    ["x|gea"] = map_cmd("<Plug>(clever-f-repeat-forward)"):with_expr(),
     -- vim-fugitive
     ["n|<leader>gs"] = map_cr("Git"),
     ["n|<leader>ga"] = map_cr("Gwrite"),
@@ -51,7 +54,7 @@ plug_keymap = {
     -- nvim-comment (This is default bind.)
     -- ["n|gcc"] = map_cr("CommentToggle"),
     -- neo-tree
-    ["n|<leader>e"] = map_cr("NeoTree"),
+    ["n|<leader>e"] = map_cr("NeoTreeShowToggle"):with_silent(),
     -- undo-tree
     ["n|<leader>ud"] = map_cr("UndotreeToggle"),
     -- toggleterm.nvim
@@ -68,8 +71,24 @@ plug_keymap = {
     --nvim-treehopper
     ["o|<silent>m"] = map_cu("lua require('tsht').nodes()"),
     ["x|<silent>m"] = map_cr("lua require('tsht').nodes()"),
+    -- Lsp mapp work when insertenter and lsp start
+	["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_nowait(),
+	["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_nowait(),
+	["n|go"] = map_cr("Lspsaga outline"):with_silent(),
+	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_silent(),
+	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_silent(),
+	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_silent(),
+	["n|gr"] = map_cr("Lspsaga rename"):with_silent(),
+	["n|K"] = map_cr("Lspsaga hover_doc"):with_silent(),
+	["n|ga"] = map_cr("Lspsaga code_action"):with_silent(),
+	["v|ga"] = map_cu("Lspsaga code_action"):with_silent(),
+	["n|gd"] = map_cr("Lspsaga peek_definition"):with_silent(),
+	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_silent(),
+	["n|gh"] = map_cr("Lspsaga lsp_finder"):with_silent(),
+	["n|gps"] = map_cr("G push"):with_silent(),
+	["n|gpl"] = map_cr("G pull"):with_silent(),
 }
 
-bind.nvim_load_mapping(_plug_keymap)
+bind.nvim_load_mapping(plug_keymap)
 
 return plug_keymap

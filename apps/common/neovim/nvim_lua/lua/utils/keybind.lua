@@ -120,7 +120,7 @@ end
 function pbind.nvim_load_mapping(mapping)
     for key, value in pairs(mapping) do
         local mode, keymap = key:match("([^|]*)|?(.*)")
-        local mode = split(mode)
+        local mode = split(mode, ",")
         if type(value) == "table" then
             local rhs = value.cmd
             local options = value.options

@@ -1,5 +1,21 @@
+local lazy_keymap = require("modules.lazy_keymap")
+local uv = vim.loop
 local config = {}
-local g = vim.g
+
+
+-- For sqlite.lua
+function config.sqlite()
+    if vim.api.nvim_exec("!cat /etc/os-release | grep '^NAME'", true):find("NixOS") ~= nil then
+        vim.api.nvim_exec("!nix path-info nixpkgs\\#sqlite.out", true)
+        local result = vim.api.nvim_exec("!nix path-info nixpkgs\\#sqlite.out", true)
+        local lines = {}
+        local count = 0
+        for s in result:gmatch("[^\n]+") do
+            table.insert(lines, s)
+        end
+        vim.g.sqlite_clib_path = lines[2] .. "/lib/libsqlite3.so"
+    end
+end
 
 
 function config.dressing()
@@ -17,11 +33,20 @@ function config.dressing()
     require("dressing").setup(opt)
 end
 
-function config.legendary()
-    local utils = require("modules.utils")
-    local path = utils.joinpath(vim.fn.stdpath("cache"), "legendary"),
 
-    utils.mkdir(path)
+function config.legendary()
+    local plugins = {
+        "dressing.nvim",
+        "sqlite.lua",
+        "which-key.nvim"
+    }
+    for _,plugin in ipairs(plugins) do
+        vim.api.nvim_command(("packadd %s"):format(plugin))
+    end
+
+    local utils = require("utils")
+    local path = utils.joinpath(vim.fn.stdpath("cache"), "legendary")
+    utils.mkdir(path, 511)
 
     local opt = {
         which_key = {
@@ -51,24 +76,38 @@ function config.legendary()
         log_level = "info",
     }
 
-    local which_key_keymap = require("modules.lazykey").legendary
+    local km = { which_key = require("modules.lazy_keymap").legendary() }
 
     require("legendary").setup(opt)
-    require("which-key").register(which_key_keymap)
+    require("which-key").register(km.which_key)
 end
 
 
 function config.neo_tree()
+    local plugins = {
+        "plenary.nvim",
+        "nvim-web-devicons",
+        "nui.nvim",
+        "nvim-window-picker",
+    }
+    for _,plugin in ipairs(plugins) do
+        vim.api.nvim_command(("packadd %s"):format(plugin))
+    end
+
     local icons = {
         ui = require("modules.ui.icons").get("ui"),
         git = require("modules.ui.icons").get("git")
     }
-    local keymap = require("modules.lazy_keymap").neo_tree()
+    local km = { neo_tree = require("modules.lazy_keymap").neo_tree() }
     local opt = {
         close_if_last_window = true,
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
+        source_selector = {
+            winbar = true,
+            statusline = false,
+        },
         default_component_configs = {
           container = {
             enable_character_fade = true
@@ -124,7 +163,7 @@ function config.neo_tree()
             noremap = true,
             nowait = true,
           },
-          mappings = keymap.default,
+          mappings = km.neo_tree.window,
         },
         nesting_rules = {},
         filesystem = {
@@ -150,7 +189,7 @@ function config.neo_tree()
             },
           },
           window = {
-            mappings = keymap.filesystem
+            mappings = km.neo_tree.fs
           }
         },
         buffers = {
@@ -159,16 +198,17 @@ function config.neo_tree()
           group_empty_dirs = true, -- when true, empty folders will be grouped together
           show_unloaded = true,
           window = {
-            mappings = keymap.buffers
+            mappings = km.neo_tree.buf
           },
         },
         git_status = {
           window = {
             position = "float",
-            mappings = keymap.git_status
+            mappings = km.neo_tree.git
           }
         }
       }
+      require("neo-tree").setup(opt)
 end
 
 
@@ -190,7 +230,7 @@ function config.sniprun()
                                             --# the hint is available for every interpreter
                                             --# but may not be always respected
         }
-        },      
+        },
 
         --# you can combo different display modes as desired and with the 'Ok' or 'Err' suffix
         --# to filter only sucessful runs (or errored-out runs respectively)
@@ -228,7 +268,7 @@ function config.sniprun()
 
         borders = 'single',              --# display borders around floating windows
                                        --# possible values are 'none', 'single', 'double', or 'shadow'
-        live_mode_toggle='off'           --# live mode toggle, see Usage - Running for more info   
+        live_mode_toggle='off'           --# live mode toggle, see Usage - Running for more info
     }
 end
 
@@ -252,7 +292,7 @@ function config.trouble()
         fold_closed = icons.ui.ArrowClosed,
         group = true, -- group results by file
         padding = true, -- add an extra new line on top of the list
-        action_keys = require("modules.lazy_keymap").trouble(),
+        -- action_keys = require("modules.lazy_keymap").trouble(),
         indent_lines = true, -- add an indent guide below the fold icons
         auto_open = false, -- automatically open the list when you have diagnostics
         auto_close = false, -- automatically close the list when you have no diagnostics
@@ -311,10 +351,11 @@ end
 function config.undotree()
     local utils = require("utils")
     local path = utils.joinpath(require("core.global").cache_dir, "undotree")
-    if fn.has("persistent_undo") then
+    if vim.fn.has("persistent_undo") then
         utils.mkdir(path)
     end
-    vim.opt.undofile = path
+    vim.g.undofile = path
+    vim.g.undotree_WindowLayout = 3  -- LeftSideWindow
 end
 
 
@@ -348,9 +389,30 @@ end
 
 
 function config.telescope()
-    local icons = {
-        ui = require("modules.ui.icons").get("ui", true)
+    local plugins = {
+        "plenary.nvim",
+        "popup.nvim",
+        "sqlite.lua",
+        "telescope-bookmarks.nvim",
+        "cheatsheet.nvim",
+        "telescope-frecency.nvim",
+        "telescope-fzf-native.nvim",
+        "telescope-http.nvim",
+        "telescope-live-grep-args.nvim",
+        "telescope-media-files.nvim",
+        "telescope-project.nvim",
+        "telescope-software-licenses.nvim",
+        "telescope-tabs",
+        "telescope-zoxide",
     }
+    for _,plugin in ipairs(plugins) do
+        vim.api.nvim_command(("packadd %s"):format(plugin))
+    end
+
+    local icons = {
+        ui = require("modules.ui.icons").get("ui", true),
+    }
+
     local telescope_actions = require("telescope.actions.set")
     local fixfolds = {
         hidden = true,
@@ -363,10 +425,13 @@ function config.telescope()
             return true
         end,
     }
+    local lga_actions = require("telescope-live-grep-args.actions")
+
+    local km = { live_grep_args = require("modules.lazy_keymap").live_grep_args(lga_actions) }
 
     local opt = {
         defaults = {
-            prompt_prefix = " " .. ui.Telescope .. " ",
+            prompt_prefix = " " .. icons.ui.Telescope .. " ",
             selection_caret = icons.ui.ChevronRight,
             entry_prefix = " ",
             scroll_strategy = "cycle", -- or limit
@@ -407,12 +472,7 @@ function config.telescope()
             live_grep_args = {
                 auto_quoting = true, -- enable/disable auto-quoting
                 -- define mappings, e.g.
-                mappings = { -- extend mappings
-                    i = {
-                      ["<C-k>"] = lga_actions.quote_prompt(),
-                      ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-                    },
-                },
+                mappings = km.live_grep_args,
             },
         },
         pickers = {
@@ -427,9 +487,18 @@ function config.telescope()
 
     require("telescope").load_extension("notify")
     require("telescope").load_extension("fzf")
-    require("telescope").load_extension("project")
-    require("telescope").load_extension("zoxide")
     require("telescope").load_extension("frecency")
     require("telescope").load_extension("live_grep_args")
+    require("telescope").load_extension("project")
+    require("telescope").load_extension("zoxide")
 end
+
+
+function config.window_picker()
+    local opt = {}
+    require("window-picker").setup()
+end
+
+
+return config
 

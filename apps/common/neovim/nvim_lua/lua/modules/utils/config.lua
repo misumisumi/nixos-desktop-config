@@ -1,18 +1,18 @@
 local config = {}
-local g, o, fn, api = vim.g, vim.o, vim.fn, vim.api
 
 
 function config.better_escape()
     local opt = {
         mapping = { "jk", "jj" },
-        timeout = o.timeoutlen,
+        timeout = vim.g.timeoutlen,
         keys = function()
-            return vim.api.nvim-win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
+            return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
         end
     }
 
     require("better_escape").setup(opt)
 end
+
 
 function config.clever_f()
     vim.api.nvim_set_hl(
@@ -27,15 +27,17 @@ function config.clever_f()
             ctermbg = "NONE"
         }
     )
-    g.clever_f_mark_char_color = "CleverChar"
-    g.clever_f_mark_direct_color = "CleverChar"
-    g.clever_f_mark_direct = true
-    g.clever_f_timeout_ms = 1500
+    vim.g.clever_f_mark_char_color = "CleverChar"
+    vim.g.clever_f_mark_direct_color = "CleverChar"
+    vim.g.clever_f_mark_direct = true
+    vim.g.clever_f_timeout_ms = 1500
 end
+
 
 function config.hop()
     require("hop").setup { keys = 'etovxqpdygfblzhckisuran' }
 end
+
 
 function config.neoscroll()
     local opt = {
@@ -50,11 +52,12 @@ function config.neoscroll()
             'zz',
             'zb'
         },
-        cursor_scrolls_alone = false,
+        cursor_scrolls_alone = true,
         performance_mode = true,
     }
     require("neoscroll").setup(opt)
 end
+
 
 function config.nvim_comment()
     local opt = {
@@ -65,8 +68,9 @@ function config.nvim_comment()
     require("nvim_comment").setup(opt)
 end
 
+
 function config.open_browser()
-    g.openbrowser_search_engines = {
+    vim.g.openbrowser_search_engines = {
         ["duckduckgo"] = "https://duckduckgo.com/?q={query}",
         ["fileformat"] = "https://www.fileformat.info/info/unicode/char/{query}/",
         ["github"] = "https://github.com/search?q={query}",
@@ -87,14 +91,15 @@ function config.open_browser()
         ["startpage"] = "https://www.startpage.com/do/search?q={query}",
         ["zenn"] = "https://zenn.dev/search?q={query}",
     }
-    g.openbrowser_default_search = "startpage"
-    g.openbrowser_use_vimproc = 1
+    vim.g.openbrowser_default_search = "startpage"
+    vim.g.openbrowser_use_vimproc = 1
 end
 
+
 function config.todo_comments()
-    local icons = { 
-        ui = require(modules.ui.icons).get("ui", true),
-        diagnostics = require(modules.ui.icons).get("diagnostics", true)
+    local icons = {
+        ui = require("modules.ui.icons").get("ui", true),
+        diagnostics = require("modules.ui.icons").get("diagnostics", true)
     }
     local opt = {
         keywords = {
@@ -103,35 +108,34 @@ function config.todo_comments()
               color = "error",
               alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
             },
-            TODO = { icon = " ", color = "info" },
             TODO = {
                 icon = icons.ui.Check,
                 color = "info"
             },
-            HACK = { 
-                icon = icons.ui.Hack,
-                color = "warning" 
+            HACK = {
+                icon = icons.ui.Fire,
+                color = "warning"
             },
-            WARN = { 
+            WARN = {
                 icon = icons.diagnostics.Warning,
                 color = "warning",
                 alt = { "WARNING", "XXX" }
             },
-            PERF = { 
+            PERF = {
                 icon = icons.ui.Perf,
                 alt = { "OPTIM",
                 "PERFORMANCE",
                 "OPTIMIZE" }
             },
-            NOTE = { 
+            NOTE = {
                 icon = icons.ui.Note,
                 color = "hint",
                 alt = { "INFO" }
             },
-            TEST = { 
-                icon = icons.ui.Test,
+            TEST = {
+                icon = icons.ui.CodeAction,
                 color = "test",
-                alt = { "TESTING", "PASSED", "FAILED" } 
+                alt = { "TESTING", "PASSED", "FAILED" }
             },
         },
         highlight = {
@@ -160,15 +164,39 @@ function config.todo_comments()
             pattern = [[\b(KEYWORDS):]], -- ripgrep regex
             -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
         },
-
-        require("todo-comments").setup(opt)
     }
+    require("todo-comments").setup(opt)
 
 end
+
 
 function config.better_whitespace()
-    g.better_whitespace_enabled = 1
-    g.better_whitespace_on_save = 1
-    g.current_line_whitespace_disabled_soft = 1
+    vim.g.better_whitespace_enabled = 0
+    vim.g.better_whitespace_on_save = 0
+    vim.g.current_line_whitespace_disabled_soft = 1
+    vim.g.strip_whitespace_on_save = 1
+    vim.g.strip_whitespace_confirm=0
 end
+
+
+function config.surround()
+    local opt = {
+        keymaps = {
+            insert = "<C-g>s",
+            insert_line = "<C-g>S",
+            normal = "sa",
+            normal_cur = "saa",
+            normal_line = "sA",
+            normal_cur_line = "sAA",
+            visual = "sa",
+            visual_line = "sA",
+            delete = "ds",
+            change = "cs",
+        },
+    }
+
+    require("nvim-surround").setup(opt)
+end
+
+return config
 

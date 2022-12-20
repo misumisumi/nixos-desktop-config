@@ -1,30 +1,26 @@
 local ui = {}
 local conf = require("modules.ui.config")
 
+
+ui["shaunsingh/nord.nvim"] = {
+    opt = false,
+    config = conf.nord
+}
+
 -- ColorScheme
 ui["catppuccin/nvim"] = {
-    opt = true,
+    opt = false,
     as = "catppuccin",
-    event = { 
-        "colorscheme catppuccin",
-        "colorscheme catppuccin-latte",
-        "colorscheme catppuccin-frappe",
-        "colorscheme catppuccin-macchiato",
-        "colorscheme catppuccin-mocha",
-    },
     config = conf.catppuccin
 }
 
 ui["navarasu/onedark.nvim"] = {
-    opt = true,
-    event = {
-        "colorscheme onedark"
-    },
+    opt = false,
     config = conf.onedark
 }
 
 -- Start Menu
-ui["goolord/alpha-nvim"] = { 
+ui["goolord/alpha-nvim"] = {
     opt = true,
     event = "BufWinEnter",
     config = conf.alpha
@@ -47,13 +43,13 @@ ui["j-hui/fidget.nvim"] = {
 -- Gitの差分表示
 ui["lewis6991/gitsigns.nvim"] = {
     opt = true,
-    event = { "BufReadPost", "BufNewFile" },
+    after = "nvim-scrollbar",
     config = conf.gitsigns
 }
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
     opt = true,
-    event = { "BufReadPost" },
+    event = "BufReadPost",
     config = conf.indent_blankline
 }
 
@@ -62,14 +58,13 @@ ui["hoob3rt/lualine.nvim"] = {
     requires = {
         { "kyazdani42/nvim-web-devicons", opt = true },
     },
-    wants = { "nvim-web-devicons" },
     after = "nvim-lspconfig",
     config = conf.lualine
 }
 
 ui["kevinhwang91/nvim-hlslens"] = {
     opt = true,
-    after = "nvim-scrollbar",
+    after = "gitsigns.nvim",
     config = conf.nvim_hlslens
 }
 
@@ -80,7 +75,11 @@ ui["rcarriga/nvim-notify"] = {
 
 ui["petertriho/nvim-scrollbar"] = {
     opt = true,
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
+    -- event = "BufReadPost",
     config = conf.nvim_scrollbar
 }
+
+
+return ui
 

@@ -1,5 +1,6 @@
-local config = {}
+local vim = vim
 local g, o, fn, api = vim.g, vim.o, vim.fn, vim.api
+local config = {}
 
 
 function config.flutter_tools()
@@ -225,4 +226,6 @@ function config.vimtex()
     g.vimtex_view_forward_search_on_start = false
 end
 
+
+return config
 

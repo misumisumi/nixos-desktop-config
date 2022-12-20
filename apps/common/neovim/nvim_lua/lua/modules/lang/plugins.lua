@@ -23,23 +23,23 @@ lang["iamcco/markdown-preview.nvim"] = {
     config = conf.md_preview
 }
 
-lang["simra39/rust-tools.nvim"] = {
-    opt = true,
-    requires = {
-        { { "nvim-lua/plenary.nvim", opt = false } }
-    },
-    after = {
-        "nvim-lspconfig",
-        "lsp_signature"
-    },
-    ft = rust,
-    config = conf.rust_tools
-}
+-- lang["simrat39/rust-tools.nvim"] = {
+--     opt = true,
+--     requires = {
+--         { "nvim-lua/plenary.nvim", opt = false }
+--     },
+--     after = {
+--         "nvim-lspconfig",
+--         "lsp_signature"
+--     },
+--     ft = rust,
+--     config = conf.rust_tools
+-- }
 
 lang["fatih/vim-go"] = {
     opt = true,
     ft = "go",
-    event = ":GoInstallBinaries",
+    -- event = "GoInstallBinaries",
     config = conf.vim_go
 }
 
@@ -48,4 +48,7 @@ lang["lervag/vimtex"] = {
     opt = "tex",
     config = conf.vimtex
 }
+
+
+return lang
 

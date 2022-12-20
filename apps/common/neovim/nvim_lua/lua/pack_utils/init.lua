@@ -1,5 +1,5 @@
 -- PackerのUtils
-
+local vim = vim
 local fn, uv, api = vim.fn, vim.loop, vim.api
 local utils = require("utils")
 local joinpath = utils.joinpath
@@ -8,9 +8,10 @@ local is_mac = global.is_mac
 local modules_dir = global.modules_dir
 
 
-local settings = require("packer.settings")
-local backup_compiled = settings.backup_compiled
+local settings = require("pack_utils.settings")
+local compiled_dir = settings.compiled_dir
 local packer_compiled = settings.packer_compiled
+local backup_compiled = settings.backup_compiled
 local use_ssh = settings.use_ssh
 
 local packer = nil
@@ -24,7 +25,7 @@ function Packer:load_plugins()
         local list = {}
         local tmp = vim.split(fn.globpath(modules_dir, joinpath("*", "plugins.lua")), "\n")
 
-        for _,v in iparis(tmp) do
+        for _,f in ipairs(tmp) do
             list[#list + 1] = f:sub(#modules_dir - 6, -1)
         end
 
@@ -36,8 +37,10 @@ function Packer:load_plugins()
     -- Each plugins.lua return { "<repo>" = { conf=foo } }
     for _,m in ipairs(plugins_file) do
         local repos = require(m:sub(0, #m - 4))
-        for repo, conf in pairs(repos) do
-            self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
+        if type(repos) == "table" then
+            for repo, conf in pairs(repos) do
+                self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
+            end
         end
     end
 end
@@ -48,7 +51,7 @@ function Packer:load_packer()
         api.nvim_command("packadd packer.nvim")
         packer = require("packer")
     end
-    local clone_prefix = use_ssh and "git@github.com" or "https://github.com/%s"
+    local clone_prefix = use_ssh and "git@github.com:%s" or "https://github.com/%s"
     if not is_mac then
         packer.init({
             compile_path = packer_compiled,
@@ -80,22 +83,25 @@ function Packer:load_packer()
     self:load_plugins()
     packer.use({ "wbthomason/packer.nvim", opt = true })
     for _, repo in ipairs(self.repos) do
+        -- for i,k in ipairs(repo) do
+        --     print(k)
+        --     break
+        -- end
         packer.use(repo)
     end
 end
 
 
 function Packer:init_ensure_plugins()
+    local packer_dir = settings.packer_dir
     if not (utils.path_exists(packer_dir)) then
         local cmd = (
             use_ssh and "!git clone git@github.com:wbthomason/packer.nvim.git "
             or "!git clone https://github.com/wbthomason/packer.nvim "
         ) .. packer_dir
         api.nvim_command(cmd)
-        uv.fs_mkdir(joinpath(data_dir, "lua"), 511, function()
-            assert(nil, "Failed to make packer compile dir. Please restart Nvim and we'll try it again!")
-        end)
-        self.load_packer()
+	utils.mkdir(compiled_dir, 511)
+        self:load_packer()
         packer.install()
     end
 end
@@ -144,13 +150,13 @@ function plugins.load_compile()
     local cmds = { "Compile", "Install", "Update", "Sync", "Clean", "Status" }
     for _, cmd in ipairs(cmds) do
         api.nvim_create_user_command("Packer" .. cmd, function()
-            require("pack_util")[cmd == "Compile" and "back_compile" or string.lower(cmd)]()
+            require("pack_utils")[cmd == "Compile" and "back_compile" or string.lower(cmd)]()
         end, { force = true })
     end
 
     api.nvim_create_autocmd("User", {
         pattern = "PackerComplete",
-        callback = function() require("pack_util").backup_compiled() end
+        callback = function() require("pack_utils").back_compile() end
     })
 end
 

@@ -25,7 +25,7 @@ utils["famiu/bufdelete.nvim"] = {
     config = conf.bufdelete
 }
 
-utils["rhysd/clever-f"] = {
+utils["rhysd/clever-f.vim"] = {
     opt = true,
     event = "BufReadPost",
     config = conf.clever_f
@@ -55,7 +55,7 @@ utils["tyru/open-browser.vim"] = {
     requires = {
         { "Shougo/vimproc.vim", opt = true, run = make }
     },
-    wants = { "vimproc.vim" },
+    after = { "vimproc.vim" },
     cmd = {
         "OpenBrowser",
         "OpenBrowserSearch"
@@ -63,7 +63,7 @@ utils["tyru/open-browser.vim"] = {
     config = conf.open_browser
 }
 
-utils["folke/todo-comments.nvim:"] = {
+utils["folke/todo-comments.nvim"] = {
     opt = true,
     requires = "nvim-lua/plenary.nvim",
     wants = { "plenary.nvim" },
@@ -101,13 +101,22 @@ utils["tpope/vim-repeat"] = {
     event = "BufReadPost"
 }
 
-utils["tpope/vim-surround"] = {
+-- utils["tpope/vim-surround"] = {
+--     opt = true,
+--     event = "BufReadPost"
+-- }
+
+utils["kylechui/nvim-surround"] = {
     opt = true,
-    event = "BufReadPost"
+    event = "BufReadPost",
+    config = conf.surround
 }
 
 utils["vim-jp/vimdoc-ja"] = {
     opt = true,
     cmd = "help"
 }
+
+
+return utils
 

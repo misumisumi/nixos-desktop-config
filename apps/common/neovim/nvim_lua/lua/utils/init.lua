@@ -1,3 +1,5 @@
+local vim = vim
+local uv = vim.loop
 local os_name = vim.loop.os_uname().sysname
 local sep = (os_name == "Windows_NT") and "\\" or "/"
 
@@ -18,10 +20,14 @@ function utils.joinpath(...)
     local arg = {...}
     local path = ""
     for i,v in ipairs(arg) do
-        path = path .. sep .. v
+        if i == 1 then
+            path = v
+        else
+            path = path .. sep .. v
+        end
     end
 
-    if utils.get_ext(v) == nil then
+    if utils.get_ext(path) == nil then
         return path .. sep
     else
         return path
@@ -29,15 +35,19 @@ function utils.joinpath(...)
 end
 
 
-function path_exists(path)
+function utils.path_exists(path)
     return vim.loop.fs_stat(path) ~= nil
 end
 
 
-function utils.mkdir(path)
-    if not path_exists(path) then
-        os.mkdir(path)
-    end
+function utils.mkdir(path, mode)
+    mode = mode == nil and 755 or mode
+    uv.fs_mkdir(path, mode, function()
+        assert(true, ("Failed to mkdir %s!"):format(path))
+    end)
+    -- if not utils.path_exists(path) then
+    --     os.mkdir(path)
+    -- end
 end
 
 
@@ -48,3 +58,16 @@ function utils.check_os()
 
     return is_linux,is_mac,is_windows
 end
+
+
+function utils.load_plugin(plugins)
+    if type(plugins) == "string" then
+        vim.api.nvim_command(("packadd %s"):format(plugins))
+    else
+        for _,plugin in ipairs(plugins) do
+            vim.api.nvim_command(("packadd %s"):format(plugin))
+        end
+    end
+end
+
+return utils

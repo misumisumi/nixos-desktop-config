@@ -1,6 +1,7 @@
 local uv, opt = vim.loop, vim.opt
+local o = vim.o
 local global = require("core.global")
-local utils = require("core.utils")
+local utils = require("utils")
 
 local search_ignore = { 
     ".git",
@@ -39,7 +40,7 @@ local function load_options()
         infercase = true, -- 補完で大文字小文字を区別しない
         linebreak = true,
         list = true, -- タブ文字などの可視化
-        nowrap = true,
+        wrap = true,
         number = true,
         shiftround = true,
         smartcase = true,
@@ -62,8 +63,8 @@ local function load_options()
         scrolloff = 3,
         shiftwidth = 4,
         tabstop = 4,
-        timeoutlen = 0, -- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
-        ttimeoutlen = 0, -- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
+        timeoutlen = 200, -- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
+        ttimeoutlen = 200, -- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
         winblend = 20, -- ウィンドウの透過率(%)
 
         -- backupdir = utils.joinpath(global.cache_dir, "backup"),
@@ -73,35 +74,36 @@ local function load_options()
         undodir = utils.joinpath(global.state_dir, "undo"),
 
         ambiwidth = "single", -- 全角は半角2文字分
-        breakindentopt = "shift:2,min:20", -- 折り返された行を同じインデントにする (wrapが音のとき),
+        breakindentopt = { "shift:2", "min:20" }, -- 折り返された行を同じインデントにする (wrapが音のとき),
+        clipboard = "unnamedplus",
         colorcolumn = { 80, 100 },
-        complete = ".,w,b,k", -- 補完の検索は"現在のバッファ,別ウィンドウのバッファ,読み込まれてる別のバッファ,英語単語辞書"
-        display="listline", -- 行が折り返されてかつ行が折り返されているときに表示させる
+        complete = { ".", "w", "b", "k" }, -- 補完の検索は"現在のバッファ,別ウィンドウのバッファ,読み込まれてる別のバッファ,英語単語辞書"
+        display = "lastline", -- 行が折り返されてかつ行が折り返されているときに表示させる
         encoding = "utf-8",
-        fileencodings = "utf-8,iso-2202-jp,euc-jp,sjis",
+        fileencodings = { "utf-8", "iso-2202-jp", "euc-jp", "sjis" },
         fileformats = { "unix", "mac", "dos"},
         helplang = { "ja", "en" },
         mouse = "a",
-        nrformts = "",
-        sessionoptions = "curdir,tabpages,winsize",
+        nrformats = "",
+        sessionoptions = { "curdir", "tabpages", "winsize" },
         showbreak = "> ", -- インデントかつ折返しのとき行の先頭に識別子をつける
-        swhitchbuf = "useopen",
-        wildignore = search_ignore,
-        wildmode = "longerst,full",
+        switchbuf = "useopen",
+        wildignore = "search_ignore",
+        wildmode = { "longest", "full" },
     }
 
-    for name,value in paris(global_opts) do 
+    for name,value in pairs(global_opts) do
         opt[name] = value
         if string.find(name, "dir") ~= nil then
             uv.fs_mkdir(value, 511)
         end
-        if string.find(name, "file") ~= nil then
-            uv.fs_mkdir(vim.fn.fnamemodify(value, ":h"), 511)
-        end
+        -- if string.find(name, "spellfile") ~= nil then
+        --     uv.fs_mkdir(vim.fn.fnamemodify(value, ":t"), 511)
+        -- end
     end
 
-    opt.iskeyword.remove("_")
-    opt.matchpairs.append("<:>")
+    -- opt.iskeyword.remove("_")
+    -- opt.matchpairs.append("<:>")
 end
 
 load_options()

@@ -1,5 +1,4 @@
 local config = {}
-local g, fn, api = vim.g, vim.fn, vim.api
 
 
 function config.vim_illuminate()
@@ -30,19 +29,18 @@ function config.vim_illuminate()
 end
 
 function config.neodim()
-    local normal_background = api.nvim_get_hl_by_name("Normal", true).background
-    local blend_color = normal_background ~= nil and ("#%06x").format(normal_background) or "#000000"
+    local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
     local opt = {
         alpha = 0.5,
-        blend_color = blend_color,
+        blend_color = normal_background ~= nil and ("#%06x").format(normal_background) or "#000000",
         update_in_insert = {
             enable = true,
             delay = 100,
         },
         hide = {
-            visual_text = true,
+            virtual_text = true,
             signs = false,
-            underline = false
+            underline = false,
         }
     }
 
@@ -50,7 +48,7 @@ function config.neodim()
 end
 
 function config.nvim_treesitter()
-    local keymap = require("modules.lazy_keymap")
+    local km = { textobject = require("modules.lazy_keymap").textobject() }
     local opt = {
         ensure_installed = {
             "bash",
@@ -96,15 +94,15 @@ function config.nvim_treesitter()
         textobject = {
             select = {
                 enable = true,
-                keymaps = keymap.select
+                keymaps = km.textobject.select
             },
             move = {
                 enable = true,
                 set_jumpse = true,
-                goto_next_start = keymap.move.goto_next_start,
-                goto_next_end = keymap.move.goto_next_end,
-                goto_previous_start = keymap.move.goto_previous_start,
-                goto_previous_end = keymap.move.goto_previous_end,
+                goto_next_start = km.textobject.move.goto_next_start,
+                goto_next_end = km.textobject.move.goto_next_end,
+                goto_previous_start = km.textobject.move.goto_previous_start,
+                goto_previous_end = km.textobject.move.goto_previous_end,
             }
         },
         rainbow = {
@@ -118,4 +116,6 @@ function config.nvim_treesitter()
     }
 end
 
+
+return config
 

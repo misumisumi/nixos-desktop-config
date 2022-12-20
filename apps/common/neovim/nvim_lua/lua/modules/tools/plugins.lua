@@ -1,34 +1,39 @@
 local tools = {}
 local conf = require("modules.tools.config")
+local depends = require("modules.depends.config")
 
 -- CodePallet
 tools["mrjones2014/legendary.nvim"] = {
     opt = true,
     requires = {
-        { "stevearc/dressing.nvim", opt = true, config = conf.dressing },
-        { "kkharji/sqlite.lua", opt = true },
+        { "stevearc/dressing.nvim", opt = false, config = conf.dressing },
+        { "kkharji/sqlite.lua", opt = true, setup = conf.sqlite },
         { "folke/which-key.nvim", opt = true }
     },
-    wants = {
-        "dressing.nvim",
-        "sqlite.lua",
-        "which-key.nvim"
-    },
     cmd = "Legendary",
-    config = conf.legendary()
+    config = conf.legendary
 }
 
 tools["nvim-neo-tree/neo-tree.nvim"] = {
-    opt = true,
+    opt = false,
     branch = "v2.x",
     requires = {
-        { "nvim-lua/plenary.nvim", opt = true },
-        { "nvim-tree/nvim-web-devicons", opt = true },
-        { "MunifTanjim/nui.nvim", opt = true },
-        { "s1n7ax/nvim-window-picker", opt = true }  -- Optional independent
+        { "nvim-lua/plenary.nvim", opt=false },
+        { "nvim-tree/nvim-web-devicons", opt=false },
+        { "MunifTanjim/nui.nvim", opt=false },
+        {
+            "s1n7ax/nvim-window-picker",
+            opt=true,
+            after = "neo-tree.nvim",
+            config = conf.window_picker,
+        },
     },
     cmd = {
-        "Neotree"
+        "Neotree",
+        "NeoTreeShow",
+        "NeoTreeShowToggle",
+        "NeoTreeShowInSplit",
+        "NeoTreeShowInSplitToggle",
     },
     config = conf.neo_tree
 }
@@ -39,6 +44,7 @@ tools["michaelb/sniprun"] = {
     run = "bash ./install.sh",
     cmd = {
         "SnipRun",
+        "<,'>SnipRun",
         "SnipInfo"
     },
     config = conf.sniprun
@@ -47,28 +53,33 @@ tools["michaelb/sniprun"] = {
 -- Show trouble
 tools["folke/trouble.nvim"] = {
     opt = true,
+	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
+	config = conf.trouble,
+}
+
+tools["Shougo/vimproc.vim"] = {
+    opt = true,
+    run = "make",
+    after = "vim-quickrun"
 }
 
 tools["thinca/vim-quickrun"] = {
     opt = true,
-    requires = {
-        { "vimproc.vim", opt = true, run = make }
-    },
-    wants = "vimproc.vim",
     cmd = "QuickRun",
-    config = conf.vimproc
+    -- config = conf.vimproc
 }
 
 tools["dstein64/vim-startuptime"] = {
     opt = true,
-    cmd = "StartupTime" 
+    cmd = "StartupTime"
 }
 
 tools["folke/which-key.nvim"] = {
-    opt = true
+    opt = false,
+    config = conf.which_key
 }
 
-tools["mbill/undotree"] = {
+tools["mbbill/undotree"] = {
     opt = true,
     cmd = "UndotreeToggle",
     config = conf.undotree
@@ -84,21 +95,11 @@ tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     tag = "0.1.0",
     requires = {
-        { "nvim-lua/plenary.nvim", opt = true },
-        { "nvim-lua/plenary.nvim", opt = true },
+        { "nvim-lua/plenary.nvim", opt = false },
+        { "nvim-lua/popup.nvim", opt = true }
     },
-    wants = {
-        "plenary",
-        "popup",
-        "telescope-bookmarks.nvim",
-        "cheatsheet.nvim",
-        "telescope-fzf-native.nvim",
-        "telescope-live-grep-args.nvim",
-        "telescope-media-files.nvim",
-        "telescope-http.nvim",
-        "telescope-project.nvim",
-        "telescope-tabs",
-        "telescope-software-licenses.nvim"
+    cmd = {
+        "Telescope"
     },
     config = conf.telescope
 }
@@ -114,15 +115,21 @@ tools["sudormrfbin/cheatsheet.nvim"] = {
 tools["nvim-telescope/telescope-frecency.nvim"] = {
     opt = true,
     requires = {
-        { "kkharji/sqlite.lua", opt = true },
-        { "nvim-tree/nvim-web-devicons", opt = true }
-    },
-    wants = { "sqlite.lua", "nvim-web-devicons" },
+        {
+            "kkharji/sqlite.lua",
+            opt = true,
+            setup = conf.sqlite
+        },
+        {
+            "nvim-tree/nvim-web-devicons",
+            opt = true,
+        }
+    }
 }
 
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
     opt = true,
-    run = "make",
+    run = "make"
 }
 
 tools["nvim-telescope/telescope-live-grep-args.nvim"] = {
@@ -148,4 +155,11 @@ tools["LukasPietzschmann/telescope-tabs"] = {
 tools["chip/telescope-software-licenses.nvim"] = {
     opt = true,
 }
+
+tools["jvgrootveld/telescope-zoxide"] = {
+    opt = true
+}
+
+
+return tools
 

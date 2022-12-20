@@ -1,4 +1,3 @@
-local vim = {}
 local autocmd = {}
 
 
@@ -34,17 +33,18 @@ function autocmd.load_autocmds()
         },
 
         wins = {
-            -- tmuxとneovimのfocus・unfocusを視覚的にわかりやすくする
-            { "WinEnter", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_color_by_name("Bg")) },
-            { "WinEnter", "*", ("highlight NormalNc guibg=%06x"):format(vim.api.nvim_get_color_by_name("Black")) },
-            { "FocusGained", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_color_by_name("Bg")) },
-            { "FocusLost", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_color_by_name("Black")) },
-            -- nvimを開いているウィンドウの大きさが変更されたとき各ウィンドウの大きさを均等にする
-            { "VimResized", "*", [[tabdo wincmd =]] },
+            -- -- tmuxとneovimのfocus・unfocusを視覚的にわかりやすくする
+            -- { "WinEnter", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_hl_by_name("Normal", true).background) },
+            -- { "WinEnter", "*", ("highlight NormalNc guibg=%06x"):format(vim.api.nvim_get_color_by_name("Black")) },
+            -- { "FocusGained", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_hl_by_name("Normal", true).background) },
+            -- { "FocusLost", "*", ("highlight Normal guibg=%06x"):format(vim.api.nvim_get_color_by_name("Black")) },
+            -- -- nvimを開いているウィンドウの大きさが変更されたとき各ウィンドウの大きさを均等にする
+            -- { "VimResized", "*", [[tabdo wincmd =]] },
         },
 
         ft = {
-            { "FileType", "markdown", "set wrap" },
-            { "FileType", "tex", "set wrap" },
         }
     }
+end
+
+autocmd.load_autocmds()
