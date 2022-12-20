@@ -114,6 +114,8 @@ function config.nvim_treesitter()
             enable = true
         }
     }
+
+    require("nvim-treesitter.configs").setup(opt)
 end
 
 

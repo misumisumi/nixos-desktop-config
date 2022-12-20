@@ -7,6 +7,7 @@ vim.api.nvim_command([[packadd cmp-nvim-lsp]])
 local nvim_lsp = require("lspconfig")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
+local mason_registry = require("mason-registry")
 
 require("lspconfig.ui.windows").default_options.border = "single"
 
@@ -23,8 +24,35 @@ mason_lsp.setup({
 		"clangd",
 		"gopls",
 		"pyright",
+        "rnix",
 	},
 })
+
+mason_registry:on("package:install:success", function(pkg)
+    pkg:get_receipt():if_present(function(receipt)
+
+        -- Figure out the interpreter inspecting nvim itself
+        -- This is the same for all packages, so compute only once
+        local interpreter = os.execute(
+             ("patchelf --print-interpreter %q"):format(
+               "$(grep -oE '\\/nix\\/store\\/[a-z0-9]+-neovim-unwrapped-[0-9]+\\.[0-9]+\\.[0-9]+\\/bin\\/nvim' $(which nvim))"
+             )
+        )
+
+
+        for _, rel_path in pairs(receipt.links.bin) do
+            local bin_abs_path = pkg:get_install_path() .. "/" .. rel_path
+            if pkg.name == "lua-language-server" then
+              bin_abs_path = pkg:get_install_path() .. "/extension/server/bin/lua-language-server"
+            end
+
+            -- Set the interpreter on the binary
+            os.execute(
+                ("patchelf --set-interpreter %q %q"):format(interpreter, bin_abs_path)
+            )
+        end
+    end)
+end)
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
