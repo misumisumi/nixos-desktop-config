@@ -11,6 +11,7 @@ in
     firewall = {
       enable = true;
       allowedTCPPorts = [
+        4010
         4713                       # PulseAudio
       ];
       allowedUDPPortRanges = [

@@ -1,5 +1,11 @@
 { pkgs, user, ... }:
 {
+  boot = {
+    kernelModules = [
+     "v4l2loopback"
+     "snd-aloop"
+    ];
+  };
   security.sudo = {
     extraRules = [
       {
