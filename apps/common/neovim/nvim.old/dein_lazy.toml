@@ -1,0 +1,55 @@
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+if = 'has("nvim")'
+hook_post_update = 'TSUpdate'
+on_event = 'BufRead'
+hook_source= '''
+source ~/.config/nvim/configs/nvim-treesitter.lua
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'
+hook_add = '''
+let g:mkdp_browser = '/etc/profiles/per-user/sumi/bin/vivaldi'
+'''
+# hook_add = '''
+# "let g:mkdp_markdown_css='~/github-markdown.css'
+# '''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+on_event = 'BufRead'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_event = 'BufRead'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+on_event = 'BufRead'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+on_event = 'BufRead'
+
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['tex']
+hook_source='''
+let g:vimtex_fold_envs=0
+let g:vimtex_view_general_viewer='zathura'
+augroup filetype
+  autocmd!
+  " tex file (I always use latex)
+  autocmd BufRead,BufNewFile *.tex set filetype=tex
+augroup END
+
+" disable the conceal function
+let g:tex_conceal=''
+'''
+
+[[plugins]]
+repo = 'chrisbra/csv.vim'
+on_ft = ['csv']

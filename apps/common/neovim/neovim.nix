@@ -2,13 +2,16 @@
   neovim conf
   I use conf sourcing ./nvim but you can manager from home manager.
 */
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   xdg = {
     configFile = {
       "nvim".source = ./nvim; # windowsとconfigを共有するため.config/nvimで管理する
     };
+  };
+  home.sessionVariables = {
+    SQLITE_CLIB_PATH = "${pkgs.sqlite.out}/lib/libsqlite3.so";
   };
 
   programs = {
@@ -27,22 +30,12 @@
         cargo
         ninja
         gcc # For nvim-treesitter
-
-        black
-        efm-langserver # Language servers
-        nixpkgs-fmt # use rnix-lsp
-        pylint
-        ripgrep
-        rnix-lsp
-        silver-searcher # ToDO どっちか消す
-        vim-vint
-        yamllint
-
+        patchelf
+        sqlite
         yarn
 
-        luaPackages.lua-lsp
-        sumneko-lua-language-server
-        nodePackages.diagnostic-languageserver
+        ripgrep
+        silver-searcher # ToDO どっちか消す
       ];
 
       extraPython3Packages = ps: with ps; [
