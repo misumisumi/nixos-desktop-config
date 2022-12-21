@@ -48,6 +48,7 @@ in
           "FiraCode"
           "Hack"
           "Terminus"
+          "Noto"
         ];
       })
 
