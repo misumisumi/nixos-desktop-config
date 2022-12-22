@@ -5,9 +5,7 @@ local lazy_keymap = {}
 
 
 -- ui
-function lazy_keymap.gitsigns(bufnr)
-    local gs = package.loaded.gitsigns
-
+function lazy_keymap.gitsigns(gs)
     local keymap = {
         ["n|]c"] = map_cmd(
             function()
@@ -15,26 +13,26 @@ function lazy_keymap.gitsigns(bufnr)
                 vim.schedule(function() gs.next_hunk() end)
                 return "<Ignore>"
             end
-        ):with_expr(),
+        ):with_expr():with_buffer():with_desc("Gitsigns prev hunk"),
         ["n|[c"] = map_cmd(
             function()
                 if vim.wo.diff then return "[c" end
-                vim.schedule(function() gs.next_hunk() end)
+                vim.schedule(function() gs.prev_hunk() end)
                 return "<Ignore>"
             end
-        ):with_expr(),
+        ):with_expr():with_buffer():with_desc("Gitsigns prev hunk"),
         -- Actions
-        ["n,v|<leader>hs"] = map_cr(":Gitsigns stage_hunk"),
-        ["n,v|<leader>hr"] = map_cr(":Gitsigns reset_hunk"),
-        ["n|<leader>hS"] = map_cmd(gs.stage_buffer),
-        ["n|<leader>hu"] = map_cmd(gs.undo_stage_hunk),
-        ["n|<leader>hR"] = map_cmd(gs.reset_buffer),
-        ["n|<leader>hp"] = map_cmd(gs.preview_hunk),
-        ["n|<leader>hb"] = map_cmd(function() gs.blame_line{ full=true } end),
-        ["n|<leader>tb"] = map_cmd(gs.toggle_current_line_blame),
-        ["n|<leader>hd"] = map_cmd(gs.diffthis),
-        ["n|<leader>hD"] = map_cmd(function() gs.diffthis("~") end),
-        ["n|<leader>td"] = map_cmd(gs.toggle_deleted),
+        ["n,v|<leader>hs"] = map_cr("Gitsigns stage_hunk"):with_buffer(),
+        ["n,v|<leader>hr"] = map_cr("Gitsigns reset_hunk"):with_buffer(),
+        ["n|<leader>hS"] = map_cmd(gs.stage_buffer):with_buffer():with_desc("Gitsigns stage buffer"),
+        ["n|<leader>hu"] = map_cmd(gs.undo_stage_hunk):with_buffer():with_desc("Gitsigns undo stage hunk"),
+        ["n|<leader>hR"] = map_cmd(gs.reset_buffer):with_buffer():with_desc("Gitsigns reset buffer"),
+        ["n|<leader>hp"] = map_cmd(gs.preview_hunk):with_buffer():with_desc("Gitsigns preview hunk"),
+        ["n|<leader>hb"] = map_cmd(function() gs.blame_line{ full=true } end):with_buffer():with_desc("Gitsigns blame line"),
+        ["n|<leader>tb"] = map_cmd(gs.toggle_current_line_blame):with_buffer():with_desc("Gitsigns blame current line"),
+        ["n|<leader>hd"] = map_cmd(gs.diffthis):with_desc("Gitsigns diffthis"),
+        ["n|<leader>hD"] = map_cmd(function() gs.diffthis("~") end):with_buffer():with_desc("Gitsigns diffthis ~"),
+        ["n|<leader>sgd"] = map_cmd(gs.toggle_deleted):with_buffer():with_desc("Gitsigns toggle delete"),
         ["o,x|ih"] = map_cr(":Gitsigns select_hunk"),
     }
     bind.nvim_load_mapping(keymap)
@@ -44,9 +42,10 @@ end
 function lazy_keymap.neo_tree()
     local keymap = {
         window = {
-            ["<space>"] = { 
-                "toggle_node", 
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+            ["<space>"] = false,
+            ["<space><space>"] = {
+                "toggle_node",
+                nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open_drop",
             ["<cr>"] = "open_drop",
@@ -59,11 +58,10 @@ function lazy_keymap.neo_tree()
             ["v"] = "open_vsplit",
             ["V"] = "vsplit_with_window_picker",
             ["t"] = "open_tabnew",
-            ["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
             ["C"] = "close_node",
             ["z"] = "close_all_nodes",
             -- ["Z"] = "expand_all_nodes",
-            ["n"] = { 
+            ["n"] = {
               "add",
               -- some commands may take optional config options, see `:h neo-tree-mappings` for details
               config = {
@@ -307,6 +305,15 @@ function lazy_keymap.textobject()
 end
 
 function lazy_keymap.nvim_cmp(cmp)
+    local t = function(str)
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
+    end
+
+    local has_words_before = function()
+        local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
     local keymap = {
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<C-p>"] = cmp.mapping.select_prev_item(),

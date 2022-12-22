@@ -466,7 +466,7 @@ end
 
 
 function config.gitsigns()
-    local keymap = { gitsigns = require("modules.lazy_keymap").gitsigns }
+    local km = { gitsigns = require("modules.lazy_keymap").gitsigns }
 
     local opts = {
         signs = {
@@ -518,9 +518,13 @@ function config.gitsigns()
           ignore_whitespace = false,
         },
         current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-        on_attach = keymap.gitsigns
+        on_attach = function()
+            local gs = package.loaded.gitsigns
+            km.gitsigns(gs)
+        end
     }
 
+    require("gitsigns").setup(opts)
     require("scrollbar.handlers.gitsigns").setup()
 end
 
@@ -605,9 +609,9 @@ function config.lualine()
     end
 
     local function nix_env()
-        nix_env = os.getenv("NIX_ENV")
-        if nix_env ~= nil then
-            return ("%s"):format(nix_env)
+        local env = os.getenv("NIX_ENV")
+        if env ~= nil then
+            return ("%s"):format(env)
         end
 
         return ""
@@ -758,7 +762,7 @@ function config.nvim_scrollbar()
             text = " ",
         },
         marks = {
-            Cursor = { color = get_color("grey"), text = "  " },
+            Cursor = { color = get_color("white"), text = " " },
             Search = { color = get_color("lightgreen"), text = text },
             Error = { color = get_color("magenta"), text = text },
             Warn = { color = get_color("yellow"), text = text },

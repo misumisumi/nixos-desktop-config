@@ -9,7 +9,6 @@ tools["mrjones2014/legendary.nvim"] = {
         {
             "stevearc/dressing.nvim",
             opt = true,
-            after = "sqlite.lua",
             config = conf.dressing },
         { "kkharji/sqlite.lua", opt = true },
         { "folke/which-key.nvim", opt = false }
@@ -127,6 +126,7 @@ tools["dhruvmanila/telescope-bookmarks.nvim"] = {
 
 tools["sudormrfbin/cheatsheet.nvim"] = {
     opt = true,
+    cmd = "Cheatsheet"
 }
 
 tools["nvim-telescope/telescope-frecency.nvim"] = {
@@ -165,7 +165,8 @@ tools["nvim-telescope/telescope-project.nvim"] = {
 }
 
 tools["LukasPietzschmann/telescope-tabs"] = {
-    opt = true,
+    after = "telescope.nvim",
+    config = conf.telescope_tabs
 }
 
 tools["chip/telescope-software-licenses.nvim"] = {

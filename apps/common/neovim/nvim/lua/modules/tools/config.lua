@@ -20,11 +20,12 @@ end
 function config.legendary()
     local plugins = {
         "sqlite.lua",
-        "dressing"
+        "dressing.nvim"
     }
     for _,plugin in ipairs(plugins) do
         vim.api.nvim_command(("packadd %s"):format(plugin))
     end
+    local utils = require("utils")
 
     local path = utils.joinpath(vim.fn.stdpath("cache"), "legendary")
     utils.mkdir(path, 511)
@@ -275,15 +276,17 @@ function config.trouble()
         auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
         auto_fold = false, -- automatically fold a file trouble list at creation
         auto_jump = {"lsp_definitions"}, -- for the given modes, automatically jump if there is only a single result
-        signs = {
-            error = icons.ui.diagnostics.Error_alt,
-            warning = icons.ui.diagnostics.Warning_alt,
-            hint = icons.ui.diagnostics.Hint_alt,
-            information = icons.ui.diagnostics.Information_alt,
-            other = icons.ui.diagnostics.Question_alt
-        },
+        -- signs = {
+        --     error = icons.ui.diagnostics.Error_alt,
+        --     warning = icons.ui.diagnostics.Warning_alt,
+        --     hint = icons.ui.diagnostics.Hint_alt,
+        --     information = icons.ui.diagnostics.Information_alt,
+        --     other = icons.ui.diagnostics.Question_alt
+        -- },
         use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
     }
+
+    require("trouble").setup(opts)
 end
 
 
@@ -329,66 +332,72 @@ function config.which_key()
             padding = { 1, 1, 1, 1 },
             winblend = 0,
         },
+        disable = {
+            filetype = {
+                "TelescopePrompt",
+                "neo-tree"
+            }
+        }
     }
 
     require("which-key").setup(opts)
 end
 
 function config.wilder()
-	local wilder = require("wilder")
-	local icons = { ui = require("modules.ui.icons").get("ui") }
+    local wilder = require("wilder")
+    local icons = { ui = require("modules.ui.icons").get("ui") }
 
-	wilder.setup({ modes = { ":", "/", "?" } })
-	wilder.set_option("use_python_remote_plugin", 0)
-	wilder.set_option("pipeline", {
-		wilder.branch(
-			wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
-			wilder.vim_search_pipeline(),
-			{
-				wilder.check(function(_, x)
-					return x == ""
-				end),
-				wilder.history(),
-				wilder.result({
-					draw = {
-						function(_, x)
-							return icons.ui.Calendar .. " " .. x
-						end,
-					},
-				}),
-			}
-		),
-	})
+    wilder.setup({ modes = { ":", "/", "?" } })
+    wilder.set_option("use_python_remote_plugin", 0)
+    wilder.set_option("pipeline", {
+        wilder.branch(
+            wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
+            wilder.vim_search_pipeline(),
+            {
+                wilder.check(function(_, x)
+                    return x == ""
+                end),
+                wilder.history(),
+                wilder.result({
+                    draw = {
+                        function(_, x)
+                            return icons.ui.Calendar .. " " .. x
+                        end,
+                    },
+                }),
+            }
+        ),
+    })
 
-	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-		border = "rounded",
-		empty_message = wilder.popupmenu_empty_message_with_spinner(),
-		highlighter = wilder.lua_fzy_highlighter(),
-		left = {
-			" ",
-			wilder.popupmenu_devicons(),
-			wilder.popupmenu_buffer_flags({
-				flags = " a + ",
-				icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
-			}),
-		},
-		right = {
-			" ",
-			wilder.popupmenu_scrollbar(),
-		},
-	}))
-	local wildmenu_renderer = wilder.wildmenu_renderer({
-		highlighter = wilder.lua_fzy_highlighter(),
-		apply_incsearch_fix = true,
-	})
-	wilder.set_option(
-		"renderer",
-		wilder.renderer_mux({
-			[":"] = popupmenu_renderer,
-			["/"] = wildmenu_renderer,
-			substitute = wildmenu_renderer,
-		})
-	)
+    local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+        border = "rounded",
+        empty_message = wilder.popupmenu_empty_message_with_spinner(),
+        highlighter = wilder.lua_fzy_highlighter(),
+        left = {
+            " ",
+            wilder.popupmenu_devicons(),
+            wilder.popupmenu_buffer_flags({
+                flags = " a + ",
+                icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
+            }),
+        },
+        right = {
+            " ",
+            wilder.popupmenu_scrollbar(),
+        },
+    }))
+    local wildmenu_renderer = wilder.wildmenu_renderer({
+        highlighter = wilder.lua_fzy_highlighter(),
+        apply_incsearch_fix = true,
+    })
+    wilder.set_option(
+        "renderer",
+        wilder.renderer_mux({
+            [":"] = popupmenu_renderer,
+            ["/"] = wildmenu_renderer,
+            substitute = wildmenu_renderer,
+        })
+    )
 end
 
 
@@ -424,15 +433,12 @@ function config.telescope()
     local plugins = {
         "sqlite.lua",
         "telescope-bookmarks.nvim",
-        "cheatsheet.nvim",
         "telescope-frecency.nvim",
         "telescope-fzf-native.nvim",
         "telescope-http.nvim",
         "telescope-live-grep-args.nvim",
-        "telescope-media-files.nvim",
         "telescope-project.nvim",
         "telescope-software-licenses.nvim",
-        "telescope-tabs",
         "telescope-zoxide",
     }
     for _,plugin in ipairs(plugins) do
@@ -514,15 +520,23 @@ function config.telescope()
             oldfiles = fixfolds,
         }
     }
+    require("telescope").setup(opts)
 
-    require("telescope").load_extension("notify")
-    require("telescope").load_extension("fzf")
     require("telescope").load_extension("frecency")
+    require("telescope").load_extension("fzf")
     require("telescope").load_extension("live_grep_args")
+    require("telescope").load_extension("notify")
     require("telescope").load_extension("project")
+    require("telescope").load_extension("software-licenses")
     require("telescope").load_extension("zoxide")
+    require("telescope").load_extension("bookmarks")
+    require("telescope").load_extension("http")
 end
 
+
+function config.telescope_tabs()
+    require("telescope-tabs").setup()
+end
 
 return config
 

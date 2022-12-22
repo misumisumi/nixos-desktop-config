@@ -14,9 +14,9 @@ ts["zbirenbaum/neodim"] = {
     config = conf.neodim
 }
 
-utils["norcalli/nvim-colorizer.lua"] = {
+ts["norcalli/nvim-colorizer.lua"] = {
     opt = true,
-    after = "nvim-treesitter",
+    require = "nvim-treesitter",
     config = conf.nvim_colorizer
 }
 
