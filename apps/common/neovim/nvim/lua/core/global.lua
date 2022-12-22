@@ -1,7 +1,5 @@
-utils = require("utils")
-
+local utils = require("utils")
 local global = {}
-local os_name = vim.loop.os_uname().sysname
 
 
 function global:load_variables()

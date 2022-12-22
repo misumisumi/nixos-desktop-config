@@ -26,8 +26,9 @@ function rhs_options:new()
             remap = false,
             nowait = false,
             silent = false,
+            buffer = false,
+            desc = false,
         },
-        buffer = false,
     }
     setmetatable(instance, self)
     self.__index = self
@@ -55,7 +56,7 @@ end
 
 function rhs_options:map_cu(cmd_string)
     -- 範囲指定の数字を削除した後コマンド実行
-	self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
+    self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
     return self
 end
 
@@ -90,6 +91,12 @@ function rhs_options:with_buffer(num)
 end
 
 
+function rhs_options:with_desc(str)
+    self.options.desc = str
+    return self
+end
+
+
 local pbind = {}
 
 
@@ -120,11 +127,10 @@ end
 function pbind.nvim_load_mapping(mapping)
     for key, value in pairs(mapping) do
         local mode, keymap = key:match("([^|]*)|?(.*)")
-        local mode = split(mode, ",")
+        mode = split(mode, ",")
         if type(value) == "table" then
             local rhs = value.cmd
             local options = value.options
-            local buf = value.buffer
             vim.keymap.set(mode, keymap, rhs, options)
             -- if buf then
             --     vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)

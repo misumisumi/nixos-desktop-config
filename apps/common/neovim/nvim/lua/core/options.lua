@@ -100,7 +100,7 @@ local function load_options()
         sessionoptions = { "curdir", "help", "tabpages", "winsize" },
         showbreak = "> ", -- インデントかつ折返しのとき行の先頭に識別子をつける
         switchbuf = "useopen",
-        wildignore = "search_ignore",
+        wildignore = search_ignore,
         wildmode = { "longest", "full" },
 
         inccommand = "nosplit",
