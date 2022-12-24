@@ -4,16 +4,16 @@ let
 in
 {
   imports = (import (appDir + "/common/cli")) ++
-            (import (appDir + "/common/git")) ++
-            (import (appDir + "/common/neovim")) ++
-            (import (appDir + "/common/shell")) ++
-            (import (appDir + "/desktop") { inherit lib hostname; }) ++
-            (import (appDir + "/desktop/wm/${wm}"));
+    (import (appDir + "/common/git")) ++
+    (import (appDir + "/common/neovim")) ++
+    (import (appDir + "/common/shell")) ++
+    (import (appDir + "/desktop") { inherit lib hostname; }) ++
+    (import (appDir + "/desktop/wm/${wm}"));
 
   home = {
     packages = (import (appDir + "/common/pkgs") pkgs) ++
-               (import (appDir + "/desktop/pkgs") { inherit pkgs; isMinimal = true; }) ++
-               (import ./pkg.nix) pkgs;
+      (import (appDir + "/desktop/pkgs") { inherit pkgs; isMinimal = true; }) ++
+      (import ./pkgs.nix) pkgs;
   };
 
   xresources = {
