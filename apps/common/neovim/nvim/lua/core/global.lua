@@ -3,7 +3,7 @@ local global = {}
 
 
 function global:load_variables()
-    self.is_linux, self.is_mac, self.is_windows = utils.check_os
+    self.is_linux, self.is_mac, self.is_windows = utils.check_os()
     self.is_wsl = vim.fn.has("wsl") == 1
     local home = utils.get_home()
     self.vim_path = vim.fn.stdpath("config")

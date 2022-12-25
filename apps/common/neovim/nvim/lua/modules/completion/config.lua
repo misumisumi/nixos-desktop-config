@@ -136,6 +136,7 @@ function config.lspsaga()
     require("lspsaga").init_lsp_saga(opts)
 end
 
+
 function config.cmp()
     local icons = {
         kind = require("modules.ui.icons").get("kind", false),
@@ -232,28 +233,8 @@ function config.cmp()
     }
 
     cmp.setup(opts)
-    -- cmp.setup.cmdline('/', {
-    --     sources = cmp.config.sources({
-    --         { name = 'nvim_lsp_document_symbol' }
-    --     },
-    --     {
-    --         { name = 'buffer' }
-    --     })
-    -- })
-    -- cmp.setup.cmdline(':', {
-    --   mapping = cmp.mapping.preset.cmdline(),
-    --   sources = cmp.config.sources({
-    --     { name = 'path' }
-    --   }, {
-    --     {
-    --       name = 'cmdline',
-    --       option = {
-    --         ignore_cmds = { 'Man', '!' }
-    --       }
-    --     }
-    --   })
-    -- })
 end
+
 
 function config.luasnip()
     local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
@@ -271,10 +252,12 @@ function config.luasnip()
     require("luasnip.loaders.from_snipmate").lazy_load()
 end
 
+
 -- function config.tabnine()
 --  local tabnine = require("cmp_tabnine.config")
 --  tabnine:setup({ max_line = 1000, max_num_results = 20, sort = true })
 -- end
+
 
 function config.autopairs()
     require("nvim-autopairs").setup()
@@ -329,6 +312,7 @@ function config.autopairs()
     )
 end
 
+
 function config.mason_install()
     require("mason-tool-installer").setup({
 
@@ -363,6 +347,7 @@ function config.mason_install()
     })
 end
 
+
 function config.copilot()
     vim.defer_fn(function()
         require("copilot").setup({
@@ -372,5 +357,6 @@ function config.copilot()
         })
     end, 100)
 end
+
 
 return config

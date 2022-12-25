@@ -30,6 +30,7 @@
         cargo
         ninja
         gcc # For nvim-treesitter
+        # zlib
         patchelf
         sqlite
         yarn

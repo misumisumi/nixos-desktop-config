@@ -34,12 +34,20 @@ mason_registry:on("package:install:success", function(pkg)
             local bin_abs_path = pkg:get_install_path() .. "/" .. rel_path
             if pkg.name == "lua-language-server" then
                 bin_abs_path = pkg:get_install_path() .. "/extension/server/bin/lua-language-server"
+                os.execute(
+                    ("patchelf --set-interpreter %s %s"):format(interpreter, bin_abs_path)
+                )
+            elseif pkg.name == "marksman" then
+                bin_abs_path = pkg:get_install_path() .. "/marksman"
+                local libstdcpp = return_exe_value("nix path-info -r /run/current-system | grep gcc | grep lib | head -n1"):sub(1, -2) .. "/lib"
+                local zlib = return_exe_value("nix path-info -r /run/current-system | grep zlib | head -n1"):sub(1, -2) .. "/lib"
+                local icu4c = return_exe_value("nix path-info -r /run/current-system | grep icu4c | head -n1"):sub(1, -2) .. "/lib"
+                os.execute(
+                    ("patchelf --set-interpreter %s --set-rpath %s:%s:%s %s"):format(interpreter, libstdcpp, zlib, icu4c, bin_abs_path)
+                )
             end
 
             -- Set the interpreter on the binary
-            local result = os.execute(
-                ("patchelf --set-interpreter %s %s"):format(interpreter, bin_abs_path)
-            )
         end
     end)
 end)
@@ -60,6 +68,7 @@ mason_lsp.setup({
         "gopls",
         "pyright",
         "rnix",
+        "marksman",
     },
 })
 
@@ -241,6 +250,10 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
                 },
             },
         })
+    elseif server == "rnix" then
+        nvim_lsp.rnix.setup({})
+    elseif server == "marksman" then
+        nvim_lsp.marksman.setup({})
     elseif server ~= "efm" then
         nvim_lsp[server].setup({
             capabilities = capabilities,

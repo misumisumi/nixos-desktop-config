@@ -3,20 +3,21 @@ local conf = require("modules.treesitter.config")
 
 ts["RRethy/vim-illuminate"] = {
     opt = true,
-    after = { "nvim-treesitter" },
+    after = "nvim-treesitter",
     config = conf.vim_illuminate
 }
 
 ts["zbirenbaum/neodim"] = {
     opt = true,
+    -- requires = { "nvim-treesitter", after = "neodim" },
+    -- event = "LspAttach",
     after = "nvim-treesitter",
-    event = "LspAttach",
     config = conf.neodim
 }
 
 ts["norcalli/nvim-colorizer.lua"] = {
     opt = true,
-    require = "nvim-treesitter",
+    after = "nvim-treesitter",
     config = conf.nvim_colorizer
 }
 
