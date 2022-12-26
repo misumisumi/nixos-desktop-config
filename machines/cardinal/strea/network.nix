@@ -1,8 +1,10 @@
 { lib, hostname, ... }:
-
+let
+  inherit (import ../../path-relove.nix) commonDir;
+in
 {
   imports = [
-    ../common/network.nix
+    (commonDir + "/network.nix")
   ];
   networking = {
     hostName = "${hostname}";
@@ -10,11 +12,6 @@
 
   systemd = {
     network = {
-      lab-network.enable = true;
-      extraHosts = ''
-        192.168.1.50 yui
-        192.168.1.70 metatron
-      '';
       networks = {
         "10-wired" = {
           name = "enp1s0";

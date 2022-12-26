@@ -1,13 +1,16 @@
 { lib, hostname, pkgs, ... }:
-
+let
+  inherit (import ../../path-relove.nix) appDir;
+in
 {
-  imports = (import ../../apps/common/cli) ++
-    (import ../../apps/common/git) ++
-    (import ../../apps/common/neovim) ++
-    (import ../../apps/common/shell);
+  imports = (import (appDir + "/common/cli")) ++
+    (import (appDir + "/common/git")) ++
+    (import (appDir + "/common/neovim")) ++
+    (import (appDir + "/common/shell")) ++
+    (import (appDir + "/common/ssh"));
 
   home = {
-    packages = (import ../../apps/common/pkgs) pkgs;
+    packages = (import (appDir + "/common/pkgs") pkgs);
   };
 
 }

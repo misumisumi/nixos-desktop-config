@@ -5,6 +5,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./network.nix
+    ./gpu.nix
   ]
   ++ (import (appDir + "/virtualisation"));
 }
