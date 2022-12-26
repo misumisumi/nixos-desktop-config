@@ -45,6 +45,6 @@ else
     zephyrus = settings { hostname = "zephyrus"; rootDir = "ordinary"; inherit user; };
 
     # metatron = settings { hostname = "metatron"; rootDir = "cardinal"; inherit user; };
-    # strea = settings { hostname = "strea"; rootDir = "cardinal"; inherit user; };
+    strea = settings { hostname = "strea"; rootDir = "cardinal"; inherit user; };
     yui = settings { hostname = "yui"; rootDir = "cardinal"; inherit user; };
   }
