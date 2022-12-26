@@ -15,7 +15,7 @@
       enable = if hostname == "tsundere" || hostname == "vm" then false else true;
       settings = {
         General = {
-          Enable = "Source,Sink,Media,Socket";  # Enable A2DP sink
+          Enable = "Source,Sink,Media,Socket"; # Enable A2DP sink
         };
       };
     };
@@ -25,16 +25,11 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    pavucontrol
-    paprefs
-  ];
-
   services = {
     blueman.enable = true;
     udisks2.enable = true;
     dbus.packages = with pkgs; [ xfce.xfconf ];
-    gvfs.enable = true;       # Mount, trash, and other functions
-    tumbler.enable = true;    # Thumbnail supoport for images
+    gvfs.enable = true; # Mount, trash, and other functions
+    tumbler.enable = true; # Thumbnail supoport for images
   };
 }

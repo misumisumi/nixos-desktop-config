@@ -1,13 +1,17 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.config.pulseaudio = true;             # 一部パッケージのビルド時にpulseaudioを使うように指示する
+  nixpkgs.config.pulseaudio = true; # 一部パッケージのビルド時にpulseaudioを使うように指示する
   sound.enable = true;
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+    paprefs
+  ];
   hardware = {
     pulseaudio = {
       enable = true;
       # support32Bit = true; # For 32bit apps
-      package = pkgs.pulseaudioFull;            # Enable extra codecs (AAC, APTX, APTX-HD and LDAC.)
+      package = pkgs.pulseaudioFull; # Enable extra codecs (AAC, APTX, APTX-HD and LDAC.)
       extraConfig = ''
         load-module module-dbus-protocol
         # # For container
