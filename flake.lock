@@ -106,11 +106,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1670513770,
-        "narHash": "sha256-muL74fsbGA8K8WlZSPNWddOiuBnC54kAajncX6nXrh4=",
+        "lastModified": 1671966569,
+        "narHash": "sha256-jbLgfSnmLchARBNFRvCic63CFQ9LAyvlXnBpc2kwjQc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "054d9e3187ca00479e8036dc0e92900a384f30fd",
+        "rev": "c55fa26ce05fee8e063db22918d05a73d430b2ea",
         "type": "github"
       },
       "original": {
@@ -155,11 +155,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1670507980,
-        "narHash": "sha256-riNZa0xzM1it3pzxciwALeMs+0CsBMWIW2FqulzK8vM=",
+        "lastModified": 1671722432,
+        "narHash": "sha256-ojcZUekIQeOZkHHzR81st7qxX99dB1Eaaq6PU5MNeKc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2787fc7d1e51404678614bf0fe92fc296746eec0",
+        "rev": "652e92b8064949a11bc193b90b74cb727f2a1405",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1670560288,
-        "narHash": "sha256-3TylYeaVeNkuIcyvdwCy/D1k723CDRqUgViRZCAdsGw=",
+        "lastModified": 1672073588,
+        "narHash": "sha256-0Nh0X60a1R7YK4sKLC6+gc2M7ofXYZ3K4bOUgRiZk7w=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "557e831973c5c9ce04e548e0672cad6ead61bbdd",
+        "rev": "db05a5e18de3bb4a6a7c08b3443318b947221165",
         "type": "github"
       },
       "original": {
@@ -217,11 +217,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1670218453,
-        "narHash": "sha256-rG3WEEb+YBSeiYx8B/4JLmaIUe+R+FMl+htAA/B0pn8=",
+        "lastModified": 1671860266,
+        "narHash": "sha256-uKEuFQ4du2nRI2r+tdKMDRJ/WE7OLQJhqS0NV5kbNLM=",
         "ref": "refs/heads/main",
-        "rev": "434c30482e16c36626985f6115063c0ee783e6ee",
-        "revCount": 39,
+        "rev": "690642eb29527babd214b010020c3073856c3e7c",
+        "revCount": 45,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
