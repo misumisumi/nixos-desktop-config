@@ -68,8 +68,8 @@ local plug_keymap = {
     ["n|]t"] = map_cr("lua require('todo-comments').jump_next()"),
     ["n|[t"] = map_cr("lua require('todo-comments').jump_prev()"),
     -- vim-easy-align
-    ["n|gea"] = map_cmd("<Plug>(clever-f-repeat-forward)"):with_expr(),
-    ["x|gea"] = map_cmd("<Plug>(clever-f-repeat-forward)"):with_expr(),
+    ["n|ea"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
+    ["x|ea"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
     -- vim-fugitive
     ["n|<leader>gs"] = map_cr("Git"),
     ["n|<leader>ga"] = map_cr("Gwrite"),
