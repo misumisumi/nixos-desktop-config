@@ -26,7 +26,7 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
-            imports = [ (import ../hm/hm.nix) ] ++ [ (import hostConf) ]  # Common home conf + Each machine conf
+            imports = [ (import ../hm/hm.nix) ] ++ [ (import hostConf) ] # Common home conf + Each machine conf
               ++ optionals (rootDir != "general") (with private-conf.nixosModules; [ ssh_my_conf put_wallpapers ]);
           };
         }
@@ -41,10 +41,16 @@ if isGeneral then
   }
 else
   {
-    mother = settings { hostname = "mother"; rootDir = "ordinary"; inherit user; };
-    zephyrus = settings { hostname = "zephyrus"; rootDir = "ordinary"; inherit user; };
+    mother = settings {
+      hostname = "mother";
+      rootDir = "ordinary"; inherit user;
+    };
+    zephyrus = settings
+      { hostname = "zephyrus"; rootDir = "ordinary"; inherit user; };
 
     # metatron = settings { hostname = "metatron"; rootDir = "cardinal"; inherit user; };
-    strea = settings { hostname = "strea"; rootDir = "cardinal"; inherit user; };
-    yui = settings { hostname = "yui"; rootDir = "cardinal"; inherit user; };
+    strea = settings
+      { hostname = "strea"; rootDir = "cardinal"; inherit user; };
+    yui = settings
+      { hostname = "yui"; rootDir = "cardinal"; inherit user; };
   }
