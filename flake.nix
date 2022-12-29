@@ -2,8 +2,8 @@
   description = "Each my machine NixOS System Flake Configuration";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     flake-utils.url = "github:numtide/flake-utils";
 

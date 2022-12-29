@@ -85,11 +85,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1670598079,
-        "narHash": "sha256-VYDzISpIeuG2+yV4+qhApQTPwGYz8t+WkN3RS8nJ694=",
+        "lastModified": 1672251152,
+        "narHash": "sha256-cwz6KyeafFbT3K1WJm8NPH0TF08uieIcylWpNh6j3TM=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "a6cbd0b13e64ee2c6b93a3feab849527e2ec360d",
+        "rev": "47ef770469d8c43de3c4e92d3a473cf15a68b53b",
         "type": "github"
       },
       "original": {
@@ -155,16 +155,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1671883564,
-        "narHash": "sha256-C15oAtyupmLB3coZY7qzEHXjhtUx/+77olVdqVMruAg=",
+        "lastModified": 1672080458,
+        "narHash": "sha256-Ukjn8YUwZevxDPaVUmTx2sf9bCcIJSasmLz+xjGBKrs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dac57a4eccf1442e8bf4030df6fcbb55883cb682",
+        "rev": "1eb875e811dd59e21e77f6337f2c1592889b48b3",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-22.11",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -217,11 +217,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1672105631,
-        "narHash": "sha256-eu5YMQdWxArG8tBvVVFR42U62Dh92BF6iGDBsfPVOKk=",
+        "lastModified": 1672282239,
+        "narHash": "sha256-YXi5tONI4W1n+J80vMFBjh+LiaJFdR4nog1lyHC79F0=",
         "ref": "refs/heads/main",
-        "rev": "1a2f00ae931c85d6374aa56c428721fb385ae1da",
-        "revCount": 50,
+        "rev": "da3423adfca1c6f20ddea40fdf5fae72618f2630",
+        "revCount": 52,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
