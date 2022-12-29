@@ -15,6 +15,8 @@ let
         ./configuration.nix # Common system conf
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
+        flakes.nixosModules.asusd
+        flakes.nixosModules.supergfxd
 
         ../modules
 
