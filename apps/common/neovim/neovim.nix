@@ -29,6 +29,7 @@
         go
         cargo
         ninja
+        gnumake
         gcc # For nvim-treesitter
         # zlib
         patchelf
