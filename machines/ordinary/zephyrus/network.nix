@@ -16,6 +16,33 @@ in
       wait = "background";
     };
     hostName = "${hostname}";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        4713 # PulseAudio
+        1701
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764; # KDE-connect
+        }
+        {
+          from = 60000;
+          to = 60011; # Mosh
+        }
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764; # KDE-connect
+        }
+        {
+          from = 60000;
+          to = 60011; # Mosh
+        }
+      ];
+    };
   };
 
   systemd = {
@@ -31,7 +58,7 @@ in
         "10-wireless" = {
           name = "wlp2s0";
           DHCP = "yes";
-          address = [ "192.168.1.50" ];
+          address = [ "192.168.1.200" ];
         };
         "20-wired" = {
           name = "enp4s0f4u1u3";

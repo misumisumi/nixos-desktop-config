@@ -2,21 +2,24 @@
 { pkgs, inputs, stateVersion, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;        # Allow proprietary software.
+  nixpkgs.config.allowUnfree = true; # Allow proprietary software.
+  nixpkgs.config.allowBroken = true;
 
-  nix = {                                   # Nix Package Manager settings
-    settings ={
-      auto-optimise-store = true;           # Optimise syslinks
+  nix = {
+    # Nix Package Manager settings
+    settings = {
+      auto-optimise-store = true; # Optimise syslinks
     };
-    gc = {                                  # 1週間ごとに7日前のイメージを削除
+    gc = {
+      # 1週間ごとに7日前のイメージを削除
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    package = pkgs.nixVersions.stable;               # Enable nixFlakes on system
+    package = pkgs.nixVersions.stable; # Enable nixFlakes on system
     registry.nixpkgs.flake = inputs.nixpkgs;
 
-# flakeの有効化とビルド時の依存関係を維持(オフラインでも再ビルド可能にする)
+    # flakeの有効化とビルド時の依存関係を維持(オフラインでも再ビルド可能にする)
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs          = true
@@ -24,9 +27,11 @@
     '';
   };
 
-  system = {                                # NixOS settings
-    autoUpgrade = {                         # Allow auto update
-      enable = true;
+  system = {
+    # NixOS settings
+    autoUpgrade = {
+      # Allow auto update
+      enable = false;
       channel = "https://nixos.org/channels/nixos-unstable";
     };
     stateVersion = "${stateVersion}";
