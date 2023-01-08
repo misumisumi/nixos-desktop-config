@@ -49,8 +49,8 @@ local plug_keymap = {
     ["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_silent(),
     ["n|gr"] = map_cr("Lspsaga rename"):with_silent(),
     ["n|K"] = map_cr("Lspsaga hover_doc"):with_silent(),
-    ["n|ga"] = map_cr("Lspsaga code_action"):with_silent(),
-    ["v|ga"] = map_cu("Lspsaga code_action"):with_silent(),
+    ["n|ca"] = map_cr("Lspsaga code_action"):with_silent(),
+    ["v|ca"] = map_cu("Lspsaga code_action"):with_silent(),
     ["n|gd"] = map_cr("Lspsaga peek_definition"):with_silent(),
     ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_silent(),
     -- hop.nvim
@@ -68,8 +68,8 @@ local plug_keymap = {
     ["n|]t"] = map_cr("lua require('todo-comments').jump_next()"),
     ["n|[t"] = map_cr("lua require('todo-comments').jump_prev()"),
     -- vim-easy-align
-    ["n|ea"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
-    ["x|ea"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
+    ["n|ga"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
+    ["x|ga"] = map_cmd("<Plug>(EasyAlign)"):with_silent(),
     -- vim-fugitive
     ["n|<leader>gs"] = map_cr("Git"),
     ["n|<leader>ga"] = map_cr("Gwrite"),
