@@ -6,16 +6,18 @@ in
   imports = [
     (commonDir + "/network.nix")
   ];
-  networking = {
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-    };
+  services = {
     hostapd = {
       enable = true;
       ssid = "zephyrus";
       interface = "wlp2s0";
       wpaPassphrase = "FsP65sEZdvxMjZL";
+    };
+  };
+  networking = {
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
     };
     dhcpcd = {
       enable = true;
@@ -60,23 +62,29 @@ in
           Name = "br0";
         };
       };
+      links = {
+        "ethusb0" = {
+          matchConfig = {
+            MACAddress = "00:e0:4c:68:00:12";
+          };
+          linkConfig = {
+            Name = "ethusb0";
+          };
+        };
+      };
       networks = {
-        "10-wireless" = {
-          name = "wlp2s0";
-          DHCP = "yes";
-          address = [ "192.168.1.200" ];
-        };
         "20-wired" = {
-          name = "enp4s0f4u1u3";
+          name = "ethusb0";
           bridge = [ "br0" "univ" ];
-        };
-        "20-usb" = {
-          name = "enp4s0f4u1u2";
-          DHCP = "yes";
         };
         "30-br0" = {
           name = "br0";
           DHCP = "yes";
+        };
+        "40-wireless" = {
+          name = "wlp2s0";
+          DHCP = "yes";
+          address = [ "192.168.1.200" ];
         };
       };
     };

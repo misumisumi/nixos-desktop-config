@@ -74,7 +74,7 @@ lib.optionals (! isMinimal) [
   gpick
   gimp
   inkscape
-  unityhub
+  unityhub-latest
 
   copyq # Clipboard Manager
   # sidequest                     # Meta Quest side loading tool
