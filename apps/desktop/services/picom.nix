@@ -1,6 +1,4 @@
-/*
-Picom (compositor for Xorg) conf
-*/
+# Picom (compositor for Xorg) conf
 { pkgs, ... }:
 
 {
@@ -8,7 +6,7 @@ Picom (compositor for Xorg) conf
     picom = {
       enable = true;
       backend = "glx";
-      vSync = false;  # When vSync=true, Picom have problem if you use Nvidia 
+      vSync = false; # When vSync=true, Picom have problem if you use Nvidia 
 
       fade = true;
       fadeDelta = 10;
@@ -71,12 +69,12 @@ Picom (compositor for Xorg) conf
         blur-background-frame = false;
         blur-bluer-kern = "3x3box";
         blur-background-exclude = [
-            "class_g = 'kdeconnectd && !focused'"
-            "_NET_WM_NAME@:s *= 'KDE Connect Daemon'"
-            "window_type = 'dock'"
-            "window_type = 'desktop'"
-            "_GTK_FRAME_EXTENTS@:c"
-          ];
+          "class_g = 'kdeconnectd && !focused'"
+          "_NET_WM_NAME@:s *= 'KDE Connect Daemon'"
+          "window_type = 'dock'"
+          "window_type = 'desktop'"
+          "_GTK_FRAME_EXTENTS@:c"
+        ];
         mark-wmwin-focused = true;
         mark-overdir-focused = false;
         detect-rounded-corners = true;
