@@ -8,7 +8,7 @@ in
   ];
   services = {
     hostapd = {
-      enable = true;
+      enable = false;
       ssid = "zephyrus";
       interface = "wlp2s0";
       wpaPassphrase = "FsP65sEZdvxMjZL";
