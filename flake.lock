@@ -85,11 +85,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1672251152,
-        "narHash": "sha256-cwz6KyeafFbT3K1WJm8NPH0TF08uieIcylWpNh6j3TM=",
+        "lastModified": 1672315894,
+        "narHash": "sha256-MTjwU2+7NhC0RoIfbXUVZd4RBNtLcsNKfGu0KJtAXaI=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "47ef770469d8c43de3c4e92d3a473cf15a68b53b",
+        "rev": "579c44955c552edabee7afc7e9ace1e389720e3f",
         "type": "github"
       },
       "original": {
@@ -106,11 +106,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1671966569,
-        "narHash": "sha256-jbLgfSnmLchARBNFRvCic63CFQ9LAyvlXnBpc2kwjQc=",
+        "lastModified": 1672274925,
+        "narHash": "sha256-DpkuoGwEW92zj/3jWKLb1biF4whs9yIc+pQbg67gqGU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c55fa26ce05fee8e063db22918d05a73d430b2ea",
+        "rev": "a993eac1065c6ce63a8d724b7bccf624d0e91ca2",
         "type": "github"
       },
       "original": {
