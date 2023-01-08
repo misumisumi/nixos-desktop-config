@@ -11,6 +11,12 @@ in
       enable = true;
       userControlled.enable = true;
     };
+    hostapd = {
+      enable = true;
+      ssid = "zephyrus";
+      interface = "wlp2s0";
+      wpaPassphrase = "FsP65sEZdvxMjZL";
+    };
     dhcpcd = {
       enable = true;
       wait = "background";
