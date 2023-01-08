@@ -38,6 +38,7 @@
         "100:name *?= 'Youtube'"
         "100:name *?= 'Prime Video'"
         "100:name *?= 'ニコニコ動画'"
+        "100:name *?= 'Netflix'"
       ];
 
       shadow = true;
