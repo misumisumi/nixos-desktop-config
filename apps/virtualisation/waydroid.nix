@@ -1,5 +1,5 @@
 /*
-waydroid (Android emulater) conf
+  waydroid (Android emulater) conf
 */
 { pkgs, ... }:
 
@@ -12,6 +12,7 @@ waydroid (Android emulater) conf
   environment = {
     systemPackages = with pkgs; [
       weston
+      python3Packages.pyclip
     ];
   };
 }

@@ -2,72 +2,73 @@
 { pkgs, isMinimal ? false }:
 let
   lib = pkgs.lib;
-  tex = (pkgs.texlive.combine {       # TexLive(Japanese support)
-      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese;
+  tex = (pkgs.texlive.combine {
+    # TexLive(Japanese support)
+    inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese;
   });
 in
 with pkgs; [
-  man-pages                       # manuals
+  man-pages # manuals
   man-db
   texinfo
 
-  mesa-demos                      # Graphics utility
+  mesa-demos # Graphics utility
   vulkan-tools
-  polkit_gnome                    # polkit
+  polkit_gnome # polkit
 
-  gnuplot                         # CLI Plotter
-  pandoc                          # Document Converter
-  tex                             # tex
+  gnuplot # CLI Plotter
+  pandoc # Document Converter
+  tex # tex
   texlab
 
   font-manager
 
-  i3lock                          # Screen Locker
+  i3lock # Screen Locker
 
-  nomacs                          # Image Viewer
+  nomacs # Image Viewer
 
-  shared-mime-info                # For FileManager
+  shared-mime-info # For FileManager
   ffmpegthumbnailer
   evince
   gnome.file-roller
   lxde.lxmenu-data
   haskellPackages.thumbnail
 
-  discord                         # Communications
+  discord # Communications
 
-  audacity                        # GUI Sound Editor
-  sox                             # CLI Sound Editor
+  audacity # GUI Sound Editor
+  sox # CLI Sound Editor
 
-  playerctl                       # CLI control media
+  playerctl # CLI control media
 
-  imagemagick                     # CLI Image Editor
+  imagemagick # CLI Image Editor
 
-  firefox                         # Browser
+  firefox # Browser
 
-  spotify                         # Music Streaming
-  spotify-tui                     # CLI tools for spotify
+  spotify # Music Streaming
+  spotify-tui # CLI tools for spotify
 
-  gnome.simple-scan               # Scaner
-  baobab                          # Disk Usage Analyzer
+  gnome.simple-scan # Scaner
+  baobab # Disk Usage Analyzer
 
-  zathura                         # PDF viewer
+  zathura # PDF viewer
 ] ++
 lib.optionals (! isMinimal) [
-  (vivaldi.override { proprietaryCodecs = true; })                         # Browser
+  (vivaldi.override { proprietaryCodecs = true; }) # Browser
 
-  wavesurfer                      # pkgs from Sumi-Sumi/flakes
+  wavesurfer # pkgs from Sumi-Sumi/flakes
   prime-run
 
-  scream                          # Audio Recivier (For windows VM)
+  scream # Audio Recivier (For windows VM)
   conky
   android-tools
 
-  slack                           # Communications
+  slack # Communications
   zoom-us
   element-desktop
   ferdium
 
-  blender                         # Creative Utility
+  blender # Creative Utility
   krita
   gmic-qt-krita
   gpick
@@ -75,10 +76,12 @@ lib.optionals (! isMinimal) [
   inkscape
   unityhub
 
-  copyq                           # Clipboard Manager
+  copyq # Clipboard Manager
   # sidequest                     # Meta Quest side loading tool
 
-  remmina                         # Remote desktop client
+  remmina # Remote desktop client
 
-  zotero                          # Paper managiment tool
+  zotero # Paper managiment tool
+
+  juce # VST plugin flamework
 ]

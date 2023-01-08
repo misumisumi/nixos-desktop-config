@@ -30,7 +30,6 @@ in
       readline = prev.readline6;
     };
   })
-
   (final: prev: {
     qtile = prev.qtile.unwrapped.override (old: {
       patches = old.patches ++ [
