@@ -85,11 +85,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1672315894,
-        "narHash": "sha256-MTjwU2+7NhC0RoIfbXUVZd4RBNtLcsNKfGu0KJtAXaI=",
+        "lastModified": 1673186554,
+        "narHash": "sha256-ZlBChn9PoXOQq1M0xs/a6m4z/3OOMcMhH4Zc0aI5JQU=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "579c44955c552edabee7afc7e9ace1e389720e3f",
+        "rev": "1d9172206e99182470546d2e4f8ab1ef745022f3",
         "type": "github"
       },
       "original": {
@@ -217,11 +217,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1672282239,
-        "narHash": "sha256-YXi5tONI4W1n+J80vMFBjh+LiaJFdR4nog1lyHC79F0=",
+        "lastModified": 1673188176,
+        "narHash": "sha256-aHteyUHRZjgc6SGlSmpZscQo3IljgIVd3DxeEL9ELnY=",
         "ref": "refs/heads/main",
-        "rev": "da3423adfca1c6f20ddea40fdf5fae72618f2630",
-        "revCount": 52,
+        "rev": "b2ef484bcae9687abb325585ffb8b4b3ea702496",
+        "revCount": 54,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
