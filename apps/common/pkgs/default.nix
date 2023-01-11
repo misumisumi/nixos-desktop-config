@@ -1,29 +1,31 @@
 pkgs: with pkgs; [
-  nix-prefetch      # Prefetch checkers
+  nix-index # A files database for nixpkgs
+  nix-prefetch # Prefetch checkers
   nix-prefetch-git
-  nvfetcher         # Tool of automate nix package updates
+  nvfetcher # Tool of automate nix package updates
 
-  bc                # GNU calculater
+  bc # GNU calculater
 
-  zip               # Archives
+  zip # Archives
   unzip
 
-  tree              # Show file tree
+  tree # Show file tree
 
-  bottom            # System monitor
-  bpytop            # System monitor
-  duf               # Show storage usage
-  neofetch          # Fetch system info
+  bottom # System monitor
+  bpytop # System monitor
+  duf # Show storage usage
+  neofetch # Fetch system info
 
-  mosh              # Mobile Shell
+  mosh # Mobile Shell
 
-  trash-cli         # Command Line Interface to FreeDesktop.org Trash
-  ffmpeg            # Multi media solution
+  trash-cli # Command Line Interface to FreeDesktop.org Trash
+  ffmpeg # Multi media solution
 
-  figlet            # Make AA from character
-  cmatrix           # Lain of character
+  figlet # Make AA from character
+  cmatrix # Lain of character
+  ascii-image-converter # Make ascii art
 
-  progress          # Show progress of coreutils programs
-
-  dmidecode         # Show BIOS info
+  progress # Show progress of coreutils programs
+  iperf3 # Network speed test tool
+  bintools # Manipulating binaries
 ]
