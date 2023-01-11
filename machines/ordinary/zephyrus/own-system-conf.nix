@@ -6,7 +6,7 @@
       enable = true;
       profileConfig = "quiet";
     };
-    flake-supergfxd = {
+    supergfxd = {
       enable = true;
       settings = {
         mode = "Integrated";

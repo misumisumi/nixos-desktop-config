@@ -1,4 +1,4 @@
-{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, user, nixpkgs, nur, nixgl, home-manager, flakes, nvim-config, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
 
 let
   lib = nixpkgs.lib;
@@ -15,9 +15,6 @@ let
         ./configuration.nix # Common system conf
         (overlay { inherit inputs nixpkgs; })
         nur.nixosModules.nur
-        flakes.nixosModules.asusd
-        flakes.nixosModules.supergfxd
-
         ../modules
 
         (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
@@ -28,8 +25,13 @@ let
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
           home-manager.users."${user}" = {
-            imports = [ (import ../hm/hm.nix) ] ++ [ (import hostConf) ] # Common home conf + Each machine conf
-              ++ optionals (rootDir != "general") (with private-conf.nixosModules; [ ssh_my_conf put_wallpapers ]);
+            # Common home conf + Each machine conf
+            imports = [
+              (import ../hm/hm.nix)
+              (import hostConf)
+              nvim-config.nixosModules.nvim-config
+            ]
+            ++ optionals (rootDir != "general") (with private-conf.nixosModules; [ ssh_my_conf put_wallpapers ]);
           };
         }
       ] ++ (optional (rootDir != "general") private-conf.nixosModules.my-network);
