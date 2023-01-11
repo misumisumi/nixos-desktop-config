@@ -76,6 +76,21 @@
         "type": "github"
       }
     },
+    "flake-utils_5": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "flakes": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -85,11 +100,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1673186554,
-        "narHash": "sha256-ZlBChn9PoXOQq1M0xs/a6m4z/3OOMcMhH4Zc0aI5JQU=",
+        "lastModified": 1673422352,
+        "narHash": "sha256-5Bv3Pu6sPCn0gisTVMNci6FfXS0EIpbzlAAhJb/lqPk=",
         "owner": "Sumi-Sumi",
         "repo": "flakes",
-        "rev": "1d9172206e99182470546d2e4f8ab1ef745022f3",
+        "rev": "67b689d3211b2c41b03b5b15b1765b555d7ab2ec",
         "type": "github"
       },
       "original": {
@@ -207,6 +222,30 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "inputs": {
+        "flake-utils": "flake-utils_5",
+        "flakes": [
+          "flakes"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1673450098,
+        "narHash": "sha256-f/bJhuKnZfoZaWItGh5sliMHnelWGumPyypRpMg+/NQ=",
+        "owner": "Sumi-Sumi",
+        "repo": "nvim-config",
+        "rev": "fc63b85c240db4f72881d51ae9b19aeb09b2e4f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sumi-Sumi",
+        "repo": "nvim-config",
+        "type": "github"
+      }
+    },
     "private-conf": {
       "inputs": {
         "flake-utils": [
@@ -217,11 +256,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1673188176,
-        "narHash": "sha256-aHteyUHRZjgc6SGlSmpZscQo3IljgIVd3DxeEL9ELnY=",
+        "lastModified": 1673336068,
+        "narHash": "sha256-AdHEMfwOs8Dn4+Al6eamv+qG/e8xCXj8AHXXwLFEhWY=",
         "ref": "refs/heads/main",
-        "rev": "b2ef484bcae9687abb325585ffb8b4b3ea702496",
-        "revCount": 54,
+        "rev": "124e402cb1ea5abe0227da5e559dfb03ff462fec",
+        "revCount": 56,
         "type": "git",
         "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
       },
@@ -238,6 +277,7 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
+        "nvim-config": "nvim-config",
         "private-conf": "private-conf"
       }
     },

@@ -20,6 +20,11 @@
       url = "github:Sumi-Sumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-config = {
+      url = "github:Sumi-Sumi/nvim-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flakes.follows = "flakes";
+    };
     private-conf = {
       url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +32,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, private-conf }:
+  outputs = inputs @ { self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, nvim-config, private-conf }:
     let
       user = "sumi";
       stateVersion = "23.05";       # For Home Manager
@@ -46,14 +51,14 @@
         import ./machines {
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;
-          inherit nixpkgs nur nixgl home-manager flakes private-conf;
+          inherit nixpkgs nur nixgl home-manager flakes nvim-config private-conf;
         }
       );
       homeConfigurations = (
         import ./hm {
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;
-          inherit nixpkgs nur nixgl home-manager flakes private-conf;
+          inherit nixpkgs nur nixgl home-manager flakes nvim-config private-conf;
         }
       );
     };
