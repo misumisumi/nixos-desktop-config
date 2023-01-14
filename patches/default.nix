@@ -2,14 +2,33 @@ let
   dataDir = "var/lib/xppend1v2";
 in
 [
+  # override: default.nixに記載の属性をオーバライドする
+  # overrideAttrs: default.nixに記載されていない属性も追加できる
+  # Package patch template
+  # (final: prev: {
+  #   package = prev.package.overrideAttrs (old: {
+  #   });
+  # })
+  # Unwrapped package patch template
+  # (final: prev: {
+  #   package = prev.package.unwrapped.override (old: {
+  #   });
+  # })
+  # pythonPackages patch template
   # (final: prev: {
   #   python3Packages = prev.python3Packages.override {
   #     overrides = pfinal: pprev: {
-  #       dbus-next = pprev.dbus-next.overridePythonAttrs (old: {
-  #         # dbus-nest have issue in test so remove some test.
-  #         # temporary fix for https://github.com/NixOS/nixpkgs/issues/197408
-  #         checkPhase = builtins.replaceStrings [ "not test_peer_interface" ] [ "not test_peer_interface and not test_tcp_connection_with_forwarding" ] old.checkPhase;
+  #       package = pprev.package.overridePythonAttrs (old: {
   #       });
+  #     };
+  #   };
+  # })
+  # haskellPackages patch template
+  # (final: prev: {
+  #   haskellPackages = prev.haskellPackages.override {
+  #     overrides = hself: hsuper: {
+  #       # Can add/override packages here
+  #       package = prev.haskell.lib.doJailbreak hsuper.package;
   #     };
   #   };
   # })
@@ -23,28 +42,12 @@ in
   })
 
   (final: prev: {
-    clisp = prev.clisp.override {
-      # On newer readline8 fails as:
-      #  #<FOREIGN-VARIABLE "rl_readline_state" #x...>
-      #   does not have the required size or alignment
-      readline = prev.readline6;
-    };
-  })
-  (final: prev: {
     qtile = prev.qtile.unwrapped.override (old: {
       patches = old.patches ++ [
         ./fix-xcbq.patch
       ];
     });
   })
-
-  # (final: prev: {
-  #   unzip = prev.unzip.overrideAttrs (old: {
-  #     patches = old.patches ++ [
-  #       ./fix-unzip.patch
-  #     ];
-  #   });
-  # })
 
   (final: prev: {
     xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
