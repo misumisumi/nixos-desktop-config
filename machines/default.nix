@@ -29,6 +29,7 @@ let
             imports = [
               (import ../hm/hm.nix)
               (import hostConf)
+              flakes.nixosModules.yaskkserv2
               nvim-config.nixosModules.nvim-config
             ]
             ++ optionals (rootDir != "general") (with private-conf.nixosModules; [ ssh_my_conf put_wallpapers ]);
