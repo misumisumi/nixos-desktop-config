@@ -11,32 +11,35 @@ in
     interfaces.enp4s0.wakeOnLan.enable = true;
     firewall = {
       enable = true;
-      allowedUDPPorts = [
-        4010
+      trustedInterfaces = [
+        "br0"
       ];
-      allowedTCPPorts = [
-        4713 # PulseAudio
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 1714;
-          to = 1764; # KDE-connect
-        }
-        {
-          from = 60000;
-          to = 60011; # Mosh
-        }
-      ];
-      allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764; # KDE-connect
-        }
-        {
-          from = 60000;
-          to = 60011; # Mosh
-        }
-      ];
+      # allowedUDPPorts = [
+      #   4010
+      # ];
+      # allowedTCPPorts = [
+      #   4713 # PulseAudio
+      # ];
+      # allowedUDPPortRanges = [
+      #   {
+      #     from = 1714;
+      #     to = 1764; # KDE-connect
+      #   }
+      #   {
+      #     from = 60000;
+      #     to = 60011; # Mosh
+      #   }
+      # ];
+      # allowedTCPPortRanges = [
+      #   {
+      #     from = 1714;
+      #     to = 1764; # KDE-connect
+      #   }
+      #   {
+      #     from = 60000;
+      #     to = 60011; # Mosh
+      #   }
+      # ];
     };
   };
 
