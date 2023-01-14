@@ -1,5 +1,5 @@
 /*
-tmux (terminal multiplexer) conf
+  tmux (terminal multiplexer) conf
 */
 { pkgs, ... }:
 
@@ -27,7 +27,7 @@ tmux (terminal multiplexer) conf
         }
       ];
 
-      prefix = "C-j";
+      prefix = "C-c";
 
       terminal = "tmux-256color";
       clock24 = true;
