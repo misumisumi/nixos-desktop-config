@@ -16,6 +16,9 @@ keys = [
         lazy.spawn(PARAM.terminal),
         desc="Launch terminal",
     ),
+    Key(
+        [PARAM.mod], "Tab", lazy.next_layout(), desc="Move window focus to other window"
+    ),
     # Operate window in workspace
     Key([PARAM.mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([PARAM.mod], "l", lazy.layout.right(), desc="Move focus to right"),

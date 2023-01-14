@@ -10,9 +10,12 @@ from libqtile.log_utils import logger
 
 
 def check_screen_saver():
-    path = Path.home().joinpath(".cache", "betterlockscreen", "current", "lock_color.png")
+    path = Path.home().joinpath(
+        ".cache", "betterlockscreen", "current", "lock_color.png"
+    )
     if not path.exists():
         subprocess.run("betterlockscreen -u {}".format(PARAM.screen_saver))
+
 
 # 擬似的に各スクリーンにグループが割り当てられるようにするための初期化
 def init_screen_and_group():
@@ -29,21 +32,33 @@ def init_screen_and_group():
 @hook.subscribe.startup_once
 def autostart():
     if PARAM.laptop:
-        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(PARAM.wallpapers[0],
-                                                              PARAM.wallpapers[1]), shell=True)
+        subprocess.run(
+            "feh --bg-fill {} --bg-fill {}".format(
+                PARAM.wallpapers[0], PARAM.wallpapers[1]
+            ),
+            shell=True,
+        )
     if PARAM.vm:
-        subprocess.run('feh --bg-fill {}'.format(PARAM.wallpapers[0]), shell=True)
+        subprocess.run("feh --bg-fill {}".format(PARAM.wallpapers[0]), shell=True)
     else:
         # subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1])), shell=True)
-        subprocess.run('feh --bg-fill {} --bg-fill {}'.format(str(PARAM.wallpapers[MONITOR0]), str(PARAM.wallpapers[MONITOR1]), str(PARAM.wallpapers[MONITOR2])), shell=True)
+        subprocess.run(
+            "feh --bg-fill {} --bg-fill {}".format(
+                str(PARAM.wallpapers[MONITOR0]),
+                str(PARAM.wallpapers[MONITOR1]),
+                str(PARAM.wallpapers[MONITOR2]),
+            ),
+            shell=True,
+        )
     check_screen_saver()
     init_screen_and_group()
 
 
 @hook.subscribe.startup_complete
 def afterstart():
-    subprocess.run('copyq &', shell=True)
-    subprocess.run('kdeconnect-indicator &', shell=True)
-    if PARAM.is_display_tablet:
-        subprocess.run('xp-pen-driver-indicator', shell=True)
-
+    subprocess.run("copyq &", shell=True)
+    subprocess.run("kdeconnect-indicator &", shell=True)
+    subprocess.run("xmodmap -e 'keycode 255=space' -e 'keycode 65=Shift_L'", shell=True)
+    subprocess.run("systemctl --user restart xcape.service", shell=True)
+    # if PARAM.is_display_tablet:
+    #     subprocess.run("xp-pen-driver-indicator", shell=True)
