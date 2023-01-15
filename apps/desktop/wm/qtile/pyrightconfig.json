@@ -1,0 +1,8 @@
+{
+    "include": [
+        "conf",
+    ],
+    "extraPaths": [
+        "/etc/profiles/per-user/sumi/lib/python3.10/site-packages",
+    ]
+}

@@ -2,8 +2,8 @@
 from libqtile import bar
 from libqtile.config import Screen
 
-from my_modules.param import PARAM
-from my_modules.my_bar import make_bar
+from my_modules.global_config import GLOBAL
+from my_modules.bar import make_bar
 
 from libqtile.log_utils import logger
 
@@ -20,38 +20,33 @@ def make_screens(num_screen):
                 Screen(
                     top=bar.Bar(
                         top_widgets,
-                        PARAM.bar_font_size,
-                        background=PARAM.c_normal['BGbase'],
-                        border_color=PARAM.c_normal['cyan']
+                        GLOBAL.bar_font_size,
+                        background=GLOBAL.c_normal["BGbase"],
+                        border_color=GLOBAL.c_normal["cyan"],
                     ),
-                    )
                 )
-        elif PARAM.is_display_tablet and i>num_screen:
-            screens.append(
-                Screen(
-                    top=None
-                    )
-                )
+            )
+        elif GLOBAL.is_display_tablet and i > num_screen:
+            screens.append(Screen(top=None))
         else:
             screens.append(
                 Screen(
                     top=bar.Bar(
                         top_widgets,
-                        PARAM.bar_font_size,
-                        background=PARAM.c_normal['BGbase'],
-                        border_color=PARAM.c_normal['cyan']
+                        GLOBAL.bar_font_size,
+                        background=GLOBAL.c_normal["BGbase"],
+                        border_color=GLOBAL.c_normal["cyan"],
                     ),
-                    bottom = bar.Bar(
+                    bottom=bar.Bar(
                         bottom_widgets,
-                        PARAM.bar_font_size,
-                        background=PARAM.c_normal['clear'],
-                        border_color=PARAM.c_normal['cyan'],
-                    )
-                    )
+                        GLOBAL.bar_font_size,
+                        background=GLOBAL.c_normal["clear"],
+                        border_color=GLOBAL.c_normal["cyan"],
+                    ),
                 )
+            )
 
     return screens
 
 
-screens = make_screens(PARAM.num_screen)
-
+screens = make_screens(GLOBAL.num_screen)

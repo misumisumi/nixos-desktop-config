@@ -21,7 +21,7 @@ with lib; {
     mapExpression = {
       "\#65" = "space";
     };
-    timeout = 350;
+    timeout = 250;
   };
   xsession = {
     putWallpapers.enable = true;
