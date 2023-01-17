@@ -60,6 +60,7 @@
         #bind-k display-panes\; confirm-before kill-pane\;
         bind-key C-x run "tmux kill-pane || tmux kill-window"
         bind-key C-t run "tmux last-pane || tmux last-window || tmux new-window"
+        bind-key g popup -w90% -h90% -E lazygit # (prefix) gでlazygitを起動する
 
         bind-key i display-panes
 
