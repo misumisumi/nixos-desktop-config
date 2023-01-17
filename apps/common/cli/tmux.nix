@@ -4,23 +4,25 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ xsel ];
   programs = {
     tmux = {
       enable = true;
 
-      # tmuxのプラグインはリストで渡す
       # tmuxのプラグインはリストで[ tmux-plugin { plugin=tmux-plugin extraConfig="some settings for tmux-plugin" } ]とする
-      plugins = with pkgs; [
-        tmuxPlugins.sensible
-
+      plugins = with pkgs.tmuxPlugins; [
+        sensible
+        nord # Theme
+        extrakto # complete commands from text in screen
+        tilish # change tmux like i3wm
         {
-          plugin = tmuxPlugins.resurrect;
+          plugin = resurrect;
           extraConfig = ''
             set -g @resurrect-capture-pane-contents 'on'
           '';
         }
         {
-          plugin = tmuxPlugins.continuum;
+          plugin = continuum;
           extraConfig = ''
             set -g @continuum-save-interval '10'
           '';
@@ -28,7 +30,6 @@
       ];
 
       prefix = "C-c";
-
       terminal = "tmux-256color";
       clock24 = true;
       historyLimit = 10000;
@@ -40,6 +41,8 @@
       extraConfig = ''
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -g mouse on
+        bind-key C-j swap-pane -D
+        bind-key C-k swap-pane -U
 
         # setw -g window-active-style fg='#c0c5ce',bg='#2b303b'
         # setw -g window-style fg='#c0c5ce',bg='#27292d'
@@ -66,6 +69,8 @@
         unbind s
         bind-key s split-window -v # 水平方向split
         bind-key v split-window -h # 垂直方向split
+
+        bind-key S choose-tree
 
         run-shell "tmux setenv -g TMUX_VERSION $(tmux -V | cut -c 6-)"
 

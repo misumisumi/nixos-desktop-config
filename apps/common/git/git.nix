@@ -4,6 +4,29 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ delta ];
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = {
+        paging = {
+          pager = "delta --dark --paging=never";
+        };
+      };
+      gui = {
+        theme = {
+          selectedLineBgColor = [ "default" ];
+          selectedRangeBgColor = [ "default" ];
+        };
+      };
+      refresher = {
+        refreshInterval = 3;
+      };
+      os = {
+        editCommand = "nvim";
+      };
+    };
+  };
   programs = {
     git = {
       enable = true;
