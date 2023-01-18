@@ -7,15 +7,33 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.nix-zsh-completions ];
+  home.packages = with pkgs; [ nix-zsh-completions bat ];
+  imports = [ ../../../modules/zinit.nix ];
   programs = {
     fzf = {
       enable = true;
+      enableZshIntegration = false; # Confilict "jeffreytse/zsh-vi-mode" so init my self
+      # ALT+C option
+      changeDirWidgetOptions = [
+        "--preview 'tree -C {} | tree -200'"
+      ];
+      # CTRL+T option
+      fileWidgetOptions = [
+        "--preview 'bat -n --color=always {}'"
+        "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
+      ];
+      # CTRL+R option
+      historyWidgetOptions = [
+        "--preview 'echo {}' --preview-window up:3:hidden:wrap"
+        "--bind 'ctrl-/:toggle-preview'"
+        "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+        "--color header:italic"
+        "--header 'Press CTRL-Y to copy command into clipboard'"
+      ];
     };
     dircolors = {
       enable = true;
     };
-
     zsh = {
       enable = true;
       dotDir = ".config/zsh";
@@ -40,16 +58,6 @@
 
       prezto = {
         enable = true;
-        pmodules = [
-          "environment"
-          "terminal"
-          "editor"
-          "directory"
-          "spectrum"
-          "utility"
-          "completion"
-          "prompt"
-        ];
         extraFunctions = [
           "zargs"
           "zmv"
@@ -57,111 +65,157 @@
         extraModules = [
           "attr"
         ];
+        tmux = {
+          autoStartLocal = true;
+          autoStartRemote = true;
+          defaultSessionName = "WS0";
+          itermIntegration = true;
+        };
       };
-
-      plugins = [
-        {
-          name = "zinit";
-          src = pkgs.zinit;
-          file = "share/zinit/zinit.zsh";
-        }
-      ];
+      zinit = {
+        enable = true;
+        promptTheme = {
+          theme = "romkatv/powerlevel10k";
+          modifier = ''
+            depth=1 atload'P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
+            [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+            source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"' light-mode \
+          '';
+        };
+        plugins = {
+          "depth=1 light-mode" = [
+            "jeffreytse/zsh-vi-mode"
+          ];
+          "wait'0b' lucid blockf light-mode" = [
+            "zsh-users/zsh-autosuggestions"
+            "zsh-users/zsh-completions"
+          ];
+          "wait'0c' lucid blockf light-mode" = [
+            "depth=1 atload'abbr_init' olets/zsh-abbr"
+          ];
+          "wait'!1a' lucid blockf light-mode" = [
+            "zdharma-continuum/fast-syntax-highlighting"
+          ];
+          "wait'1b' lucid light-mode" = [
+            "hlissner/zsh-autopair"
+          ];
+        };
+        prezto = {
+          enable = true;
+          pmodules = [
+            "environment"
+            "terminal"
+            #"tmux"
+          ];
+          pmodulesWithModifier = {
+            "wait'0a' lucid" = [
+              "history"
+              "directory"
+              "spectrum"
+              "completion"
+            ];
+          };
+        };
+        initConfig = ''
+          # The plugin will auto execute this zvm_after_init function
+          function zvm_after_init() {
+            # Binding keys for zsh-abbr
+            if [[ $options[zle] = on ]]; then
+              . ${pkgs.fzf}/share/fzf/completion.zsh
+              . ${pkgs.fzf}/share/fzf/key-bindings.zsh
+            fi
+          }
+          # historyに元のコマンドが残るalias
+          function abbr_init() {
+            abbr_cmds=(
+              # virtual env
+              diren="nix flake new -t github:nix-community/nix-direnv"
+              direal="direnv allow"
+              venv='source venv/bin/activate'
+              # podman and buildah
+              p='podman'
+              ppl='podman pull'
+              ppld='(){podman pull docker.io/$1}'
+              pps='podman ps'
+              pimgs='podman images'
+              prun='podman run'
+              bud='buildah bud'
+              # git
+              lg='lazygit'
+              g='git'
+              ga='git add'
+              gc='git commit'
+              gac='git add -A && git commit'
+              gst='git status'
+              gbr='git branch'
+              gco='git checkout'
+              gdf='git diff'
+              gl='git log'
+              ggr='git grep'
+              gsw='git switch'
+              gpl='git pull'
+              gpu='git push'
+              gget='ghq get'
+              # nixos-rebuild
+              nixos-test='nixos-rebuild test --flake '
+              nixos-switch='nixos-rebuild switch --flake '
+            )
+            zargs -P0 -icmd -- abbr_cmds -- abbr -S cmd
+          }
+          abbr_init()
+        '';
+      };
       shellAliases = {
         nix = "noglob nix";
         nixos-rebuild = "noglob nixos-rebuild";
         nixos-install = "noglob nixos-install";
         nixos-container = "noglob nixos-container";
       };
+      localVariables = {
+        ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj";
+        ZVM_VI_VISUAL_ESCAPE_BINDKEY = "jj";
+        ZVM_VI_OPPEND_ESCAPE_BINDKEY = "jj";
+        ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT";
+        ABBR_QUIET = 1;
+      };
 
-      # initExtraFirst = ''
-      #   if [[ -z "$TMUX" ]]; then
-      #     tmux new-session
-      #     exit
-      #   fi
-      # '';
-      initExtraBeforeCompInit = ''
-        # p10k instant prompt
-        P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
-        [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+      # 既にsessionが起動しているかつattach済なら新しくsessionを作成する
+      # そうでなればsessionにattachする
+      initExtraFirst = ''
+        # Calc startup time
+        # zmodload zsh/zprof
+        # zprof
 
-        if [[ -r "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh ]]; then
-          source "''${XDG_CACHE_HOME:-''${HOME}/.cache}"/p10k-instant-prompt-"''${(%):-%n}".zsh
+        if [[ ! -n $TMUX ]]; then
+          tmux start-server
+          if ! tmux list-session 2> /dev/null; then
+            tmux new-session -s "WS0"
+          else
+            is_attach=""
+            tmux list-sessions | while read line; do
+              if [[ $(echo $line | grep "attached") == "" ]]; then
+                is_attach=$(echo $line | awk -F':' '{print $1}')
+                echo $is_attach
+                break
+              fi
+            done
+            if [[ ! $is_attach ]]; then
+              tmux new-session
+            else
+              tmux attach-session -t $is_attach
+            fi
+          fi
+          exit
         fi
-        source "''${XDG_CONFIG_HOME}/zsh/.p10k.zsh"
-
-        declare -A ZINIT
-        ZINIT_HOME=''${HOME}/.zinit
-        ZINIT[HOME_DIR]=''${ZINIT_HOME}
-        [[ -r ''${ZINIT_HOME} ]] || mkdir -p ''${ZINIT_HOME}
+      '';
+      initExtraBeforeCompInit = ''
+        setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
+        setopt BARE_GLOB_QUAL        # 条件付け検索の有効化
+        setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
+        setopt inc_append_history    # 履歴をインクリメンタルに追加
       '';
 
       initExtra = ''
-        autoload -Uz promptinit
-
-        autoload -Uz _zinit
-        (( ''${+_comps} )) && _comps[zinit]=_zinit
-
-        # setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
-        # setopt BARE_GLOB_QUAL        # 条件付け検索の有効化
-        setopt append_history        # 履歴を追加 (毎回 .zsh_history を作るのではなく)
-        setopt inc_append_history    # 履歴をインクリメンタルに追加
-
-        ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-        ZVM_VI_VISUAL_ESCAPE_BINDKEY=jj
-        ZVM_VI_OPPEND_ESCAPE_BINDKEY=jj
-        ZVM_LINE_INIT_MODE=$ZVM_MODE_LAST
-
-        export DIRENV_WARN_TIMEOUT=120s     # DIRENVのタイムアウトまでを長くする
-        bindkey -v
-
-        zinit snippet PZT::modules/helper/init.zsh
-        zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-        zinit ice silent wait"!0a"; zi light zdharma-continuum/history-search-multi-word
-        zinit ice silent wait"!0b"; zi light zdharma-continuum/fast-syntax-highlighting
-        zinit ice silent wait"!1a"; zi light zsh-users/zsh-autosuggestions
-        zinit ice silent wait"!2a"; zi light hlissner/zsh-autopair
-        zinit ice silent depth=1 trigger-load '!zsh-vi-mode'; zi light jeffreytse/zsh-vi-mode
-        zinit ice silent depth=1 trigger-load '!zsh-abbr'; zi light olets/zsh-abbr
-
-        # The plugin will auto execute this zvm_after_init function
-        function zvm_after_init() {
-          # Binding keys for zsh-abbr
-          _abbr_bind_widgets
-        }
-
-
-        # historyに元のコマンドが残るalias
-        ABBR_QUIET=1
-        abbr dene="nix flake new -t github:nix-community/nix-direnv"
-        abbr deal="direnv allow"
-        abbr venv='source venv/bin/activate'
-        abbr tx='tmux'
-
-        # podman and buildah
-        abbr p='podman'
-        abbr ppl='podman pull'
-        abbr ppld='(){podman pull docker.io/$1}'
-        abbr pps='podman ps'
-        abbr pimgs='podman images'
-        abbr prun='podman run'
-        abbr bud='buildah bud'
-
-        # git
-        abbr g='git'
-        abbr ga='git add'
-        abbr gc='git commit'
-        abbr gac='git add -A && git commit'
-        abbr gst='git status'
-        abbr gbr='git branch'
-        abbr gco='git checkout'
-        abbr gdf='git diff'
-        abbr gl='git log'
-        abbr ggr='git grep'
-        abbr gsw='git switch'
-        abbr gpl='git pull'
-        abbr gpu='git push'
-        abbr gget='ghq get'
       '';
     };
   };

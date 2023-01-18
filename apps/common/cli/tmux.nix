@@ -4,7 +4,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ xsel ];
+  home.packages = with pkgs; [ xsel bc ];
   programs = {
     tmux = {
       enable = true;
@@ -14,7 +14,12 @@
         sensible
         nord # Theme
         extrakto # complete commands from text in screen
-        tilish # change tmux like i3wm
+        {
+          plugin = tilish; # change tmux like i3wm
+          extraConfig = ''
+            set -g @tilish-dmenu 'on'
+          '';
+        }
         {
           plugin = resurrect;
           extraConfig = ''
@@ -41,11 +46,13 @@
       extraConfig = ''
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -g mouse on
+        set -g status-left '#[fg=black,bg=blue,bold]#{?client_prefix,#[reverse],} #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]#{?client_prefix,#[reverse]#[fg=black],}'
+
         bind-key C-j swap-pane -D
         bind-key C-k swap-pane -U
 
-        # setw -g window-active-style fg='#c0c5ce',bg='#2b303b'
-        # setw -g window-style fg='#c0c5ce',bg='#27292d'
+        setw -g window-active-style fg='#d8e1e6',bg='#1f292e'
+        setw -g window-style fg='#d8e1e6',bg='#171e21'
 
         # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
         bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -71,12 +78,16 @@
         bind-key s split-window -v # 水平方向split
         bind-key v split-window -h # 垂直方向split
 
-        bind-key S choose-tree
-
-        run-shell "tmux setenv -g TMUX_VERSION $(tmux -V | cut -c 6-)"
-
+        run-shell "tmux setenv -g TMUX_VERSION $(tmux -V | cut -c 6- | sed -e 's/[a-z]//g')"
         if-shell -b '[ "$(echo "$TMUX_VERSION < 3.0" | bc)" = 1 ]' "bind-key S choose-tree -s"
+        if-shell -b '[ "$(echo "$TMUX_VERSION < 3.2" | bc)" = 1 ]' {
+            bind-key C-a run-shell "tmux list-sessions | fzf-tmux --reverse | awk -F':' '{print $1}' | xargs tmux switch-client -t"
+        }
         if-shell -b '[ "$(echo "$TMUX_VERSION >= 3.0" | bc)" = 1 ]' "bind-key S choose-tree -Zs"
+        if-shell -b '[ "$(echo "$TMUX_VERSION >= 3.2" | bc)" = 1 ]' {
+            bind-key C-a run-shell "tmux list-sessions | fzf-tmux -p --reverse | awk -F':' '{print $1}' | xargs tmux switch-client -t"
+        }
+
       '';
     };
 

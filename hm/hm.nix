@@ -1,6 +1,6 @@
 { config, lib, pkgs, user, stateVersion, ... }:
 
-{ 
+{
   programs = {
     home-manager.enable = true;
   };
@@ -10,7 +10,7 @@
     username = "${user}";
     homeDirectory = "/home/${user}";
     activation = {
-      myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      myActivationAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -d ${config.home.homeDirectory}/.config/ranger ]; then
           mkdir ${config.home.homeDirectory}/.config/ranger
         fi
@@ -23,13 +23,14 @@
 
 
     sessionVariables = {
-      CHROME_PATH="${pkgs.vivaldi}/bin/vivaldi";
-      EDITOR="nvim";
+      CHROME_PATH = "${pkgs.vivaldi}/bin/vivaldi";
+      EDITOR = "nvim";
       NIXOS_OZONE_WL = "1";
+      DIRENV_WARN_TIMEOUT = "120s"; # DIRENVのタイムアウトまでを長くする
     };
 
     shellAliases = {
-      ls="ls --color=auto";
+      ls = "ls --color=auto";
       grep = "grep --color=auto";
       fgrep = "grep -F --color=auto";
       egrep = "grep -E --color=auto";
