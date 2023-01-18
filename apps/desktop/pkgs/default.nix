@@ -4,7 +4,7 @@ let
   lib = pkgs.lib;
   tex = (pkgs.texlive.combine {
     # TexLive(Japanese support)
-    inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese;
+    inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese collection-latexextra;
   });
 in
 with pkgs; [

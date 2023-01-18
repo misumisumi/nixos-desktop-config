@@ -28,4 +28,7 @@ pkgs: with pkgs; [
   progress # Show progress of coreutils programs
   iperf3 # Network speed test tool
   bintools # Manipulating binaries
+
+  fd # fast find
+  ripgrep # fast grep
 ]
