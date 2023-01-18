@@ -9,7 +9,8 @@ from libqtile.log_utils import logger
 _match_code = [Match(wm_class="code")]
 
 _match_browse = [Match(wm_class="vivaldi-stable"), Match(wm_class="firefox")]
-_match_paper = [Match(wm_class="org.pwmt.zathura")]
+# _match_paper = [Match(wm_class="org.pwmt.zathura")]
+_match_paper = []
 
 _match_analyze = [
     Match(title="WaveSurfer 1.8.8p5"),
