@@ -1,5 +1,5 @@
 /*
-Uniformed look for Qt and GTK applications
+  Uniformed look for Qt and GTK applications
 */
 { pkgs, ... }:
 
@@ -10,7 +10,7 @@ Uniformed look for Qt and GTK applications
       # name = "Noto Sans CJK JP";
       # package = pkgs.noto-fonts-cjk-sans;
       # size = 12;
-      name = "Source Han Sans";       # Discord have CJK character render problem if you use Noto Font CJK. (https://github.com/NixOS/nixpkgs/issues/171976)
+      name = "Source Han Sans"; # Discord have CJK character render problem if you use Noto Font CJK. (https://github.com/NixOS/nixpkgs/issues/171976)
       package = pkgs.source-han-sans;
       size = 12;
     };
@@ -26,5 +26,9 @@ Uniformed look for Qt and GTK applications
   qt = {
     enable = true;
     platformTheme = "gtk";
+    style = {
+      package = pkgs.arc-kde-theme;
+      name = "ark-dark";
+    };
   };
 }
