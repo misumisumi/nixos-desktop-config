@@ -16,13 +16,7 @@ with lib; {
       "qtile".source = ./conf;
     };
   };
-  services.xcape = {
-    enable = true;
-    mapExpression = {
-      "\#65" = "space";
-    };
-    timeout = 250;
-  };
+
   xsession = {
     putWallpapers.enable = true;
     windowManager = {

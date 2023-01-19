@@ -41,13 +41,12 @@
       customPaneNavigationAndResize = true;
       keyMode = "vi";
       resizeAmount = 5;
+      baseIndex = 1;
       shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -g mouse on
-        set -g status-left '#[fg=black,bg=blue,bold]#{?client_prefix,#[reverse],} #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]#{?client_prefix,#[reverse]#[fg=black],}'
-
         bind-key C-j swap-pane -D
         bind-key C-k swap-pane -U
 

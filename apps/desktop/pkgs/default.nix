@@ -84,4 +84,6 @@ lib.optionals (! isMinimal) [
   zotero # Paper managiment tool
 
   juce # VST plugin flamework
+
+  wpsoffice
 ]

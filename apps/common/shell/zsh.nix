@@ -135,7 +135,7 @@
               # podman and buildah
               p='podman'
               ppl='podman pull'
-              ppld='(){podman pull docker.io/$1}'
+              ppld='podman pull docker.io/'
               pps='podman ps'
               pimgs='podman images'
               prun='podman run'
@@ -157,12 +157,14 @@
               gpu='git push'
               gget='ghq get'
               # nixos-rebuild
-              nixos-test='nixos-rebuild test --flake '
-              nixos-switch='nixos-rebuild switch --flake '
+              nixtest='sudo nixos-rebuild test --flake'
+              nixswitch='sudo nixos-rebuild switch --flake'
             )
-            zargs -P0 -icmd -- abbr_cmds -- abbr -S cmd
+            for cmd in "''${abbr_cmds[@]}"
+            do
+              abbr $cmd
+            done
           }
-          abbr_init()
         '';
       };
       shellAliases = {

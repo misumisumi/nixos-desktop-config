@@ -54,7 +54,7 @@ def autostart():
 def afterstart():
     subprocess.run("copyq &", shell=True)
     subprocess.run("kdeconnect-indicator &", shell=True)
-    subprocess.run("xmodmap -e 'keycode 255=space' -e 'keycode 65=Shift_L'", shell=True)
+    # subprocess.run("xmodmap -e 'keycode 255=space' -e 'keycode 65=Shift_L'", shell=True)
     subprocess.run("systemctl --user restart xcape.service", shell=True)
     # if GLOBAL.is_display_tablet:
     #     subprocess.run("xp-pen-driver-indicator", shell=True)
