@@ -12,6 +12,12 @@ _settings = {
     "border_focus": GLOBAL.c_normal["cyan"],
     "border_normal": GLOBAL.c_normal["BGbase"],
 }
+
+_floating_settings = {
+    "border_width": GLOBAL.border,
+    "border_focus": GLOBAL.c_normal["green"],
+    "border_normal": GLOBAL.c_normal["BGbase"],
+}
 # for default
 layout1 = [
     layout.Columns(
@@ -76,5 +82,5 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
-    **_settings
+    **_floating_settings
 )

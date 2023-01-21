@@ -10,7 +10,8 @@ from libqtile.log_utils import logger
 
 
 keys = [
-    Key([GLOBAL.mod, "shift"], "Return", lazy.spawn(GLOBAL.terminal), desc="Launch terminal"),
+    Key([GLOBAL.mod], "Return", lazy.spawn(GLOBAL.terminal), desc="Launch terminal"),
+    Key([GLOBAL.mod, "shift"], "Return", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Launch terminal"),
     # Operate window in workspace
     Key([GLOBAL.mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([GLOBAL.mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -52,8 +53,10 @@ keys = [
         desc="show power-menu",
     ),
     # Toggle copyq and calculator
+    Key([GLOBAL.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
+    Key([GLOBAL.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
     Key([GLOBAL.mod], "s", lazy.spawn("copyq toggle")),
-    Key([GLOBAL.mod, "shift"], "s", lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort")),
+    Key([GLOBAL.mod], "equal", lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort")),
     # Lock screen
     Key([GLOBAL.mod, "control"], "b", lazy.spawn("betterlockscreen -l -- -e"), desc="lock PC"),
     # Screenshot

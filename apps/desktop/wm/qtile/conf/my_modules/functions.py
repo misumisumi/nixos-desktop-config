@@ -385,4 +385,3 @@ def capture_screen(qtile, is_clipboard=False):
         Qtile.cmd_spawn(qtile, "flameshot screen -n {} -c".format(idx))
     else:
         Qtile.cmd_spawn(qtile, "flameshot screen -n {} -p {}".format(idx, GLOBAL.capture_path))
-
