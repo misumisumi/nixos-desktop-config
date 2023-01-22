@@ -14,10 +14,12 @@
       enable = true;
       enableZshIntegration = false; # Confilict "jeffreytse/zsh-vi-mode" so init my self
       # ALT+C option
+      changeDirWidgetCommand = "fd -H --type d";
       changeDirWidgetOptions = [
         "--preview 'tree -C {} | tree -200'"
       ];
       # CTRL+T option
+      fileWidgetCommand = "fd -H --type f";
       fileWidgetOptions = [
         "--preview 'bat -n --color=always {}'"
         "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
@@ -30,6 +32,12 @@
         "--color header:italic"
         "--header 'Press CTRL-Y to copy command into clipboard'"
       ];
+      tmux = {
+        enableShellIntegration = true;
+        shellIntegrationOptions = [
+          "-d 30%"
+        ];
+      };
     };
     dircolors = {
       enable = true;
@@ -61,6 +69,8 @@
         extraFunctions = [
           "zargs"
           "zmv"
+          "zcp"
+          "zln"
         ];
         extraModules = [
           "attr"
@@ -90,8 +100,8 @@
             "zsh-users/zsh-autosuggestions"
             "zsh-users/zsh-completions"
           ];
-          "wait'0c' lucid blockf light-mode" = [
-            "depth=1 atload'abbr_init' olets/zsh-abbr"
+          "wait'0c' lucid nocd depth=1 light-mode" = [
+            "atload'abbr_init' olets/zsh-abbr"
           ];
           "wait'!1a' lucid blockf light-mode" = [
             "zdharma-continuum/fast-syntax-highlighting"
@@ -160,18 +170,19 @@
               nixtest='sudo nixos-rebuild test --flake'
               nixswitch='sudo nixos-rebuild switch --flake'
             )
-            for cmd in "''${abbr_cmds[@]}"
-            do
-              abbr $cmd
-            done
+            if [[ ''${#abbr_cmds[@]} == $(cat $XDG_CONFIG_HOME/zsh/abbreviations | wc -l) ]]; then
+              abbr load
+            else
+              for cmd in "''${abbr_cmds[@]}"
+              do
+                abbr $cmd
+              done
+            fi
           }
         '';
       };
       shellAliases = {
         nix = "noglob nix";
-        nixos-rebuild = "noglob nixos-rebuild";
-        nixos-install = "noglob nixos-install";
-        nixos-container = "noglob nixos-container";
       };
       localVariables = {
         ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj";
@@ -179,6 +190,9 @@
         ZVM_VI_OPPEND_ESCAPE_BINDKEY = "jj";
         ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT";
         ABBR_QUIET = 1;
+      };
+      sessionVariables = {
+        MANPAGER = "less -R --use-color -Dd+c -Du+b";
       };
 
       # 既にsessionが起動しているかつattach済なら新しくsessionを作成する

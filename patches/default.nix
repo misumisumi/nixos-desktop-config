@@ -48,6 +48,19 @@ in
       ];
     });
   })
+  (final: prev: {
+    tmuxPlugins = prev.tmuxPlugins
+      // {
+      dracula = prev.tmuxPlugins.dracula.overrideAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "dracula";
+          repo = "tmux";
+          rev = "ffc6ef8efbe556fa908aee6615f0781348337faa";
+          sha256 = "0a3vrp14pz0mpr7629grysmw6gf4hahvbiarafkl1nckll5yihyk";
+        };
+      });
+    };
+  })
 
   (final: prev: {
     xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
