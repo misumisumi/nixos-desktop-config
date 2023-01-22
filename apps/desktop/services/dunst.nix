@@ -1,5 +1,5 @@
 /*
-Dunst (notification-daemons) conf
+  Dunst (notification-daemons) conf
 */
 { pkgs, ... }:
 
@@ -10,11 +10,14 @@ Dunst (notification-daemons) conf
       settings = {
         global = {
           font = "Noto Sans CJK JP 12";
-          min_icon_size=64;
-          min_max_size=256;
+          min_icon_size = 64;
+          min_max_size = 256;
           monitor = 0;
-          geometry = "400x50-30+30";
-          indicate_hidden = true;
+          width = 400;
+          height = 50;
+          offset = -30;
+          origin = "top-left";
+          indicate_hidden = false;
           transparency = 0;
           separator_height = 2;
           horizontal_padding = 8;
@@ -28,17 +31,24 @@ Dunst (notification-daemons) conf
           word_wrap = true;
           show_indicators = true;
           sticky_history = true;
+          context = "ctrl+shift+period";
+          history = "ctrl+shift+comma";
+          close = "ctrl+space";
+          close_all = "ctrl+shift+space";
+          dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst";
+          right_click = "context";
+          notification_limit = 5;
         };
         urgency_low = {
           background = "#222222";
           foreground = "#888888";
-          timeout = 10;
+          timeout = 12;
         };
 
         urgency_normal = {
           background = "#222d32";
           foreground = "#cfd8dc";
-          timeout = 10;
+          timeout = 12;
         };
 
         urgency_critical = {
