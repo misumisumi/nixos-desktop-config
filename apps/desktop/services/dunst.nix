@@ -14,9 +14,10 @@
           min_max_size = 256;
           monitor = 0;
           width = 400;
-          height = 50;
-          offset = -30;
-          origin = "top-left";
+          height = 200;
+          enable_posix_regex = true;
+          offset = "-30+30";
+          origin = "top-right";
           indicate_hidden = false;
           transparency = 0;
           separator_height = 2;
@@ -42,13 +43,13 @@
         urgency_low = {
           background = "#222222";
           foreground = "#888888";
-          timeout = 12;
+          timeout = 8;
         };
 
         urgency_normal = {
           background = "#222d32";
           foreground = "#cfd8dc";
-          timeout = 12;
+          timeout = 8;
         };
 
         urgency_critical = {
