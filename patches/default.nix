@@ -33,6 +33,35 @@ in
   #   };
   # })
   (final: prev: {
+    wpsoffice = prev.wpsoffice.overrideAttrs (old: rec {
+      patchPhase = ''
+        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/libpdfmain.so
+        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/libqpdfpaint.so
+        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/qt/plugins/imageformats/libqtiff.so
+        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/libpdfmain.so
+        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/libqpdfpaint.so
+        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/qt/plugins/imageformats/libqtiff.so
+      '';
+    });
+  })
+  # Patch from https://github.com/NixOS/nixpkgs/pull/211600
+  (final: prev: {
+    gmic = prev.gmic.overrideAttrs (old: rec {
+      version = "3.2.0";
+      src = prev.fetchFromGitHub {
+        owner = "dtschump";
+        repo = "gmic";
+        rev = "v.${version}";
+        hash = "sha256-lrIlzxXWqv046G5uRkBQnjvysaIcv+iDKxjuUEJWqcs=";
+      };
+      gmic_stdlib = prev.fetchurl {
+        name = "gmic_stdlib.h";
+        url = "http://gmic.eu/gmic_stdlib${prev.lib.replaceStrings ["."] [""] version}.h";
+        hash = "sha256-kWHzA1Dk7F4IROq/gk+RJllry3BABMbssJxhkQ6Cp2M=";
+      };
+    });
+  })
+  (final: prev: {
     haskellPackages = prev.haskellPackages.override {
       overrides = hself: hsuper: {
         # Can add/override packages here
@@ -112,3 +141,4 @@ in
     });
   })
 ]
+

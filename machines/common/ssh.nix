@@ -8,10 +8,12 @@
     enable = true;
     ports = [ 12511 ];
     forwardX11 = true;
-    kbdInteractiveAuthentication = true;
-    extraConfig = 
-    ''
-      UsePAM yes
-    '';
+    settings = {
+      KbdInteractiveAuthentication = true;
+    };
+    extraConfig =
+      ''
+        UsePAM yes
+      '';
   };
 }

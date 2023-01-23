@@ -70,7 +70,7 @@ lib.optionals (! isMinimal) [
 
   blender # Creative Utility
   krita
-  gmic-qt-krita
+  #gmic-qt-krita
   gpick
   gimp
   inkscape

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -32,7 +32,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, nur, nixgl, home-manager, flakes, nvim-config, private-conf }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-stable, flake-utils, nur, nixgl, home-manager, flakes, nvim-config, private-conf }:
     let
       user = "sumi";
       stateVersion = "23.05";       # For Home Manager
@@ -51,14 +51,14 @@
         import ./machines {
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;
-          inherit nixpkgs nur nixgl home-manager flakes nvim-config private-conf;
+          inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvim-config private-conf;
         }
       );
       homeConfigurations = (
         import ./hm {
           inherit (nixpkgs) lib;
           inherit inputs overlay stateVersion user;
-          inherit nixpkgs nur nixgl home-manager flakes nvim-config private-conf;
+          inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvim-config private-conf;
         }
       );
     };
