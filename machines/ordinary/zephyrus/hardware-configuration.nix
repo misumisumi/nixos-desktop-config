@@ -4,7 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =[ 
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot = {
@@ -20,24 +20,24 @@
       };
     };
     kernelModules = [ "kvm-amd" ];
-    resumeDevice = "/.swapfile";
-    kernelParams = [ "resume=/dev/mapper/VolGroup00-lvolroot" "resume_offset=27234304" ];
+    resumeDevice = "/dev/mapper/VolGroup00-lvolroot";
+    kernelParams = [ "resume_offset=27234304" ];
   };
 
   fileSystems."/" =
-    { 
+    {
       device = "/dev/disk/by-label/root";
       fsType = "ext4";
     };
 
   fileSystems."/home" =
-    { 
+    {
       device = "/dev/disk/by-label/home";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { 
+    {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
@@ -45,7 +45,7 @@
   systemd.tmpfiles.rules = [
     "w    /sys/power/image_size - - - - 0"
   ];
-  swapDevices = [ 
+  swapDevices = [
     {
       device = "/.swapfile";
       size = 1024 * 16;
