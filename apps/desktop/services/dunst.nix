@@ -58,6 +58,11 @@
           frame_color = "#ff0000";
           timeout = 0;
         };
+        vivaldi-stable = {
+          appname = "Input Method";
+          format = "";
+          urgency = "low";
+        };
       };
     };
   };
