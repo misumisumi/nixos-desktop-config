@@ -101,6 +101,7 @@ keys = [
             Key([], "j", move_pinp("down")),
             Key([], "l", move_pinp("right")),
             Key([], "h", move_pinp("left")),
+            Key([], "f", force_pinp()),
             Key([], "space", lazy.ungrab_chord()),
         ],
         name="pinp",

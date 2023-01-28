@@ -39,7 +39,7 @@ layout2 = [
         **_settings,
         align=layout.MonadTall._right,
         ratio=0.65,
-        new_client_position="bottom",
+        new_client_position="after_current",
         single_border_width=GLOBAL.border,
         margin=GLOBAL.margin,
         single_margin=GLOBAL.margin
