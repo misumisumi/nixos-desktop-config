@@ -47,6 +47,7 @@ in
             set -g @dracula-ram-usage-label "RAM"
             set -g @dracula-gpu-usage-label "GPU"
             set -g @dracula-show-timezone false
+            set -g @dracula-show-fahrenheit false
 
             if-shell '[ -z $SSH_CONNECTION ]' {
               run-shell 'echo  w/oconnect'

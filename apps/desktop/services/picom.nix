@@ -29,6 +29,8 @@
         "100:class_g = 'fcitx' && !focused"
         "100:class_g = 'pentablet' && focused"
         "100:class_g = 'pentablet' && !focused"
+        "100:class_g = 'Looking Glass (client)' && focused"
+        "100:class_g = 'Looking Glass (client)' && !focused"
         "100:name = 'masterduel' && focused"
         "100:name = 'masterduel' && !focused"
         "100:name = 'WaveSurer 1.8.8.p5' && focused"
