@@ -135,7 +135,7 @@ in
         bind i display-panes
 
         # relox config file
-        bind r source-file ~/tmux/tmux.conf \; display "Reloaded!"
+        bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
         run-shell "tmux setenv -g TMUX_VERSION $(tmux -V | cut -c 6- | sed -e 's/[a-z]//g')"
         if-shell -b '[ "$(echo "$TMUX_VERSION < 3.0" | bc)" = 1 ]' "bind S choose-tree -s"
