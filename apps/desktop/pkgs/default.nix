@@ -85,5 +85,5 @@ lib.optionals (! isMinimal) [
 
   juce # VST plugin flamework
 
-  wpsoffice
+  libreoffice # Office
 ]
