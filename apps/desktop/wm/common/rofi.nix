@@ -1,5 +1,5 @@
 /*
-Rofi (App launcher) conf
+  Rofi (App launcher) conf
 */
 { pkgs, ... }:
 let
@@ -64,8 +64,8 @@ in
     rofi = {
       enable = true;
       plugins = with pkgs; [
-                             rofi-calc
-                           ];
+        rofi-calc
+      ];
 
       font = "FiraCode Nerd Font 20";
       terminal = "${pkgs.alacritty}/bin/alacritty";
@@ -78,13 +78,13 @@ in
         icon-theme = "Papirus-Dark";
         drun-show-actions = false;
         kb-remove-char-back = "BackSpace,Shift+BackSpace,Control+q";
-        kb-remove-to-eol = "Control+p";
-        kb-accept-entry = "Control+n,Control+m,Return,KP_Enter";
+        kb-remove-to-eol = "Control+D";
+        kb-accept-entry = "Control+m,Return,KP_Enter";
         kb-mode-complete = "Control+c";
         kb-row-left = "Control+Page_Up,Control+h";
         kb-row-right = "Control+l";
-        kb-row-up = "Up,Control+k";
-        kb-row-down = "Down,Control+j";
+        kb-row-up = "Up,Control+p,Control+k";
+        kb-row-down = "Down,Control+n,Control+j";
       };
     };
   };
