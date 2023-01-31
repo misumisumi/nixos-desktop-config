@@ -5,15 +5,12 @@
     network = {
       enable = true;
       wait-online = {
-        timeout = 0;    # Disable wait online
+        timeout = 0; # Disable wait online
       };
     };
   };
 
   services = {
-    nscd = {
-      enable = false;
-    };
     resolved = {
       enable = true;
       fallbackDns = [
@@ -27,7 +24,7 @@
   };
 
   networking = {
-    useDHCP = lib.mkDefault false;    # Setting each network interafces
+    useDHCP = lib.mkDefault false; # Setting each network interafces
   };
-  system.nssModules = lib.mkForce [];
+  # system.nssModules = lib.mkForce [];
 }

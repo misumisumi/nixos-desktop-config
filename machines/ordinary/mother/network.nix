@@ -6,6 +6,11 @@ in
   imports = [
     (commonDir + "/network.nix")
   ];
+  services = {
+    nscd = {
+      enable = true;
+    };
+  };
   networking = {
     hostName = "${hostname}";
     interfaces.enp4s0.wakeOnLan.enable = true;

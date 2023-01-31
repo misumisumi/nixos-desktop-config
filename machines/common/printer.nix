@@ -6,7 +6,7 @@
   services = {
     printing = {
       enable = true;
-      drivers = with pkgs; [ cnijfilter2 ];
+      drivers = with pkgs; [ cnijfilter2 cups-brother-hll5100dn ];
     };
     avahi = {
       enable = true;

@@ -13,7 +13,11 @@ in
       interface = "wlp2s0";
       wpaPassphrase = "FsP65sEZdvxMjZL";
     };
+    nscd = {
+      enable = true;
+    };
   };
+
   networking = {
     wireless = {
       enable = true;
@@ -27,8 +31,12 @@ in
     firewall = {
       enable = true;
       allowedTCPPorts = [
+        5353 # avahi
         4713 # PulseAudio
         1701
+      ];
+      allowedUDPPorts = [
+        5353 # avahi
       ];
       allowedUDPPortRanges = [
         {
