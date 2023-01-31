@@ -44,7 +44,7 @@ async def move_speclific_apps(window):
     await asyncio.sleep(0.01)
     if window.name == "Spotify":
         window.togroup("0-media")
-    elif window.name in ["Picture in picture", "ピクチャー イン ピクチャー", "Picture-in-Picture"]:
+    elif window.name in ["Picture in picture", "ピクチャー イン ピクチャー", "Picture-in-Picture", "mpv"]:
         # 画面サイズに合わせて自動的にPinPのサイズとポジションを決定する
         pinp_size, pinp_pos = get_pinp_size_pos()
 
