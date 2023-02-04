@@ -1,89 +1,68 @@
-# My need packages.
-{ pkgs, isMinimal ? false }:
-let
-  lib = pkgs.lib;
-  tex = (pkgs.texlive.combine {
-    # TexLive(Japanese support)
-    inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese collection-latexextra;
-  });
-in
+# default is minimal desktop app
+# "isMidium" add SNS tools and some utility
+# "isLarge" add Creative tools
+# "isFull" add my need pkg
+{ lib, pkgs, addCLItools ? false, isMidium ? false, isLarge ? false, isFull ? false }:
 with pkgs; [
-  man-pages # manuals
-  man-db
-  texinfo
-
   mesa-demos # Graphics utility
   vulkan-tools
   polkit_gnome # polkit
 
-  gnuplot # CLI Plotter
-  pandoc # Document Converter
-  tex # tex
-  texlab
-
-  font-manager
+  firefox # Browser
+  nomacs # Image Viewer
+  zathura # PDF viewer
 
   i3lock # Screen Locker
-
-  nomacs # Image Viewer
-
-  shared-mime-info # For FileManager
-  ffmpegthumbnailer
-  evince
-  gnome.file-roller
-  lxde.lxmenu-data
-  haskellPackages.thumbnail
-
-  discord # Communications
-
-  audacity # GUI Sound Editor
-  sox # CLI Sound Editor
-
-  playerctl # CLI control media
-
-  imagemagick # CLI Image Editor
-
-  firefox # Browser
-
-  spotify # Music Streaming
-  spotify-tui # CLI tools for spotify
+] ++ lib.optionals (addCLItools || isFull) (
+  let
+    texlive-combined = (pkgs.texlive.combine {
+      # TexLive(Japanese support)
+      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese collection-latexextra;
+    });
+  in
+  [
+    sox # CLI Sound Editor
+    graphicsmagick # CLI Image Editor
+    playerctl # CLI control media
+    gnuplot # CLI Plotter
+    pandoc # Document Converter
+    texlive-combined # LaTex
+    pympress # PDF reader for presentations
+    evince # PDF viewer
+  ]
+) ++ lib.optionals (isMidium || isLarge || isFull) [
+  font-manager
+  # Communications
+  discord
+  slack
+  element-desktop
+  zoom-us
 
   gnome.simple-scan # Scaner
   baobab # Disk Usage Analyzer
+  spotify # Music Streaming
+  spotify-tui # CLI tools for spotify
+] ++ lib.optionals (isLarge || isFull) [
+  libreoffice # Office
+  copyq # Clipboard Manager
+  remmina # Remote desktop client
+  zotero # Paper managiment tool
 
-  zathura # PDF viewer
-] ++
-lib.optionals (! isMinimal) [
-  (vivaldi.override { proprietaryCodecs = true; }) # Browser
-
-  wavesurfer # pkgs from Sumi-Sumi/flakes
-  prime-run
-
-  scream # Audio Recivier (For windows VM)
-  conky
-  android-tools
-
-  slack # Communications
-  zoom-us
-  element-desktop
-  ferdium
-
-  blender # Creative Utility
+  # Creative Utility
+  audacity # GUI Sound Editor
+  blender
   krita
   #gmic-qt-krita
   gpick
   gimp
   inkscape
+
+] ++ lib.optionals isFull [
+  (vivaldi.override { proprietaryCodecs = true; }) # Browser
+  wavesurfer # pkgs from Sumi-Sumi/flakes
+  android-tools
+  ferdium # One place, Some webapp
   unityhub-latest
-
-  copyq # Clipboard Manager
-  # sidequest                     # Meta Quest side loading tool
-
-  remmina # Remote desktop client
-
-  zotero # Paper managiment tool
-
   juce # VST plugin flamework
-
-  libreoffice # Office
+  # sidequest                     # Meta Quest side loading tool
 ]

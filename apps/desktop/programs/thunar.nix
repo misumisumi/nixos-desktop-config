@@ -4,7 +4,17 @@ let
 in
 {
   home = {
-    packages = with pkgs.xfce; [ thunar-with-plugins xfconf exo ];
+    packages = with pkgs; with pkgs.xfce; [
+      thunar-with-plugins
+      xfconf
+      exo
+
+      shared-mime-info # For FileManager
+      ffmpegthumbnailer
+      gnome.file-roller
+      lxde.lxmenu-data
+      haskellPackages.thumbnail
+    ];
   };
   xdg.configFile."xfce4/helpers.rc".text = ''
     TerminalEmulator=kitty

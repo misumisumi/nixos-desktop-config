@@ -1,0 +1,4 @@
+[
+  ./programs.nix
+  ./thunar.nix
+]

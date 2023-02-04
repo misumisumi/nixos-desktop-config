@@ -8,6 +8,7 @@ in
     enable = true;
     defaultApplications = {
       "application/pdf" = [ "org.pwmt.zathura-pdf-mupdf.desktop" "vivaldi-stable.desktop" ];
+      "application/wps-office.pptx" = "impress.desktop";
       "text/html" = browsers;
       "text/xml" = [ "neovim.desktop" ] ++ browsers;
       "x-scheme-handler/ftp" = browsers;

@@ -1,6 +1,4 @@
-/*
-CLI Image Viewer and Movie Player and Downloader
-*/
+# Image Viewer and Movie Player and Downloader
 { pkgs, ... }:
 
 {
@@ -11,7 +9,7 @@ CLI Image Viewer and Movie Player and Downloader
       enable = true;
       config = {
         osd-fractions = true;
-        osd-level=2;
+        osd-level = 2;
         no-keepaspect-window = true;
         ytdl-format = "bestvideo+bestaudio";
       };

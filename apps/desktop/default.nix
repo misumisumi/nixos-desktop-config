@@ -1,12 +1,15 @@
-{ lib, hostname, ... }:
+{ lib, hostname, isFull ? false, ... }:
 with lib;
 (
   (import ./ime) ++
-  (import ./media) ++
-  (import ./services) ++
+  (import ./programs) ++
   (import ./systemd) ++
   (import ./terminal) ++
   (import ./wm/common) ++
-  (import ./xdg-mime) ++
-  optionals (hostname != "general") (import ./theme)
+  optionals isFull (
+    (import ./games) ++
+    (import ./services) ++
+    (import ./theme) ++
+    (import ./xdg-mime)
+  )
 )

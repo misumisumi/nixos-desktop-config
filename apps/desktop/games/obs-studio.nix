@@ -1,6 +1,4 @@
-/*
-Streaming/Recording app
-*/
+# Streaming/Recording app
 { lib, hostname, pkgs, ... }:
 
 with lib; {
