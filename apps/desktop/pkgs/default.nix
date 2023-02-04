@@ -6,13 +6,8 @@
 with pkgs; [
   mesa-demos # Graphics utility
   vulkan-tools
-  polkit_gnome # polkit
 
   firefox # Browser
-  nomacs # Image Viewer
-  zathura # PDF viewer
-
-  i3lock # Screen Locker
 ] ++ lib.optionals (addCLItools || isFull) (
   let
     texlive-combined = (pkgs.texlive.combine {
@@ -21,6 +16,8 @@ with pkgs; [
     });
   in
   [
+    i3lock # Screen Locker
+    zathura # PDF viewer
     sox # CLI Sound Editor
     graphicsmagick # CLI Image Editor
     playerctl # CLI control media
@@ -31,6 +28,7 @@ with pkgs; [
     evince # PDF viewer
   ]
 ) ++ lib.optionals (isMidium || isLarge || isFull) [
+  nomacs # Image Viewer
   font-manager
   # Communications
   discord
