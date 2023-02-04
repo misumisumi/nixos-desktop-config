@@ -35,7 +35,7 @@
       tmux = {
         enableShellIntegration = true;
         shellIntegrationOptions = [
-          "-d 30%"
+          "-p"
         ];
       };
     };
