@@ -7,7 +7,7 @@ with builtins; with lib; let
   gitignore = splitString "\n" (readFile ./gitignore);
 in
 {
-  home.packages = with pkgs; [ git-ignore ];
+  home.packages = with pkgs; [ git-ignore git-secret ];
   programs.lazygit = {
     enable = true;
     settings = {
