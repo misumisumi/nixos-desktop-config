@@ -12,8 +12,8 @@ in
 
   home = {
     packages = (import (appDir + "/common/pkgs") pkgs) ++
-      (import (appDir + "/desktop/pkgs") { inherit pkgs; isMinimal = true; }) ++
-      (import ./pkgs.nix) pkgs;
+      (import (appDir + "/desktop/pkgs") { inherit pkgs; }) ++
+      (with pkgs; [ pacman arch-install-scripts ]);
   };
 
   xresources = {
