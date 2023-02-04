@@ -1,6 +1,6 @@
 # default is minimal desktop app
-# "isMidium" add SNS tools and some utility
-# "isLarge" add Creative tools
+# "isMidium" add some utility
+# "isLarge" add SNS and Creative tools
 # "isFull" add my need pkg
 { lib, pkgs, addCLItools ? false, isMidium ? false, isLarge ? false, isFull ? false }:
 with pkgs; [
@@ -16,7 +16,6 @@ with pkgs; [
     });
   in
   [
-    i3lock # Screen Locker
     zathura # PDF viewer
     sox # CLI Sound Editor
     graphicsmagick # CLI Image Editor
@@ -28,23 +27,25 @@ with pkgs; [
     evince # PDF viewer
   ]
 ) ++ lib.optionals (isMidium || isLarge || isFull) [
+  i3lock # Screen Locker
   nomacs # Image Viewer
   font-manager
+  gnome.simple-scan # Scaner
+  baobab # Disk Usage Analyzer
+  copyq # Clipboard Manager
+] ++ lib.optionals (isLarge || isFull) [
+  libreoffice # Office
+  remmina # Remote desktop client
+  zotero # Paper managiment tool
+
+  spotify # Music Streaming
+  spotify-tui # CLI tools for spotify
+
   # Communications
   discord
   slack
   element-desktop
   zoom-us
-
-  gnome.simple-scan # Scaner
-  baobab # Disk Usage Analyzer
-  spotify # Music Streaming
-  spotify-tui # CLI tools for spotify
-] ++ lib.optionals (isLarge || isFull) [
-  libreoffice # Office
-  copyq # Clipboard Manager
-  remmina # Remote desktop client
-  zotero # Paper managiment tool
 
   # Creative Utility
   audacity # GUI Sound Editor
@@ -54,7 +55,6 @@ with pkgs; [
   gpick
   gimp
   inkscape
-
 ] ++ lib.optionals isFull [
   (vivaldi.override { proprietaryCodecs = true; }) # Browser
   wavesurfer # pkgs from Sumi-Sumi/flakes

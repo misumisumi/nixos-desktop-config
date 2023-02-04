@@ -9,7 +9,7 @@ in
     (import (appDir + "/common/neovim")) ++
     (import (appDir + "/common/shell")) ++
     (import (appDir + "/common/ssh")) ++
-    (import (appDir + "/desktop") { inherit lib hostname; isFull = true; }) ++
+    (import (appDir + "/desktop") { inherit lib hostname; isLarge = true; }) ++
     (import (appDir + "/desktop/wm/qtile"));
 
   home = {
