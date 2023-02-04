@@ -4,10 +4,6 @@ pkgs: with pkgs; [
   nix-prefetch-git
   nvfetcher # Tool of automate nix package updates
 
-  man-pages # manuals
-  man-db
-  texinfo
-
   bc # GNU calculater
 
   zip # Archives

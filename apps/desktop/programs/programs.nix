@@ -1,9 +1,10 @@
-# Image Viewer and Movie Player and Downloader
 { pkgs, ... }:
 
 {
   programs = {
     feh.enable = true;
+    yt-dlp. enable = true;
+    mangohud.enable = true;
 
     mpv = {
       enable = true;
@@ -15,8 +16,5 @@
       };
     };
 
-    yt-dlp = {
-      enable = true;
-    };
   };
 }

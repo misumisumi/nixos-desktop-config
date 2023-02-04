@@ -53,17 +53,19 @@ in
           "FiraCode"
           "Hack"
           "Terminus"
-          "Noto"
         ];
       })
 
       papirus-icon-theme # Icons
     ];
   };
+  documentation = {
+    man.generateCaches = true;
+  };
 
   environment = {
     variables = {
-      TERMINAL = "alacritty";
+      TERMINAL = "kitty";
       EDITOR = "nvim";
       VISUAL = "nvim";
     };

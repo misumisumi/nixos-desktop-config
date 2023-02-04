@@ -1,3 +1,3 @@
 [
-  ./devbox.nix
+  ./develop.nix
 ]
