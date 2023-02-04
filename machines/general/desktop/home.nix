@@ -12,7 +12,7 @@ in
 
   home = {
     packages = (import (appDir + "/common/pkgs") pkgs) ++
-      (import (appDir + "/desktop/pkgs") { inherit pkgs; }) ++
+      (import (appDir + "/desktop/pkgs") { inherit lib pkgs; }) ++
       (with pkgs; [ pacman arch-install-scripts ]);
   };
 

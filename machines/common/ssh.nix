@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ lib, stateVersion, pkgs, ... }:
 
-{
+with lib; {
   programs.ssh = {
     askPassword = "";
   };
@@ -8,12 +8,10 @@
     enable = true;
     ports = [ 12511 ];
     forwardX11 = true;
-    settings = {
-      KbdInteractiveAuthentication = true;
-    };
     extraConfig =
       ''
         UsePAM yes
       '';
-  };
+  } // lib.attrsets.optionalAttrs (stateVersion <= "22.11") { kbdInteractiveAuthentication = true; }
+  // lib.attrsets.optionalAttrs (stateVersion > "22.11") { settings.kbdInteractiveAuthentication = true; };
 }

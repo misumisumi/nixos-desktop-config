@@ -5,13 +5,14 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
-  # boot.resumeDevice = "/.swapfile";
+  # boot.resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
   # boot.kernelParams = [ "resume_offset=resume_size" ];
   boot.extraModulePackages = [ ];
   boot.initrd.luks.devices = {
@@ -23,27 +24,37 @@
   };
 
   fileSystems."/" =
-    { 
-      device = "/dev/disk/by-label/general-root";
+    {
+      label = "general-root";
+      fsType = "ext4";
+    };
+  fileSystems."/nix" =
+    {
+      label = "general-nix";
+      fsType = "ext4";
+    };
+  fileSystems."/var" =
+    {
+      label = "general-var";
       fsType = "ext4";
     };
 
   fileSystems."/home" =
-    { 
-      device = "/dev/disk/by-label/general-home";
+    {
+      label = "general-home";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { 
-      device = "/dev/disk/by-label/ge-boot";
+    {
+      label = "ge-boot";
       fsType = "vfat";
     };
 
   swapDevices = [
     {
-      device = "/.swapfile";
-      size = 1024*4; # swap size is 4GB
+      device = "/dev/mapper/VolGroupGeneral-swap";
+      priority = 10;
     }
   ];
 
