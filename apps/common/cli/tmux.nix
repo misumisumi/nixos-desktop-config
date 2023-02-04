@@ -103,7 +103,7 @@ in
         set -g mouse on
         
         setw -g window-active-style fg='#d8e1e6',bg='#1f292e'
-        setw -g window-style fg='#d8e1e6',bg='#13181b'
+        setw -g window-style fg='#d8e1e6',bg='#080A0c'
         
         set -g display-panes-time 800 # slightly longer pane indicators display time
         set -g display-time 1000      # slightly longer status messages display time
