@@ -2,11 +2,11 @@
 with lib;
 (
   (import ./ime) ++
-  (import ./systemd) ++
   (import ./wm/common) ++
   optionals (isMidium || isLarge) (
     (import ./programs) ++
     (import ./services) ++
+    (import ./systemd) ++
     (import ./terminal) ++
     (import ./theme) ++
     (import ./xdg-mime)
