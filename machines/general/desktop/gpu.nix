@@ -4,12 +4,12 @@
   services = {
     xserver = {
       videoDrivers = [
-        "qxl"
         "amdgpu"
         "radeon"
-        "nouveau"      # If you use "nvidia", You must comment out this.
-        "modesetting"  # If you use "nvidia", You must comment out this.
-        # "nvidia"
+        "nvidia"
+        "modesetting" # If you use "nvidia", You must comment out this.
+        "qxl"
+        "fbdev"
       ];
     };
   };
