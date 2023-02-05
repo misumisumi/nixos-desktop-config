@@ -7,8 +7,8 @@
         "amdgpu"
         "radeon"
         "nvidia"
-        "modesetting" # If you use "nvidia", You must comment out this.
         "qxl"
+        "modesetting"
         "fbdev"
       ];
       deviceSection = ''

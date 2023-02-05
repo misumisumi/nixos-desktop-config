@@ -5,6 +5,8 @@
     xserver = {
       videoDrivers = [
         "nvidia"
+        "modesetting"
+        "fbdev"
       ];
       deviceSection = ''
         Driver         "nvidia"
@@ -36,7 +38,7 @@
   };
 
   hardware = {
-    nvidia.modesetting.enable = false;
+    nvidia.modesetting.enable = true;
     opengl.extraPackages = with pkgs; [
       libvdpau-va-gl
       vaapiVdpau
