@@ -69,17 +69,18 @@ in
       "intel_iommu=igfx_off"
     ] else
       [ "amd_iommu=on" ]) ++ (optional (builtins.length cfg.devices > 0)
-        ("vfio-pci.ids=" + builtins.concatStringsSep "," cfg.devices))
-      ++ (optionals cfg.applyACSpatch [
-        "pcie_acs_override=downstream,multifunction"
-        "pci=nomsi"
-      ]) ++ (optional cfg.disableEFIfb "video=efifb:off")
-      ++ (optionals cfg.ignoreMSRs [
-        "kvm.ignore_msrs=1"
-        "kvm.report_ignored_msrs=0"
-      ]);
+      ("vfio-pci.ids=" + builtins.concatStringsSep "," cfg.devices))
+    ++ (optionals cfg.applyACSpatch [
+      "pcie_acs_override=downstream,multifunction"
+      "pci=nomsi"
+    ]) ++ (optional cfg.disableEFIfb "video=efifb:off")
+    ++ (optionals cfg.ignoreMSRs [
+      "kvm.ignore_msrs=1"
+      "kvm.report_ignored_msrs=0"
+    ])
+    ++ [ "iommu=pt" ];
 
-    boot.kernelModules = [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ]
+    boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ]
       ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel nested=1" "kvm_amd nested=1" ])
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel nested=1")
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd nested=1");
