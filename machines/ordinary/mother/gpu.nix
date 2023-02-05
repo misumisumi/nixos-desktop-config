@@ -36,7 +36,7 @@
   };
 
   hardware = {
-    nvidia.modesetting.enable = true;
+    nvidia.modesetting.enable = false;
     opengl.extraPackages = with pkgs; [
       libvdpau-va-gl
       vaapiVdpau

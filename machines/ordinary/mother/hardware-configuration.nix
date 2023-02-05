@@ -4,7 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =[ 
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot = {
@@ -24,27 +24,35 @@
   };
 
   fileSystems."/" =
-    { 
-      device = "/dev/disk/by-label/root";
+    {
+      device = "/dev/disk/by-label/mother-root";
       fsType = "ext4";
     };
-
+  fileSystems."/nix" =
+    {
+      device = "/dev/disk/by-label/mother-nix";
+      fsType = "ext4";
+    };
+  fileSystems."/var" =
+    {
+      device = "/dev/disk/by-label/mother-var";
+      fsType = "ext4";
+    };
   fileSystems."/home" =
-    { 
-      device = "/dev/disk/by-label/home";
+    {
+      device = "/dev/disk/by-label/mother-home";
       fsType = "ext4";
     };
-
   fileSystems."/boot" =
-    { 
-      device = "/dev/disk/by-label/boot";
+    {
+      device = "/dev/disk/by-label/mo-boot";
       fsType = "vfat";
     };
 
   swapDevices = [
     {
-      device = "/.swapfile";
-      size = 1024*16;
+      device = "/dev/mapper/VolGroup00-lvolswap";
+      priority = 10;
     }
   ];
 
