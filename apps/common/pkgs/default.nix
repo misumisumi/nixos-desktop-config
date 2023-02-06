@@ -1,4 +1,5 @@
-pkgs: with pkgs; [
+{ lib, pkgs, isLarge ? false }:
+with lib; with pkgs; [
   nix-index # A files database for nixpkgs
   nix-prefetch # Prefetch checkers
   nix-prefetch-git
@@ -31,4 +32,18 @@ pkgs: with pkgs; [
 
   fd # fast find
   ripgrep # fast grep
-]
+] ++ optionals isLarge (
+  let
+    texlive-combined = (pkgs.texlive.combine {
+      # TexLive(Japanese support)
+      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese collection-latexextra;
+    });
+  in
+  [
+    graphicsmagick # CLI Image Editor
+    pandoc # Document Converter
+    playerctl # CLI control media
+    sox # CLI Sound Editor
+    texlive-combined # LaTex
+  ]
+)
