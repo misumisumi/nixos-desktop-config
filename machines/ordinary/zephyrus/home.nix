@@ -4,7 +4,7 @@ let
 in
 {
   imports = (import (appDir + "/common/cli")) ++
-    (import (appDir + "/common/develop")) ++
+    (import (appDir + "/common/programs")) ++
     (import (appDir + "/common/git")) ++
     (import (appDir + "/common/neovim")) ++
     (import (appDir + "/common/shell")) ++
@@ -13,10 +13,10 @@ in
     (import (appDir + "/desktop/wm/qtile"));
 
   home = {
-    packages = (import (appDir + "/common/pkgs") pkgs) ++
+    packages = (import (appDir + "/common/pkgs") { inherit lib pkgs; isLarge = true; }) ++
       (import (appDir + "/desktop/pkgs") { inherit lib pkgs; isFull = true; }) ++
       (import (appDir + "/virtualisation/pkgs") pkgs) ++
-      (with pkgs; [ prime-run ]);
+      (with pkgs; [ prime-run bt-dualboot ]);
   };
   xresources = {
     extraConfig = "Xft.dpi:100";
