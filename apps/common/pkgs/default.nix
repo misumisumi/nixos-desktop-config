@@ -5,6 +5,8 @@ with lib; with pkgs; [
   nix-prefetch-git
   nvfetcher # Tool of automate nix package updates
 
+  devbox # Instant, easy, predictable shells and container
+
   bc # GNU calculater
 
   zip # Archives

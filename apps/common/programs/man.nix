@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-
 {
-  home.packages = with pkgs; [ devbox ];
   programs = {
     man = {
       enable = true;

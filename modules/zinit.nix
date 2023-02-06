@@ -10,6 +10,9 @@ let
 
   zinitPromptModules = submodule {
     options = {
+      enable = mkEnableOption ''
+        set prompt theme
+      '';
       theme = mkOption {
         type = str;
         default = "";
@@ -142,7 +145,7 @@ in
       [[ -r ''${ZINIT_HOME} ]] || mkdir -p ''${ZINIT_HOME}
       source "${pkgs.zinit}/share/zinit/zinit.zsh"
 
-      zinit ${cfg.promptTheme.modifier} for ${cfg.promptTheme.theme}
+      ${optionalString cfg.promptTheme.enable "zinit ${cfg.promptTheme.modifier} for ${cfg.promptTheme.theme}"}
 
       ${cfg.initConfig}
 

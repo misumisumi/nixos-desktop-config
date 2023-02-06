@@ -5,7 +5,6 @@ in
 with lib;
 {
   imports = (import (appDir + "/common/cli")) ++
-    (import (appDir + "/common/programs")) ++
     (import (appDir + "/common/git")) ++
     (import (appDir + "/common/neovim")) ++
     (import (appDir + "/common/shell")) ++
