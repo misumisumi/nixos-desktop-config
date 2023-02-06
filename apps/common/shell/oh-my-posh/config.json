@@ -90,7 +90,7 @@
                     "foreground": "p:white",
                     "leading_diamond": "<p:blue>\ue0b3</>",
                     "properties": {
-                        "threshold": 1000
+                        "threshold": 3000
                     },
                     "style": "diamond",
                     "template": " \ufa1e{{ .FormattedMs }} ",
