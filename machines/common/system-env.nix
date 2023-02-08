@@ -51,8 +51,12 @@ in
         # Nerdfont override
         fonts = [
           "FiraCode"
-          "Hack"
-          "Terminus"
+        ];
+      })
+
+      (plemoljp.override {
+        fonts = [
+          "plemoljp_nfj"
         ];
       })
 
