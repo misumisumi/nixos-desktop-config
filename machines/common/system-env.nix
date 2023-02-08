@@ -54,10 +54,13 @@ in
         ];
       })
 
-      (plemoljp.override {
+      (plemoljp-fonts.override {
         fonts = [
-          "plemoljp_nfj"
+          "plemoljp-nfj"
         ];
+      })
+      (udev-gothic-font.override {
+        withNerd = true;
       })
 
       papirus-icon-theme # Icons
