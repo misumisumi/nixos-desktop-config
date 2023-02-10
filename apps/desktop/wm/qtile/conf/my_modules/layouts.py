@@ -44,6 +44,18 @@ layout2 = [
         margin=GLOBAL.margin,
         single_margin=GLOBAL.margin
     ),
+    layout.Columns(
+        **_settings,
+        border_focus_stack=GLOBAL.c_normal["cyan"],
+        border_normal_stack=GLOBAL.c_normal["BGbase"],
+        border_on_single=True,
+        fair=False,
+        num_columns=2,
+        insert_position=1,
+        margin=GLOBAL.margin,
+        margin_on_single=GLOBAL.margin,
+        split=False
+    ),
 ]
 
 layout3 = [
@@ -55,6 +67,18 @@ layout3 = [
         single_border_width=GLOBAL.border,
         margin=GLOBAL.margin,
         single_margin=GLOBAL.margin
+    ),
+    layout.Columns(
+        **_settings,
+        border_focus_stack=GLOBAL.c_normal["cyan"],
+        border_normal_stack=GLOBAL.c_normal["BGbase"],
+        border_on_single=True,
+        fair=False,
+        num_columns=2,
+        insert_position=1,
+        margin=GLOBAL.margin,
+        margin_on_single=GLOBAL.margin,
+        split=False
     ),
 ]
 # For full
