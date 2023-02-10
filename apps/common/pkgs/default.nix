@@ -38,7 +38,8 @@ with lib; with pkgs; [
   let
     texlive-combined = (pkgs.texlive.combine {
       # TexLive(Japanese support)
-      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese collection-latexextra;
+      inherit (pkgs.texlive) scheme-medium latexmk collection-langjapanese
+        collection-latexextra newtx newtxtt newpx boondox fontaxes tlmgrbasics;
     });
   in
   [
