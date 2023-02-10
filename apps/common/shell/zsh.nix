@@ -233,6 +233,8 @@
       '';
 
       initExtra = ''
+        set vi-cmd-mode-string "\1\e[?8c\2"
+        set vi-ins-mode-string "\1\e[?0c\2"
       '';
     };
   };
