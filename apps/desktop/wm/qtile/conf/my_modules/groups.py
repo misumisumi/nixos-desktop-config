@@ -125,7 +125,6 @@ def _set_groups():
             name = "{}-{}".format(n, k)
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
             groups.append(Group(name, layouts=layouts, matches=matches, label=label))
-    groups.append(ScratchPad("scratchpad", _rule_scratchpad))
     if GLOBAL.is_display_tablet:
         name = list(_display_tablet.keys())[0]
         groups.append(
@@ -135,6 +134,7 @@ def _set_groups():
                 label=_display_tablet[name][0],
             )
         )
+    groups.append(ScratchPad("scratchpad", _rule_scratchpad))
 
     return groups
 

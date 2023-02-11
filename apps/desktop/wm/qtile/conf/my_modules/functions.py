@@ -343,13 +343,13 @@ def to_from_display_tablet(qtile):
     if GLOBAL.is_display_tablet:
         if idx == GLOBAL.num_screen:
             to_idx = list(_group_and_rule.keys()).index("full")
-            logger.warning(to_idx)
             group = qtile.groups[to_idx]
+            # logger.warning(group)
             qtile.current_window.togroup(group.name)
             qtile.cmd_to_screen(0)
             qtile.current_screen.set_group(group)
         else:
-            qtile.current_window.togroup(qtile.groups[-1].name)
+            qtile.current_window.togroup(qtile.groups[-2].name)
             qtile.cmd_to_screen(GLOBAL.num_screen)
 
 
