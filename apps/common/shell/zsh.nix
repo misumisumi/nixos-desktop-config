@@ -36,6 +36,8 @@
         enableShellIntegration = true;
         shellIntegrationOptions = [
           "-p"
+          "-w 80%"
+          "-h 70%"
         ];
       };
     };
