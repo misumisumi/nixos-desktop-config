@@ -37,13 +37,13 @@
       user = "sumi";
       stateVersion = "23.05";       # For Home Manager
 
-      overlay = { inputs, nixpkgs, ... }: {
+      overlay = { inputs, nixpkgs, pkgs-stable, ... }: {
         nixpkgs.overlays = [
           nur.overlay
           nixgl.overlay
           flakes.overlays.default
           private-conf.overlays.default
-        ] ++ (import ./patches);
+        ] ++ (import ./patches { inherit pkgs-stable; });
       };
     in
     {

@@ -1,4 +1,4 @@
-{ inputs, overlay, stateVersion, user, nixpkgs, nur, nixgl, home-manager, flakes, nvim-config, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, user, nixpkgs, nixpkgs-stable, nur, nixgl, home-manager, flakes, nvim-config, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
 
 let
   lib = nixpkgs.lib;
@@ -7,13 +7,15 @@ let
   settings = { hostname, user, rootDir, wm ? "gnome" }:
     let
       hostConf = ./. + "/${rootDir}" + "/${hostname}" + /home.nix;
+      system = choiceSystem hostname;
+      pkgs-stable = import nixpkgs-stable { inherit system; config = { allowUnfree = true; }; };
     in
     with lib; nixosSystem {
-      system = choiceSystem hostname;
+      inherit system;
       specialArgs = { inherit hostname inputs user stateVersion wm; }; # specialArgs give some args to modules
       modules = [
         ./configuration.nix # Common system conf
-        (overlay { inherit inputs nixpkgs; })
+        (overlay { inherit inputs nixpkgs pkgs-stable; })
         nur.nixosModules.nur
         ../modules
 

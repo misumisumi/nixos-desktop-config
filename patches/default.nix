@@ -1,6 +1,4 @@
-let
-  dataDir = "var/lib/xppend1v2";
-in
+{ pkgs-stable, ... }:
 [
   # override: default.nixに記載の属性をオーバライドする
   # overrideAttrs: default.nixに記載されていない属性も追加できる
@@ -33,16 +31,10 @@ in
   #   };
   # })
   (final: prev: {
-    wpsoffice = prev.wpsoffice.overrideAttrs (old: rec {
-      patchPhase = ''
-        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/libpdfmain.so
-        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/libqpdfpaint.so
-        patchelf --remove-needed libtiff.so.5 opt/kingsoft/wps-office/office6/qt/plugins/imageformats/libqtiff.so
-        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/libpdfmain.so
-        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/libqpdfpaint.so
-        patchelf --add-needed libtiff.so.6 opt/kingsoft/wps-office/office6/qt/plugins/imageformats/libqtiff.so
-      '';
-    });
+    embree = pkgs-stable.embree;
+    openimagedenoise = pkgs-stable.openimagedenoise;
+    blender = pkgs-stable.blender;
+    spotify = pkgs-stable.spotify;
   })
   # Patch from https://github.com/NixOS/nixpkgs/pull/211600
   (final: prev: {
@@ -91,54 +83,58 @@ in
     };
   })
 
-  (final: prev: {
-    xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
-      desktopItems = [
-        (prev.makeDesktopItem {
+  (final: prev:
+    let
+      dataDir = "var/lib/xppend1v2";
+    in
+    {
+      xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
+        desktopItems = [
+          (prev.makeDesktopItem {
+            name = "xp-pen-driver";
+            exec = "xp-pen-driver-indicator";
+            icon = "pentablet";
+            comment = "XPPen driver";
+            desktopName = "xppentablet";
+            categories = [ "Application" "Utility" ];
+          })
+        ];
+        run_script = prev.writeShellApplication {
           name = "xp-pen-driver";
-          exec = "xp-pen-driver-indicator";
-          icon = "pentablet";
-          comment = "XPPen driver";
-          desktopName = "xppentablet";
-          categories = [ "Application" "Utility" ];
-        })
-      ];
-      run_script = prev.writeShellApplication {
-        name = "xp-pen-driver";
-        text = ''
-          sudo sh -c "xp-pen-driver &"
+          text = ''
+            sudo sh -c "xp-pen-driver &"
+          '';
+        };
+        indicator = prev.writeShellApplication {
+          name = "xp-pen-driver-indicator";
+          text = ''
+            sudo sh -c "xp-pen-driver /mini &"
+          '';
+        };
+        installPhase = ''
+          runHook preInstall
+          mkdir -p $out/{opt,bin,share}
+          cp -r App/usr/lib/pentablet/{pentablet,resource.rcc,conf} $out/opt
+          chmod +x $out/opt/pentablet
+          cp -r App/lib $out/lib
+          sed -i 's#usr/lib/pentablet#${dataDir}#g' $out/opt/pentablet
+          cp -r $run_script/bin/* $out/bin
+          cp -r $indicator/bin/* $out/bin
+          sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver
+          sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver-indicator
+
+          cp -r App/usr/share/icons $out/share/icons
+          cp -r $desktopItems/share/applications $out/share/applications
+          runHook postInstall
         '';
-      };
-      indicator = prev.writeShellApplication {
-        name = "xp-pen-driver-indicator";
-        text = ''
-          sudo sh -c "xp-pen-driver /mini &"
+
+        postFixup = ''
+          makeWrapper $out/opt/pentablet $out/opt/xp-pen-driver \
+          "''${qtWrapperArgs[@]}" \
+            --run 'if [ ! -d /${dataDir} ]; then mkdir -p /${dataDir}; cp -r '$out'/opt/conf /${dataDir}; chmod u+w -R /${dataDir}; fi'
         '';
-      };
-      installPhase = ''
-        runHook preInstall
-        mkdir -p $out/{opt,bin,share}
-        cp -r App/usr/lib/pentablet/{pentablet,resource.rcc,conf} $out/opt
-        chmod +x $out/opt/pentablet
-        cp -r App/lib $out/lib
-        sed -i 's#usr/lib/pentablet#${dataDir}#g' $out/opt/pentablet
-        cp -r $run_script/bin/* $out/bin
-        cp -r $indicator/bin/* $out/bin
-        sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver
-        sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver-indicator
 
-        cp -r App/usr/share/icons $out/share/icons
-        cp -r $desktopItems/share/applications $out/share/applications
-        runHook postInstall
-      '';
-
-      postFixup = ''
-        makeWrapper $out/opt/pentablet $out/opt/xp-pen-driver \
-        "''${qtWrapperArgs[@]}" \
-          --run 'if [ ! -d /${dataDir} ]; then mkdir -p /${dataDir}; cp -r '$out'/opt/conf /${dataDir}; chmod u+w -R /${dataDir}; fi'
-      '';
-
-    });
-  })
+      });
+    })
 ]
 
