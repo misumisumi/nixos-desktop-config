@@ -7,11 +7,22 @@ with lib; {
   services.openssh = {
     enable = true;
     ports = [ 12511 ];
-    forwardX11 = true;
+    settings = {
+
+      forwardX11 = true;
+    };
     extraConfig =
       ''
         UsePAM yes
       '';
-  } // lib.attrsets.optionalAttrs (stateVersion <= "22.11") { kbdInteractiveAuthentication = true; }
-  // lib.attrsets.optionalAttrs (stateVersion > "22.11") { settings.kbdInteractiveAuthentication = true; };
+  } // lib.attrsets.optionalAttrs (stateVersion <= "22.11") {
+    kbdInteractiveAuthentication = true;
+    forwardX11 = true;
+  }
+  // lib.attrsets.optionalAttrs (stateVersion > "22.11") {
+    settings = {
+      kbdInteractiveAuthentication = true;
+      X11Forwarding = true;
+    };
+  };
 }
