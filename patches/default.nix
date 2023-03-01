@@ -30,12 +30,12 @@
   #     };
   #   };
   # })
-  (final: prev: {
-    embree = pkgs-stable.embree;
-    openimagedenoise = pkgs-stable.openimagedenoise;
-    blender = pkgs-stable.blender;
-    spotify = pkgs-stable.spotify;
-  })
+  # (final: prev: {
+  #   embree = pkgs-stable.embree;
+  #   openimagedenoise = pkgs-stable.openimagedenoise;
+  #   blender = pkgs-stable.blender;
+  #   spotify = pkgs-stable.spotify;
+  # })
   # Patch from https://github.com/NixOS/nixpkgs/pull/211600
   (final: prev: {
     gmic = prev.gmic.overrideAttrs (old: rec {
