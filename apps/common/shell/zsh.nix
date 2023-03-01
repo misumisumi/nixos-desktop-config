@@ -87,7 +87,7 @@
       zinit = {
         enable = true;
         promptTheme = {
-          enable = false;
+          enable = true;
           theme = "romkatv/powerlevel10k";
           modifier = ''
             depth=1 atload'P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
