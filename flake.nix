@@ -21,7 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-config = {
-      url = "github:Sumi-Sumi/nvim-config";
+      # url = "github:Sumi-Sumi/nvim-config";
+      url = "github:Sumi-Sumi/nvimdots";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flakes.follows = "flakes";
     };
