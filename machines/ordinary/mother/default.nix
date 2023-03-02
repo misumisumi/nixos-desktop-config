@@ -8,7 +8,8 @@ in
     ./gpu.nix
     ./virtualisation.nix
     ./own-system-conf.nix
-    (commonDir + "/pulseaudio.nix")
+    (commonDir + "/pipewire.nix")
+    (commonDir + "/musnix.nix")
     (commonDir + "/printer.nix")
     (appDir + "/desktop/wm/qtile/xserver.nix")
   ] ++

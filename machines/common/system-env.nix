@@ -77,6 +77,6 @@ in
       VISUAL = "nvim";
     };
 
-    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs; # 
+    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs;
   };
 }

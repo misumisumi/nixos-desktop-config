@@ -1,4 +1,4 @@
-{ inputs, overlay, stateVersion, user, nixpkgs, nixpkgs-stable, nur, nixgl, home-manager, flakes, nvim-config, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
+{ inputs, overlay, stateVersion, user, nixpkgs, nixpkgs-stable, nur, nixgl, home-manager, flakes, musnix, nvim-config, private-conf ? null, isGeneral ? false, ... }: # Multipul arguments
 
 let
   lib = nixpkgs.lib;
@@ -17,6 +17,7 @@ let
         ./configuration.nix # Common system conf
         (overlay { inherit inputs nixpkgs pkgs-stable; })
         nur.nixosModules.nur
+        musnix.nixosModules.musnix
         ../modules
 
         (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
