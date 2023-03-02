@@ -26,6 +26,7 @@ in
         background = "#1f292e";
         background_opacity = "0.85";
         clear_all_shortcuts = "yes";
+        enable_audio_bell = "no";
       };
       keybindings = {
         "ctrl+shift+up" = "scroll_line_up";
