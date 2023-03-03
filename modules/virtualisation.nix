@@ -4,7 +4,8 @@ with lib;
 let
   cfg = config.virtualisation;
   tmpfileEntry = name: f: "f /dev/shm/${name} ${f.mode} ${f.user} ${f.group} -";
-in {
+in
+{
   options.virtualisation = {
     sharedMemoryFiles = mkOption {
       type = types.attrsOf (types.submodule ({ name, ... }: {
@@ -70,16 +71,17 @@ in {
       enable = cfg.scream.enable;
       description = "Scream Receiver (For windows VM)";
       wantedBy = [ "default.target" ];
-      wants = [ "network-online.target" "pulseaudio.service" ];
+      # wants = [ "network-online.target" "pulseaudio.service" ]; # For pulseaudio
+      wants = [ "network-online.target" "pipewire-pulse.service" ];
       environment.IS_SERVICE = "1";
       unitConfig = {
         StartLimitInterval = 200;
         StartLimitBurst = 2;
       };
       serviceConfig = {
-        Type="simple";
+        Type = "simple";
         ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
-        Restart="on-failure";
+        Restart = "on-failure";
       };
     };
   };
