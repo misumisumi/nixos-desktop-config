@@ -9,7 +9,6 @@ in
     ./virtualisation.nix
     ./own-system-conf.nix
     (commonDir + "/pipewire.nix")
-    (commonDir + "/musnix.nix")
     (commonDir + "/printer.nix")
     (appDir + "/desktop/wm/qtile/xserver.nix")
   ] ++
