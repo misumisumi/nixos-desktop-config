@@ -10,7 +10,7 @@ from my_modules.layouts import layout1, layout2, layout3, layout4
 from my_modules.global_config import GLOBAL
 
 
-_rule_code = [{"wm_class": "code"}, {"wm_class": "kitty"}]
+_rule_code = [{"wm_class": "code"}, {"wm_class": GLOBAL.terminal}]
 
 _rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
 # _rule_paper = {wm_class:"org.pwmt.zathura"}
@@ -58,7 +58,7 @@ _group_and_rule = {
 
 
 _rule_scratchpad = {
-    DropDown("term", "kitty", opacity=0.8),
+    DropDown("term", GLOBAL.terminal, opacity=0.8),
     DropDown("copyq", "copyq show", opacity=0.7),
     DropDown("bluetooth", "blueman-manager", opacity=0.7),
     DropDown("volume", "pavucontrol", opacity=0.7),

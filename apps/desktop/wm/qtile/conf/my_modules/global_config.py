@@ -11,8 +11,8 @@ class Global:
     laptop = os.uname()[1] in ["zephyrus"]
     vm = "general" == os.uname()[1]
 
-    mod = "mod4"  # super key
-    terminal = "kitty"
+    mod = "mod1"  # super key is 'mod4', alt is 'mod1'
+    terminal = "wezterm"
 
     home = Path.home()
     capture_path = home.joinpath("Pictures", "screenshot")
