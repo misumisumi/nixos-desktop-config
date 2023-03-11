@@ -77,17 +77,17 @@
         extraModules = [
           "attr"
         ];
-        tmux = {
-          autoStartLocal = true;
-          autoStartRemote = true;
-          defaultSessionName = "WS0";
-          itermIntegration = true;
-        };
+        # tmux = {
+        #   autoStartLocal = true;
+        #   autoStartRemote = true;
+        #   defaultSessionName = "WS0";
+        #   itermIntegration = true;
+        # };
       };
       zinit = {
         enable = true;
         promptTheme = {
-          enable = true;
+          enable = false;
           theme = "romkatv/powerlevel10k";
           modifier = ''
             depth=1 atload'P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
@@ -96,10 +96,8 @@
           '';
         };
         plugins = {
-          "depth=1 light-mode" = [
-            "jeffreytse/zsh-vi-mode"
-          ];
           "wait'0b' lucid blockf light-mode" = [
+            "depth=1 atload'zvm_init && zle -N zle-line-init' jeffreytse/zsh-vi-mode"
             "zsh-users/zsh-autosuggestions"
             "zsh-users/zsh-completions"
           ];
@@ -205,27 +203,28 @@
         # zmodload zsh/zprof
         # zprof
 
-        if [[ ! -n $TMUX ]]; then
-          tmux start-server
-          if ! tmux list-session 2> /dev/null; then
-            tmux new-session -s "WS0"
-          else
-            is_attach=""
-            tmux list-sessions | while read line; do
-              if [[ $(echo $line | grep "attached") == "" ]]; then
-                is_attach=$(echo $line | awk -F':' '{print $1}')
-                echo $is_attach
-                break
-              fi
-            done
-            if [[ ! $is_attach ]]; then
-              tmux new-session
-            else
-              tmux attach-session -t $is_attach
-            fi
-          fi
-          exit
-        fi
+        # auto start tmux
+        # if [[ ! -n $TMUX ]]; then
+        #   tmux start-server
+        #   if ! tmux list-session 2> /dev/null; then
+        #     tmux new-session -s "WS0"
+        #   else
+        #     is_attach=""
+        #     tmux list-sessions | while read line; do
+        #       if [[ $(echo $line | grep "attached") == "" ]]; then
+        #         is_attach=$(echo $line | awk -F':' '{print $1}')
+        #         echo $is_attach
+        #         break
+        #       fi
+        #     done
+        #     if [[ ! $is_attach ]]; then
+        #       tmux new-session
+        #     else
+        #       tmux attach-session -t $is_attach
+        #     fi
+        #   fi
+        #   exit
+        # fi
       '';
       initExtraBeforeCompInit = ''
         setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)

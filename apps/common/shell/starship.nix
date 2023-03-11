@@ -1,4 +1,9 @@
 with builtins; {
+  xdg = {
+    configFile = {
+      "starship".source = ./starship;
+    };
+  };
   programs.starship = {
     enable = true;
     settings = fromTOML (unsafeDiscardStringContext (readFile ./starship/starship.toml));
@@ -32,5 +37,9 @@ with builtins; {
       fi
       return ret
     }
+    _fix_cursor() {
+      echo -ne '\e[6 q'
+    }
+    precmd_functions+=(_fix_cursor)
   '';
 }
