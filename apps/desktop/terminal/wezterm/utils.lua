@@ -1,5 +1,16 @@
 local M = {}
 
+function M.getOS()
+    -- Unix, Linux variants
+    local fh, err = assert(io.popen("uname -o 2>/dev/null", "r"))
+    local osname = nil
+    if fh then
+        osname = fh:read()
+    end
+
+    return osname or "Windows"
+end
+
 function M.basename(s)
     return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end

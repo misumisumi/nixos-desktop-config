@@ -37,7 +37,7 @@ keys = [
     Key([GLOBAL.mod], "p", focus_cycle_screen(backward=True), desc="focus prev screen"),
     Key([GLOBAL.mod, "shift"], "n", move_cycle_screen(), keep_pinp(), update_pinp_screen_idx()),
     Key([GLOBAL.mod, "shift"], "p", move_cycle_screen(backward=True), keep_pinp(), update_pinp_screen_idx()),
-    Key([GLOBAL.mod, "shift"], "d", to_from_display_tablet(), keep_pinp(), update_pinp_screen_idx()),
+    Key([GLOBAL.mod, "shift"], "t", to_from_display_tablet(), keep_pinp(), update_pinp_screen_idx()),
     # Toggle Float and FullScreen
     Key([GLOBAL.mod], "f", lazy.window.toggle_floating()),
     Key([GLOBAL.mod, "shift"], "f", lazy.window.toggle_maximize()),
