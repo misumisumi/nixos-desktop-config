@@ -39,8 +39,17 @@ in
         init = {
           defaultBranch = "main";
         };
+        commit = {
+          template = "~/.config/git/message";
+        };
       };
       ignores = lines2list gitignore;
+      delta.enable = true;
+    };
+  };
+  xdg = {
+    configFile = {
+      "git/message".source = ./gitmessage;
     };
   };
 }
