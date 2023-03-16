@@ -97,7 +97,7 @@
         };
         plugins = {
           "wait'0b' lucid blockf light-mode" = [
-            "depth=1 atload'zvm_init && zle -N zle-line-init' jeffreytse/zsh-vi-mode"
+            "depth=1 atload'zle -N starship-line-init && zvm_init' jeffreytse/zsh-vi-mode"
             "zsh-users/zsh-autosuggestions"
             "zsh-users/zsh-completions"
           ];
