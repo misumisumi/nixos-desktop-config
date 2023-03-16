@@ -13,6 +13,7 @@ class Global:
 
     mod = "mod1"  # super key is 'mod4', alt is 'mod1'
     terminal = "wezterm"
+    terminal_class = "org.wezfurlong.wezterm"
 
     home = Path.home()
     capture_path = home.joinpath("Pictures", "screenshot")
