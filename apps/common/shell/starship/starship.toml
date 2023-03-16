@@ -7,8 +7,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:terminal_dark)\
-\n$character
-"""
+\n$character"""
 
 
 right_format = """
@@ -21,8 +20,7 @@ $nodejs\
 $php\
 $rust\
 $username\
-$hostname
-"""
+$hostname"""
 
 palette = "tokyonight"
 
