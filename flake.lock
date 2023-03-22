@@ -100,15 +100,15 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1675864004,
-        "narHash": "sha256-bg01LyHPOLbG1Sy8ic4lmvOx2pzZc9K4gUq+o20VNio=",
-        "owner": "Sumi-Sumi",
+        "lastModified": 1679411948,
+        "narHash": "sha256-kvmXHNHwOPeb+3/J3uUB3yVGB+3Qfp6cQ4rfupUWNPg=",
+        "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "d6be522e636b3359ffcbe58dd466dc97fe39db1c",
+        "rev": "cf6c83e09a1bbf7ce4e9555a79f5676423404e28",
         "type": "github"
       },
       "original": {
-        "owner": "Sumi-Sumi",
+        "owner": "misumisumi",
         "repo": "flakes",
         "type": "github"
       }
@@ -134,10 +134,28 @@
         "type": "github"
       }
     },
+    "musnix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1677620425,
+        "narHash": "sha256-ThhVPUEfXtnS6kziQMY2GwcUZard1E16+5TA/UKJBf4=",
+        "owner": "musnix",
+        "repo": "musnix",
+        "rev": "eedb1d32ad356877b0888fb8e3ffb32e71f874de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "musnix",
+        "repo": "musnix",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1676383589,
@@ -155,15 +173,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1660551188,
-        "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
-        "owner": "nixos",
+        "lastModified": 1677407201,
+        "narHash": "sha256-3blwdI9o1BAprkvlByHvtEm5HAIRn/XPjtcfiunpY7s=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "441dc5d512153039f19ef198e662e4f3dbb9fd65",
+        "rev": "7f5639fa3b68054ca0b062866dc62b22c3f11505",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -185,6 +204,21 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1660551188,
+        "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "441dc5d512153039f19ef198e662e4f3dbb9fd65",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1677407201,
         "narHash": "sha256-3blwdI9o1BAprkvlByHvtEm5HAIRn/XPjtcfiunpY7s=",
@@ -249,15 +283,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1677683090,
-        "narHash": "sha256-1zDVV9kO9ZAtf01mMgp7gozYCceZjFU51QdKwZpvdc0=",
-        "owner": "Sumi-Sumi",
+        "lastModified": 1679412394,
+        "narHash": "sha256-wFyCFNTfIM11gdo+sK/Ky/mwiYd2tgP7eMpn025SBK0=",
+        "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "6ee0fb76d319b5da9097bee9f04e7aba15f70c72",
+        "rev": "7b453e82b6c64fcffd12fed61161e709d5fa5689",
         "type": "github"
       },
       "original": {
-        "owner": "Sumi-Sumi",
+        "owner": "misumisumi",
         "repo": "nvimdots",
         "type": "github"
       }
@@ -278,11 +312,11 @@
         "rev": "6219a5f834bd6a3e36f802f1bf4e425c7a300255",
         "revCount": 67,
         "type": "git",
-        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/Sumi-Sumi/nixos-private-config.git"
+        "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       }
     },
     "root": {
@@ -290,8 +324,9 @@
         "flake-utils": "flake-utils",
         "flakes": "flakes",
         "home-manager": "home-manager",
+        "musnix": "musnix",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "nvim-config": "nvim-config",
