@@ -16,18 +16,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flakes = {
-      url = "github:Sumi-Sumi/flakes";
+      url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     musnix  = { url = "github:musnix/musnix"; };
     nvim-config = {
-      # url = "github:Sumi-Sumi/nvim-config";
-      url = "github:Sumi-Sumi/nvimdots";
+      # url = "github:misumisumi/nvim-config";
+      url = "github:misumisumi/nvimdots";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flakes.follows = "flakes";
     };
     private-conf = {
-      url = "git+ssh://git@github.com/Sumi-Sumi/nixos-private-config.git";
+      url = "git+ssh://git@github.com/misumisumi/nixos-private-config.git";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
