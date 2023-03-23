@@ -119,5 +119,10 @@ local config = {
         "[[a-zA-Z0-9][!-~]+]{8,160}",
     },
 }
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    table.insert(config, {
+        default_prog = "powershell.exe -NoLogo",
+    })
+end
 
 return config
