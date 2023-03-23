@@ -1,6 +1,7 @@
 { config, pkgs, user, ... }:
 {
   boot = {
+    loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
