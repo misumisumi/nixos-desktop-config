@@ -63,12 +63,23 @@
   })
 
   (final: prev: {
-    qtile = prev.qtile.unwrapped.override (old: {
-      patches = old.patches ++ [
-        ./fix-xcbq.patch
-      ];
-    });
+    python3Packages = prev.python3Packages.override {
+      overrides = pfinal: pprev: {
+        qtile = pprev.qtile.overridePythonAttrs (old: {
+          patches = old.patches ++ [
+            ./fix-xcbq.patch
+          ];
+        });
+      };
+    };
   })
+  # (final: prev: {
+  #   qtile-unwrapped = prev.qtile-unwrapped.override (old: {
+  #     patches = old.patches ++ [
+  #       ./fix-xcbq.patch
+  #     ];
+  #   });
+  # })
   (final: prev: {
     tmuxPlugins = prev.tmuxPlugins
       // {
