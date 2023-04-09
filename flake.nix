@@ -4,22 +4,22 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
-
     flake-utils.url = "github:numtide/flake-utils";
-
     nur.url = "github:nix-community/NUR";
-
     nixgl.url = "github:guibou/nixGL";
+    musnix.url = "github:musnix/musnix";
+    matlab.url = "gitlab:doronbehar/nix-matlab";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     flakes = {
       url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    musnix  = { url = "github:musnix/musnix"; };
+
     nvim-config = {
       # url = "github:misumisumi/nvim-config";
       url = "github:misumisumi/nvimdots";
