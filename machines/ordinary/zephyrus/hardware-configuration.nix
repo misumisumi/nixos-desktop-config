@@ -26,19 +26,27 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-label/root";
+      device = "/dev/disk/by-label/zephyrus-root";
       fsType = "ext4";
     };
-
+  fileSystems."/nix" =
+    {
+      device = "/dev/disk/by-label/zephyrus-nix";
+      fsType = "ext4";
+    };
+  fileSystems."/var" =
+    {
+      device = "/dev/disk/by-label/zephyrus-var";
+      fsType = "ext4";
+    };
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-label/home";
+      device = "/dev/disk/by-label/zephyrus-home";
       fsType = "ext4";
     };
-
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-label/boot";
+      device = "/dev/disk/by-label/ze-boot";
       fsType = "vfat";
     };
   # lower image_size
@@ -47,8 +55,8 @@
   ];
   swapDevices = [
     {
-      device = "/.swapfile";
-      size = 1024 * 16;
+      device = "/dev/mapper/VolGroup00-lvolswap";
+      priority = 10;
     }
   ];
 
