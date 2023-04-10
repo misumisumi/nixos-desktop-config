@@ -8,7 +8,10 @@
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
     musnix.url = "github:musnix/musnix";
-    matlab.url = "gitlab:doronbehar/nix-matlab";
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -33,7 +36,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-stable, flake-utils, nur, nixgl, home-manager, flakes, musnix, nvim-config, private-conf }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-stable, flake-utils, nur, nixgl, home-manager, flakes, musnix, nix-matlab, nvim-config, private-conf }:
     let
       user = "sumi";
       stateVersion = "23.05";       # For Home Manager
@@ -42,6 +45,7 @@
         nixpkgs.overlays = [
           nur.overlay
           nixgl.overlay
+          nix-matlab.overlay
           flakes.overlays.default
           private-conf.overlays.default
         ] ++ (import ./patches { inherit pkgs-stable; });

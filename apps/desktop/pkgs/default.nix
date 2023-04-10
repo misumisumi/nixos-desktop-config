@@ -49,5 +49,6 @@ with lib; with pkgs; [
   ferdium # One place, Some webapp
   unityhub-latest
   juce # VST plugin flamework
+  matlab # Followed by nix-matlab
   # sidequest                     # Meta Quest side loading tool
 ]
