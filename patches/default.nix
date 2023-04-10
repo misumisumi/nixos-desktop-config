@@ -62,24 +62,24 @@
     };
   })
 
+  #(final: prev: {
+  #  python3Packages = prev.python3Packages.override {
+  #    overrides = pfinal: pprev: {
+  #      qtile-unwrapped = pprev.qtile-unwrapped.overridePythonAttrs (old: {
+  #        patches = old.patches ++ [
+  #          ./fix-xcbq.patch
+  #        ];
+  #      });
+  #    };
+  #  };
+  #})
   (final: prev: {
-    python3Packages = prev.python3Packages.override {
-      overrides = pfinal: pprev: {
-        qtile = pprev.qtile.overridePythonAttrs (old: {
-          patches = old.patches ++ [
-            ./fix-xcbq.patch
-          ];
-        });
-      };
-    };
+    qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
+      patches = old.patches ++ [
+        ./fix-xcbq.patch
+      ];
+    });
   })
-  # (final: prev: {
-  #   qtile-unwrapped = prev.qtile-unwrapped.override (old: {
-  #     patches = old.patches ++ [
-  #       ./fix-xcbq.patch
-  #     ];
-  #   });
-  # })
   (final: prev: {
     tmuxPlugins = prev.tmuxPlugins
       // {
