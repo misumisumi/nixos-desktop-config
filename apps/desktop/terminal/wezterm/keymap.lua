@@ -83,7 +83,7 @@ end
 -- Use "SUPER" for Linux (qtile and xmonad cannot distinguish between left and right alt)
 -- Use "RightAlt" for Windows/Mac (Windows and mac cannot be used because shortcuts are assigned to super key.)
 local function with_mod()
-    local mod = utils.getOS() == "GNU/Linux" and "SUPER" or "LEADER"
+    local mod = wezterm.target_triple == "x86_64-unknown-linux-gnu" and "SUPER" or "LEADER"
     return {
         { key = "+", mods = string.format("%s", mod), action = act.IncreaseFontSize },
         { key = "-", mods = string.format("%s", mod), action = act.DecreaseFontSize },

@@ -51,4 +51,22 @@ with lib; with pkgs; [
   juce # VST plugin flamework
   matlab # Followed by nix-matlab
   # sidequest                     # Meta Quest side loading tool
-]
+] ++ optionals isFull
+  (
+    let
+      dotnetPkg =
+        (with pkgs.dotnetCorePackages; combinePackages [
+          sdk_6_0
+        ]);
+      dotnetTools = (callPackage ./dotnet-tool.nix { });     # dotnet-tool.nix is the file from the link above
+    in
+    [
+      (vivaldi.override { proprietaryCodecs = true; }) # Browser
+      wavesurfer # pkgs from Sumi-Sumi/flakes
+      android-tools
+      ferdium # One place, Some webapp
+      unityhub-latest
+      juce # VST plugin flamework
+      # sidequest                     # Meta Quest side loading tool
+    ]
+  )

@@ -13,7 +13,7 @@ in
   };
   networking = {
     hostName = "${hostname}";
-    interfaces.enp4s0.wakeOnLan.enable = true;
+    interfaces.enp5s0.wakeOnLan.enable = true;
     firewall = {
       enable = true;
       trustedInterfaces = [
@@ -58,7 +58,7 @@ in
       };
       networks = {
         "10-wired" = {
-          name = "enp4s0";
+          name = "enp5s0";
           bridge = [ "br0" ];
         };
         "20-br0" = {

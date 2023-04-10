@@ -1,6 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
+  # boot.extraModprobeConfig = lib.mkAfter ''
+  #   softdep snd_hda_intel pre: vfio-pci
+  #   softdep nouveau pre: vfio-pci
+  #   softdep nvidia pre: vfio-pci
+  #   softdep xhci_hcd pre: vfio-pci
+  # '';
   services = {
     xserver = {
       videoDrivers = [
@@ -12,7 +18,7 @@
         Driver         "nvidia"
         VendorName     "NVIDIA Corporation"
         BoardName      "NVIDIA GeForce GTX 1050 Ti"
-        BusID          "PCI:9:0:0"
+        BusID          "PCI:10:0:0"
       '';
       monitorSection = ''
         VendorName     "Unknown"

@@ -26,6 +26,12 @@ in
       example = [ "10de:1b80" "10de:10f0" ];
       description = "PCI IDs of devices to bind to vfio-pci";
     };
+    deviceDomains = mkOption {
+      type = types.listOf (types.strMatching "[0-9]{4}:[0-9]{2}:[0-9]{2}.[0-9]");
+      default = [ ];
+      example = [ "0000:01:00.0" "0000:01:00.1" ];
+      description = "PCI Domains of devices to bind to vfio-pci";
+    };
     disableEFIfb = mkOption {
       type = types.bool;
       default = false;
@@ -80,11 +86,33 @@ in
     ])
     ++ [ "iommu=pt" ];
 
-    boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ]
+    # boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ]
+    boot.kernelModules = (optionals (cfg.deviceDomains == [ ]) [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ])
       ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel nested=1" "kvm_amd nested=1" ])
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel nested=1")
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd nested=1");
 
+    boot.initrd = optionals (cfg.deviceDomains != [ ]) {
+      preDeviceCommands = ''
+        DEVS="${concatMapStrings (x: x + " ") cfg.deviceDomains}"
+        if [ -z "$(ls -A /sys/class/iommu)" ]; then
+          exit 0
+        fi
+        for DEV in $DEVS; do
+          echo "vfio-pci" > "/sys/bus/pci/devices/$DEV/driver_override"
+        done
+      '';
+    };
+    systemd.services = optionals (cfg.deviceDomains != [ ]) {
+      vfio-load = {
+        description = "Insert vfio-pci driver";
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "/run/current-system/sw/bin/modprobe -i vfio-pci";
+        };
+      };
+    };
     # boot.initrd.kernelModules =
     #   [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
     boot.blacklistedKernelModules =
