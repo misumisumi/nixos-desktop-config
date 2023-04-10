@@ -22,13 +22,13 @@ in
     };
     devices = mkOption {
       type = types.listOf (types.strMatching "[0-9a-f]{4}:[0-9a-f]{4}");
-      default = null;
+      default = [];
       example = [ "10de:1b80" "10de:10f0" ];
       description = "PCI IDs of devices to bind to vfio-pci";
     };
     deviceDomains = mkOption {
       type = types.listOf (types.strMatching "[0-9]{4}:[0-9]{2}:[0-9]{2}.[0-9]");
-      default = null;
+      default = [];
       example = [ "0000:01:00.0" "0000:01:00.1" ];
       description = "PCI Domains of devices to bind to vfio-pci";
     };
