@@ -283,11 +283,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1679412394,
-        "narHash": "sha256-wFyCFNTfIM11gdo+sK/Ky/mwiYd2tgP7eMpn025SBK0=",
+        "lastModified": 1680158558,
+        "narHash": "sha256-TBGD4/vfhTlq5XmJubAF/deSvPP7cUAXIhonClRrGRc=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "7b453e82b6c64fcffd12fed61161e709d5fa5689",
+        "rev": "1a9b07267a06674a812a822a400ea44300a1f646",
         "type": "github"
       },
       "original": {
@@ -306,11 +306,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1675653819,
-        "narHash": "sha256-qIYiGnAcLE4lljEY4rDufNpWm8xBnl+9gRvm5f3IOqY=",
+        "lastModified": 1680758721,
+        "narHash": "sha256-fpiC/D48UGAyUFKAocr5hpPrK7qIrzXpVrWQzNSaBKY=",
         "ref": "refs/heads/main",
-        "rev": "6219a5f834bd6a3e36f802f1bf4e425c7a300255",
-        "revCount": 67,
+        "rev": "fb834e07301afde4b0a568c54d084983c3383748",
+        "revCount": 69,
         "type": "git",
         "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       },
