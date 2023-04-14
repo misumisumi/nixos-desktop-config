@@ -1,6 +1,8 @@
 { config, pkgs, user, ... }:
 {
   boot = {
+    tmpOnTmpfs = true;
+    tmpOnTmpfsSize = "50%";
     loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback

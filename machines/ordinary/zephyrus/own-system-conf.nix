@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  boot = {
+    tmpOnTmpfs = true;
+    tmpOnTmpfsSize = "80%";
+  };
   services = {
     asusd = {
       enable = true;
