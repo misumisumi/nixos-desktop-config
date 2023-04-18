@@ -82,7 +82,7 @@ in
       };
       networks = {
         "20-wired" = {
-          name = "ethusb0";
+          name = "enp4s*";
           bridge = [ "br0" ];
         };
         "30-br0" = {
