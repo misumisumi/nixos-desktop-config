@@ -1,9 +1,20 @@
-{ pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   boot = {
-    tmpOnTmpfs = true;
-    tmpOnTmpfsSize = "80%";
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "80%";
+    };
+    extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback
+    ];
+    kernelModules = [
+      "v4l2loopback"
+      "snd-aloop"
+    ];
   };
   services = {
     asusd = {

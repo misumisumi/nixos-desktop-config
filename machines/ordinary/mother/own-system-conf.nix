@@ -1,8 +1,14 @@
-{ config, pkgs, user, ... }:
 {
+  config,
+  pkgs,
+  user,
+  ...
+}: {
   boot = {
-    tmpOnTmpfs = true;
-    tmpOnTmpfsSize = "50%";
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "50%";
+    };
     loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
@@ -15,14 +21,13 @@
   security.sudo = {
     extraRules = [
       {
-        users = [ "${user}" ];
-        commands =
-          [
-            {
-              command = "${pkgs.xp-pen-driver}/bin/xp-pen-driver";
-              options = [ "SETENV" "NOPASSWD" ];
-            }
-          ];
+        users = ["${user}"];
+        commands = [
+          {
+            command = "${pkgs.xp-pen-driver}/bin/xp-pen-driver";
+            options = ["SETENV" "NOPASSWD"];
+          }
+        ];
       }
     ];
   };
