@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   sound.enable = false;
   security.rtkit.enable = true;
   services = {
@@ -115,5 +113,7 @@
     pulseaudio
     pavucontrol
     paprefs
+    cadence
+    portaudio
   ];
 }
