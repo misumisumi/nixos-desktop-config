@@ -37,11 +37,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1681037374,
-        "narHash": "sha256-XL6X3VGbEFJZDUouv2xpKg2Aljzu/etPLv5e1FPt1q0=",
+        "lastModified": 1681202837,
+        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "033b9f258ca96a10e543d4442071f614dc3f8412",
+        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
         "type": "github"
       },
       "original": {
@@ -119,11 +119,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1679411948,
-        "narHash": "sha256-kvmXHNHwOPeb+3/J3uUB3yVGB+3Qfp6cQ4rfupUWNPg=",
+        "lastModified": 1681812854,
+        "narHash": "sha256-w59Ah8lSVNDgYImyAz+0CqkEoAT5eKYGZgyaANjd/qs=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "cf6c83e09a1bbf7ce4e9555a79f5676423404e28",
+        "rev": "323ad4fef6a0c092cd7e641ab9a152d2895dd3ef",
         "type": "github"
       },
       "original": {
@@ -136,15 +136,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1681127522,
-        "narHash": "sha256-Eo4dd0AmKshM+A6msQRMwT42QvWGNxa8RjmZ4tY7g9E=",
+        "lastModified": 1681814024,
+        "narHash": "sha256-DPxY/dIxegJ443OJ8jJDusZxX1cbhNe/r3XjG/KifCk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "93f5cb2482dd20e57eb8ca6c819cdad9738f98a0",
+        "rev": "cd5723734acbffa63e11a69cf6767f8ef69f6517",
         "type": "github"
       },
       "original": {
@@ -179,11 +178,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1681138882,
-        "narHash": "sha256-zBs6q+XxOM2AMIyFXEDRsIqx7WfD96IdgW367fBBsZI=",
+        "lastModified": 1681830075,
+        "narHash": "sha256-ADfjruLAIfRgYyEEuzHV8ebHzOxxJ1z6xKu+G7iWupw=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "719d2cbd183fe787d7f8f095e64fd5e388ae0c04",
+        "rev": "d83be3d786c5aa77f485d0ce03700b0ec9b11ada",
         "type": "gitlab"
       },
       "original": {
@@ -229,11 +228,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1681041438,
-        "narHash": "sha256-NmRGMklxBZ8Ol47CKMQxAU1F+v8ySpsHAAiC7ZL4vxY=",
+        "lastModified": 1681759395,
+        "narHash": "sha256-7aaRtLxLAy8qFVIA26ulB+Q5nDVzuQ71qi0s0wMjAws=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "48dcbaf7fa799509cbec85d55b8d62dcf1477d57",
+        "rev": "cd749f58ba83f7155b7062dd49d08e5e47e44d50",
         "type": "github"
       },
       "original": {
@@ -260,11 +259,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1681036984,
-        "narHash": "sha256-AbScJXshYzbeUKHh+Y3OICc3iAtr+NqJ3Xb81GW+ptU=",
+        "lastModified": 1681737997,
+        "narHash": "sha256-pHhjgsIkRMu80LmVe8QoKIZB6VZGRRxFmIvsC5S89k4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fd531dee22c9a3d4336cc2da39e8dd905e8f3de4",
+        "rev": "f00994e78cd39e6fc966f0c4103f908e63284780",
         "type": "github"
       },
       "original": {
@@ -276,11 +275,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1681138984,
-        "narHash": "sha256-Om/pWs0eIvzBgqMBs0Fb0T925UBZfqtjVPffdi+yQi0=",
+        "lastModified": 1681818355,
+        "narHash": "sha256-A29uoPDtF3Jw5u9BDWhXyZxzhLrUURHJmR47cbO1zEo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4887a7118ab0d4b2f6f9870a40d32612cd5bb72b",
+        "rev": "25eeb98c8378d0d716816b05c8441953b84aec2f",
         "type": "github"
       },
       "original": {
@@ -312,7 +311,7 @@
         "type": "github"
       }
     },
-    "nvim-config": {
+    "nvimdots": {
       "inputs": {
         "flake-utils": "flake-utils_5",
         "flakes": [
@@ -323,11 +322,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1681132357,
-        "narHash": "sha256-uieX0Wyiodh/E69WM4h6jsrF+R1AK1MH3rD9WSSUVPk=",
+        "lastModified": 1681834106,
+        "narHash": "sha256-WZSN18yfa1Bn2kzfVsQgsWCWrryvojET5Gkd2+4nHLk=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "cafb9d47e4b2b7c0effd350bc55e795cb86ecfe9",
+        "rev": "62cb81a5e29d259980a93d914fcf417ac1f85fd8",
         "type": "github"
       },
       "original": {
@@ -336,7 +335,7 @@
         "type": "github"
       }
     },
-    "private-conf": {
+    "private-config": {
       "inputs": {
         "flake-utils": [
           "flake-utils"
@@ -346,11 +345,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680758721,
-        "narHash": "sha256-fpiC/D48UGAyUFKAocr5hpPrK7qIrzXpVrWQzNSaBKY=",
+        "lastModified": 1681463670,
+        "narHash": "sha256-dt3g76WlR+2cWkxcOwkUjx39Qaa4yf65M9MvEduS2dE=",
         "ref": "refs/heads/main",
-        "rev": "fb834e07301afde4b0a568c54d084983c3383748",
-        "revCount": 69,
+        "rev": "bd93f34f6562e73e3f2961a79f14eb9b7b24b69f",
+        "revCount": 73,
         "type": "git",
         "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       },
@@ -370,8 +369,8 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "nvim-config": "nvim-config",
-        "private-conf": "private-conf"
+        "nvimdots": "nvimdots",
+        "private-config": "private-config"
       }
     },
     "systems": {
@@ -386,21 +385,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1678901627,
-        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     }
