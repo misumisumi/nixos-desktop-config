@@ -30,6 +30,7 @@ with pkgs;
     pympress # PDF reader for presentations
     zathura # PDF viewer
     evince # PDF viewer
+    poppler_utils # PDF utils
 
     libreoffice # Office
     remmina # Remote desktop client
