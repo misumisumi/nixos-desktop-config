@@ -11,72 +11,66 @@ if wezterm.gui then
     table.insert(copy_mode, {
         key = "Escape",
         mods = "NONE",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(copy_mode, {
         key = "c",
         mods = "CTRL",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(copy_mode, {
         key = "g",
         mods = "CTRL",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(copy_mode, {
         key = "q",
         mods = "NONE",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(search_mode, {
         key = "Escape",
         mods = "NONE",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(search_mode, {
         key = "c",
         mods = "CTRL|LEADER",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
     table.insert(search_mode, {
         key = "g",
         mods = "CTRL",
-        action = act.Multiple({
-            wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g skk")
-            end),
-            act.CopyMode("Close"),
-        }),
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
+    })
+    table.insert(search_mode, {
+        key = "q",
+        mods = "CTRL",
+        action = wezterm.action_callback(function(win, pane)
+            os.execute("fcitx5-remote -g skk")
+            win:perform_action(act.CopyMode("Close"), pane)
+        end),
     })
 end
 
@@ -95,6 +89,8 @@ local function with_mod()
                 win:perform_action(act.Search("CurrentSelectionOrEmptyString"), pane)
             end),
         },
+        { key = "f", mods = string.format("%s", mod), action = act.ScrollByPage(1) },
+        { key = "b", mods = string.format("%s", mod), action = act.ScrollByPage(-1) },
         { key = "Enter", mods = string.format("SHIFT|%s", mod), action = act.SplitPane({ direction = "Right", size = { Percent = 30 } }) },
         { key = "Enter", mods = string.format("%s", mod), action = act.SplitPane({ direction = "Down", size = { Percent = 30 } }) },
         { key = "Space", mods = string.format("%s", mod), action = act.TogglePaneZoomState },
@@ -131,8 +127,9 @@ local config = {
         { key = "%", mods = "SHIFT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
         { key = "+", mods = "SHIFT|CTRL", action = act.IncreaseFontSize },
         { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+        { key = "=", mods = "CTRL", action = act.ResetFontSize },
         {
-            key = "/",
+            key = "f",
             mods = "SHIFT|CTRL",
             action = wezterm.action_callback(function(win, pane)
                 os.execute("fcitx5-remote -g EN")
@@ -153,7 +150,14 @@ local config = {
                 win:perform_action(act.ActivateCopyMode, pane)
             end),
         },
-        { key = "c", mods = "CTRL|LEADER", action = act.SendKey({ key = "c", mods = "CTRL" }) },
+        {
+            key = "c",
+            mods = "CTRL|LEADER",
+            action = wezterm.action_callback(function(win, pane)
+                act.SendKey({ key = "c", mods = "CTRL" })
+                win:perform_action(act.ScrollToBottom, pane)
+            end),
+        },
         { key = "Space", mods = "SHIFT|CTRL", action = act.TogglePaneZoomState },
         { key = "h", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Left") },
         { key = "j", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Down") },

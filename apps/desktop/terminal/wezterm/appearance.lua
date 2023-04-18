@@ -110,6 +110,7 @@ local config = {
 
     use_fancy_tab_bar = false,
     tab_bar_at_bottom = true,
+    tab_max_width = 32,
     default_cwd = wezterm.home_dir,
     quick_select_patterns = {
         -- match things that look like sha1 hashes
