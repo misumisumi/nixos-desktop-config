@@ -154,8 +154,8 @@ local config = {
             key = "c",
             mods = "CTRL|LEADER",
             action = wezterm.action_callback(function(win, pane)
-                act.SendKey({ key = "c", mods = "CTRL" })
                 win:perform_action(act.ScrollToBottom, pane)
+                win:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
             end),
         },
         { key = "Space", mods = "SHIFT|CTRL", action = act.TogglePaneZoomState },
