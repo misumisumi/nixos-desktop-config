@@ -1,14 +1,12 @@
 /*
-  Zsh conf
-  I have some plugins problem when managin nix, so I manage zsh plugins from zinit.
-  When you put zinit in nixpkgs, you need to create a symbolic link manually because the path to completions is different.
-  You can watch this solution at (machines/home.nix home.activation.myActivationAction)
+Zsh conf
+I have some plugins problem when managin nix, so I manage zsh plugins from zinit.
+When you put zinit in nixpkgs, you need to create a symbolic link manually because the path to completions is different.
+You can watch this solution at (machines/home.nix home.activation.myActivationAction)
 */
-{ pkgs, ... }:
-
-{
-  home.packages = with pkgs; [ nix-zsh-completions bat ];
-  imports = [ ../../../modules/zinit.nix ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [nix-zsh-completions bat];
+  imports = [../../../modules/zinit.nix];
   programs = {
     fzf = {
       enable = true;
@@ -236,6 +234,14 @@
       initExtra = ''
         set vi-cmd-mode-string "\1\e[?8c\2"
         set vi-ins-mode-string "\1\e[?0c\2"
+        # qtileやkittyなどwrap環境内で作業することが必要な時に依存関係のPATHを外す処理
+        # (依存関係のPATHが追記された状態を解消してクリーンな状態に戻す)
+        # direnvでは問題なかったがnix-shellやnix shellでパスが追記されない
+        # (PATH追記後にSHELLが起動するため)問題があったため、シェルの深さで実行の有無を決める
+        if [ -n "$DESKTOP_SESSION" ] && [ "$SHLVL" -eq 2 ] || [ "$SHLVL" -eq 1 ]; then
+        	PATH=$(echo "$PATH" | sed 's/\/nix\/store\/[a-zA-Z._0-9-]\+\/bin:\?//g' | sed 's/:$//')
+        	export PATH="$PATH"
+        fi
       '';
     };
   };
