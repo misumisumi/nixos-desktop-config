@@ -1,16 +1,14 @@
 # Picom (compositor for Xorg) conf
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services = {
     picom = {
       enable = true;
       backend = "glx";
-      vSync = false; # When vSync=true, Picom have problem if you use Nvidia 
+      vSync = false; # When vSync=true, Picom have problem if you use Nvidia
 
       fade = true;
       fadeDelta = 10;
-      fadeSteps = [ 0.06 0.06 ];
+      fadeSteps = [0.06 0.06];
 
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
@@ -19,8 +17,8 @@
         "85:class_g = 'alacritty' && !focused"
         "85:class_g = 'kitty' && focused"
         "85:class_g = 'kitty' && !focused"
-        "90:class_g = 'org.wezfurlong.wezterm' && focused"
-        "90:class_g = 'org.wezfurlong.wezterm' && !focused"
+        "100:class_g = 'org.wezfurlong.wezterm' && focused"
+        "100:class_g = 'org.wezfurlong.wezterm' && !focused"
         "100:class_g = 'krita' && focused"
         "100:class_g = 'krita' && !focused"
         "100:class_g = 'Blender' && focused"
@@ -55,7 +53,7 @@
         "_GTK_FRAME_EXTENTS@:c"
         "class_g = 'rofi'"
       ];
-      shadowOffsets = [ (-7) (-7) ];
+      shadowOffsets = [(-7) (-7)];
       shadowOpacity = 0.75;
 
       settings = {
@@ -88,7 +86,7 @@
         detect-transient = true;
         glx-no-stencil = true;
         glx-no-rebind-pixmap = true;
-        use-damage = true;
+        use-damage = false;
         xrender-sync-fence = true;
       };
     };
