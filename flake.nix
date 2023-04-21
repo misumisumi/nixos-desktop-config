@@ -6,8 +6,15 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/NUR";
-    nixgl.url = "github:guibou/nixGL";
-    musnix.url = "github:musnix/musnix";
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
