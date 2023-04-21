@@ -1,10 +1,7 @@
 # For
-
-{ pkgs, ... }:
-let
-  systemPkgs = (import ../../apps/system-pkgs);
-in
-{
+{pkgs, ...}: let
+  systemPkgs = import ../../apps/system-pkgs;
+in {
   time.timeZone = "Asia/Tokyo"; # Time zone and internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -28,13 +25,13 @@ in
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Source Han Serif" ];
-        sansSerif = [ "Source Han Sans" ];
-        monospace = [ "Source Han Mono" ];
+        serif = ["Source Han Serif"];
+        sansSerif = ["Source Han Sans"];
+        monospace = ["Source Han Mono"];
         # serif = [ "Noto Serif CJK JP" ];
         # sansSerif = [ "Noto Sans CJK JP" ];
         # monospace = [ "Noto Sans Mono CJK JP" ];
-        emoji = [ "Noto Color Emoji" ];
+        emoji = ["Noto Color Emoji"];
       };
     };
     fonts = with pkgs; [
@@ -77,6 +74,6 @@ in
       VISUAL = "nvim";
     };
 
-    systemPackages = systemPkgs.systemPkgs pkgs ++ systemPkgs.systemWidePythonPkgs pkgs;
+    systemPackages = systemPkgs.systemPkgs pkgs;
   };
 }

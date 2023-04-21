@@ -1,8 +1,8 @@
 {
     "include": [
-        "conf",
+        "conf"
     ],
     "extraPaths": [
-        "/etc/profiles/per-user/sumi/lib/python3.10/site-packages",
+        "/etc/profiles/per-user/sumi/lib/python3.10/site-packages"
     ]
 }
