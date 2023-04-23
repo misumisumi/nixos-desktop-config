@@ -7,7 +7,7 @@
 }: let
   png =
     if hostname != "general"
-    then "${config.users.users.${user}.home}/Pictures/wallpapers/background.png"
+    then "${pkgs.my-wallpapers}/wallpapers/background.png"
     else "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
 in {
   imports = [../common/xserver.nix];
