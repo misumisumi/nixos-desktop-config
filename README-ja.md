@@ -1,52 +1,50 @@
-[English](./README.md)|[日本語](./README-ja.md)
-
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-Welcome to the nix environment!
-This is the machine configuration of [misumisumi](https://github.com/misumisumi).
+nix の環境へようこそ!!
+これは[misumisumi](https://github.com/misumisumi)のマシン設定です。
 
-You can try NixOS using some of my configuration.
-Currently, only the NixOS environment is supported.
-In the future, other distributions (user home config) and macOS will be supported.
+私の設定の一部を利用して NixOS を試すことができます。
+現在、NixOS 環境のみサポートしています。
+将来的に他のディストリブーション(user home config)、macOS をサポートする予定です。
 
-## Description
+## 説明
 
-- This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes) and is located at root [flake.nix](. /flake.nix) cannot be used because it contains my private repository.
-- You can try the environment created for recovery (gnome or qtile or CLI only).
-- The configuration for each app can be found in [apps](. /apps).
-- Configuration for each machine can be found in [machines](. /machines).
-  - [machines/ordinary](. /machines/ordinary) is the environment for daily use.  
-    (Not available because it contains the contents of the private repository.)
-  - [machines/general](. /machines/general) is the general-purpose environment for recovery.
+- このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されており、root の[flake.nix](./flake.nix)には私の private リポジトリが含まれているため使用できません。
+- リカバリー用に作成した環境(gnome or qtile or CLI only)を試用することができます。
+- 各アプリの設定は[apps](./apps)にあります。
+- 各マシンの設定は[machines](./machines)にあります。
+  - [machines/ordinary](./machines/ordinary)は日常用途の環境です。  
+    (プライベートリポジトリの内容を含むため使用不可)
+  - [machines/general](./machines/general)はリカバリー用の汎用環境です。
 
-## Installation Guide
+## インストールガイド
 
 ### NixOS
 
-- Boot via UEFI/systemd-boot, use disk encryption via LVM on LUKS
-- Three environments can be used
+- UEFI/systemd-boot によるブート、LVM on LUKS によるディスク暗号化を使用
+- 3 つの環境を使うことができます。
   - gnome
   - qtile
-  - minimal (CLI only) 1.
+  - minimal (CLI only)
 
-1. download Install media from [official](https://nixos.org/download.html)
-2. boot ISO and check network connection
+1. [公式](https://nixos.org/download.html)から Install media のダウンロード
+2. ISO の起動とネットワーク接続の確認
    - run `ip -c a and ping 8.8.8.8`
-   - wireless settings use `nmcli` or `wpa_supplicant`
-3. make partition and add partition label
+   - WiFi の設定は`nmcli`または`wpa_supplicant`
+3. パーティションの作成とラベルの付与
 
-   - use GPT partition label
-   - Please see [archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照 how to make LVM on LUKS
+   - GPT パーティションラベルを使用
+   - LVM on LUKS の設定は[archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照
 
    |      For       |       Partition Type        | Partition label |     Suggested size      |
    | :------------: | :-------------------------: | :-------------: | :---------------------: |
    |     /boot      | EFI system partition (ef00) |       \-        |          128MB          |
    | LUKS partition |      Linux LVM (8E00)       | GENERALLUKSROOT | Remainder of the device |
 
-   - partition of LVM on LUKS
+   - LVM on LUKS パーティション
 
-     - You can make vfat label at `dosfslabel /dev/XXX <label>`
-     - You can make ext4 label at`e2label /dev/XXX <label>`
+     - vfat label は`dosfslabel /dev/XXX <label>`で作成
+     - ext4 label は`e2label /dev/XXX <label>` で作成
 
      |  For  |    file system     |    label     |     Suggested size      |
      | :---: | :----------------: | :----------: | :---------------------: |
@@ -57,7 +55,7 @@ In the future, other distributions (user home config) and macOS will be supporte
      | /nix  |        ext4        | general-nix  |     more tharn 64GB     |
      | swap  | use swap partition |      \-      |           4GB           |
 
-4. disk mount
+4. ディスクマウント
 
 ```
 mount /dev/<for-root> /mnt
@@ -68,14 +66,12 @@ mount /dev/<for-var> /mnt/var
 mount /dev/<for-boot> /mnt/boot
 ```
 
-5. Install.
+5. インストール
    ```
    cd machines/general
    nix flake update
-   sudo nixos-install --flake . #{gnome|qtile|minimal}
+   sudo nixos-install --flake .#{gnome|qtile|minimal}
    ```
-
-Translated with www.DeepL.com/Translator (free version)
 
 ## Appendix
 
@@ -108,3 +104,7 @@ Translated with www.DeepL.com/Translator (free version)
 - [ ] add description of this repository
 - [ ] support other linux distributions (non NixOS)
 - [ ] support macOS
+
+```
+
+```
