@@ -1,7 +1,5 @@
 # For
-{pkgs, ...}: let
-  systemPkgs = import ../../apps/system-pkgs;
-in {
+{pkgs, ...}: {
   time.timeZone = "Asia/Tokyo"; # Time zone and internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -74,6 +72,6 @@ in {
       VISUAL = "nvim";
     };
 
-    systemPackages = systemPkgs.systemPkgs pkgs;
+    systemPackages = import ../../apps/systemWide/pkgs {inherit pkgs;};
   };
 }

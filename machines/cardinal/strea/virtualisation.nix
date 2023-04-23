@@ -2,10 +2,8 @@
   virtualisation = {
     vfio = {
       enable = true;
-      IOMMUType = "amd";
-      devices = [];
-      # devices = [ "10de:2204" "10de:1aef" ];
-      deviceDomains = ["0000:09:00.0" "0000:09:00.1"];
+      IOMMUType = "intel";
+      devices = [ ];
       blacklistNvidia = false;
       disableEFIfb = false;
       ignoreMSRs = true;
@@ -17,6 +15,6 @@
       pageSize = "1G";
       numPages = 16;
     };
-    scream.enable = true;
+    scream.enable = false;
   };
 }

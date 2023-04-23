@@ -1,10 +1,10 @@
-{ lib, hostname, ... }:
-let
-  inherit (import ../../path-relove.nix) commonDir;
-in
 {
+  lib,
+  hostname,
+  ...
+}: {
   imports = [
-    (commonDir + "/network.nix")
+    ../../common/network.nix
   ];
   services = {
     hostapd = {
@@ -63,7 +63,7 @@ in
 
   systemd = {
     network = {
-      lab-network.enable = true;
+      useMyDots.enable = true;
       netdevs = {
         "br0".netdevConfig = {
           Kind = "bridge";
@@ -83,7 +83,7 @@ in
       networks = {
         "20-wired" = {
           name = "enp4s*";
-          bridge = [ "br0" ];
+          bridge = ["br0"];
         };
         "30-br0" = {
           name = "br0";
@@ -92,7 +92,7 @@ in
         "40-wireless" = {
           name = "wlp2s0";
           DHCP = "yes";
-          address = [ "192.168.1.200" ];
+          address = ["192.168.1.200"];
         };
       };
     };

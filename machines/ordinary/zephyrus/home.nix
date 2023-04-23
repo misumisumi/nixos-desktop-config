@@ -3,34 +3,31 @@
   hostname,
   pkgs,
   ...
-}: let
-  inherit (import ../../path-relove.nix) appDir;
-in {
+}: {
+  programs.ssh.useMyDots.enable = true;
+  programs.neovim.useMyDots.enable = true;
+  programs.editorconfig.useMyDots.enable = true;
+
   imports =
-    (import (appDir + "/common/programs"))
-    ++ (import (appDir + "/common/git"))
-    ++ (import (appDir + "/common/neovim"))
-    ++ (import (appDir + "/common/shell"))
-    ++ (import (appDir + "/common/ssh"))
-    ++ (import (appDir + "/desktop") {
+    import ../../../apps/userWide {
       inherit lib hostname;
       isLarge = true;
-    })
-    ++ (import (appDir + "/desktop/wm/qtile"));
+    }
+    ++ (import ../../../apps/userWide/wm/qtile);
 
   home = {
+    installCommonPkgs = {
+      enable = true;
+      isLarge = true;
+    };
     packages =
-      (import (appDir + "/common/pkgs") {
-        inherit lib pkgs;
-        isLarge = true;
-      })
-      ++ (import (appDir + "/desktop/pkgs") {
+      (import ../../../apps/userWide/pkgs {
         inherit lib pkgs;
         isFull = true;
       })
-      ++ (import (appDir + "/virtualisation/pkgs") pkgs)
-      ++ (with pkgs; [prime-run bt-dualboot]);
+      ++ (with pkgs; [evtest xp-pen-driver]);
   };
+
   xresources = {
     extraConfig = "Xft.dpi:100";
   };

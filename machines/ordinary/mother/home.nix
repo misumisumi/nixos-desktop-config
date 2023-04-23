@@ -1,21 +1,31 @@
-{ lib, hostname, pkgs, ... }:
-let
-  inherit (import ../../path-relove.nix) appDir;
-in
 {
-  imports = (import (appDir + "/common/programs")) ++
-    (import (appDir + "/common/git")) ++
-    (import (appDir + "/common/neovim")) ++
-    (import (appDir + "/common/shell")) ++
-    (import (appDir + "/common/ssh")) ++
-    (import (appDir + "/desktop") { inherit lib hostname; isLarge = true; }) ++
-    (import (appDir + "/desktop/wm/qtile"));
+  lib,
+  hostname,
+  pkgs,
+  ...
+}: {
+  programs.ssh.useMyDots.enable = true;
+  programs.neovim.useMyDots.enable = true;
+  programs.editorconfig.useMyDots.enable = true;
+
+  imports =
+    import ../../../apps/userWide {
+      inherit lib hostname;
+      isLarge = true;
+    }
+    ++ (import ../../../apps/userWide/wm/qtile);
 
   home = {
-    packages = (import (appDir + "/common/pkgs") { inherit lib pkgs; isLarge = true; }) ++
-      (import (appDir + "/desktop/pkgs") { inherit lib pkgs; isFull = true; }) ++
-      (import (appDir + "/virtualisation/pkgs") pkgs) ++
-      (with pkgs; [ evtest xp-pen-driver ]);
+    installCommonPkgs = {
+      enable = true;
+      isLarge = true;
+    };
+    packages =
+      (import ../../../apps/userWide/pkgs {
+        inherit lib pkgs;
+        isFull = true;
+      })
+      ++ (with pkgs; [evtest xp-pen-driver]);
   };
 
   xresources = {

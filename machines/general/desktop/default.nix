@@ -1,18 +1,14 @@
-{ wm, ... }:
-let
-  inherit (import ../../path-relove.nix) commonDir appDir;
-in
-{
-  imports = [
-    ./hardware-configuration.nix
-    ./network.nix
-    ./gpu.nix
-    ./own-system-conf.nix
-    (commonDir + "/pulseaudio.nix")
-    (commonDir + "/printer.nix")
-    (appDir + "/desktop/wm/${wm}/xserver.nix")
-    (appDir + "/virtualisation/podman.nix")
-  ];
+{wm, ...}: {
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./network.nix
+      ./gpu.nix
+      ./own-system-conf.nix
+      ../../common/pulseaudio.nix
+      ../../common/printer.nix
+    ]
+    ++ (import ../../../apps/systemWide/wm/${wm});
   nix = {
     extraOptions = ''
       binary-caches-parallel-connections = 4

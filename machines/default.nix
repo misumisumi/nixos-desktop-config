@@ -3,14 +3,15 @@
   overlay,
   stateVersion,
   user,
+  home-manager,
+  nixgl,
   nixpkgs,
   nixpkgs-stable,
   nur,
-  nixgl,
-  home-manager,
+  common-config,
   flakes,
-  musnix,
   nvimdots,
+  musnix ? null,
   private-config ? null,
   isGeneral ? false,
   ...
@@ -43,10 +44,11 @@ let
         modules =
           [
             ./configuration.nix # Common system conf
-            (overlay {inherit inputs nixpkgs pkgs-stable;})
+            (overlay {inherit nixpkgs pkgs-stable;})
             nur.nixosModules.nur
             musnix.nixosModules.musnix
-            ../modules
+            common-config.nixosModules.for-nixos
+            # ../modules
 
             (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
 
@@ -61,10 +63,12 @@ let
                   [
                     (import ../hm/hm.nix)
                     (import hostConf)
+                    ../modules/nixosWallpaper.nix
                     flakes.nixosModules.for-hm
-                    nvimdots.nixosModules.nvimdots
+                    common-config.nixosModules.for-hm
+                    nvimdots.nixosModules.for-hm
                   ]
-                  ++ optionals (rootDir != "general") (private-config.nixosModules.for-nixos);
+                  ++ optionals (rootDir != "general") [private-config.nixosModules.for-hm];
               };
             }
           ]
