@@ -25,7 +25,7 @@
         inherit lib pkgs;
         isFull = true;
       })
-      ++ (with pkgs; [evtest xp-pen-driver]);
+      ++ (with pkgs; [prime-run bt-dualboot]);
   };
 
   xresources = {
