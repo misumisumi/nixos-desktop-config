@@ -81,7 +81,7 @@
         ];
         mark-wmwin-focused = true;
         mark-overdir-focused = false;
-        detect-rounded-corners = true;
+        detect-rounded-corners = false;
         detect-client-opacity = true;
         detect-transient = true;
         glx-no-stencil = true;
