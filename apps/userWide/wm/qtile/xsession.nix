@@ -34,5 +34,5 @@ in
           ''; # You maybe have some probrem (ex fcitx5...) if you launch using it.
         }; # You can see this in ArchWiki https://wiki.archlinux.jp/index.php/Systemd/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC#D-Bus
       }
-      // optionalAttrs (hostname == "genenral") {putPrivateWallpapers.enable = true;};
+      // optionalAttrs (hostname != "genenral") {putPrivateWallpapers.enable = true;};
   }
