@@ -61,14 +61,14 @@ let
                   [
                     (import ../hm/hm.nix)
                     (import hostConf)
-                    flakes.nixosModules.yaskkserv2
+                    flakes.nixosModules.for-hm
                     nvimdots.nixosModules.nvimdots
                   ]
-                  ++ optionals (rootDir != "general") (with private-config.nixosModules; [ssh_my_conf put_wallpapers]);
+                  ++ optionals (rootDir != "general") (private-config.nixosModules.for-nixos);
               };
             }
           ]
-          ++ (optional (rootDir != "general") private-config.nixosModules.my-network);
+          ++ (optional (rootDir != "general") private-config.nixosModules.for-nixos);
       };
 in
   if isGeneral

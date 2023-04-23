@@ -1,0 +1,3 @@
+[
+  ./xserver.nix
+]
