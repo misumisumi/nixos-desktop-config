@@ -19,22 +19,16 @@
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    common-config.url = "github:misumisumi/nixos-common-config";
+    nvimdots.url = "github:misumisumi/nvimdots";
     flakes = {
       url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nvimdots = {
-      # url = "github:misumisumi/nvimdots";
-      url = "github:misumisumi/nvimdots";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flakes.follows = "flakes";
     };
     private-config = {
       url = "git+ssh://git@github.com/misumisumi/nixos-private-config.git";
@@ -45,23 +39,23 @@
 
   outputs = inputs @ {
     self,
-    nixpkgs,
-    nixpkgs-stable,
     flake-utils,
-    nur,
-    nixgl,
     home-manager,
-    flakes,
     musnix,
     nix-matlab,
+    nixgl,
+    nixpkgs,
+    nixpkgs-stable,
+    nur,
+    common-config,
     nvimdots,
+    flakes,
     private-config,
   }: let
     user = "sumi";
     stateVersion = "23.05"; # For Home Manager
 
     overlay = {
-      inputs,
       nixpkgs,
       pkgs-stable,
       ...
@@ -81,15 +75,15 @@
       import ./machines {
         inherit (nixpkgs) lib;
         inherit inputs overlay stateVersion user;
-        inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes musnix nvimdots private-config;
+        inherit home-manager musnix nixgl nixpkgs nixpkgs-stable nur common-config flakes nvimdots private-config;
       }
     );
-    homeConfigurations = (
-      import ./hm {
-        inherit (nixpkgs) lib;
-        inherit inputs overlay stateVersion user;
-        inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvimdots private-config;
-      }
-    );
+    # homeConfigurations = (
+    #   import ./hm {
+    #     inherit (nixpkgs) lib;
+    #     inherit inputs overlay stateVersion user;
+    #     inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvimdots private-config;
+    #   }
+    # );
   };
 }
