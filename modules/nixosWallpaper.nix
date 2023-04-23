@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-with lib; 
-let
-  cfg = config.xsession.putWallpapers;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.xsession.putWallpapers;
+in {
   options = {
     xsession.putWallpapers = {
       enable = mkEnableOption ''
