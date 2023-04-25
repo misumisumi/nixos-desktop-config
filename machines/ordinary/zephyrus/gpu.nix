@@ -1,12 +1,14 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services = {
     xserver = {
       videoDrivers = [
         "amdgpu"
         "nvidia"
       ];
+      deviceSection = ''
+        Option "DRI" "3"
+        Option "TearFree" "true"
+      '';
     };
   };
 
