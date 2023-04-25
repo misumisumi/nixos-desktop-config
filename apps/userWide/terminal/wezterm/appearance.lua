@@ -53,7 +53,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     -- ensure that the titles fit in the available space,
     -- and that we have room for the edges.
-    local title = " " .. tab.tab_index .. " " .. wezterm.truncate_right(tab.active_pane.title, max_width - 3) .. " "
+    local title = " " .. tab.tab_index .. " " .. wezterm.truncate_right(tab.active_pane.title, max_width - 5) .. " "
 
     return {
         { Background = { Color = edge_background } },
