@@ -163,6 +163,7 @@ local config = {
         { key = "j", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Down") },
         { key = "k", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Up") },
         { key = "l", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Right") },
+        { key = "d", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
         { key = "p", mods = "SHIFT|CTRL", action = act.ShowLauncher },
         { key = "q", mods = "CTRL|LEADER", action = act.QuickSelect },
         { key = "R", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },
