@@ -1,21 +1,32 @@
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-nix の環境へようこそ!!
+nix の環境へようこそ!!  
 これは[misumisumi](https://github.com/misumisumi)のマシン設定です。
 
-私の設定の一部を利用して NixOS を試すことができます。
-現在、NixOS 環境のみサポートしています。
+私の設定の一部を利用して NixOS を試すことができます。  
+現在、NixOS 環境のみサポートしています。  
 将来的に他のディストリブーション(user home config)、macOS をサポートする予定です。
 
 ## 説明
 
-- このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されており、root の[flake.nix](./flake.nix)には私の private リポジトリが含まれているため使用できません。
+- このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
 - リカバリー用に作成した環境(gnome or qtile or CLI only)を試用することができます。
+  - root の[flake.nix](./flake.nix)は private repository を含むため使用できません。  
+    詳しくはインストールガイドを見てください。
 - 各アプリの設定は[apps](./apps)にあります。
 - 各マシンの設定は[machines](./machines)にあります。
-  - [machines/ordinary](./machines/ordinary)は日常用途の環境です。  
-    (プライベートリポジトリの内容を含むため使用不可)
-  - [machines/general](./machines/general)はリカバリー用の汎用環境です。
+  - mother, stacia, zephyrus は private-repository を含むため使用できません。
+
+```
+machines
+├── common # 各マシン共通の設定
+├── general # 汎用環境(リカバリー用)
+│   ├── desktop # gnome or qtile
+│   └── minimal # CLI only
+├── mother # My Desktop
+├── stacia # My GPU server with desktop
+└── zephyrus # My Laptop
+```
 
 ## インストールガイド
 
@@ -82,7 +93,7 @@ mount /dev/<for-boot> /mnt/boot
 |              |       Linux       |       macOS       |
 | :----------: | :---------------: | :---------------: |
 |    Shell     |        Zsh        |        Zsh        |
-|   Terminal   | Kitty & Alacritty | Kitty & Alacritty |
+|   Terminal   | wezterm && kitty  | wezterm && kitty  |
 |    Editor    |      Neovim       |      Neovim       |
 |   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
 | Input Method | Fcitx5+mozc & skk |        \-         |
@@ -96,8 +107,6 @@ mount /dev/<for-boot> /mnt/boot
 | gnome | Wayland or Xorg |
 | QTile |      Xorg       |
 | Yabai |      macOS      |
-
-- Tilling WM Key Map
 
 ## ToDO
 

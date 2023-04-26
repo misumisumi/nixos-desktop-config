@@ -2,22 +2,33 @@
 
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-Welcome to the nix environment!
-This is the machine configuration of [misumisumi](https://github.com/misumisumi).
+Welcome to the nix environment!  
+This is [misumisumi](https://github.com/misumisumi)'s machine setup.
 
-You can try NixOS using some of my configuration.
-Currently, only the NixOS environment is supported.
+You can try NixOS using some of my setup.  
+Currently, only the NixOS environment is supported.  
 In the future, other distributions (user home config) and macOS will be supported.
 
 ## Description
 
-- This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes) and is located at root [flake.nix](. /flake.nix) cannot be used because it contains my private repository.
-- You can try the environment created for recovery (gnome or qtile or CLI only).
-- The configuration for each app can be found in [apps](. /apps).
-- Configuration for each machine can be found in [machines](. /machines).
-  - [machines/ordinary](. /machines/ordinary) is the environment for daily use.  
-    (Not available because it contains the contents of the private repository.)
-  - [machines/general](. /machines/general) is the general-purpose environment for recovery.
+- This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes).
+- You can try the environment (gnome or qtile or CLI only) created for recovery.
+  - You can also try out [flake.nix](. /flake.nix) cannot be used because it contains a private repository.  
+    See the installation guide for details.
+- Settings for each app are located in [apps](. /apps).
+- The configuration for each machine is located in [machines](. /machines).
+  - mother, stacia and zephyrus cannot be used because they contain private-repository.
+
+```
+machines
+├── common # 各マシン共通の設定
+├── general # 汎用環境(リカバリー用)
+│   ├── desktop # gnome or qtile
+│   └── minimal # CLI only
+├── mother # My Desktop
+├── stacia # My GPU server with desktop
+└── zephyrus # My Laptop
+```
 
 ## Installation Guide
 
