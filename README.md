@@ -21,8 +21,8 @@ In the future, other distributions (user home config) and macOS will be supporte
 
 ```
 machines
-├── common # 各マシン共通の設定
-├── general # 汎用環境(リカバリー用)
+├── common # Settings common to each machine
+├── general # General environment for recovery
 │   ├── desktop # gnome or qtile
 │   └── minimal # CLI only
 ├── mother # My Desktop
