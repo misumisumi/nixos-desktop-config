@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../../common/network.nix
+    ../common/network.nix
   ];
   services = {
     hostapd = {

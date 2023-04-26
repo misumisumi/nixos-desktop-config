@@ -9,11 +9,11 @@
   programs.editorconfig.useMyDots.enable = true;
 
   imports =
-    import ../../../apps/userWide {
+    import ../../apps/userWide {
       inherit lib hostname;
       isLarge = true;
     }
-    ++ (import ../../../apps/userWide/wm/qtile);
+    ++ (import ../../apps/userWide/wm/qtile);
 
   home = {
     installCommonPkgs = {
@@ -21,11 +21,11 @@
       isLarge = true;
     };
     packages =
-      (import ../../../apps/userWide/pkgs {
+      (import ../../apps/userWide/pkgs {
         inherit lib pkgs;
         isFull = true;
       })
-      ++ (with pkgs; [evtest xp-pen-driver]);
+      ++ (with pkgs; [prime-run bt-dualboot]);
   };
 
   xresources = {

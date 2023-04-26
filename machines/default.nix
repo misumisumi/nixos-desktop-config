@@ -20,17 +20,17 @@
 let
   lib = nixpkgs.lib;
   choiceSystem = x:
-    if (x == "aegis" || x == "ku-dere")
+    if (x == "aegis")
     then "aarch64-linux"
     else "x86_64-linux";
 
   settings = {
     hostname,
     user,
-    rootDir,
+    rootDir ? "",
     wm ? "gnome",
   }: let
-    hostConf = ./. + "/${rootDir}" + "/${hostname}" + /home.nix;
+    hostConf = ./. + (lib.optionalString (rootDir != "") "/${rootDir}") + "/${hostname}" + /home.nix;
     system = choiceSystem hostname;
     pkgs-stable = import nixpkgs-stable {
       inherit system;
@@ -98,35 +98,18 @@ in
   else {
     mother = settings {
       hostname = "mother";
-      rootDir = "ordinary";
       inherit user;
     };
     zephyrus =
       settings
       {
         hostname = "zephyrus";
-        rootDir = "ordinary";
         inherit user;
       };
-
-    # metatron = settings { hostname = "metatron"; rootDir = "cardinal"; inherit user; };
-    alice = settings {
-      hostname = "alice";
-      rootDir = "cardinal";
-      inherit user;
-    };
-    strea =
+    stacia =
       settings
       {
-        hostname = "strea";
-        rootDir = "cardinal";
-        inherit user;
-      };
-    yui =
-      settings
-      {
-        hostname = "yui";
-        rootDir = "cardinal";
+        hostname = "stacia";
         inherit user;
       };
   }
