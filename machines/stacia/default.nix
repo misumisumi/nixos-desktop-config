@@ -6,9 +6,9 @@
       ./gpu.nix
       ./virtualisation.nix
       ./own-system-conf.nix
-      ../../common/pipewire.nix
-      ../../common/musnix.nix
-      ../../common/printer.nix
+      ../common/pipewire.nix
+      ../common/musnix.nix
+      ../common/printer.nix
     ]
-    ++ (import ../../../apps/systemWide/wm/qtile);
+    ++ (import ../../apps/systemWide/wm/qtile);
 }
