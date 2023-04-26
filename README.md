@@ -38,7 +38,7 @@ machines
 - Three environments can be used
   - gnome
   - qtile
-  - minimal (CLI only) 1.
+  - minimal (CLI only)
 
 1. download Install media from [official](https://nixos.org/download.html)
 2. boot ISO and check network connection
