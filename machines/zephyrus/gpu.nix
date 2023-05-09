@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  boot.kernelParams = [
+    "amdgpu.ppfeaturemask=0xfff7ffff"
+  ];
   services = {
     xserver = {
       videoDrivers = [
@@ -6,8 +9,10 @@
         "nvidia"
       ];
       deviceSection = ''
+        Driver "amdgpu"
         Option "DRI" "3"
-        Option "TearFree" "true"
+        Option "EnablePageFlip" "off"
+        Option "TearFree" "false"
       '';
     };
   };
@@ -15,7 +20,6 @@
   hardware = {
     nvidia.powerManagement.enable = true;
     opengl.extraPackages = with pkgs; [
-      amdvlk
       libvdpau-va-gl
       vaapiVdpau
       rocm-opencl-icd
