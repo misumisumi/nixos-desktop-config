@@ -8,7 +8,7 @@ from libqtile.log_utils import logger
 
 @dataclasses.dataclass
 class Global:
-    laptop = os.uname()[1] in ["zephyrus"]
+    laptop = os.uname()[1] in ["zephyrus" "stacia"]
     vm = "general" == os.uname()[1]
 
     mod = "mod1"  # super key is 'mod4', alt is 'mod1'
