@@ -13,7 +13,7 @@
   };
   networking = {
     hostName = "${hostname}";
-    interfaces.enp5s0.wakeOnLan.enable = true;
+    interfaces.enp34s0.wakeOnLan.enable = true;
     firewall = {
       enable = true;
       trustedInterfaces = [
@@ -58,14 +58,13 @@
       };
       networks = {
         "10-wired" = {
-          name = "enp5s0";
+          name = "enp34s0";
           bridge = ["br0"];
         };
         "20-br0" = {
           name = "br0";
-          dns = ["192.168.1.40" "127.0.0.1"];
-          address = ["192.168.1.30"];
-          gateway = ["192.168.1.1"];
+          DHCP = "yes";
+          address = ["133.24.91.38"];
         };
       };
     };
