@@ -50,7 +50,7 @@
 
   swapDevices = [
     {
-      device = "/dev/mapper/VolGroup00-lvolswap";
+      device = "/dev/mapper/VolGroupStacia-lvolswap";
       priority = 10;
     }
   ];
