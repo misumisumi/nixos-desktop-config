@@ -106,7 +106,7 @@ def make_bar(is_tray=False):
         groupbox,
         _rignt_corner(**_colorset4),
     ]
-    if not (GLOBAL.laptop or GLOBAL.vm):
+    if not (GLOBAL.under_fhd or GLOBAL.vm):
         top_widgets += [
             _separator(),
             _left_corner(**_colorset1),
@@ -147,7 +147,7 @@ def make_bar(is_tray=False):
         _separator(),
     ]
 
-    if not (GLOBAL.laptop or GLOBAL.vm):
+    if not (GLOBAL.under_fhd or GLOBAL.vm):
         top_widgets += [
             _left_corner(**_colorset1),
             net,
@@ -172,7 +172,7 @@ def make_bar(is_tray=False):
             _separator(),
         ]
 
-    if GLOBAL.laptop or GLOBAL.vm:
+    if GLOBAL.under_fhd or GLOBAL.vm:
         bottom_widgets = [
             _separator(),
             _left_corner(**_colorset7),

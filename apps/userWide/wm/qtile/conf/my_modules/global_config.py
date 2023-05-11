@@ -8,9 +8,10 @@ from libqtile.log_utils import logger
 
 @dataclasses.dataclass
 class Global:
-    laptop = os.uname()[1] in ["zephyrus" "stacia"]
+    laptop = os.uname()[1] in ["zephyrus"]
+    under_fhd = os.uname()[1] in ["zephyrus", "stacia"]
     vm = "general" == os.uname()[1]
-
+    laptop = os.uname()[1] in ["zephyrus" "stacia"]
     mod = "mod1"  # super key is 'mod4', alt is 'mod1'
     terminal = "wezterm"
     terminal_class = "org.wezfurlong.wezterm"
