@@ -4,12 +4,12 @@ in {
   programs.singularity.enable = true;
   environment.systemPackages = [myTerraform];
   virtualisation = {
+    lxc.enable = true;
+    lxd = {
+      enable = true;
+      recommendedSysctlSettings = true;
+    };
     vfio = {
-      lxc.enable = true;
-      lxd = {
-        enable = true;
-        recommendedSysctlSettings = true;
-      };
       enable = true;
       IOMMUType = "amd";
       devices = [];
