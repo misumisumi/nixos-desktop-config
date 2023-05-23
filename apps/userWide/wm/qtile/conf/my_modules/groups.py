@@ -53,7 +53,7 @@ _group_and_rule = {
     "code": ("", (layout2, layout3), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
     "paper": ("", (layout1,), _rule_paper),
-    "analyze": ("ﲋ", (layout1,), _rule_analyze),
+    "analyze": ("", (layout1,), _rule_analyze),
     "full": ("", (layout4,), _rule_full),
     "sns": ("", (layout1,), _rule_sns),
     "media": ("", (layout2, layout3), _rule_media),
