@@ -59,7 +59,7 @@ with pkgs;
     wavesurfer # pkgs from Sumi-Sumi/flakes
     android-tools
     ferdium # One place, Some webapp
-    unityhub-latest
+    unityhub
     juce # VST plugin flamework
     matlab # Followed by nix-matlab
     carla
