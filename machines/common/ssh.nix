@@ -1,10 +1,8 @@
 {
   lib,
   stateVersion,
-  pkgs,
   ...
-}:
-with lib; {
+}: {
   programs.ssh = {
     askPassword = "";
   };
