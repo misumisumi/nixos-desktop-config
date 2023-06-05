@@ -22,7 +22,7 @@ with lib; {
     }
     // lib.attrsets.optionalAttrs (stateVersion > "22.11") {
       settings = {
-        kbdInteractiveAuthentication = true;
+        KbdInteractiveAuthentication = true;
         X11Forwarding = true;
       };
     };
