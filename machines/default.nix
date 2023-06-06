@@ -3,22 +3,12 @@
   overlay,
   stateVersion,
   user,
-  home-manager,
-  nixgl,
-  nixpkgs,
-  nixpkgs-stable,
-  nur,
-  common-config,
-  flakes,
-  nvimdots,
-  musnix ? null,
-  private-config ? null,
   isGeneral ? false,
   ...
 }:
 # Multipul arguments
 let
-  lib = nixpkgs.lib;
+  lib = inputs.nixpkgs.lib;
   choiceSystem = x:
     if (x == "aegis")
     then "aarch64-linux"
@@ -32,7 +22,7 @@ let
   }: let
     hostConf = ./. + (lib.optionalString (rootDir != "") "/${rootDir}") + "/${hostname}" + /home.nix;
     system = choiceSystem hostname;
-    pkgs-stable = import nixpkgs-stable {
+    pkgs-stable = import inputs.nixpkgs-stable {
       inherit system;
       config = {allowUnfree = true;};
     };
@@ -44,15 +34,18 @@ let
         modules =
           [
             ./configuration.nix # Common system conf
-            (overlay {inherit nixpkgs pkgs-stable;})
-            nur.nixosModules.nur
-            musnix.nixosModules.musnix
-            common-config.nixosModules.for-nixos
+            (overlay {
+              inherit (inputs) nixpkgs;
+              inherit pkgs-stable;
+            })
+            inputs.nur.nixosModules.nur
+            inputs.musnix.nixosModules.musnix
+            inputs.common-config.nixosModules.for-nixos
             # ../modules
 
             (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
 
-            home-manager.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -64,15 +57,15 @@ let
                     (import ../hm/hm.nix)
                     (import hostConf)
                     ../modules/nixosWallpaper.nix
-                    flakes.nixosModules.for-hm
-                    common-config.nixosModules.for-hm
-                    nvimdots.nixosModules.for-hm
+                    inputs.flakes.nixosModules.for-hm
+                    inputs.common-config.nixosModules.for-hm
+                    inputs.nvimdots.nixosModules.for-hm
                   ]
-                  ++ optionals (rootDir != "general") [private-config.nixosModules.for-hm];
+                  ++ optionals (rootDir != "general") [inputs.private-config.nixosModules.for-hm];
               };
             }
           ]
-          ++ (optional (rootDir != "general") private-config.nixosModules.for-nixos);
+          ++ (optional (rootDir != "general") inputs.private-config.nixosModules.for-nixos);
       };
 in
   if isGeneral
