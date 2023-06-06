@@ -30,6 +30,10 @@
     hostName = "${hostname}";
     firewall = {
       enable = true;
+      trustedInterfaces = [
+        "br0"
+        "lxdbr0"
+      ];
       allowedTCPPorts = [
         5353 # avahi
         4713 # PulseAudio
