@@ -2,11 +2,11 @@
   "nodes": {
     "common-config": {
       "locked": {
-        "lastModified": 1685777856,
-        "narHash": "sha256-trKkOxLppvJLSCgS73XWX0wujZX02zeId8JRkLcdjiA=",
+        "lastModified": 1685934882,
+        "narHash": "sha256-HHgo1/S4d4coYBZGpgAJgUTyKTQfrMwYE1rvx0xLaZ4=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "31195eaffd7d1c1a9e462ac5bc58eef59d5cc305",
+        "rev": "41327864e63986a62e2ca61f3e340016436a5653",
         "type": "github"
       },
       "original": {
@@ -44,6 +44,24 @@
       "original": {
         "owner": "edolstra",
         "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1680392223,
+        "narHash": "sha256-n3g7QFr85lDODKt250rkZj2IFS3i4/8HBU2yKHO3tqw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "dcc36e45d054d7bb554c9cdab69093debd91a0b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
         "type": "github"
       }
     },
@@ -137,6 +155,33 @@
         "type": "github"
       }
     },
+    "lxd-nixos": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs-stable"
+        ],
+        "nixpkgs-2211": [
+          "nixpkgs-stable"
+        ],
+        "nixpkgs-unstable": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1684265670,
+        "narHash": "sha256-V+NF3p8U/cc3dWKy5QKCqtBxETHA8BJ7S4nNtmEJrJA=",
+        "ref": "refs/heads/main",
+        "rev": "ab6c7084cc9619c0e4050f3ed1b65503a0418cac",
+        "revCount": 84,
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/lxd-nixos"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/lxd-nixos"
+      }
+    },
     "musnix": {
       "inputs": {
         "nixpkgs": [
@@ -211,6 +256,24 @@
         "type": "github"
       },
       "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1680213900,
+        "narHash": "sha256-cIDr5WZIj3EkKyCgj/6j3HBH4Jj1W296z7HTcWj1aMA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e3652e0735fbec227f342712f180f4f21f0594f2",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
@@ -315,6 +378,7 @@
         "flake-utils": "flake-utils",
         "flakes": "flakes",
         "home-manager": "home-manager",
+        "lxd-nixos": "lxd-nixos",
         "musnix": "musnix",
         "nix-matlab": "nix-matlab",
         "nixgl": "nixgl",
