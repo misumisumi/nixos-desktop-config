@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -21,6 +22,12 @@
   programs.singularity.enable = true;
   programs.singularity.package = pkgs._singularity;
   virtualisation = {
+    lxc.enable = true;
+    lxd = {
+      enable = true;
+      recommendedSysctlSettings = true;
+      package = inputs.lxd-nixos.packages.x86_64-linux.lxd;
+    };
     vfio = {
       enable = true;
       IOMMUType = "amd";
