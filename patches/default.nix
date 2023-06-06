@@ -37,19 +37,12 @@
   # })
   # Patch from https://github.com/NixOS/nixpkgs/pull/211600
   (final: prev: {
-    gmic = prev.gmic.overrideAttrs (old: rec {
-      version = "3.2.0";
-      src = prev.fetchFromGitHub {
-        owner = "dtschump";
-        repo = "gmic";
-        rev = "v.${version}";
-        hash = "sha256-lrIlzxXWqv046G5uRkBQnjvysaIcv+iDKxjuUEJWqcs=";
-      };
-      gmic_stdlib = prev.fetchurl {
-        name = "gmic_stdlib.h";
-        url = "http://gmic.eu/gmic_stdlib${prev.lib.replaceStrings ["."] [""] version}.h";
-        hash = "sha256-kWHzA1Dk7F4IROq/gk+RJllry3BABMbssJxhkQ6Cp2M=";
-      };
+    qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
+      patches =
+        old.patches
+        ++ [
+          ./fix-xcbq.patch
+        ];
     });
   })
   (final: prev: {
@@ -59,27 +52,6 @@
         thumbnail = prev.haskell.lib.doJailbreak hsuper.thumbnail;
       };
     };
-  })
-
-  #(final: prev: {
-  #  python3Packages = prev.python3Packages.override {
-  #    overrides = pfinal: pprev: {
-  #      qtile-unwrapped = pprev.qtile-unwrapped.overridePythonAttrs (old: {
-  #        patches = old.patches ++ [
-  #          ./fix-xcbq.patch
-  #        ];
-  #      });
-  #    };
-  #  };
-  #})
-  (final: prev: {
-    qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
-      patches =
-        old.patches
-        ++ [
-          ./fix-xcbq.patch
-        ];
-    });
   })
   (final: prev: {
     tmuxPlugins =
