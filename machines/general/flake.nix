@@ -2,7 +2,7 @@
   description = "General NixOS System Flake Configuration (w/o my private repository)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -46,7 +46,7 @@
     flakes,
   }: let
     user = "sumi";
-    stateVersion = "22.11"; # For Home Manager
+    stateVersion = "23.05"; # For Home Manager
 
     overlay = {
       nixpkgs,
@@ -67,7 +67,6 @@
         isGeneral = true;
         inherit (nixpkgs) lib;
         inherit inputs overlay stateVersion user;
-        inherit home-manager musnix nixgl nixpkgs nixpkgs-stable nur common-config flakes nvimdots;
       }
     );
   };
