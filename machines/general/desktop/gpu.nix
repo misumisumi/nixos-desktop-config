@@ -1,22 +1,16 @@
 {pkgs, ...}: {
-  # services = {
-  #   xserver = {
-  #     videoDrivers = [
-  #       "amdgpu"
-  #       "radeon"
-  #       "nvidia"
-  #       "qxl"
-  #       "modesetting"
-  #       "fbdev"
-  #     ];
-  #     deviceSection = ''
-  #       Driver         "nvidia"
-  #       VendorName     "NVIDIA Corporation"
-  #       BoardName      "NVIDIA GeForce GTX 1050 Ti"
-  #       BusID          "PCI:9:0:0"
-  #     '';
-  #   };
-  # };
+  services = {
+    xserver = {
+      videoDrivers = [
+        "amdgpu"
+        "radeon"
+        "nvidia"
+        "qxl"
+        "modesetting"
+        "fbdev"
+      ];
+    };
+  };
 
   hardware = {
     opengl.extraPackages = with pkgs; [
