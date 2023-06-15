@@ -18,7 +18,7 @@ let
     hostname,
     user,
     rootDir ? "",
-    wm ? "gnome",
+    wm ? "qtile",
   }: let
     hostConf = ./. + (lib.optionalString (rootDir != "") "/${rootDir}") + "/${hostname}" + /home.nix;
     system = choiceSystem hostname;
