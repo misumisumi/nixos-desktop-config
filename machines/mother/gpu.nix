@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   # boot.extraModprobeConfig = lib.mkAfter ''
   #   softdep snd_hda_intel pre: vfio-pci
   #   softdep nouveau pre: vfio-pci
@@ -45,9 +47,12 @@
 
   hardware = {
     nvidia.modesetting.enable = true;
-    opengl.extraPackages = with pkgs; [
-      libvdpau-va-gl
-      vaapiVdpau
-    ];
+    opengl = {
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        libvdpau-va-gl
+        vaapiVdpau
+      ];
+    };
   };
 }

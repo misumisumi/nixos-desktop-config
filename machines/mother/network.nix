@@ -1,8 +1,4 @@
-{
-  lib,
-  hostname,
-  ...
-}: {
+{hostname, ...}: {
   imports = [
     ../common/network.nix
   ];
