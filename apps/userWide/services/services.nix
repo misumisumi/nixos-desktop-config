@@ -1,9 +1,7 @@
 /*
 Auto launch apps
 */
-{ config, hostname, pkgs, ... }:
-
-{
+{wm, ...}: {
   services = {
     udiskie.enable = true;
 
@@ -13,8 +11,7 @@ Auto launch apps
 
     kdeconnect = {
       enable = true;
-      indicator = true;
+      indicator = wm != "qtile"; # launch from qtile
     };
   };
 }
-

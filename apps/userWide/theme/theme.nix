@@ -1,9 +1,7 @@
 /*
-  Uniformed look for Qt and GTK applications
+Uniformed look for Qt and GTK applications
 */
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   gtk = {
     enable = true;
     font = {
@@ -28,7 +26,7 @@
     platformTheme = "gtk";
     style = {
       package = pkgs.arc-kde-theme;
-      name = "ark-dark";
+      name = "bb10dark";
     };
   };
 }
