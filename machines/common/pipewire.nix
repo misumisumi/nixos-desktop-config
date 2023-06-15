@@ -116,4 +116,5 @@
     cadence
     portaudio
   ];
+  environment.etc."pipewire/pipewire-pulse".source = ./pipewire-conf/pipewire-pulse.conf;
 }
