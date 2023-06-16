@@ -23,10 +23,6 @@
       enable = true;
       userControlled.enable = true;
     };
-    dhcpcd = {
-      enable = true;
-      wait = "background";
-    };
     hostName = "${hostname}";
     firewall = {
       enable = true;
