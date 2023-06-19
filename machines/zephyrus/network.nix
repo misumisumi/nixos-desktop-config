@@ -17,7 +17,6 @@
       enable = true;
     };
   };
-
   networking = {
     wireless = {
       enable = true;
@@ -29,6 +28,7 @@
       trustedInterfaces = [
         "br0"
         "lxdbr0"
+        "k8sbr0"
       ];
       allowedTCPPorts = [
         5353 # avahi
@@ -63,6 +63,7 @@
 
   systemd = {
     network = {
+      wait-online.ignoredInterfaces = ["wlan0"];
       useMyDots.enable = true;
       netdevs = {
         "br0".netdevConfig = {

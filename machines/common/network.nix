@@ -3,7 +3,7 @@
     network = {
       enable = true;
       wait-online = {
-        timeout = 0; # Disable wait online
+        timeout = 5; # Disable wait online
         anyInterface = true;
       };
     };
