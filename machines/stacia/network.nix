@@ -19,6 +19,7 @@
       trustedInterfaces = [
         "br0"
         "lxdbr0"
+        "k8sbr0"
       ];
       # allowedUDPPorts = [
       #   4010
