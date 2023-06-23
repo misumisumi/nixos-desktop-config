@@ -1,13 +1,8 @@
-{
-  config,
-  pkgs,
-  user,
-  ...
-}: {
+{config, ...}: {
   boot = {
     tmp = {
       useTmpfs = true;
-      tmpfsSize = "50%";
+      tmpfsSize = "80%";
     };
     loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
