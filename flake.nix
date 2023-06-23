@@ -8,7 +8,7 @@
     lxd-nixos = {
       url = "git+https://codeberg.org/adamcstephens/lxd-nixos";
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      inputs.nixpkgs-2211.follows = "nixpkgs-stable";
+      inputs.nixpkgs-2305.follows = "nixpkgs-stable";
       inputs.nixpkgs-unstable.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
