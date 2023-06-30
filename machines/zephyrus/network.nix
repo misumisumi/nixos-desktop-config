@@ -6,6 +6,7 @@
   imports = [
     ../common/network.nix
   ];
+
   services = {
     hostapd = {
       enable = false;

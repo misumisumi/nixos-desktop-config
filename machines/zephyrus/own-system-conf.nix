@@ -19,6 +19,7 @@
   services = {
     asusd = {
       enable = true;
+      enableUserService = true;
       profileConfig = "quiet";
     };
     supergfxd = {
@@ -44,7 +45,7 @@
   '';
   powerManagement = {
     enable = true;
-    # powertop.enable = true;
+    powertop.enable = true;
     cpuFreqGovernor = "ondemand";
   };
   nix = {
