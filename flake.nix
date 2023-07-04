@@ -5,12 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
-    lxd-nixos = {
-      url = "git+https://codeberg.org/adamcstephens/lxd-nixos";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-      inputs.nixpkgs-2305.follows = "nixpkgs-stable";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
-    };
+    lxd-nixos.url = "git+https://codeberg.org/adamcstephens/lxd-nixos";
     nur.url = "github:nix-community/NUR";
     musnix = {
       url = "github:musnix/musnix";
