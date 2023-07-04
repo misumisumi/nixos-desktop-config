@@ -26,7 +26,7 @@ groupbox = widget.GroupBox(
     fontsize=GLOBAL.font_size,
     active=GLOBAL.c_normal["white"],
 )
-cpu = widget.CPU(format=" {load_percent:0=4.1f}%", **_colorset2, **_font_conf)
+cpu = widget.CPU(format="  {load_percent:0=4.1f}%", **_colorset2, **_font_conf)
 memory = widget.Memory(
     format=" {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}",
     measure_mem="G",
@@ -35,7 +35,7 @@ memory = widget.Memory(
     **_font_conf,
 )
 df = widget.DF(
-    format=" {uf}{m}/{s}{m} ({r:.0f}%)",
+    format="󰋊 {uf}{m}/{s}{m} ({r:.0f}%)",
     visible_on_warn=False,
     partition="/home",
     **_colorset2,
@@ -46,7 +46,7 @@ wttr = widget.Wttr(format="%c%t/%p|", location={"Himeji": "Himeji"}, **_colorset
 clock = widget.Clock(format="%y-%m-%d %a %H:%M:%S", **_colorset2, **_font_conf)
 net = widget.Net(format="{down} ↓↑ {up}", **_colorset2, **_font_conf)
 volume = widget.Volume(
-    fmt=" {}",
+    fmt="  {}",
     get_volume_command=[
         "sh",
         "-c",
@@ -61,14 +61,14 @@ volume = widget.Volume(
 systray = widget.Systray(**_colorset3)
 backlight = list(Path("/sys/class/backlight/").glob("*"))
 if not len(backlight) == 0:
-    backlight = widget.Backlight(fmt=" {}", backlight_name=backlight[0], **_colorset2, **_font_conf)
+    backlight = widget.Backlight(fmt="  {}", backlight_name=backlight[0], **_colorset2, **_font_conf)
 battery = widget.Battery(
     format="{char} {percent:2.0%}",
-    charge_char="",
-    discharge_char="",
-    empty_char="",
-    full_chal="",
-    unknown_char="",
+    charge_char="󰂄",
+    discharge_char="󰂁",
+    empty_char="󰁻",
+    full_chal="󰂂",
+    unknown_char="󰂃",
     **_colorset1,
     **_font_conf,
 )
@@ -134,9 +134,9 @@ def make_bar(is_tray=False):
             border=GLOBAL.c_normal["BGbase"],
             theme_mode="preferred",
             theme_path="Papirus-Dark",
-            txt_floating="🗗",
-            txt_floatingp="🗖",
-            txt_minimized="🗕",
+            txt_floating="󱂬",
+            txt_minimized="",
+            txt_maximized="",
             icon_size=GLOBAL.icon_size,
             borderwidth=GLOBAL.border,
             max_title_width=120,

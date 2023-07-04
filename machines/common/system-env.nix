@@ -51,7 +51,7 @@
 
       (plemoljp-fonts.override {
         fonts = [
-          "plemoljp-nfj"
+          "plemoljp-nf"
         ];
       })
       (udev-gothic-font.override {
