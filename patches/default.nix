@@ -44,13 +44,7 @@
           ./fix-xcbq.patch
         ];
     });
-    zoom-us = prev.zoom-us.overrideAttrs (old: rec {
-      version = "5.15.2.4260";
-      src = prev.fetchurl {
-        url = "https://zoom.us/client/${version}/zoom_x86_64.pkg.tar.xz";
-        hash = "sha256-R6M180Gcqu4yZC+CtWnixSkjPe8CvgoTPWSz7B6ZAlE=";
-      };
-    });
+    inherit (pkgs-stable) edk2 OVMF OVMFFull;
   })
   (final: prev: {
     haskellPackages = prev.haskellPackages.override {
