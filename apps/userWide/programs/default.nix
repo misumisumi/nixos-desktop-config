@@ -1,5 +1,6 @@
 [
   ./programs.nix
   ./gpg.nix
-  ./thunar.nix
+  ./nemo.nix
+  ./zathura.nix
 ]
