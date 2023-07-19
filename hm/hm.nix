@@ -19,8 +19,6 @@
         if [ ! -d ${config.home.homeDirectory}/.config/ranger ]; then
           mkdir ${config.home.homeDirectory}/.config/ranger
         fi
-        [ -f ${config.home.homeDirectory}/.config/fcitx5/profile ] && rm -f ${config.home.homeDirectory}/.config/fcitx5/profile
-        [ -f ${config.home.homeDirectory}/.config/mimeapps.list ] && rm -f ${config.home.homeDirectory}/.config/mileapps.list
       '';
     };
 
