@@ -111,7 +111,7 @@ class MatchWithCurrentScreen(Match):
         return True
 
 
-_display_tablet = {"creation": ("", layout4)}
+_display_tablet = {"creation": ("󰂫", layout4)}
 
 GROUP_PER_SCREEN = len(_group_and_rule)
 

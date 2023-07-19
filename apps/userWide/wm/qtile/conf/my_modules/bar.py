@@ -35,7 +35,7 @@ memory = widget.Memory(
     **_font_conf,
 )
 df = widget.DF(
-    format="󰋊 {uf}{m}/{s}{m} ({r:.0f}%)",
+    format=" {uf}{m}/{s}{m} ({r:.0f}%)",
     visible_on_warn=False,
     partition="/home",
     **_colorset2,
