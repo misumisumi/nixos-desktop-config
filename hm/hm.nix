@@ -1,6 +1,11 @@
-{ config, lib, pkgs, user, stateVersion, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  user,
+  stateVersion,
+  ...
+}: {
   programs = {
     home-manager.enable = true;
   };
@@ -10,10 +15,12 @@
     username = "${user}";
     homeDirectory = "/home/${user}";
     activation = {
-      myActivationAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
         if [ ! -d ${config.home.homeDirectory}/.config/ranger ]; then
           mkdir ${config.home.homeDirectory}/.config/ranger
         fi
+        [ -f ${config.home.homeDirectory}/.config/fcitx5/profile ] && rm -f ${config.home.homeDirectory}/.config/fcitx5/profile
+        [ -f ${config.home.homeDirectory}/.config/mimeapps.list ] && rm -f ${config.home.homeDirectory}/.config/mileapps.list
       '';
     };
 
@@ -36,7 +43,6 @@
       trm = "trash-rm";
       tty-clock = "tty-clock -s -c -C 6";
     };
-
   };
   fonts.fontconfig.enable = true;
 
@@ -53,5 +59,4 @@
       };
     };
   };
-
 }

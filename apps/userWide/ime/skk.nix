@@ -1,14 +1,18 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   useDict = "Combined";
-  dicts = { "Minimal" = "SKK-JISYO.S"; "Middle" = "SKK-JISYO.M"; "Large" = "SKK-JISYO.L"; "Combined" = "SKK-JISYO.combined"; };
-in
-{
+  dicts = {
+    "Minimal" = "SKK-JISYO.S";
+    "Middle" = "SKK-JISYO.M";
+    "Large" = "SKK-JISYO.L";
+    "Combined" = "SKK-JISYO.combined";
+  };
+in {
   services.yaskkserv2.enable = true;
   xdg = {
     configFile = {
       "libskk/rules/user-config".source = ./skk-config/libskk;
       "fcitx5/conf/skk.conf".source = ./skk-config/fcitx5/skk.conf;
+      "fcitx5/profile".source = ./skk-config/fcitx5/profile;
     };
   };
   home.file = {
