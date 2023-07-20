@@ -1,7 +1,10 @@
 # Conf for nix package manager
-{ pkgs, inputs, stateVersion, ... }:
-
 {
+  pkgs,
+  inputs,
+  stateVersion,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true; # Allow proprietary software.
   nixpkgs.config.allowBroken = true;
 

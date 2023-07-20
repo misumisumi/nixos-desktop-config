@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-let
-  thunar-with-plugins = with pkgs.xfce; (thunar.override { thunarPlugins = [ thunar-volman thunar-archive-plugin thunar-media-tags-plugin ]; });
-in
-{
+{pkgs, ...}: let
+  thunar-with-plugins = with pkgs.xfce; (thunar.override {thunarPlugins = [thunar-volman thunar-archive-plugin thunar-media-tags-plugin];});
+in {
   home = {
-    packages = with pkgs; with pkgs.xfce; [
+    packages = with pkgs;
+    with pkgs.xfce; [
       thunar-with-plugins
       xfconf
       exo

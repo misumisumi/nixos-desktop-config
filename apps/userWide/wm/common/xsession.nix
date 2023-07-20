@@ -1,12 +1,15 @@
 /*
-  Manage xsession from home-manager.
-  NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
-  However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
+Manage xsession from home-manager.
+NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
+However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 */
-
-{ config, lib, user, pkgs, ... }:
-
 {
+  config,
+  lib,
+  user,
+  pkgs,
+  ...
+}: {
   services = {
     screen-locker = {
       enable = true;
@@ -20,11 +23,11 @@
   };
 
   home = {
-    packages = with pkgs; [ betterlockscreen libinput-gestures ];
+    packages = with pkgs; [betterlockscreen libinput-gestures];
     keyboard = {
       layout = "us";
       model = "pc104";
-      options = [ "ctrl:nocaps" ];
+      options = ["ctrl:nocaps"];
     };
     pointerCursor = {
       x11.enable = true;
@@ -56,13 +59,13 @@
     libinput-gestures = {
       Unit = {
         Description = "Launch libinput-gestures";
-        Partof = [ "graphical-session.target" ];
+        Partof = ["graphical-session.target"];
       };
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.libinput-gestures}/bin/libinput-gestures";
       };
-      Install.WantedBy = [ "graphical-session.target" ];
+      Install.WantedBy = ["graphical-session.target"];
     };
   };
 }

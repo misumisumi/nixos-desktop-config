@@ -1,7 +1,5 @@
 # Fcitx5 (IME) conf
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   i18n = {
     inputMethod = {
       enabled = "fcitx5";
@@ -11,7 +9,7 @@
           libsForQt5.fcitx5-qt
           # fcitx5-mozc
           fcitx5-mozc-ext-neologd
-          (fcitx5-skk.override { useEmoji = true; })
+          (fcitx5-skk.override {useEmoji = true;})
           fcitx5-configtool
           fcitx5-nord
         ];

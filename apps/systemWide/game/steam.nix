@@ -1,7 +1,5 @@
 # This is "NixOS" options.
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   hardware.steam-hardware.enable = false;
   programs.steam = {
     enable = true;

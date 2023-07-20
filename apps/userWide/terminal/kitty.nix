@@ -1,30 +1,20 @@
-/*
-  Kitty conf
-*/
-{ pkgs, ... }:
-let
-  font = "FiraCode Nerd Font";
+# Kitty conf
+{pkgs, ...}: let
+  font = "PlemolJP Console NF";
   size = 12;
-in
-{
+in {
   programs = {
     kitty = {
       enable = true;
       font = {
-        package = (pkgs.nerdfonts.override {
-          # Nerdfont override
-          fonts = [
-            "FiraCode"
-            "Hack"
-          ];
-        });
+        package = pkgs.plemoljp-fonts;
         name = font;
         size = size;
       };
       settings = {
-        foreground = "#d8e1e6";
-        background = "#1f292e";
-        background_opacity = "0.85";
+        foreground = "#f8f8f2";
+        background = "#282a36";
+        background_opacity = "0.80";
         clear_all_shortcuts = "yes";
         enable_audio_bell = "no";
       };
@@ -61,4 +51,3 @@ in
     };
   };
 }
-

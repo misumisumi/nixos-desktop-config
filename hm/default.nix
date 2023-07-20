@@ -1,26 +1,41 @@
 # Home-manager configuration for general
-{ inputs, overlay, stateVersion, nixpkgs, nur, nixgl, home-manager, flakes, user, private-conf ? null, ... }: # Multipul arguments
-let
-  choiceSystem = x: if ( x == "dummy" ) then "aarch64-linux" else "x86_64-linux";
+{
+  inputs,
+  overlay,
+  stateVersion,
+  user,
+  ...
+}: let
+  choiceSystem = x:
+    if (x == "dummy")
+    then "aarch64-linux"
+    else "x86_64-linux";
 
-  settings = { hostname, user }:
-  let
+  settings = {
+    hostname,
+    user,
+  }: let
     system = choiceSystem hostname;
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
   in
-    home-manager.lib.hjomeManagerConfiguration {
+    inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit hostname user stateVersion; };
+      extraSpecialArgs = {inherit hostname user stateVersion;};
       modules = [
-        (overlay { inherit inputs nixpkgs; })
-        nur.nixosModules.nur
+        (overlay {inherit inputs;})
+        inputs.nur.nixosModules.nur
 
         ./hm.nix
         ./${hostname}
       ];
     };
-in
-{
-  arch = settings { hostname = "arch"; inherit user; };
-  general = settings { hostname = "general"; user = "general"; };
+in {
+  arch = settings {
+    hostname = "arch";
+    inherit user;
+  };
+  general = settings {
+    hostname = "general";
+    user = "general";
+  };
 }

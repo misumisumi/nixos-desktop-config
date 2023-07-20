@@ -1,9 +1,5 @@
-/*
-  Dunst (notification-daemons) conf
-*/
-{ pkgs, ... }:
-
-{
+# Dunst (notification-daemons) conf
+{pkgs, ...}: {
   services = {
     dunst = {
       enable = true;

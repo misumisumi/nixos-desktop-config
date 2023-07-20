@@ -38,24 +38,9 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    flake-utils,
-    home-manager,
-    lxd-nixos,
-    musnix,
-    nix-matlab,
-    nixgl,
-    nixpkgs,
-    nixpkgs-stable,
-    nur,
-    common-config,
-    nvimdots,
-    flakes,
-    private-config,
-  }: let
+  outputs = inputs @ {self, ...}: let
     user = "sumi";
-    stateVersion = "23.05"; # For Home Manager
+    stateVersion = "23.11"; # For Home Manager
 
     overlay = {
       nixpkgs,
@@ -64,18 +49,18 @@
     }: {
       nixpkgs.overlays =
         [
-          nur.overlay
-          nixgl.overlay
-          nix-matlab.overlay
-          flakes.overlays.default
-          private-config.overlays.default
+          inputs.nur.overlay
+          inputs.nixgl.overlay
+          inputs.nix-matlab.overlay
+          inputs.flakes.overlays.default
+          inputs.private-config.overlays.default
         ]
         ++ (import ./patches {inherit pkgs-stable;});
     };
   in {
     nixosConfigurations = (
       import ./machines {
-        inherit (nixpkgs) lib;
+        inherit (inputs.nixpkgs) lib;
         inherit inputs overlay stateVersion user;
       }
     );

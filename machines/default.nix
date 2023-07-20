@@ -5,9 +5,7 @@
   user,
   isGeneral ? false,
   ...
-}:
-# Multipul arguments
-let
+}: let
   lib = inputs.nixpkgs.lib;
   choiceSystem = x:
     if (x == "aegis")

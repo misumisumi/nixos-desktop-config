@@ -1,16 +1,22 @@
 # Streaming/Recording app
-{ lib, hostname, pkgs, ... }:
-
+{
+  lib,
+  hostname,
+  pkgs,
+  ...
+}:
 with lib; {
   programs = {
     obs-studio = {
       enable = true;
-      plugins = with pkgs; with pkgs.obs-studio-plugins; [
-        looking-glass-obs
-        obs-pipewire-audio-capture
-        droidcam-obs-plugin
-      ]
-      ++ optional (hostname != "general") obs-ndi;
+      plugins = with pkgs;
+      with pkgs.obs-studio-plugins;
+        [
+          looking-glass-obs
+          obs-pipewire-audio-capture
+          droidcam-obs-plugin
+        ]
+        ++ optional (hostname != "general") obs-ndi;
     };
   };
 }

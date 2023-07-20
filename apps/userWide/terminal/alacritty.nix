@@ -1,14 +1,10 @@
-/*
-  Alacritty conf
-*/
-{ pkgs, ... }:
+# Alacritty conf
 let
   font = "FiraCode Nerd Font";
   size = 12.0;
   # font = "Ricty Diminished with Fira Code";
   # size = 14.0
-in
-{
+in {
   programs = {
     alacritty = {
       enable = true;
@@ -61,4 +57,3 @@ in
     };
   };
 }
-

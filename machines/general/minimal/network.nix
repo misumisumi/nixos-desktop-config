@@ -1,6 +1,9 @@
-{ hostname, lib, pkgs, ... }:
-
 {
+  hostname,
+  lib,
+  pkgs,
+  ...
+}: {
   networking = {
     hostName = "${hostname}";
 

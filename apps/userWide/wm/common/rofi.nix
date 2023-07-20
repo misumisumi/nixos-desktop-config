@@ -1,8 +1,7 @@
 /*
-  Rofi (App launcher) conf
+Rofi (App launcher) conf
 */
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   iggy_conf = ''
     @theme "iggy"
     button-iggy1, button-iggy2 {
@@ -51,14 +50,13 @@ let
         size: 0.8em;
     }
   '';
-in
-{
+in {
   xdg = {
     configFile = {
       "rofi/my_theme.rasi".text = adapta;
     };
   };
-  home.packages = with pkgs; [ rofi-power-menu ];
+  home.packages = with pkgs; [rofi-power-menu];
 
   programs = {
     rofi = {

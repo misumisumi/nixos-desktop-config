@@ -49,14 +49,8 @@
         ];
       })
 
-      (plemoljp-fonts.override {
-        fonts = [
-          "plemoljp-nf"
-        ];
-      })
-      (udev-gothic-font.override {
-        withNerd = true;
-      })
+      plemoljp-fonts
+      udev-gothic-font
 
       papirus-icon-theme # Icons
     ];

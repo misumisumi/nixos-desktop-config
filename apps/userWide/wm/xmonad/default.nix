@@ -1,0 +1,3 @@
+[
+  ./xsession.nix
+]
