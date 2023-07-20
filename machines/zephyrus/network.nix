@@ -1,8 +1,4 @@
-{
-  lib,
-  hostname,
-  ...
-}: {
+{hostname, ...}: {
   imports = [
     ../common/network.nix
   ];
@@ -10,9 +6,16 @@
   services = {
     hostapd = {
       enable = false;
-      ssid = "zephyrus";
-      interface = "wlp2s0";
-      wpaPassphrase = "FsP65sEZdvxMjZL";
+      radios = {
+        wlp2s0 = {
+          countryCode = "JP";
+          band = "2g";
+          networks.wlp2s0 = {
+            ssid = "zephyrus";
+            authentication.saePasswordsFile = [{password = "FsP65sEZdvxMjZL";}]; # Use saePasswordsFile if possible.
+          };
+        };
+      };
     };
     nscd = {
       enable = true;
