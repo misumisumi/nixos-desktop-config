@@ -28,7 +28,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = with pkgs; [pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd];
+          packages = with pkgs; [OVMFFull.fd];
         };
         swtpm.enable = true;
         # verbatimConfig = ''
