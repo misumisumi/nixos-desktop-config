@@ -40,8 +40,7 @@ let
             })
             inputs.nur.nixosModules.nur
             inputs.musnix.nixosModules.musnix
-            inputs.common-config.nixosModules.for-nixos
-            # ../modules
+            ../modules
 
             (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
 
