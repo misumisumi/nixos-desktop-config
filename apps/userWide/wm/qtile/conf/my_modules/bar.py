@@ -128,6 +128,7 @@ def make_bar(is_tray=False):
         wttr,
         clock,
         _rignt_corner(**_colorset1),
+        widget.Spacer(),
     ]
 
     if not GLOBAL.under_fhd:

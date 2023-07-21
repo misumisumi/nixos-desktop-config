@@ -19,7 +19,7 @@ _rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
 # _rule_paper = {wm_class:"org.pwmt.zathura"}
 _rule_paper = []
 
-_rule_analyze = [{"title": "WaveSurfer 1.8.8p5"}, {"wm_class": "thunar"}]
+_rule_analyze = [{"title": "WaveSurfer 1.8.8p5"}, {"wm_class": "thunar"}, {"wm_class": "nemo"}]
 
 _rule_full = [
     {"wm_class": "Steam"},
