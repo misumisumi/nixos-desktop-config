@@ -12,7 +12,6 @@ in {
     configFile = {
       "libskk/rules/user-config".source = ./skk-config/libskk;
       "fcitx5/conf/skk.conf".source = ./skk-config/fcitx5/skk.conf;
-      "fcitx5/profile".source = ./skk-config/fcitx5/profile;
     };
   };
   home.file = {
