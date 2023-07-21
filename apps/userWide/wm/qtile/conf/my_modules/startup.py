@@ -17,19 +17,17 @@ def check_screen_saver():
 
 # 擬似的に各スクリーンにグループが割り当てられるようにするための初期化
 def init_screen_and_group():
-    qtile.focus_screen(0)
-    qtile.current_screen.set_group(qtile.groups[0])
-    if not GLOBAL.laptop:
-        qtile.focus_screen(1)
-        qtile.current_screen.set_group(qtile.groups[7])
-        qtile.focus_screen(2)
-        qtile.current_screen.set_group(qtile.groups[14])
+    count = 0
+    for i, _ in enumerate(qtile.screens):
+        qtile.focus_screen(i)
+        qtile.current_screen.set_group(qtile.groups[count])
+        count += 7
     qtile.focus_screen(0)
 
 
 @hook.subscribe.startup_once
 def autostart():
-    if GLOBAL.laptop:
+    if len(qtile.screens) == 1:
         subprocess.run(
             "feh --bg-fill {} --bg-fill {}".format(GLOBAL.wallpapers[0], GLOBAL.wallpapers[1]),
             shell=True,
@@ -54,7 +52,3 @@ def autostart():
 def afterstart():
     subprocess.run("copyq &", shell=True)
     subprocess.run("kdeconnect-indicator &", shell=True)
-    # subprocess.run("xmodmap -e 'keycode 255=space' -e 'keycode 65=Shift_L'", shell=True)
-    subprocess.run("systemctl --user restart xcape.service", shell=True)
-    # if GLOBAL.is_display_tablet:
-    #     subprocess.run("xp-pen-driver-indicator", shell=True)

@@ -11,7 +11,6 @@ from my_modules.startup import *
 
 from libqtile.log_utils import logger
 
-
 dgroups_key_binder = GLOBAL.dgroups_key_binder
 dgroups_app_rules = GLOBAL.dgroups_app_rules
 follow_mouse_focus = GLOBAL.follow_mouse_focus

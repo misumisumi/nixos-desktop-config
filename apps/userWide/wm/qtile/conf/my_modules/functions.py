@@ -14,10 +14,6 @@ from libqtile.log_utils import logger
 
 PINP_WINDOW = None
 FLOATING_WINDOW_IDX = 0
-monitor_pos = "delete"
-if not GLOBAL.laptop:
-    monitor_pos = "right-of"
-
 
 # PinPの生成時とWS切替時にフォーカスを当てないようにする
 def keep_focus_window_in_tiling(window=None):
@@ -355,27 +351,24 @@ def to_from_display_tablet(qtile):
 
 @lazy.function
 def attach_screen(qtile, pos):
-    if GLOBAL.laptop:
-        if pos == "delete":
-            subprocess.run("xrandr --output HDMI-A-0 --off", shell=True)
-            subprocess.run(
-                "feh --bg-fill {}".format(GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
-                shell=True,
-            )
-        else:
-            subprocess.run(
-                "xrandr --output eDP --auto --output HDMI-A-0 --auto --{} eDP".format(pos),
-                shell=True,
-            )
-            subprocess.run(
-                "feh --bg-fill {} --bg-fill {}".format(
-                    GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg"),
-                    GLOBAL.home.joinpath("Pictures", "wallpapers", "main02.jpg"),
-                ),
-                shell=True,
-            )
-        global monitor_pos
-        monitor_pos = "{}".format(pos)
+    if pos == "delete":
+        subprocess.run("xrandr --output HDMI-A-0 --off", shell=True)
+        subprocess.run(
+            "feh --bg-fill {}".format(GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
+            shell=True,
+        )
+    else:
+        subprocess.run(
+            "xrandr --output eDP --auto --output HDMI-A-0 --auto --{} eDP".format(pos),
+            shell=True,
+        )
+        subprocess.run(
+            "feh --bg-fill {} --bg-fill {}".format(
+                GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg"),
+                GLOBAL.home.joinpath("Pictures", "wallpapers", "main02.jpg"),
+            ),
+            shell=True,
+        )
 
 
 @lazy.function

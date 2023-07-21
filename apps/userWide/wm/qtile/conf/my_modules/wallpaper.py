@@ -17,7 +17,7 @@ MONITOR2 = 0
 
 @hook.subscribe.setgroup
 def change_wallpaper():
-    if not (GLOBAL.laptop or GLOBAL.vm):
+    if len(qtile.screens) == 3:
         global MONITOR0
         global MONITOR1
         global MONITOR2

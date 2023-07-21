@@ -3,6 +3,7 @@ import os
 import dataclasses
 from pathlib import Path
 
+from libqtile import qtile
 from libqtile.log_utils import logger
 
 

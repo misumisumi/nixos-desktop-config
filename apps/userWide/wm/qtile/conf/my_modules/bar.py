@@ -1,11 +1,13 @@
 """widgets for qtile bar"""
 from pathlib import Path
-from libqtile import widget
+from libqtile import qtile, widget
 from xdg import IconTheme
 
 from my_modules.global_config import GLOBAL
 
 from libqtile.log_utils import logger
+
+
 
 _colorset1 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["cyan"]}
 _colorset2 = {"background": GLOBAL.c_normal["cyan"], "foreground": GLOBAL.c_normal["BGbase"]}
@@ -15,6 +17,7 @@ _colorset5 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_nor
 _colorset6 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["white"]}
 _colorset7 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_normal["cyan"]}
 _colorset8 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["magenta"]}
+_colorset9 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_normal["blue"]}
 
 _font_conf = {"font": GLOBAL.font, "fontsize": GLOBAL.font_size}
 
@@ -127,25 +130,26 @@ def make_bar(is_tray=False):
         _rignt_corner(**_colorset1),
     ]
 
-    top_widgets += [
-        _separator(),
-        _left_corner(**_colorset4),
-        widget.TaskList(
-            border=GLOBAL.c_normal["BGbase"],
-            theme_mode="preferred",
-            theme_path="Papirus-Dark",
-            txt_floating="󱂬",
-            txt_minimized="",
-            txt_maximized="",
-            icon_size=GLOBAL.icon_size,
-            borderwidth=GLOBAL.border,
-            max_title_width=120,
-            **_colorset3,
-            **_font_conf,
-        ),
-        _rignt_corner(**_colorset4),
-        _separator(),
-    ]
+    if not GLOBAL.under_fhd:
+        top_widgets += [
+            _separator(),
+            _left_corner(**_colorset4),
+            widget.TaskList(
+                border=GLOBAL.c_normal["BGbase"],
+                theme_mode="preferred",
+                theme_path="Papirus-Dark",
+                txt_floating="󱂬",
+                txt_minimized="",
+                txt_maximized="",
+                icon_size=GLOBAL.icon_size,
+                borderwidth=GLOBAL.border,
+                max_title_width=120,
+                **_colorset3,
+                **_font_conf,
+            ),
+            _rignt_corner(**_colorset4),
+            _separator(),
+        ]
 
     if not (GLOBAL.under_fhd or GLOBAL.vm):
         top_widgets += [
@@ -182,7 +186,23 @@ def make_bar(is_tray=False):
             _rignt_corner(**_colorset2),
             df,
             _rignt_corner(**_colorset7),
-            widget.Spacer(),
+            _separator(),
+            _left_corner(**_colorset9),
+            widget.TaskList(
+                border=GLOBAL.c_normal["BGbase"],
+                theme_mode="preferred",
+                theme_path="Papirus-Dark",
+                txt_floating="󱂬",
+                txt_minimized="",
+                txt_maximized="",
+                icon_size=GLOBAL.icon_size,
+                borderwidth=GLOBAL.border,
+                max_title_width=120,
+                **_colorset3,
+                **_font_conf,
+            ),
+            _rignt_corner(**_colorset9),
+            _separator(),
             _left_corner(**_colorset7),
             net,
             _rignt_corner(**_colorset1),
