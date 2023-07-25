@@ -5,8 +5,9 @@
   ...
 }: {
   programs.ssh.useMyDots.enable = true;
-  programs.neovim.useMyDots.enable = true;
-  programs.editorconfig.useMyDots.enable = true;
+  programs.neovim.activateNvimDots.enable = true;
+  # programs.neovim.useMyDots.enable = true;
+  # programs.editorconfig.useMyDots.enable = true;
 
   imports =
     import ../../apps/userWide {
