@@ -119,6 +119,7 @@ def make_bar(is_tray=False):
             _rignt_corner(**_colorset2),
             df,
             _rignt_corner(**_colorset1),
+            # widget.Spacer(),
         ]
     top_widgets += [
         _separator(),
@@ -128,8 +129,12 @@ def make_bar(is_tray=False):
         wttr,
         clock,
         _rignt_corner(**_colorset1),
-        widget.Spacer(),
+        # widget.Spacer(),
     ]
+    if GLOBAL.under_fhd:
+        top_widgets += [
+            widget.Spacer(),
+        ]
 
     if not GLOBAL.under_fhd:
         top_widgets += [
@@ -150,10 +155,6 @@ def make_bar(is_tray=False):
             ),
             _rignt_corner(**_colorset4),
             _separator(),
-        ]
-
-    if not (GLOBAL.under_fhd or GLOBAL.vm):
-        top_widgets += [
             _left_corner(**_colorset1),
             net,
             _rignt_corner(**_colorset1),
