@@ -378,16 +378,16 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1690280702,
-        "narHash": "sha256-hPz93qP9WkBTYD8peO6HzojJnfrsH+hUIn6MjsgMXOk=",
+        "lastModified": 1690525466,
+        "narHash": "sha256-q/8kPvW3GW7PURASoMCDbarkdZFAwboHtalU/lvYyDo=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "d3841310ac9c3b2b585002a7cbf341b5d9e558c2",
+        "rev": "d58cafffe746a7d05972f3c3703a4905beaa313f",
         "type": "github"
       },
       "original": {
         "owner": "misumisumi",
-        "ref": "nixos-support",
+        "ref": "nixos-support-using-mason",
         "repo": "nvimdots",
         "type": "github"
       }

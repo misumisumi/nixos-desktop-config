@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   boot = {
     tmp = {
@@ -16,6 +15,7 @@
       "snd-aloop"
     ];
   };
+  programs.nix-ld.enable = true;
   services = {
     asusd = {
       enable = true;

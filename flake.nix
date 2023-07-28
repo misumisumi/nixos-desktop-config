@@ -26,7 +26,8 @@
     };
 
     common-config.url = "github:misumisumi/nixos-common-config";
-    nvimdots.url = "github:misumisumi/nvimdots/nixos-support";
+    # nvimdots.url = "github:misumisumi/nvimdots/nixos-support";
+    nvimdots.url = "github:misumisumi/nvimdots/nixos-support-using-mason";
     flakes = {
       url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,38 +39,40 @@
     };
   };
 
-  outputs = inputs @ {self, ...}: let
-    user = "sumi";
-    stateVersion = "23.11"; # For Home Manager
+  outputs = inputs @ { self, ... }:
+    let
+      user = "sumi";
+      stateVersion = "23.11"; # For Home Manager
 
-    overlay = {
-      nixpkgs,
-      pkgs-stable,
-      ...
-    }: {
-      nixpkgs.overlays =
-        [
-          inputs.nur.overlay
-          inputs.nixgl.overlay
-          inputs.nix-matlab.overlay
-          inputs.flakes.overlays.default
-          inputs.private-config.overlays.default
-        ]
-        ++ (import ./patches {inherit pkgs-stable;});
+      overlay =
+        { nixpkgs
+        , pkgs-stable
+        , ...
+        }: {
+          nixpkgs.overlays =
+            [
+              inputs.nur.overlay
+              inputs.nixgl.overlay
+              inputs.nix-matlab.overlay
+              inputs.flakes.overlays.default
+              inputs.private-config.overlays.default
+            ]
+            ++ (import ./patches { inherit pkgs-stable; });
+        };
+    in
+    {
+      nixosConfigurations = (
+        import ./machines {
+          inherit (inputs.nixpkgs) lib;
+          inherit inputs overlay stateVersion user;
+        }
+      );
+      # homeConfigurations = (
+      #   import ./hm {
+      #     inherit (nixpkgs) lib;
+      #     inherit inputs overlay stateVersion user;
+      #     inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvimdots private-config;
+      #   }
+      # );
     };
-  in {
-    nixosConfigurations = (
-      import ./machines {
-        inherit (inputs.nixpkgs) lib;
-        inherit inputs overlay stateVersion user;
-      }
-    );
-    # homeConfigurations = (
-    #   import ./hm {
-    #     inherit (nixpkgs) lib;
-    #     inherit inputs overlay stateVersion user;
-    #     inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvimdots private-config;
-    #   }
-    # );
-  };
 }

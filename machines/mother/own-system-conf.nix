@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  user,
-  ...
+{ config
+, pkgs
+, user
+, ...
 }: {
   boot = {
     tmp = {
@@ -18,14 +17,15 @@
       "snd-aloop"
     ];
   };
+  programs.nix-ld.enable = true;
   security.sudo = {
     extraRules = [
       {
-        users = ["${user}"];
+        users = [ "${user}" ];
         commands = [
           {
             command = "${pkgs.xp-pen-driver}/bin/xp-pen-driver";
-            options = ["SETENV" "NOPASSWD"];
+            options = [ "SETENV" "NOPASSWD" ];
           }
         ];
       }
