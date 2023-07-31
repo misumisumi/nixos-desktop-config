@@ -4,7 +4,7 @@
 , ...
 }: {
   programs.ssh.useMyDots.enable = true;
-  programs.neovim.activateNvimDots = {
+  programs.neovim.nvimdots = {
     enable = true;
     setBuildEnv = true;
     withBuildTools = true;
