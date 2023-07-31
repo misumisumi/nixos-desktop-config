@@ -1,9 +1,8 @@
 # From https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ lib
+, pkgs
+, config
+, ...
 }:
 with lib;
 with types; let
@@ -14,7 +13,7 @@ with types; let
       enable = mkEnableOption "Enable hook";
       preHook = mkOption {
         type = attrsOf str;
-        default = {};
+        default = { };
         example = {
           windows = ''
             echo hello
@@ -26,7 +25,7 @@ with types; let
       };
       postHook = mkOption {
         type = attrsOf str;
-        default = {};
+        default = { };
         example = {
           windows = ''
             echo hello
@@ -38,11 +37,12 @@ with types; let
       };
     };
   };
-in {
+in
+{
   options.virtualisation.vfio = {
     enable = mkEnableOption "VFIO Configuration";
     IOMMUType = mkOption {
-      type = types.enum ["intel" "amd" "both"];
+      type = types.enum [ "intel" "amd" "both" ];
       example = "intel";
       description = "Type of the IOMMU used";
     };
@@ -54,14 +54,14 @@ in {
     };
     devices = mkOption {
       type = types.listOf (types.strMatching "[0-9a-f]{4}:[0-9a-f]{4}");
-      default = [];
-      example = ["10de:1b80" "10de:10f0"];
+      default = [ ];
+      example = [ "10de:1b80" "10de:10f0" ];
       description = "PCI IDs of devices to bind to vfio-pci";
     };
     deviceDomains = mkOption {
       type = types.listOf (types.strMatching "[0-9]{4}:[0-9]{2}:[0-9]{2}.[0-9]");
-      default = [];
-      example = ["0000:01:00.0" "0000:01:00.1"];
+      default = [ ];
+      example = [ "0000:01:00.0" "0000:01:00.1" ];
       description = "PCI Domains of devices to bind to vfio-pci";
     };
     disableEFIfb = mkOption {
@@ -93,7 +93,7 @@ in {
     };
     hook = mkOption {
       type = hookModules;
-      default = {};
+      default = { };
       description = "Options to configure libvirt hook.";
     };
   };
@@ -102,6 +102,7 @@ in {
       SUBSYSTEM=="vfio", OWNER="root", GROUP="kvm"
     '';
 
+    boot.extraModprobeConfig = optionalString (cfg.devices != [ ]) ("options vfio-pci ids=" + (concatStringsSep "," cfg.devices));
     boot.kernelParams =
       (
         if cfg.IOMMUType == "both"
@@ -115,10 +116,8 @@ in {
           "intel_iommu=on"
           "intel_iommu=igfx_off"
         ]
-        else ["amd_iommu=on"]
+        else [ "amd_iommu=on" ]
       )
-      ++ (optional (cfg.devices != [])
-        ("vfio-pci.ids=" + builtins.concatStringsSep "," cfg.devices))
       ++ (optionals cfg.applyACSpatch [
         "pcie_acs_override=downstream,multifunction"
         "pci=nomsi"
@@ -128,17 +127,16 @@ in {
         "kvm.ignore_msrs=1"
         "kvm.report_ignored_msrs=0"
       ])
-      ++ ["iommu=pt"];
+      ++ [ "iommu=pt" ];
 
     # boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ]
-    boot.kernelModules =
-      []
-      ++ (optionals (cfg.deviceDomains == null) ["vfio_pci" "vfio" "vfio_iommu_type1"])
-      ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") ["kvm_intel nested=1" "kvm_amd nested=1"])
+    boot.kernelModules = [ ]
+      ++ (optionals (cfg.deviceDomains == null) [ "vfio_pci" "vfio" "vfio_iommu_type1" ])
+      ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel nested=1" "kvm_amd nested=1" ])
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel nested=1")
       ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd nested=1");
 
-    boot.initrd = optionalAttrs (cfg.deviceDomains != []) {
+    boot.initrd = optionalAttrs (cfg.deviceDomains != [ ]) {
       preDeviceCommands = ''
         DEVS="${concatMapStrings (x: x + " ") cfg.deviceDomains}"
         if [ -z "$(ls -A /sys/class/iommu)" ]; then
@@ -149,18 +147,10 @@ in {
         done
       '';
     };
-    systemd.services = optionalAttrs (cfg.deviceDomains != []) {
+    systemd.services = optionalAttrs (cfg.deviceDomains != [ ]) {
       vfio-load = {
         description = "Insert vfio-pci driver";
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = "/run/current-system/sw/bin/modprobe -i vfio-pci";
-        };
-      };
-      nvidia-driver-load = {
-        description = "Insert vfio-pci driver";
-        wantedBy = ["multi-user.target"];
+        wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
           ExecStart = "/run/current-system/sw/bin/modprobe -i vfio-pci";
@@ -170,7 +160,7 @@ in {
     # boot.initrd.kernelModules =
     #   [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
     boot.blacklistedKernelModules =
-      optionals cfg.blacklistNvidia ["nvidia" "nouveau"];
+      optionals cfg.blacklistNvidia [ "nvidia" "nouveau" ];
 
     boot.kernelPatches = optionals cfg.applyACSpatch [
       {
@@ -200,7 +190,7 @@ in {
     '';
     environment.etc =
       mkIf cfg.hook.enable
-      ((attrsets.mapAttrs'
+        ((attrsets.mapAttrs'
           (vm: value:
             attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/prepare/begin/10-pre-hook.sh") {
               text = value;
