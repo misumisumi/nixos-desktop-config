@@ -27,7 +27,7 @@
 
     common-config.url = "github:misumisumi/nixos-common-config";
     # nvimdots.url = "github:misumisumi/nvimdots/nixos-support";
-    nvimdots.url = "github:misumisumi/nvimdots/nixos-support-using-mason";
+    nvimdots.url = "github:misumisumi/nvimdots/my-config";
     flakes = {
       url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
