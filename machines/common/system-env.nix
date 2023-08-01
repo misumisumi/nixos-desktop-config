@@ -1,5 +1,5 @@
 # For
-{pkgs, ...}: {
+{ pkgs, ... }: {
   time.timeZone = "Asia/Tokyo"; # Time zone and internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -20,19 +20,19 @@
   };
 
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig = {
       defaultFonts = {
-        serif = ["Source Han Serif"];
-        sansSerif = ["Source Han Sans"];
-        monospace = ["Source Han Mono"];
+        serif = [ "Source Han Serif" ];
+        sansSerif = [ "Source Han Sans" ];
+        monospace = [ "Source Han Mono" ];
         # serif = [ "Noto Serif CJK JP" ];
         # sansSerif = [ "Noto Sans CJK JP" ];
         # monospace = [ "Noto Sans Mono CJK JP" ];
-        emoji = ["Noto Color Emoji"];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
-    fonts = with pkgs; [
+    packages = with pkgs; [
       noto-fonts-emoji
       # noto-fonts # Normal usage
       # noto-fonts-cjk-sans
@@ -66,6 +66,7 @@
       VISUAL = "nvim";
     };
 
-    systemPackages = import ../../apps/systemWide/pkgs {inherit pkgs;};
+    systemPackages = import ../../apps/systemWide/pkgs { inherit pkgs; };
   };
 }
+
