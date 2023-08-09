@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../apps/systemWide/virtualisation/libvirt
     ../../apps/systemWide/virtualisation/lxd
     ../../apps/systemWide/virtualisation/podman
     ../../apps/systemWide/virtualisation/singularity
@@ -9,7 +10,7 @@
       enable = true;
       enableNestedVirtualization = true;
       IOMMUType = "amd";
-      devices = [];
+      devices = [ ];
       blacklistNvidia = false;
       disableEFIfb = false;
       ignoreMSRs = true;

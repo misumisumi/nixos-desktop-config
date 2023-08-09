@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   boot = {
     tmp = {
       useTmpfs = true;
@@ -13,6 +13,7 @@
       "snd-aloop"
     ];
   };
+  programs.nix-ld.enable = true;
   nix = {
     settings = {
       cores = 4;
@@ -23,3 +24,4 @@
     '';
   };
 }
+

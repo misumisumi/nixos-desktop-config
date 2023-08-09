@@ -5,8 +5,20 @@
   ...
 }: {
   programs.ssh.useMyDots.enable = true;
-  programs.neovim.useMyDots.enable = true;
-  programs.editorconfig.useMyDots.enable = true;
+  programs.neovim.nvimdots = {
+    enable = true;
+    setBuildEnv = true;
+    withBuildTools = true;
+    withDotNET = true;
+    withGo = true;
+    withHaskell = true;
+    withJava = true;
+    withRust = true;
+    extraDependentPackages = with pkgs; [icu];
+  };
+  programs.neovim.extraPackages = with pkgs; [
+    deno
+  ];
 
   imports =
     import ../../apps/userWide {
