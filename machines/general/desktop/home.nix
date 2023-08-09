@@ -1,18 +1,30 @@
-{
-  lib,
-  hostname,
-  pkgs,
-  wm,
-  ...
+{ lib
+, hostname
+, pkgs
+, wm
+, ...
 }:
 with lib; {
-  programs.neovim.useMyDots.enable = true;
-  programs.editorconfig.useMyDots.enable = true;
+  programs.neovim.nvimdots = {
+    enable = true;
+    setBuildEnv = true;
+    withBuildTools = true;
+    withDotNET = true;
+    withGo = true;
+    withHaskell = true;
+    withJava = true;
+    withRust = true;
+    extraDependentPackages = with pkgs; [ icu ];
+  };
+  programs.neovim.extraPackages = with pkgs; [
+    deno
+  ];
   imports =
-    import ../../../apps/userWide {
-      inherit lib hostname;
-      isMidium = true;
-    }
+    import ../../../apps/userWide
+      {
+        inherit lib hostname;
+        isMidium = true;
+      }
     ++ (import ../../../apps/userWide/wm/${wm});
 
   home = {
@@ -24,7 +36,7 @@ with lib; {
         inherit lib pkgs;
         isMidium = true;
       })
-      ++ (with pkgs; [pacman arch-install-scripts vscode]);
+      ++ (with pkgs; [ pacman arch-install-scripts vscode ]);
   };
 
   xresources = {
