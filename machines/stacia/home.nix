@@ -1,8 +1,7 @@
-{
-  lib,
-  hostname,
-  pkgs,
-  ...
+{ lib
+, hostname
+, pkgs
+, ...
 }: {
   programs.ssh.useMyDots.enable = true;
   programs.neovim.nvimdots = {
@@ -13,18 +12,18 @@
     withGo = true;
     withHaskell = true;
     withJava = true;
-    withRust = true;
-    extraDependentPackages = with pkgs; [icu];
+    extraDependentPackages = with pkgs; [ icu ];
   };
   programs.neovim.extraPackages = with pkgs; [
     deno
   ];
 
   imports =
-    import ../../apps/userWide {
-      inherit lib hostname;
-      isLarge = true;
-    }
+    import ../../apps/userWide
+      {
+        inherit lib hostname;
+        isLarge = true;
+      }
     ++ (import ../../apps/userWide/wm/qtile);
 
   home = {
@@ -37,10 +36,11 @@
         inherit lib pkgs;
         isFull = true;
       })
-      ++ (with pkgs; [prime-run bt-dualboot]);
+      ++ (with pkgs; [ prime-run bt-dualboot ]);
   };
 
   xresources = {
     extraConfig = "Xft.dpi:100";
   };
 }
+

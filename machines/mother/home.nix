@@ -12,7 +12,6 @@
     withGo = true;
     withHaskell = true;
     withJava = true;
-    withRust = true;
     extraDependentPackages = with pkgs; [ icu ];
   };
   programs.neovim.extraPackages = with pkgs; [
