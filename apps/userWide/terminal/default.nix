@@ -1,4 +1,3 @@
 [
   ./kitty.nix
-  ./wezterm.nix
 ]
