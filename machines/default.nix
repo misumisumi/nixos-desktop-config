@@ -57,7 +57,9 @@ let
                   (import hostConf)
                   ../modules/nixosWallpaper.nix
                   inputs.flakes.nixosModules.for-hm
-                  inputs.common-config.nixosModules.for-hm
+                  inputs.common-config.nixosModules.core
+                  inputs.common-config.nixosModules.extra
+                  # inputs.common-config.nixosModules.tmux
                   inputs.nvimdots.nixosModules.nvimdots
                 ]
                 ++ optionals (rootDir != "general") [ inputs.private-config.nixosModules.for-hm ];

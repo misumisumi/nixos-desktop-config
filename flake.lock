@@ -2,11 +2,11 @@
   "nodes": {
     "common-config": {
       "locked": {
-        "lastModified": 1691546938,
-        "narHash": "sha256-qxh1sf/xZ64Obv+Hlg+gbSR2FBUELucmEvaFJmQ0xbQ=",
+        "lastModified": 1692515726,
+        "narHash": "sha256-KcKK8US1ryKADZBTfFxgC8lQIW0CkPHb6XNPkbZuN8k=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "94acac46a6b33d59e720c7aaa039e2e0d7a8f128",
+        "rev": "3003d2cae0599a07c850c58bcdc2de349df6ed0d",
         "type": "github"
       },
       "original": {
@@ -378,11 +378,11 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1691732903,
-        "narHash": "sha256-AAM7Gei6D9vok4cWrjPTsZDhpb8QsJePSb8BENsx/bc=",
+        "lastModified": 1692437804,
+        "narHash": "sha256-Qz47zj/NbyPIwHbxvLV3AABUvQXRXxKNav8KFylTxWw=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "0745d7740bb41182629d7cd5fab5d319dc3ca0fb",
+        "rev": "fc033553b9d4863e158ffe7f0f030b5c9b6bda04",
         "type": "github"
       },
       "original": {
