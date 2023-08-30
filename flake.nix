@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    flake-utils.url = "github:numtide/flake-utils";
     lxd-nixos.url = "git+https://codeberg.org/adamcstephens/lxd-nixos";
     nur.url = "github:nix-community/NUR";
     musnix = {
@@ -14,7 +13,6 @@
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
@@ -26,8 +24,7 @@
     };
 
     common-config.url = "github:misumisumi/nixos-common-config";
-    # nvimdots.url = "github:misumisumi/nvimdots/nixos-support";
-    nvimdots.url = "github:misumisumi/nvimdots/my-config";
+    nvimdots.url = "github:misumisumi/nvimdots";
     flakes = {
       url = "github:misumisumi/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +32,6 @@
     private-config = {
       url = "git+ssh://git@github.com/misumisumi/nixos-private-config.git";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -45,10 +41,14 @@
       stateVersion = "23.11"; # For Home Manager
 
       overlay =
-        { nixpkgs
-        , pkgs-stable
-        , ...
-        }: {
+        { system }:
+        let
+          nixpkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+            config = { allowUnfree = true; };
+          };
+        in
+        {
           nixpkgs.overlays =
             [
               inputs.nur.overlay
@@ -57,7 +57,7 @@
               inputs.flakes.overlays.default
               inputs.private-config.overlays.default
             ]
-            ++ (import ./patches { inherit pkgs-stable; });
+            ++ (import ./patches { inherit nixpkgs-stable; });
         };
     in
     {
