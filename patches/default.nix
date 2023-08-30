@@ -1,4 +1,4 @@
-{pkgs-stable, ...}: [
+{ nixpkgs-stable, ... }: [
   # override: default.nixに記載の属性をオーバライドする
   # overrideAttrs: default.nixに記載されていない属性も追加できる
   # Package patch template
@@ -37,14 +37,85 @@
   # })
   # Patch from https://github.com/NixOS/nixpkgs/pull/211600
   (final: prev: {
-    qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
-      patches =
-        old.patches
-        ++ [
-          ./fix-xcbq.patch
-        ];
-    });
-    inherit (pkgs-stable) edk2 OVMF OVMFFull;
+    pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+      (pfinal: pprev: {
+        qtile = pprev.qtile.overridePythonAttrs (old:
+          let
+            _xcffib =
+              let
+                pname = "xcffib";
+                version = "1.4.0";
+              in
+              pprev.${pname}.overridePythonAttrs (old: {
+                inherit pname version;
+                patches = [ ];
+                src = prev.fetchPypi {
+                  inherit pname version;
+                  hash = "sha256-uXfADf7TjHWuGIq8EkLvmDwCJSqGd6gMSwKVMz9StiQ=";
+                };
+              });
+            _pywlroots =
+              let
+                pname = "pywlroots";
+                version = "0.16.4";
+              in
+              pprev.${pname}.overridePythonAttrs (old: {
+                inherit pname version;
+                buildInputs = with prev; [ libinput libxkbcommon pixman xorg.libxcb udev wayland wlroots_0_16 ];
+                src = prev.fetchPypi {
+                  inherit pname version;
+                  hash = "sha256-+1PILk14XoA/dINfoOQeeMSGBrfYX3pLA6eNdwtJkZE=";
+                };
+              });
+          in
+          {
+            version = "2023.08.23"; # qtile
+            src = prev.fetchFromGitHub {
+              owner = "qtile";
+              repo = "qtile";
+              rev = ''9b2aff3b3d4607f3e782afda2ec2a061d7eba9f1''; # qtile
+              hash = ''sha256-20MO9eo2itF4zGLe9efEtE6c5UtAyQWKJBgwOSWBqAM=''; # qtile
+            };
+            prePatch = ''
+              substituteInPlace libqtile/backend/wayland/cffi/build.py \
+                --replace /usr/include/pixman-1 ${prev.pixman.outPath}/include \
+                --replace /usr/include/libdrm ${prev.libdrm.dev.outPath}/include/libdrm
+            '';
+            buildInputs = with prev; [
+              libinput
+              wayland
+              wlroots_0_16
+              libxkbcommon
+              libdrm
+            ];
+            propagatedBuildInputs = with prev; with pprev; [
+              _xcffib
+              (cairocffi.override { withXcffib = true; xcffib = _xcffib; })
+              python-dateutil
+              dbus-python
+              dbus-next
+              mpd2
+              psutil
+              pyxdg
+              pygobject3
+              pywayland
+              _pywlroots
+              xkbcommon
+              pulseaudio
+            ];
+            patches =
+              old.patches
+                ++ [
+                ./fix-xcbq.patch
+              ];
+          }
+        );
+      }
+      )
+    ];
+  })
+  (final: prev: {
+    inherit (nixpkgs-stable) nvfetcher;
   })
   (final: prev: {
     haskellPackages = prev.haskellPackages.override {
@@ -69,54 +140,56 @@
       };
   })
 
-  (final: prev: let
-    dataDir = "var/lib/xppend1v2";
-  in {
-    xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
-      desktopItems = [
-        (prev.makeDesktopItem {
+  (final: prev:
+    let
+      dataDir = "var/lib/xppend1v2";
+    in
+    {
+      xp-pen-driver = prev.xp-pen-deco-01-v2-driver.overrideAttrs (old: {
+        desktopItems = [
+          (prev.makeDesktopItem {
+            name = "xp-pen-driver";
+            exec = "xp-pen-driver-indicator";
+            icon = "pentablet";
+            comment = "XPPen driver";
+            desktopName = "xppentablet";
+            categories = [ "Application" "Utility" ];
+          })
+        ];
+        run_script = prev.writeShellApplication {
           name = "xp-pen-driver";
-          exec = "xp-pen-driver-indicator";
-          icon = "pentablet";
-          comment = "XPPen driver";
-          desktopName = "xppentablet";
-          categories = ["Application" "Utility"];
-        })
-      ];
-      run_script = prev.writeShellApplication {
-        name = "xp-pen-driver";
-        text = ''
-          sudo sh -c "xp-pen-driver &"
-        '';
-      };
-      indicator = prev.writeShellApplication {
-        name = "xp-pen-driver-indicator";
-        text = ''
-          sudo sh -c "xp-pen-driver /mini &"
-        '';
-      };
-      installPhase = ''
-        runHook preInstall
-        mkdir -p $out/{opt,bin,share}
-        cp -r App/usr/lib/pentablet/{pentablet,resource.rcc,conf} $out/opt
-        chmod +x $out/opt/pentablet
-        cp -r App/lib $out/lib
-        sed -i 's#usr/lib/pentablet#${dataDir}#g' $out/opt/pentablet
-        cp -r $run_script/bin/* $out/bin
-        cp -r $indicator/bin/* $out/bin
-        sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver
-        sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver-indicator
+          text = ''
+            sudo sh -c "xp-pen-driver &"
+          '';
+        };
+        indicator = prev.writeShellApplication {
+          name = "xp-pen-driver-indicator";
+          text = ''
+            sudo sh -c "xp-pen-driver /mini &"
+          '';
+        };
+        installPhase = ''
+          runHook preInstall
+          mkdir -p $out/{opt,bin,share}
+          cp -r App/usr/lib/pentablet/{pentablet,resource.rcc,conf} $out/opt
+          chmod +x $out/opt/pentablet
+          cp -r App/lib $out/lib
+          sed -i 's#usr/lib/pentablet#${dataDir}#g' $out/opt/pentablet
+          cp -r $run_script/bin/* $out/bin
+          cp -r $indicator/bin/* $out/bin
+          sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver
+          sed -i "s#xp-pen-driver#$out/opt/xp-pen-driver#g" $out/bin/xp-pen-driver-indicator
 
-        cp -r App/usr/share/icons $out/share/icons
-        cp -r $desktopItems/share/applications $out/share/applications
-        runHook postInstall
-      '';
+          cp -r App/usr/share/icons $out/share/icons
+          cp -r $desktopItems/share/applications $out/share/applications
+          runHook postInstall
+        '';
 
-      postFixup = ''
-        makeWrapper $out/opt/pentablet $out/opt/xp-pen-driver \
-        "''${qtWrapperArgs[@]}" \
-          --run 'if [ ! -d /${dataDir} ]; then mkdir -p /${dataDir}; cp -r '$out'/opt/conf /${dataDir}; chmod u+w -R /${dataDir}; fi'
-      '';
-    });
-  })
+        postFixup = ''
+          makeWrapper $out/opt/pentablet $out/opt/xp-pen-driver \
+          "''${qtWrapperArgs[@]}" \
+            --run 'if [ ! -d /${dataDir} ]; then mkdir -p /${dataDir}; cp -r '$out'/opt/conf /${dataDir}; chmod u+w -R /${dataDir}; fi'
+        '';
+      });
+    })
 ]

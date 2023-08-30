@@ -1,29 +1,14 @@
 diff --git a/libqtile/backend/x11/xcbq.py b/libqtile/backend/x11/xcbq.py
-index 6e5ceb5a..e4581e9f 100644
+index 1f61ed2b..002cd2ca 100644
 --- a/libqtile/backend/x11/xcbq.py
 +++ b/libqtile/backend/x11/xcbq.py
-@@ -526,11 +526 @@ class Connection:
--        if hasattr(self, "xinerama"):
--            for i, s in enumerate(self.xinerama.query_screens()):
--                scr = PseudoScreen(
--                    self,
--                    s.x_org,
--                    s.y_org,
--                    s.width,
--                    s.height,
--                )
+@@ -519,7 +519,8 @@ class Connection:
+                     i["width"],
+                     i["height"],
+                 )
 -                pseudoscreens.append(scr)
--        elif hasattr(self, "randr"):
-+        if hasattr(self, "randr"):
-@@ -544,0 +535,11 @@ class Connection:
 +                if i["width"] != 0 and i["height"] != 0:
 +                    pseudoscreens.append(scr)
-+        elif hasattr(self, "xinerama"):
-+            for i, s in enumerate(self.xinerama.query_screens()):
-+                scr = PseudoScreen(
-+                    self,
-+                    s.x_org,
-+                    s.y_org,
-+                    s.width,
-+                    s.height,
-+                )
+         return pseudoscreens
+
+     def finalize(self):
