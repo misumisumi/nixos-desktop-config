@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   systemd = {
     network = {
       enable = true;
@@ -12,17 +12,12 @@
   services = {
     resolved = {
       enable = true;
-      extraConfig = ''
-        [Resolve]
-        DNS=1.1.1.1 2606:4700:4700::1111
-      '';
+      dnssec = "true";
       fallbackDns = [
         "1.1.1.1"
         "2606:4700:4700::1111"
         "8.8.8.8"
         "2001:4860:4860::8888"
-        "192.168.1.40"
-        "192.168.1.1"
       ];
     };
   };

@@ -24,7 +24,7 @@
         users = [ "${user}" ];
         commands = [
           {
-            command = "${pkgs.xp-pen-driver}/bin/xp-pen-driver";
+            command = "${pkgs.xp-pen-driver}/opt/xp-pen-driver";
             options = [ "SETENV" "NOPASSWD" ];
           }
         ];

@@ -1,4 +1,4 @@
-{hostname, ...}: {
+{ hostname, ... }: {
   imports = [
     ../common/network.nix
   ];
@@ -17,12 +17,12 @@
         "lxdbr0"
         "k8sbr0"
       ];
-      # allowedUDPPorts = [
-      #   4010
-      # ];
-      # allowedTCPPorts = [
-      #   4713 # PulseAudio
-      # ];
+      allowedUDPPorts = [
+        # 4010
+      ];
+      allowedTCPPorts = [
+        # 4713 # PulseAudio
+      ];
       # allowedUDPPortRanges = [
       #   {
       #     from = 1714;
@@ -49,21 +49,41 @@
   systemd = {
     network = {
       netdevs = {
-        "br0".netdevConfig = {
-          Kind = "bridge";
-          Name = "br0";
+        "br0" = {
+          netdevConfig = {
+            Kind = "bridge";
+            Name = "br0";
+            MACAddress = "56:47:6a:94:2d:34";
+          };
+          extraConfig = ''
+            [Bridge]
+            VLANFiltering=1
+            DefaultPVID=1
+          '';
         };
       };
       networks = {
-        "10-wired" = {
+        "20-wired" = {
           name = "enp5s0";
-          bridge = ["br0"];
+          bridge = [ "br0" ];
+          bridgeVLANs = [
+            {
+              bridgeVLANConfig = {
+                VLAN = "10";
+                PVID = 1;
+                EgressUntagged = 1;
+              };
+            }
+            {
+              bridgeVLANConfig = {
+                VLAN = "30";
+              };
+            }
+          ];
         };
-        "20-br0" = {
+        "30-br0" = {
           name = "br0";
-          dns = ["192.168.1.40" "127.0.0.1"];
-          address = ["192.168.1.20"];
-          gateway = ["192.168.1.1"];
+          DHCP = "yes";
         };
       };
     };
