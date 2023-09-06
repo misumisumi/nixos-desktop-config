@@ -1,23 +1,47 @@
 """widgets for qtile bar"""
 from pathlib import Path
+
 from libqtile import qtile, widget
+from libqtile.log_utils import logger
+from my_modules.global_config import GLOBAL
 from xdg import IconTheme
 
-from my_modules.global_config import GLOBAL
-
-from libqtile.log_utils import logger
-
-
-
-_colorset1 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["cyan"]}
-_colorset2 = {"background": GLOBAL.c_normal["cyan"], "foreground": GLOBAL.c_normal["BGbase"]}
-_colorset3 = {"background": GLOBAL.c_normal["blue"], "foreground": GLOBAL.c_normal["BGbase"]}
-_colorset4 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["blue"]}
-_colorset5 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_normal["BGbase"]}
-_colorset6 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["white"]}
-_colorset7 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_normal["cyan"]}
-_colorset8 = {"background": GLOBAL.c_normal["BGbase"], "foreground": GLOBAL.c_normal["magenta"]}
-_colorset9 = {"background": GLOBAL.c_normal["clear"], "foreground": GLOBAL.c_normal["blue"]}
+_colorset1 = {
+    "background": GLOBAL.c_normal["BGbase"],
+    "foreground": GLOBAL.c_normal["cyan"],
+}
+_colorset2 = {
+    "background": GLOBAL.c_normal["cyan"],
+    "foreground": GLOBAL.c_normal["BGbase"],
+}
+_colorset3 = {
+    "background": GLOBAL.c_normal["blue"],
+    "foreground": GLOBAL.c_normal["BGbase"],
+}
+_colorset4 = {
+    "background": GLOBAL.c_normal["BGbase"],
+    "foreground": GLOBAL.c_normal["blue"],
+}
+_colorset5 = {
+    "background": GLOBAL.c_normal["clear"],
+    "foreground": GLOBAL.c_normal["BGbase"],
+}
+_colorset6 = {
+    "background": GLOBAL.c_normal["BGbase"],
+    "foreground": GLOBAL.c_normal["white"],
+}
+_colorset7 = {
+    "background": GLOBAL.c_normal["clear"],
+    "foreground": GLOBAL.c_normal["cyan"],
+}
+_colorset8 = {
+    "background": GLOBAL.c_normal["BGbase"],
+    "foreground": GLOBAL.c_normal["magenta"],
+}
+_colorset9 = {
+    "background": GLOBAL.c_normal["clear"],
+    "foreground": GLOBAL.c_normal["blue"],
+}
 
 _font_conf = {"font": GLOBAL.font, "fontsize": GLOBAL.font_size}
 
@@ -45,9 +69,15 @@ df = widget.DF(
     **_font_conf,
 )
 chrod = widget.Chord(**_colorset8, **_font_conf)
-wttr = widget.Wttr(format="%c%t/%p|", location={"Himeji": "Himeji"}, **_colorset2, **_font_conf)
+wttr = widget.Wttr(
+    format="%c%t/%p|", location={"Himeji": "Himeji"}, **_colorset2, **_font_conf
+)
 clock = widget.Clock(format="%y-%m-%d %a %H:%M:%S", **_colorset2, **_font_conf)
-net = widget.Net(format="{down} ↓↑ {up}", **_colorset2, **_font_conf)
+net = widget.Net(
+    format="{down:0=6.2f}{down_suffix:<2}↓↑{up:0=6.2f}{up_suffix:<2}",
+    **_colorset2,
+    **_font_conf,
+)
 volume = widget.Volume(
     fmt="  {}",
     get_volume_command=[
@@ -64,7 +94,9 @@ volume = widget.Volume(
 systray = widget.Systray(**_colorset3)
 backlight = list(Path("/sys/class/backlight/").glob("*"))
 if not len(backlight) == 0:
-    backlight = widget.Backlight(fmt="  {}", backlight_name=backlight[0], **_colorset2, **_font_conf)
+    backlight = widget.Backlight(
+        fmt="  {}", backlight_name=backlight[0], **_colorset2, **_font_conf
+    )
 battery = widget.Battery(
     format="{char} {percent:2.0%}",
     charge_char="󰂄",
@@ -149,7 +181,7 @@ def make_bar(is_tray=False):
                 txt_maximized="",
                 icon_size=GLOBAL.icon_size,
                 borderwidth=GLOBAL.border,
-                max_title_width=120,
+                margin_x=100,
                 **_colorset3,
                 **_font_conf,
             ),
