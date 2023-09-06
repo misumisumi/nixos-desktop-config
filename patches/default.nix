@@ -40,41 +40,13 @@
     pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
       (pfinal: pprev: {
         qtile = pprev.qtile.overridePythonAttrs (old:
-          let
-            _xcffib =
-              let
-                pname = "xcffib";
-                version = "1.4.0";
-              in
-              pprev.${pname}.overridePythonAttrs (old: {
-                inherit pname version;
-                patches = [ ];
-                src = prev.fetchPypi {
-                  inherit pname version;
-                  hash = "sha256-uXfADf7TjHWuGIq8EkLvmDwCJSqGd6gMSwKVMz9StiQ=";
-                };
-              });
-            _pywlroots =
-              let
-                pname = "pywlroots";
-                version = "0.16.4";
-              in
-              pprev.${pname}.overridePythonAttrs (old: {
-                inherit pname version;
-                buildInputs = with prev; [ libinput libxkbcommon pixman xorg.libxcb udev wayland wlroots_0_16 ];
-                src = prev.fetchPypi {
-                  inherit pname version;
-                  hash = "sha256-+1PILk14XoA/dINfoOQeeMSGBrfYX3pLA6eNdwtJkZE=";
-                };
-              });
-          in
           {
-            version = "2023.08.23"; # qtile
+            version = "2023.09.04"; # qtile
             src = prev.fetchFromGitHub {
               owner = "qtile";
               repo = "qtile";
-              rev = ''9b2aff3b3d4607f3e782afda2ec2a061d7eba9f1''; # qtile
-              hash = ''sha256-20MO9eo2itF4zGLe9efEtE6c5UtAyQWKJBgwOSWBqAM=''; # qtile
+              rev = "f45dc910ada928dae63b9db7ae89bf4c285909a8";
+              hash = "sha256-8hUW3TRwja+K0PAzKPo2UWCk8AbVy1f+8zfH3OOoSo8=";
             };
             prePatch = ''
               substituteInPlace libqtile/backend/wayland/cffi/build.py \
@@ -88,21 +60,56 @@
               libxkbcommon
               libdrm
             ];
-            propagatedBuildInputs = with prev; with pprev; [
-              _xcffib
-              (cairocffi.override { withXcffib = true; xcffib = _xcffib; })
-              python-dateutil
-              dbus-python
-              dbus-next
-              mpd2
-              psutil
-              pyxdg
-              pygobject3
-              pywayland
-              _pywlroots
-              xkbcommon
-              pulseaudio
-            ];
+            propagatedBuildInputs =
+              let
+                _cairocffi = pprev.cairocffi.overridePythonAttrs (_: rec {
+                  pname = "cairocffi";
+                  version = "1.6.1";
+                  src = prev.fetchPypi {
+                    inherit pname version;
+                    hash = "sha256-eOa75HNXZAxFPQvpKfpJzQXM4uEobz0qHKnL2n79uLc=";
+                  };
+                  format = "pyproject";
+                  postPatch = "";
+                  propagatedNativeBuildInputs = with prev.python3Packages; [ cffi flit-core ];
+                });
+                _xcffib = pfinal.xcffib.overrideAttrs (oldAttrs: rec {
+                  version = "1.5.0";
+                  patches = [ ];
+                  src = oldAttrs.src.override {
+                    inherit version;
+                    hash = "sha256-qVyUZfL5e0/O3mBr0eCEB6Mt9xy3YP1Xv+U2d9tpGsw=";
+                  };
+                });
+                _pywlroots =
+                  let
+                    pname = "pywlroots";
+                    version = "0.16.4";
+                  in
+                  pprev.${pname}.overridePythonAttrs (old: {
+                    inherit pname version;
+                    buildInputs = with prev; [ libinput libxkbcommon pixman xorg.libxcb udev wayland wlroots_0_16 ];
+                    src = prev.fetchPypi {
+                      inherit pname version;
+                      hash = "sha256-+1PILk14XoA/dINfoOQeeMSGBrfYX3pLA6eNdwtJkZE=";
+                    };
+                  });
+              in
+              with prev; with pprev; [
+                _xcffib
+                (_cairocffi.override { withXcffib = true; xcffib = _xcffib; })
+                python-dateutil
+                dbus-python
+                dbus-next
+                mpd2
+                psutil
+                pyxdg
+                pygobject3
+                pywayland
+                _pywlroots
+                xkbcommon
+                pulseaudio
+              ];
             patches =
               old.patches
                 ++ [
@@ -193,3 +200,24 @@
       });
     })
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
