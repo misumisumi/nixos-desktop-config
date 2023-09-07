@@ -1,7 +1,8 @@
 /*
-Rofi (App launcher) conf
+  Rofi (App launcher) conf
 */
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   iggy_conf = ''
     @theme "iggy"
     button-iggy1, button-iggy2 {
@@ -50,13 +51,14 @@ Rofi (App launcher) conf
         size: 0.8em;
     }
   '';
-in {
+in
+{
   xdg = {
     configFile = {
       "rofi/my_theme.rasi".text = adapta;
     };
   };
-  home.packages = with pkgs; [rofi-power-menu];
+  home.packages = with pkgs; [ rofi-power-menu ];
 
   programs = {
     rofi = {
@@ -65,7 +67,7 @@ in {
         rofi-calc
       ];
 
-      font = "FiraCode Nerd Font 20";
+      font = "UDEV Gothic 35LG 20";
       terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = "my_theme.rasi";
 

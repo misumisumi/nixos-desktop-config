@@ -1,6 +1,6 @@
 """This is paramater"""
-import os
 import dataclasses
+import os
 from pathlib import Path
 
 from libqtile import qtile
@@ -21,9 +21,13 @@ class Global:
     if not capture_path.exists():
         os.mkdir(capture_path)
     if laptop or vm:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "fixed").glob("*.png"))
+        wallpapers = list(
+            home.joinpath("Pictures", "wallpapers", "fixed").glob("*.png")
+        )
     else:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png"))
+        wallpapers = list(
+            home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png")
+        )
     wallpapers.sort()
     screen_saver = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
 
@@ -39,7 +43,7 @@ class Global:
 
     slice_width = 350 if laptop else 500
 
-    font = "Noto Sans CJK JP"
+    font = "UDEV Gothic 35LG"
     font_size = 18
     icon_size = 22
 
