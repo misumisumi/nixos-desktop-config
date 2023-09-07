@@ -25,10 +25,7 @@
 
     common-config.url = "github:misumisumi/nixos-common-config";
     nvimdots.url = "github:misumisumi/nvimdots";
-    flakes = {
-      url = "github:misumisumi/flakes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flakes.url = "github:misumisumi/flakes";
     private-config = {
       url = "git+ssh://git@github.com/misumisumi/nixos-private-config.git";
       inputs.nixpkgs.follows = "nixpkgs";

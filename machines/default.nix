@@ -22,10 +22,6 @@ let
     let
       hostConf = ./. + (lib.optionalString (rootDir != "") "/${rootDir}") + "/${hostname}" + /home.nix;
       system = choiceSystem hostname;
-      pkgs-stable = import inputs.nixpkgs-stable {
-        inherit system;
-        config = { allowUnfree = true; };
-      };
     in
     with lib;
     nixosSystem {
@@ -35,8 +31,7 @@ let
         [
           ./configuration.nix # Common system conf
           (overlay {
-            inherit (inputs) nixpkgs;
-            inherit pkgs-stable;
+            inherit system;
           })
           inputs.nur.nixosModules.nur
           inputs.musnix.nixosModules.musnix

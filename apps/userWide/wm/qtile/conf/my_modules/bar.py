@@ -181,7 +181,6 @@ def make_bar(is_tray=False):
                 txt_maximized="",
                 icon_size=GLOBAL.icon_size,
                 borderwidth=GLOBAL.border,
-                margin_x=100,
                 **_colorset3,
                 **_font_conf,
             ),
