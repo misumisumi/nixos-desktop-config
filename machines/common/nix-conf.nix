@@ -1,9 +1,8 @@
 # Conf for nix package manager
-{
-  pkgs,
-  inputs,
-  stateVersion,
-  ...
+{ pkgs
+, inputs
+, stateVersion
+, ...
 }: {
   nixpkgs.config.allowUnfree = true; # Allow proprietary software.
   nixpkgs.config.allowBroken = true;
@@ -12,6 +11,12 @@
     # Nix Package Manager settings
     settings = {
       auto-optimise-store = true; # Optimise syslinks
+      substituters = [
+        "https://misumisumi.cachix.org"
+      ];
+      trusted-public-keys = [
+        "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+      ];
     };
     gc = {
       # 1週間ごとに7日前のイメージを削除
