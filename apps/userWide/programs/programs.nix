@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ ... }: {
   programs = {
     feh.enable = true;
     yt-dlp. enable = true;
