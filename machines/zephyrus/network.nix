@@ -1,4 +1,4 @@
-{hostname, ...}: {
+{ hostname, ... }: {
   imports = [
     ../common/network.nix
   ];
@@ -12,7 +12,7 @@
           band = "2g";
           networks.wlp2s0 = {
             ssid = "zephyrus";
-            authentication.saePasswordsFile = [{password = "FsP65sEZdvxMjZL";}]; # Use saePasswordsFile if possible.
+            authentication.saePasswordsFile = [{ password = "FsP65sEZdvxMjZL"; }]; # Use saePasswordsFile if possible.
           };
         };
       };
@@ -67,7 +67,7 @@
 
   systemd = {
     network = {
-      wait-online.ignoredInterfaces = ["wlan0"];
+      wait-online.ignoredInterfaces = [ "wlan0" ];
       useMyDots.enable = true;
       netdevs = {
         "br0".netdevConfig = {
@@ -88,7 +88,7 @@
       networks = {
         "20-wired" = {
           name = "enp4s*";
-          bridge = ["br0"];
+          bridge = [ "br0" ];
         };
         "30-br0" = {
           name = "br0";
@@ -97,7 +97,7 @@
         "40-wireless" = {
           name = "wlp2s0";
           DHCP = "yes";
-          address = ["192.168.1.200"];
+          address = [ "192.168.1.200" ];
         };
       };
     };

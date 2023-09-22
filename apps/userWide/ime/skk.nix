@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   useDict = "Combined";
   dicts = {
     "Minimal" = "SKK-JISYO.S";
@@ -6,7 +7,8 @@
     "Large" = "SKK-JISYO.L";
     "Combined" = "SKK-JISYO.combined";
   };
-in {
+in
+{
   services.yaskkserv2.enable = true;
   xdg = {
     configFile = {

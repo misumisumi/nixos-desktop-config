@@ -1,4 +1,4 @@
-{wm, ...}: {
+{ wm, ... }: {
   imports =
     [
       ./hardware-configuration.nix

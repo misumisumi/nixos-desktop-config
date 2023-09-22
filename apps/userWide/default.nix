@@ -1,9 +1,8 @@
-{
-  lib,
-  hostname,
-  isMidium ? false,
-  isLarge ? false,
-  ...
+{ lib
+, hostname
+, isMidium ? false
+, isLarge ? false
+, ...
 }:
 with lib; (
   (import ./ime)

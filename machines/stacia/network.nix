@@ -1,7 +1,6 @@
-{
-  lib,
-  hostname,
-  ...
+{ lib
+, hostname
+, ...
 }: {
   imports = [
     ../common/network.nix
@@ -61,12 +60,12 @@
       networks = {
         "10-wired" = {
           name = "enp34s0";
-          bridge = ["br0"];
+          bridge = [ "br0" ];
         };
         "20-br0" = {
           name = "br0";
           DHCP = "yes";
-          address = ["133.24.91.38"];
+          address = [ "133.24.91.38" ];
         };
       };
     };

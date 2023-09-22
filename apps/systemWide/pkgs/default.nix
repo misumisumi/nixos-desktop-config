@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   coreutils-full # GNU coreutils
   killall # Process killer

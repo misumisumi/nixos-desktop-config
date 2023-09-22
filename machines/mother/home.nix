@@ -5,6 +5,6 @@
   ];
   home.packages = with pkgs; [ prime-run bt-dualboot xp-pen-driver ];
   xresources = {
-    extraConfig = "Xft.dpi:100";
+    extraConfig = "Xft.dpi:120";
   };
 }

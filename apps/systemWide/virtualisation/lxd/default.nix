@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   virtualisation = {
     lxc.enable = true;
     lxd = {

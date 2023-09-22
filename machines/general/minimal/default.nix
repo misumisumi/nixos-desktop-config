@@ -1,7 +1,6 @@
-{
-  pkgs,
-  wm,
-  ...
+{ pkgs
+, wm
+, ...
 }: {
   imports = [
     ./hardware-configuration.nix

@@ -1,8 +1,7 @@
 # libvirt conf
-{
-  pkgs,
-  user,
-  ...
+{ pkgs
+, user
+, ...
 }: {
   environment = {
     systemPackages = with pkgs; [
@@ -15,7 +14,7 @@
   users = {
     groups = {
       libvirt = {
-        members = ["root" "${user}"];
+        members = [ "root" "${user}" ];
       };
     };
   };
@@ -28,7 +27,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = with pkgs; [OVMFFull.fd];
+          packages = with pkgs; [ OVMFFull.fd ];
         };
         swtpm.enable = true;
         # verbatimConfig = ''

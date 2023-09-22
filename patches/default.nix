@@ -41,12 +41,12 @@
       (pfinal: pprev: {
         qtile = pprev.qtile.overridePythonAttrs (old:
           {
-            version = "2023.09.04"; # qtile
+            version = "2023.09.20"; # qtile
             src = prev.fetchFromGitHub {
               owner = "qtile";
               repo = "qtile";
-              rev = "f45dc910ada928dae63b9db7ae89bf4c285909a8";
-              hash = "sha256-8hUW3TRwja+K0PAzKPo2UWCk8AbVy1f+8zfH3OOoSo8=";
+              rev = "45f249cddd89f782fa309a16b5ad653eab03b9c2";
+              hash = "sha256-NZBPTvvt944j/rhoPKUQpbiQAuG9SFE2QP6yR7ISG0Q=";
             };
             prePatch = ''
               substituteInPlace libqtile/backend/wayland/cffi/build.py \
@@ -200,7 +200,6 @@
       });
     })
 ]
-
 
 
 

@@ -1,14 +1,16 @@
-{pkgs, ...}: let
-  browsers = ["vivaldi-stable.desktop" "firefox.desktop"];
-  image_viewer = ["org.nomacs.ImageLounge.desktop" "feh.desktop"];
-in {
+{ pkgs, ... }:
+let
+  browsers = [ "vivaldi-stable.desktop" "firefox.desktop" ];
+  image_viewer = [ "org.nomacs.ImageLounge.desktop" "feh.desktop" ];
+in
+{
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop" "vivaldi-stable.desktop"];
+      "application/pdf" = [ "org.pwmt.zathura-pdf-mupdf.desktop" "vivaldi-stable.desktop" ];
       "application/wps-office.pptx" = "impress.desktop";
       "text/html" = browsers;
-      "text/xml" = ["neovim.desktop"] ++ browsers;
+      "text/xml" = [ "neovim.desktop" ] ++ browsers;
       "x-scheme-handler/ftp" = browsers;
       "x-scheme-handler/http" = browsers;
       "x-scheme-handler/https" = browsers;

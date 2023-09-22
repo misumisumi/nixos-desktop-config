@@ -1,7 +1,7 @@
 /*
-waydroid (Android emulater) conf
+  waydroid (Android emulater) conf
 */
-{pkgs, ...}: {
+{ pkgs, ... }: {
   virtualisation = {
     waydroid = {
       enable = true;
@@ -10,7 +10,7 @@ waydroid (Android emulater) conf
   environment = {
     systemPackages = with pkgs; [
       weston
-      (python3.withPackages (ps: with ps; [pyclip]))
+      (python3.withPackages (ps: with ps; [ pyclip ]))
     ];
   };
 }

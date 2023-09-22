@@ -4,7 +4,8 @@ let
   size = 12.0;
   # font = "Ricty Diminished with Fira Code";
   # size = 14.0
-in {
+in
+{
   programs = {
     alacritty = {
       enable = true;

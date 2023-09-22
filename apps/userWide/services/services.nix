@@ -1,5 +1,5 @@
 # Auto launch apps
-{wm, ...}: {
+{ wm, ... }: {
   services = {
     udiskie.enable = true;
 
