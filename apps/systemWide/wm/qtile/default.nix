@@ -1,8 +1,8 @@
-{
-  hostname,
-  pkgs,
-  ...
-}: let
+{ hostname
+, pkgs
+, ...
+}:
+let
   png =
     if hostname != "general"
     then "${pkgs.my-wallpapers}/wallpapers/background.png"
@@ -20,8 +20,9 @@
   nixos-gsettings-overrides = pkgs.cinnamon.cinnamon-gsettings-overrides.override {
     extraGSettingsOverrides = cinnamon-default-terminal;
   };
-in {
-  imports = [../common/xserver.nix];
+in
+{
+  imports = [ ../common/xserver.nix ];
   environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = "${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
   services.xserver.displayManager = {
     defaultSession = "none+xsession";

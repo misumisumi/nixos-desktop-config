@@ -1,7 +1,6 @@
-{
-  lib,
-  hostname,
-  ...
+{ lib
+, hostname
+, ...
 }: {
   networking = {
     hostName = "${hostname}";
@@ -24,5 +23,5 @@
       enable = false;
     };
   };
-  system.nssModules = lib.mkForce [];
+  system.nssModules = lib.mkForce [ ];
 }

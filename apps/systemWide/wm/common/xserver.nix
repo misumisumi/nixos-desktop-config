@@ -1,12 +1,11 @@
 /*
-Keyboard is not managed from xserver.
-You must edit home.xsession.keyboard. (conf is ./xsession.nix)
+  Keyboard is not managed from xserver.
+  You must edit home.xsession.keyboard. (conf is ./xsession.nix)
 */
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
   programs.light.enable = true;
 
@@ -14,7 +13,7 @@ You must edit home.xsession.keyboard. (conf is ./xsession.nix)
     xserver = {
       enable = true;
       autorun = true;
-      gdk-pixbuf.modulePackages = [pkgs.librsvg];
+      gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
       layout = "us";
       xkbOptions = "caps:nocaps"; # keyboard is managed home-manager

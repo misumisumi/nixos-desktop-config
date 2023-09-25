@@ -1,8 +1,10 @@
 # Kitty conf
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   font = "PlemolJP Console NF";
   size = 12;
-in {
+in
+{
   programs = {
     kitty = {
       enable = true;

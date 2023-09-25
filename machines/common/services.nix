@@ -1,9 +1,8 @@
-{
-  lib,
-  user,
-  hostname,
-  pkgs,
-  ...
+{ lib
+, user
+, hostname
+, pkgs
+, ...
 }:
 with lib; {
   security = {
@@ -37,7 +36,7 @@ with lib; {
     {
       blueman.enable = true;
       udisks2.enable = true;
-      dbus.packages = with pkgs; [xfce.xfconf];
+      dbus.packages = with pkgs; [ xfce.xfconf ];
       gvfs.enable = true; # Mount, trash, and other functions
       tumbler.enable = true; # Thumbnail supoport for images
     }
@@ -50,7 +49,7 @@ with lib; {
               EVENTS:
                 EV_KEY: [KEY_ENTER]
         '';
-        plugins = [pkgs.interception-tools-plugins.dual-function-keys];
+        plugins = [ pkgs.interception-tools-plugins.dual-function-keys ];
       };
     };
 }

@@ -1,17 +1,17 @@
 # From https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ lib
+, pkgs
+, config
+, ...
 }:
 with lib; let
   cfg = config.virtualisation;
   tmpfileEntry = name: f: "f /dev/shm/${name} ${f.mode} ${f.user} ${f.group} -";
-in {
+in
+{
   options.virtualisation = {
     sharedMemoryFiles = mkOption {
-      type = types.attrsOf (types.submodule ({name, ...}: {
+      type = types.attrsOf (types.submodule ({ name, ... }: {
         options = {
           name = mkOption {
             visible = false;
@@ -35,7 +35,7 @@ in {
           };
         };
       }));
-      default = {};
+      default = { };
     };
     hugepages = {
       enable = mkEnableOption "Hugepages";
@@ -71,9 +71,9 @@ in {
     services.scream = {
       enable = cfg.scream.enable;
       description = "Scream Receiver (For windows VM)";
-      wantedBy = ["default.target"];
+      wantedBy = [ "default.target" ];
       # wants = [ "network-online.target" "pulseaudio.service" ]; # For pulseaudio
-      wants = ["network-online.target" "pipewire-pulse.service"];
+      wants = [ "network-online.target" "pipewire-pulse.service" ];
       environment.IS_SERVICE = "1";
       unitConfig = {
         StartLimitInterval = 200;

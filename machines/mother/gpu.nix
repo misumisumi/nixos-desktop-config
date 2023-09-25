@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   # boot.extraModprobeConfig = lib.mkAfter ''
   #   softdep snd_hda_intel pre: vfio-pci

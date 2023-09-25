@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  user,
-  pkgs,
-  ...
+{ config
+, lib
+, user
+, pkgs
+, ...
 }: {
-  imports = [../common/xserver.nix];
+  imports = [ ../common/xserver.nix ];
 
   services.xserver.displayManager = {
     lightdm.background = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";

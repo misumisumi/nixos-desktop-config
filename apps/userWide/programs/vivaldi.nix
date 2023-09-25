@@ -29,11 +29,11 @@
         updateUrl = "https://raw.githubusercontent.com/FilipePS/Traduzir-paginas-web/master/updates.xml";
       } # translate web pages
       {
-        id = "mbkealjjbgdefaeolfjpmohgkbejfnli";
+        id = "ajdlpmoffekghhblfajmiacgbdknmbpa";
         updateUrl = "https://raw.githubusercontent.com/misumisumi/Chromium-Extensions-auto-packer/main/BetterTweetDeckOTD/updates.xml";
       } # Better TweetDeck (OldTweetDeck-compatible)
       {
-        id = "ilpagdghakcfnlaanggbgjbmdflagajb";
+        id = "bjcdldglejahkljjcjhpdclapfpiphhf";
         updateUrl = "https://raw.githubusercontent.com/misumisumi/Chromium-Extensions-auto-packer/main/OldTweetDeck/updates.xml";
       } # OldTweetDeck
     ];

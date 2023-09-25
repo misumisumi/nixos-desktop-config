@@ -1,11 +1,11 @@
 # User level systemd-unit
 # Please read each description
-{pkgs, ...}: {
+{ pkgs, ... }: {
   systemd.user.services = {
     polkit-gnome-authentication-agent-1 = {
       Unit = {
         Description = "polkit-gnome-authentication-agent-1";
-        After = ["graphical-session.target"];
+        After = [ "graphical-session.target" ];
       };
       Service = {
         Type = "simple";
@@ -15,7 +15,7 @@
         TimeoutStopSec = 10;
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = [ "default.target" ];
       };
     };
   };

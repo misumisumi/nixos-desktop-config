@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  boot.kernelModules = ["snd-seq" "snd-rawmidi"];
+{ pkgs, ... }: {
+  boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
   nixpkgs.config.pulseaudio = true; # 一部パッケージのビルド時にpulseaudioを使うように指示する
   sound.enable = true;
   environment.systemPackages = with pkgs; [

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   boot.kernelParams = [
     "amdgpu.ppfeaturemask=0xfff7ffff"
   ];
