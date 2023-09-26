@@ -80,11 +80,7 @@ net = widget.Net(
 )
 volume = widget.Volume(
     fmt="  {}",
-    get_volume_command=[
-        "sh",
-        "-c",
-        "if [ -z \"$(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g')\" ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi",
-    ],
+    get_volume_command="if [ -z $(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g') ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi",
     mute_command=["pactl set-source-mute @DEFAULT_SOURCE@ toggle"],
     volume_up_command=["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
     volume_down_command=["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
