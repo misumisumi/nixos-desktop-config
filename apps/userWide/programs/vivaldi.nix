@@ -7,23 +7,24 @@
       hunspellDictsChromium.en_US
     ];
     extensions = [
-      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
-      { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
-      { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
-      { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
-      { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
-      { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark reader
-      { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
-      { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
-      { id = "ghbmnnjooekpmoecnnnilnnbdlolhkhi"; } # google docs offline
-      { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
-      { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
-      { id = "mheleidccioamimekojienbdfclcbaan"; } # q accelerator
-      { id = "niloccemoadcdkdjlinkgdfekeahmflj"; } # save to pocket
-      { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; } # zotero connector
       { id = "joaffhoebddkohkafembmdkfmmcgmepj"; } # better vrchat dot com
-      { id = "diapeboihmphompedonjjbmkbhflmcek"; } # vrc url pasteExtension
+      { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
+      { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark reader
       { id = "elfdpkmfllnhhgnicaaeacbilcallpbd"; } # flow chat for youtube live
+      { id = "ghbmnnjooekpmoecnnnilnnbdlolhkhi"; } # google docs offline
+      { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
+      { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
+      { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
+      { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
+      { id = "mheleidccioamimekojienbdfclcbaan"; } # q accelerator
+      { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
+      { id = "niloccemoadcdkdjlinkgdfekeahmflj"; } # save to pocket
+      { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+      { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
+      { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
+      { id = "diapeboihmphompedonjjbmkbhflmcek"; } # vrc url pasteExtension
+      { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; } # zotero connector
       {
         id = "bolggfoncklhniejomgplkjcllmnonbh";
         updateUrl = "https://raw.githubusercontent.com/FilipePS/Traduzir-paginas-web/master/updates.xml";
