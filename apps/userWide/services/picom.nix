@@ -3,6 +3,7 @@
   services = {
     picom = {
       enable = true;
+      package = pkgs.picom-next;
       backend = "glx";
       vSync = false; # When vSync=true, Picom have problem if you use Nvidia
 
@@ -68,7 +69,7 @@
         ];
         blur-method = "dual_kawase";
         blur-size = 8;
-        blur-strength = 5;
+        blur-strength = 6;
         blur-background = false;
         blur-background-frame = false;
         blur-bluer-kern = "3x3box";

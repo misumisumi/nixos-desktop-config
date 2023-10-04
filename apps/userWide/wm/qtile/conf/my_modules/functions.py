@@ -2,18 +2,16 @@
 import asyncio
 import subprocess
 
+from libqtile import hook, qtile
 from libqtile.core.manager import Qtile
-from libqtile import qtile, hook
 from libqtile.lazy import lazy
-
+from libqtile.log_utils import logger
 from my_modules.global_config import GLOBAL
 from my_modules.groups import GROUP_PER_SCREEN, _group_and_rule
 
-from libqtile.log_utils import logger
-
-
 PINP_WINDOW = None
 FLOATING_WINDOW_IDX = 0
+
 
 # PinPの生成時とWS切替時にフォーカスを当てないようにする
 def keep_focus_window_in_tiling(window=None):
@@ -40,7 +38,12 @@ async def move_speclific_apps(window):
     await asyncio.sleep(0.01)
     if window.name == "Spotify":
         window.togroup("0-media")
-    elif window.name in ["Picture in picture", "ピクチャー イン ピクチャー", "Picture-in-Picture", "mpv"]:
+    elif window.name in [
+        "Picture in picture",
+        "ピクチャー イン ピクチャー",
+        "Picture-in-Picture",
+        "mpv",
+    ]:
         # 画面サイズに合わせて自動的にPinPのサイズとポジションを決定する
         pinp_size, pinp_pos = get_pinp_size_pos()
 
@@ -293,7 +296,9 @@ def move_n_screen_group(qtile, idx):
     groups = qtile.groups
     s_idx = qtile.current_screen.index
     if idx < GROUP_PER_SCREEN:
-        qtile.current_window.togroup(groups[int(idx + GROUP_PER_SCREEN * s_idx)].name, switch_group=True)
+        qtile.current_window.togroup(
+            groups[int(idx + GROUP_PER_SCREEN * s_idx)].name, switch_group=True
+        )
 
 
 @lazy.function
@@ -304,7 +309,7 @@ def focus_cycle_screen(qtile, backward=False):
         to_idx = n_screen - 1 if idx == 0 else idx - 1
     else:
         to_idx = 0 if idx + 1 == n_screen else idx + 1
-    qtile.cmd_to_screen(to_idx)
+    qtile.to_screen(to_idx)
 
 
 @lazy.function
@@ -317,7 +322,11 @@ def move_cycle_screen(qtile, backward=False):
         if backward:
             to_idx = n_screen - 1 if idx == 0 else idx - 1
             to_group = qtile.groups.index(qtile.current_screen.group) - GROUP_PER_SCREEN
-            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * GLOBAL.num_screen)
+            to_group = (
+                to_group
+                if to_group >= 0
+                else to_group + (GROUP_PER_SCREEN * GLOBAL.num_screen)
+            )
 
         else:
             to_idx = 0 if idx + 1 == n_screen else idx + 1
@@ -329,7 +338,7 @@ def move_cycle_screen(qtile, backward=False):
             )
         group = qtile.groups[to_group]
         qtile.current_window.togroup(group.name)
-        qtile.cmd_to_screen(to_idx)
+        qtile.to_screen(to_idx)
         qtile.current_screen.set_group(group)
 
 
@@ -342,11 +351,11 @@ def to_from_display_tablet(qtile):
             group = qtile.groups[to_idx]
             # logger.warning(group)
             qtile.current_window.togroup(group.name)
-            qtile.cmd_to_screen(0)
+            qtile.to_screen(0)
             qtile.current_screen.set_group(group)
         else:
             qtile.current_window.togroup(qtile.groups[-2].name)
-            qtile.cmd_to_screen(GLOBAL.num_screen)
+            qtile.to_screen(GLOBAL.num_screen)
 
 
 @lazy.function
@@ -354,7 +363,9 @@ def attach_screen(qtile, pos):
     if pos == "delete":
         subprocess.run("xrandr --output HDMI-A-0 --off", shell=True)
         subprocess.run(
-            "feh --bg-fill {}".format(GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
+            "feh --bg-fill {}".format(
+                GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg")
+            ),
             shell=True,
         )
     else:
@@ -377,4 +388,6 @@ def capture_screen(qtile, is_clipboard=False):
     if is_clipboard:
         Qtile.cmd_spawn(qtile, "flameshot screen -n {} -c".format(idx))
     else:
-        Qtile.cmd_spawn(qtile, "flameshot screen -n {} -p {}".format(idx, GLOBAL.capture_path))
+        Qtile.cmd_spawn(
+            qtile, "flameshot screen -n {} -p {}".format(idx, GLOBAL.capture_path)
+        )
