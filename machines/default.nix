@@ -52,6 +52,8 @@ let
                   (import hostConf)
                   ../modules/nixosWallpaper.nix
                   inputs.flakes.nixosModules.for-hm
+                  # The settings for common-config will be loaded when it is imported.
+                  # See `misumisumi/nixos-common-config` for configuration
                   inputs.common-config.nixosModules.core
                   inputs.common-config.nixosModules.extra
                   # inputs.common-config.nixosModules.tmux
