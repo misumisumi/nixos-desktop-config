@@ -43,6 +43,9 @@
         "100:name *?= 'Youtube'"
         "100:name *?= 'Prime Video'"
         "100:name *?= 'ニコニコ動画'"
+        "100:name *?= '.pdf'"
+        "100:name *?= '.jpg'"
+        "100:name *?= '.png'"
       ];
 
       shadow = true;
