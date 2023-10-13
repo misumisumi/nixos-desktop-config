@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    lxd-nixos.url = "git+https://codeberg.org/adamcstephens/lxd-nixos";
     nur.url = "github:nix-community/NUR";
     musnix = {
       url = "github:musnix/musnix";
