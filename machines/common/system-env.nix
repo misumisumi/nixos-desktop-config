@@ -42,16 +42,6 @@
       source-han-serif
       source-han-mono
 
-      (nerdfonts.override {
-        # Nerdfont override
-        fonts = [
-          "FiraCode"
-        ];
-      })
-
-      plemoljp-fonts
-      udev-gothic-font
-
       papirus-icon-theme # Icons
     ];
   };

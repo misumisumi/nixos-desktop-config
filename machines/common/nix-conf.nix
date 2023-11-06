@@ -13,9 +13,11 @@
       auto-optimise-store = true; # Optimise syslinks
       substituters = [
         "https://misumisumi.cachix.org"
+        "https://cuda-maintainers.cachix.org"
       ];
       trusted-public-keys = [
         "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+        "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       ];
     };
     gc = {

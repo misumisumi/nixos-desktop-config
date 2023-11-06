@@ -2,43 +2,37 @@
 { inputs
 , overlay
 , stateVersion
-, user
 , ...
 }:
 let
-  choiceSystem = x:
-    if (x == "dummy")
-    then "aarch64-linux"
-    else "x86_64-linux";
-
+  inherit (inputs.nixpkgs) lib;
   settings =
     { hostname
     , user
-    ,
+    , system ? "x86_64-linux"
+    , withExtra ? false
+    , withTmux ? false
+    , withGui ? false
+    , homeDirectory ? ""
     }:
     let
-      system = choiceSystem hostname;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit hostname user stateVersion; };
+      extraSpecialArgs = { inherit hostname user stateVersion withExtra withTmux; };
       modules = [
         (overlay { inherit inputs; })
         inputs.nur.nixosModules.nur
 
-        ./hm.nix
-        ./${hostname}
-      ];
+        inputs.common-config.nixosModules.home-manager
+      ]; # ++ lib.optional withGui ./gui.nix;
     };
 in
 {
-  arch = settings {
-    hostname = "arch";
-    inherit user;
-  };
-  general = settings {
+  y_univ = settings {
     hostname = "general";
-    user = "general";
+    user = "kobayashi";
+    homeDirectory = "/homex/kobayashi";
   };
 }

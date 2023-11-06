@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    common-config.url = "github:misumisumi/nixos-common-config";
+    common-config.url = "github:misumisumi/nixos-common-config/fix-module";
     nvimdots.url = "github:misumisumi/nvimdots";
     flakes.url = "github:misumisumi/flakes";
     private-config = {
@@ -57,6 +57,16 @@
         };
     in
     {
+      nixConfig = {
+        extra-substituters = [
+          "https://misumisumi.cachix.org"
+          "https://cuda-maintainers.cachix.org"
+        ];
+        extra-trusted-public-keys = [
+          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+          "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+        ];
+      };
       nixosConfigurations = (
         import ./machines {
           inherit (inputs.nixpkgs) lib;
@@ -72,3 +82,4 @@
       # );
     };
 }
+

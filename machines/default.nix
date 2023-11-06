@@ -7,21 +7,16 @@
 }:
 let
   lib = inputs.nixpkgs.lib;
-  choiceSystem = x:
-    if (x == "aegis")
-    then "aarch64-linux"
-    else "x86_64-linux";
-
   settings =
     { hostname
     , user
     , rootDir ? ""
+    , system ? "x86_64-linux"
     , wm ? "qtile"
     ,
     }:
     let
       hostConf = ./. + (lib.optionalString (rootDir != "") "/${rootDir}") + "/${hostname}" + /home.nix;
-      system = choiceSystem hostname;
     in
     with lib;
     nixosSystem {
@@ -43,19 +38,22 @@ let
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit hostname user stateVersion wm; };
+            home-manager.extraSpecialArgs = {
+              inherit hostname user stateVersion wm;
+              withExtra = true;
+              withTmux = false;
+              homeDirectory = "";
+            };
             home-manager.users."${user}" = {
               # Common home conf + Each machine conf
               imports =
                 [
-                  (import ../hm/hm.nix)
                   (import hostConf)
                   ../modules/nixosWallpaper.nix
                   inputs.flakes.nixosModules.for-hm
                   # The settings for common-config will be loaded when it is imported.
                   # See `misumisumi/nixos-common-config` for configuration
-                  inputs.common-config.nixosModules.core
-                  inputs.common-config.nixosModules.extra
+                  inputs.common-config.nixosModules.home-manager
                   # inputs.common-config.nixosModules.tmux
                   inputs.nvimdots.nixosModules.nvimdots
                 ]
