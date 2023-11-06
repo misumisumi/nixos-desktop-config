@@ -73,13 +73,12 @@
           inherit inputs overlay stateVersion user;
         }
       );
-      # homeConfigurations = (
-      #   import ./hm {
-      #     inherit (nixpkgs) lib;
-      #     inherit inputs overlay stateVersion user;
-      #     inherit nixpkgs nixpkgs-stable nur nixgl home-manager flakes nvimdots private-config;
-      #   }
-      # );
+      homeConfigurations = (
+        import ./hm {
+          inherit (inputs.nixpkgs) lib;
+          inherit inputs overlay stateVersion user;
+        }
+      );
     };
 }
 

@@ -5,7 +5,6 @@
 , ...
 }:
 let
-  inherit (inputs.nixpkgs) lib;
   settings =
     { hostname
     , user
@@ -17,15 +16,19 @@ let
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
+      inherit (inputs.nixpkgs) lib;
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit hostname user stateVersion withExtra withTmux; };
+      extraSpecialArgs = { inherit hostname user stateVersion withExtra withTmux homeDirectory; };
       modules = [
-        (overlay { inherit inputs; })
+        (overlay { inherit system; })
         inputs.nur.nixosModules.nur
 
+        inputs.flakes.nixosModules.for-hm
         inputs.common-config.nixosModules.home-manager
+        inputs.nvimdots.nixosModules.nvimdots
+        ./nix-conf.nix
       ]; # ++ lib.optional withGui ./gui.nix;
     };
 in

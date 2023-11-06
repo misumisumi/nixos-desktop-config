@@ -25,9 +25,7 @@ let
       modules =
         [
           ./configuration.nix # Common system conf
-          (overlay {
-            inherit system;
-          })
+          (overlay { inherit system; })
           inputs.nur.nixosModules.nur
           inputs.musnix.nixosModules.musnix
           ../modules
