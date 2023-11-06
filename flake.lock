@@ -2,16 +2,15 @@
   "nodes": {
     "common-config": {
       "locked": {
-        "lastModified": 1699265698,
-        "narHash": "sha256-lnCelv6gK/bqhsLna3+SxnGUibRO/poAxCOJd3ZFUXw=",
+        "lastModified": 1699274132,
+        "narHash": "sha256-ezaK85vd5fTTKzpmPBHml8+NL1IdGI3YFPcq0oPBrKw=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "8de87e324acea56519afc9b9a80c655436cf82dd",
+        "rev": "c4d45c846f2c0f39d8bbd9e2b93672f5177187da",
         "type": "github"
       },
       "original": {
         "owner": "misumisumi",
-        "ref": "fix-module",
         "repo": "nixos-common-config",
         "type": "github"
       }

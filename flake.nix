@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    common-config.url = "github:misumisumi/nixos-common-config/fix-module";
+    common-config.url = "github:misumisumi/nixos-common-config";
     nvimdots.url = "github:misumisumi/nvimdots";
     flakes.url = "github:misumisumi/flakes";
     private-config = {

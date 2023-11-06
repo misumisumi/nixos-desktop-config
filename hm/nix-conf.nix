@@ -1,6 +1,6 @@
-{ lib, ... }:
 {
-  _module.args = {
-    pkgs.config.allowUnfree = lib.mkDefault true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
   };
 }
