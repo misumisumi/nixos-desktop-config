@@ -2,11 +2,11 @@
   "nodes": {
     "common-config": {
       "locked": {
-        "lastModified": 1699274132,
-        "narHash": "sha256-ezaK85vd5fTTKzpmPBHml8+NL1IdGI3YFPcq0oPBrKw=",
+        "lastModified": 1699356636,
+        "narHash": "sha256-o7GDoJ7uJ0SZUVd/kHepHIRt08iNESz+kLxcvAVqZVA=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "c4d45c846f2c0f39d8bbd9e2b93672f5177187da",
+        "rev": "692bd7f730c70da04f23e18457c8c4188ce9afb9",
         "type": "github"
       },
       "original": {
@@ -363,11 +363,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1698115777,
-        "narHash": "sha256-MxoBqtaAEzJDPfapEFpkCiIduCArf8Uh77kymt1kdoE=",
+        "lastModified": 1699347281,
+        "narHash": "sha256-U7xEi3TfmZ3zqi4o/RL5k1ec2ig/sPTAHrYxZxoTzzE=",
         "ref": "refs/heads/main",
-        "rev": "9ad789b3da8bcf65eeee4e09214cda6de0f6112b",
-        "revCount": 108,
+        "rev": "92dc043130edf21113e81bd8af94eb35a2f90d34",
+        "revCount": 109,
         "type": "git",
         "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       },
