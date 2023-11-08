@@ -102,7 +102,6 @@ in
       SUBSYSTEM=="vfio", OWNER="root", GROUP="kvm"
     '';
 
-    boot.extraModprobeConfig = optionalString (cfg.devices != [ ]) ("options vfio-pci ids=" + (concatStringsSep "," cfg.devices));
     boot.kernelParams =
       (
         if cfg.IOMMUType == "both"
@@ -127,17 +126,17 @@ in
         "kvm.ignore_msrs=1"
         "kvm.report_ignored_msrs=0"
       ])
-      ++ [ "iommu=pt" ];
+      ++ [ "iommu=pt" ]
+      ++ (optionals (cfg.devices != [ ]) [
+        ("vfio-pci.ids=" + (concatStringsSep "," cfg.devices))
+        "vfio-pci.disable_vga=1"
+      ])
+      ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel.nested=1" "kvm_amd.nested=1" ])
+      ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel.nested=1")
+      ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd.nested=1");
 
-    # boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ]
-    boot.kernelModules = [ ]
-      ++ (optionals (cfg.deviceDomains == null) [ "vfio_pci" "vfio" "vfio_iommu_type1" ])
-      ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel nested=1" "kvm_amd nested=1" ])
-      ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel nested=1")
-      ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd nested=1");
-
-    boot.initrd = optionalAttrs (cfg.deviceDomains != [ ]) {
-      preDeviceCommands = ''
+    boot.initrd = {
+      preDeviceCommands = optionalString (cfg.deviceDomains != [ ]) ''
         DEVS="${concatMapStrings (x: x + " ") cfg.deviceDomains}"
         if [ -z "$(ls -A /sys/class/iommu)" ]; then
           exit 0
@@ -146,6 +145,7 @@ in
           echo "vfio-pci" > "/sys/bus/pci/devices/''$DEV/driver_override"
         done
       '';
+      kernelModules = mkBefore (optionals (cfg.devices != [ ]) [ "vfio_pci" "vfio" "vfio_iommu_type1" ]);
     };
     systemd.services = optionalAttrs (cfg.deviceDomains != [ ]) {
       vfio-load = {
