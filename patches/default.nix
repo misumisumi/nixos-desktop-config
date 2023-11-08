@@ -121,9 +121,7 @@
       )
     ];
   })
-  (final: prev: {
-    inherit (nixpkgs-stable) nvfetcher;
-  })
+  (final: prev: { })
   (final: prev: {
     haskellPackages = prev.haskellPackages.override {
       overrides = hself: hsuper: {

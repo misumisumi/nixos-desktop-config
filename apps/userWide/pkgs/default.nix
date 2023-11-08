@@ -49,7 +49,6 @@ with pkgs;
   audacity # GUI Sound Editor
   blender
   krita
-  #gmic-qt-krita
   gpick
   gimp
   inkscape
@@ -64,4 +63,6 @@ with pkgs;
   matlab # Followed by nix-matlab
   carla
   # sidequest                     # Meta Quest side loading tool
+
+  vrc-get-latest # Unofficial VRChat package manager
 ]
