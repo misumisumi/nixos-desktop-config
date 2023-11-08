@@ -2,11 +2,11 @@
   "nodes": {
     "common-config": {
       "locked": {
-        "lastModified": 1699356636,
-        "narHash": "sha256-o7GDoJ7uJ0SZUVd/kHepHIRt08iNESz+kLxcvAVqZVA=",
+        "lastModified": 1699440686,
+        "narHash": "sha256-lQehk4fuPxt8pR/bmzpW5XDnow5dgL8vtLCrp9aD0vg=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "692bd7f730c70da04f23e18457c8c4188ce9afb9",
+        "rev": "2212c6c898427a3e4f3cd16473d04d1333c89b31",
         "type": "github"
       },
       "original": {
@@ -342,11 +342,11 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1697603146,
-        "narHash": "sha256-Ehg8m8BJfWAx3rXa/HfqGu9hkUar7EsFiog3TSYqnZU=",
+        "lastModified": 1699438556,
+        "narHash": "sha256-oqlNGDUvdF6d/7xft0peF74dTCsXd5r8MPfs/oydtkE=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "2183928b2651b3196311c655fb4857ab7b98e07f",
+        "rev": "4b4517b5d545f08d032822a1f104803dc539c516",
         "type": "github"
       },
       "original": {
@@ -363,11 +363,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699347281,
-        "narHash": "sha256-U7xEi3TfmZ3zqi4o/RL5k1ec2ig/sPTAHrYxZxoTzzE=",
+        "lastModified": 1699438354,
+        "narHash": "sha256-nHKpSU9PIiyNNdg5vaZNV6tcaQe0AkT0rEhh8Z7Ww3U=",
         "ref": "refs/heads/main",
-        "rev": "92dc043130edf21113e81bd8af94eb35a2f90d34",
-        "revCount": 109,
+        "rev": "21090869b182cbb1ce0c3e5072f74b3ce9708641",
+        "revCount": 110,
         "type": "git",
         "url": "ssh://git@github.com/misumisumi/nixos-private-config.git"
       },
