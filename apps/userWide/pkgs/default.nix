@@ -12,57 +12,51 @@
 with lib;
 with pkgs;
 [
-  mesa-demos # Graphics utility
-  vulkan-tools
+  mesa-demos # OpenGL utility
+  vulkan-tools # vulkan utility
 
   firefox # Browser
 ]
 ++ optionals (isMidium || isLarge || isFull) [
   i3lock # Screen Locker
   nomacs # Image Viewer
-  font-manager
+  font-manager # font-manger
   gnome.simple-scan # Scaner
   baobab # Disk Usage Analyzer
   copyq # Clipboard Manager
 ]
 ++ optionals (isLarge || isFull) [
-  gnuplot # CLI Plotter
-  pympress # PDF reader for presentations
-  zathura # PDF viewer
+  audacity # GUI Sound Editor
+  blender # 3DCG modeling tool
+  discord # chat
+  element-desktop # matrix chat
   evince # PDF viewer
-  poppler_utils # PDF utils
-
+  gimp # image editor
+  gnuplot # CLI Plotter
+  gpick # color picker
+  inkscape # SVG editor
+  krita # painting tool
   libreoffice # Office
+  poppler_utils # PDF utils
+  pympress # PDF reader for presentations
   remmina # Remote desktop client
-  zotero # Paper managiment tool
-
+  slack # chat
   spotify # Music Streaming
   spotify-tui # CLI tools for spotify
-
-  # Communications
-  discord
-  slack
-  element-desktop
-  zoom-us
-
-  # Creative Utility
-  audacity # GUI Sound Editor
-  blender
-  krita
-  gpick
-  gimp
-  inkscape
+  zathura # PDF viewer
+  zoom-us # video conferencing app
+  zotero # Paper managiment tool
 ]
 ++ optionals isFull [
-  # (vivaldi.override {proprietaryCodecs = true;}) # Browser
-  wavesurfer # pkgs from Sumi-Sumi/flakes
+  # sidequest                     # Meta Quest side loading tool
   android-tools
+  carla
   ferdium # One place, Some webapp
-  unityhub
   juce # VST plugin flamework
   matlab # Followed by nix-matlab
-  carla
-  # sidequest                     # Meta Quest side loading tool
-
+  unityhub
   vrc-get-latest # Unofficial VRChat package manager
+  wavesurfer # pkgs from Sumi-Sumi/flakes
+  yabridge # A modern and transparent way to use Windows VST2 and VST3 plugins on Linux
+  yabridgectl # A modern and transparent way to use Windows VST2 and VST3 plugins on Linux
 ]
