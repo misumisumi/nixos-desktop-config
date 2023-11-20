@@ -17,7 +17,6 @@
     pulseaudio
     pavucontrol
     paprefs
-    cadence
     portaudio
   ];
   # environment.etc."pipewire/pipewire-pulse.conf".source = ./pipewire-conf/pipewire-pulse.conf;
