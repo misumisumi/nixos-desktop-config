@@ -1,3 +1,0 @@
-[
-  ./obs-studio.nix
-]

@@ -8,6 +8,6 @@
     ../common/pipewire.nix
     ../common/musnix.nix
     ../common/printer.nix
-    ../../apps/systemWide/wm/qtile
+    ../../apps/wm/qtile
   ];
 }

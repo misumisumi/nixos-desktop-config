@@ -1,10 +1,13 @@
 { config, ... }: {
   boot = {
+    loader.timeout = 10;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    supportedFilesystems = [ "zfs" ];
+    zfs.forceImportRoot = false;
     tmp = {
       useTmpfs = true;
       tmpfsSize = "80%";
     };
-    loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
@@ -13,7 +16,6 @@
       "snd-aloop"
     ];
   };
-  programs.nix-ld.enable = true;
   nix = {
     settings = {
       cores = 4;

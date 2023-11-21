@@ -14,6 +14,8 @@
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
       kernelModules = [ "dm-snapshot" ];
+      kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+      supportedFilesystems = [ "ntfs" ];
       luks.devices = {
         luksroot = {
           device = "/dev/disk/by-partlabel/LUKSROOT";

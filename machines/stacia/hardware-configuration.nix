@@ -22,9 +22,6 @@
         };
       };
     };
-    kernelPackages = lib.mkForce config.boot.zfs.package.latestCompatibleLinuxPackages;
-    supportedFilesystems = [ "zfs" ];
-    zfs.forceImportRoot = false;
     #resumeDevice = "/.swapfile";
     #kernelParams = [ "resume_offset=27234304" ];
   };

@@ -2,9 +2,21 @@
   description = "Each my machine NixOS System Flake Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flakes.url = "github:misumisumi/flakes";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    sops-nix.url = "github:Mic92/sops-nix";
+    nvimdots.url = "github:misumisumi/nvimdots";
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     musnix = {
       url = "github:musnix/musnix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,25 +25,16 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
+    dotfiles = {
+      url = "github:misumisumi/nixos-common-config/split-hm";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    common-config.url = "github:misumisumi/nixos-common-config";
-    nvimdots.url = "github:misumisumi/nvimdots";
-    flakes.url = "github:misumisumi/flakes";
-    private-config = {
-      url = "git+ssh://git@github.com/misumisumi/nixos-private-config.git";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+      inputs.nur.follows = "nur";
+      inputs.flakes.follows = "flakes";
     };
   };
 
-  outputs = inputs @ { self, ... }:
+  outputs = inputs @ { self, flake-parts, ... }:
     let
       user = "sumi";
       stateVersion = "23.11"; # For Home Manager
@@ -49,36 +52,48 @@
             [
               inputs.nur.overlay
               inputs.nixgl.overlay
-              inputs.nix-matlab.overlay
               inputs.flakes.overlays.default
-              inputs.private-config.overlays.default
             ]
             ++ (import ./patches { inherit nixpkgs-stable; });
         };
     in
-    {
-      nixConfig = {
-        extra-substituters = [
-          "https://misumisumi.cachix.org"
-          "https://cuda-maintainers.cachix.org"
+    flake-parts.lib.mkFlake
+      { inherit inputs; }
+      {
+        imports = [
+          inputs.devshell.flakeModule
         ];
-        extra-trusted-public-keys = [
-          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
-          "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
-        ];
+        flake = {
+          nixConfig = {
+            extra-substituters = [
+              "https://misumisumi.cachix.org"
+            ];
+            extra-trusted-public-keys = [
+              "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+            ];
+          };
+          nixosConfigurations = (
+            import ./machines {
+              inherit (inputs.nixpkgs) lib;
+              inherit inputs overlay stateVersion user;
+            }
+          );
+        };
+        systems = [ "x86_64-linux" ];
+        perSystem = { config, pkgs, system, ... }: rec{
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ ];
+            config.allowUnfree = true;
+          };
+          devshells.default = {
+            packages = with pkgs; [
+              age
+              sops
+              ssh-to-age
+            ];
+          };
+        };
       };
-      nixosConfigurations = (
-        import ./machines {
-          inherit (inputs.nixpkgs) lib;
-          inherit inputs overlay stateVersion user;
-        }
-      );
-      homeConfigurations = (
-        import ./hm {
-          inherit (inputs.nixpkgs) lib;
-          inherit inputs overlay stateVersion user;
-        }
-      );
-    };
 }
 

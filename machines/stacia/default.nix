@@ -1,13 +1,23 @@
 {
   imports = [
+    ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
-    ./gpu.nix
-    ./virtualisation.nix
     ./own-system-conf.nix
-    ../common/pipewire.nix
-    ../common/musnix.nix
-    ../common/printer.nix
-    ../../apps/systemWide/wm/qtile
+    ./virtualisation.nix
+    ../common
+    ../../system
+    ../../system/bluetooth
+    ../../system/pipewire
+    ../../system/musnix
+    ../../apps/documentation
+    ../../apps/nix-ld
+    ../../apps/pkgs
+    ../../apps/printer
+    ../../apps/programs
+    ../../apps/services
+    ../../apps/sops
+    ../../apps/ssh
+    ../../apps/wm/qtile
   ];
 }
