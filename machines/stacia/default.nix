@@ -3,7 +3,8 @@
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
-    ./own-system-conf.nix
+    ./sops.nix
+    ./system.nix
     ./virtualisation.nix
     ../common
     ../../system

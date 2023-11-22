@@ -8,18 +8,30 @@ keys:
     - &stacia age12994fjtztfkz06rtg0w6gxrzne3z0y223zumu293jtdsfukukussq233na
     - &zephyrus: age1lc2dnrqr84rat2aqmm9g78mssuxm40vsswr7lnaz59n97qjgg9csx2wekj
 creation_rules:
-  - path_regex: secrets/hosts/mother.yaml
+  - path_regex: sops/secrets/hosts/mother/secrets.yaml
     key_groups:
       - age:
           - *sumi_mother
           - *mother
-  - path_regex: secrets/hosts/stacia.yaml
+  - path_regex: sops/secrets/hosts/stacia/secrets.yaml
     key_groups:
       - age:
           - *sumi_stacia
           - *stacia
-  - path_regex: secrets/hosts/zephyrus.yaml
+  - path_regex: sops/secrets/hosts/zephyrus/secrets.yaml
     key_groups:
       - age:
+          - *sumi_zephyrus
+          - *zephyrus
+  - path_regex: sops/secrets/network/wireless
+    key_groups:
+      - age:
+          - *sumi_zephyrus
+          - *zephyrus
+  - path_regex: sops/secrets/openfortivpn/config
+    key_groups:
+      - age:
+          - *sumi_mother
+          - *mother
           - *sumi_zephyrus
           - *zephyrus
