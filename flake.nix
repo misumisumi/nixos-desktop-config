@@ -4,11 +4,12 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     flakes.url = "github:misumisumi/flakes";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    sops-nix.url = "github:Mic92/sops-nix";
     nvimdots.url = "github:misumisumi/nvimdots";
+    sops-nix.url = "github:Mic92/sops-nix";
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,11 +27,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "github:misumisumi/nixos-common-config/split-hm";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-      inputs.nur.follows = "nur";
+      url = "github:misumisumi/nixos-common-config";
+      # url = "path:/home/sumi/Templates/nix/nixos-common-config";
       inputs.flakes.follows = "flakes";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixgl.follows = "nixgl";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nur.follows = "nur";
+      inputs.nvimdots.follows = "nvimdots";
+      inputs.sops-nix.follows = "sops-nix";
     };
   };
 
@@ -87,6 +93,15 @@
             config.allowUnfree = true;
           };
           devshells.default = {
+            commands = [
+              {
+                help = "update keys of sops secrets";
+                name = "update-keys";
+                command = ''
+                  find sops/secrets -type f | xargs -I{} sops updatekeys --yes {}
+                '';
+              }
+            ];
             packages = with pkgs; [
               age
               sops
