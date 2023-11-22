@@ -1,4 +1,5 @@
 { config, ... }: {
+  networking.hostId = "7dfa348e";
   boot = {
     loader.timeout = 10;
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;

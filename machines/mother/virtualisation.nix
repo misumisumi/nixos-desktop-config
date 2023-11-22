@@ -1,10 +1,10 @@
 {
   imports = [
-    ../../apps/systemWide/virtualisation/libvirt
-    ../../apps/systemWide/virtualisation/lxd
-    ../../apps/systemWide/virtualisation/podman
-    ../../apps/systemWide/virtualisation/singularity
-    ../../apps/systemWide/virtualisation/waydroid
+    ../../apps/virtualisation/libvirt
+    ../../apps/virtualisation/lxd
+    ../../apps/virtualisation/podman
+    ../../apps/virtualisation/singularity
+    ../../apps/virtualisation/waydroid
   ];
   virtualisation = {
     vfio = {

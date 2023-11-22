@@ -1,13 +1,25 @@
 {
   imports = [
+    ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
-    ./gpu.nix
+    ./sops.nix
+    ./system.nix
     ./virtualisation.nix
-    ./own-system-conf.nix
-    ../common/pipewire.nix
-    ../common/musnix.nix
-    ../common/printer.nix
+    ../common
+    ../../system
+    ../../system/bluetooth
+    ../../system/pipewire
+    ../../system/musnix
+    ../../apps/documentation
+    ../../apps/nix-ld
+    ../../apps/openfortivpn
+    ../../apps/pkgs
+    ../../apps/printer
+    ../../apps/programs
+    ../../apps/services
+    ../../apps/sops
+    ../../apps/ssh
     ../../apps/wm/qtile
   ];
 }

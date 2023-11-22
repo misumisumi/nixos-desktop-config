@@ -16,16 +16,19 @@ creation_rules:
   - path_regex: sops/secrets/hosts/stacia/secrets.yaml
     key_groups:
       - age:
+          - *sumi_mother
           - *sumi_stacia
           - *stacia
   - path_regex: sops/secrets/hosts/zephyrus/secrets.yaml
     key_groups:
       - age:
+          - *sumi_mother
           - *sumi_zephyrus
           - *zephyrus
   - path_regex: sops/secrets/network/wireless
     key_groups:
       - age:
+          - *sumi_mother
           - *sumi_zephyrus
           - *zephyrus
   - path_regex: sops/secrets/openfortivpn/config

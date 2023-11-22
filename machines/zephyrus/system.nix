@@ -2,7 +2,10 @@
 , pkgs
 , ...
 }: {
+  networking.hostId = "dade0dc9";
   boot = {
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    supportedFilesystems = [ "ntfs" "zfs" ];
     tmp = {
       useTmpfs = true;
       tmpfsSize = "80%";
@@ -18,7 +21,6 @@
   programs.nix-ld.enable = true;
   services = {
     asusd = {
-      enable = true;
       enableUserService = true;
       profileConfig = "quiet";
     };

@@ -3,12 +3,12 @@
 , user
 , ...
 }: {
+  networking.hostId = "bcf1bfe4";
   boot = {
-    tmp = {
-      useTmpfs = true;
-      tmpfsSize = "50%";
-    };
     loader.timeout = 10;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    supportedFilesystems = [ "zfs" ];
+    zfs.forceImportRoot = false;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
@@ -16,22 +16,12 @@
       "v4l2loopback"
       "snd-aloop"
     ];
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "50%";
+    };
   };
-  programs.nix-ld.enable = true;
-  security.sudo = {
-    extraRules = [
-      {
-        users = [ "${user}" ];
-        commands = [
-          {
-            command = "${pkgs.xp-pen-driver}/opt/xp-pen-driver";
-            options = [ "SETENV" "NOPASSWD" ];
-          }
-        ];
-      }
-    ];
-  };
-
+  environment.systemPackages = with pkgs; [ xp-pen-driver ];
   nix = {
     settings = {
       cores = 6;

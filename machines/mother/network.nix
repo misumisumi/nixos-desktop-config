@@ -1,7 +1,4 @@
 { hostname, ... }: {
-  imports = [
-    ../common/network.nix
-  ];
   services = {
     nscd = {
       enable = true;
@@ -23,26 +20,26 @@
       allowedTCPPorts = [
         # 4713 # PulseAudio
       ];
-      # allowedUDPPortRanges = [
-      #   {
-      #     from = 1714;
-      #     to = 1764; # KDE-connect
-      #   }
-      #   {
-      #     from = 60000;
-      #     to = 60011; # Mosh
-      #   }
-      # ];
-      # allowedTCPPortRanges = [
-      #   {
-      #     from = 1714;
-      #     to = 1764; # KDE-connect
-      #   }
-      #   {
-      #     from = 60000;
-      #     to = 60011; # Mosh
-      #   }
-      # ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764; # KDE-connect
+        }
+        # {
+        #   from = 60000;
+        #   to = 60011; # Mosh
+        # }
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764; # KDE-connect
+        }
+        # {
+        #   from = 60000;
+        #   to = 60011; # Mosh
+        # }
+      ];
     };
   };
 

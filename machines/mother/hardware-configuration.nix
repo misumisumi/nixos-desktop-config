@@ -10,7 +10,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot = {
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
       kernelModules = [ "dm-snapshot" ];
@@ -22,10 +21,7 @@
         };
       };
     };
-    supportedFilesystems = [ "zfs" ];
-    zfs.forceImportRoot = false;
   };
-  networking.hostId = "bcf1bfe4";
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/mother-root";

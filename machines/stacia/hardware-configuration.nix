@@ -25,7 +25,6 @@
     #resumeDevice = "/.swapfile";
     #kernelParams = [ "resume_offset=27234304" ];
   };
-  networking.hostId = "7dfa348e";
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/stacia-root";
