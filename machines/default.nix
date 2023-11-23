@@ -75,6 +75,7 @@ then {
 else {
   mother = settings {
     hostname = "mother";
+    scheme = "full";
     inherit user;
   };
   zephyrus =
