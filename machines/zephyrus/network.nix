@@ -25,7 +25,7 @@
       networks =
         {
           "Pixel_3770" = {
-            psk = "@PXIEL@";
+            psk = "@PIXEL@";
             priority = 100;
           };
           "SHIRASAGI_PR@NHK" = {

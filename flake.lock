@@ -73,11 +73,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1700636317,
-        "narHash": "sha256-CHNugGg78RX85yjrHGt4bR8pawsKSCRdH7g9uee5N6A=",
+        "lastModified": 1700763967,
+        "narHash": "sha256-I8jPNT8YRzkGWgHRStVoLu+w0OR15PqKr2MQFJFdvco=",
         "owner": "misumisumi",
         "repo": "nixos-common-config",
-        "rev": "b093d64facc61b424fa98c3cd3b48bafc5eb3af1",
+        "rev": "388655c252e002d23b8f2f786dc13c07e0c8c706",
         "type": "github"
       },
       "original": {

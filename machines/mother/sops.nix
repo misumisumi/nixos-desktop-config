@@ -7,7 +7,10 @@
     };
     defaultSopsFile = ../../sops/secrets/hosts/mother/secrets.yaml;
     secrets = {
-      "openfortivpn/config".sopsFile = ../../sops/secrets/openfortivpn/config;
+      "openfortivpn/config" = {
+        sopsFile = ../../sops/secrets/openfortivpn/config;
+        format = "binary";
+      };
       password.neededForUsers = true;
     };
   };

@@ -81,6 +81,7 @@ else {
     settings
       {
         hostname = "zephyrus";
+        scheme = "full";
         inherit user;
       };
   stacia =
