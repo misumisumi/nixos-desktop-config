@@ -6,7 +6,7 @@
     ./sops.nix
     ./system.nix
     ./virtualisation.nix
-    ../common
+    ../init
     ../../system
     ../../system/bluetooth
     ../../system/pipewire
