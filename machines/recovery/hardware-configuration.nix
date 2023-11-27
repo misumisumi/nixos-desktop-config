@@ -13,10 +13,10 @@
 
   boot.initrd.availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  # boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  # boot.extraModulePackages = [ ];
   # boot.resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
   # boot.kernelParams = [ "resume_offset=resume_size" ];
-  boot.extraModulePackages = [ ];
   boot.initrd.luks.devices = {
     luksroot = {
       device = "/dev/disk/by-partlabel/GENERALLUKSROOT";

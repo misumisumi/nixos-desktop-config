@@ -1,17 +1,16 @@
-{ wm, ... }: {
+{ lib, wm, ... }: {
   imports =
     [
+      ./gpu.nix
       ./hardware-configuration.nix
       ./network.nix
-      ./gpu.nix
-      ./own-system-conf.nix
-      ../../common/pulseaudio.nix
-      ../../common/printer.nix
-    ]
-    ++ (import ../../../apps/systemWide/wm/${wm});
-  nix = {
-    extraOptions = ''
-      binary-caches-parallel-connections = 4
-    '';
-  };
+      ./system.nix
+      ../init
+      ../../system
+      ../../system/bluetooth
+      ../../system/pulseaudio
+      ../../apps/documentation
+      ../../apps/pkgs
+      ../../apps/programs
+    ] ++ lib.optional (wm == "gnome") ../../apps/gnome;
 }

@@ -1,5 +1,6 @@
 # Default normal user config
 { config
+, lib
 , hostname
 , user
 , pkgs
@@ -14,7 +15,6 @@
   users.users.${user} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    hashedPasswordFile = config.sops.secrets.password.path;
     extraGroups = [ "wheel" "uucp" "kvm" "input" "audio" "video" "scanner" "lp" "lxd" ];
     useDefaultShell = true;
     subUidRanges = [
@@ -30,5 +30,10 @@
         startGid = 300000;
       }
     ];
-  };
+  } // lib.optionalAttrs (builtins.hasAttr "password" config.sops.secrets) {
+    hashedPasswordFile = config.sops.secrets.password.path;
+  } // lib.optionalAttrs (! builtins.hasAttr "password" config.sops.secrets) {
+    password = "nixos";
+  }
+  ;
 }

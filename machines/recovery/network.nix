@@ -9,7 +9,6 @@
       enable = true;
       dhcp = "dhcpcd";
       wifi.powersave = false;
-      firewallBackend = "nftables";
     };
 
     dhcpcd = {

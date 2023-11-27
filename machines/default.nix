@@ -2,11 +2,10 @@
 , overlay
 , stateVersion
 , user
-, isGeneral ? false
 , ...
 }:
 let
-  lib = inputs.nixpkgs.lib;
+  inherit (inputs.nixpkgs) lib;
   settings =
     { hostname
     , user
@@ -21,7 +20,7 @@ let
       with lib;
       nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs hostname user stateVersion wm; }; # specialArgs give some args to modules
+        specialArgs = { inherit inputs hostname user stateVersion useNixOSWallpaper wm; }; # specialArgs give some args to modules
         modules =
           [
             (overlay { inherit system; })
@@ -52,27 +51,19 @@ let
           ];
       };
 in
-if isGeneral
-then {
+{
   gnome = settings {
-    hostname = "desktop";
-    user = "general";
-    rootDir = "general";
+    hostname = "recovery";
+    user = "nixos";
     wm = "gnome";
-  };
-  qtile = settings {
-    hostname = "desktop";
-    user = "general";
-    rootDir = "general";
-    wm = "qtile";
+    scheme = "full";
   };
   minimal = settings {
-    hostname = "minimal";
-    user = "general";
-    rootDir = "general";
+    hostname = "recovery";
+    user = "nixos";
+    wm = "";
+    scheme = "minimal";
   };
-}
-else {
   mother = settings {
     hostname = "mother";
     scheme = "full";

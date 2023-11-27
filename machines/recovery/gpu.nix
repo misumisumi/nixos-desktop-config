@@ -3,7 +3,6 @@
     xserver = {
       videoDrivers = [
         "amdgpu"
-        "radeon"
         "nvidia"
         "qxl"
         "modesetting"
