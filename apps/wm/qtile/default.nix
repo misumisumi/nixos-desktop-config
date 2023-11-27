@@ -3,10 +3,6 @@
 , ...
 }:
 let
-  png =
-    if hostname != "general"
-    then ../wallpapers/background.png
-    else "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
   script = pkgs.writeShellApplication {
     name = "open-wezterm-here";
     text = ''
@@ -22,10 +18,9 @@ let
   };
 in
 {
-  imports = [ ../common/xserver.nix ];
+  imports = [ ../../xserver ];
   environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR = "${nixos-gsettings-overrides}/share/gsettings-schemas/nixos-gsettings-overrides/glib-2.0/schemas";
   services.xserver.displayManager = {
     defaultSession = "none+xsession";
-    lightdm.background = png;
   };
 }
