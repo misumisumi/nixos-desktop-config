@@ -34,7 +34,7 @@ let
             {
               home-manager = {
                 useGlobalPkgs = true;
-                useUserPackages = false;
+                useUserPackages = true;
                 extraSpecialArgs = {
                   inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
                 };
