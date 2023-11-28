@@ -73,16 +73,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1701077242,
-        "narHash": "sha256-6CFtA/DJQ9Ckdlvjatjnpb0O9ApOurIHcFQcNt1ON+k=",
+        "lastModified": 1701156879,
+        "narHash": "sha256-IvXcf5aqdERoFKp7ijofeXUr0jz48Hia3ayUF6UmJq8=",
         "owner": "misumisumi",
-        "repo": "nixos-common-config",
-        "rev": "ed7b83ca249b9a1e96ab2b4cbad54e5e115fe571",
+        "repo": "home-manager-config",
+        "rev": "30154b96a38a25cf4ab20339483b8da4056284e7",
         "type": "github"
       },
       "original": {
         "owner": "misumisumi",
-        "repo": "nixos-common-config",
+        "repo": "home-manager-config",
         "type": "github"
       }
     },

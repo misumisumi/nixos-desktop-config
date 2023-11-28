@@ -23,7 +23,6 @@ let
         specialArgs = { inherit inputs hostname user stateVersion useNixOSWallpaper wm; }; # specialArgs give some args to modules
         modules =
           [
-            (overlay { inherit system; })
             inputs.nur.nixosModules.nur
             inputs.musnix.nixosModules.musnix
             inputs.sops-nix.nixosModules.sops
@@ -34,8 +33,8 @@ let
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = false;
-                useUserPackages = true;
+                useGlobalPkgs = true;
+                useUserPackages = false;
                 extraSpecialArgs = {
                   inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
                 };

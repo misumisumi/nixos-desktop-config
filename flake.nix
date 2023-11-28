@@ -31,7 +31,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "github:misumisumi/nixos-common-config";
+      url = "github:misumisumi/home-manager-config";
       # url = "path:/home/sumi/Templates/nix/nixos-common-config";
       inputs = {
         flakes.follows = "flakes";

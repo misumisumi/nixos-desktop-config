@@ -1,13 +1,11 @@
-{ pkgs
+{ config
+, pkgs
 , inputs
+, system
 , stateVersion
 , ...
-}: {
-  nixpkgs.config = {
-    allowUnfree = true; # Allow proprietary software.
-    allowBroken = true;
-  };
-
+}:
+{
   nix = {
     settings = {
       auto-optimise-store = true; # Optimise syslinks
@@ -35,6 +33,23 @@
       keep-outputs          = true
       keep-derivations      = true
     '';
+  };
+  nixpkgs = {
+    overlays = [
+      inputs.nur.overlay
+      inputs.nixgl.overlay
+      inputs.flakes.overlays.default
+    ]
+    ++ (
+      let
+        nixpkgs-stable = import inputs.nixpkgs-stable {
+          inherit (config.nixpkgs) system;
+          config = { allowUnfree = true; };
+        };
+      in
+      import ../../patches { inherit nixpkgs-stable; }
+    );
+    config = { allowUnfree = true; };
   };
 
   system = {
