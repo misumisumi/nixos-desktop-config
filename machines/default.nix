@@ -33,19 +33,21 @@ let
 
             inputs.home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = false;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
-              };
-              home-manager.sharedModules = [
-                inputs.flakes.nixosModules.for-hm
-                inputs.nvimdots.nixosModules.nvimdots
-                inputs.dotfiles.homeManagerModules.dotfiles
-                inputs.sops-nix.homeManagerModules.sops
-              ];
-              home-manager.users."${user}" = {
-                dotfilesActivation = true;
+              home-manager = {
+                useGlobalPkgs = false;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
+                };
+                sharedModules = [
+                  inputs.flakes.nixosModules.for-hm
+                  inputs.nvimdots.nixosModules.nvimdots
+                  inputs.dotfiles.homeManagerModules.dotfiles
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
+                users."${user}" = {
+                  dotfilesActivation = true;
+                };
               };
             }
           ];

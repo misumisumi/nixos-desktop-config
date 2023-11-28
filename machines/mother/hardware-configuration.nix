@@ -22,28 +22,28 @@
       };
     };
   };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/mother-root";
-    fsType = "ext4";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/mother-root";
+      fsType = "ext4";
+    };
+    "/nix" = {
+      device = "/dev/disk/by-label/mother-nix";
+      fsType = "ext4";
+    };
+    "/var" = {
+      device = "/dev/disk/by-label/mother-var";
+      fsType = "ext4";
+    };
+    "/home" = {
+      device = "/dev/disk/by-label/mother-home";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/mo-boot";
+      fsType = "vfat";
+    };
   };
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/mother-nix";
-    fsType = "ext4";
-  };
-  fileSystems."/var" = {
-    device = "/dev/disk/by-label/mother-var";
-    fsType = "ext4";
-  };
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/mother-home";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/mo-boot";
-    fsType = "vfat";
-  };
-
   swapDevices = [
     {
       device = "/dev/mapper/VolGroup00-lvolswap";

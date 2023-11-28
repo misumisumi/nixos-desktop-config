@@ -11,43 +11,46 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  # boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
-  # boot.extraModulePackages = [ ];
-  # boot.resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
-  # boot.kernelParams = [ "resume_offset=resume_size" ];
-  boot.initrd.luks.devices = {
-    luksroot = {
-      device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
-      preLVM = true;
-      allowDiscards = true;
+  boot = {
+    initrd = {
+      availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
+      kernelModules = [ "dm-snapshot" ];
+      luks.devices = {
+        luksroot = {
+          device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
+          preLVM = true;
+          allowDiscards = true;
+        };
+      };
+    };
+    # kernelModules = [ "kvm-amd" "kvm-intel" ];
+    # extraModulePackages = [ ];
+    # resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
+    # kernelParams = [ "resume_offset=resume_size" ];
+  };
+
+  fileSystems = {
+    "/" = {
+      label = "general-root";
+      fsType = "ext4";
+    };
+    "/nix" = {
+      label = "general-nix";
+      fsType = "ext4";
+    };
+    "/var" = {
+      label = "general-var";
+      fsType = "ext4";
+    };
+    "/home" = {
+      label = "general-home";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      label = "ge-boot";
+      fsType = "vfat";
     };
   };
-
-  fileSystems."/" = {
-    label = "general-root";
-    fsType = "ext4";
-  };
-  fileSystems."/nix" = {
-    label = "general-nix";
-    fsType = "ext4";
-  };
-  fileSystems."/var" = {
-    label = "general-var";
-    fsType = "ext4";
-  };
-
-  fileSystems."/home" = {
-    label = "general-home";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    label = "ge-boot";
-    fsType = "vfat";
-  };
-
   swapDevices = [
     {
       device = "/dev/mapper/VolGroupGeneral-swap";

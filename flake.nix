@@ -29,14 +29,16 @@
     dotfiles = {
       url = "github:misumisumi/nixos-common-config";
       # url = "path:/home/sumi/Templates/nix/nixos-common-config";
-      inputs.flakes.follows = "flakes";
-      inputs.home-manager.follows = "home-manager";
-      inputs.nixgl.follows = "nixgl";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nur.follows = "nur";
-      inputs.nvimdots.follows = "nvimdots";
-      inputs.sops-nix.follows = "sops-nix";
+      inputs = {
+        flakes.follows = "flakes";
+        home-manager.follows = "home-manager";
+        nixgl.follows = "nixgl";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+        nixpkgs.follows = "nixpkgs";
+        nur.follows = "nur";
+        nvimdots.follows = "nvimdots";
+        sops-nix.follows = "sops-nix";
+      };
     };
   };
 
@@ -78,12 +80,10 @@
               "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
             ];
           };
-          nixosConfigurations = (
-            import ./machines {
-              inherit (inputs.nixpkgs) lib;
-              inherit inputs overlay stateVersion user;
-            }
-          );
+          nixosConfigurations = import ./machines {
+            inherit (inputs.nixpkgs) lib;
+            inherit inputs overlay stateVersion user;
+          };
         };
         systems = [ "x86_64-linux" ];
         perSystem = { config, pkgs, system, ... }: rec{
