@@ -1,10 +1,6 @@
 { config, ... }: {
-  networking.hostId = "7dfa348e";
   boot = {
     loader.timeout = 10;
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    supportedFilesystems = [ "zfs" ];
-    zfs.forceImportRoot = false;
     tmp = {
       useTmpfs = true;
       tmpfsSize = "80%";

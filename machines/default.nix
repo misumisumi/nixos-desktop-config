@@ -60,7 +60,7 @@ in
     wm = "gnome";
     scheme = "full";
   };
-  minimal = settings {
+  tty-only = settings {
     hostname = "recovery";
     user = "nixos";
     wm = "";

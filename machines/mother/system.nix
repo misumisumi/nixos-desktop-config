@@ -3,12 +3,8 @@
 , user
 , ...
 }: {
-  networking.hostId = "bcf1bfe4";
   boot = {
     loader.timeout = 10;
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    supportedFilesystems = [ "zfs" ];
-    zfs.forceImportRoot = false;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];

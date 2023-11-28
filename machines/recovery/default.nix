@@ -5,6 +5,7 @@
       ./hardware-configuration.nix
       ./network.nix
       ./system.nix
+      ./zfs.nix
       ../init
       ../../system
       ../../system/bluetooth

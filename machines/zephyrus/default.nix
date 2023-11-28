@@ -8,6 +8,7 @@
     ./sops.nix
     ./system.nix
     ./virtualisation.nix
+    ./zfs.nix
     ../init
     ../../system
     ../../system/bluetooth
