@@ -5,57 +5,52 @@ nix の環境へようこそ!!
 
 私の設定の一部を利用して NixOS を試すことができます。  
 現在、NixOS 環境のみサポートしています。  
-将来的に他のディストリブーション(user home config)、macOS をサポートする予定です。
+将来的にmacOS をサポートする予定です。
 
 ## 説明
 
 - このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
-- リカバリー用に作成した環境(gnome or qtile or CLI only)を試用することができます。
-  - root の[flake.nix](./flake.nix)は private repository を含むため使用できません。  
-    詳しくはインストールガイドを見てください。
-- 各アプリの設定は[apps](./apps)にあります。
+- リカバリー用に作成した環境(gnome or CLI only)を試用することができます。
+- システムにインストールされるパッケージの設定は[apps](./apps)で管理されています。
+- ユーザーにインストールされるパッケージの設定は別リポジトリ: [home-manager-config]()で管理されています。
 - 各マシンの設定は[machines](./machines)にあります。
-  - mother, stacia, zephyrus は private-repository を含むため使用できません。
 
 ```
 machines
-├── common # 各マシン共通の設定
-├── general # 汎用環境(リカバリー用)
-│   ├── desktop # gnome or qtile
-│   └── minimal # CLI only
-├── mother # My Desktop
-├── stacia # My GPU server with desktop
-└── zephyrus # My Laptop
+├── init      # 共通設定
+├── mother    # メインPC
+├── recovery  # リカバリー用
+├── stacia    # 研究室PC
+└── zephyrus  # ラップトップ
 ```
 
-## インストールガイド
+## Installation Guide
 
 ### NixOS
 
-- UEFI/systemd-boot によるブート、LVM on LUKS によるディスク暗号化を使用
-- 3 つの環境を使うことができます。
+- Boot via UEFI/systemd-boot, use disk encryption via LVM on LUKS
+- Three environments can be used
   - gnome
-  - qtile
-  - minimal (CLI only)
+  - tty-only
 
-1. [公式](https://nixos.org/download.html)から Install media のダウンロード
-2. ISO の起動とネットワーク接続の確認
+1. download Install media from [official](https://nixos.org/download.html)
+2. boot ISO and check network connection
    - run `ip -c a and ping 8.8.8.8`
-   - WiFi の設定は`nmcli`または`wpa_supplicant`
-3. パーティションの作成とラベルの付与
+   - wireless settings use `nmcli` or `wpa_supplicant`
+3. make partition and add partition label
 
-   - GPT パーティションラベルを使用
-   - LVM on LUKS の設定は[archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照
+   - use GPT partition label
+   - Please see [archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照 how to make LVM on LUKS
 
    |      For       |       Partition Type        | Partition label |     Suggested size      |
    | :------------: | :-------------------------: | :-------------: | :---------------------: |
    |     /boot      | EFI system partition (ef00) |       \-        |          128MB          |
    | LUKS partition |      Linux LVM (8E00)       | GENERALLUKSROOT | Remainder of the device |
 
-   - LVM on LUKS パーティション
+   - partition of LVM on LUKS
 
-     - vfat label は`dosfslabel /dev/XXX <label>`で作成
-     - ext4 label は`e2label /dev/XXX <label>` で作成
+     - You can make vfat label at `dosfslabel /dev/XXX <label>`
+     - You can make ext4 label at`e2label /dev/XXX <label>`
 
      |  For  |    file system     |    label     |     Suggested size      |
      | :---: | :----------------: | :----------: | :---------------------: |
@@ -66,7 +61,7 @@ machines
      | /nix  |        ext4        | general-nix  |     more tharn 64GB     |
      | swap  | use swap partition |      \-      |           4GB           |
 
-4. ディスクマウント
+4. disk mount
 
 ```
 mount /dev/<for-root> /mnt
@@ -77,12 +72,13 @@ mount /dev/<for-var> /mnt/var
 mount /dev/<for-boot> /mnt/boot
 ```
 
-5. インストール
-   ```
-   cd machines/general
-   nix flake update
-   sudo nixos-install --flake .#{gnome|qtile|minimal}
-   ```
+5. Install.
+
+```
+cd machines/general
+nix flake update
+sudo nixos-install --flake . #{gnome|tty-only}
+```
 
 ## Appendix
 
@@ -110,10 +106,4 @@ mount /dev/<for-boot> /mnt/boot
 
 ## ToDO
 
-- [ ] add description of this repository
-- [ ] support other linux distributions (non NixOS)
 - [ ] support macOS
-
-```
-
-```
