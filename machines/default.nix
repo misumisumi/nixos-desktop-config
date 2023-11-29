@@ -1,5 +1,4 @@
 { inputs
-, overlay
 , stateVersion
 , user
 , ...
@@ -23,14 +22,12 @@ let
         specialArgs = { inherit inputs hostname user stateVersion useNixOSWallpaper wm; }; # specialArgs give some args to modules
         modules =
           [
-            inputs.nur.nixosModules.nur
-            inputs.musnix.nixosModules.musnix
-            inputs.sops-nix.nixosModules.sops
             ../modules
-
-            (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
-
             inputs.home-manager.nixosModules.home-manager
+            inputs.musnix.nixosModules.musnix
+            inputs.nur.nixosModules.nur
+            inputs.sops-nix.nixosModules.sops
+            (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
             {
               home-manager = {
                 useGlobalPkgs = true;

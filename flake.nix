@@ -32,7 +32,7 @@
     };
     dotfiles = {
       url = "github:misumisumi/home-manager-config";
-      # url = "path:/home/sumi/Templates/nix/nixos-common-config";
+      # url = "path:/home/sumi/Templates/nix/home-manager-config";
       inputs = {
         flakes.follows = "flakes";
         home-manager.follows = "home-manager";
@@ -50,24 +50,6 @@
     let
       user = "sumi";
       stateVersion = "23.11"; # For Home Manager
-
-      overlay =
-        { system }:
-        let
-          nixpkgs-stable = import inputs.nixpkgs-stable {
-            inherit system;
-            config = { allowUnfree = true; };
-          };
-        in
-        {
-          nixpkgs.overlays =
-            [
-              inputs.nur.overlay
-              inputs.nixgl.overlay
-              inputs.flakes.overlays.default
-            ]
-            ++ (import ./patches { inherit nixpkgs-stable; });
-        };
     in
     flake-parts.lib.mkFlake
       { inherit inputs; }
@@ -86,7 +68,7 @@
           };
           nixosConfigurations = import ./machines {
             inherit (inputs.nixpkgs) lib;
-            inherit inputs overlay stateVersion user;
+            inherit inputs stateVersion user;
           };
         };
         systems = [ "x86_64-linux" ];
