@@ -35,20 +35,20 @@
     '';
   };
   nixpkgs = {
-    overlays = [
-      inputs.nur.overlay
-      inputs.nixgl.overlay
-      inputs.flakes.overlays.default
-    ]
-    ++ (
+    overlays =
       let
         nixpkgs-stable = import inputs.nixpkgs-stable {
           inherit (config.nixpkgs) system;
           config = { allowUnfree = true; };
         };
       in
-      import ../../patches { inherit nixpkgs-stable; }
-    );
+      [
+        inputs.nur.overlay
+        inputs.nixgl.overlay
+        inputs.flakes.overlays.default
+        inputs.dotfiles.overlays.default
+        (import ../../patches { inherit nixpkgs-stable; })
+      ];
     config = { allowUnfree = true; };
   };
 
