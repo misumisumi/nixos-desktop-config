@@ -39,7 +39,7 @@
               cursorTheme = {
                 name = "Dracula-cursors";
                 package = pkgs.dracula-theme;
-                size = 24;
+                size = lib.mkDefault 24;
               };
               iconTheme = {
                 name = "Papirus-Dark";

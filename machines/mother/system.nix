@@ -18,6 +18,7 @@
     };
   };
   environment.systemPackages = with pkgs; [ xp-pen-driver ];
+  services.xserver.displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
   nix = {
     settings = {
       cores = 6;
