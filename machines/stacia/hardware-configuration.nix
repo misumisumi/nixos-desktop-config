@@ -22,35 +22,32 @@
         };
       };
     };
-    kernelPackages = lib.mkForce config.boot.zfs.package.latestCompatibleLinuxPackages;
-    supportedFilesystems = [ "zfs" ];
-    zfs.forceImportRoot = false;
     #resumeDevice = "/.swapfile";
     #kernelParams = [ "resume_offset=27234304" ];
   };
-  networking.hostId = "7dfa348e";
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/stacia-root";
-    fsType = "ext4";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/stacia-root";
+      fsType = "ext4";
+    };
+    "/nix" = {
+      device = "/dev/disk/by-label/stacia-nix";
+      fsType = "ext4";
+    };
+    "/var" = {
+      device = "/dev/disk/by-label/stacia-var";
+      fsType = "ext4";
+    };
+    "/home" = {
+      device = "/dev/disk/by-label/stacia-home";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/st-boot";
+      fsType = "vfat";
+    };
   };
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/stacia-nix";
-    fsType = "ext4";
-  };
-  fileSystems."/var" = {
-    device = "/dev/disk/by-label/stacia-var";
-    fsType = "ext4";
-  };
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/stacia-home";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/st-boot";
-    fsType = "vfat";
-  };
-
   swapDevices = [
     {
       device = "/dev/mapper/VolGroupStacia-lvolswap";

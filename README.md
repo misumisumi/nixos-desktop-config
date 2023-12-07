@@ -12,22 +12,18 @@ In the future, other distributions (user home config) and macOS will be supporte
 ## Description
 
 - This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes).
-- You can try the environment (gnome or qtile or CLI only) created for recovery.
-  - You can also try out [flake.nix](. /flake.nix) cannot be used because it contains a private repository.  
-    See the installation guide for details.
-- Settings for each app are located in [apps](. /apps).
-- The configuration for each machine is located in [machines](. /machines).
-  - mother, stacia and zephyrus cannot be used because they contain private-repository.
+- You can try out the environment created for recovery (gnome or CLI only).
+- The settings of packages installed on the system are managed in [apps](./apps).
+- Configuration of packages installed by users is managed in a separate repository: [home-manager-config]().
+- Settings for each machine are located in [machines](./machines).
 
 ```
 machines
-├── common # Settings common to each machine
-├── general # General environment for recovery
-│   ├── desktop # gnome or qtile
-│   └── minimal # CLI only
-├── mother # My Desktop
-├── stacia # My GPU server with desktop
-└── zephyrus # My Laptop
+├── init      # common settings
+├── mother    # Main desktop
+├── recovery  # For recovery
+├── stacia    # Work desktop
+└── zephyrus  # Laptop
 ```
 
 ## Installation Guide
@@ -37,8 +33,7 @@ machines
 - Boot via UEFI/systemd-boot, use disk encryption via LVM on LUKS
 - Three environments can be used
   - gnome
-  - qtile
-  - minimal (CLI only)
+  - tty-only
 
 1. download Install media from [official](https://nixos.org/download.html)
 2. boot ISO and check network connection
@@ -80,13 +75,12 @@ mount /dev/<for-boot> /mnt/boot
 ```
 
 5. Install.
-   ```
-   cd machines/general
-   nix flake update
-   sudo nixos-install --flake . #{gnome|qtile|minimal}
-   ```
 
-Translated with www.DeepL.com/Translator (free version)
+```
+cd machines/general
+nix flake update
+sudo nixos-install --flake . #{gnome|tty-only}
+```
 
 ## Appendix
 
@@ -116,6 +110,4 @@ Translated with www.DeepL.com/Translator (free version)
 
 ## ToDO
 
-- [ ] add description of this repository
-- [ ] support other linux distributions (non NixOS)
 - [ ] support macOS

@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   services = {
     xserver = {
+      exportConfiguration = true;
       videoDrivers = [
         "amdgpu"
         "nvidia"
@@ -13,7 +14,10 @@
   };
 
   hardware = {
-    nvidia.powerManagement.enable = true;
+    nvidia = {
+      powerManagement.enable = true;
+      nvidiaPersistenced = true;
+    };
     opengl.extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl

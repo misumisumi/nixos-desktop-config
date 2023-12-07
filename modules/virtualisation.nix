@@ -59,30 +59,32 @@ in
     scream.enable = mkEnableOption "Scream";
   };
 
-  config.systemd.tmpfiles.rules =
-    mapAttrsToList tmpfileEntry cfg.sharedMemoryFiles;
+  config = {
+    systemd.tmpfiles.rules =
+      mapAttrsToList tmpfileEntry cfg.sharedMemoryFiles;
 
-  config.boot.kernelParams = optionals cfg.hugepages.enable [
-    "default_hugepagesz=${cfg.hugepages.defaultPageSize}"
-    "hugepagesz=${cfg.hugepages.pageSize}"
-    "hugepages=${toString cfg.hugepages.numPages}"
-  ];
-  config.systemd.user = {
-    services.scream = {
-      enable = cfg.scream.enable;
-      description = "Scream Receiver (For windows VM)";
-      wantedBy = [ "default.target" ];
-      # wants = [ "network-online.target" "pulseaudio.service" ]; # For pulseaudio
-      wants = [ "network-online.target" "pipewire-pulse.service" ];
-      environment.IS_SERVICE = "1";
-      unitConfig = {
-        StartLimitInterval = 200;
-        StartLimitBurst = 2;
-      };
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
-        Restart = "on-failure";
+    boot.kernelParams = optionals cfg.hugepages.enable [
+      "default_hugepagesz=${cfg.hugepages.defaultPageSize}"
+      "hugepagesz=${cfg.hugepages.pageSize}"
+      "hugepages=${toString cfg.hugepages.numPages}"
+    ];
+    systemd.user = {
+      services.scream = {
+        inherit (cfg.scream) enable;
+        description = "Scream Receiver (For windows VM)";
+        wantedBy = [ "default.target" ];
+        # wants = [ "network-online.target" "pulseaudio.service" ]; # For pulseaudio
+        wants = [ "network-online.target" "pipewire-pulse.service" ];
+        environment.IS_SERVICE = "1";
+        unitConfig = {
+          StartLimitInterval = 200;
+          StartLimitBurst = 2;
+        };
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.scream}/bin/scream -i br0 -v";
+          Restart = "on-failure";
+        };
       };
     };
   };

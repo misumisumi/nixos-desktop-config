@@ -1,3 +1,0 @@
-[
-  ./xdg-mime.nix
-]
