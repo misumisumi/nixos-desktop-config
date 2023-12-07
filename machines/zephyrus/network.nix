@@ -41,11 +41,11 @@
             priority = 6;
           };
           "YUNET_EDU" = {
-            priority = 25;
+            priority = 21;
             psk = "@YUNET@";
           };
           "eduroam" = {
-            priority = 26;
+            priority = 20;
             auth = ''
               scan_ssid=1
               eap=PEAP
@@ -59,15 +59,15 @@
           };
           "kosakaken4" = {
             psk = "@KOSAKAKEN_NEW@";
-            priority = 22;
+            priority = 25;
           };
           "4CE67640131C" = {
             psk = "@KOSAKAKEN_OLD@";
-            priority = 21;
+            priority = 24;
           };
           "kosakaken2-5G" = {
-            psk = "@KOSAKAKEN_SEMI@";
-            priority = 22;
+            psk = "@KOSAKAKEN_SEMINAR@";
+            priority = 25;
           };
         };
     };
