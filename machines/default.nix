@@ -50,17 +50,17 @@ let
       };
 in
 {
-  gnome = settings {
+  recovery-gui = settings {
     hostname = "recovery";
     user = "nixos";
     wm = "gnome";
     scheme = "full";
   };
-  tty-only = settings {
+  recovery-cui = settings {
     hostname = "recovery";
     user = "nixos";
     wm = "";
-    scheme = "minimal";
+    scheme = "small";
   };
   mother = settings {
     hostname = "mother";
