@@ -8,56 +8,15 @@
 , ...
 }: {
   imports = [
+    (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
-
   boot = {
     initrd = {
-      availableKernelModules = [ "ahci" "nvme" "xhci_pci" "virtio_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" "virtio_blk" ];
+      availableKernelModules = [ "ahci" "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sr_mod" "sd_mod" ];
       kernelModules = [ "dm-snapshot" ];
-      luks.devices = {
-        luksroot = {
-          device = "/dev/disk/by-partlabel/GENERALLUKSROOT";
-          preLVM = true;
-          allowDiscards = true;
-        };
-      };
-    };
-    # kernelModules = [ "kvm-amd" "kvm-intel" ];
-    # extraModulePackages = [ ];
-    # resumeDevice = "/dev/mapper/VolGroupGeneral-swap";
-    # kernelParams = [ "resume_offset=resume_size" ];
-  };
-
-  fileSystems = {
-    "/" = {
-      label = "general-root";
-      fsType = "ext4";
-    };
-    "/nix" = {
-      label = "general-nix";
-      fsType = "ext4";
-    };
-    "/var" = {
-      label = "general-var";
-      fsType = "ext4";
-    };
-    "/home" = {
-      label = "general-home";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      label = "ge-boot";
-      fsType = "vfat";
     };
   };
-  swapDevices = [
-    {
-      device = "/dev/mapper/VolGroupGeneral-swap";
-      priority = 10;
-    }
-  ];
-
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

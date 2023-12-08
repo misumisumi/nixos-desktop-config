@@ -65,6 +65,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1701905325,
+        "narHash": "sha256-lda63LmEIlDMeCgWfjr3/wb487XPllBByfrGRieyEk4=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "1144887c6f4d2dcbb2316a24364ef53e25b0fcfe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "dotfiles": {
       "inputs": {
         "devshell": "devshell_2",
@@ -95,11 +115,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701972864,
-        "narHash": "sha256-hzkRmHASN008m6yvP3AezNgqtXVkujZ/pdlE8io4MPg=",
+        "lastModified": 1702010513,
+        "narHash": "sha256-loblBzdjwB4EqfXD7I+OFD92xJxrfYTN5N1yOw6Uwl0=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "ee9d333d58fae963be0416e19c0a002d7416c25a",
+        "rev": "50594a74ae8e632f5ded5800a825f324aebb4bd7",
         "type": "github"
       },
       "original": {
@@ -408,6 +428,7 @@
     "root": {
       "inputs": {
         "devshell": "devshell",
+        "disko": "disko",
         "dotfiles": "dotfiles",
         "flake-parts": "flake-parts_2",
         "flakes": "flakes",
