@@ -1,6 +1,7 @@
 { lib, wm, ... }: {
   imports =
     [
+      ./filesystem.nix
       ./gpu.nix
       ./hardware-configuration.nix
       ./network.nix

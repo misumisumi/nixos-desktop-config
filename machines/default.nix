@@ -23,6 +23,7 @@ let
         modules =
           [
             ../modules
+            inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.musnix.nixosModules.musnix
             inputs.nur.nixosModules.nur
@@ -54,7 +55,7 @@ in
     hostname = "recovery";
     user = "nixos";
     wm = "gnome";
-    scheme = "full";
+    scheme = "small";
   };
   recovery-cui = settings {
     hostname = "recovery";
