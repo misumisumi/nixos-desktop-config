@@ -8,7 +8,6 @@
 , ...
 }: {
   imports = [
-    (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot = {
