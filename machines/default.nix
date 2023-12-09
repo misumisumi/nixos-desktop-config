@@ -8,7 +8,6 @@ let
   settings =
     { hostname
     , user
-    , rootDir ? ""
     , system ? "x86_64-linux"
     , homeDirectory ? ""
     , scheme ? "minimal"
@@ -28,7 +27,7 @@ let
             inputs.musnix.nixosModules.musnix
             inputs.nur.nixosModules.nur
             inputs.sops-nix.nixosModules.sops
-            (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
+            (./. + "/${hostname}") # Each machine conf
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -51,14 +50,21 @@ let
       };
 in
 {
-  recovery-gui = settings {
-    hostname = "recovery";
+  liveimg-gui = settings {
+    hostname = "liveimg";
     user = "nixos";
     wm = "gnome";
     scheme = "small";
+    useNixOSWallpaper = true;
   };
-  recovery-cui = settings {
-    hostname = "recovery";
+  liveimg-cui = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "";
+    scheme = "small";
+  };
+  liveimg-iso = settings {
+    hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";

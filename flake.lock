@@ -115,11 +115,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1702010513,
-        "narHash": "sha256-loblBzdjwB4EqfXD7I+OFD92xJxrfYTN5N1yOw6Uwl0=",
+        "lastModified": 1702126620,
+        "narHash": "sha256-IPzDxqXp5DUEMntYxUgVFL8cLHS8LMh2PaMmL6F80hY=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "50594a74ae8e632f5ded5800a825f324aebb4bd7",
+        "rev": "b90d0ea8283803702e829811e52e10c6bb713c3a",
         "type": "github"
       },
       "original": {
@@ -412,11 +412,11 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1700769495,
-        "narHash": "sha256-2HAka3pzDshpETSG9ZkX9umw4czAFIJieGkbjODN9ns=",
+        "lastModified": 1702119086,
+        "narHash": "sha256-nPX9C5Tybm2ydhDLJfQszn0x8nf7gvNpIz78WH0PP38=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "d5eee26b781727fd0a339c8d6b8483db7044b825",
+        "rev": "6d88e86bd73bd984ea2965beba5de78e636a6d2a",
         "type": "github"
       },
       "original": {

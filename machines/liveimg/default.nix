@@ -1,10 +1,16 @@
-{ lib, wm, ... }: {
+{ lib
+, hostname
+, modulesPath
+, wm
+, ...
+}:
+{
   imports =
     [
       ./filesystem.nix
       ./gpu.nix
-      ./hardware-configuration.nix
       ./network.nix
+      ./ssh.nix
       ./system.nix
       ./zfs.nix
       ../init
@@ -14,5 +20,8 @@
       ../../apps/documentation
       ../../apps/pkgs
       ../../apps/programs
-    ] ++ lib.optional (wm == "gnome") ../../apps/gnome;
+    ] ++ lib.optional (wm == "gnome") ../../apps/gnome
+    ++ lib.optional (! lib.hasSuffix "iso" hostname) ./hardware-configuration.nix
+    ++ lib.optional (lib.hasSuffix "iso" hostname) ./iso.nix
+  ;
 }
