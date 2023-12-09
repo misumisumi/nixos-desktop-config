@@ -91,9 +91,17 @@
                   find sops/secrets -type f | xargs -I{} sops updatekeys --yes {}
                 '';
               }
+              {
+                help = "disko";
+                name = "disko";
+                command = ''
+                  ${inputs.disko.packages.${system}.disko}/bin/disko ''${@}
+                '';
+              }
             ];
             packages = with pkgs; [
               age
+              nixos-generators
               sops
               ssh-to-age
             ];
