@@ -14,6 +14,7 @@
       '';
       settings = {
         KbdInteractiveAuthentication = true;
+        PermitRootLogin = "yes";
       };
     };
 }

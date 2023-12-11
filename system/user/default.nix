@@ -36,4 +36,10 @@
     password = "nixos";
   }
   ;
+  users.users.root = lib.optionalAttrs (builtins.hasAttr "password" config.sops.secrets)
+    {
+      hashedPasswordFile = config.sops.secrets.password.path;
+    } // lib.optionalAttrs (! builtins.hasAttr "password" config.sops.secrets) {
+    password = "nixos";
+  };
 }
