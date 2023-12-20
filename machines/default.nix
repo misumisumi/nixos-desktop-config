@@ -36,10 +36,11 @@ let
                   inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
                 };
                 sharedModules = [
+                  inputs.dotfiles.homeManagerModules.dotfiles
                   inputs.flakes.nixosModules.for-hm
                   inputs.nvimdots.nixosModules.nvimdots
-                  inputs.dotfiles.homeManagerModules.dotfiles
                   inputs.sops-nix.homeManagerModules.sops
+                  inputs.spicetify-nix.homeManagerModule
                 ];
                 users."${user}" = {
                   dotfilesActivation = true;
