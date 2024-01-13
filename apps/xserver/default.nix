@@ -4,6 +4,7 @@
 , useNixOSWallpaper
 , ...
 }: {
+  imports = [ ./gsettings.nix ];
   programs.light.enable = true;
 
   services = {
