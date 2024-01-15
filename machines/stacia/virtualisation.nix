@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../apps/virtualisation/incus
     ../../apps/virtualisation/libvirt
     ../../apps/virtualisation/lxd
     ../../apps/virtualisation/podman
