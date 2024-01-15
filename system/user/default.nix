@@ -15,7 +15,7 @@
   users.users.${user} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "uucp" "kvm" "input" "audio" "video" "scanner" "lp" "lxd" ];
+    extraGroups = [ "wheel" "uucp" "kvm" "input" "audio" "video" "scanner" "lp" "lxd" "incus-admin" ];
     useDefaultShell = true;
     subUidRanges = [
       # Using rootless container

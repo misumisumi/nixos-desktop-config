@@ -60,6 +60,16 @@ in
   };
 
   config = {
+    # Place the virtiofsd directory in an FHS compliant location
+    system.activationScripts.virtiofs.text =
+      let
+        check_virtualisation = with config.virtualisation; lxc.enable || lxd.enable || incus.enable || libvirtd.enable;
+      in
+      optionalString check_virtualisation ''
+        mkdir -p /usr/lib/qemu
+        ln -sf ${pkgs.virtiofsd}/bin/virtiofsd /usr/lib/qemu/virtiofsd
+      '';
+
     systemd.tmpfiles.rules =
       mapAttrsToList tmpfileEntry cfg.sharedMemoryFiles;
 
