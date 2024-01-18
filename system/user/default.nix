@@ -11,11 +11,14 @@
     enable = true;
     enableCompletion = false;
   };
-
   users.users.${user} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "uucp" "kvm" "input" "audio" "video" "scanner" "lp" "lxd" "incus-admin" ];
+    extraGroups = [
+      "input"
+      "uucp"
+      "wheel"
+    ];
     useDefaultShell = true;
     subUidRanges = [
       # Using rootless container

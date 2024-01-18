@@ -1,5 +1,12 @@
 # Please add apps/security for enabling rtkit
-{ pkgs, ... }: {
+{ pkgs
+, user
+, ...
+}:
+{
+  users.groups = {
+    audio.members = [ "${user}" ];
+  };
   sound.enable = false;
   security.rtkit.enable = true;
   services = {
