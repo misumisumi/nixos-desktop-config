@@ -1,10 +1,14 @@
 { config
 , lib
 , pkgs
+, user
 , useNixOSWallpaper
 , ...
 }: {
   imports = [ ./gsettings.nix ];
+  users.groups = {
+    video.members = [ "${user}" ];
+  };
   programs.light.enable = true;
 
   services = {
