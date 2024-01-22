@@ -1,4 +1,3 @@
-{ ... }:
 let
   rootDevice = "/dev/disk/by-id/ata-WDC_WDS100T2B0A-00SM50_2012A4445212";
 in
