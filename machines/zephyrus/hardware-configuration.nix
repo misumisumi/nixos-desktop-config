@@ -22,9 +22,7 @@
         };
       };
     };
-    kernelModules = [ "kvm-amd" ];
     resumeDevice = "/dev/mapper/VolGroup00-lvolroot";
-    kernelParams = [ "resume_offset=27234304" ];
   };
   fileSystems = {
     "/" = {
