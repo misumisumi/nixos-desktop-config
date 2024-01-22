@@ -2,7 +2,7 @@
 
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-Welcome to the nix environment!  
+Welcome to the nix World!  
 This is [misumisumi](https://github.com/misumisumi)'s machine setup.
 
 You can try NixOS using some of my setup.  
@@ -12,74 +12,66 @@ In the future, other distributions (user home config) and macOS will be supporte
 ## Description
 
 - This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes).
-- You can try out the environment created for recovery (gnome or CLI only).
-- The settings of packages installed on the system are managed in [apps](./apps).
-- Configuration of packages installed by users is managed in a separate repository: [home-manager-config]().
+- You can try out gnome or CLI environment for recovery.
+- This repository only manages system settings.
+- The configuration of packages installed by users is managed in a separate repository: [home-manager-config](https://github.com/misumisumi/home-manager-config).
 - Settings for each machine are located in [machines](./machines).
 
 ```
-machines
-├── init      # common settings
-├── mother    # Main desktop
-├── recovery  # For recovery
-├── stacia    # Work desktop
-└── zephyrus  # Laptop
+nixos-desktop-config
+├── apps           # app settings
+├── hm             # home-manager config
+├── machines       # each machine configs
+│   ├── init       # common machine config
+│   ├── liveimg    # liveimg
+│   ├── mother     # My Main PC
+│   ├── soleus     # Desktop
+│   ├── stacia     # Desktop
+│   └── zephyrus   # Laptop
+├── modules        # nixosModules
+├── patches        # patch for nixpkgs
+└── system         # common system config
 ```
 
 ## Installation Guide
 
-### NixOS
+1. Create `nix` env
 
-- Boot via UEFI/systemd-boot, use disk encryption via LVM on LUKS
-- Three environments can be used
-  - gnome
-  - tty-only
+- Container from [DockerHub (nixos/nix)](https://hub.docker.com/r/nixos/nix/tags)
+- Install nix package manager from [official guide](https://nixos.org/download)
+- Launch VM using [official iso](https://nixos.org/download)
 
-1. download Install media from [official](https://nixos.org/download.html)
-2. boot ISO and check network connection
+2. Check networking connection
+
    - run `ip -c a and ping 8.8.8.8`
    - wireless settings use `nmcli` or `wpa_supplicant`
-3. make partition and add partition label
 
-   - use GPT partition label
-   - Please see [archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照 how to make LVM on LUKS
+3. Install
 
-   |      For       |       Partition Type        | Partition label |     Suggested size      |
-   | :------------: | :-------------------------: | :-------------: | :---------------------: |
-   |     /boot      | EFI system partition (ef00) |       \-        |          128MB          |
-   | LUKS partition |      Linux LVM (8E00)       | GENERALLUKSROOT | Remainder of the device |
+#### Bootable External Disk
 
-   - partition of LVM on LUKS
+```sh
+# Create key file for luks
+echo <password> > /tmp/luks.key
+# In root env
 
-     - You can make vfat label at `dosfslabel /dev/XXX <label>`
-     - You can make ext4 label at`e2label /dev/XXX <label>`
+# Format disk and mount to `/mnt`
+# **Need edit `device` in ./machines/liveimg/filesystem.nix**
+# "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
+nix run nixpkgs#disko -- -m disko --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
 
-     |  For  |    file system     |    label     |     Suggested size      |
-     | :---: | :----------------: | :----------: | :---------------------: |
-     | /boot |        vfat        |   ge-boot    |          128MB          |
-     | /root |        ext4        | general-root |           4GB           |
-     | /home |        ext4        | general-home | Remainder of the device |
-     | /var  |        ext4        | general-var  |     more tharn 32GB     |
-     | /nix  |        ext4        | general-nix  |     more tharn 64GB     |
-     | swap  | use swap partition |      \-      |           4GB           |
-
-4. disk mount
-
-```
-mount /dev/<for-root> /mnt
-mkdir -p /mnt/{boot,home,var,nix}
-mount /dev/<for-home> /mnt/home
-mount /dev/<for-nix> /mnt/nix
-mount /dev/<for-var> /mnt/var
-mount /dev/<for-boot> /mnt/boot
+# Install NixOS to `/mnt`
+nixos-install --no-root-passwd --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
 ```
 
-5. Install.
+#### Create LiveCD
 
-```
-cd machines/general
-nix flake update
-sudo nixos-install --flake . #{gnome|tty-only}
+```sh
+# Create .iso file
+nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#liveimg-iso
+
+# Write iso to device
+dd if=result/iso/*.iso of=/dev/sdX status=progress
 ```
 
 ## Appendix
@@ -105,8 +97,6 @@ sudo nixos-install --flake . #{gnome|tty-only}
 | gnome | Wayland or Xorg |
 | QTile |      Xorg       |
 | Yabai |      macOS      |
-
-- Tilling WM Key Map
 
 ## ToDO
 

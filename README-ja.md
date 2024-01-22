@@ -1,84 +1,75 @@
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
-nix の環境へようこそ!!  
+nix の世界へようこそ!!  
 これは[misumisumi](https://github.com/misumisumi)のマシン設定です。
 
-私の設定の一部を利用して NixOS を試すことができます。  
-現在、NixOS 環境のみサポートしています。  
-将来的にmacOS をサポートする予定です。
+リカバリー用の設定使って NixOS を試すことができます。(Bootable Disk or LiveCD)
 
 ## 説明
 
 - このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
-- リカバリー用に作成した環境(gnome or CLI only)を試用することができます。
-- システムにインストールされるパッケージの設定は[apps](./apps)で管理されています。
-- ユーザーにインストールされるパッケージの設定は別リポジトリ: [home-manager-config]()で管理されています。
+- リカバリー用のgnomeまたはCLI環境を試用することができます。
+- このリポジトリではシステム設定のみ管理されています。
+- ユーザーにインストールされるパッケージの設定は別リポジトリ: [home-manager-config](https://github.com/misumisumi/home-manager-config)で管理されています。
 - 各マシンの設定は[machines](./machines)にあります。
 
 ```
-machines
-├── init      # 共通設定
-├── mother    # メインPC
-├── recovery  # リカバリー用
-├── stacia    # 研究室PC
-└── zephyrus  # ラップトップ
+nixos-desktop-config
+├── apps           # アプリ設定
+├── hm             # home-manager config
+├── machines       # 各マシンの設定
+│   ├── init       # マシン共通設定
+│   ├── liveimg    # live環境
+│   ├── mother     # メインPC
+│   ├── soleus     # デスクトップ
+│   ├── stacia     # デスクトップ
+│   └── zephyrus   # ラップトップ
+├── modules        # nixosModules
+├── patches        # nixpkgsのパッチ
+└── system         # システム共通設定
 ```
 
-## Installation Guide
+## インストールガイド
 
 ### NixOS
 
-- Boot via UEFI/systemd-boot, use disk encryption via LVM on LUKS
-- Three environments can be used
-  - gnome
-  - tty-only
+1. `nix`環境の構築
 
-1. download Install media from [official](https://nixos.org/download.html)
-2. boot ISO and check network connection
+- Container from [DockerHub (nixos/nix)](https://hub.docker.com/r/nixos/nix/tags)
+- Install nix package manager from [official guide](https://nixos.org/download)
+- Launch VM using [official iso](https://nixos.org/download)
+
+2. ネットワーク接続の確認
+
    - run `ip -c a and ping 8.8.8.8`
    - wireless settings use `nmcli` or `wpa_supplicant`
-3. make partition and add partition label
 
-   - use GPT partition label
-   - Please see [archwiki](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)を参照 how to make LVM on LUKS
+3. インストール
 
-   |      For       |       Partition Type        | Partition label |     Suggested size      |
-   | :------------: | :-------------------------: | :-------------: | :---------------------: |
-   |     /boot      | EFI system partition (ef00) |       \-        |          128MB          |
-   | LUKS partition |      Linux LVM (8E00)       | GENERALLUKSROOT | Remainder of the device |
+   - Bootable External Disk
 
-   - partition of LVM on LUKS
+   ```sh
+   # Create key file for luks
+   echo <password> > /tmp/luks.key
+   # In root env
 
-     - You can make vfat label at `dosfslabel /dev/XXX <label>`
-     - You can make ext4 label at`e2label /dev/XXX <label>`
+   # Format disk and mount to `/mnt`
+   # "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
+   nix run nixpkgs#disko -- -m disko --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
 
-     |  For  |    file system     |    label     |     Suggested size      |
-     | :---: | :----------------: | :----------: | :---------------------: |
-     | /boot |        vfat        |   ge-boot    |          128MB          |
-     | /root |        ext4        | general-root |           4GB           |
-     | /home |        ext4        | general-home | Remainder of the device |
-     | /var  |        ext4        | general-var  |     more tharn 32GB     |
-     | /nix  |        ext4        | general-nix  |     more tharn 64GB     |
-     | swap  | use swap partition |      \-      |           4GB           |
+   # Install NixOS to `/mnt`
+   nixos-install --no-root-passwd --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
+   ```
 
-4. disk mount
+   - Create LiveCD
 
-```
-mount /dev/<for-root> /mnt
-mkdir -p /mnt/{boot,home,var,nix}
-mount /dev/<for-home> /mnt/home
-mount /dev/<for-nix> /mnt/nix
-mount /dev/<for-var> /mnt/var
-mount /dev/<for-boot> /mnt/boot
-```
+   ```sh
+   # Create .iso file
+   nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#liveimg-iso
 
-5. Install.
-
-```
-cd machines/general
-nix flake update
-sudo nixos-install --flake . #{gnome|tty-only}
-```
+   # Write iso to device
+   dd if=result/iso/*.iso of=/dev/sdX status=progress
+   ```
 
 ## Appendix
 
