@@ -1,0 +1,57 @@
+name: Auto review
+on:
+  workflow_run:
+    workflows: [Build check]
+    types:
+      - completed
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build-check.yml
+          workflow_conclusion: success
+          name: pr-number
+          path: artifacts
+
+      - name: Set PR number
+        id: pr-number
+        run: echo pr-number=$(cat ./artifacts/pr-number.txt) >> $GITHUB_OUTPUT
+
+      - name: PR review and merge
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh pr review --approve ${{ steps.pr-number.outputs.pr-number }}
+          gh pr merge --merge --auto ${{ steps.pr-number.outputs.pr-number }}
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build-check.yml
+          workflow_conclusion: success
+          name: pr-number
+          path: artifacts
+
+      - name: Set PR number
+        id: pr-number
+        run: echo pr-number=$(cat ./artifacts/pr-number.txt) >> $GITHUB_OUTPUT
+
+      - name: Close PR
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: gh pr close ${{ steps.pr-number.outputs.pr-number }}
