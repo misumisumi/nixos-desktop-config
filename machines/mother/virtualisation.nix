@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../apps/virtualisation/incus
     ../../apps/virtualisation/libvirt
     ../../apps/virtualisation/lxd
     ../../apps/virtualisation/podman
@@ -10,7 +11,7 @@
     vfio = {
       enable = true;
       IOMMUType = "amd";
-      devices = [ "10de:2204" "10de:1aef" ];
+      devices = [ "10de:2504" "10de:228e" ];
       # deviceDomains = [ "0000:09:00.0" "0000:09:00.1" ];
       blacklistNvidia = false;
       disableEFIfb = false;
