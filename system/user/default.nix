@@ -6,7 +6,7 @@
 , pkgs
 , ...
 }: {
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = [ "/share/zsh" "/share/bash-completion" ];
   programs.zsh = {
     enable = true;
     enableCompletion = false;
