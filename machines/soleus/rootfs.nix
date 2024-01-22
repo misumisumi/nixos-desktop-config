@@ -5,8 +5,8 @@
 let
   root_device = "/dev/disk/by-id/ata-SPCC_Solid_State_Disk_AA230929S312803074";
   root_device_size = 128.0; # GB
-  home_device = "/dev/disk/by-id/ata-WDC_WD40EZRZ-00GXCB0_WD-WCC7k5DFP3Yj";
-  home_device_size = 128.0; # GB
+  home_device = "/dev/disk/by-id/ata-WDC_WD40EZRZ-00GXCB0_WD-WCC7K5DFP3YA";
+  home_device_size = 3726; # GB
   reserved_size = device_size: device_size * (1 - 0.89);
 in
 {

@@ -29,6 +29,14 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixos-stable.follows = "nixpkgs-stable";
+        disko.follows = "disko";
+      };
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,6 +108,13 @@
                 name = "disko";
                 command = ''
                   ${inputs.disko.packages.${system}.disko}/bin/disko ''${@}
+                '';
+              }
+              {
+                help = "nixos-anywhere";
+                name = "nixos-anywhere";
+                command = ''
+                  ${inputs.nixos-anywhere.packages.${system}.nixos-anywhere}/bin/nixos-anywhere ''${@}
                 '';
               }
             ];

@@ -2,8 +2,9 @@
 {
   networking.hostId = "7dfa348e";
   boot = {
+    initrd.supportedFilesystems = [ "zfs" ];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    supportedFilesystems = [ "zfs" ];
+    kernelParams = [ "nohibernate" ];
     zfs.forceImportRoot = false;
   };
   services.zfs = {
