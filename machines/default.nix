@@ -75,18 +75,21 @@ in
     scheme = "full";
     inherit user;
   };
-  zephyrus =
-    settings
-      {
-        hostname = "zephyrus";
-        scheme = "full";
-        inherit user;
-      };
-  stacia =
-    settings
-      {
-        hostname = "stacia";
-        scheme = "full";
-        inherit user;
-      };
+  zephyrus = settings {
+    hostname = "zephyrus";
+    scheme = "full";
+    inherit user;
+  };
+  stacia = settings {
+    hostname = "stacia";
+    scheme = "full";
+    inherit user;
+  };
+  soleus = settings {
+    hostname = "soleus";
+    inherit user;
+    scheme = "small";
+    useNixOSWallpaper = true;
+    wm = "gnome";
+  };
 }

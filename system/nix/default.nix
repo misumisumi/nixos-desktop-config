@@ -3,6 +3,7 @@
 , inputs
 , system
 , stateVersion
+, user
 , ...
 }:
 {
@@ -17,6 +18,7 @@
         "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       ];
+      trusted-users = [ "root" "${user}" ];
     };
     gc = {
       # 1週間ごとに7日前のイメージを削除

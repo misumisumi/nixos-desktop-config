@@ -1,10 +1,12 @@
-{ lib
+{ config
+, lib
 , stateVersion
 , ...
 }: {
   programs.ssh = {
     askPassword = "";
   };
+  networking.firewall.allowedTCPPorts = config.services.openssh.ports;
   services.openssh =
     {
       enable = true;
