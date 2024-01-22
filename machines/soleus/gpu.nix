@@ -3,13 +3,9 @@
     xserver = {
       exportConfiguration = true;
       videoDrivers = [
-        "amdgpu"
+        "modesetting"
         "nvidia"
       ];
-      deviceSection = ''
-        Option "DRI" "3"
-        Option "TearFree" "true"
-      '';
     };
   };
 
@@ -19,10 +15,10 @@
       nvidiaPersistenced = true;
     };
     opengl.extraPackages = with pkgs; [
-      amdvlk
+      intel-media-driver
+      vaapiIntel
       libvdpau-va-gl
       vaapiVdpau
-      rocm-opencl-icd
     ];
   };
 }

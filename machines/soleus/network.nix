@@ -9,13 +9,10 @@
   };
   networking = {
     hostName = "${hostname}";
-    interfaces.enp34s0.wakeOnLan.enable = true;
     firewall = {
       enable = true;
       trustedInterfaces = [
         "br0"
-        "lxdbr0"
-        "k8sbr0"
       ];
       # allowedUDPPorts = [
       #   4010
@@ -24,20 +21,12 @@
       #   4713 # PulseAudio
       # ];
       allowedUDPPortRanges = [
-        {
-          from = 1714;
-          to = 1764; # KDE-connect
-        }
         # {
         #   from = 60000;
         #   to = 60011; # Mosh
         # }
       ];
       allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764; # KDE-connect
-        }
         # {
         #   from = 60000;
         #   to = 60011; # Mosh
@@ -56,13 +45,14 @@
       };
       networks = {
         "10-wired" = {
-          name = "enp34s0";
+          name = "enp0s31f6";
           bridge = [ "br0" ];
         };
         "20-br0" = {
           name = "br0";
-          DHCP = "yes";
-          address = [ "133.24.91.38" ];
+          address = [ "192.168.0.89" ];
+          dns = [ "133.24.72.30" ];
+          gateway = [ "192.168.0.1" ];
         };
       };
     };
