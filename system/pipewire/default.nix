@@ -1,13 +1,18 @@
 # Please add apps/security for enabling rtkit
-{ pkgs
+{ lib
+, pkgs
 , user
 , ...
 }:
 {
-  users.groups = {
-    audio.members = [ "${user}" ];
-  };
-  sound.enable = false;
+  environment.systemPackages = with pkgs; [
+    pulseaudio
+    pavucontrol
+    paprefs
+    portaudio
+  ];
+  # environment.etc."pipewire/pipewire-pulse.conf".source = ./pipewire-conf/pipewire-pulse.conf;
+  hardware.pulseaudio.enable = lib.mkForce false;
   security.rtkit.enable = true;
   services = {
     pipewire = {
@@ -21,11 +26,8 @@
       jack.enable = true;
     };
   };
-  environment.systemPackages = with pkgs; [
-    pulseaudio
-    pavucontrol
-    paprefs
-    portaudio
-  ];
-  # environment.etc."pipewire/pipewire-pulse.conf".source = ./pipewire-conf/pipewire-pulse.conf;
+  sound.enable = lib.mkForce false;
+  users.groups = {
+    audio.members = [ "${user}" ];
+  };
 }
