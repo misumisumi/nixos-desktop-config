@@ -11,11 +11,14 @@
     enable = true;
     enableCompletion = false;
   };
-
   users.users.${user} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "uucp" "kvm" "input" "audio" "video" "scanner" "lp" "lxd" ];
+    extraGroups = [
+      "input"
+      "uucp"
+      "wheel"
+    ];
     useDefaultShell = true;
     subUidRanges = [
       # Using rootless container
@@ -36,4 +39,10 @@
     password = "nixos";
   }
   ;
+  users.users.root = lib.optionalAttrs (builtins.hasAttr "password" config.sops.secrets)
+    {
+      hashedPasswordFile = config.sops.secrets.password.path;
+    } // lib.optionalAttrs (! builtins.hasAttr "password" config.sops.secrets) {
+    password = "nixos";
+  };
 }

@@ -3,6 +3,7 @@
 , ...
 }: {
   networking = {
+    wireless.enable = false;
     hostName = "${hostname}";
 
     networkmanager = {

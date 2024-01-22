@@ -3,7 +3,7 @@
     xserver = {
       videoDrivers = [
         "amdgpu"
-        "nvidia"
+        "nouveau"
         "qxl"
         "modesetting"
         "fbdev"

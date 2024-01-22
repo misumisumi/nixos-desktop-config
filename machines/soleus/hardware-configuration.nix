@@ -3,6 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config
 , lib
+, pkgs
 , modulesPath
 , ...
 }: {
@@ -12,7 +13,9 @@
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
+      kernelModules = [ "dm-snapshot" ];
     };
   };
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

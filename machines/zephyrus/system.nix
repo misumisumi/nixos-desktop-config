@@ -45,8 +45,8 @@
   '';
   powerManagement = {
     enable = true;
+    cpuFreqGovernor = "performance";
     powertop.enable = true;
-    cpuFreqGovernor = "ondemand";
   };
   nix = {
     settings = {

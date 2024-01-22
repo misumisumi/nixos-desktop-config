@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs
+, user
+, ...
+}: {
+  users.groups = {
+    audio.members = [ "${user}" ];
+  };
   boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
   nixpkgs.config.pulseaudio = true; # 一部パッケージのビルド時にpulseaudioを使うように指示する
   sound.enable = true;

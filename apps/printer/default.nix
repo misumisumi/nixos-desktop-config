@@ -1,4 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs
+, user
+, ...
+}: {
+  users.groups = {
+    lp.members = [ "${user}" ];
+    scanner.members = [ "${user}" ];
+  };
   hardware.sane.enable = true;
 
   services = {
@@ -8,7 +15,7 @@
     };
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
     };
     system-config-printer = {
       enable = true;

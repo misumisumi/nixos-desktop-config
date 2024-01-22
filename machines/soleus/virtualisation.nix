@@ -1,18 +1,14 @@
 {
   imports = [
-    ../../apps/virtualisation/incus
-    ../../apps/virtualisation/libvirt
-    ../../apps/virtualisation/lxd
     ../../apps/virtualisation/podman
     ../../apps/virtualisation/singularity
-    ../../apps/virtualisation/waydroid
   ];
   virtualisation = {
     vfio = {
       enable = true;
-      IOMMUType = "amd";
-      devices = [ "10de:2504" "10de:228e" ];
-      # deviceDomains = [ "0000:09:00.0" "0000:09:00.1" ];
+      enableNestedVirtualization = true;
+      IOMMUType = "intel";
+      devices = [ ];
       blacklistNvidia = false;
       disableEFIfb = false;
       ignoreMSRs = true;
@@ -24,6 +20,5 @@
       pageSize = "1G";
       numPages = 16;
     };
-    scream.enable = true;
   };
 }

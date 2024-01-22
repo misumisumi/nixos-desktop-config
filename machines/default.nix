@@ -8,7 +8,6 @@ let
   settings =
     { hostname
     , user
-    , rootDir ? ""
     , system ? "x86_64-linux"
     , homeDirectory ? ""
     , scheme ? "minimal"
@@ -23,11 +22,12 @@ let
         modules =
           [
             ../modules
+            inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.musnix.nixosModules.musnix
             inputs.nur.nixosModules.nur
             inputs.sops-nix.nixosModules.sops
-            (./. + "/${rootDir}" + "/${hostname}") # Each machine conf
+            (./. + "/${hostname}") # Each machine conf
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -36,10 +36,11 @@ let
                   inherit inputs hostname user stateVersion homeDirectory scheme useNixOSWallpaper wm;
                 };
                 sharedModules = [
+                  inputs.dotfiles.homeManagerModules.dotfiles
                   inputs.flakes.nixosModules.for-hm
                   inputs.nvimdots.nixosModules.nvimdots
-                  inputs.dotfiles.homeManagerModules.dotfiles
                   inputs.sops-nix.homeManagerModules.sops
+                  inputs.spicetify-nix.homeManagerModule
                 ];
                 users."${user}" = {
                   dotfilesActivation = true;
@@ -50,14 +51,21 @@ let
       };
 in
 {
-  recovery-gui = settings {
-    hostname = "recovery";
+  liveimg-gui = settings {
+    hostname = "liveimg";
     user = "nixos";
     wm = "gnome";
-    scheme = "full";
+    scheme = "small";
+    useNixOSWallpaper = true;
   };
-  recovery-cui = settings {
-    hostname = "recovery";
+  liveimg-cui = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "";
+    scheme = "small";
+  };
+  liveimg-iso = settings {
+    hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";
@@ -67,18 +75,21 @@ in
     scheme = "full";
     inherit user;
   };
-  zephyrus =
-    settings
-      {
-        hostname = "zephyrus";
-        scheme = "full";
-        inherit user;
-      };
-  stacia =
-    settings
-      {
-        hostname = "stacia";
-        scheme = "full";
-        inherit user;
-      };
+  zephyrus = settings {
+    hostname = "zephyrus";
+    scheme = "full";
+    inherit user;
+  };
+  stacia = settings {
+    hostname = "stacia";
+    scheme = "full";
+    inherit user;
+  };
+  soleus = settings {
+    hostname = "soleus";
+    inherit user;
+    scheme = "small";
+    useNixOSWallpaper = true;
+    wm = "gnome";
+  };
 }

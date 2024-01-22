@@ -3,22 +3,16 @@
 , user
 , ...
 }: {
-  environment = {
-    systemPackages = with pkgs; [
-      win-virtio
-      virt-manager
-      looking-glass-client
-      dmidecode # Show BIOS info
-    ];
+  users.groups = {
+    libvirt.members = [ "root" "${user}" ];
+    kvm.members = [ "root" "${user}" ];
   };
-  users = {
-    groups = {
-      libvirt = {
-        members = [ "root" "${user}" ];
-      };
-    };
-  };
-
+  environment.systemPackages = with pkgs; [
+    win-virtio
+    virt-manager
+    looking-glass-client
+    dmidecode # Show BIOS info
+  ];
   virtualisation = {
     libvirtd = {
       enable = true; # Virtual drivers

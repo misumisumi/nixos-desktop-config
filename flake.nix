@@ -13,6 +13,10 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,10 +29,22 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixos-stable.follows = "nixpkgs-stable";
+        disko.follows = "disko";
+      };
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
       url = "github:misumisumi/home-manager-config";
@@ -87,9 +103,24 @@
                   find sops/secrets -type f | xargs -I{} sops updatekeys --yes {}
                 '';
               }
+              {
+                help = "disko";
+                name = "disko";
+                command = ''
+                  ${inputs.disko.packages.${system}.disko}/bin/disko ''${@}
+                '';
+              }
+              {
+                help = "nixos-anywhere";
+                name = "nixos-anywhere";
+                command = ''
+                  ${inputs.nixos-anywhere.packages.${system}.nixos-anywhere}/bin/nixos-anywhere ''${@}
+                '';
+              }
             ];
             packages = with pkgs; [
               age
+              nixos-generators
               sops
               ssh-to-age
             ];
