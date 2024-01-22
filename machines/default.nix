@@ -51,6 +51,11 @@ let
       };
 in
 {
+  test = settings {
+    hostname = "mother";
+    inherit user;
+    scheme = "test";
+  };
   liveimg-gui = settings {
     hostname = "liveimg";
     user = "nixos";
