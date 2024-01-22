@@ -68,7 +68,7 @@ in
     hostname = "liveimg";
     user = "nixos";
     wm = "";
-    scheme = "small";
+    scheme = "core";
   };
   mother = settings {
     hostname = "mother";

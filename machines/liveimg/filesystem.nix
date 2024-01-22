@@ -37,7 +37,7 @@ in
                 type = "luks";
                 name = "luks-bootusb";
                 initrdUnlock = false; # Do not unlock on boot
-                passwordFile = "/tmp/secrets/luks.key";
+                passwordFile = "/tmp/luks.key";
                 settings = {
                   allowDiscards = true;
                 };
