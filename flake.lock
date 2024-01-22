@@ -116,11 +116,11 @@
         "spicetify-nix": "spicetify-nix"
       },
       "locked": {
-        "lastModified": 1705914012,
-        "narHash": "sha256-Q/Q5X7WhRtA2lJNwLqGxo8+5hce9MXmlMSc+QkpFJ5Q=",
+        "lastModified": 1705917345,
+        "narHash": "sha256-iFWbDs6/IvBZlxcLKj7CmFRLoAw7ZfpuC7wcDAPLGU0=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "3064895f4e0acc2165d184fc2c7d03fbb28fe1fd",
+        "rev": "b75ee804ec638ef11fc075369e5e3116233096d9",
         "type": "github"
       },
       "original": {
