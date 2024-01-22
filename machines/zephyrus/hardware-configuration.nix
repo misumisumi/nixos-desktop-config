@@ -13,49 +13,11 @@
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "uas" "sd_mod" ];
-      kernelModules = [ "dm-snapshot" ];
-      luks.devices = {
-        luksroot = {
-          device = "/dev/disk/by-partlabel/LUKSROOT";
-          preLVM = true;
-          allowDiscards = true;
-        };
-      };
-    };
-    resumeDevice = "/dev/mapper/VolGroup00-lvolroot";
-  };
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/zephyrus-root";
-      fsType = "ext4";
-    };
-    "/nix" = {
-      device = "/dev/disk/by-label/zephyrus-nix";
-      fsType = "ext4";
-    };
-    "/var" = {
-      device = "/dev/disk/by-label/zephyrus-var";
-      fsType = "ext4";
-    };
-    "/home" = {
-      device = "/dev/disk/by-label/zephyrus-home";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-label/ze-boot";
-      fsType = "vfat";
     };
   };
   # lower image_size
   systemd.tmpfiles.rules = [
     "w    /sys/power/image_size - - - - 0"
   ];
-  swapDevices = [
-    {
-      device = "/dev/mapper/VolGroup00-lvolswap";
-      priority = 10;
-    }
-  ];
-
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

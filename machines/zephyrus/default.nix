@@ -5,6 +5,7 @@
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
+    ./rootfs.nix
     ./sops.nix
     ./system.nix
     ./virtualisation.nix
