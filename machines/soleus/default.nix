@@ -21,6 +21,6 @@
     ../../apps/services
     ../../apps/sops
     ../../apps/ssh
-    ../../apps/wm/qtile
+    ../../apps/gnome
   ];
 }
