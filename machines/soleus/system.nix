@@ -6,6 +6,7 @@
       tmpfsSize = "80%";
     };
   };
+  services.openssh.ports = [ 22 ];
   nix = {
     settings = {
       cores = 4;
