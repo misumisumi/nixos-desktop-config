@@ -92,7 +92,7 @@ in
   };
   soleus = settings {
     hostname = "soleus";
-    inherit user;
+    user = "kobayashi";
     scheme = "small";
     useNixOSWallpaper = true;
     wm = "gnome";
