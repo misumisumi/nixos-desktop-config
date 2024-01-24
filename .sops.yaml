@@ -20,7 +20,7 @@ creation_rules:
           - *sumi_mother
           - *sumi_stacia
           - *stacia
-  - path_regex: sops/secrets/hosts/soleus/secrets.yaml
+  - path_regex: sops/secrets/hosts/soleus/*
     key_groups:
       - age:
           - *sumi_mother

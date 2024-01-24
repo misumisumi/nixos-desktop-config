@@ -3,6 +3,7 @@
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
+    ./nfs.nix
     ./rootfs.nix
     ./sops.nix
     ./system.nix

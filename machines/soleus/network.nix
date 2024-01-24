@@ -10,13 +10,14 @@
   networking = {
     hostName = "${hostname}";
     firewall = {
-      enable = true;
+      enable = false;
       trustedInterfaces = [
         "br0"
       ];
-      # allowedUDPPorts = [
-      #   4010
-      # ];
+      allowedUDPPorts = [
+        5353
+        5355
+      ];
       # allowedTCPPorts = [
       #   4713 # PulseAudio
       # ];
@@ -34,7 +35,6 @@
       ];
     };
   };
-
   systemd = {
     network = {
       netdevs = {
@@ -50,9 +50,19 @@
         };
         "20-br0" = {
           name = "br0";
+          DHCP = "yes";
           address = [ "192.168.0.91/24" ];
-          dns = [ "192.168.0.1" "133.24.72.30" ];
+          dns = [ "192.168.0.1" ];
           gateway = [ "192.168.0.1" ];
+          dhcpV4Config = {
+            UseDomains = true;
+          };
+          dhcpV6Config = {
+            UseDomains = true;
+          };
+          ipv6AcceptRAConfig = {
+            UseDomains = true;
+          };
         };
       };
     };

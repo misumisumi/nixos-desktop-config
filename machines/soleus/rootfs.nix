@@ -58,9 +58,14 @@ in
       PoolHomeFS = {
         type = "zpool";
         rootFsOptions = {
-          compression = "zstd";
           "com.sun:auto-snapshot" = "false";
+          acltype = "posixacl";
+          atime = "on";
           canmount = "off";
+          compression = "zstd";
+          dnodesize = "auto";
+          relatime = "on";
+          xattr = "sa";
         };
         datasets = {
           reserved = {
@@ -82,15 +87,21 @@ in
           "user/home" = {
             type = "zfs_fs";
             mountpoint = "/home";
+            options.mountpoint = "legacy";
           };
         };
       };
       PoolRootFS = {
         type = "zpool";
         rootFsOptions = {
-          compression = "zstd";
           "com.sun:auto-snapshot" = "false";
+          acltype = "posixacl";
+          atime = "on";
           canmount = "off";
+          compression = "zstd";
+          dnodesize = "auto";
+          relatime = "on";
+          xattr = "sa";
         };
         datasets = {
           reserved = {
