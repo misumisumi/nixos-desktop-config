@@ -47,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "github:misumisumi/home-manager-config";
+      url = "github:misumisumi/home-manager-config/release-1.0";
       # url = "path:/home/sumi/Templates/nix/home-manager-config";
       inputs = {
         flakes.follows = "flakes";
