@@ -5,6 +5,7 @@ on:
 jobs:
   build-check:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login != 'misumisumi'
     steps:
       - uses: easimon/maximize-build-space@master
         with:
