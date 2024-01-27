@@ -51,6 +51,11 @@ let
       };
 in
 {
+  test = settings {
+    hostname = "mother";
+    inherit user;
+    scheme = "test";
+  };
   liveimg-gui = settings {
     hostname = "liveimg";
     user = "nixos";
@@ -68,7 +73,7 @@ in
     hostname = "liveimg";
     user = "nixos";
     wm = "";
-    scheme = "small";
+    scheme = "core";
   };
   mother = settings {
     hostname = "mother";
@@ -87,7 +92,7 @@ in
   };
   soleus = settings {
     hostname = "soleus";
-    inherit user;
+    user = "kobayashi";
     scheme = "small";
     useNixOSWallpaper = true;
     wm = "gnome";

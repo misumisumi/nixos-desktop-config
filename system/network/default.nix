@@ -8,16 +8,11 @@
       };
     };
   };
-
   services = {
     resolved = {
       enable = true;
       # dnssec = "allow-downgrade";
-      dnssec = "false";
-      extraConfig = ''
-        [Resolve]
-        DNS=1.1.1.1 2606:4700:4700::1111
-      '';
+      dnssec = lib.mkDefault "false";
       fallbackDns = [
         "1.1.1.1"
         "2606:4700:4700::1111"
@@ -29,6 +24,7 @@
 
   networking = {
     useDHCP = lib.mkDefault false; # Setting each network interafces
+    nameservers = [ "1.1.1.1" "2606:4700:4700::1111" ];
   };
   # system.nssModules = lib.mkForce [];
 }
