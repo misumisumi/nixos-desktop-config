@@ -16,6 +16,7 @@
     shell = pkgs.zsh;
     extraGroups = [
       "input"
+      "uinput"
       "uucp"
       "wheel"
     ];
