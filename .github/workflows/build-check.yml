@@ -36,3 +36,17 @@ jobs:
           name: pr-number
           path: pr-number.txt
           retention-days: 7
+
+  bypass-check:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'misumisumi'
+    steps:
+      - name: Save PR number
+        run: echo $GITHUB_REF | sed -e 's/[^0-9]//g' > pr-number.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr-number
+          path: pr-number.txt
+          retention-days: 7
