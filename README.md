@@ -83,7 +83,7 @@ dd if=result/iso/*.iso of=/dev/sdX status=progress
 |              |       Linux       |       macOS       |
 | :----------: | :---------------: | :---------------: |
 |    Shell     |        Zsh        |        Zsh        |
-|   Terminal   | Kitty & Alacritty | Kitty & Alacritty |
+|   Terminal   |      wezterm      |      wezterm      |
 |    Editor    |      Neovim       |      Neovim       |
 |   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
 | Input Method | Fcitx5+mozc & skk |        \-         |

@@ -80,7 +80,7 @@ nixos-desktop-config
 |              |       Linux       |       macOS       |
 | :----------: | :---------------: | :---------------: |
 |    Shell     |        Zsh        |        Zsh        |
-|   Terminal   | wezterm && kitty  | wezterm && kitty  |
+|   Terminal   |      Wezterm      |      Wezterm      |
 |    Editor    |      Neovim       |      Neovim       |
 |   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
 | Input Method | Fcitx5+mozc & skk |        \-         |
