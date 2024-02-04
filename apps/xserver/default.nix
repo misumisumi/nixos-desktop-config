@@ -16,10 +16,11 @@
     xserver = {
       enable = true;
       autorun = true;
-      layout = "us";
       gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
-
-      xkbOptions = "caps:nocaps"; # keyboard is managed home-manager
+      xkb = {
+        layout = "us";
+        options = "caps:nocaps"; # keyboard is managed home-manager
+      };
 
       libinput = {
         enable = true;
