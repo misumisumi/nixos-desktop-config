@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   virtualisation = {
+    containers.cdi.dynamic.nvidia.enable = true;
     podman = {
       enable = true;
-      enableNvidia = true;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
     };
