@@ -10,7 +10,6 @@
   environment.systemPackages = with pkgs; [
     win-virtio
     virt-manager
-    looking-glass-client
     dmidecode # Show BIOS info
   ];
   virtualisation = {
