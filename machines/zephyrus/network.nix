@@ -72,6 +72,7 @@
         };
     };
     hostName = "${hostname}";
+    nftables.enable = true;
     firewall =
       {
         enable = true;

@@ -9,6 +9,7 @@
   };
   networking = {
     hostName = "${hostname}";
+    nftables.enable = true;
     firewall = {
       enable = false;
       trustedInterfaces = [
