@@ -7,6 +7,7 @@
   networking = {
     hostName = "${hostname}";
     interfaces.enp5s0.wakeOnLan.enable = true;
+    nftables.enable = true;
     firewall = {
       enable = true;
       trustedInterfaces = [

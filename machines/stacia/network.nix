@@ -10,6 +10,7 @@
   networking = {
     hostName = "${hostname}";
     interfaces.enp34s0.wakeOnLan.enable = true;
+    nftables.enable = true;
     firewall = {
       enable = true;
       trustedInterfaces = [
