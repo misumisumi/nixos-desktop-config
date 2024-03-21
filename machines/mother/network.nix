@@ -11,6 +11,7 @@
     firewall = {
       enable = true;
       trustedInterfaces = [
+        "br0"
         "incusbr0"
         "k8sbr0"
       ];
