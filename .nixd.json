@@ -1,6 +1,6 @@
 {
     "formatting": {
-        "command": "nixpkgs-fmt"
+        "command": "statix fix -s"
     },
     "options": {
         "enable": true,

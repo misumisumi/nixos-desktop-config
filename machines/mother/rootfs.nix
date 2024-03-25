@@ -82,7 +82,6 @@ in
           lvolswap = {
             size = "16GB";
             content = {
-              # vm.swapiness = 10 due to realtime audio
               type = "swap";
               resumeDevice = true;
             };
