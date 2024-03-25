@@ -3,4 +3,4 @@
 hda = "hda"
 
 [files]
-extend-exclude = ["sops"]
+extend-exclude = ["sops", "flake.lock"]
