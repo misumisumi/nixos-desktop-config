@@ -25,7 +25,7 @@ in
               label = "LUKSROOT";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "encrypted";
                 extraOpenArgs = [ ];
                 passwordFile = "/tmp/secret.key";
                 settings.allowDiscards = true;
