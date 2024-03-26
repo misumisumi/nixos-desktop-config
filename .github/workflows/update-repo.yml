@@ -2,7 +2,7 @@ name: Update repository
 on:
   workflow_dispatch: # allows manual triggering
   schedule:
-    - cron: "0 17 * * 5" # runs weekly on Saturday at 02:00 (JST)
+    - cron: "0 18 * * 5" # runs weekly on Saturday at 03:00 (JST)
 
 jobs:
   update-repo:
@@ -19,7 +19,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      - uses: cachix/install-nix-action@v25
+      - uses: cachix/install-nix-action@v20
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
@@ -33,48 +33,3 @@ jobs:
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
-
-  update-readme:
-    runs-on: ubuntu-latest
-    needs: update-repo
-    steps:
-      - name: Generate GitHub Apps token
-        id: generate
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
-
-      - uses: actions/checkout@v4
-        if: needs.update-repo.result == 'success'
-        with:
-          fetch-depth: 2
-          ref: "update_flake_lock_action"
-          token: ${{ steps.generate.outputs.token }}
-
-      - uses: cachix/install-nix-action@v25
-        if: needs.update-repo.result == 'success'
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-
-      - name: Update README
-        id: update-readme
-        if: needs.update-repo.result == 'success'
-        run: ./scripts/update-readme.sh
-
-      - name: Get last commit message
-        id: last-commit-message
-        if: needs.update-repo.result == 'success'
-        run: |
-          echo "msg=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
-
-      - name: Commit README
-        id: commit
-        uses: stefanzweifel/git-auto-commit-action@v5
-        if: needs.update-repo.result == 'success'
-        with:
-          push_options: "--force"
-          commit_message: ${{ steps.last-commit-message.outputs.msg }}
-          commit_options: "--amend --no-edit"
-          skip_fetch: true
-          file_pattern: "README.md _sources/*"
