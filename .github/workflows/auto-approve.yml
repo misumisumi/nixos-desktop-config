@@ -1,61 +1,45 @@
 name: Auto approve
 on:
   workflow_run:
-    workflows: [Build check]
+    workflows: "*"
     types:
       - completed
 
 jobs:
-  check-pr:
+  auto-approve:
     runs-on: ubuntu-latest
+    if: contains(fromJSON('["misumisumi", "app/operate-pr-for-flakes"]'), github.actor)
     outputs:
-      pr-number: ${{ steps.pr-number.outputs.pr-number }}
-      check-codeowner: >-
-        steps.pr-author.outputs.pr-author == "misumisumi" ||
-        steps.pr-author.outputs.pr-author == "app/operate-pr-for-flakes"
+      pr-number: ${{ steps.pr.outputs.result }}
     steps:
-      - name: Download artifact
-        id: download-artifact
-        uses: dawidd6/action-download-artifact@v3
+      # From https://github.com/orgs/community/discussions/25220#discussioncomment-8697399
+      - name: Find associated pull request
+        id: pr
+        uses: actions/github-script@v7
         with:
-          workflow: build-check.yml
-          workflow_conclusion: success
-          name: pr-number
-          path: artifacts
+          script: |
+            const response = await github.rest.search.issuesAndPullRequests({
+              q: 'repo:${{ github.repository }} is:pr sha:${{ github.event.workflow_run.head_sha }}',
+              per_page: 1,
+            })
+            const items = response.data.items
+            if (items.length < 1) {
+              console.error('No PRs found')
+              return
+            }
+            const pullRequestNumber = items[0].number
+            console.info("Pull request number is", pullRequestNumber)
+            return pullRequestNumber
 
-      - name: Set PR number
-        id: pr-number
-        run: |
-          echo pr-number=$(cat ./artifacts/pr-number.txt) >> $GITHUB_OUTPUT
-
-      - name: Check PR Author
-        id: pr-author
+      - name: Check workflow status
+        id: check-workflow-status
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          echo pr-author=$(gh pr view ${{ steps.pr-number.outputs.pr-number }} --json author --jq .author.login) >> $GITHUB_OUTPUT
-
-  on-success:
-    runs-on: ubuntu-latest
-    needs: check-pr
-    if: >-
-      needs.outputs.check-codeowner &&
-      github.event.workflow_run.conclusion == 'success'
-    steps:
-      - name: PR review and merge
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          gh pr review --approve ${{ needs.check-pr.outputs.pr-number.outputs.pr-number }}
-          gh pr merge --merge --auto ${{ needs.check-pr.outputs.pr-number.outputs.pr-number }}
-
-  on-failure:
-    runs-on: ubuntu-latest
-    needs: on-success
-    if: >-
-      needs.on-success.result != 'success'
-    steps:
-      - name: Error handling
-        run: |
-          echo "Not approve"
-          exit 1
+          status_check=$(gh pr view ${{ steps.pr.outputs.result }} --json statusCheckRollup)
+          completed=$(echo $status_check | jq -r '.statusCheckRollup | [.[] | select(.status=="COMPLETED")]')
+          if [ $(cat $completed | jq -r '. | length' ) -eq $(cat $status_check | jq -r '.statusCheckRollup | length') ]; then
+            if [ $(cat $completed | jq '[.[].conclusion] | all(.=="SUCCESS" or "NEUTRAL")') == true ]; then
+              gh pr review --approve ${{ steps.pr.outputs.result }} --repo ${{ github.repository }}
+            end
+          end

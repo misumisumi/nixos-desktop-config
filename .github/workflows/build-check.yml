@@ -1,11 +1,12 @@
 name: Build check
 on:
   pull_request:
+    paths:
+      - "**.nix"
 
 jobs:
   build-check:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login != 'misumisumi'
     steps:
       - uses: easimon/maximize-build-space@master
         with:
@@ -26,27 +27,3 @@ jobs:
 
       - name: Run flake build
         run: nix build --no-link ".#nixosConfigurations.test.config.system.build.toplevel"
-
-      - name: Save PR number
-        run: echo $GITHUB_REF | sed -e 's/[^0-9]//g' > pr-number.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr-number
-          path: pr-number.txt
-          retention-days: 7
-
-  bypass-check:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'misumisumi'
-    steps:
-      - name: Save PR number
-        run: echo $GITHUB_REF | sed -e 's/[^0-9]//g' > pr-number.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr-number
-          path: pr-number.txt
-          retention-days: 7
