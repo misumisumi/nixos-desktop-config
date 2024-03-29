@@ -5,17 +5,15 @@ on:
     types:
       - completed
 
+permissions: write-all
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["misumisumi", "app/operate-pr-for-flakes"]'), github.actor)
-    outputs:
-      pr-number: ${{ steps.pr.outputs.result }}
+    if: contains(fromJSON('["misumisumi"]'), github.actor)
     steps:
       # From https://github.com/orgs/community/discussions/25220#discussioncomment-8697399
-      - name: Find associated pull request
+      - uses: actions/github-script@v7
         id: pr
-        uses: actions/github-script@v7
         with:
           script: |
             const response = await github.rest.search.issuesAndPullRequests({
@@ -35,11 +33,13 @@ jobs:
         id: check-workflow-status
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUM: ${{ steps.pr.outputs.result }}
         run: |
-          status_check=$(gh pr view ${{ steps.pr.outputs.result }} --json statusCheckRollup)
+          status_check=$(gh pr view "${PR_NUM}" --json statusCheckRollup)
           completed=$(echo $status_check | jq -r '.statusCheckRollup | [.[] | select(.status=="COMPLETED")]')
-          if [ $(cat $completed | jq -r '. | length' ) -eq $(cat $status_check | jq -r '.statusCheckRollup | length') ]; then
-            if [ $(cat $completed | jq '[.[].conclusion] | all(.=="SUCCESS" or "NEUTRAL")') == true ]; then
-              gh pr review --approve ${{ steps.pr.outputs.result }} --repo ${{ github.repository }}
-            end
-          end
+          if [ $(echo $completed | jq -r '. | length' ) -eq $(echo $status_check | jq -r '.statusCheckRollup | length') ]; then
+            if [ $(echo $completed | jq '[.[].conclusion] | all(.=="SUCCESS" or "NEUTRAL")') = true ]; then
+              gh pr review --approve "${PR_NUM}"
+            fi
+          fi

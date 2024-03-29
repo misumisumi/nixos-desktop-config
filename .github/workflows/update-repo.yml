@@ -4,17 +4,15 @@ on:
   schedule:
     - cron: "0 18 * * 5" # runs weekly on Saturday at 03:00 (JST)
 
+permissions: read-all
 jobs:
   update-repo:
     runs-on: ubuntu-latest
-    outputs:
-      pr-number: ${{ steps.update.outputs.pull-request-number }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate GitHub Apps token
-        id: generate
-        uses: tibdex/github-app-token@v2
+      - uses: tibdex/github-app-token@v1
+        id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
@@ -23,13 +21,12 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Update flake lock
+      - uses: DeterminateSystems/update-flake-lock@v20
         id: update
-        uses: DeterminateSystems/update-flake-lock@v21
         with:
-          token: ${{ steps.generate.outputs.token }}
-          commit-msg: "Update flake and package version"
-          pr-title: "Update repository" # Title of PR to be created
+          token: ${{ steps.generate_token.outputs.token }}
+          commit-msg: "chore(flake.lock): auto update flake.lock"
+          pr-title: "chore(flake.lock): auto update flake.lock" # Title of PR to be created
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
