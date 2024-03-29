@@ -1,7 +1,9 @@
 name: Auto approve
 on:
   workflow_run:
-    workflows: "*"
+    workflows:
+      - "Build Check"
+      - "reviewdog"
     types:
       - completed
 

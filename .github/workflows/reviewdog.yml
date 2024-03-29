@@ -1,13 +1,7 @@
 name: reviewdog
 on:
-  push:
-    branch-ignore:
-      - "update_flake_lock_action"
-    tags:
-      - "*"
-    paths:
-      - "*"
   pull_request:
+  push:
 
 permissions: read-all
 jobs:
