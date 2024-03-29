@@ -10,7 +10,7 @@ permissions:
 jobs:
   user-pr:
     runs-on: ubuntu-latest
-    if: ${{ ! endsWith(github.actor, '[bot]') }}
+    if: github.actor == 'release-please-action[bot]' || ${{ ! endsWith(github.actor, '[bot]') }}
     steps:
       - uses: tibdex/github-app-token@v1
         id: generate_token
