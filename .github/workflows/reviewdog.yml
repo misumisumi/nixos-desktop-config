@@ -9,22 +9,27 @@ on:
       - "*"
   pull_request:
 
+permissions: read-all
 jobs:
   reviewdog:
     name: reviewdog
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
-      - uses: cachix/install-nix-action@v26
+
+      - uses: cachix/install-nix-action@v25
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          github_access_token: ${{ github.token }}
+
       - run: nix profile install nixpkgs#statix nixpkgs#typos
+
       - name: Run reviewdog
         env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           reviewdog -reporter=github-pr-review -filter-mode=file -fail-on-error
