@@ -21,7 +21,7 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - uses: DeterminateSystems/update-flake-lock@v20
+      - uses: DeterminateSystems/update-flake-lock@v21
         id: update
         with:
           token: ${{ steps.generate_token.outputs.token }}
