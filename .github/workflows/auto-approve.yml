@@ -39,9 +39,9 @@ jobs:
           PR_NUM: ${{ steps.pr.outputs.result }}
         run: |
           status_check=$(gh pr view "${PR_NUM}" --json statusCheckRollup)
-          completed=$(echo $status_check | jq -r '.statusCheckRollup | [.[] | select(.status=="COMPLETED")]')
-          if [ $(echo $completed | jq -r '. | length' ) -eq $(echo $status_check | jq -r '.statusCheckRollup | length') ]; then
-            if [ $(echo $completed | jq '[.[].conclusion] | all(.=="SUCCESS" or "NEUTRAL")') = true ]; then
+          completed=$(echo "${status_check}" | jq -r '.statusCheckRollup | [.[] | select(.status=="COMPLETED")]')
+          if [ $(echo "${completed}" | jq -r '. | length' ) -eq $(echo "${status_check}" | jq -r '.statusCheckRollup | length') ]; then
+            if [ $(echo "${completed}" | jq '[.[].conclusion] | all(.=="SUCCESS" or "NEUTRAL")') = true ]; then
               gh pr review --approve "${PR_NUM}"
             fi
           fi
