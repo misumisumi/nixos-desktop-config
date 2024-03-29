@@ -3,7 +3,9 @@ on:
   pull_request:
     paths:
       - "**.nix"
+      - "flake.lock"
 
+permissions: read-all
 jobs:
   build-check:
     runs-on: ubuntu-latest
@@ -25,5 +27,27 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Run flake build
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - uses: cachix/cachix-action@v12
+        with:
+          name: misumisumi
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          skipPush: true
+
+      - name: Build Check
+        id: build-check
         run: nix build --no-link ".#nixosConfigurations.test.config.system.build.toplevel"
+
+      - name: Create package list
+        env:
+          PR_NUM: ${{ github.event.number }}
+        run: |
+          nix path-info -r ./result | cut -d'-' -f2- | sort | sed -e "s/-[a-z]\+$//g" | uniq > current-nixpkgs.list
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ github.actor == 'app/update-flake' }}
+        with:
+          name: current-nixpkgs
+          path: current-nixpkgs.list
+          overwrite: true

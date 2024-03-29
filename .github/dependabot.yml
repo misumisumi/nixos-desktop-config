@@ -8,11 +8,3 @@ updates:
       day: "saturday"
       time: "03:00"
       timezone: "Asia/Tokyo"
-    groups:
-      angular:
-        patterns:
-          - "*"
-        update-types:
-          - major
-          - minor
-          - patch
