@@ -1,5 +1,4 @@
 name: Delete workflow
-
 on:
   workflow_dispatch:
     inputs:
