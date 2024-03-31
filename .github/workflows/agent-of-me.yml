@@ -1,0 +1,72 @@
+name: approve and merge instead of me
+on:
+  pull_request:
+    types:
+      - opened
+
+permissions: read-all
+jobs:
+  approve-owner:
+    runs-on: ubuntu-latest
+    if: contains(fromJSON('["misumisumi"]'), github.actor)
+    env:
+      GH_REPO: ${{ github.repository }}
+      PR_NUM: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_ME_APP_ID }}
+          private_key: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
+      - name: Auto approve
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          gh pr review --approve "${PR_NUM}"
+
+  merge-pr-created-by-bot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'workflow-executor[bot]' }}
+    env:
+      GH_REPO: ${{ github.repository }}
+      PR_NUM: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_ME_APP_ID }}
+          private_key: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
+      - name: Auto approve and merge for bot PRs
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          gh pr review --approve "$PR_NUM"
+          gh pr merge --auto --merge "$PR_NUM"
+
+  merge-pr-created-by-dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    env:
+      GH_REPO: ${{ github.repository }}
+      PR_NUM: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_ME_APP_ID }}
+          private_key: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
+      - uses: dependabot/fetch-metadata@v2
+        id: metadata
+        with:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - name: Auto approve and merge for dependabot PRs
+        if: contains(fromJSON('["minor", "patch"]'), steps.metadata.outputs.update-type)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh pr review --approve "$PR_NUM"
+          gh pr merge --auto --merge "$PR_NUM"
