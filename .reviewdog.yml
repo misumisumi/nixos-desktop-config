@@ -4,6 +4,13 @@ runner:
     errorformat:
       - "%f>%l:%c:%t:%n:%m"
     level: warning
+
   typos:
-    cmd: typos
+    cmd: typos --exclude CHANGELOG.md
     format: typos
+
+  actionlint:
+    cmd: SHELLCHECK_OPTS='-e SC2086' actionlint -oneline
+    errorformat:
+      - "%f:%l:%c: %m"
+    level: warning

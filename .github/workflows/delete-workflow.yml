@@ -1,4 +1,4 @@
-name: Delete workflow
+name: delete workflow
 
 on:
   workflow_dispatch:
@@ -23,4 +23,4 @@ jobs:
 
       - run: |
           gh run list --workflow "${WORKFLOW}" --limit 1000 --json databaseId,status --jq '.[] | select(.status == "completed") | .databaseId' \
-            | xargs -n 1 -I {} gh api -X DELETE repos/${GH_REPO}/actions/runs/{}
+            | xargs -n 1 -I {} gh api -X DELETE repos/"${GH_REPO}"/actions/runs/{}
