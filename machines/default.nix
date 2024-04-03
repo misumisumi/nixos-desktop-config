@@ -37,8 +37,8 @@ let
                 };
                 sharedModules = [
                   inputs.dotfiles.homeManagerModules.dotfiles
-                  inputs.flakes.nixosModules.for-hm
-                  inputs.nvimdots.nixosModules.nvimdots
+                  inputs.flakes.homeManagerModules.default
+                  inputs.nvimdots.homeManagerModules.nvimdots
                   inputs.sops-nix.homeManagerModules.sops
                   inputs.spicetify-nix.homeManagerModule
                 ];

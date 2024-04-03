@@ -116,15 +116,16 @@
         "spicetify-nix": "spicetify-nix"
       },
       "locked": {
-        "lastModified": 1711739919,
-        "narHash": "sha256-1SJ9rJ34LnhnYoHVghOZIOqtY1oSj+PAQ9l658A2e58=",
+        "lastModified": 1712119749,
+        "narHash": "sha256-xiVzDqi9z3OaOAPFoOC6duWm4jmM4iXeogubmu0lbhg=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "d798da8fc9753ddb3d4f6081bca00a9c3719dd1e",
+        "rev": "d8dae12d1e64fcaa0d53abc35bf40c6dcf7ae054",
         "type": "github"
       },
       "original": {
         "owner": "misumisumi",
+        "ref": "fix/neovim",
         "repo": "home-manager-config",
         "type": "github"
       }
@@ -316,11 +317,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1711729641,
-        "narHash": "sha256-xcjPAXBYPSilO5ON0ywFz7c9K9IlheJBNzTawyuZtJI=",
+        "lastModified": 1712082984,
+        "narHash": "sha256-Due75H65ay9FS7TpsIU0YD8joqI455EiIDXQFUQgqgY=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "c515c3fd00686699154321ab794a31d6c886ab88",
+        "rev": "e55ef0c93267f9b872e63ee423cb8135e75800d5",
         "type": "github"
       },
       "original": {
@@ -578,15 +579,16 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1711737545,
-        "narHash": "sha256-Y1EPg2wiP9ceHBx0t8p6Txq77e3to9U/3M5DaBT4mmw=",
+        "lastModified": 1712119675,
+        "narHash": "sha256-uV4ei3lUkeGsdwlZZzTCUYrqqtFBnT6sfmXR1Cne9To=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "44340fdbeb7772dec0fc90249257e0964597820d",
+        "rev": "03d740d28b1474105321cd4c00e5840e440ffb31",
         "type": "github"
       },
       "original": {
         "owner": "misumisumi",
+        "ref": "home-manager",
         "repo": "nvimdots",
         "type": "github"
       }

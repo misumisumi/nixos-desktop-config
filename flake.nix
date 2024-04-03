@@ -8,7 +8,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    nvimdots.url = "github:misumisumi/nvimdots";
+    nvimdots.url = "github:misumisumi/nvimdots/home-manager";
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,8 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "github:misumisumi/home-manager-config";
-      # url = "path:/home/sumi/Templates/nix/home-manager-config";
+      url = "github:misumisumi/home-manager-config/fix/neovim";
       inputs = {
         flakes.follows = "flakes";
         home-manager.follows = "home-manager";
