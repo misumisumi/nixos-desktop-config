@@ -7,9 +7,11 @@ on:
 permissions:
   contents: write
   pull-requests: write
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'misumisumi'
     outputs:
       release_created: ${{ steps.release-please.outputs.release_created }}
       major: ${{ steps.release-please.outputs.major }}
