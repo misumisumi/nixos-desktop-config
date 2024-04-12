@@ -1,16 +1,25 @@
 name: build check
 on:
   pull_request:
-    paths:
-      - "**.nix"
-      - "flake.lock"
 
-permissions: read-all
+permissions:
+  id-token: "write"
+  contents: "read"
+
 jobs:
   build-check:
     runs-on: ubuntu-latest
     steps:
+      - uses: dorny/paths-filter@v3
+        id: change
+        with:
+          filters: |
+            nix:
+              - "**.nix"
+              - "flake.lock"
+
       - uses: easimon/maximize-build-space@master
+        if: steps.change.outputs.nix == 'true'
         with:
           root-reserve-mb: 8192
           swap-size-mb: 1024
@@ -22,12 +31,13 @@ jobs:
           remove-docker-images: true
 
       - uses: actions/checkout@v4
+        if: steps.change.outputs.nix == 'true'
 
       - uses: cachix/install-nix-action@v26
+        if: steps.change.outputs.nix == 'true'
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-
       - name: Build check
+        if: steps.change.outputs.nix == 'true'
         run: nix build --no-link ".#nixosConfigurations.test.config.system.build.toplevel"

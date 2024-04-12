@@ -2,12 +2,14 @@ name: update repository
 on:
   workflow_dispatch: # allows manual triggering
   schedule:
-    - cron: "0 18 * * 5" # runs weekly on Saturday at 03:00 (JST)
+    - cron: "0 20 * * 5" # runs weekly on Saturday at 05:00 (JST)
 
 permissions: read-all
+
 jobs:
   update-repo:
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'misumisumi'
     steps:
       - uses: actions/checkout@v4
 
@@ -24,7 +26,7 @@ jobs:
       - uses: DeterminateSystems/update-flake-lock@v21
         id: update
         with:
-          token: ${{ github.token }}
+          token: ${{ steps.generate-token.outputs.token }}
           commit-msg: "chore(flake.lock): auto update flake.lock"
           pr-title: "chore(flake.lock): auto update flake.lock" # Title of PR to be created
           pr-labels: | # Labels to be set on the PR
