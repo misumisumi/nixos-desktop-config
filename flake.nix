@@ -47,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "github:misumisumi/home-manager-config/fix/neovim";
+      url = "github:misumisumi/home-manager-config";
       inputs = {
         flakes.follows = "flakes";
         home-manager.follows = "home-manager";
