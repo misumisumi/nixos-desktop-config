@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.0...v1.1.1) (2024-04-13)
+
+
+### Bug Fixes
+
+* **.nixd.json:** use nixpkgs-fmt ([51b796d](https://github.com/misumisumi/nixos-desktop-config/commit/51b796d2b58a17017c485660a7b443f70be3eae7))
+* fix module name ([8aebf9f](https://github.com/misumisumi/nixos-desktop-config/commit/8aebf9f95a7c40858aba679dfd56aed4cdd510ba))
+
 ## [1.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v1.0.1...v1.1.0) (2024-03-29)
 
 
