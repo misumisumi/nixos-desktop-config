@@ -3,6 +3,7 @@ on:
   pull_request:
 
 permissions: read-all
+
 jobs:
   reviewdog:
     runs-on: ubuntu-latest

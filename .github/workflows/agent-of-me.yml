@@ -1,17 +1,61 @@
 name: approve and merge instead of me
 on:
-  pull_request:
-    types:
-      - opened
+  workflow_run:
+    workflows:
+      - "build check"
+      - "reviewdog"
+    types: [completed]
 
 permissions: read-all
+
 jobs:
+  workflow-status:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'misumisumi'
+    outputs:
+      all-success: ${{ steps.workflow-status.outputs.all-success }}
+      pr-number: ${{ steps.pr.outputs.result }}
+    steps:
+      # From https://github.com/orgs/community/discussions/25220#discussioncomment-8697399
+      - uses: actions/github-script@v7
+        id: pr
+        with:
+          script: |
+            const response = await github.rest.search.issuesAndPullRequests({
+              q: 'repo:${{ github.repository }} is:pr sha:${{ github.event.workflow_run.head_sha }}',
+              per_page: 1,
+            })
+            const items = response.data.items
+            if (items.length < 1) {
+              console.error('No PRs found')
+              return
+            }
+            const pullRequestNumber = items[0].number
+            console.info("Pull request number is", pullRequestNumber)
+            return pullRequestNumber
+
+      - name: Check workflow status
+        id: workflow-status
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUM: ${{ steps.pr.outputs.result }}
+        run: |
+          status_check=$(gh pr view "${PR_NUM}" --json statusCheckRollup)
+          check_all_success=$(echo $status_check | jq -r '.statusCheckRollup | [.[].conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
+          echo "all-success=${check_all_success}" >> $GITHUB_OUTPUT
+
   approve-owner:
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["misumisumi"]'), github.actor)
+    needs: workflow-status
+    if: >-
+      ${{
+        contains(fromJSON('["misumisumi"]'), github.actor) &&
+        needs.workflow-status.outputs.all-success == 'true'
+       }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ github.event.pull_request.number }}
+      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -27,10 +71,15 @@ jobs:
 
   merge-pr-created-by-bot:
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'workflow-executor[bot]' }}
+    needs: workflow-status
+    if: >-
+      ${{
+        github.actor == 'workflow-executor[bot]' &&
+        needs.workflow-status.outputs.all-success == 'true'
+      }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ github.event.pull_request.number }}
+      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -43,14 +92,19 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           gh pr review --approve "$PR_NUM"
-          gh pr merge --auto --merge "$PR_NUM"
+          gh pr merge --merge --auto "$PR_NUM"
 
   merge-pr-created-by-dependabot:
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    needs: workflow-status
+    if: >-
+      ${{
+        github.actor == 'dependabot[bot]' &&
+        needs.workflow-status.outputs.all-success == 'true'
+      }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ github.event.pull_request.number }}
+      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -69,4 +123,4 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           gh pr review --approve "$PR_NUM"
-          gh pr merge --auto --merge "$PR_NUM"
+          gh pr merge --merge --auto "$PR_NUM"

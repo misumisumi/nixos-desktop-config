@@ -9,6 +9,7 @@ on:
         type: string
 
 permissions: read-all
+
 jobs:
   delete:
     runs-on: ubuntu-20.04
