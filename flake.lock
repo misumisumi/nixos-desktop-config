@@ -116,11 +116,11 @@
         "spicetify-nix": "spicetify-nix"
       },
       "locked": {
-        "lastModified": 1713554924,
-        "narHash": "sha256-+prTYx+3pbxH00Xuf1/XF0LqlLJwQU5qOeOFp1O79Gc=",
+        "lastModified": 1713609670,
+        "narHash": "sha256-XmRs2pWtqQlqR6UF1+sLQ4/XpuaOQbDFtXex4IZTupE=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "f2acdd2894a487dd660e2b261d4494ce062ff795",
+        "rev": "8395f145081b95da942cacc2130990838f624423",
         "type": "github"
       },
       "original": {
@@ -725,11 +725,11 @@
     },
     "nvimdots": {
       "locked": {
-        "lastModified": 1712551224,
-        "narHash": "sha256-WaEbhpxK2fycRNfoBSqG/O/aQnk7pqlB/x79/QcK8fg=",
+        "lastModified": 1713607846,
+        "narHash": "sha256-+MhhMv3ZraIeA5U3y4/3RdeepaBKAEIZiNKUraPao/M=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "43d5fd2bc12d73f418b0001d57b0bbac24f1e081",
+        "rev": "98b29ba0332e61d29ee8c9feace9a50223ac1cb0",
         "type": "github"
       },
       "original": {
