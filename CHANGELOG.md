@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.1...v1.1.2) (2024-04-22)
+
+
+### Bug Fixes
+
+* depricate config ([a2a9ce2](https://github.com/misumisumi/nixos-desktop-config/commit/a2a9ce2e614aaa4aaef1b65cab3ef3d1e5a04ddd))
+
 ## [1.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.0...v1.1.1) (2024-04-13)
 
 
