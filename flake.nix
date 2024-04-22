@@ -1,5 +1,13 @@
 {
   description = "Each my machine NixOS System Flake Configuration";
+  nixConfig = {
+    extra-substituters = [
+      "https://misumisumi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+    ];
+  };
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -64,7 +72,7 @@
   outputs = inputs @ { self, flake-parts, ... }:
     let
       user = "sumi";
-      stateVersion = "23.11"; # For Home Manager
+      stateVersion = "24.05"; # For Home Manager
     in
     flake-parts.lib.mkFlake
       { inherit inputs; }
@@ -73,14 +81,6 @@
           inputs.devshell.flakeModule
         ];
         flake = {
-          nixConfig = {
-            extra-substituters = [
-              "https://misumisumi.cachix.org"
-            ];
-            extra-trusted-public-keys = [
-              "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
-            ];
-          };
           nixosConfigurations = import ./machines {
             inherit (inputs.nixpkgs) lib;
             inherit inputs stateVersion user;
