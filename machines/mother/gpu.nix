@@ -1,5 +1,4 @@
 { pkgs
-, lib
 , ...
 }: {
   # boot.extraModprobeConfig = lib.mkAfter ''
@@ -45,6 +44,7 @@
   };
 
   hardware = {
+    nvidia-container-toolkit.enable = true;
     nvidia.modesetting.enable = true;
     opengl = {
       driSupport32Bit = true;
