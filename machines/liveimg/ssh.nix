@@ -1,7 +1,4 @@
-{ lib
-, stateVersion
-, ...
-}: {
+{
   programs.ssh = {
     askPassword = "";
   };
