@@ -13,6 +13,15 @@
   programs.light.enable = true;
 
   services = {
+    libinput = {
+      enable = true;
+      mouse.naturalScrolling = true;
+      touchpad = {
+        tapping = true;
+        naturalScrolling = true;
+        accelSpeed = "0.6";
+      };
+    };
     xserver = {
       enable = true;
       autorun = true;
@@ -20,16 +29,6 @@
       xkb = {
         layout = "us";
         options = "caps:nocaps"; # keyboard is managed home-manager
-      };
-
-      libinput = {
-        enable = true;
-        mouse.naturalScrolling = true;
-        touchpad = {
-          tapping = true;
-          naturalScrolling = true;
-          accelSpeed = "0.6";
-        };
       };
 
       displayManager = {
