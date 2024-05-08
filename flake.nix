@@ -16,7 +16,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nur.url = "github:nix-community/NUR";
-    nvimdots.url = "github:misumisumi/nvimdots";
+    nvimdots = {
+      url = "github:misumisumi/nvimdots";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
