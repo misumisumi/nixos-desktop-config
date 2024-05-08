@@ -51,9 +51,9 @@ let
 in
 {
   test = settings {
-    hostname = "mother";
+    hostname = "liveimg";
     inherit user;
-    scheme = "test";
+    scheme = "full";
   };
   liveimg-gui = settings {
     hostname = "liveimg";
