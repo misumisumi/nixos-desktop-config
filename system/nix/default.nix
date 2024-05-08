@@ -1,8 +1,6 @@
 { config
 , pkgs
 , inputs
-, system
-, stateVersion
 , user
 , ...
 }:
@@ -55,7 +53,7 @@
   };
 
   system = {
-    inherit stateVersion;
+    stateVersion = config.system.nixos.release;
     # NixOS settings
     autoUpgrade = {
       # Allow auto update

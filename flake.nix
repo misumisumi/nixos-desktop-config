@@ -13,8 +13,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flakes.url = "github:misumisumi/flakes";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nur.url = "github:nix-community/NUR";
     nvimdots.url = "github:misumisumi/nvimdots";
     devshell = {
@@ -69,62 +69,57 @@
     };
   };
 
-  outputs = inputs @ { self, flake-parts, ... }:
-    let
-      user = "sumi";
-      stateVersion = "24.05"; # For Home Manager
-    in
-    flake-parts.lib.mkFlake
-      { inherit inputs; }
-      {
-        imports = [
-          inputs.devshell.flakeModule
-        ];
-        flake = {
-          nixosConfigurations = import ./machines {
-            inherit (inputs.nixpkgs) lib;
-            inherit inputs stateVersion user;
-          };
-        };
-        systems = [ "x86_64-linux" ];
-        perSystem = { config, pkgs, system, ... }: rec{
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [ ];
-            config.allowUnfree = true;
-          };
-          devshells.default = {
-            commands = [
-              {
-                help = "update keys of sops secrets";
-                name = "update-keys";
-                command = ''
-                  find sops/secrets -type f | xargs -I{} sops updatekeys --yes {}
-                '';
-              }
-              {
-                help = "disko";
-                name = "disko";
-                command = ''
-                  ${inputs.disko.packages.${system}.disko}/bin/disko ''${@}
-                '';
-              }
-              {
-                help = "nixos-anywhere";
-                name = "nixos-anywhere";
-                command = ''
-                  ${inputs.nixos-anywhere.packages.${system}.nixos-anywhere}/bin/nixos-anywhere ''${@}
-                '';
-              }
-            ];
-            packages = with pkgs; [
-              age
-              nixos-generators
-              sops
-              ssh-to-age
-            ];
-          };
+  outputs = inputs @ { flake-parts, ... }: flake-parts.lib.mkFlake
+    { inherit inputs; }
+    {
+      imports = [
+        inputs.devshell.flakeModule
+      ];
+      flake = {
+        nixosConfigurations = import ./machines {
+          inherit (inputs.nixpkgs) lib;
+          inherit inputs;
         };
       };
+      systems = [ "x86_64-linux" ];
+      perSystem = { pkgs, system, ... }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ ];
+          config.allowUnfree = true;
+        };
+        devshells.default = {
+          commands = [
+            {
+              help = "update keys of sops secrets";
+              name = "update-keys";
+              command = ''
+                find sops/secrets -type f | xargs -I{} sops updatekeys --yes {}
+              '';
+            }
+            {
+              help = "disko";
+              name = "disko";
+              command = ''
+                ${inputs.disko.packages.${system}.disko}/bin/disko ''${@}
+              '';
+            }
+            {
+              help = "nixos-anywhere";
+              name = "nixos-anywhere";
+              command = ''
+                ${inputs.nixos-anywhere.packages.${system}.nixos-anywhere}/bin/nixos-anywhere ''${@}
+              '';
+            }
+          ];
+          packages = with pkgs; [
+            age
+            nixos-generators
+            sops
+            ssh-to-age
+          ];
+        };
+      };
+    };
 }
 

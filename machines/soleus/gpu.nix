@@ -10,6 +10,7 @@
   };
 
   hardware = {
+    nvidia-container-toolkit.enable = true;
     nvidia = {
       powerManagement.enable = true;
       nvidiaPersistenced = true;

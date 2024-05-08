@@ -51,114 +51,109 @@
           netdevConfig = {
             Kind = "bridge";
             Name = "br0";
+            MACAddress = "56:47:6a:94:2d:34";
           };
-          extraConfig = ''
-            [Bridge]
-            VLANFiltering=1
-            DefaultPVID=1
-          '';
         };
         "br1" = {
           netdevConfig = {
             Kind = "bridge";
             Name = "br1";
           };
-          extraConfig = ''
-            [Bridge]
-            VLANFiltering=1
-            DefaultPVID=100
-          '';
-        };
-        home = {
-          netdevConfig = {
-            Kind = "vlan";
-            Name = "home";
-            MACAddress = "56:47:6a:94:2d:34";
-          };
-          vlanConfig = {
-            Id = 1;
+          bridgeConfig = {
+            VLANFiltering = true;
+            DefaultPVID = 101;
           };
         };
-        dev-server-host = {
+        devnode = {
           netdevConfig = {
             Kind = "vlan";
-            Name = "dev-server-host";
-            MACAddress = "7f:11:b1:60:a4:74";
-          };
-          vlanConfig = {
-            Id = 100;
-          };
-        };
-        dev-k8s = {
-          netdevConfig = {
-            Kind = "vlan";
-            Name = "dev-server-host";
-            MACAddress = "7f:11:b1:60:a4:84";
+            Name = "devnode";
+            MACAddress = "6d:ff:2e:62:27:31";
           };
           vlanConfig = {
             Id = 101;
           };
         };
-        dev-nfs = {
+        devk8s = {
           netdevConfig = {
             Kind = "vlan";
-            Name = "dev-server-host";
-            MACAddress = "7f:11:b1:60:a4:94";
+            Name = "devk8s";
+            MACAddress = "ef:e2:93:7e:94:e5";
           };
           vlanConfig = {
             Id = 102;
+          };
+        };
+        devnfs = {
+          netdevConfig = {
+            Kind = "vlan";
+            Name = "devnfs";
+            MACAddress = "23:ad:d6:5b:f1:5a";
+          };
+          vlanConfig = {
+            Id = 103;
           };
         };
       };
       networks = {
         "10-wired" = {
           name = "enp5s0";
+          vlan = [ "devnode" "devk8s" "devnfs" ];
           bridge = [ "br0" ];
         };
         "20-br0" = {
           name = "br0";
-          vlan = [ "home" "dev" ];
+          DHCP = "yes";
+        };
+        "20-devnode" = {
+          name = "devnode";
+          bridge = [ "br1" ];
           bridgeVLANs = [
             {
               bridgeVLANConfig = {
-                VLAN = "1";
-              };
-            }
-            {
-              bridgeVLANConfig = {
-                VLAN = "100-102";
+                PVID = 101;
+                EgressUntagged = 101;
               };
             }
           ];
         };
-        "30-home" = {
-          name = "home";
-          DHCP = "yes";
-        };
-        "40-dev-server-host" = {
-          name = "dev-server-host";
-          bridge = [ "br1" ];
-          DHCP = "no";
-        };
-        "40-dev-k8s" = {
-          name = "dev-k8s";
-          bridge = [ "br1" ];
-          DHCP = "no";
-        };
-        "40-dev-nfs" = {
-          name = "dev-nfs";
-          bridge = [ "br1" ];
-          DHCP = "no";
-        };
-        "50-br1" = {
-          name = "br1";
-          DHCP = "no";
+        "20-devk8s" = {
+          name = "devk8s";
+          bond = [ "br1" ];
           bridgeVLANs = [
             {
               bridgeVLANConfig = {
-                VLAN = "100-102";
-                PVID = 100;
-                EgressUntagged = 100;
+                PVID = 102;
+                EgressUntagged = 102;
+              };
+            }
+          ];
+        };
+        "20-devnfs" = {
+          name = "devnfs";
+          bond = [ "devbr1" ];
+          bridgeVLANs = [
+            {
+              bridgeVLANConfig = {
+                PVID = 103;
+                EgressUntagged = 103;
+              };
+            }
+          ];
+        };
+        "30-br1" = {
+          name = "br1";
+          networkConfig = {
+            LinkLocalAddressing = "no";
+            LLDP = "no";
+            EmitLLDP = "no";
+            IPv6AcceptRA = "no";
+            IPv6SendRA = "no";
+          };
+          bridgeVLANs = [
+            {
+              bridgeVLANConfig = {
+                VLAN = "101-103";
               };
             }
           ];

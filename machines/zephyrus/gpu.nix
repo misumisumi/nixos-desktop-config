@@ -18,6 +18,7 @@
   };
 
   hardware = {
+    nvidia-container-toolkit.enable = true;
     nvidia.powerManagement.enable = true;
     opengl.extraPackages = with pkgs; [
       libvdpau-va-gl
