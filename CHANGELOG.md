@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.2...v1.1.3) (2024-05-08)
+
+
+### Bug Fixes
+
+* **libinputs:** fix option name ([941b625](https://github.com/misumisumi/nixos-desktop-config/commit/941b6256040cabe54bf716655e0e4caa5f593b44))
+* **network:** fix vlan-tag network ([7234ea6](https://github.com/misumisumi/nixos-desktop-config/commit/7234ea64cd11ffc942159ee02c18679d5d21d862))
+* **nvidia-container-toolkit:** rename option to `hardware.nvidia-container-toolkit` ([a7673d3](https://github.com/misumisumi/nixos-desktop-config/commit/a7673d328ab22aaf3624c6d6edc83a9f3ef03ccf))
+* remove stateVersion and update inputs ([00a2bae](https://github.com/misumisumi/nixos-desktop-config/commit/00a2bae8010820f8f1138b1af427ae4ddac39201))
+* **ssh:** remove branching by version ([562fbdf](https://github.com/misumisumi/nixos-desktop-config/commit/562fbdf62c2022410bc98fd0c7392b8454a8654d))
+* test config ([4e4945a](https://github.com/misumisumi/nixos-desktop-config/commit/4e4945a0094e87a3bb8f5595cfdc09cc1781b3ee))
+
 ## [1.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.1...v1.1.2) (2024-04-22)
 
 
