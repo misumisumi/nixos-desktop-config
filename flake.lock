@@ -135,11 +135,11 @@
         "spicetify-nix": "spicetify-nix"
       },
       "locked": {
-        "lastModified": 1715046915,
-        "narHash": "sha256-HyRnXPLCcNnvhIPBfo1DCuw/8L1u1W0lUOPMwatP2vI=",
+        "lastModified": 1715194582,
+        "narHash": "sha256-OI5U3xrDnZqKk+VVIQBRU0GxLGzSAv21c7HxpvgHoPQ=",
         "owner": "misumisumi",
         "repo": "home-manager-config",
-        "rev": "77022c24c8cbac8c45550ced61a721de77958999",
+        "rev": "5fa7f54e2d2ea2bcaa4dbb57dccea9ac533c3651",
         "type": "github"
       },
       "original": {
@@ -704,22 +704,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
-      "locked": {
-        "lastModified": 1714280680,
-        "narHash": "sha256-eNTZCX/vK/BQOpY+6n5a6oGxBBe7qfSbtcppepCLAAQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "9516f3c963708933abe984df94a925af38916237",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "locked": {
         "lastModified": 1714754675,
@@ -760,7 +744,9 @@
         "devshell": "devshell_4",
         "flake-parts": "flake-parts_5",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1715017422,
