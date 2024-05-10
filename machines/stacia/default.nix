@@ -1,5 +1,20 @@
+{ wm, ... }:
 {
   imports = [
+    ../../apps/system/documentation
+    ../../apps/system/nix-ld
+    ../../apps/system/pkgs
+    ../../apps/system/printer
+    ../../apps/system/programs
+    ../../apps/system/services
+    ../../apps/system/sops
+    ../../apps/system/ssh
+    ../../apps/system/wm/${wm}
+    ../../settings/system
+    ../../settings/system/bluetooth
+    ../../settings/system/musnix
+    ../../settings/system/pipewire
+    ../init
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
@@ -8,19 +23,5 @@
     ./system.nix
     ./virtualisation.nix
     ./zfs.nix
-    ../init
-    ../../system
-    ../../system/bluetooth
-    ../../system/pipewire
-    ../../system/musnix
-    ../../apps/documentation
-    ../../apps/nix-ld
-    ../../apps/pkgs
-    ../../apps/printer
-    ../../apps/programs
-    ../../apps/services
-    ../../apps/sops
-    ../../apps/ssh
-    ../../apps/wm/qtile
   ];
 }

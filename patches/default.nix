@@ -39,6 +39,24 @@
 final: prev:
 {
   # xp-pentablet-unwrapped = prev.libsForQt5.callPackage ./xp-pen-drivers { };
+  pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+    (pfinal: pprev: {
+      qtile = pprev.qtile.overridePythonAttrs (old: {
+        patches =
+          old.patches
+            ++ [
+            ./fix-xcbq.patch
+          ];
+      }
+      );
+    })
+  ];
+  haskellPackages = prev.haskellPackages.override {
+    overrides = hself: hsuper: {
+      # Can add/override packages here
+      thumbnail = prev.haskell.lib.doJailbreak hsuper.thumbnail;
+    };
+  };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
 }
 

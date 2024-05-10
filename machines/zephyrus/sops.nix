@@ -5,15 +5,15 @@
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
-    defaultSopsFile = ../../sops/secrets/hosts/zephyrus/secrets.yaml;
+    defaultSopsFile = ../../sops/hosts/zephyrus/secrets.yaml;
     secrets = {
       "openfortivpn/config" = {
-        sopsFile = ../../sops/secrets/openfortivpn/config;
+        sopsFile = ../../sops/system/openfortivpn/config;
         format = "binary";
       };
       password.neededForUsers = true;
       wireless = {
-        sopsFile = ../../sops/secrets/network/wireless;
+        sopsFile = ../../sops/system/network/wireless;
         format = "binary";
       };
     };
