@@ -1,0 +1,162 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "palette": {
+        "bg": "#353746",
+        "black": "#111111",
+        "blue": "#01ACFA",
+        "green": "#4FD700",
+        "red": "#E50000",
+        "white": "#F8F8F2",
+        "yellow": "#D7AF00",
+        "purple": "#BB1EC2"
+    },
+    "blocks": [
+        {
+            "alignment": "left",
+            "newline": true,
+            "segments": [
+                {
+                    "background": "p:bg",
+                    "foreground": "p:blue",
+                    "style": "plain",
+                    "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} \ue0b1",
+                    "type": "os"
+                },
+                {
+                    "background": "p:bg",
+                    "foreground": "p:blue",
+                    "style": "plain",
+                    "template": " \uf0e7 ",
+                    "type": "root"
+                },
+                {
+                    "background": "p:bg",
+                    "foreground": "p:blue",
+                    "properties": {
+                        "style": "unique"
+                    },
+                    "style": "plain",
+                    "template": " {{ .Path }} ",
+                    "type": "path"
+                },
+                {
+                    "background": "p:bg",
+                    "foreground": "p:green",
+                    "powerline_symbol": "\ue0b0",
+                    "properties": {
+                        "fetch_stash_count": true,
+                        "fetch_upstream_icon": true,
+                        "cherry_pick_icon": "\u2713 ",
+                        "commit_icon": "\u25b7 ",
+                        "fetch_status": true,
+                        "merge_icon": "\u25f4 ",
+                        "no_commits_icon": "[no commits]",
+                        "rebase_icon": "\u2c62 ",
+                        "tag_icon": "\u25b6 "
+                    },
+                    "style": "plain",
+                    "template": "<p:blue>\ue0b1 </>{{ .UpstreamIcon }}{{ .HEAD }}{{ if and (eq .Ahead 0) (eq .Behind 0) }} \u2261{{end}}{{ if gt .Ahead 0 }} \u2191{{.Ahead}}{{end}}{{ if gt .Behind 0 }} \u2193{{.Behind}}{{end}} <p:yellow>{{ if .Working.Changed }}+{{ .Working.Added }} ~{{ .Working.Modified }}</> <p:red>-{{ .Working.Deleted }} {{ end }}</>",
+                    "type": "git"
+                },
+                {
+                    "background": "transparent",
+                    "foreground": "p:bg",
+                    "style": "plain",
+                    "template": "\ue0b0",
+                    "type": "text"
+                }
+            ],
+            "type": "prompt"
+        },
+        {
+            "alignment": "right",
+            "segments": [
+                {
+                    "type": "exit",
+                    "style": "diamond",
+                    "foreground": "p:white",
+                    "background": "p:bg",
+                    "background_templates": [
+                        "{{ if gt .Code 0 }}p:red{{ end }}"
+                    ],
+                    "leading_diamond": "\ue0b2",
+                    "template": " \uE23A ",
+                    "properties": {
+                        "always_enabled": true
+                    }
+                },
+                {
+                    "background": "p:bg",
+                    "foreground": "p:white",
+                    "leading_diamond": "<p:blue>\ue0b3</>",
+                    "properties": {
+                        "threshold": 3000
+                    },
+                    "style": "diamond",
+                    "template": " \ufa1e{{ .FormattedMs }} ",
+                    "type": "executiontime"
+                },
+                {
+                    "type": "python",
+                    "style": "diamond",
+                    "leading_diamond": "<p:blue>\ue0b3</>",
+                    "foreground": "p:white",
+                    "background": "p:bg",
+                    "properties": {
+                        "display_mode": "context"
+                    },
+                    "template": " \uE235 {{ .Full }} "
+                },
+                {
+                    "type": "kubectl",
+                    "style": "diamond",
+                    "leading_diamond": "<p:blue>\ue0b3</>",
+                    "foreground": "p:white",
+                    "background": "p:bg",
+                    "template": " \uFD31 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+                },
+                {
+                    "type": "aws",
+                    "style": "diamond",
+                    "leading_diamond": "<p:blue>\ue0b3</>",
+                    "foreground": "p:white",
+                    "background": "p:bg",
+                    "template": " \uE7AD {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
+                },
+                {
+                    "background": "p:bg",
+                    "foreground": "p:white",
+                    "style": "diamond",
+                    "leading_diamond": "<p:blue>\ue0b3</>",
+                    "template": "{{ if .SSHSession }} {{ .UserName }}@{{ .HostName }} <p:blue>\ue0b3</> {{else}} {{end}}",
+                    "type": "session"
+                }
+            ],
+            "type": "prompt"
+        },
+        {
+            "alignment": "left",
+            "newline": true,
+            "segments": [
+                {
+                    "foreground": "p:green",
+                    "foreground_templates": [
+                        "{{ if gt .Code 0 }} p:red {{ end }}"
+                    ],
+                    "properties": {
+                        "always_enabled": true
+                    },
+                    "style": "plain",
+                    "template": "\u276f ",
+                    "type": "exit"
+                }
+            ],
+            "type": "prompt"
+        }
+    ],
+    "transient_prompt": {
+        "background": "transparent",
+        "template": " "
+    },
+    "version": 2
+}

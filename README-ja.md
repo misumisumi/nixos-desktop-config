@@ -1,7 +1,7 @@
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
 nix の世界へようこそ!!  
-これは[misumisumi](https://github.com/misumisumi)のマシン設定です。
+これは[misumisumi](https://github.com/misumisumi)のNixOSおよびhome-managerの設定です。
 
 リカバリー用の設定使って NixOS を試すことができます。(Bootable Disk or LiveCD)
 
@@ -9,24 +9,41 @@ nix の世界へようこそ!!
 
 - このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
 - リカバリー用のgnomeまたはCLI環境を試用することができます。
-- このリポジトリではシステム設定のみ管理されています。
-- ユーザーにインストールされるパッケージの設定は別リポジトリ: [home-manager-config](https://github.com/misumisumi/home-manager-config)で管理されています。
 - 各マシンの設定は[machines](./machines)にあります。
+- ユーザー環境でのみ`nix`を使いたい場合は`home-manager`を試すことができます。
+
+- system-wide
 
 ```
 nixos-desktop-config
-├── apps           # アプリ設定
-├── hm             # home-manager config
-├── machines       # 各マシンの設定
-│   ├── init       # マシン共通設定
-│   ├── liveimg    # live環境
-│   ├── mother     # メインPC
-│   ├── soleus     # デスクトップ
-│   ├── stacia     # デスクトップ
-│   └── zephyrus   # ラップトップ
-├── modules        # nixosModules
-├── patches        # nixpkgsのパッチ
-└── system         # システム共通設定
+├── apps           # settings for installing apps
+│   ├── system     # system wide
+│   └── user       # user wide
+│       ├── core   # common installing apps
+│       ├── full   # include GUI
+│       ├── medium # include latex
+│       └── small  # include neovim and zsh
+├── machines       # settings for each machine
+├── modules        # nixosModules and homeManagerModules
+├── patches        # patch of package
+├── settings       # common machine settings
+│   ├── system     # system wide
+│   └── user       # user wide
+├── sops           # secrets
+└── users          # settings for each user
+```
+
+- only user-wide (home-manager)
+
+```
+# core config (Please see apps/user/core)
+home-manager switch --flake ".#core"
+
+# small config (Please see apps/user/small, Include `core`)
+home-manager switch --flake ".#small"
+
+# full config (Please see apps/user/full, Include `core` and `small`)
+home-manager switch --flake ".#full"
 ```
 
 ## インストールガイド

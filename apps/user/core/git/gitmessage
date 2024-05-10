@@ -1,0 +1,47 @@
+
+
+# ==== Commit Messages(Template) ====
+# <type> or <type>(scope): 変更内容 or title
+#
+# 本文があってもいい (全て100文字以内)
+# (ex: REFERENCE [ex. web link, docs])
+# <type>(scope): 個別の変更内容
+# <type>(scope): 個別の変更内容
+#
+# BREAKING CHANGE: 重大な変更内容 (必ず最後(フッター)に配置)
+
+# ==== Type ====
+# build: ビルドの変更
+# chore: ビルドツールやライブラリで自動生成されたものをコミットするとき
+# ci: CIの設定やスクリプトの修正
+# docs: ドキュメント関連の変更
+# feat: 新機能・新規ファイルの追加
+# fix: バグ修正
+# perf: パフォーマンス改善
+# refactor: リファクタリング
+# revert: 修正取り消し
+# style: コードの意味に影響を与えない修正 (フォーマッターの自動修正等)
+# test: テスト関連の修正
+# <type>!: 重大な変更 (BREAKING CHANGE)
+
+# ==== Emojis ====
+# 🛠  :hammer_and_wrench: build
+# ♻️   :recycle: chore
+# ⚙️   :gear: ci
+# 📚  :books: docs
+# ✨  :sparkles: feat
+# 🐛  :bug: fix
+# 🚀  :rocket: perf
+# 📦  :package: refactor
+# 🗑️  :wastebasket: revert
+# 💎  :gem_stone: style
+# 🚨  :rotate_light: test
+
+# ==== 仕様 ====
+# `@commitlint/config-conventional`に従っている
+# 仕様はhttps://www.npmjs.com/package/@commitlint/config-conventional
+# - lower cate for character
+# - not type and subject empty
+# - max length is 100
+# - need blank behind body and footer
+# - no need stop char (.)

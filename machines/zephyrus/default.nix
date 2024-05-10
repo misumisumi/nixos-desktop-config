@@ -1,7 +1,21 @@
-{ inputs, ... }:
+{ inputs, wm, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
+    ../../apps/system/documentation
+    ../../apps/system/nix-ld
+    ../../apps/system/pkgs
+    ../../apps/system/printer
+    ../../apps/system/programs
+    ../../apps/system/services
+    ../../apps/system/sops
+    ../../apps/system/ssh
+    ../../apps/system/wm/${wm}
+    ../../settings/system
+    ../../settings/system/bluetooth
+    ../../settings/system/pipewire
+    ../../settings/system/systemd/openfortivpn
+    ../init
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix
@@ -10,19 +24,5 @@
     ./system.nix
     ./virtualisation.nix
     ./zfs.nix
-    ../init
-    ../../system
-    ../../system/bluetooth
-    ../../system/pipewire
-    ../../apps/documentation
-    ../../apps/nix-ld
-    ../../apps/openfortivpn
-    ../../apps/pkgs
-    ../../apps/printer
-    ../../apps/programs
-    ../../apps/services
-    ../../apps/sops
-    ../../apps/ssh
-    ../../apps/wm/qtile
   ];
 }

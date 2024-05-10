@@ -57,31 +57,40 @@
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dotfiles = {
-      url = "github:misumisumi/home-manager-config";
-      inputs = {
-        flakes.follows = "flakes";
-        home-manager.follows = "home-manager";
-        nixgl.follows = "nixgl";
-        nixpkgs-stable.follows = "nixpkgs-stable";
-        nixpkgs.follows = "nixpkgs";
-        nur.follows = "nur";
-        nvimdots.follows = "nvimdots";
-        sops-nix.follows = "sops-nix";
-      };
-    };
   };
 
-  outputs = inputs @ { flake-parts, ... }: flake-parts.lib.mkFlake
+  outputs = inputs @ { self, flake-parts, ... }: flake-parts.lib.mkFlake
     { inherit inputs; }
     {
       imports = [
         inputs.devshell.flakeModule
       ];
       flake = {
+        overlay = self.overlays.default;
+        overlays.default =
+          let
+            nixpkgs-stable = import inputs.nixpkgs-stable {
+              system = "x86_64-linux";
+              config = { allowUnfree = true; };
+            };
+          in
+          import ./patches { inherit nixpkgs-stable; };
+        homeManagerModules = {
+          dotfiles = import ./modules/home-manager/dotfiles.nix;
+          zinit = import ./modules/home-manager/zinit.nix;
+        };
+        nixosModules = {
+          vfio = import ./modules/nixos/vfio.nix;
+          virtualisation = import ./modules/nixos/virtualisation.nix;
+          xp-pentablet = import ./modules/nixos/xp-pentablet.nix;
+        };
+        homeConfigurations = import ./machines/home-manager.nix {
+          inherit (inputs.nixpkgs) lib;
+          inherit inputs self;
+        };
         nixosConfigurations = import ./machines {
           inherit (inputs.nixpkgs) lib;
-          inherit inputs;
+          inherit inputs self;
         };
       };
       systems = [ "x86_64-linux" ];
@@ -117,6 +126,8 @@
           ];
           packages = with pkgs; [
             age
+            bashInteractive
+            home-manager
             nixos-generators
             sops
             ssh-to-age
