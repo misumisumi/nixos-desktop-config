@@ -23,9 +23,9 @@
       ./zfs.nix
     ] ++ lib.optional (wm == "gnome") ../../apps/gnome
     ++ lib.optionals (! lib.hasSuffix "iso" hostname) [
-      ../../system/bluetooth
-      ../../system/fonts
-      ../../system/pulseaudio
+      ../../settings/system/bluetooth
+      ../../settings/system/fonts
+      ../../settings/system/pulseaudio
       ./filesystem.nix
       ./gpu.nix
       ./hardware-configuration.nix

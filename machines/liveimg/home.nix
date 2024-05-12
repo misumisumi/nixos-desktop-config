@@ -4,9 +4,9 @@
 }:
 {
   imports = lib.optionals (wm != "") [
-    ../../apps/full/programs/firefox.nix
-    ../../apps/full/programs/vivaldi.nix
+    ../../apps/user/full/programs/firefox.nix
+    ../../apps/user/full/programs/vivaldi.nix
   ]
-  ++ (import ../../apps/full/ime)
+  ++ (import ../../apps/user/full/ime)
   ;
 }

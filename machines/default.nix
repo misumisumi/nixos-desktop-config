@@ -54,10 +54,11 @@ let
       };
 in
 {
-  test = settings {
+  liveimg-gui-full = settings {
     hostname = "liveimg";
-    inherit user;
+    user = "nixos";
     scheme = "full";
+    useNixOSWallpaper = true;
   };
   liveimg-gui = settings {
     hostname = "liveimg";
@@ -66,17 +67,17 @@ in
     scheme = "small";
     useNixOSWallpaper = true;
   };
+  liveimg-cui-iso = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "";
+    scheme = "core";
+  };
   liveimg-cui = settings {
     hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";
-  };
-  liveimg-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    wm = "";
-    scheme = "core";
   };
   mother = settings {
     hostname = "mother";
