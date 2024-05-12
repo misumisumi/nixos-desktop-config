@@ -1,5 +1,62 @@
 # Changelog
 
+## 1.0.0 (2024-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* clean up
+* include user-wide settings
+
+### Features
+
+* add some pkg and add cmd of disko ([dc5967c](https://github.com/misumisumi/nixos-desktop-config/commit/dc5967c01f922ed0e6f04c87437f02d1b1592609))
+* add spicetify ([f2fd1f5](https://github.com/misumisumi/nixos-desktop-config/commit/f2fd1f5b732ed7e328decdaa7117409fb63bacda))
+* clean up ([5f6b321](https://github.com/misumisumi/nixos-desktop-config/commit/5f6b3213787ecdee68200f0ad1de2fb705db2250))
+* create default incus config ([3c1e1dd](https://github.com/misumisumi/nixos-desktop-config/commit/3c1e1dd594f86ec5feac6578af57b393ed88f0d5))
+* enable nftable for incus ([581633e](https://github.com/misumisumi/nixos-desktop-config/commit/581633ef00e56997b4c8aaefd20c51b4daec3234))
+* fix auto approve and support dependabot ([a39b120](https://github.com/misumisumi/nixos-desktop-config/commit/a39b1208ffc22f0ab9adef752b47b79fe87e9fe0))
+* improbe xp-pen-driver support ([d1c9cbd](https://github.com/misumisumi/nixos-desktop-config/commit/d1c9cbde0c8aa34707c35578b352fde1ab32bbe6))
+* reviewdog support ([e24edaa](https://github.com/misumisumi/nixos-desktop-config/commit/e24edaa3629d6695a0f60dfc98ea3a7d7b403016))
+* support `disko` for recovery disk ([883363d](https://github.com/misumisumi/nixos-desktop-config/commit/883363dd2ef90dd053970c06143f02ede53ea671))
+* support incus ([b80acb5](https://github.com/misumisumi/nixos-desktop-config/commit/b80acb5dd3ccaa516c333b2ed1e359e64b9a56cf))
+* 複数のvlanに対応させたbridgeの作成 ([2b53f42](https://github.com/misumisumi/nixos-desktop-config/commit/2b53f4202853af3b2f9969c06cadf06ebc1bc36c))
+
+
+### Bug Fixes
+
+* **.nixd.json:** use nixpkgs-fmt ([76887de](https://github.com/misumisumi/nixos-desktop-config/commit/76887de54a916063c0f658bdd6506ad3445fe91b))
+* allow root user login ([b86d0dc](https://github.com/misumisumi/nixos-desktop-config/commit/b86d0dca08e39ab93f67ccd415d1d72b2a4029ee))
+* auto-approve workflow ([8ec2de5](https://github.com/misumisumi/nixos-desktop-config/commit/8ec2de5a21812c163203f87e00aa598cc902d5fe))
+* background setting was exist in `xserver` ([2b6e9c7](https://github.com/misumisumi/nixos-desktop-config/commit/2b6e9c7775c273888ef4caf30adf3f692fcd2c51))
+* boot usb setting ([c27e9c1](https://github.com/misumisumi/nixos-desktop-config/commit/c27e9c190e14d3c1311a5f0ce7bde884fa5d79a8))
+* change option name ([0149040](https://github.com/misumisumi/nixos-desktop-config/commit/0149040f18e01f8e2a4c2bc1c6a550bc902264e8))
+* depricate config ([2e3cd91](https://github.com/misumisumi/nixos-desktop-config/commit/2e3cd91359ece765fcecc35604f1f34f31ea84c7))
+* fix conflicting ([23415ca](https://github.com/misumisumi/nixos-desktop-config/commit/23415cab6a5f824bc46169e18f484eae426872fa))
+* fix module name ([c05f039](https://github.com/misumisumi/nixos-desktop-config/commit/c05f0391b37e292e15500898d809eb5a664a8d26))
+* gnome ([c6dbf13](https://github.com/misumisumi/nixos-desktop-config/commit/c6dbf13579c801aad97c46f8ee0dfef7a51e8bdf))
+* **libinputs:** fix option name ([fa8aabc](https://github.com/misumisumi/nixos-desktop-config/commit/fa8aabc8f9d8424302df5185c9b274e0f1786d86))
+* **network:** fix vlan-tag network ([45b99e0](https://github.com/misumisumi/nixos-desktop-config/commit/45b99e0bd503171e4f248ebafbcf97c090e37f38))
+* **nvidia-container-toolkit:** rename option to `hardware.nvidia-container-toolkit` ([da47090](https://github.com/misumisumi/nixos-desktop-config/commit/da4709096fcb95347a9ecbe6305cfed41effa83a))
+* openfortivpn ([678a712](https://github.com/misumisumi/nixos-desktop-config/commit/678a7121c1b718b36601656ebaefce3f84155c95))
+* remove hm dir ([d3cb2f5](https://github.com/misumisumi/nixos-desktop-config/commit/d3cb2f5fc08a6193dc57a5a6dbeb57afab457b2c))
+* remove patch of incus ([6c9a5dd](https://github.com/misumisumi/nixos-desktop-config/commit/6c9a5dd4b7b497e130231c7c79631e1632bd3072))
+* remove stateVersion and update inputs ([04a2ea7](https://github.com/misumisumi/nixos-desktop-config/commit/04a2ea7f0949e9c27d391e1eb6c369e27dfb4e0c))
+* rename to liveimg and add ssh ([93ee3bb](https://github.com/misumisumi/nixos-desktop-config/commit/93ee3bbd50d77ce90255e383d6ef1d0fae82f366))
+* separate gsettings ([16f4e87](https://github.com/misumisumi/nixos-desktop-config/commit/16f4e875b86de3f56d21233c1752409a6a68600d))
+* soleus config ([ba38f88](https://github.com/misumisumi/nixos-desktop-config/commit/ba38f88ef1730f3a9de33bb56a3f84a4d7e1314f))
+* some fix ([521d8dc](https://github.com/misumisumi/nixos-desktop-config/commit/521d8dc487c2320eeb4487440675e411f237873e))
+* **ssh:** remove branching by version ([f08e08b](https://github.com/misumisumi/nixos-desktop-config/commit/f08e08b8c9068001a8f6584627f9047a1688482c))
+* test config ([2227a9a](https://github.com/misumisumi/nixos-desktop-config/commit/2227a9a773949a46da1880dd13651a51eeb4bc37))
+* typos ([792b16c](https://github.com/misumisumi/nixos-desktop-config/commit/792b16c03dd522cc26cb0d8cf410e92a60c7eb3d))
+* virtualisation configs ([5aa22da](https://github.com/misumisumi/nixos-desktop-config/commit/5aa22da2758bac0d9e7dd24096e79592a825e753))
+* virtualisation.podman.enableNvidia is deprecated ([f65ba1f](https://github.com/misumisumi/nixos-desktop-config/commit/f65ba1f9a156f6c3da5f5cf7bbf4272746ebdaf5))
+
+
+### Code Refactoring
+
+* include user-wide settings ([ab9baef](https://github.com/misumisumi/nixos-desktop-config/commit/ab9baefba461efa2db563c8edf0fc9823576af40)), closes [#51](https://github.com/misumisumi/nixos-desktop-config/issues/51)
+
 ## [1.1.4](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.3...v1.1.4) (2024-05-12)
 
 
