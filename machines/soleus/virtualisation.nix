@@ -1,7 +1,7 @@
 {
   imports = [
-    ../../apps/virtualisation/podman
-    ../../apps/virtualisation/singularity
+    ../../apps/system/virtualisation/podman
+    ../../apps/system/virtualisation/singularity
   ];
   virtualisation = {
     vfio = {

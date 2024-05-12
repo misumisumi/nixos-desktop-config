@@ -1,22 +1,20 @@
 { lib
-, pkgs
 , hostname
-, modulesPath
 , wm
 , ...
 }:
 {
   imports =
     [
-      ../../apps/documentation
-      ../../apps/pkgs
-      ../../apps/programs
-      ../../system/console
-      ../../system/environment
-      ../../system/locale
-      ../../system/network
-      ../../system/nix
-      ../../system/security
+      ../../apps/system/documentation
+      ../../apps/system/pkgs
+      ../../apps/system/programs
+      ../../settings/system/console
+      ../../settings/system/environment
+      ../../settings/system/locale
+      ../../settings/system/network
+      ../../settings/system/nix
+      ../../settings/system/security
       ../init
       ./network.nix
       ./ssh.nix
@@ -25,9 +23,9 @@
       ./zfs.nix
     ] ++ lib.optional (wm == "gnome") ../../apps/gnome
     ++ lib.optionals (! lib.hasSuffix "iso" hostname) [
-      ../../system/bluetooth
-      ../../system/fonts
-      ../../system/pulseaudio
+      ../../settings/system/bluetooth
+      ../../settings/system/fonts
+      ../../settings/system/pulseaudio
       ./filesystem.nix
       ./gpu.nix
       ./hardware-configuration.nix

@@ -1,4 +1,5 @@
-{ inputs
+{ self
+, inputs
 , ...
 }:
 let
@@ -16,15 +17,17 @@ let
       with lib;
       nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs hostname user useNixOSWallpaper wm; }; # specialArgs give some args to modules
+        specialArgs = { inherit self inputs hostname user useNixOSWallpaper wm; }; # specialArgs give some args to modules
         modules =
           [
-            ../modules
             inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.musnix.nixosModules.musnix
             inputs.nur.nixosModules.nur
             inputs.sops-nix.nixosModules.sops
+            self.nixosModules.vfio
+            self.nixosModules.virtualisation
+            self.nixosModules.xp-pentablet
             (./. + "/${hostname}") # Each machine conf
             ({ config, ... }: {
               home-manager = {
@@ -34,11 +37,12 @@ let
                   inherit inputs hostname user homeDirectory scheme useNixOSWallpaper wm;
                 };
                 sharedModules = [
-                  inputs.dotfiles.homeManagerModules.dotfiles
                   inputs.flakes.homeManagerModules.default
                   inputs.nvimdots.homeManagerModules.nvimdots
                   inputs.sops-nix.homeManagerModules.sops
                   inputs.spicetify-nix.homeManagerModule
+                  self.homeManagerModules.dotfiles
+                  self.homeManagerModules.zinit
                 ];
                 users."${user}" = {
                   dotfilesActivation = true;
@@ -50,10 +54,11 @@ let
       };
 in
 {
-  test = settings {
+  liveimg-gui-full = settings {
     hostname = "liveimg";
-    inherit user;
+    user = "nixos";
     scheme = "full";
+    useNixOSWallpaper = true;
   };
   liveimg-gui = settings {
     hostname = "liveimg";
@@ -62,17 +67,17 @@ in
     scheme = "small";
     useNixOSWallpaper = true;
   };
+  liveimg-cui-iso = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "";
+    scheme = "core";
+  };
   liveimg-cui = settings {
     hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";
-  };
-  liveimg-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    wm = "";
-    scheme = "core";
   };
   mother = settings {
     hostname = "mother";

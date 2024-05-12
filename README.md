@@ -3,7 +3,7 @@
 # misumisumi' NixOS & nix-darwin System Configuration & Home-Manager Configuration Flake
 
 Welcome to the nix World!  
-This is [misumisumi](https://github.com/misumisumi)'s machine setup.
+This is [misumisumi](https://github.com/misumisumi)'s NixOS and home-manager settings.
 
 You can try NixOS using some of my setup.  
 Currently, only the NixOS environment is supported.  
@@ -13,24 +13,41 @@ In the future, other distributions (user home config) and macOS will be supporte
 
 - This repository is maintained by [Nix Flakes](https://nixos.wiki/wiki/Flakes).
 - You can try out gnome or CLI environment for recovery.
-- This repository only manages system settings.
-- The configuration of packages installed by users is managed in a separate repository: [home-manager-config](https://github.com/misumisumi/home-manager-config).
 - Settings for each machine are located in [machines](./machines).
+- You can try with `home-manager`, if you can only use under user env.
+
+- system-wide
 
 ```
 nixos-desktop-config
-├── apps           # app settings
-├── hm             # home-manager config
-├── machines       # each machine configs
-│   ├── init       # common machine config
-│   ├── liveimg    # liveimg
-│   ├── mother     # My Main PC
-│   ├── soleus     # Desktop
-│   ├── stacia     # Desktop
-│   └── zephyrus   # Laptop
-├── modules        # nixosModules
-├── patches        # patch for nixpkgs
-└── system         # common system config
+├── apps           # settings for installing apps
+│   ├── system     # system wide
+│   └── user       # user wide
+│       ├── core   # common installing apps
+│       ├── full   # include GUI
+│       ├── medium # include latex
+│       └── small  # include neovim and zsh
+├── machines       # settings for each machine
+├── modules        # nixosModules and homeManagerModules
+├── patches        # patch of package
+├── settings       # common machine settings
+│   ├── system     # system wide
+│   └── user       # user wide
+├── sops           # secrets
+└── users          # settings for each user
+```
+
+- only user-wide (home-manager)
+
+```
+# core config (Please see apps/user/core)
+home-manager switch --flake ".#core"
+
+# small config (Please see apps/user/small, Include `core`)
+home-manager switch --flake ".#small"
+
+# full config (Please see apps/user/full, Include `core` and `small`)
+home-manager switch --flake ".#full"
 ```
 
 ## Installation Guide

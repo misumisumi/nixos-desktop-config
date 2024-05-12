@@ -1,7 +1,4 @@
-{ config
-, lib
-, hostname
-, user
+{ user
 , pkgs
 , ...
 }: {
