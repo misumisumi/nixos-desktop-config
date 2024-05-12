@@ -40,4 +40,4 @@ jobs:
 
       - name: Build check
         if: steps.change.outputs.nix == 'true'
-        run: nix build --no-link ".#nixosConfigurations.test.config.system.build.toplevel"
+        run: nix build --no-link ".#nixosConfigurations.liveimg-gui-full.config.system.build.toplevel"
