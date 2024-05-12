@@ -28,7 +28,7 @@ import XMonad (
     xK_v,
     xK_r,
     xK_e,
-    xK_commma,
+    xK_comma,
     xK_period,
     xK_Print
 )
@@ -87,7 +87,7 @@ keymap = [
     , ((modm .|. shiftMask,    xK_s), spawn "rofi -show calc -modi calc -no-show-match -no-sort")
 ]
 
-functionMap = [ 
+functionMap = [
       ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
     , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
     , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
