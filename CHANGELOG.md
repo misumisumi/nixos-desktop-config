@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.4](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.3...v1.1.4) (2024-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* include user-wide settings
+
+### Bug Fixes
+
+* remove hm dir ([34779c6](https://github.com/misumisumi/nixos-desktop-config/commit/34779c626f87cb285cf12da620ce165e75a3b377))
+* some fix ([12ca362](https://github.com/misumisumi/nixos-desktop-config/commit/12ca362831b7d078100f3ad3ab8f75cb1e467e5d))
+* typos ([9286cb5](https://github.com/misumisumi/nixos-desktop-config/commit/9286cb58390c777e86d497f53c96cf0d83ee516c))
+
+
+### Code Refactoring
+
+* include user-wide settings ([dedf82a](https://github.com/misumisumi/nixos-desktop-config/commit/dedf82a8842265ff28f7654cf7aac9fd61a3d383)), closes [#51](https://github.com/misumisumi/nixos-desktop-config/issues/51)
+
 ## [1.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v1.1.2...v1.1.3) (2024-05-08)
 
 
