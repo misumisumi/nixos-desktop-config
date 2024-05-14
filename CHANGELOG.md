@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.0...v2.0.1) (2024-05-14)
+
+
+### Bug Fixes
+
+* **neovim:** update neovim input ([4bbbb58](https://github.com/misumisumi/nixos-desktop-config/commit/4bbbb5828cf41d3fc140c7753275354820d9192a))
+
 ## 2.0.0 (2024-05-12)
 
 
