@@ -4,9 +4,9 @@
 }:
 {
   imports = [
-    ../../apps/full/programs/firefox.nix
-    ../../apps/full/programs/vivaldi.nix
-  ] ++ (import ../../apps/full/ime);
+    ../../apps/user/full/programs/firefox.nix
+    ../../apps/user/full/programs/vivaldi.nix
+  ] ++ (import ../../apps/user/full/ime);
   home = {
     packages = with pkgs;[
       ffmpeg # Multi media solution
