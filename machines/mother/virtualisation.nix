@@ -2,7 +2,6 @@
   imports = [
     ../../apps/system/virtualisation/incus
     ../../apps/system/virtualisation/libvirt
-    ../../apps/system/virtualisation/lxd
     ../../apps/system/virtualisation/podman
     ../../apps/system/virtualisation/singularity
     ../../apps/system/virtualisation/waydroid
