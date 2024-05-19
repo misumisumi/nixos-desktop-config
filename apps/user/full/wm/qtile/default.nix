@@ -17,6 +17,11 @@ with lib; {
   };
 
   xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gnome ];
+      configPackages = with pkgs; [ gnome.gnome-session ];
+    };
     configFile = {
       "qtile".source = ./conf;
     };

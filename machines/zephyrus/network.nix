@@ -78,7 +78,7 @@
         enable = true;
         trustedInterfaces = [
           "br0"
-          "lxdbr0"
+          "incusbr0"
           "k8sbr0"
         ];
         allowedTCPPorts = [

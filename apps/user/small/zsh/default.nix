@@ -98,16 +98,11 @@
                 eval "$(${pkgs.fzf}/bin/fzf --zsh)"
               fi
             '';
-            # See apps/core/starship/default.nix
-            init_starship = lib.optionalString config.programs.starship.enable ''
-              enable_transientprompt
-            '';
           in
           ''
             # The plugin will auto execute this zvm_after_init function
             function zvm_after_init() {
-              ${init_fzf}
-              ${init_starship}
+                ${init_fzf}
             }
           '';
       };
