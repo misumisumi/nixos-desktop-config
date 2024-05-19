@@ -19,7 +19,7 @@ jobs:
               - "flake.lock"
 
       - uses: easimon/maximize-build-space@master
-        if: steps.change.outputs.nix
+        if: steps.change.outputs.nix == 'true'
         with:
           root-reserve-mb: 8192
           swap-size-mb: 1024
@@ -31,13 +31,16 @@ jobs:
           remove-docker-images: true
 
       - uses: actions/checkout@v4
-        if: steps.change.outputs.nix
+        if: steps.change.outputs.nix == 'true'
 
       - uses: cachix/install-nix-action@v26
-        if: steps.change.outputs.nix
+        if: steps.change.outputs.nix == 'true'
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            connect-timeout = 15
+            stalled-download-timeout = 15
 
       - name: Build check
-        if: steps.change.outputs.nix
+        if: steps.change.outputs.nix == 'true'
         run: nix build --no-link ".#nixosConfigurations.liveimg-gui-full.config.system.build.toplevel"

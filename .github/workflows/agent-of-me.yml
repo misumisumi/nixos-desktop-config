@@ -44,8 +44,10 @@ jobs:
         run: |
           check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '.[] | [.[].conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
           existing_review=$(gh pr view "${PR_NUM}" --json reviews --jq ".reviews | length > 0")
+          echo "all-success is ${check_all_success}"
+          echo "existing-review is ${existing_review}"
           echo "all-success=${check_all_success}" >> $GITHUB_OUTPUT
-          echo "existing-review=${existing_review} >> $GITHUB_OUTPUT"
+          echo "existing-review=${existing_review}" >> $GITHUB_OUTPUT
 
   # From https://github.com/cli/cli/issues/2342
   dismiss-reviews:
@@ -54,11 +56,20 @@ jobs:
     if: >-
       ${{
         contains(fromJSON('["misumisumi", "[bot]"]'), github.actor) &&
-        needs.workflow-status.outputs.existing-review &&
-        ! needs.workflow-status.outputs.all-success
+        github.event.workflow_run.name == 'build check' &&
+        needs.workflow-status.outputs.existing-review == 'true' &&
+        needs.workflow-status.outputs.all-success == 'false'
        }}
     steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AGENT_OF_ME_APP_ID }}
+          private_key: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
       - name: Dismiss approvals
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           gh api repos/${{ github.repository }}/pulls/${{ needs.workflow-status.outputs.pr-number }}/reviews \
             --jq '.[] | select(.state == "APPROVED") | .id' \
@@ -71,7 +82,7 @@ jobs:
     if: >-
       ${{
         contains(fromJSON('["misumisumi"]'), github.actor) &&
-        needs.workflow-status.outputs.all-success
+        needs.workflow-status.outputs.all-success == 'true'
        }}
     env:
       GH_REPO: ${{ github.repository }}
@@ -95,7 +106,7 @@ jobs:
     if: >-
       ${{
         github.actor == 'workflow-executor[bot]' &&
-        needs.workflow-status.outputs.all-success
+        needs.workflow-status.outputs.all-success == 'true'
       }}
     env:
       GH_REPO: ${{ github.repository }}
@@ -120,7 +131,7 @@ jobs:
     if: >-
       ${{
         github.actor == 'dependabot[bot]' &&
-        needs.workflow-status.outputs.all-success
+        needs.workflow-status.outputs.all-success == 'true'
       }}
     env:
       GH_REPO: ${{ github.repository }}
@@ -135,7 +146,7 @@ jobs:
       - uses: dependabot/fetch-metadata@v2
         id: metadata
         with:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          github-token: ${{ steps.generate-token.outputs.token }}
 
       - name: Auto approve and merge for dependabot PRs
         if: contains(fromJSON('["minor", "patch"]'), steps.metadata.outputs.update-type)
