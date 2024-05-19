@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.1...v2.0.2) (2024-05-19)
+
+
+### Bug Fixes
+
+* **qtile:** add xdg-desktop-portal setting ([71b30fe](https://github.com/misumisumi/nixos-desktop-config/commit/71b30fe4365f65ff10183572cb49409c0e2919e9))
+* remove lxd ([d5f4d4f](https://github.com/misumisumi/nixos-desktop-config/commit/d5f4d4f380a986be8bddf5599dab5acd491ee2e8))
+* **soleus:** fix path ([a483626](https://github.com/misumisumi/nixos-desktop-config/commit/a48362666862f1f0e4130948787f5076420260ee))
+* **sops:** update keys ([a5a6c0d](https://github.com/misumisumi/nixos-desktop-config/commit/a5a6c0da03faa775f99a1a71ae35cb2d6f2a747a))
+* **starship:** remove transient prompt ([e00e380](https://github.com/misumisumi/nixos-desktop-config/commit/e00e3800644a107ad340d1985a21ba0b689665e9))
+
 ## [2.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.0...v2.0.1) (2024-05-14)
 
 
