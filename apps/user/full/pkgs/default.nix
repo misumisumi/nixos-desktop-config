@@ -35,6 +35,7 @@
       looking-glass-client # A KVM Frame Relay (KVMFR) implementation
       mesa-demos # OpenGL utility
       nomacs # Image Viewer
+      obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files
       pympress # PDF reader for presentations
       remmina # Remote desktop client
       slack # chat
