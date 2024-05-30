@@ -29,6 +29,7 @@
       gpick # color picker
       i3lock # Screen Locker
       inkscape # SVG editor
+      ipaexfont # Japanese font package with Mincho and Gothic fonts
       juce # VST plugin flamework
       krita # painting tool
       libreoffice # Office

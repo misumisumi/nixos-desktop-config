@@ -19,6 +19,7 @@
         collection-langjapanese
         collection-latexextra
         fontaxes
+        ipaex
         latexmk
         newpx
         newtx
