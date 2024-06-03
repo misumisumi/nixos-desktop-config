@@ -14,13 +14,17 @@
     extraPackages = tpkgs: {
       inherit (tpkgs)
         algorithms
+        biber
+        biblatex
         boondox
         collection-fontsrecommended
         collection-langjapanese
         collection-latexextra
+        csvsimple
         fontaxes
         ipaex
         latexmk
+        luatexja
         newpx
         newtx
         newtxtt
