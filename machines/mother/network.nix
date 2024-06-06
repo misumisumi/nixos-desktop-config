@@ -14,6 +14,7 @@
         "br0"
         "incusbr0"
         "k8sbr0"
+        "waydroid0"
       ];
       allowedUDPPorts = [
         # 4010
