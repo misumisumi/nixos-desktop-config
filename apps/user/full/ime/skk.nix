@@ -27,6 +27,7 @@ in
     # Auto update skk dict
     ".local/share/fcitx5/skk/dictionary_list".text = ''
       file=$FCITX_CONFIG_DIR/skk/user.dict,mode=readwrite,type=file
+      encoding=UTF-8,file=${pkgs.skk-emoji-jisyo}/share/SKK-JISYO.emoji.utf8,mode=readonly,type=file
       file=${pkgs.skk-dicts}/share/${dicts.${useDict}},mode=readonly,type=file
       encoding=UTF-8,host=localhost,port=1178,type=server
     '';
