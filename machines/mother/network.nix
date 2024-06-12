@@ -111,10 +111,8 @@
           bridge = [ "br1" ];
           bridgeVLANs = [
             {
-              bridgeVLANConfig = {
-                PVID = 101;
-                EgressUntagged = 101;
-              };
+              PVID = 101;
+              EgressUntagged = 101;
             }
           ];
         };
@@ -123,10 +121,8 @@
           bond = [ "br1" ];
           bridgeVLANs = [
             {
-              bridgeVLANConfig = {
-                PVID = 102;
-                EgressUntagged = 102;
-              };
+              PVID = 102;
+              EgressUntagged = 102;
             }
           ];
         };
@@ -135,10 +131,8 @@
           bond = [ "devbr1" ];
           bridgeVLANs = [
             {
-              bridgeVLANConfig = {
-                PVID = 103;
-                EgressUntagged = 103;
-              };
+              PVID = 103;
+              EgressUntagged = 103;
             }
           ];
         };
@@ -153,9 +147,7 @@
           };
           bridgeVLANs = [
             {
-              bridgeVLANConfig = {
-                VLAN = "101-103";
-              };
+              VLAN = "101-103";
             }
           ];
         };
