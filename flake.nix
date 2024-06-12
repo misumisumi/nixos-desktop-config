@@ -14,10 +14,10 @@
     flakes.url = "github:misumisumi/flakes";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nur.url = "github:nix-community/NUR";
     nvimdots = {
-      url = "github:misumisumi/nvimdots";
+      url = "github:misumisumi/nvimdots/feat/update-to-0.10";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {

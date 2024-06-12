@@ -45,7 +45,7 @@ final: prev:
         patches =
           old.patches
             ++ [
-            ./fix-xcbq.patch
+            # ./fix-xcbq.patch
           ];
       }
       );
