@@ -22,8 +22,12 @@ local config = {
     },
     -- color_scheme = "Catppuccin Mocha",
     font = wezterm.font_with_fallback({
-        { family = "UDEV Gothic 35NFLG", weight = "Medium" },
-        "FiraCode Nerd Font",
+        {
+            family = "Moralerspace Neon NF",
+            weight = "Regular",
+            harfbuzz_features = {'liga','calt', 'ss01',  'ss06', 'ss07', 'ss08', 'ss09'}
+        },
+        "FiraCode Nerd Font Mono",
     }),
     font_size = 10.0,
     enable_scroll_bar = true,
