@@ -6,10 +6,12 @@
       enable = true;
       font = {
         package = pkgs.udev-gothic-nf;
-        name = "UDEV Gothic NFLG";
+        name = "Moralerspace Neon NF";
         size = 12;
       };
       settings = {
+        font_features = "Moralerspace Neon NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+
         ackground = "#282a36";
         background_opacity = "0.90";
         clear_all_shortcuts = "yes";
