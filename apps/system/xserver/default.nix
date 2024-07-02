@@ -10,7 +10,10 @@
   users.groups = {
     video.members = [ "${user}" ];
   };
-  programs.light.enable = true;
+  programs = {
+    gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+    light.enable = true;
+  };
 
   services = {
     libinput = {
@@ -25,7 +28,6 @@
     xserver = {
       enable = true;
       autorun = true;
-      gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
       xkb = {
         layout = "us";
         options = "caps:nocaps"; # keyboard is managed home-manager
