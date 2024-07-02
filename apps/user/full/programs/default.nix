@@ -1,4 +1,5 @@
 [
+  ./aichat.nix
   ./firefox.nix
   ./gpg.nix
   ./mpv.nix
