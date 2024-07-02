@@ -27,7 +27,7 @@
       ];
       nvimdots = {
         enable = true;
-        bindLazyLock = true;
+        mergeLazyLock = true;
         setBuildEnv = true;
         withBuildTools = true;
         withHaskell = true;

@@ -17,7 +17,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nur.url = "github:nix-community/NUR";
     nvimdots = {
-      url = "github:misumisumi/nvimdots/feat/update-to-0.10";
+      url = "github:misumisumi/nvimdots";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {
