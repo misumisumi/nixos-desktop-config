@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   systemd.user.startServices = "sd-switch";
   sops = {
@@ -8,10 +8,17 @@
       keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
       sshKeyPaths = [ ];
     };
-    secrets."ssh.lua" = {
-      path = "${config.xdg.configHome}/wezterm/ssh.lua";
-      sopsFile = ../../sops/user/wezterm/ssh.lua;
-      format = "binary";
+    secrets = {
+      "ssh.lua" = {
+        path = "${config.xdg.configHome}/wezterm/ssh.lua";
+        sopsFile = ../../sops/user/wezterm/ssh.lua;
+        format = "binary";
+      };
+      "aichat/config.yaml" = {
+        path = "${config.xdg.configHome}/aichat/config.yaml";
+        sopsFile = ../../sops/user/aichat/config.yaml;
+        format = "binary";
+      };
     };
   };
 }

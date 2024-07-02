@@ -11,9 +11,4 @@
         Translate the following text into Japanese using words and context appropriate for an engineering paper.
         Then, embed the latex syntax exactly as it is in the appropriate place.
   '';
-  sops.secrets."aichat/config.yaml" = {
-    path = "${config.xdg.configHome}/aichat/config.yaml";
-    sopsFile = ../../../../sops/user/aichat/config.yaml;
-    format = "binary";
-  };
 }

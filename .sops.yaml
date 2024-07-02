@@ -67,7 +67,6 @@ creation_rules:
     key_groups:
       - age:
           - *sumi_mother
-          - *sumi_soleus
           - *sumi_stacia
           - *sumi_zephyrus
   - path_regex: sops/user/wezterm/[^/]+\.lua$
