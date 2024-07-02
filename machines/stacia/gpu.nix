@@ -19,7 +19,7 @@
       powerManagement.enable = true;
       nvidiaPersistenced = true;
     };
-    opengl.extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl
       vaapiVdpau

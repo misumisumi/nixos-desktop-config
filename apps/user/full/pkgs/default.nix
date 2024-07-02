@@ -29,12 +29,14 @@
       gpick # color picker
       i3lock # Screen Locker
       inkscape # SVG editor
+      ipaexfont # Japanese font package with Mincho and Gothic fonts
       juce # VST plugin flamework
       krita # painting tool
       libreoffice # Office
       looking-glass-client # A KVM Frame Relay (KVMFR) implementation
       mesa-demos # OpenGL utility
       nomacs # Image Viewer
+      obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files
       pympress # PDF reader for presentations
       remmina # Remote desktop client
       slack # chat

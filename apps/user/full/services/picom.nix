@@ -14,10 +14,10 @@
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
-        "85:class_g = 'alacritty' && focused"
-        "85:class_g = 'alacritty' && !focused"
-        "85:class_g = 'kitty' && focused"
-        "85:class_g = 'kitty' && !focused"
+        "100:class_g = 'alacritty' && focused"
+        "100:class_g = 'alacritty' && !focused"
+        "100:class_g = 'kitty' && focused"
+        "100:class_g = 'kitty' && !focused"
         "100:class_g = 'org.wezfurlong.wezterm' && focused"
         "100:class_g = 'org.wezfurlong.wezterm' && !focused"
         "100:class_g = 'krita' && focused"
@@ -58,6 +58,15 @@
         "class_g = 'Cairo-clock'"
         "_GTK_FRAME_EXTENTS@:c"
         "class_g = 'rofi'"
+        "class_g = 'Conky'"
+        "class_g = 'Cairo-clock'"
+        "class_g = 'dunst'"
+        "class_g = 'rofi'"
+        "class_g = 'kdeconnectd'"
+        "class_g = 'kdeconnect-handler'"
+        "class_g = 'kdeconnect-indicator'"
+        "class_g = 'kdeconnect-sms'"
+        "class_g = 'kdeconnect-sms-handler'"
       ];
       shadowOffsets = [ (-7) (-7) ];
       shadowOpacity = 0.75;

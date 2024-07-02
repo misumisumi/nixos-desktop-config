@@ -16,13 +16,6 @@
           "@commitlint/config-conventional"
           commitlint-format-json
         ]))
-        (textlint.withPlugins (ps: with ps; [
-          "@proofdict/textlint-rule-proofdict"
-          textlint-filter-rule-allowlist
-          textlint-filter-rule-comments
-          textlint-rule-preset-ja-spacing
-          textlint-rule-preset-ja-technical-writing
-        ]))
         deno
         go
         nixd
@@ -34,7 +27,7 @@
       ];
       nvimdots = {
         enable = true;
-        bindLazyLock = true;
+        mergeLazyLock = true;
         setBuildEnv = true;
         withBuildTools = true;
         withHaskell = true;

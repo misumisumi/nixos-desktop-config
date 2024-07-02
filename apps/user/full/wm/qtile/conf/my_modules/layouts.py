@@ -1,4 +1,5 @@
 """layout"""
+
 from libqtile import layout
 from libqtile.config import Match
 from libqtile.log_utils import logger
@@ -100,7 +101,6 @@ floating_layout = layout.Floating(
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="pentablet"),
-        Match(wm_class="PenTablet"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],

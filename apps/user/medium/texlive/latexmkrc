@@ -36,21 +36,3 @@ given ($^O) {
 $local_latexmkrc_path = "./.latexmkrc.local";
 require $local_latexmkrc_path if -e $local_latexmkrc_path;
 
-
-
-# default preview
-given ($^O) {
-    when (/MSWin32/) {
-        $pdf_previewer = 'start';
-    }
-    when (/darwin/) {
-        $pdf_previewer = 'open';
-    }
-    default {
-        $pdf_previewer = 'evince';
-    }
-}
-
-# local config
-$local_latexmkrc_path = './.latexmkrc.local';
-require $local_latexmkrc_path if -e $local_latexmkrc_path;

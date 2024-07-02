@@ -30,9 +30,8 @@
       screenSection = ''
         DefaultDepth    24
         Option         "Stereo" "0"
-        Option         "nvidiaXineramaInfoOrder" "DFP-2"
-        Option         "metamodes" "DP-0: nvidia-auto-select +1920+0, HDMI-0: nvidia-auto-select +4480+0, DVI-D-0: nvidia-auto-select +0+360"
-        # Option         "metamodes" "DP-0: nvidia-auto-select +1920+0, HDMI-0: nvidia-auto-select +4480+0"
+        Option         "nvidiaXineramaInfoOrder" "DP-0,HDMI-0,DVI-D-0"
+        Option         "metamodes" "DP-0: nvidia-auto-select +0+0, HDMI-0: nvidia-auto-select +2560+0, DVI-D-0: nvidia-auto-select +5120+0"
         Option         "SLI" "Off"
         Option         "MultiGPU" "Off"
         Option         "BaseMosaic" "off"

@@ -34,7 +34,7 @@ def change_wallpaper():
                 MONITOR1 = gidx
             subprocess.run(
                 "feh --bg-fill {} --bg-fill {} --bg-fill {}".format(
-                    str(GLOBAL.wallpapers[MONITOR0]), str(GLOBAL.wallpapers[MONITOR2]), str(GLOBAL.wallpapers[MONITOR1])
+                    str(GLOBAL.wallpapers[MONITOR0]), str(GLOBAL.wallpapers[MONITOR1]), str(GLOBAL.wallpapers[MONITOR2])
                 ),
                 shell=True,
             )

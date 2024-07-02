@@ -117,7 +117,6 @@ local function with_mod()
             mods = string.format("%s", mod),
             action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
         },
-        { key = "t", mods = string.format("CTRL|%s", mod), action = act.SpawnTab("CurrentPaneDomain") },
         {
             key = "u",
             mods = string.format("%s", mod),
@@ -191,11 +190,6 @@ local config = {
         { key = "q", mods = "CTRL|LEADER", action = act.QuickSelect },
         { key = "R", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },
         { key = "s", mods = "CTRL|SHIFT", action = act.PaneSelect({ alphabet = "", mode = "SwapWithActive" }) },
-        {
-            key = "t",
-            mods = "CTRL",
-            action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
-        },
         { key = "t", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
         {
             key = "u",

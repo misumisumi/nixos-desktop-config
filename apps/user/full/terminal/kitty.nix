@@ -6,12 +6,14 @@
       enable = true;
       font = {
         package = pkgs.udev-gothic-nf;
-        name = "UDEV Gothic NFLG";
-        size = 12;
+        name = "UDEV Gothic NF";
+        size = 11;
       };
       settings = {
+        font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+
         ackground = "#282a36";
-        background_opacity = "0.90";
+        background_opacity = "0.80";
         clear_all_shortcuts = "yes";
         enable_audio_bell = "no";
 

@@ -1,6 +1,6 @@
 # Alacritty conf
 let
-  font = "UDEV Gothic NFLG";
+  font = "Moralerspace Neon NF";
 in
 {
   programs = {
