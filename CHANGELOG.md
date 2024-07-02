@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.2...v2.1.0) (2024-07-02)
+
+
+### Features
+
+* **aichat:** add aichat ([4df56fb](https://github.com/misumisumi/nixos-desktop-config/commit/4df56fb2c4c959669bdd53d2bbe1dd90f0416486))
+* **neovim:** use mergeLazyLock cmd ([7b85616](https://github.com/misumisumi/nixos-desktop-config/commit/7b856163303c64a9ec506df6452793622cd54a7d))
+* **obsidian:** add obsidian ([a4a9a2f](https://github.com/misumisumi/nixos-desktop-config/commit/a4a9a2fd872d95b149de36e5dea858bc1373d4fe))
+
+
+### Bug Fixes
+
+* bridgeConfig and fix xineramainfoorder ([252d5de](https://github.com/misumisumi/nixos-desktop-config/commit/252d5de038b504886d8934a685e9fe2fa2044935))
+* desktop env ([066bf0b](https://github.com/misumisumi/nixos-desktop-config/commit/066bf0b450f008522adbd1426b4b646b73ddeefc))
+* fix attr names ([26fab2c](https://github.com/misumisumi/nixos-desktop-config/commit/26fab2c802be7934f14738f54e3bd768039fc0bf))
+* fix encrypt file ([1e8078e](https://github.com/misumisumi/nixos-desktop-config/commit/1e8078e6706dd3ad97301c4bf667bb1db4efea68))
+* fix mother network conf ([956087f](https://github.com/misumisumi/nixos-desktop-config/commit/956087fade55f572011d2532d2a88b323e07ef05))
+* **latexmk:** fix latexmk config ([7acdbed](https://github.com/misumisumi/nixos-desktop-config/commit/7acdbed8de90369f792d0ed5f24d1a3ee921e163))
+* migrate to noto ([62698af](https://github.com/misumisumi/nixos-desktop-config/commit/62698afff6972f383c8613a38ad77b5591855634))
+* **qtile:** wallpaper ([1bd9ff3](https://github.com/misumisumi/nixos-desktop-config/commit/1bd9ff338201800aa96572b53e8bc27f02fe599a))
+* **skk:** add dict ([3ff225f](https://github.com/misumisumi/nixos-desktop-config/commit/3ff225fa39fe1d5ddddc592d9d38ed3fc52b5689))
+* some fix ([7e35327](https://github.com/misumisumi/nixos-desktop-config/commit/7e3532794581413fdbc287f5ac73ac4f9824244f))
+* terminal font ([5b9229c](https://github.com/misumisumi/nixos-desktop-config/commit/5b9229cfc19fe3e49b218622794dfcfe12e75c8d))
+* terminal font ([0da6529](https://github.com/misumisumi/nixos-desktop-config/commit/0da65292961496987cee5603df67d742f6f43762))
+* **texlive:** add ieeetran ([34d841b](https://github.com/misumisumi/nixos-desktop-config/commit/34d841b057c1a9d1b3670b0d80283acd97307f60))
+* **texlive:** add some package ([3cf44a1](https://github.com/misumisumi/nixos-desktop-config/commit/3cf44a1cf099ac795949d925b082dc41a34106fc))
+* update and fix patch ([ec973b7](https://github.com/misumisumi/nixos-desktop-config/commit/ec973b7453625f1166f9dbbb3e969708b06a963d))
+* **waydroid:** add desktop entry of weston ([f7fff74](https://github.com/misumisumi/nixos-desktop-config/commit/f7fff745579fe64954751867ec16c52a730e292b))
+* **wezterm:** fix keymap ([fb28bc6](https://github.com/misumisumi/nixos-desktop-config/commit/fb28bc6e30706c2cfa126409a0128d68a86a42cc))
+
 ## [2.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.1...v2.0.2) (2024-05-19)
 
 
