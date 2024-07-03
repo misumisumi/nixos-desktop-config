@@ -15,7 +15,7 @@
       powerManagement.enable = true;
       nvidiaPersistenced = true;
     };
-    opengl.extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel
       libvdpau-va-gl

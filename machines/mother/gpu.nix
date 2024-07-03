@@ -1,4 +1,5 @@
 { pkgs
+, config
 , ...
 }: {
   # boot.extraModprobeConfig = lib.mkAfter ''
@@ -20,13 +21,6 @@
         BoardName      "NVIDIA GeForce GTX 1050 Ti"
         BusID          "PCI:10:0:0"
       '';
-      monitorSection = ''
-        VendorName     "Unknown"
-        ModelName      "IODATA EX-LDGCQ241D"
-        HorizSync       15.0 - 90.0
-        VertRefresh     24.0 - 76.0
-        Option         "DPMS"
-      '';
       screenSection = ''
         DefaultDepth    24
         Option         "Stereo" "0"
@@ -44,9 +38,12 @@
 
   hardware = {
     nvidia-container-toolkit.enable = true;
-    nvidia.modesetting.enable = true;
-    opengl = {
-      driSupport32Bit = true;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+      modesetting.enable = true;
+    };
+    graphics = {
+      enable32Bit = true;
       extraPackages = with pkgs; [
         libvdpau-va-gl
         vaapiVdpau
