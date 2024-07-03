@@ -56,23 +56,21 @@
           '';
         };
         plugins = {
-          "lucid blockf light-mode " = [
+          # HACK: add ver=${pkgs.zsh-plugin-name.src.rev} and remove depth=1 if you want to fix plugin version.
+          "lucid blockf depth=1 light-mode " = [
             "atload'zvm_init'"
-            "depth=1 jeffreytse/zsh-vi-mode"
+            "jeffreytse/zsh-vi-mode"
             "zsh-users/zsh-autosuggestions"
             "marlonrichert/zsh-autocomplete"
           ];
           "wait'0b' lucid nocd depth=1 light-mode" = [
             "olets/zsh-abbr"
           ];
-          "wait'!1a' lucid blockf light-mode" = [
+          "wait'!1a' lucid blockf depth=1 light-mode" = [
             "zdharma-continuum/fast-syntax-highlighting"
           ];
-          "wait'1b' lucid light-mode" = [
+          "wait'1b' lucid depth=1 light-mode" = [
             "hlissner/zsh-autopair"
-          ];
-          "wait'2a' lucid light-mode" = [
-            "endaaman/lxd-completion-zsh"
           ];
         };
         prezto = {
@@ -145,9 +143,11 @@
         	PATH=$(echo "$PATH" | sed 's/\/nix\/store\/[a-zA-Z._0-9-]\+\/bin:\?//g' | sed 's/:$//')
         	export PATH="$PATH"
         fi
-        # For marlonrichert / zsh-autocomplete
+        # For marlonrichert/zsh-autocomplete
         zstyle -e ':autocomplete:history-search-backward:*' list-lines 'reply=$(( LINES / 2 ))'
         zstyle ':autocomplete:*' min-delay 0.05
+        zstyle ':completion:*' completer \
+            _complete _complete:-fuzzy _correct _approximate _ignored
         bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
         bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
       '';
