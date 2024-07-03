@@ -1,16 +1,16 @@
-{ lib
-, inputs
+{ inputs
 , pkgs
 , ...
 }:
 let
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in
 {
   programs.spicetify =
     {
       enable = true;
-      theme = spicePkgs.themes.Nightlight;
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
 
       enabledExtensions = with spicePkgs.extensions; [
         copyToClipboard
@@ -22,10 +22,10 @@ in
         {
           src = pkgs.fetchgit {
             url = "https://github.com/L3-N0X/spicetify-dj-info";
-            rev = "6260a768743bb5d1a398c11c380517b6aaf8e8ff";
-            hash = "sha256-Tb0ckjTSnsUTGp3d/U0idxwofBlkcFW2QWfAWdrv7CI=";
+            rev = "50f417c554529c54ab7d4b398d505beca94ef417";
+            hash = "sha256-1jT+eISut0HkBVLMOWi2IpHMG2KSBnM3TzJbeSe5hKc=";
           };
-          filename = "djinfo.js";
+          name = "djinfo.js";
         }
       ];
     };

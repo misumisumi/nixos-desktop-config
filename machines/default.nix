@@ -40,7 +40,7 @@ let
                   inputs.flakes.homeManagerModules.default
                   inputs.nvimdots.homeManagerModules.nvimdots
                   inputs.sops-nix.homeManagerModules.sops
-                  inputs.spicetify-nix.homeManagerModule
+                  inputs.spicetify-nix.homeManagerModules.default
                   self.homeManagerModules.dotfiles
                   self.homeManagerModules.zinit
                 ];
