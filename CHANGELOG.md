@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.0...v2.1.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* **aichat:** add prompt ([7aa421c](https://github.com/misumisumi/nixos-desktop-config/commit/7aa421c7fe3c3bf2c0aa6987998a2cfe30a324fe))
+* change repo of spicetify-nix ([ff8922a](https://github.com/misumisumi/nixos-desktop-config/commit/ff8922a035e3d45c7f248b4bf238e4856118cd61))
+* encrypt file type ([7d8d469](https://github.com/misumisumi/nixos-desktop-config/commit/7d8d46957a2c0881ff022d71b803dc29afea6ddc))
+* encrypt file type ([28bcd69](https://github.com/misumisumi/nixos-desktop-config/commit/28bcd699214a295fb443416f1a471c8313eea636))
+* fix deprecated define ([a605ad9](https://github.com/misumisumi/nixos-desktop-config/commit/a605ad9f30ea9a786fd9fe33e06a3a149799f4bc))
+* **nvidia:** cannot show display from dvi with latest driver ([c5d8c10](https://github.com/misumisumi/nixos-desktop-config/commit/c5d8c104337341a2a0149c3b01f434535384c1d4))
+* **spicetify:** add patch ([3213091](https://github.com/misumisumi/nixos-desktop-config/commit/3213091faa560a696cc8577238731c43e358c0c2))
+* **zsh:** remove expand comp ([1e7ee1d](https://github.com/misumisumi/nixos-desktop-config/commit/1e7ee1df259ad8a2c5f42d3714282d05ad544c23))
+
 ## [2.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.0.2...v2.1.0) (2024-07-02)
 
 

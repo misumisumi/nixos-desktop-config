@@ -23,7 +23,7 @@ jobs:
         with:
           script: |
             const response = await github.rest.search.issuesAndPullRequests({
-              q: 'repo:${{ github.repository }} is:pr is:open sha:${{ github.event.workflow_run.head_sha }}'
+              q: 'repo:${{ github.repository }} is:pr is:open sha:${{ github.event.workflow_run.head_sha }}',
               per_page: 1,
             })
             const items = response.data.items
