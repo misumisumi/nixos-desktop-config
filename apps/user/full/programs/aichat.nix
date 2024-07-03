@@ -1,7 +1,11 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = [ pkgs.aichat ];
   xdg.configFile."aichat/roles.yaml".text = ''
+    - name: programmer
+      prompt: |-
+        You are a professional programmer.
+        Answer the following my question with appropriate code and explanation in Japanese.
     - name: translator
       prompt: |-
         Translate the following text to Japanese.
