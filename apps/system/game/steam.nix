@@ -1,6 +1,5 @@
 # This is "NixOS" options.
 { pkgs, ... }: {
-  hardware.steam-hardware.enable = false;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

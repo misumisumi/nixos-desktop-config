@@ -45,12 +45,9 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia.modesetting.enable = true;
-    opengl = {
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        libvdpau-va-gl
-        vaapiVdpau
-      ];
-    };
+    graphics.extraPackages = with pkgs; [
+      libvdpau-va-gl
+      vaapiVdpau
+    ];
   };
 }
