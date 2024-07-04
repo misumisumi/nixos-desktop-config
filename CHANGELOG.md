@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.2...v2.1.3) (2024-07-04)
+
+
+### Bug Fixes
+
+* **aichat:** add completion and role ([837aac1](https://github.com/misumisumi/nixos-desktop-config/commit/837aac1855642c446bf44830d3da29539e7a71a5))
+
 ## [2.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.1...v2.1.2) (2024-07-04)
 
 
