@@ -5,6 +5,15 @@ on:
 permissions: read-all
 
 jobs:
+  pre-workflow:
+    uses: ./.github/workflows/agent-of-me.yml
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      triggered-name: "reviewdog"
+    secrets:
+      AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
+      AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
   reviewdog:
     runs-on: ubuntu-latest
     steps:
@@ -26,3 +35,13 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           reviewdog -reporter=github-pr-review -fail-on-error
+
+  post-workflow:
+    uses: ./.github/workflows/agent-of-me.yml
+    needs: reviewdog
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      triggered-name: "reviewdog"
+    secrets:
+      AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
+      AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
