@@ -1,10 +1,18 @@
 name: approve and merge instead of me
 on:
-  workflow_run:
-    workflows:
-      - "build check"
-      - "reviewdog"
-    types: [requested, completed]
+  workflow_call:
+    inputs:
+      pr-number:
+        required: true
+        type: string
+      triggered-name:
+        required: true
+        type: string
+    secrets:
+      AGENT_OF_ME_APP_ID:
+        required: true
+      AGENT_OF_ME_PRIVATE_KEY:
+        required: true
 
 permissions: read-all
 
@@ -15,48 +23,30 @@ jobs:
     outputs:
       all-success: ${{ steps.workflow-status.outputs.all-success }}
       existing-review: ${{ steps.workflow-status.outputs.existing-review }}
-      pr-number: ${{ steps.pr.outputs.result }}
     steps:
-      # From https://github.com/orgs/community/discussions/25220#discussioncomment-8697399
-      - uses: actions/github-script@v7
-        id: pr
-        with:
-          script: |
-            const response = await github.rest.search.issuesAndPullRequests({
-              q: 'repo:${{ github.repository }} is:pr is:open sha:${{ github.event.workflow_run.head_sha }}',
-              per_page: 1,
-            })
-            const items = response.data.items
-            if (items.length < 1) {
-              console.error('No PRs found')
-              return
-            }
-            const pullRequestNumber = items[0].number
-            console.info("Pull request number is", pullRequestNumber)
-            return pullRequestNumber
-
       - name: Check workflow status
         id: workflow-status
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          PR_NUM: ${{ steps.pr.outputs.result }}
+          PR_NUM: ${{ inputs.pr-number }}
         run: |
-          check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '.[] | [.[].conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
+          # no check agent-of-me workflow
+          check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '[.[].[] | select(.name | test("workflow") | not) | .conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
           existing_review=$(gh pr view "${PR_NUM}" --json reviews --jq ".reviews | length > 0")
           echo "all-success is ${check_all_success}"
           echo "existing-review is ${existing_review}"
           echo "all-success=${check_all_success}" >> $GITHUB_OUTPUT
           echo "existing-review=${existing_review}" >> $GITHUB_OUTPUT
 
-  # From https://github.com/cli/cli/issues/2342
+  # INFO: https://github.com/cli/cli/issues/2342
   dismiss-reviews:
     runs-on: ubuntu-latest
     needs: workflow-status
     if: >-
       ${{
         contains(fromJSON('["misumisumi", "[bot]"]'), github.actor) &&
-        github.event.workflow_run.name == 'build check' &&
+        inputs.triggered-name == 'build check' &&
         needs.workflow-status.outputs.existing-review == 'true' &&
         needs.workflow-status.outputs.all-success == 'false'
        }}
@@ -71,10 +61,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
-          gh api repos/${{ github.repository }}/pulls/${{ needs.workflow-status.outputs.pr-number }}/reviews \
+          gh api repos/${{ github.repository }}/pulls/${{ inputs.pr-number }}/reviews \
             --jq '.[] | select(.state == "APPROVED") | .id' \
             | xargs -I '{}' gh api --method=PUT -f message="Dismissed due to PR edit." \
-            repos/${{ github.repository }}/pulls/${{ needs.workflow-status.outputs.pr-number }}/reviews/'{}'/dismissals
+            repos/${{ github.repository }}/pulls/${{ inputs.pr-number }}/reviews/'{}'/dismissals
 
   approve-owner:
     runs-on: ubuntu-latest
@@ -86,7 +76,7 @@ jobs:
        }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
+      PR_NUM: ${{ inputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -110,7 +100,7 @@ jobs:
       }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
+      PR_NUM: ${{ inputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
@@ -135,7 +125,7 @@ jobs:
       }}
     env:
       GH_REPO: ${{ github.repository }}
-      PR_NUM: ${{ needs.workflow-status.outputs.pr-number }}
+      PR_NUM: ${{ inputs.pr-number }}
     steps:
       - uses: tibdex/github-app-token@v2
         id: generate-token
