@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.1...v2.1.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* **workflow:** dealing with secondary rate limits ([5018380](https://github.com/misumisumi/nixos-desktop-config/commit/5018380a6698b327c62a278d56ee80e983d4afe5))
+
 ## [2.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.0...v2.1.1) (2024-07-03)
 
 
