@@ -3,10 +3,31 @@ on:
   pull_request:
 
 permissions:
-  id-token: "write"
-  contents: "read"
+  actions: read
+  attestations: read
+  checks: read
+  contents: read
+  deployments: read
+  discussions: read
+  id-token: write
+  issues: read
+  packages: read
+  pages: read
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
 
 jobs:
+  pre-workflow:
+    uses: ./.github/workflows/agent-of-me.yml
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      triggered-name: "build check"
+    secrets:
+      AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
+      AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
+
   build-check:
     runs-on: ubuntu-latest
     steps:
@@ -44,3 +65,13 @@ jobs:
       - name: Build check
         if: steps.change.outputs.nix == 'true'
         run: nix build --no-link ".#nixosConfigurations.liveimg-gui-full.config.system.build.toplevel"
+
+  post-workflow:
+    uses: ./.github/workflows/agent-of-me.yml
+    needs: build-check
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      triggered-name: "build check"
+    secrets:
+      AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
+      AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
