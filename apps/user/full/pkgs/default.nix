@@ -24,7 +24,7 @@
       ferdium # One place, Some webapp
       font-manager # font-manger
       gimp # image editor
-      gnome.simple-scan # Scaner
+      simple-scan # Scaner
       gnuplot # CLI Plotter
       gpick # color picker
       i3lock # Screen Locker
