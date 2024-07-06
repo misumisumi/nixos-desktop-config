@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.4](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.3...v2.1.4) (2024-07-06)
+
+
+### Bug Fixes
+
+* fix pkg name ([f402386](https://github.com/misumisumi/nixos-desktop-config/commit/f4023860d6299bf54d06c34fac6c94ccabfb9fd7))
+
 ## [2.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.2...v2.1.3) (2024-07-04)
 
 
