@@ -3,7 +3,12 @@
 , ...
 }:
 {
-  home.sessionVariables.EDITOR = "nvim";
+  home = {
+    sessionVariables.EDITOR = "nvim";
+    packages = with pkgs; [
+      file # File type checker
+    ];
+  };
   programs = {
     dotnet.dev.enable = true;
     java.enable = true;
