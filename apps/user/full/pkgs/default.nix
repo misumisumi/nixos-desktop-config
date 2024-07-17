@@ -24,7 +24,6 @@
       ferdium # One place, Some webapp
       font-manager # font-manger
       gimp # image editor
-      simple-scan # Scaner
       gnuplot # CLI Plotter
       gpick # color picker
       i3lock # Screen Locker
@@ -39,7 +38,9 @@
       obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files
       pympress # PDF reader for presentations
       remmina # Remote desktop client
+      simple-scan # Scaner
       slack # chat
+      sops # secrets management
       unityhub
       update-github-actions-permissions # Update GitHub Actions permissions
       vrc-get # Unofficial VRChat package manager
