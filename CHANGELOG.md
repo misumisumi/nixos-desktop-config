@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.5](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.4...v2.1.5) (2024-07-17)
+
+
+### Bug Fixes
+
+* **full/pkgs:** add sops ([3d470bf](https://github.com/misumisumi/nixos-desktop-config/commit/3d470bff9613ad7b4ffbb6e1ea189c70aed317bc))
+* **neovim:** fix obsidian.nvim ([4d6d835](https://github.com/misumisumi/nixos-desktop-config/commit/4d6d8357bae161f06b44b7605c6cfaa40a97edd2))
+
 ## [2.1.4](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.3...v2.1.4) (2024-07-06)
 
 
