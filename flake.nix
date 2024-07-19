@@ -11,11 +11,14 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flakes.url = "github:misumisumi/flakes";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nur.url = "github:nix-community/NUR";
+    flakes = {
+      url = "github:misumisumi/flakes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvimdots = {
       url = "github:misumisumi/nvimdots";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +81,7 @@
         homeManagerModules = {
           dotfiles = import ./modules/home-manager/dotfiles.nix;
           zinit = import ./modules/home-manager/zinit.nix;
+          zotero = import ./modules/home-manager/zotero.nix;
         };
         nixosModules = {
           vfio = import ./modules/nixos/vfio.nix;

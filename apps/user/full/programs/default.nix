@@ -10,4 +10,5 @@
   ./spicetify.nix
   ./vivaldi.nix
   ./zathura.nix
+  ./zotero.nix
 ]

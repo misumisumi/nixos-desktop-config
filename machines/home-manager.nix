@@ -27,6 +27,7 @@ let
         inputs.nvimdots.homeManagerModules.nvimdots
         self.homeManagerModules.dotfiles
         self.homeManagerModules.zinit
+        self.homeManagerModules.zotero
         ({ config, ... }: {
           imports = [
             ../settings/user/nix

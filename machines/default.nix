@@ -43,6 +43,7 @@ let
                   inputs.spicetify-nix.homeManagerModules.default
                   self.homeManagerModules.dotfiles
                   self.homeManagerModules.zinit
+                  self.homeManagerModules.zotero
                 ];
                 users."${user}" = {
                   dotfilesActivation = true;
