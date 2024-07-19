@@ -49,7 +49,6 @@
       yabridge # A modern and transparent way to use Windows VST2 and VST3 plugins on Linux
       yabridgectl # A modern and transparent way to use Windows VST2 and VST3 plugins on Linux
       zoom-us # video conferencing app
-      zotero # Paper managiment tool
     ];
   };
 }
