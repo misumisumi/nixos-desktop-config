@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.5...v2.2.0) (2024-07-19)
+
+
+### Features
+
+* **zotero:** add zotero home-manager module ([633834b](https://github.com/misumisumi/nixos-desktop-config/commit/633834bf25834374112dd203f6c90abae976fc18))
+
+
+### Bug Fixes
+
+* **firefox:** automatically enable extensions ([eea3eb8](https://github.com/misumisumi/nixos-desktop-config/commit/eea3eb84c23e80f661c47ccceff5baa56574d1f6))
+
 ## [2.1.5](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.4...v2.1.5) (2024-07-17)
 
 
