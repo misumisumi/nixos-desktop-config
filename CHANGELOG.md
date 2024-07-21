@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.0...v2.2.1) (2024-07-21)
+
+
+### Bug Fixes
+
+* **sound:** remove sound.enable option ([ecce3fa](https://github.com/misumisumi/nixos-desktop-config/commit/ecce3fade990fab68024fb50b92825c0a7bf4d42))
+
 ## [2.2.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.1.5...v2.2.0) (2024-07-19)
 
 
