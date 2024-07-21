@@ -26,7 +26,6 @@
       jack.enable = true;
     };
   };
-  sound.enable = lib.mkForce false;
   users.groups = {
     audio.members = [ "${user}" ];
   };

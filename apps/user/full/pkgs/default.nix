@@ -25,6 +25,7 @@
       font-manager # font-manger
       gimp # image editor
       gnuplot # CLI Plotter
+      google-fonts
       gpick # color picker
       i3lock # Screen Locker
       inkscape # SVG editor

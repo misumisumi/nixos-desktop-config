@@ -1,6 +1,7 @@
 [default]
 [default.extend-words]
 hda = "hda"
+HD = "HD"
 
 [files]
 extend-exclude = [

@@ -13,6 +13,13 @@
       "snd-aloop"
     ];
   };
+  services.pipewire.extraConfig.pipewire-pulse = {
+    native-protocol-tcp = {
+      pulse.cmd = [
+        { cmd = "load-module"; args = "module-native-protocol-tcp"; flags = [ "port=4656" "auth-anonymous=1" ]; }
+      ];
+    };
+  };
   nix = {
     settings = {
       cores = 4;
