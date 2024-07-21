@@ -1,4 +1,5 @@
 """widgets for qtile bar"""
+
 from pathlib import Path
 
 from libqtile import qtile, widget
@@ -48,30 +49,27 @@ _font_conf = {"font": GLOBAL.font, "fontsize": GLOBAL.font_size}
 groupbox = widget.GroupBox(
     this_current_screen_border=GLOBAL.c_normal["cyan"],
     borderwidth=GLOBAL.border,
-    **_colorset3,
-    font="Hack Nerd Font",
-    fontsize=GLOBAL.font_size,
     active=GLOBAL.c_normal["white"],
+    **_colorset3,
+    **_font_conf,
 )
 cpu = widget.CPU(format="  {load_percent:0=4.1f}%", **_colorset2, **_font_conf)
 memory = widget.Memory(
-    format=" {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}",
+    format="  {MemUsed:0=4.1f}{mm}/{MemTotal: .1f}{mm}",
     measure_mem="G",
     measure_swap="G",
     **_colorset1,
     **_font_conf,
 )
 df = widget.DF(
-    format=" {uf}{m}/{s}{m} ({r:.0f}%)",
+    format="  {uf}{m}/{s}{m} ({r:.0f}%)",
     visible_on_warn=False,
     partition="/home",
     **_colorset2,
     **_font_conf,
 )
 chrod = widget.Chord(**_colorset8, **_font_conf)
-wttr = widget.Wttr(
-    format="%c%t/%p|", location={"Himeji": "Himeji"}, **_colorset2, **_font_conf
-)
+wttr = widget.Wttr(format="%c%t/%p|", location={"Himeji": "Himeji"}, **_colorset2, **_font_conf)
 clock = widget.Clock(format="%y-%m-%d %a %H:%M:%S", **_colorset2, **_font_conf)
 net = widget.Net(
     format="{down:0=6.2f}{down_suffix:<2}↓↑{up:0=6.2f}{up_suffix:<2}",
@@ -90,9 +88,7 @@ volume = widget.Volume(
 systray = widget.Systray(**_colorset3)
 backlight = list(Path("/sys/class/backlight/").glob("*"))
 if not len(backlight) == 0:
-    backlight = widget.Backlight(
-        fmt="  {}", backlight_name=backlight[0], **_colorset2, **_font_conf
-    )
+    backlight = widget.Backlight(fmt="  {}", backlight_name=backlight[0], **_colorset2, **_font_conf)
 battery = widget.Battery(
     format="{char} {percent:2.0%}",
     charge_char="󰂄",
