@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.1...v2.2.2) (2024-07-21)
+
+
+### Bug Fixes
+
+* **qtile:** fix missing icon ([175ec31](https://github.com/misumisumi/nixos-desktop-config/commit/175ec3108067e4c3fa49ee5b040b42ffd4d90ee4))
+
 ## [2.2.1](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.0...v2.2.1) (2024-07-21)
 
 
