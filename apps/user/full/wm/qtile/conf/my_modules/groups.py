@@ -1,4 +1,5 @@
 """layout and group"""
+
 import re
 
 from libqtile import qtile
@@ -55,11 +56,11 @@ _rule_media = [
 _group_and_rule = {
     "code": ("", (layout2, layout3), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
-    "paper": ("", (layout1,), _rule_paper),
-    "analyze": ("", (layout1,), _rule_analyze),
-    "full": ("", (layout4,), _rule_full),
-    "sns": ("", (layout1,), _rule_sns),
-    "media": ("", (layout2, layout3), _rule_media),
+    "paper": ("󱔗", (layout1,), _rule_paper),
+    "analyze": ("󰉕", (layout1,), _rule_analyze),
+    "full": ("󰓓", (layout4,), _rule_full),
+    "sns": ("󰡠", (layout1,), _rule_sns),
+    "media": ("󰓇", (layout2, layout3), _rule_media),
 }
 
 
@@ -77,7 +78,6 @@ class MatchWithCurrentScreen(Match):
         self.screen_id = screen_id
 
     def compare(self, client: base.Window) -> bool:
-        value: Any
         for property_name, rule_value in self._rules.items():
             if property_name == "title":
                 value = client.name
