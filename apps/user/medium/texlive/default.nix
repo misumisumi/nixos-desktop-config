@@ -30,7 +30,9 @@
         newpx
         newtx
         newtxtt
+        plautopatch
         scheme-medium
+        tabularray
         tlmgrbasics
         ;
     };
