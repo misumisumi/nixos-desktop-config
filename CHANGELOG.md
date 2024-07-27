@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.3](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.2...v2.2.3) (2024-07-27)
+
+
+### Bug Fixes
+
+* **texlive:** add some package ([8f95563](https://github.com/misumisumi/nixos-desktop-config/commit/8f9556356cde2f2d8188c8d050fc576bf2393aa9))
+
 ## [2.2.2](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.1...v2.2.2) (2024-07-21)
 
 
