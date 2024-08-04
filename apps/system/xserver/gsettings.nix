@@ -12,7 +12,7 @@ let
     [org.cinnamon.desktop.default-applications.terminal]
     exec= '${script}/bin/open-wezterm-here'
   '';
-  nixos-gsettings-overrides = pkgs.cinnamon.cinnamon-gsettings-overrides.override {
+  nixos-gsettings-overrides = pkgs.cinnamon-gsettings-overrides.override {
     extraGSettingsOverrides = cinnamon-default-terminal;
   };
 in
