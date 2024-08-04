@@ -34,3 +34,10 @@ jobs:
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
+
+      - name: Check evaluation warning
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          nix run nixpkgs#nixos-rebuild dry-build --flake ".#liveimg-gui-full" --option pure-eval false --option eval-cache false 2>&1 | grep "evaluation warning" > eval_warning.log
+          gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
