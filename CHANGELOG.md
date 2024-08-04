@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.4](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.3...v2.2.4) (2024-08-04)
+
+
+### Bug Fixes
+
+* **cinnamon-pkgs:** move pkgs.cinnamon.&lt;pkg-name&gt; to pkgs.<pkg-name> ([2bc46ec](https://github.com/misumisumi/nixos-desktop-config/commit/2bc46ec22aaba891063a229b6b2bc618500f2555))
+
 ## [2.2.3](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.2...v2.2.3) (2024-07-27)
 
 
