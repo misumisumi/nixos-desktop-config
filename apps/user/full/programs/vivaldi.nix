@@ -16,6 +16,7 @@
       { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark reader
       { id = "elfdpkmfllnhhgnicaaeacbilcallpbd"; } # flow chat for youtube live
       { id = "ghbmnnjooekpmoecnnnilnnbdlolhkhi"; } # google docs offline
+      { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i don't care about cookies
       { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
       { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
