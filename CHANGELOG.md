@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.5](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.4...v2.2.5) (2024-08-09)
+
+
+### Bug Fixes
+
+* **user-env:** enable nix-gc in user env ([b4c0982](https://github.com/misumisumi/nixos-desktop-config/commit/b4c09822ba66acce328bad8feacc6f0c37f9d53a))
+* **vivaldi:** add extension named i don't care about cookies ([9ddf1c9](https://github.com/misumisumi/nixos-desktop-config/commit/9ddf1c92a64a29934bc8770275b1151e4982c449))
+
 ## [2.2.4](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.3...v2.2.4) (2024-08-04)
 
 
