@@ -1,3 +1,3 @@
 {
-  imports = [ ./nix ];
+  imports = [ ./nixpkgs ];
 }

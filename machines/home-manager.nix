@@ -21,7 +21,7 @@ let
       modules = [
         inputs.nur.nixosModules.nur
         inputs.sops-nix.homeManagerModules.sops
-        inputs.spicetify-nix.homeManagerModule
+        inputs.spicetify-nix.homeManagerModules.default
 
         inputs.flakes.homeManagerModules.default
         inputs.nvimdots.homeManagerModules.nvimdots
@@ -30,7 +30,7 @@ let
         self.homeManagerModules.zotero
         ({ config, ... }: {
           imports = [
-            ../settings/user/nix
+            ../settings/user
           ];
           dotfilesActivation = true;
           home.stateVersion = config.home.version.release;

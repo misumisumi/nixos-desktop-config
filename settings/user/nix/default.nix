@@ -1,7 +1,6 @@
-{ self, inputs, pkgs, user, ... }:
+{ inputs, user, ... }:
 {
   nix = {
-    package = pkgs.nixVersions.latest;
     settings = {
       auto-optimise-store = true; # Optimise syslinks
       # flakeの有効化
@@ -27,14 +26,9 @@
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
-  nixpkgs = {
-    config = import ./nixpkgs-config.nix;
-    overlays = [
-      inputs.flakes.overlays.default
-      inputs.nixgl.overlay
-      inputs.nur.overlay
-      self.overlays.default
-    ];
-  };
-  xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
+  xdg.configFile."nixpkgs/config.nix".text = ''
+    {
+      allowUnfree = true;
+    }
+  '';
 }

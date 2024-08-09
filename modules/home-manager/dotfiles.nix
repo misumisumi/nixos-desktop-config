@@ -15,6 +15,7 @@ with builtins; {
     lib.optional (pathExists ../../users/${user}) ../../users/${user}
     ++ lib.optional (pathExists ../../machines/${hostname}/home.nix) ../../machines/${hostname}/home.nix
     ++ [
+      ../../settings/user/nix
       ../../apps/user/core/bash
       ../../apps/user/core/btop
       ../../apps/user/core/fzf
