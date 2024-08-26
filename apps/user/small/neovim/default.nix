@@ -1,7 +1,5 @@
 # This is need `https://github.com/ayamir/nvimdots`
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 {
   home = {
     sessionVariables.EDITOR = "nvim";
@@ -17,19 +15,19 @@
       vimAlias = true;
       vimdiffAlias = true;
       extraPackages = with pkgs; [
-        (commitlint.withPlugins (ps: with ps; [
-          "@commitlint/config-conventional"
-          commitlint-format-json
-        ]))
+        (commitlint.withPlugins (
+          ps: with ps; [
+            "@commitlint/config-conventional"
+            commitlint-format-json
+          ]
+        ))
         deno
         go
         nixd
-        nixpkgs-fmt
+        nixfmt-rfc-style
         statix
       ];
-      extraPython3Packages = ps: with ps; [
-        jupynium
-      ];
+      extraPython3Packages = ps: with ps; [ jupynium ];
       nvimdots = {
         enable = true;
         mergeLazyLock = true;

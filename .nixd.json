@@ -1,6 +1,6 @@
 {
     "formatting": {
-        "command": "nixpkgs-fmt"
+        "command": "nixfmt"
     },
     "options": {
         "enable": true,
