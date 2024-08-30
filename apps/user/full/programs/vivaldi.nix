@@ -6,9 +6,7 @@
   programs.vivaldi = {
     enable = true;
     package = pkgs.vivaldi.override { proprietaryCodecs = true; };
-    dictionaries = with pkgs; [
-      hunspellDictsChromium.en_US
-    ];
+    dictionaries = with pkgs; [ hunspellDictsChromium.en_US ];
     extensions = [
       { id = "joaffhoebddkohkafembmdkfmmcgmepj"; } # better vrchat
       { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
@@ -21,6 +19,7 @@
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
       { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
+      { id = "ldgfbffkinooeloadekpmfoklnobpien"; } # raindrop.io
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
       { id = "niloccemoadcdkdjlinkgdfekeahmflj"; } # save to pocket
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list

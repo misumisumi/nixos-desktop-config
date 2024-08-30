@@ -16,6 +16,7 @@
       keep-derivations = true;
       auto-optimise-store = true; # Optimise syslinks
       substituters = [
+        "https://cache.nixos.org/"
         "https://misumisumi.cachix.org"
         "https://cuda-maintainers.cachix.org"
       ];
