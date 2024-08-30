@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.6](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.5...v2.2.6) (2024-08-30)
+
+
+### Bug Fixes
+
+* **neovim:** move nixpkgs-fmt to nixfmt-rfc-style ([fd7b0b1](https://github.com/misumisumi/nixos-desktop-config/commit/fd7b0b151146e7eb8e4f4b88f91fc72791ff10d6))
+* **nix:** fix cache config ([3638e51](https://github.com/misumisumi/nixos-desktop-config/commit/3638e512e6c1223e11474687e160ae1287dda11a))
+* **spicetify:** remove patch ([d9e7100](https://github.com/misumisumi/nixos-desktop-config/commit/d9e7100746de3f2478de8f08341b03acba0e9acb))
+* **stacia:** fix network config ([495adc5](https://github.com/misumisumi/nixos-desktop-config/commit/495adc5f27a4b1e5a43ee9673d3a850c18cc27b2))
+* **theme:** remove deprecated config ([ea5749d](https://github.com/misumisumi/nixos-desktop-config/commit/ea5749d06f7bb0504d4ae984159bc47a4fea2e1e))
+* **vivaldi:** fix extension ([f1e0a57](https://github.com/misumisumi/nixos-desktop-config/commit/f1e0a5766b5aba679c27714cff24a746fa57c834))
+
 ## [2.2.5](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.4...v2.2.5) (2024-08-09)
 
 
