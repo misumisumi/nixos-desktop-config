@@ -1,9 +1,7 @@
 # Uniformed look for Qt and GTK applications
 { pkgs, ... }:
 let
-  extraConfig = {
-    gtk-menu-images = true;
-  };
+  extraConfig = { };
 in
 {
   gtk = {
