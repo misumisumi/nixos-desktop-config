@@ -25,7 +25,7 @@ local config = {
         {
             family = "Moralerspace Neon NF",
             weight = "Regular",
-            harfbuzz_features = {'liga','calt', 'ss01',  'ss06', 'ss07', 'ss08', 'ss09'}
+            harfbuzz_features = { "liga", "calt", "ss01", "ss06", "ss07", "ss08", "ss09" },
         },
         "FiraCode Nerd Font Mono",
     }),
@@ -51,6 +51,7 @@ local config = {
     quick_select_patterns = {
         "(?<=[\\(|{|`|'|\"])[^[\\(|{|`|'|\"][\\)|}|`|'|\"]]+(?=[\\)|}|`|'|\"])",
     },
+    front_end = "WebGpu",
 }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { "powershell.exe", "-NoLogo" }
