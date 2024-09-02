@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   boot.kernelParams = [
     "amdgpu.ppfeaturemask=0xfff7ffff"
   ];
@@ -19,7 +20,10 @@
 
   hardware = {
     nvidia-container-toolkit.enable = true;
-    nvidia.powerManagement.enable = true;
+    nvidia = {
+      open = true;
+      powerManagement.enable = true;
+    };
     graphics.extraPackages = with pkgs; [
       libvdpau-va-gl
       vaapiVdpau
