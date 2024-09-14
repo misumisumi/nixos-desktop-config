@@ -1,20 +1,28 @@
 { pkgs, ... }:
 let
-  thunar-with-plugins = with pkgs.xfce; (thunar.override { thunarPlugins = [ thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler ]; });
+  thunar-with-plugins =
+    with pkgs.xfce;
+    (thunar.override {
+      thunarPlugins = [
+        thunar-volman
+        thunar-archive-plugin
+        thunar-media-tags-plugin
+        tumbler
+      ];
+    });
 in
 {
   home = {
-    packages = with pkgs;
-      with pkgs.xfce; [
-        thunar-with-plugins
-        xfconf
-        exo
+    packages = with pkgs; [
+      thunar-with-plugins
+      xfce.xfconf
+      xfce.exo
 
-        shared-mime-info # For FileManager
-        ffmpegthumbnailer
-        gnome.file-roller
-        lxde.lxmenu-data
-      ];
+      shared-mime-info # For FileManager
+      ffmpegthumbnailer
+      file-roller
+      lxde.lxmenu-data
+    ];
   };
   xdg = {
     mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
