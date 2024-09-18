@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
-  boot.kernelParams = [
-    "amdgpu.ppfeaturemask=0xfff7ffff"
-  ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" ];
   services = {
     xserver = {
       videoDrivers = [
@@ -21,7 +19,7 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      open = true;
+      open = false;
       powerManagement.enable = true;
     };
     graphics.extraPackages = with pkgs; [

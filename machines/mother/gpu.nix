@@ -1,7 +1,5 @@
-{ pkgs
-, config
-, ...
-}: {
+{ pkgs, config, ... }:
+{
   # boot.extraModprobeConfig = lib.mkAfter ''
   #   softdep snd_hda_intel pre: vfio-pci
   #   softdep nouveau pre: vfio-pci
@@ -39,8 +37,8 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.production;
       modesetting.enable = true;
+      open = false;
     };
     graphics = {
       enable32Bit = true;
