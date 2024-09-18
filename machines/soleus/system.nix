@@ -1,9 +1,10 @@
-{ config, ... }: {
+{ config, ... }:
+{
   boot = {
     loader.timeout = 10;
     tmp = {
       useTmpfs = true;
-      tmpfsSize = "80%";
+      tmpfsSize = "50%";
     };
   };
   services = {
@@ -19,7 +20,11 @@
   services.pipewire.extraConfig.pipewire-pulse = {
     native-protocol-tcp = {
       pulse.cmd = [
-        { cmd = "load-module"; args = "module-tunnel-sink"; flags = [ "server=tcp:133.24.91.38:4656" ]; }
+        {
+          cmd = "load-module";
+          args = "module-tunnel-sink";
+          flags = [ "server=tcp:133.24.91.38:4656" ];
+        }
       ];
     };
   };
@@ -33,4 +38,3 @@
     '';
   };
 }
-
