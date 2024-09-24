@@ -1,5 +1,6 @@
 # Picom (compositor for Xorg) conf
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services = {
     picom = {
       enable = true;
@@ -9,41 +10,30 @@
 
       fade = true;
       fadeDelta = 10;
-      fadeSteps = [ 0.06 0.06 ];
+      fadeSteps = [
+        6.0e-2
+        6.0e-2
+      ];
 
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
-        "100:class_g = 'alacritty' && focused"
-        "100:class_g = 'alacritty' && !focused"
-        "100:class_g = 'kitty' && focused"
-        "100:class_g = 'kitty' && !focused"
-        "100:class_g = 'org.wezfurlong.wezterm' && focused"
-        "100:class_g = 'org.wezfurlong.wezterm' && !focused"
-        "100:class_g = 'krita' && focused"
-        "100:class_g = 'krita' && !focused"
-        "100:class_g = 'Blender' && focused"
-        "100:class_g = 'Blender' && !focused"
-        "100:class_g = 'Unity' && focused"
-        "100:class_g = 'Unity' && !focused"
-        "100:class_g = 'fcitx' && focused"
-        "100:class_g = 'fcitx' && !focused"
-        "100:class_g = 'pentablet' && focused"
-        "100:class_g = 'pentablet' && !focused"
-        "100:class_g = 'PenTablet' && focused"
-        "100:class_g = 'PenTablet' && !focused"
-        "100:class_g = 'Looking Glass (client)' && focused"
-        "100:class_g = 'Looking Glass (client)' && !focused"
-        "100:class_g = 'Picture in picture' && focused"
-        "100:class_g = 'Picture in picture' && !focused"
-        "100:name = 'masterduel' && focused"
-        "100:name = 'masterduel' && !focused"
-        "100:name = 'WaveSurer 1.8.8.p5' && focused"
-        "100:name = 'WaveSurer 1.8.8.p5' && !focused"
-        "100:name = 'i3lock' && focused"
-        "100:name = 'i3lock' && !focused"
-        "100:name *?= 'Youtube'"
+        "100:class_g = 'Blender'"
+        "100:class_g = 'Looking Glass (client)'"
+        "100:class_g = 'PenTablet'"
+        "100:class_g = 'Picture in picture'"
+        "100:class_g = 'Unity'"
+        "100:class_g = 'alacritty'"
+        "100:class_g = 'kitty'"
+        "100:class_g = 'krita'"
+        "100:class_g = 'org.wezfurlong.wezterm'"
+        "100:class_g = 'pentablet'"
+        "100:name = 'VRChat'"
+        "100:name = 'i3lock'"
+        "100:name = 'masterduel'"
+        "100:name *?= 'WaveSurer'"
         "100:name *?= 'Prime Video'"
+        "100:name *?= 'Youtube'"
         "100:name *?= 'ニコニコ動画'"
         "100:name *?= '.pdf'"
         "100:name *?= '.jpg'"
@@ -68,7 +58,10 @@
         "class_g = 'kdeconnect-sms'"
         "class_g = 'kdeconnect-sms-handler'"
       ];
-      shadowOffsets = [ (-7) (-7) ];
+      shadowOffsets = [
+        (-7)
+        (-7)
+      ];
       shadowOpacity = 0.75;
 
       settings = {
