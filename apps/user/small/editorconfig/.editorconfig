@@ -56,3 +56,6 @@ indent_size = 2
 
 [*.raml]
 indent_size = 2
+
+[*.{tf,tfvars,tftpl}]
+indent_size = 2
