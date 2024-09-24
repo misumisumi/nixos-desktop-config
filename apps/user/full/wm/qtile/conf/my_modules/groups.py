@@ -6,12 +6,13 @@ from libqtile import qtile
 from libqtile.backend import base
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
-from my_modules.global_config import GLOBAL
+
 from my_modules.layouts import layout1, layout2, layout3, layout4
+from my_modules.variables import GlobalConf
 
 _rule_code = [
     {"wm_class": "code"},
-    {"wm_class": GLOBAL.terminal_class if GLOBAL.terminal_class is not None else GLOBAL.terminal},
+    {"wm_class": GlobalConf.terminal_class if GlobalConf.terminal_class is not None else GlobalConf.terminal},
 ]
 
 _rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
@@ -65,7 +66,7 @@ _group_and_rule = {
 
 
 _rule_scratchpad = {
-    DropDown("term", GLOBAL.terminal, opacity=0.8),
+    DropDown("term", GlobalConf.terminal, opacity=0.8),
     DropDown("copyq", "copyq show", opacity=0.7),
     DropDown("bluetooth", "blueman-manager", opacity=0.7),
     DropDown("volume", "pavucontrol", opacity=0.7),
@@ -122,7 +123,7 @@ GROUP_PER_SCREEN = len(_group_and_rule)
 def _set_groups():
     groups = []
 
-    for n in range(GLOBAL.num_screen):
+    for n in range(GlobalConf.num_screen):
         for k, (label, layouts, rules) in _group_and_rule.items():
             if n == 1 and len(layouts) > 1:
                 layouts = layouts[1]
@@ -131,7 +132,7 @@ def _set_groups():
             name = "{}-{}".format(n, k)
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
             groups.append(Group(name, layouts=layouts, matches=matches, label=label))
-    if GLOBAL.is_display_tablet:
+    if GlobalConf.is_display_tablet:
         name = list(_display_tablet.keys())[0]
         groups.append(
             Group(

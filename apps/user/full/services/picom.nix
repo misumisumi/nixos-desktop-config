@@ -18,6 +18,7 @@
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
+        "100:QTILE_BAR:32c = 1"
         "100:class_g = 'Blender'"
         "100:class_g = 'Looking Glass (client)'"
         "100:class_g = 'PenTablet'"
@@ -42,21 +43,22 @@
 
       shadow = true;
       shadowExclude = [
-        "name = 'Notification'"
-        "class_g = 'Conky'"
-        "class_g ?= 'Notify-osd'"
-        "class_g = 'Cairo-clock'"
+        "QTILE_BAR:32c = 1"
         "_GTK_FRAME_EXTENTS@:c"
-        "class_g = 'rofi'"
-        "class_g = 'Conky'"
         "class_g = 'Cairo-clock'"
+        "class_g = 'Cairo-clock'"
+        "class_g = 'Conky'"
+        "class_g = 'Conky'"
         "class_g = 'dunst'"
-        "class_g = 'rofi'"
-        "class_g = 'kdeconnectd'"
         "class_g = 'kdeconnect-handler'"
         "class_g = 'kdeconnect-indicator'"
         "class_g = 'kdeconnect-sms'"
         "class_g = 'kdeconnect-sms-handler'"
+        "class_g = 'kdeconnectd'"
+        "class_g = 'rofi'"
+        "class_g = 'rofi'"
+        "class_g ?= 'Notify-osd'"
+        "name = 'Notification'"
       ];
       shadowOffsets = [
         (-7)
@@ -83,6 +85,7 @@
         blur-background-exclude = [
           "class_g = 'kdeconnectd && !focused'"
           "_NET_WM_NAME@:s *= 'KDE Connect Daemon'"
+          "QTILE_BAR:32c = 1"
           "window_type = 'dock'"
           "window_type = 'desktop'"
           "_GTK_FRAME_EXTENTS@:c"

@@ -1,52 +1,59 @@
 """make screen"""
-from libqtile import bar
+
+from libqtile import bar, hook
 from libqtile.config import Screen
-
-from my_modules.global_config import GLOBAL
-from my_modules.bar import make_bar
-
 from libqtile.log_utils import logger
+
+from my_modules.bar import make_bar
+from my_modules.colorset import ColorSet
+from my_modules.variables import BarConf, GlobalConf
 
 
 def make_screens(num_screen):
     screens = []
+    bars = []
     for i in range(num_screen):
         if i == 0:
             top_widgets, bottom_widgets = make_bar(is_tray=True)
         else:
             top_widgets, bottom_widgets = make_bar()
         if bottom_widgets is None:
-            screens.append(
-                Screen(
-                    top=bar.Bar(
-                        top_widgets,
-                        GLOBAL.bar_font_size,
-                        background=GLOBAL.c_normal["BGbase"],
-                        border_color=GLOBAL.c_normal["cyan"],
-                    ),
-                )
+            top_bar = bar.Bar(
+                top_widgets,
+                BarConf.size,
+                background=ColorSet.background,
+                border_color=ColorSet.cyan,
+                margin=BarConf.top_bar_margin,
             )
-        elif GLOBAL.is_display_tablet and i > num_screen:
+            bars.append(top_bar)
+            screens.append(Screen(top=top_bar))
+        elif GlobalConf.is_display_tablet and i > num_screen:
             screens.append(Screen(top=None))
         else:
-            screens.append(
-                Screen(
-                    top=bar.Bar(
-                        top_widgets,
-                        GLOBAL.bar_font_size,
-                        background=GLOBAL.c_normal["BGbase"],
-                        border_color=GLOBAL.c_normal["cyan"],
-                    ),
-                    bottom=bar.Bar(
-                        bottom_widgets,
-                        GLOBAL.bar_font_size,
-                        background=GLOBAL.c_normal["clear"],
-                        border_color=GLOBAL.c_normal["cyan"],
-                    ),
-                )
+            top_bar = bar.Bar(
+                top_widgets,
+                BarConf.size,
+                background=ColorSet.transparent,
+                border_color=ColorSet.cyan,
+                margin=BarConf.top_bar_margin,
             )
+            bottom_bar = bar.Bar(
+                bottom_widgets,
+                BarConf.size,
+                background=ColorSet.transparent,
+                border_color=ColorSet.cyan,
+                margin=BarConf.bottom_bar_margin,
+            )
+            bars.append(top_bar)
+            bars.append(bottom_bar)
+            screens.append(Screen(top=top_bar, bottom=bottom_bar))
+
+    @hook.subscribe.startup
+    def _():
+        for _bar in bars:
+            _bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)
 
     return screens
 
 
-screens = make_screens(GLOBAL.num_screen)
+screens = make_screens(GlobalConf.num_screen)

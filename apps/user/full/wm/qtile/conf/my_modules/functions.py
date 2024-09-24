@@ -7,8 +7,10 @@ from libqtile import hook, qtile
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
-from my_modules.global_config import GLOBAL
+
+from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, _group_and_rule
+from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
 PINP_WINDOW = None
 FLOATING_WINDOW_IDX = 0
@@ -26,9 +28,9 @@ def keep_focus_window_in_tiling(window=None):
 def get_pinp_size_pos(init=True):
     screen_size = (qtile.current_screen.width, qtile.current_screen.height)
     screen_pos = (qtile.current_screen.x, qtile.current_screen.y)
-    pinp_size = [int(s // GLOBAL.pinp_scale_down) for s in screen_size]
+    pinp_size = [int(s // PinPConf.pinp_scale_down) for s in screen_size]
     pinp_pos = [ss + sp - p for ss, sp, p in zip(screen_size, screen_pos, pinp_size)]
-    pinp_pos[0] = pinp_pos[0] - GLOBAL.pinp_margin
+    pinp_pos[0] = pinp_pos[0] - PinPConf.pinp_margin
 
     return pinp_size, pinp_pos
 
@@ -37,14 +39,7 @@ def get_pinp_size_pos(init=True):
 @hook.subscribe.client_new
 async def move_speclific_apps(window):
     await asyncio.sleep(0.01)
-    # if window.name == "spotify":
-    #     window.togroup("0-media")
-    if window.name.split(" - ")[-1] in [
-        "Picture in picture",
-        "ピクチャー イン ピクチャー",
-        "Picture-in-Picture",
-        "mpv",
-    ]:
+    if window.name.split(" - ")[-1] in PinPConf.target_cls_name:
         # 画面サイズに合わせて自動的にPinPのサイズとポジションを決定する
         pinp_size, pinp_pos = get_pinp_size_pos()
 
@@ -55,8 +50,8 @@ async def move_speclific_apps(window):
         window.cmd_place(
             *pinp_pos,
             *pinp_size,
-            borderwidth=GLOBAL.border,
-            bordercolor=GLOBAL.c_normal["cyan"],
+            borderwidth=WindowConf.border,
+            bordercolor=ColorSet.cyan,
             above=False,
             margin=None,
         )
@@ -81,7 +76,7 @@ def remove_pinp_by_toggle_float():
         if window.floating:
             floating_windows.append(window)
     global PINP_WINDOW
-    if PINP_WINDOW is not None and not PINP_WINDOW["window"] in floating_windows:
+    if PINP_WINDOW is not None and PINP_WINDOW["window"] not in floating_windows:
         PINP_WINDOW = None
 
 
@@ -101,8 +96,8 @@ def force_pinp(qtile):
         window.cmd_place(
             *pinp_pos,
             *pinp_size,
-            borderwidth=GLOBAL.border,
-            bordercolor=GLOBAL.c_normal["cyan"],
+            borderwidth=WindowConf.border,
+            bordercolor=ColorSet.cyan,
             above=False,
             margin=None,
         )
@@ -144,17 +139,17 @@ def move_pinp(qtile, pos):
     if PINP_WINDOW is not None and idx == PINP_WINDOW["idx"]:
         screen_size = (qtile.current_screen.width, qtile.current_screen.height)
         screen_pos = (qtile.current_screen.x, qtile.current_screen.y)
-        pinp_size = [int(s // GLOBAL.pinp_scale_down) for s in screen_size]
+        pinp_size = [int(s // PinPConf.pinp_scale_down) for s in screen_size]
         pinp_pos = [PINP_WINDOW["window"].float_x, PINP_WINDOW["window"].float_y]
 
         if pos == "up":
             pinp_pos[1] = 0
         elif pos == "down":
-            pinp_pos[1] = screen_size[1] - pinp_size[1] - GLOBAL.pinp_margin
+            pinp_pos[1] = screen_size[1] - pinp_size[1] - PinPConf.margin
         elif pos == "left":
-            pinp_pos[0] = GLOBAL.pinp_margin
+            pinp_pos[0] = PinPConf.margin
         else:
-            pinp_pos[0] = screen_size[0] - pinp_size[0] - GLOBAL.pinp_margin
+            pinp_pos[0] = screen_size[0] - pinp_size[0] - PinPConf.margin
         pinp_pos[0] += screen_pos[0]
         pinp_pos[1] += screen_pos[1]
 
@@ -162,8 +157,8 @@ def move_pinp(qtile, pos):
         PINP_WINDOW["window"].cmd_place(
             *pinp_pos,
             *pinp_size,
-            borderwidth=GLOBAL.border,
-            bordercolor=GLOBAL.c_normal["cyan"],
+            borderwidth=WindowConf.border,
+            bordercolor=ColorSet.cyan,
             above=False,
             margin=None,
         )
@@ -302,7 +297,7 @@ def move_n_screen_group(qtile, idx):
 
 @lazy.function
 def focus_cycle_screen(qtile, backward=False):
-    n_screen = GLOBAL.num_screen + 1 if GLOBAL.is_display_tablet else GLOBAL.num_screen
+    n_screen = GlobalConf.num_screen + 1 if GlobalConf.is_display_tablet else GlobalConf.num_screen
     idx = qtile.current_screen.index
     if backward:
         to_idx = n_screen - 1 if idx == 0 else idx - 1
@@ -314,22 +309,22 @@ def focus_cycle_screen(qtile, backward=False):
 @lazy.function
 def move_cycle_screen(qtile, backward=False):
     idx = qtile.current_screen.index
-    if GLOBAL.is_display_tablet and idx == GLOBAL.num_screen:
+    if GlobalConf.is_display_tablet and idx == GlobalConf.num_screen:
         pass
     else:
-        n_screen = GLOBAL.num_screen
+        n_screen = GlobalConf.num_screen
         if backward:
             to_idx = n_screen - 1 if idx == 0 else idx - 1
             to_group = qtile.groups.index(qtile.current_screen.group) - GROUP_PER_SCREEN
-            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * GLOBAL.num_screen)
+            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * GlobalConf.num_screen)
 
         else:
             to_idx = 0 if idx + 1 == n_screen else idx + 1
             to_group = qtile.groups.index(qtile.current_screen.group) + GROUP_PER_SCREEN
             to_group = (
                 to_group
-                if to_group < GROUP_PER_SCREEN * GLOBAL.num_screen
-                else to_group - (GROUP_PER_SCREEN * GLOBAL.num_screen)
+                if to_group < GROUP_PER_SCREEN * GlobalConf.num_screen
+                else to_group - (GROUP_PER_SCREEN * GlobalConf.num_screen)
             )
         group = qtile.groups[to_group]
         qtile.current_window.togroup(group.name)
@@ -340,8 +335,8 @@ def move_cycle_screen(qtile, backward=False):
 @lazy.function
 def to_from_display_tablet(qtile):
     idx = qtile.current_screen.index
-    if GLOBAL.is_display_tablet:
-        if idx == GLOBAL.num_screen:
+    if GlobalConf.is_display_tablet:
+        if idx == GlobalConf.num_screen:
             to_idx = list(_group_and_rule.keys()).index("full")
             group = qtile.groups[to_idx]
             # logger.warning(group)
@@ -350,7 +345,7 @@ def to_from_display_tablet(qtile):
             qtile.current_screen.set_group(group)
         else:
             qtile.current_window.togroup(qtile.groups[-2].name)
-            qtile.to_screen(GLOBAL.num_screen)
+            qtile.to_screen(GlobalConf.num_screen)
 
 
 @lazy.function
@@ -358,7 +353,7 @@ def attach_screen(qtile, pos):
     if pos == "delete":
         subprocess.run("xrandr --output HDMI-A-0 --off", shell=True)
         subprocess.run(
-            "feh --bg-fill {}".format(GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
+            "feh --bg-fill {}".format(GlobalConf.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
             shell=True,
         )
     else:
@@ -368,8 +363,8 @@ def attach_screen(qtile, pos):
         )
         subprocess.run(
             "feh --bg-fill {} --bg-fill {}".format(
-                GLOBAL.home.joinpath("Pictures", "wallpapers", "main01.jpg"),
-                GLOBAL.home.joinpath("Pictures", "wallpapers", "main02.jpg"),
+                GlobalConf.home.joinpath("Pictures", "wallpapers", "main01.jpg"),
+                GlobalConf.home.joinpath("Pictures", "wallpapers", "main02.jpg"),
             ),
             shell=True,
         )
@@ -381,7 +376,7 @@ def capture_screen(qtile, is_clipboard=False):
     if is_clipboard:
         Qtile.cmd_spawn(qtile, "flameshot screen -n {} -c".format(idx))
     else:
-        Qtile.cmd_spawn(qtile, "flameshot screen -n {} -p {}".format(idx, GLOBAL.capture_path))
+        Qtile.cmd_spawn(qtile, "flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
 
 
 @hook.subscribe.client_new

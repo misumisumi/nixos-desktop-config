@@ -1,12 +1,12 @@
 """set wallpaper"""
+
 import subprocess
 
-from libqtile import qtile, hook
-
-from my_modules.groups import _group_and_rule
-from my_modules.global_config import GLOBAL
+from libqtile import hook, qtile
 from libqtile.log_utils import logger
 
+from my_modules.groups import _group_and_rule
+from my_modules.variables import GlobalConf
 
 MONITOR0 = 0
 MONITOR1 = 0
@@ -34,7 +34,9 @@ def change_wallpaper():
                 MONITOR1 = gidx
             subprocess.run(
                 "feh --bg-fill {} --bg-fill {} --bg-fill {}".format(
-                    str(GLOBAL.wallpapers[MONITOR0]), str(GLOBAL.wallpapers[MONITOR1]), str(GLOBAL.wallpapers[MONITOR2])
+                    str(GlobalConf.wallpapers[MONITOR0]),
+                    str(GlobalConf.wallpapers[MONITOR1]),
+                    str(GlobalConf.wallpapers[MONITOR2]),
                 ),
                 shell=True,
             )

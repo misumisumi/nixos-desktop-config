@@ -1,14 +1,50 @@
 """This is Global config"""
 
-import dataclasses
 import os
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Union
 
 from libqtile import qtile
 from libqtile.log_utils import logger
 
 
-@dataclasses.dataclass
+@dataclass
+class FontConfig:
+    font: str = "Moralerspace Neon NF"
+    fontsize: int = 15
+
+
+@dataclass
+class BarConfig:
+    size: int = 28
+    border_width: int = 0
+    top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 5, 20])
+    bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [5, 10, 5, 10])
+    opacity: int = 1
+
+
+@dataclass
+class PinPConfig:
+    scale_down: float = 3.2
+    margin: int = 3
+    target_cls_name: list[str] = field(
+        default_factory=lambda: [
+            "Picture in picture",
+            "ピクチャー イン ピクチャー",
+            "Picture-in-Picture",
+            "mpv",
+        ]
+    )
+
+
+@dataclass
+class WindowConfig:
+    border: int = 2
+    margin: int = 10
+
+
+@dataclass
 class Global:
     laptop = os.uname()[1] in ["zephyrus"]
     under_fhd = os.uname()[1] in ["zephyrus", "stacia"]
@@ -27,50 +63,9 @@ class Global:
         wallpapers = list(home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png"))
     wallpapers.sort()
     screen_saver = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
-
     num_screen = 1 if os.uname()[1] == "vm" else 2
 
-    border = 2
-
-    pinp_scale_down = 3.2
-    pinp_margin = 3 + border
-
-    margin = 10
-    gaps = 15
-
-    slice_width = 350 if laptop else 500
-
-    font = "UDEV Gothic 35LG"
-    font_size = 18
-    icon_size = 22
-
-    bar_font_size = 28
-
     is_display_tablet = True if os.uname()[1] in ["mother"] else False
-
-    c_normal = {
-        "BGbase": "#222d32",
-        "FGbase": "#475359",
-        "black": "#01060e",
-        "red": "#ff5252",
-        "green": "#4db69f",
-        "yellow": "#c9bc0e",
-        "blue": "#008fc2",
-        "magenta": "#cf00ac",
-        "cyan": "#02adc7",
-        "white": "#cfd8dc",
-        "clear": "#00000000",
-    }
-    c_bright = {
-        "bblack": "#475359",
-        "bred": "#ff4f4d",
-        "bgreen": "#56d6ba",
-        "byellow": "#c9c30e",
-        "bblue": "#c9c30e",
-        "bmagenta": "#9c0082",
-        "bcyan": "#02b7c7",
-        "bwhite": "#a7b0b5",
-    }
 
     dgroups_key_binder = None
     dgroups_app_rules = []  # type: list
@@ -96,4 +91,8 @@ class Global:
     wmname = "LG3D"
 
 
-GLOBAL = Global()
+PinPConf = PinPConfig()
+FontConf = FontConfig()
+BarConf = BarConfig()
+WindowConf = WindowConfig()
+GlobalConf = Global()
