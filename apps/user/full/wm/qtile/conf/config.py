@@ -2,14 +2,14 @@
 
 from libqtile.log_utils import logger
 
-from my_modules import startup, wallpaper
-from my_modules.groups import groups
-from my_modules.keymap import keys, mouse
-from my_modules.layouts import floating_layout
-from my_modules.screen import make_screens
+from my_modules import groups, keymap, layouts, screens, startup, wallpaper
 from my_modules.variables import GlobalConf, set_bar_default
 
-screens = make_screens()
+groups = groups.set_groups()
+floating_layout = layouts.set_floating_layout()
+screens = screens.make_screens()
+keys = keymap.set_keys()
+mouse = keymap.set_mouse()
 
 dgroups_key_binder = GlobalConf.dgroups_key_binder
 dgroups_app_rules = GlobalConf.dgroups_app_rules

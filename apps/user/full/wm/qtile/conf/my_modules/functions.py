@@ -8,9 +8,10 @@ from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
+from my_modules import groups, screens
 from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, group_and_rule
-from my_modules.utils import get_n_screen
+from my_modules.utils import get_phy_monitors
 from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
 PINP_WINDOW = None
@@ -299,34 +300,34 @@ def move_n_screen_group(qtile, idx):
 @lazy.function
 def focus_cycle_screen(qtile, backward=False, pentablet=False):
     idx = qtile.current_screen.index
-    n_screen = get_n_screen()
+    monitors = GlobalConf.monitors
     if pentablet:
-        if idx < n_screen:
-            to_idx = n_screen
+        if idx < monitors:
+            to_idx = monitors
         else:
             to_idx = 0
     else:
         if backward:
-            to_idx = n_screen - 1 if idx == 0 else idx - 1
+            to_idx = monitors - 1 if idx == 0 else idx - 1
         else:
-            to_idx = 0 if idx + 1 == n_screen else idx + 1
+            to_idx = 0 if idx + 1 == monitors else idx + 1
     qtile.to_screen(to_idx)
 
 
 @lazy.function
 def move_cycle_screen(qtile, backward=False):
     idx = qtile.current_screen.index
-    n_screen = get_n_screen()
-    if idx <= n_screen:
+    monitors = GlobalConf.monitors
+    if idx <= monitors:
         if backward:
-            to_idx = n_screen - 1 if idx == 0 else idx - 1
+            to_idx = monitors - 1 if idx == 0 else idx - 1
             to_group = qtile.groups.index(qtile.current_screen.group) - GROUP_PER_SCREEN
-            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * n_screen)
+            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * monitors)
 
         else:
-            to_idx = 0 if idx + 1 == n_screen else idx + 1
+            to_idx = 0 if idx + 1 == monitors else idx + 1
             to_group = qtile.groups.index(qtile.current_screen.group) + GROUP_PER_SCREEN
-            to_group = to_group if to_group < GROUP_PER_SCREEN * n_screen else to_group - (GROUP_PER_SCREEN * n_screen)
+            to_group = to_group if to_group < GROUP_PER_SCREEN * monitors else to_group - (GROUP_PER_SCREEN * monitors)
         group = qtile.groups[to_group]
         qtile.current_window.togroup(group.name)
         qtile.to_screen(to_idx)
@@ -336,39 +337,16 @@ def move_cycle_screen(qtile, backward=False):
 @lazy.function
 def to_from_pentablet(qtile):
     idx = qtile.current_screen.index
-    if GlobalConf.has_pentablet:
-        n_screen = get_n_screen()
-        if idx == n_screen:
-            to_idx = list(group_and_rule.keys()).index("full")
-            group = qtile.groups[to_idx]
-            qtile.current_window.togroup(group.name)
-            qtile.to_screen(0)
-            qtile.current_screen.set_group(group)
-        else:
-            qtile.current_window.togroup(qtile.groups[-2].name)
-            qtile.to_screen(n_screen)
-
-
-@lazy.function
-def attach_screen(qtile, pos):
-    if pos == "delete":
-        subprocess.run("xrandr --output HDMI-A-0 --off", shell=True)
-        subprocess.run(
-            "feh --bg-fill {}".format(GlobalConf.home.joinpath("Pictures", "wallpapers", "main01.jpg")),
-            shell=True,
-        )
+    monitors = GlobalConf.monitors
+    if idx == monitors:
+        to_idx = list(group_and_rule.keys()).index("full")
+        group = qtile.groups[to_idx]
+        qtile.current_window.togroup(group.name)
+        qtile.to_screen(0)
+        qtile.current_screen.set_group(group)
     else:
-        subprocess.run(
-            "xrandr --output eDP --auto --output HDMI-A-0 --auto --{} eDP".format(pos),
-            shell=True,
-        )
-        subprocess.run(
-            "feh --bg-fill {} --bg-fill {}".format(
-                GlobalConf.home.joinpath("Pictures", "wallpapers", "main01.jpg"),
-                GlobalConf.home.joinpath("Pictures", "wallpapers", "main02.jpg"),
-            ),
-            shell=True,
-        )
+        qtile.current_window.togroup(qtile.groups[-2].name)
+        qtile.to_screen(monitors)
 
 
 @lazy.function
@@ -380,9 +358,24 @@ def capture_screen(qtile, is_clipboard=False):
         qtile.spawn("flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
 
 
-@hook.subscribe.client_new
-def _kde_connect(win):
-    if win.name == "KDE Connect Daemon":
-        s = qtile.current_screen
-        win.cmd_static(s.index, 0, 0, 0, 0)
-        win.cmd_place(s.x, s.y, s.width, s.height, borderwidth=0, bordercolor=None, above=False, margin=None)
+@lazy.function
+def attach_screen(qtile, pos):
+    if pos == "delete":
+        active_phy_monitors = get_phy_monitors(GlobalConf.has_pentablet, activate_only=True)
+        if not len(active_phy_monitors) > 1:
+            subprocess.run(f"xrandr --output {active_phy_monitors[-1][0]} --off", shell=True)
+    else:
+        cmd = "xrandr"
+        phy_monitors = get_phy_monitors(GlobalConf.has_pentablet)
+        for i, (output, resolution) in enumerate(phy_monitors):
+            cmd += f" --output {output} --auto"
+            if i != 0:
+                cmd += f" --{pos} {phy_monitors[i - 1][0]}"
+        subprocess.run(cmd, shell=True)
+
+
+@hook.subscribe.screen_change
+def screen_change(event):
+    GlobalConf.update_monitors()
+    qtile.screens = screens.make_screens()
+    qtile.groups = groups.set_groups()

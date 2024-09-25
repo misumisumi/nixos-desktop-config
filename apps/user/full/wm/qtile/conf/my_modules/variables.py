@@ -1,12 +1,14 @@
 """This is Global config"""
 
 import os
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Union
+from typing import Optional, Union
 
 from libqtile.log_utils import logger
 
+from my_modules import utils
 from my_modules.colorset import ColorSet
 
 
@@ -47,37 +49,33 @@ class WindowConfig:
 
 @dataclass
 class Global:
-    laptop = Path("/sys/class/power_supply/BAT0").exists()
+    monitors: int = 1
+    laptop: bool = Path("/sys/class/power_supply/BAT0").exists()
 
-    mod = "mod1"  # super key is 'mod4', alt is 'mod1'
-    terminal = "wezterm"
-    terminal_class = "org.wezfurlong.wezterm"
+    mod: str = "mod1"  # super key is 'mod4', alt is 'mod1'
+    terminal: str = "wezterm"
+    terminal_class: str = "org.wezfurlong.wezterm"
 
-    home = Path.home()
-    capture_path = home.joinpath("Pictures", "screenshot")
+    home: Path = Path.home()
+    capture_path: Path = home.joinpath("Pictures", "screenshot")
     if not capture_path.exists():
         os.mkdir(capture_path)
-    if laptop:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "fixed").glob("*.png"))
-    else:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png"))
-    wallpapers.sort()
-    screen_saver = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
+    wallpapers: list[str] = field(init=False)
+    screen_saver: str = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
 
-    has_pentablet = True if os.uname()[1] in ["mother"] else False
+    has_pentablet: bool = True if os.uname()[1] in ["mother"] else False
 
-    dgroups_key_binder = None
-    dgroups_app_rules = []  # type: list
-    follow_mouse_focus = False
-    bring_front_click = "floating_only"
-    cursor_warp = False
-    auto_fullscreen = True
-    focus_on_window_activation = "smart"
-    reconfigure_screens = True
-
+    auto_fullscreen: bool = True
+    bring_front_click: str = "floating_only"
+    cursor_warp: bool = False
+    dgroups_app_rules: list = field(default_factory=lambda: [])
+    dgroups_key_binder: Optional = field(default_factory=lambda: None)
+    focus_on_window_activation: str = "smart"
+    follow_mouse_focus: bool = False
+    reconfigure_screens: bool = True
     # If things like steam games want to auto-minimize themselves when losing
     # focus, should we respect this or not?
-    auto_minimize = True
+    auto_minimize: bool = True
 
     # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
     # string besides java UI toolkits; you can see several discussions on the
@@ -87,7 +85,14 @@ class Global:
     #
     # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
     # java that happens to be on java's whitelist.
-    wmname = "LG3D"
+    wmname: str = "LG3D"
+
+    def __post_init__(self):
+        self.wallpapers = utils.get_wallpapers(self.home, self.laptop)
+        self.update_monitors()
+
+    def update_monitors(self):
+        self.monitors = utils.get_n_monitors(self.has_pentablet)
 
 
 PinPConf = PinPConfig()

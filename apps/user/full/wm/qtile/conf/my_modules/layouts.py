@@ -62,17 +62,19 @@ layout4 = [
     layout.Max(margin=0),
 ]
 
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,  # アスペクト比固定のものでもタイリングさせる
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="pentablet"),
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ],
-    **_floating_settings,
-)
+
+def set_floating_layout():
+    return layout.Floating(
+        float_rules=[
+            # Run the utility of `xprop` to see the wm class and name of an X client.
+            *layout.Floating.default_float_rules,  # アスペクト比固定のものでもタイリングさせる
+            Match(wm_class="confirmreset"),  # gitk
+            Match(wm_class="makebranch"),  # gitk
+            Match(wm_class="maketag"),  # gitk
+            Match(wm_class="ssh-askpass"),  # ssh-askpass
+            Match(wm_class="pentablet"),
+            Match(title="branchdialog"),  # gitk
+            Match(title="pinentry"),  # GPG key password entry
+        ],
+        **_floating_settings,
+    )

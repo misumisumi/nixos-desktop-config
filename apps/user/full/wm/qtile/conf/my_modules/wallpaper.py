@@ -8,19 +8,18 @@ from libqtile.log_utils import logger
 from my_modules.groups import group_and_rule
 from my_modules.variables import GlobalConf
 
-MONITOR0 = 0
-MONITOR1 = 0
-MONITOR2 = 0
+MONITORS = {}
+cmd = "feh"
+for i in range(GlobalConf.monitors):
+    MONITORS[f"MONITOR{i}"] = 0
+    cmd += r" --bg-fill {}"
 
-# 壁紙の割当
 
-
+# 壁紙の割当(ラップトップはバッテリーの観点から固定)
 @hook.subscribe.setgroup
 def change_wallpaper():
-    if len(qtile.screens) == 3:
-        global MONITOR0
-        global MONITOR1
-        global MONITOR2
+    if not GlobalConf.laptop:
+        global MONITORS
         group = qtile.current_screen.group
         gidx = qtile.groups.index(group)
         if qtile.current_screen in qtile.screens:
@@ -28,15 +27,8 @@ def change_wallpaper():
             n_groups = len(group_and_rule)
             if gidx >= n_groups:
                 gidx -= n_groups * idx
-            if idx == 0:
-                MONITOR0 = gidx
-            elif idx == 1:
-                MONITOR1 = gidx
+            MONITORS[f"MONITOR{idx}"] = gidx
             subprocess.run(
-                "feh --bg-fill {} --bg-fill {} --bg-fill {}".format(
-                    str(GlobalConf.wallpapers[MONITOR0]),
-                    str(GlobalConf.wallpapers[MONITOR1]),
-                    str(GlobalConf.wallpapers[MONITOR2]),
-                ),
+                cmd.format(*[GlobalConf.wallpapers[MONITORS[f"MONITOR{i}"]] for i in range(GlobalConf.monitors)]),
                 shell=True,
             )

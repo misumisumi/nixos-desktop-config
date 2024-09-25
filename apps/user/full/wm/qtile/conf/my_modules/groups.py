@@ -8,7 +8,7 @@ from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
 
 from my_modules.layouts import layout1, layout2, layout3, layout4
-from my_modules.utils import get_n_screen
+from my_modules.utils import get_n_monitors
 from my_modules.variables import GlobalConf
 
 _rule_code = [
@@ -118,10 +118,10 @@ _pentablet = {"creation": ("󰂫", layout4)}
 GROUP_PER_SCREEN = len(group_and_rule)
 
 
-def _set_groups():
+def set_groups():
     groups = []
-    n_screen = get_n_screen()
-    for n in range(n_screen):
+    n_monitors = get_n_monitors(GlobalConf.has_pentablet)
+    for n in range(n_monitors):
         for k, (label, layouts, rules) in group_and_rule.items():
             if n == 1 and len(layouts) > 1:
                 layouts = layouts[1]
@@ -142,6 +142,3 @@ def _set_groups():
     groups.append(ScratchPad("scratchpad", _rule_scratchpad))
 
     return groups
-
-
-groups = _set_groups()
