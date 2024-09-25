@@ -99,12 +99,14 @@ keys = [
         F.keep_pinp(),
         F.update_pinp_screen_idx(),
     ),
+    Key([GlobalConf.mod], "t", F.focus_cycle_screen(pentablet=True), desc="forcus pentablet"),
     Key(
         [GlobalConf.mod, "shift"],
         "t",
-        F.to_from_display_tablet(),
+        F.to_from_pentablet(),
         F.keep_pinp(),
         F.update_pinp_screen_idx(),
+        desc="move window to pentablet",
     ),
     # Toggle Float and FullScreen
     Key([GlobalConf.mod], "f", lazy.window.toggle_floating()),

@@ -9,7 +9,7 @@ from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
 from my_modules.colorset import ColorSet
-from my_modules.groups import GROUP_PER_SCREEN, _group_and_rule
+from my_modules.groups import GROUP_PER_SCREEN, group_and_rule
 from my_modules.utils import get_n_screen
 from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
@@ -297,13 +297,19 @@ def move_n_screen_group(qtile, idx):
 
 
 @lazy.function
-def focus_cycle_screen(qtile, backward=False):
-    n_screen = get_n_screen()
+def focus_cycle_screen(qtile, backward=False, pentablet=False):
     idx = qtile.current_screen.index
-    if backward:
-        to_idx = n_screen - 1 if idx == 0 else idx - 1
+    n_screen = get_n_screen()
+    if pentablet:
+        if idx < n_screen:
+            to_idx = n_screen
+        else:
+            to_idx = 0
     else:
-        to_idx = 0 if idx + 1 == n_screen else idx + 1
+        if backward:
+            to_idx = n_screen - 1 if idx == 0 else idx - 1
+        else:
+            to_idx = 0 if idx + 1 == n_screen else idx + 1
     qtile.to_screen(to_idx)
 
 
@@ -328,12 +334,12 @@ def move_cycle_screen(qtile, backward=False):
 
 
 @lazy.function
-def to_from_display_tablet(qtile):
+def to_from_pentablet(qtile):
     idx = qtile.current_screen.index
     if GlobalConf.has_pentablet:
         n_screen = get_n_screen()
         if idx == n_screen:
-            to_idx = list(_group_and_rule.keys()).index("full")
+            to_idx = list(group_and_rule.keys()).index("full")
             group = qtile.groups[to_idx]
             qtile.current_window.togroup(group.name)
             qtile.to_screen(0)

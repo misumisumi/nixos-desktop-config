@@ -53,7 +53,7 @@ _rule_media = [
     {"wm_class": ".blueman-manager-wrapped"},
 ]
 
-_group_and_rule = {
+group_and_rule = {
     "code": ("", (layout2, layout3), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
     "analyze": ("󰉕", (layout1,), _rule_analyze),
@@ -113,16 +113,16 @@ class MatchWithCurrentScreen(Match):
         return True
 
 
-_display_tablet = {"creation": ("󰂫", layout4)}
+_pentablet = {"creation": ("󰂫", layout4)}
 
-GROUP_PER_SCREEN = len(_group_and_rule)
+GROUP_PER_SCREEN = len(group_and_rule)
 
 
 def _set_groups():
     groups = []
     n_screen = get_n_screen()
     for n in range(n_screen):
-        for k, (label, layouts, rules) in _group_and_rule.items():
+        for k, (label, layouts, rules) in group_and_rule.items():
             if n == 1 and len(layouts) > 1:
                 layouts = layouts[1]
             else:
@@ -131,12 +131,12 @@ def _set_groups():
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
             groups.append(Group(name, layouts=layouts, matches=matches, label=label))
     if GlobalConf.has_pentablet:
-        name = list(_display_tablet.keys())[0]
+        name = list(_pentablet.keys())[0]
         groups.append(
             Group(
                 "{}".format(name),
-                layouts=_display_tablet[name][1],
-                label=_display_tablet[name][0],
+                layouts=_pentablet[name][1],
+                label=_pentablet[name][0],
             )
         )
     groups.append(ScratchPad("scratchpad", _rule_scratchpad))

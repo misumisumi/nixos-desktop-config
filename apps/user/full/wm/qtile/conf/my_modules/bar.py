@@ -11,7 +11,7 @@ from libqtile.log_utils import logger
 from qtile_extras import widget
 
 from my_modules.colorset import ColorSet
-from my_modules.variables import FontConf, GlobalConf, WindowConf
+from my_modules.variables import BarConf, FontConf, GlobalConf, WindowConf
 
 
 @dataclass
@@ -201,33 +201,47 @@ def chord():
 def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False) -> tuple:
     top_widgets = []
     if pentablet:
+        top_widgets += lifeinfo()
         top_widgets += spacer()
         top_widgets += tasklist()
-        top_widgets += spacer()
-        return top_widgets, None
-    top_widgets += groupbox()
-    if under_fhd:
         top_widgets += spacer()
     else:
-        top_widgets += spacer(length=50)
-        top_widgets += tasklist()
-        top_widgets += spacer(length=20)
-    top_widgets += lifeinfo()
-    top_widgets += spacer()
-    top_widgets += spacer(length=5)
-    top_widgets += chord()
+        top_widgets += groupbox()
+        if under_fhd:
+            top_widgets += spacer()
+        else:
+            top_widgets += spacer(length=50)
+            top_widgets += tasklist()
+            top_widgets += spacer(length=20)
+        top_widgets += lifeinfo()
+        top_widgets += spacer()
+        top_widgets += spacer(length=5)
+        top_widgets += chord()
 
-    if not under_fhd:
-        top_widgets += spacer(length=10)
-        top_widgets += sysinfo()
-        top_widgets += spacer(length=20)
-    top_widgets += sysctrl(is_tray)
+        if not under_fhd:
+            top_widgets += spacer(length=10)
+            top_widgets += sysinfo()
+            top_widgets += spacer(length=20)
+        top_widgets += sysctrl(is_tray)
 
-    if under_fhd:
+    top_bar = bar.Bar(
+        top_widgets,
+        BarConf.size,
+        background=ColorSet.transparent,
+        margin=BarConf.top_bar_margin,
+    )
+
+    if under_fhd and not pentablet:
         bottom_widgets = tasklist()
         bottom_widgets += spacer(length=20)
         bottom_widgets += sysinfo()
+        bottom_bar = bar.Bar(
+            bottom_widgets,
+            BarConf.size,
+            background=ColorSet.transparent,
+            margin=BarConf.bottom_bar_margin,
+        )
     else:
-        bottom_widgets = None
+        bottom_bar = None
 
-    return top_widgets, bottom_widgets
+    return top_bar, bottom_bar

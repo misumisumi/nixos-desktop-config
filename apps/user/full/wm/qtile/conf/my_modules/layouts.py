@@ -59,16 +59,7 @@ layout3 = [
 ]
 # For full
 layout4 = [
-    # layout.TreeTab(
-    #     active_bg=ColorSet.bblack,
-    #     bg_color=ColorSet.background,
-    #     font=FontConfig.font,
-    #     sections=["WS{}".format(i) for i in range(1, 6)],
-    #     level_shift=20,
-    #     fontsize=FontConfig.fontsize,
-    #     section_fontsize=FontConfig.fontsize,
-    # ),
-    layout.Max(**_settings),
+    layout.Max(margin=0),
 ]
 
 floating_layout = layout.Floating(

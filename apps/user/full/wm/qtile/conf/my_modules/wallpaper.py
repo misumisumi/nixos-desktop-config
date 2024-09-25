@@ -5,7 +5,7 @@ import subprocess
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
 
-from my_modules.groups import _group_and_rule
+from my_modules.groups import group_and_rule
 from my_modules.variables import GlobalConf
 
 MONITOR0 = 0
@@ -25,7 +25,7 @@ def change_wallpaper():
         gidx = qtile.groups.index(group)
         if qtile.current_screen in qtile.screens:
             idx = qtile.screens.index(qtile.current_screen)
-            n_groups = len(_group_and_rule)
+            n_groups = len(group_and_rule)
             if gidx >= n_groups:
                 gidx -= n_groups * idx
             if idx == 0:

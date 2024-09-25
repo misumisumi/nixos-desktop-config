@@ -1,13 +1,12 @@
 """start up hooks"""
 
 import subprocess
-from pathlib import Path
 
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
 
+from my_modules.groups import group_and_rule
 from my_modules.variables import GlobalConf
-from my_modules.wallpaper import MONITOR0, MONITOR1, MONITOR2
 
 
 # 擬似的に各スクリーンにグループが割り当てられるようにするための初期化
@@ -16,7 +15,7 @@ def init_screen_and_group():
     for i, _ in enumerate(qtile.screens):
         qtile.focus_screen(i)
         qtile.current_screen.set_group(qtile.groups[count])
-        count += 7
+        count += len(group_and_rule.keys())
     qtile.focus_screen(0)
 
 
