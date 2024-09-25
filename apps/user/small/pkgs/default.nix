@@ -1,18 +1,20 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  ...
 }:
 let
-  pythonPkgs = ps:
-    with ps; [
+  pythonPkgs =
+    ps: with ps; [
       numpy
     ];
 in
 {
   home = {
-    packages = with pkgs;[
+    packages = with pkgs; [
       (python3.withPackages pythonPkgs)
       cloc # A program that counts lines of source code
-      convmv #convert encoding
+      convmv # convert encoding
+      mosh # Mobile Shell
       tty-clock # CLI clock
       unar # An archive unpacker program
     ];

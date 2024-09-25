@@ -14,16 +14,11 @@
       curl # Downloader
       dig # Domain name server
       duf # Show storage usage
-      fd # fast find
       gptfdisk # GPT partition tools
       iperf3 # Network speed test tool
-      jq # JSON processor
       killall # Process killer
       lsof # check port
-      mosh # Mobile Shell
-      neofetch # Fetch system info
       progress # Show progress of coreutils programs
-      ripgrep # fast grep
       traceroute # Track the network route
       tree # Show file tree
       unzip
