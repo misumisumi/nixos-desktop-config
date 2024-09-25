@@ -54,9 +54,13 @@ def spacer(length=bar.STRETCH):
     return [widget.Spacer(length=length, background=ColorSet.transparent, padding=0)]
 
 
+def separator():
+    return [widget.Sep(linewidth=0, padding=2, background=ColorSet.transparent)]
+
+
 def groupbox():
     return [
-        widget.TextBox(padding=5, **only_one_group),
+        widget.TextBox(padding=2, **only_one_group),
         widget.GroupBox(
             this_current_screen_border=ColorSet.cyan,
             this_screen_border=ColorSet.blue,
@@ -65,12 +69,12 @@ def groupbox():
             use_mouse_wheel=False,
             highlight_method="line",
             active=ColorSet.white,
-            margin_x=1,
+            margin_x=3,
             margin_y=3,
             **fc,
             **only_one_group,
         ),
-        widget.TextBox(padding=5, **only_one_group),
+        widget.TextBox(padding=2, **only_one_group),
     ]
 
 
@@ -125,7 +129,8 @@ def sysctrl(is_tray=False):
         base += [
             widget.UPowerWidget(),
         ]
-        if not len(list(Path("/sys/class/backlight/").glob("*"))) == 0:
+        backlight = list(Path("/sys/class/backlight/").glob("*"))
+        if not len(backlight) == 0:
             base += [
                 widget.Backlight(
                     fmt="  {}",
@@ -160,44 +165,6 @@ def lifeinfo():
     ]
 
 
-def systray():
-    return [
-        widget.Sep(linewidth=0, padding=10, background=ColorSet.transparent),
-        widget.TextBox(padding=0, **only_one_group),
-        widget.StatusNotifier(
-            icon_theme="Papirus-Dark",
-            **only_one_group,
-        ),
-        widget.TextBox(padding=0, **only_one_group),
-    ]
-
-
-backlight = list(Path("/sys/class/backlight/").glob("*"))
-if not len(backlight) == 0:
-    backlight = widget.Backlight(
-        fmt="  {}",
-        backlight_name=backlight[0],
-        # **bcs.colorset2,
-        **fc,
-    )
-
-battery = widget.Battery(
-    format="{char} {percent:2.0%}",
-    charge_char="󰂄",
-    discharge_char="󰂁",
-    empty_char="󰁻",
-    full_chal="󰂂",
-    unknown_char="󰂃",
-    **fc,
-)
-
-
-def chord():
-    return [
-        widget.Chord(**fc, **only_one_group),
-    ]
-
-
 def tasklist():
     def parse_text(text):
         max_char = 10
@@ -216,7 +183,6 @@ def tasklist():
             txt_minimized=" ",
             txt_maximized=" ",
             highlight_method="block",
-            unfocused_border="block",
             parse_text=parse_text,
             borderwidth=WindowConf.border,
             padding=3,
@@ -228,92 +194,40 @@ def tasklist():
     ]
 
 
-def separator():
-    return [widget.Sep(linewidth=0, padding=2, background=ColorSet.transparent)]
+def chord():
+    return [widget.Chord(**fc, **only_one_group)]
 
 
-def make_bar(is_tray=False):
+def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False) -> tuple:
     top_widgets = []
+    if pentablet:
+        top_widgets += spacer()
+        top_widgets += tasklist()
+        top_widgets += spacer()
+        return top_widgets, None
     top_widgets += groupbox()
-    # if not (GlobalConf.under_fhd or GlobalConf.vm):
-    #     top_widgets += [
-    #         _separator(),
-    #         # _left_corner(**bcs.colorset1),
-    #         cpu,
-    #         # _rignt_corner(**bcs.colorset1),
-    #         memory,
-    #         # _rignt_corner(**bcs.colorset2),
-    #         df,
-    #         # _rignt_corner(**bcs.colorset1),
-    #         # widget.Spacer(),
-    #     ]
-    top_widgets += spacer(length=50)
-    if not GlobalConf.under_fhd:
+    if under_fhd:
+        top_widgets += spacer()
+    else:
+        top_widgets += spacer(length=50)
         top_widgets += tasklist()
         top_widgets += spacer(length=20)
     top_widgets += lifeinfo()
     top_widgets += spacer()
-
     top_widgets += spacer(length=5)
     top_widgets += chord()
-    top_widgets += spacer(length=10)
 
-    top_widgets += sysinfo()
-    top_widgets += spacer(length=20)
+    if not under_fhd:
+        top_widgets += spacer(length=10)
+        top_widgets += sysinfo()
+        top_widgets += spacer(length=20)
     top_widgets += sysctrl(is_tray)
-    # if is_tray:
-    #     top_widgets += separator()
-    #     top_widgets += systray()
-    # else:
-    #     top_widgets += spacer()
 
-    if GlobalConf.under_fhd or GlobalConf.vm:
-        bottom_widgets = sysinfo()
-        bottom_widgets += separator()
-        bottom_widgets += tasklist()
-        if GlobalConf.laptop:
-            bottom_widgets += [
-                backlight,
-                # _rignt_corner(**bcs.colorset1),
-                battery,
-                # _rignt_corner(**bcs.colorset2),
-            ]
-        bottom_widgets += [
-            widget.CurrentScreen(
-                active_color=ColorSet.magenta,
-                inactive_color=ColorSet.background,
-                inactive_text="N",
-                **bcs.colorset2,
-                **fc,
-            ),
-            # _rignt_corner(**bcs.colorset7),
-        ]
+    if under_fhd:
+        bottom_widgets = tasklist()
+        bottom_widgets += spacer(length=20)
+        bottom_widgets += sysinfo()
     else:
         bottom_widgets = None
 
     return top_widgets, bottom_widgets
-
-
-def set_bar_default():
-    default_background = {
-        "colour": ColorSet.transparent,
-        "radius": 5,
-        "filled": True,
-        "padding_y": 0,
-        "padding_x": 0,
-        "group": True,
-        "use_widget_background": True,
-    }
-    widget_defaults = dict(
-        font=FontConf.font,
-        background=ColorSet.background,
-        foreground=ColorSet.foreground,
-        fontsize=FontConf.fontsize,
-        padding_x=3,
-        padding_y=2,
-        # decorations=[widget.decorations.RectDecoration(**default_background)],
-    )
-
-    extension_defaults = widget_defaults.copy()
-
-    return default_background, widget_defaults, extension_defaults

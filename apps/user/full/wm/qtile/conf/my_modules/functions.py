@@ -10,6 +10,7 @@ from libqtile.log_utils import logger
 
 from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, _group_and_rule
+from my_modules.utils import get_n_screen
 from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
 PINP_WINDOW = None
@@ -297,7 +298,7 @@ def move_n_screen_group(qtile, idx):
 
 @lazy.function
 def focus_cycle_screen(qtile, backward=False):
-    n_screen = GlobalConf.num_screen + 1 if GlobalConf.is_display_tablet else GlobalConf.num_screen
+    n_screen = get_n_screen()
     idx = qtile.current_screen.index
     if backward:
         to_idx = n_screen - 1 if idx == 0 else idx - 1
@@ -309,23 +310,17 @@ def focus_cycle_screen(qtile, backward=False):
 @lazy.function
 def move_cycle_screen(qtile, backward=False):
     idx = qtile.current_screen.index
-    if GlobalConf.is_display_tablet and idx == GlobalConf.num_screen:
-        pass
-    else:
-        n_screen = GlobalConf.num_screen
+    n_screen = get_n_screen()
+    if idx <= n_screen:
         if backward:
             to_idx = n_screen - 1 if idx == 0 else idx - 1
             to_group = qtile.groups.index(qtile.current_screen.group) - GROUP_PER_SCREEN
-            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * GlobalConf.num_screen)
+            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * n_screen)
 
         else:
             to_idx = 0 if idx + 1 == n_screen else idx + 1
             to_group = qtile.groups.index(qtile.current_screen.group) + GROUP_PER_SCREEN
-            to_group = (
-                to_group
-                if to_group < GROUP_PER_SCREEN * GlobalConf.num_screen
-                else to_group - (GROUP_PER_SCREEN * GlobalConf.num_screen)
-            )
+            to_group = to_group if to_group < GROUP_PER_SCREEN * n_screen else to_group - (GROUP_PER_SCREEN * n_screen)
         group = qtile.groups[to_group]
         qtile.current_window.togroup(group.name)
         qtile.to_screen(to_idx)
@@ -335,17 +330,17 @@ def move_cycle_screen(qtile, backward=False):
 @lazy.function
 def to_from_display_tablet(qtile):
     idx = qtile.current_screen.index
-    if GlobalConf.is_display_tablet:
-        if idx == GlobalConf.num_screen:
+    if GlobalConf.has_pentablet:
+        n_screen = get_n_screen()
+        if idx == n_screen:
             to_idx = list(_group_and_rule.keys()).index("full")
             group = qtile.groups[to_idx]
-            # logger.warning(group)
             qtile.current_window.togroup(group.name)
             qtile.to_screen(0)
             qtile.current_screen.set_group(group)
         else:
             qtile.current_window.togroup(qtile.groups[-2].name)
-            qtile.to_screen(GlobalConf.num_screen)
+            qtile.to_screen(n_screen)
 
 
 @lazy.function
@@ -374,9 +369,9 @@ def attach_screen(qtile, pos):
 def capture_screen(qtile, is_clipboard=False):
     idx = qtile.current_screen.index
     if is_clipboard:
-        Qtile.cmd_spawn(qtile, "flameshot screen -n {} -c".format(idx))
+        qtile.spawn("flameshot screen -n {} -c".format(idx))
     else:
-        Qtile.cmd_spawn(qtile, "flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
+        qtile.spawn("flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
 
 
 @hook.subscribe.client_new

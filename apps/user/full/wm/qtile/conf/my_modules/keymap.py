@@ -1,6 +1,6 @@
 """short cut keys"""
 
-from libqtile.config import Click, Drag, Key, KeyChord
+from libqtile.config import Drag, Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
@@ -135,7 +135,8 @@ keys = [
     # Toggle copyq and calculator
     Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
     Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
-    Key([GlobalConf.mod], "s", lazy.spawn("copyq toggle")),
+    # Key([GlobalConf.mod], "s", lazy.spawn("copyq toggle")),
+    Key([GlobalConf.mod], "s", lazy.layout.toggle_auto_maximize()),
     Key(
         [GlobalConf.mod],
         "equal",

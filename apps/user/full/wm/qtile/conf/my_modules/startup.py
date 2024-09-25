@@ -22,16 +22,13 @@ def init_screen_and_group():
 
 @hook.subscribe.startup_once
 def autostart():
-    if GlobalConf.vm:
-        subprocess.run("feh --bg-fill {}".format(GlobalConf.wallpapers[0]), shell=True)
-    else:
-        args = []
-        for i, _ in enumerate(qtile.screens):
-            args.append(f"--bg-fill {GlobalConf.wallpapers[i]}")
-        subprocess.run(
-            "feh " + " ".join(args),
-            shell=True,
-        )
+    args = []
+    for i, _ in enumerate(qtile.screens):
+        args.append(f"--bg-fill {GlobalConf.wallpapers[i]}")
+    subprocess.run(
+        "feh " + " ".join(args),
+        shell=True,
+    )
     init_screen_and_group()
 
 

@@ -8,9 +8,10 @@ from my_modules.colorset import ColorSet
 from my_modules.variables import FontConfig, WindowConf
 
 _settings = {
-    "border_width": WindowConf.border,
     "border_focus": ColorSet.cyan,
     "border_normal": ColorSet.background,
+    "border_width": WindowConf.border,
+    "margin": WindowConf.margin,
 }
 
 _floating_settings = {
@@ -28,7 +29,6 @@ layout1 = [
         fair=False,
         num_columns=2,
         insert_position=1,
-        margin=WindowConf.margin,
         margin_on_single=WindowConf.margin,
         split=False,
     ),
@@ -41,21 +41,9 @@ layout2 = [
         ratio=0.65,
         new_client_position="after_current",
         single_border_width=WindowConf.border,
-        margin=WindowConf.margin,
         single_margin=WindowConf.margin,
     ),
-    layout.Columns(
-        **_settings,
-        border_focus_stack=ColorSet.cyan,
-        border_normal_stack=ColorSet.background,
-        border_on_single=True,
-        fair=False,
-        num_columns=2,
-        insert_position=1,
-        margin=WindowConf.margin,
-        margin_on_single=WindowConf.margin,
-        split=False,
-    ),
+    layout.Max(**_settings),
 ]
 
 layout3 = [
@@ -65,33 +53,22 @@ layout3 = [
         ratio=0.65,
         new_client_position="bottom",
         single_border_width=WindowConf.border,
-        margin=WindowConf.margin,
         single_margin=WindowConf.margin,
     ),
-    layout.Columns(
-        **_settings,
-        border_focus_stack=ColorSet.cyan,
-        border_normal_stack=ColorSet.background,
-        border_on_single=True,
-        fair=False,
-        num_columns=2,
-        insert_position=1,
-        margin=WindowConf.margin,
-        margin_on_single=WindowConf.margin,
-        split=False,
-    ),
+    layout.Max(**_settings),
 ]
 # For full
 layout4 = [
-    layout.TreeTab(
-        active_bg=ColorSet.bblack,
-        bg_color=ColorSet.background,
-        font=FontConfig.font,
-        sections=["WS{}".format(i) for i in range(1, 6)],
-        level_shift=20,
-        fontsize=FontConfig.fontsize,
-        section_fontsize=FontConfig.fontsize,
-    ),
+    # layout.TreeTab(
+    #     active_bg=ColorSet.bblack,
+    #     bg_color=ColorSet.background,
+    #     font=FontConfig.font,
+    #     sections=["WS{}".format(i) for i in range(1, 6)],
+    #     level_shift=20,
+    #     fontsize=FontConfig.fontsize,
+    #     section_fontsize=FontConfig.fontsize,
+    # ),
+    layout.Max(**_settings),
 ]
 
 floating_layout = layout.Floating(

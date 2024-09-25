@@ -5,8 +5,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Union
 
-from libqtile import qtile
 from libqtile.log_utils import logger
+
+from my_modules.colorset import ColorSet
 
 
 @dataclass
@@ -19,8 +20,8 @@ class FontConfig:
 class BarConfig:
     size: int = 28
     border_width: int = 0
-    top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 5, 20])
-    bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [5, 10, 5, 10])
+    top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 0, 20])
+    bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [0, 10, 5, 10])
     opacity: int = 1
 
 
@@ -46,9 +47,8 @@ class WindowConfig:
 
 @dataclass
 class Global:
-    laptop = os.uname()[1] in ["zephyrus"]
-    under_fhd = os.uname()[1] in ["zephyrus", "stacia"]
-    vm = "general" == os.uname()[1]
+    laptop = Path("/sys/class/power_supply/BAT0").exists()
+
     mod = "mod1"  # super key is 'mod4', alt is 'mod1'
     terminal = "wezterm"
     terminal_class = "org.wezfurlong.wezterm"
@@ -57,15 +57,14 @@ class Global:
     capture_path = home.joinpath("Pictures", "screenshot")
     if not capture_path.exists():
         os.mkdir(capture_path)
-    if laptop or vm:
+    if laptop:
         wallpapers = list(home.joinpath("Pictures", "wallpapers", "fixed").glob("*.png"))
     else:
         wallpapers = list(home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png"))
     wallpapers.sort()
     screen_saver = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
-    num_screen = 1 if os.uname()[1] == "vm" else 2
 
-    is_display_tablet = True if os.uname()[1] in ["mother"] else False
+    has_pentablet = True if os.uname()[1] in ["mother"] else False
 
     dgroups_key_binder = None
     dgroups_app_rules = []  # type: list
@@ -96,3 +95,28 @@ FontConf = FontConfig()
 BarConf = BarConfig()
 WindowConf = WindowConfig()
 GlobalConf = Global()
+
+
+def set_bar_default():
+    default_background = {
+        "colour": ColorSet.transparent,
+        "radius": 5,
+        "filled": True,
+        "padding_y": 0,
+        "padding_x": 0,
+        "group": True,
+        "use_widget_background": True,
+    }
+    widget_defaults = dict(
+        font=FontConf.font,
+        background=ColorSet.background,
+        foreground=ColorSet.foreground,
+        fontsize=FontConf.fontsize,
+        padding_x=0,
+        padding_y=0,
+        # decorations=[widget.decorations.RectDecoration(**default_background)],
+    )
+
+    extension_defaults = widget_defaults.copy()
+
+    return default_background, widget_defaults, extension_defaults

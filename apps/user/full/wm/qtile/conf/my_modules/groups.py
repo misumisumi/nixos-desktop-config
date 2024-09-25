@@ -8,6 +8,7 @@ from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
 
 from my_modules.layouts import layout1, layout2, layout3, layout4
+from my_modules.utils import get_n_screen
 from my_modules.variables import GlobalConf
 
 _rule_code = [
@@ -16,8 +17,6 @@ _rule_code = [
 ]
 
 _rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
-# _rule_paper = {wm_class:"org.pwmt.zathura"}
-_rule_paper = []
 
 _rule_analyze = [
     {"title": "WaveSurfer 1.8.8p5"},
@@ -57,7 +56,6 @@ _rule_media = [
 _group_and_rule = {
     "code": ("", (layout2, layout3), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
-    "paper": ("󱔗", (layout1,), _rule_paper),
     "analyze": ("󰉕", (layout1,), _rule_analyze),
     "full": ("󰓓", (layout4,), _rule_full),
     "sns": ("󰡠", (layout1,), _rule_sns),
@@ -122,8 +120,8 @@ GROUP_PER_SCREEN = len(_group_and_rule)
 
 def _set_groups():
     groups = []
-
-    for n in range(GlobalConf.num_screen):
+    n_screen = get_n_screen()
+    for n in range(n_screen):
         for k, (label, layouts, rules) in _group_and_rule.items():
             if n == 1 and len(layouts) > 1:
                 layouts = layouts[1]
@@ -132,7 +130,7 @@ def _set_groups():
             name = "{}-{}".format(n, k)
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
             groups.append(Group(name, layouts=layouts, matches=matches, label=label))
-    if GlobalConf.is_display_tablet:
+    if GlobalConf.has_pentablet:
         name = list(_display_tablet.keys())[0]
         groups.append(
             Group(
