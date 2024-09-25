@@ -45,15 +45,6 @@ in
   xdg.configFile = {
     "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/${flavor}.dunstrc";
     "yazi/Catppuccin-${flavor}.tmTheme".source = "${pack}/bat/${flavor}.tmTheme";
-    "fcitx5/conf/classicui.conf".text =
-      let
-        mkUpper =
-          str:
-          (lib.toUpper (builtins.substring 0 1 str)) + (builtins.substring 1 (builtins.stringLength str) str);
-      in
-      lib.generators.toINIWithGlobalSection { } {
-        globalSection.Theme = "${builtins.replaceStrings [ "_" ] [ "-" ] flavor}";
-      };
   };
   gtk.theme = {
     name = "Tokyonight-Dark";

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   catppuccin.pointerCursor.enable = true;
-  i18n.inputMethod.fcitx5.catppuccin.enable = true;
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ catppuccin-fcitx5 ];
   programs = {
     alacritty.catppuccin.enable = true;
     bat.catppuccin.enable = true;

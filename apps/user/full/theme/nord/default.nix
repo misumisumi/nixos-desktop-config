@@ -13,4 +13,5 @@
     package = pkgs.dracula-theme;
   };
   services.dunst.settings.global.frame_color = "#02adc7";
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-nord ];
 }
