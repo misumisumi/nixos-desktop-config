@@ -7,12 +7,12 @@
     info.enable = true;
     zsh = {
       sessionVariables = {
-        MANPAGER = "less -R --use-color -Dd+c -Du+b";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       };
     };
     bash = {
       sessionVariables = {
-        MANPAGER = "less -R --use-color -Dd+c -Du+b";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       };
     };
   };

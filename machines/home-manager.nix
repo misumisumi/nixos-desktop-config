@@ -1,40 +1,49 @@
-{ self
-, inputs
-, ...
-}:
+{ self, inputs, ... }:
 let
   settings =
-    { hostname
-    , user
-    , system ? "x86_64-linux"
-    , scheme ? ""
-    , homeDirectory ? ""
-    , useNixOSWallpaper ? true
-    , wm ? "none"
+    {
+      hostname,
+      user,
+      system ? "x86_64-linux",
+      scheme ? "",
+      homeDirectory ? "",
+      useNixOSWallpaper ? true,
+      wm ? "none",
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit self inputs hostname user scheme homeDirectory useNixOSWallpaper wm; };
+      extraSpecialArgs = {
+        inherit
+          self
+          inputs
+          hostname
+          user
+          scheme
+          homeDirectory
+          useNixOSWallpaper
+          wm
+          ;
+      };
       modules = [
-        inputs.nur.nixosModules.nur
-        inputs.sops-nix.homeManagerModules.sops
-        inputs.spicetify-nix.homeManagerModules.default
-
+        inputs.catppuccin.homeManagerModules.catppuccin
         inputs.flakes.homeManagerModules.default
         inputs.nvimdots.homeManagerModules.nvimdots
+        inputs.sops-nix.homeManagerModules.sops
+        inputs.spicetify-nix.homeManagerModules.default
         self.homeManagerModules.dotfiles
         self.homeManagerModules.zinit
         self.homeManagerModules.zotero
-        ({ config, ... }: {
-          imports = [
-            ../settings/user
-          ];
-          dotfilesActivation = true;
-          home.stateVersion = config.home.version.release;
-        })
+        (
+          { config, ... }:
+          {
+            imports = [ ../settings/user ];
+            dotfilesActivation = true;
+            home.stateVersion = config.home.version.release;
+          }
+        )
       ];
     };
 in

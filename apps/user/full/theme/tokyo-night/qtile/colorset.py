@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 @dataclass
 class ColorSet:
-    # define catppuccin-mocha
+    # define tokyo-night
     background: str = "#1a1b26"
     foreground: str = "#c0caf5"
 
     transparent: str = "#00000000"
 
-    black: str = "#1d202f"
+    black: str = "#15161e"
     red: str = "#f7768e"
     green: str = "#9ece6a"
     yellow: str = "#e0af68"

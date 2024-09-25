@@ -1,58 +1,77 @@
-{ self
-, inputs
-, ...
-}:
+{ self, inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
   user = "sumi";
   settings =
-    { hostname
-    , user
-    , system ? "x86_64-linux"
-    , homeDirectory ? ""
-    , scheme ? "minimal"
-    , useNixOSWallpaper ? false
-    , wm ? "qtile"
+    {
+      hostname,
+      user,
+      system ? "x86_64-linux",
+      homeDirectory ? "",
+      scheme ? "minimal",
+      useNixOSWallpaper ? false,
+      wm ? "qtile",
     }:
-      with lib;
-      nixosSystem {
-        inherit system;
-        specialArgs = { inherit self inputs hostname user useNixOSWallpaper wm; }; # specialArgs give some args to modules
-        modules =
-          [
-            inputs.disko.nixosModules.disko
-            inputs.home-manager.nixosModules.home-manager
-            inputs.musnix.nixosModules.musnix
-            inputs.nur.nixosModules.nur
-            inputs.sops-nix.nixosModules.sops
-            self.nixosModules.vfio
-            self.nixosModules.virtualisation
-            self.nixosModules.xp-pentablet
-            (./. + "/${hostname}") # Each machine conf
-            ({ config, ... }: {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit inputs hostname user homeDirectory scheme useNixOSWallpaper wm;
-                };
-                sharedModules = [
-                  inputs.flakes.homeManagerModules.default
-                  inputs.nvimdots.homeManagerModules.nvimdots
-                  inputs.sops-nix.homeManagerModules.sops
-                  inputs.spicetify-nix.homeManagerModules.default
-                  self.homeManagerModules.dotfiles
-                  self.homeManagerModules.zinit
-                  self.homeManagerModules.zotero
-                ];
-                users."${user}" = {
-                  dotfilesActivation = true;
-                  home.stateVersion = config.system.stateVersion;
-                };
+    with lib;
+    nixosSystem {
+      inherit system;
+      specialArgs = {
+        inherit
+          self
+          inputs
+          hostname
+          user
+          useNixOSWallpaper
+          wm
+          ;
+      }; # specialArgs give some args to modules
+      modules = [
+        inputs.catppuccin.nixosModules.catppuccin
+        inputs.disko.nixosModules.disko
+        inputs.home-manager.nixosModules.home-manager
+        inputs.musnix.nixosModules.musnix
+        inputs.nur.nixosModules.nur
+        inputs.sops-nix.nixosModules.sops
+        self.nixosModules.vfio
+        self.nixosModules.virtualisation
+        self.nixosModules.xp-pentablet
+        (./. + "/${hostname}") # Each machine conf
+        (
+          { config, ... }:
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit
+                  inputs
+                  hostname
+                  user
+                  homeDirectory
+                  scheme
+                  useNixOSWallpaper
+                  wm
+                  ;
               };
-            })
-          ];
-      };
+              sharedModules = [
+                inputs.catppuccin.homeManagerModules.catppuccin
+                inputs.flakes.homeManagerModules.default
+                inputs.nvimdots.homeManagerModules.nvimdots
+                inputs.sops-nix.homeManagerModules.sops
+                inputs.spicetify-nix.homeManagerModules.default
+                self.homeManagerModules.dotfiles
+                self.homeManagerModules.zinit
+                self.homeManagerModules.zotero
+              ];
+              users."${user}" = {
+                dotfilesActivation = true;
+                home.stateVersion = config.system.stateVersion;
+              };
+            };
+          }
+        )
+      ];
+    };
 in
 {
   liveimg-gui-full = settings {

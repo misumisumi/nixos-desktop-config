@@ -1,5 +1,6 @@
 # Dunst (notification-daemons) conf
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services = {
     dunst = {
       enable = true;
@@ -19,7 +20,6 @@
           separator_height = 2;
           horizontal_padding = 8;
           frame_width = 3;
-          frame_color = "#02adc7";
           sort = true;
           markup = "full";
           format = "%a:\\n<b>%s</b>\\n%b";

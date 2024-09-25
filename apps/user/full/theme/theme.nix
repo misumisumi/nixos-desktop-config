@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./tokyo-night
+    # ./catppuccin-mocha
   ];
   gtk = {
     enable = true;
