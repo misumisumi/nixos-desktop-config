@@ -25,7 +25,7 @@ _rule_analyze = [
 ]
 
 _rule_full = [
-    {"wm_class": "Steam"},
+    {"title": "Steam"},
     {"wm_class": "lutris"},
     {"wm_class": "resolve"},
     {"wm_class": "krita"},

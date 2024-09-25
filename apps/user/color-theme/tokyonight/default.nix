@@ -22,6 +22,9 @@ in
         file = "bat/${flavor}.tmTheme";
       };
     };
+    btop.settings = {
+      color_theme = "tokyo-night";
+    };
     git = {
       includes = [ { path = "${pack}/delta/${flavor}.gitconfig"; } ];
       delta.options.features = "${flavor}";
