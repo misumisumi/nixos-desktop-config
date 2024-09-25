@@ -1,19 +1,23 @@
-{ config
-, lib
-, user
-, hostname
-, scheme ? "small"
-, wm ? ""
-, homeDirectory ? ""
-, ...
+{
+  config,
+  lib,
+  user,
+  hostname,
+  scheme ? "small",
+  colorTheme ? "tokyonight",
+  wm ? "",
+  homeDirectory ? "",
+  ...
 }:
-with builtins; {
+with builtins;
+{
   options = {
     dotfilesActivation = lib.mkEnableOption "Activate dotfiles";
   };
   imports = lib.optionals (scheme != "none") (
     lib.optional (pathExists ../../users/${user}) ../../users/${user}
     ++ lib.optional (pathExists ../../machines/${hostname}/home.nix) ../../machines/${hostname}/home.nix
+    ++ lib.optional (pathExists ../../apps/user/color-theme/${colorTheme}) ../../apps/user/color-theme/${colorTheme}
     ++ [
       ../../settings/user/nix
       ../../apps/user/core/bash
@@ -21,9 +25,9 @@ with builtins; {
       ../../apps/user/core/fzf
       ../../apps/user/core/git
       ../../apps/user/core/man
-      ../../apps/user/core/navi
       ../../apps/user/core/pkgs
-      ../../apps/user/core/ranger
+      ../../apps/user/core/programs
+      ../../apps/user/core/yazi
       ../../apps/user/core/sops
       ../../apps/user/core/ssh
       ../../apps/user/core/starship
@@ -34,6 +38,9 @@ with builtins; {
     ++ lib.optionals (scheme != "core") [
       ../../apps/user/small/direnv
       ../../apps/user/small/editorconfig
+      ../../apps/user/small/fastfetch
+      ../../apps/user/small/lazygit
+      ../../apps/user/small/navi
       ../../apps/user/small/neovim
       ../../apps/user/small/pkgs
       ../../apps/user/small/translate-shell
@@ -44,8 +51,8 @@ with builtins; {
       ../../apps/user/medium/texlive
     ]
     ++ lib.optionals (scheme == "full") (
-      [ ../../apps/user/full/pkgs ] ++
-      concatMap import [
+      [ ../../apps/user/full/pkgs ]
+      ++ concatMap import [
         ../../apps/user/full/ime
         ../../apps/user/full/programs
         ../../apps/user/full/services
@@ -64,7 +71,8 @@ with builtins; {
     programs.home-manager.enable = true;
     assertions = [
       {
-        assertion = scheme == "none" || scheme == "core" || scheme == "small" || scheme == "medium" || scheme == "full";
+        assertion =
+          scheme == "none" || scheme == "core" || scheme == "small" || scheme == "medium" || scheme == "full";
         message = ''
           Set scheme `none` or 'core' or 'small' or 'full'.
           none: not use home-manager config

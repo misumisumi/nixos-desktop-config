@@ -4,12 +4,14 @@
     enableCompletion = true;
     enableVteIntegration = true;
     historyIgnore = [
-      "rm *"
-      "ls *"
-      "pkill *"
-      "kill *"
+      "builtin cd *"
+      "cd *"
       "history *"
-      "trans *"
+      "kill *"
+      "ls *"
+      "mkdir *"
+      "pkill *"
+      "rm *"
     ];
   };
 }

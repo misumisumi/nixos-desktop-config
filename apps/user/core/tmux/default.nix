@@ -1,8 +1,13 @@
-{ lib
-, pkgs
-, ...
-}: {
-  home.packages = with pkgs; [ xsel bc ];
+{
+  lib,
+  pkgs,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    xsel
+    bc
+  ];
   programs = {
     fzf = {
       tmux = {

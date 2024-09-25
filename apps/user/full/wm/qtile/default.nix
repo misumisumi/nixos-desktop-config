@@ -22,9 +22,21 @@
       ];
       configPackages = with pkgs; [ gnome-session ];
     };
-    configFile = {
-      "qtile".source = ./conf;
-    };
+    configFile =
+      (lib.mapAttrs' (
+        f: _:
+        lib.nameValuePair "qtile/${f}" {
+          enable = true;
+          source = ./conf/${f};
+        }
+      ) (lib.filterAttrs (_: t: t == "regular") (builtins.readDir ./conf)))
+      // (lib.mapAttrs' (
+        f: _:
+        lib.nameValuePair "qtile/my_modules/${f}" {
+          enable = true;
+          source = ./conf/my_modules/${f};
+        }
+      ) (lib.filterAttrs (_: t: t == "regular") (builtins.readDir ./conf/my_modules)));
   };
 
   xsession = {

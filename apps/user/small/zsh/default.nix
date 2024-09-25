@@ -2,7 +2,12 @@
 #  I have some plugins problem when managin nix, so I manage zsh plugins from zinit.
 #  When you put zinit in nixpkgs, you need to create a symbolic link manually because the path to completions is different.
 #  You can watch this solution at (machines/home.nix home.activation.myActivationAction)
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   home.packages = with pkgs; [ nix-zsh-completions ];
   xdg.configFile = {
@@ -19,12 +24,14 @@
       history = {
         ignoreDups = true;
         ignorePatterns = [
-          "rm *"
-          "ls *"
-          "pkill *"
-          "kill *"
+          "builtin cd *"
+          "cd *"
           "history *"
-          "trans *"
+          "kill *"
+          "ls *"
+          "mkdir *"
+          "pkill *"
+          "rm *"
         ];
         extended = true;
         save = 10000;

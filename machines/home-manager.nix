@@ -6,6 +6,7 @@ let
       user,
       system ? "x86_64-linux",
       scheme ? "",
+      colorTheme ? "tokyonight",
       homeDirectory ? "",
       useNixOSWallpaper ? true,
       wm ? "none",
@@ -22,6 +23,7 @@ let
           hostname
           user
           scheme
+          colorTheme
           homeDirectory
           useNixOSWallpaper
           wm
@@ -52,26 +54,31 @@ in
     hostname = "system";
     user = "hm-user";
     scheme = "core";
+    colorTheme = "tokyonight";
   };
   small = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "small";
+    colorTheme = "tokyonight";
   };
   medium = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "medium";
+    colorTheme = "tokyonight";
   };
   full = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "full";
+    colorTheme = "tokyonight";
   };
   test = settings {
     hostname = "liveimg";
     user = "hm-user";
     scheme = "full";
+    colorTheme = "tokyonight";
     wm = "qtile";
   };
 }

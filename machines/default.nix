@@ -9,6 +9,7 @@ let
       system ? "x86_64-linux",
       homeDirectory ? "",
       scheme ? "minimal",
+      colorTheme ? "tokyonight",
       useNixOSWallpaper ? false,
       wm ? "qtile",
     }:
@@ -49,6 +50,7 @@ let
                   user
                   homeDirectory
                   scheme
+                  colorTheme
                   useNixOSWallpaper
                   wm
                   ;
@@ -78,6 +80,7 @@ in
     hostname = "liveimg";
     user = "nixos";
     scheme = "full";
+    colorTheme = "tokyonight";
     useNixOSWallpaper = true;
   };
   liveimg-gui = settings {
@@ -85,6 +88,7 @@ in
     user = "nixos";
     wm = "gnome";
     scheme = "small";
+    colorTheme = "tokyonight";
     useNixOSWallpaper = true;
   };
   liveimg-cui-iso = settings {
@@ -92,32 +96,38 @@ in
     user = "nixos";
     wm = "";
     scheme = "core";
+    colorTheme = "tokyonight";
   };
   liveimg-cui = settings {
     hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";
+    colorTheme = "tokyonight";
   };
   mother = settings {
     hostname = "mother";
     scheme = "full";
+    colorTheme = "tokyonight";
     inherit user;
   };
   zephyrus = settings {
     hostname = "zephyrus";
     scheme = "full";
+    colorTheme = "tokyonight";
     inherit user;
   };
   stacia = settings {
     hostname = "stacia";
     scheme = "full";
+    colorTheme = "tokyonight";
     inherit user;
   };
   soleus = settings {
     hostname = "soleus";
     user = "kobayashi";
     scheme = "small";
+    colorTheme = "tokyonight";
     useNixOSWallpaper = true;
     wm = "gnome";
   };

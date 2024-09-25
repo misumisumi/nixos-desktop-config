@@ -10,15 +10,15 @@
         size = 11;
       };
       settings = {
-        font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+        active_tab_font_style = "bold";
         background_opacity = "0.80";
-
         clear_all_shortcuts = "yes";
+        cursor_blink_interval = "0";
         enable_audio_bell = "no";
+        font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+        inactive_tab_font_style = "bold";
         tab_bar_style = "fade";
         tab_fade = "1";
-        active_tab_font_style = "bold";
-        inactive_tab_font_style = "bold";
       };
       keybindings = {
         "ctrl+shift+up" = "scroll_line_up";

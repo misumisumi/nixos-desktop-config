@@ -1,26 +1,7 @@
 local wezterm = require("wezterm")
-local color_set = require("color-set")
 
 local config = {
     window_close_confirmation = "AlwaysPrompt",
-    color_scheme = "tokyonight-storm",
-    colors = {
-        compose_cursor = "cyan",
-        tab_bar = {
-            background = color_set.bg,
-            -- The new tab button that let you create new tabs
-            new_tab = {
-                bg_color = color_set.bg,
-                fg_color = color_set.fg,
-            },
-            new_tab_hover = {
-                bg_color = color_set.bg_tab,
-                fg_color = color_set.fg_tab,
-                italic = true,
-            },
-        },
-    },
-    -- color_scheme = "Catppuccin Mocha",
     font = wezterm.font_with_fallback({
         {
             family = "Moralerspace Neon NF",
@@ -33,7 +14,7 @@ local config = {
     enable_scroll_bar = true,
     window_padding = {
         left = 0,
-        right = 2,
+        right = "1cell",
         top = 0,
         bottom = 0,
     },

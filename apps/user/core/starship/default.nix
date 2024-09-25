@@ -1,5 +1,5 @@
-{ config, ... }:
-with builtins; {
+{ config, lib, ... }:
+{
   xdg = {
     configFile = {
       "starship".source = ./starship;
@@ -14,7 +14,7 @@ with builtins; {
         enable = true;
         enableBashIntegration = false;
         enableZshIntegration = false;
-        settings = fromTOML (unsafeDiscardStringContext (readFile ./starship/starship.toml));
+        settings = lib.importTOML ./starship/starship.toml;
       };
       # "Do not activate on tty console"
       bash.initExtra = ''
