@@ -37,5 +37,4 @@ def autostart():
 
 @hook.subscribe.startup_complete
 def afterstart():
-    subprocess.run("copyq &", shell=True)
-    subprocess.run("kdeconnect-indicator &", shell=True)
+    subprocess.run("systemctl --user restart blueman-applet.service", shell=True)

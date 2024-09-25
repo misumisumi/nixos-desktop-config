@@ -12,7 +12,7 @@ from libqtile.log_utils import logger
 @dataclass
 class FontConfig:
     font: str = "Moralerspace Neon NF"
-    fontsize: int = 15
+    fontsize: int = 16
 
 
 @dataclass

@@ -5,11 +5,9 @@
 */
 {
   lib,
-  hostname,
   pkgs,
   ...
 }:
-with lib;
 {
   home = {
     packages = with pkgs; [ xorg.xmodmap ];
@@ -37,8 +35,6 @@ with lib;
           qtile = pkgs.python3.pkgs.qtile.override {
             extraPackages = with pkgs.python3.pkgs; [
               qtile-extras
-              pyxdg
-              dbus-next
             ];
           };
         in

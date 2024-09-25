@@ -21,7 +21,7 @@ def make_screens(num_screen):
             top_bar = bar.Bar(
                 top_widgets,
                 BarConf.size,
-                background=ColorSet.background,
+                background=ColorSet.transparent,
                 border_color=ColorSet.cyan,
                 margin=BarConf.top_bar_margin,
             )

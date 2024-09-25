@@ -50,8 +50,8 @@ only_one_group = {
 
 
 # widgets config
-def spacer():
-    return [widget.Spacer(background=ColorSet.transparent, padding=0)]
+def spacer(length=bar.STRETCH):
+    return [widget.Spacer(length=length, background=ColorSet.transparent, padding=0)]
 
 
 def groupbox():
@@ -108,8 +108,9 @@ def sysinfo():
     ]
 
 
-def sysctrl():
+def sysctrl(is_tray=False):
     base = [
+        widget.TextBox(padding=0, background=ColorSet.transparent, **right_corner),
         widget.Volume(
             fmt=" {}",
             get_volume_command="if [ -z $(pactl get-sink-mute $(pactl get-default-sink) | sed -e 's/Mute: no//g') ]; then echo \[$(pactl get-sink-volume $(pactl get-default-sink) | awk -F'/' '{print $2}' | sed -e 's/\s//g')\]; else echo M; fi",
@@ -121,19 +122,24 @@ def sysctrl():
         ),
     ]
     if GlobalConf.laptop:
-        backlight = list(Path("/sys/class/backlight/").glob("*"))
-        if not len(backlight) == 0:
+        base += [
+            widget.UPowerWidget(),
+        ]
+        if not len(list(Path("/sys/class/backlight/").glob("*"))) == 0:
             base += [
                 widget.Backlight(
                     fmt="  {}",
                     backlight_name=backlight[0],
+                    foreground=ColorSet.background,
+                    background=ColorSet.blue,
                     **fc,
                 )
             ]
+    if is_tray:
         base += [
-            widget.UPowerWidget(
-                foreground=ColorSet.background,
-                background=ColorSet.blue,
+            widget.StatusNotifier(
+                icon_theme="Papirus-Dark",
+                **left_corner,
             ),
         ]
 
@@ -166,12 +172,6 @@ def systray():
     ]
 
 
-chrod = widget.Chord(
-    # **bcs.colorset8,
-    **fc
-)
-
-
 backlight = list(Path("/sys/class/backlight/").glob("*"))
 if not len(backlight) == 0:
     backlight = widget.Backlight(
@@ -192,18 +192,39 @@ battery = widget.Battery(
 )
 
 
-def tasklist():
+def chord():
     return [
+        widget.Chord(**fc, **only_one_group),
+    ]
+
+
+def tasklist():
+    def parse_text(text):
+        max_char = 10
+        if len(text) > max_char:
+            return text[: max_char - 1] + "…"
+        else:
+            return text
+
+    return [
+        widget.TextBox(padding=0, **only_one_group),
         widget.TaskList(
-            border=ColorSet.background,
+            border=ColorSet.blue,
+            markup_focused="<span foreground=" + f'"{ColorSet.background}"' + ">{}</span>",
             theme_mode="fallback",
             txt_floating="󱂬 ",
             txt_minimized=" ",
             txt_maximized=" ",
+            highlight_method="block",
+            unfocused_border="block",
+            parse_text=parse_text,
             borderwidth=WindowConf.border,
             padding=3,
-            **fc,
-        )
+            menu_font=FontConf.font,
+            menu_fontsize=FontConf.fontsize,
+            **only_one_group,
+        ),
+        widget.TextBox(padding=0, **only_one_group),
     ]
 
 
@@ -226,18 +247,25 @@ def make_bar(is_tray=False):
     #         # _rignt_corner(**bcs.colorset1),
     #         # widget.Spacer(),
     #     ]
-    top_widgets += spacer()
-    top_widgets += lifeinfo()
-    top_widgets += spacer()
-    # top_widgets += sysinfo()
-
+    top_widgets += spacer(length=50)
     if not GlobalConf.under_fhd:
         top_widgets += tasklist()
-    if is_tray:
-        top_widgets += separator()
-        top_widgets += systray()
-    else:
-        top_widgets += spacer()
+        top_widgets += spacer(length=20)
+    top_widgets += lifeinfo()
+    top_widgets += spacer()
+
+    top_widgets += spacer(length=5)
+    top_widgets += chord()
+    top_widgets += spacer(length=10)
+
+    top_widgets += sysinfo()
+    top_widgets += spacer(length=20)
+    top_widgets += sysctrl(is_tray)
+    # if is_tray:
+    #     top_widgets += separator()
+    #     top_widgets += systray()
+    # else:
+    #     top_widgets += spacer()
 
     if GlobalConf.under_fhd or GlobalConf.vm:
         bottom_widgets = sysinfo()
