@@ -107,7 +107,7 @@ def set_keys():
         Key([GlobalConf.mod, "control", "shift"], "f", lazy.window.toggle_fullscreen()),
         # Exit and Reload
         Key([GlobalConf.mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        Key([GlobalConf.mod, "control"], "e", lazy.shutdown(), desc="Shutdown Qtile"),
+        Key([GlobalConf.mod, "control", "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         # Launch rofi
         Key(
             [GlobalConf.mod],

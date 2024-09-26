@@ -34,3 +34,4 @@ def autostart():
 @hook.subscribe.startup_complete
 def afterstart():
     subprocess.run("systemctl --user restart blueman-applet.service", shell=True)
+    subprocess.run("systemctl --user restart flameshot.service", shell=True)

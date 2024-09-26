@@ -93,6 +93,7 @@ class Global:
 
     def update_monitors(self):
         self.monitors = utils.get_n_monitors(self.has_pentablet)
+        self.monitors_w_pentablet = utils.get_n_monitors(False)
 
 
 PinPConf = PinPConfig()

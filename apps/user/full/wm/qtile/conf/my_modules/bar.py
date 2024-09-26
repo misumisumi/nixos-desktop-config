@@ -215,13 +215,15 @@ def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = F
             top_widgets += spacer(length=20)
         top_widgets += lifeinfo()
         top_widgets += spacer()
-        top_widgets += spacer(length=5)
-        top_widgets += chord()
 
-        if not under_fhd:
+        if under_fhd:
+            top_widgets += spacer()
             top_widgets += spacer(length=10)
+        else:
             top_widgets += sysinfo()
             top_widgets += spacer(length=20)
+        top_widgets += chord()
+        top_widgets += spacer(length=10)
         top_widgets += sysctrl(is_tray)
 
     top_bar = bar.Bar(

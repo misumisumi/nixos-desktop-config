@@ -10,7 +10,7 @@ from my_modules.variables import GlobalConf
 
 MONITORS = {}
 cmd = "feh"
-for i in range(GlobalConf.monitors):
+for i in range(GlobalConf.monitors_w_pentablet):
     MONITORS[f"MONITOR{i}"] = 0
     cmd += r" --bg-fill {}"
 
@@ -29,6 +29,8 @@ def change_wallpaper():
                 gidx -= n_groups * idx
             MONITORS[f"MONITOR{idx}"] = gidx
             subprocess.run(
-                cmd.format(*[GlobalConf.wallpapers[MONITORS[f"MONITOR{i}"]] for i in range(GlobalConf.monitors)]),
+                cmd.format(
+                    *[GlobalConf.wallpapers[MONITORS[f"MONITOR{i}"]] for i in range(GlobalConf.monitors_w_pentablet)]
+                ),
                 shell=True,
             )
