@@ -20,7 +20,6 @@
     nvidia-container-toolkit.enable = true;
     nvidia = {
       open = false;
-      powerManagement.enable = true;
     };
     graphics.extraPackages = with pkgs; [
       libvdpau-va-gl

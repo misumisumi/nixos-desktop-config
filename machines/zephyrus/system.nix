@@ -1,7 +1,9 @@
-{ config
-, pkgs
-, ...
-}: {
+{
+  config,
+  pkgs,
+  ...
+}:
+{
   boot = {
     supportedFilesystems = [ "ntfs" ];
     tmp = {
@@ -18,6 +20,7 @@
   };
   programs.nix-ld.enable = true;
   services = {
+    upower.enable = true;
     asusd = {
       enableUserService = true;
       profileConfig = "quiet";

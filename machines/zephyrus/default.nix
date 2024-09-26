@@ -10,6 +10,7 @@
     ../../apps/system/services
     ../../apps/system/sops
     ../../apps/system/ssh
+    ../../apps/system/steam
     ../../apps/system/wm/${wm}
     ../../settings/system
     ../../settings/system/bluetooth
