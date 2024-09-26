@@ -16,9 +16,10 @@ for i in range(GlobalConf.monitors_w_pentablet):
 
 
 # 壁紙の割当(ラップトップはバッテリーの観点から固定)
-@hook.subscribe.setgroup
-def change_wallpaper():
-    if not GlobalConf.laptop:
+if not GlobalConf.laptop:
+
+    @hook.subscribe.setgroup
+    def change_wallpaper():
         global MONITORS
         group = qtile.current_screen.group
         gidx = qtile.groups.index(group)
@@ -34,3 +35,10 @@ def change_wallpaper():
                 ),
                 shell=True,
             )
+
+
+def init_screen_wallpapers():
+    feh = "feh"
+    for i, _ in enumerate(qtile.screens):
+        feh += f" --bg-fill {GlobalConf.wallpapers[i]}"
+    subprocess.run(feh, shell=True)

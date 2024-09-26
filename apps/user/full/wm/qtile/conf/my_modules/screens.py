@@ -1,6 +1,6 @@
 """make screen"""
 
-from libqtile import hook
+from libqtile import hook, qtile
 from libqtile.config import Screen
 from libqtile.log_utils import logger
 
@@ -9,7 +9,7 @@ from my_modules.utils import get_phy_monitors
 from my_modules.variables import GlobalConf
 
 
-def make_screens():
+def make_screens(manually: bool = False):
     monitors = get_phy_monitors(GlobalConf.has_pentablet)
 
     screens = []
@@ -34,9 +34,13 @@ def make_screens():
 
         screens.append(Screen(top=top_bar, bottom=None))
 
-    @hook.subscribe.startup
-    def _():
-        for _bar in bars:
-            _bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)
-
     return screens
+
+
+@hook.subscribe.startup
+def set_bar_property():
+    for screen in qtile.screens:
+        for pos in ["top", "bottom"]:
+            bar = getattr(screen, pos)
+            if bar:
+                bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)

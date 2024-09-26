@@ -72,7 +72,7 @@ class Global:
     dgroups_key_binder: Optional = field(default_factory=lambda: None)
     focus_on_window_activation: str = "smart"
     follow_mouse_focus: bool = False
-    reconfigure_screens: bool = True
+    reconfigure_screens: bool = False
     # If things like steam games want to auto-minimize themselves when losing
     # focus, should we respect this or not?
     auto_minimize: bool = True

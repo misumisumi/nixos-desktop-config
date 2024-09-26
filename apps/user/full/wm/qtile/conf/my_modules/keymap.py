@@ -182,20 +182,6 @@ def set_keys():
         ),
         Key([], "XF86Launch1", lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
         Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
-        # Attach Screen
-        KeyChord(
-            [GlobalConf.mod],
-            "a",
-            [
-                Key([], "k", F.attach_screen("above")),
-                Key([], "j", F.attach_screen("below")),
-                Key([], "l", F.attach_screen("right-of")),
-                Key([], "h", F.attach_screen("left-of")),
-                Key([], "d", F.attach_screen("delete")),
-                Key([], "space", lazy.ungrab_chord()),
-            ],
-            name="attach",
-        ),
         # PinP operationes
         KeyChord(
             [GlobalConf.mod],
@@ -222,6 +208,24 @@ def set_keys():
                 F.keep_pinp(),
                 F.update_pinp_screen_idx(),
                 desc="move window to pentablet",
+            ),
+        ]
+    if GlobalConf.laptop:
+        keys += [
+            # Attach Screen
+            KeyChord(
+                [GlobalConf.mod],
+                "a",
+                [
+                    Key([], "k", F.attach_screen("above")),
+                    Key([], "j", F.attach_screen("below")),
+                    Key([], "l", F.attach_screen("right-of")),
+                    Key([], "h", F.attach_screen("left-of")),
+                    Key([], "d", F.attach_screen("delete")),
+                    Key([], "r", F.reload_screens()),
+                    Key([], "space", lazy.ungrab_chord()),
+                ],
+                name="attach",
             ),
         ]
 

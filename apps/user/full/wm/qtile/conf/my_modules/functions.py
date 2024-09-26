@@ -4,14 +4,13 @@ import asyncio
 import subprocess
 
 from libqtile import hook, qtile
-from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
-from my_modules import groups, screens
+from my_modules import groups, screens, startup
 from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, group_and_rule
-from my_modules.utils import get_phy_monitors
+from my_modules.utils import get_monitor_status
 from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
 PINP_WINDOW = None
@@ -358,24 +357,44 @@ def capture_screen(qtile, is_clipboard=False):
         qtile.spawn("flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
 
 
+def _reload_screens(qtile):
+    GlobalConf.update_monitors()
+    qtile.config.screens = screens.make_screens(manually=True)
+    qtile.config.groups = groups.set_groups()
+    qtile.reconfigure_screens()
+
+
+@lazy.function
+def reload_screens(qtile):
+    _reload_screens(qtile)
+
+
+@hook.subscribe.screens_reconfigured
+async def reinit_screen():
+    await asyncio.sleep(0.6)
+    screens.set_bar_property()
+    qtile.reload_config()
+    startup.autostart()
+
+
 @lazy.function
 def attach_screen(qtile, pos):
+    cmd = "xrandr"
     if pos == "delete":
-        active_phy_monitors = get_phy_monitors(GlobalConf.has_pentablet, activate_only=True)
-        if not len(active_phy_monitors) > 1:
-            subprocess.run(f"xrandr --output {active_phy_monitors[-1][0]} --off", shell=True)
+        monitor_status = get_monitor_status()
+        conn = monitor_status["connected"]
+        if len(conn) > 1:
+            cmd += f" --output {conn[-1]} --off"
     else:
-        cmd = "xrandr"
-        phy_monitors = get_phy_monitors(GlobalConf.has_pentablet)
-        for i, (output, resolution) in enumerate(phy_monitors):
-            cmd += f" --output {output} --auto"
-            if i != 0:
-                cmd += f" --{pos} {phy_monitors[i - 1][0]}"
-        subprocess.run(cmd, shell=True)
-
-
-@hook.subscribe.screen_change
-def screen_change(event):
-    GlobalConf.update_monitors()
-    qtile.screens = screens.make_screens()
-    qtile.groups = groups.set_groups()
+        monitor_status = get_monitor_status()
+        conn = monitor_status["connected"]
+        for i, monitor in enumerate(conn):
+            cmd += f" --output {monitor} --auto"
+            if i > 0:
+                cmd += f" --{pos} {conn[i-1]}"
+        discon = monitor_status["disconnected"]
+        if len(discon) > 0:
+            cmd += f" --output {discon[0]} --auto --{pos} {conn[i-1]}"
+    popen = subprocess.Popen(cmd, shell=True)
+    popen.wait(timeout=5)
+    _reload_screens(qtile)

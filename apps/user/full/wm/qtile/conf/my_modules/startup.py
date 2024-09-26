@@ -6,7 +6,7 @@ from libqtile import hook, qtile
 from libqtile.log_utils import logger
 
 from my_modules.groups import group_and_rule
-from my_modules.variables import GlobalConf
+from my_modules.wallpaper import init_screen_wallpapers
 
 
 # 擬似的に各スクリーンにグループが割り当てられるようにするための初期化
@@ -21,13 +21,7 @@ def init_screen_and_group():
 
 @hook.subscribe.startup_once
 def autostart():
-    args = []
-    for i, _ in enumerate(qtile.screens):
-        args.append(f"--bg-fill {GlobalConf.wallpapers[i]}")
-    subprocess.run(
-        "feh " + " ".join(args),
-        shell=True,
-    )
+    init_screen_wallpapers()
     init_screen_and_group()
 
 
