@@ -109,7 +109,7 @@ def set_keys():
         Key([GlobalConf.mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
         Key([GlobalConf.mod, "control", "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         # Launch rofi
-        Key([GlobalConf.mod], "space", lazy.spawn("rofi -show"), desc="show rofi"),
+        Key([GlobalConf.mod], "space", lazy.spawn("rofi -show combi"), desc="show rofi"),
         Key([GlobalConf.mod, "shift"], "space", lazy.spawn("rofi -show run"), desc="run rofi as shell mode"),
         Key(
             [GlobalConf.mod, "control"],

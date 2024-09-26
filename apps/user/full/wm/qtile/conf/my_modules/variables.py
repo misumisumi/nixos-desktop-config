@@ -1,7 +1,7 @@
 """This is Global config"""
 
+import configparser
 import os
-import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Union
@@ -19,6 +19,18 @@ class FontConfig:
 
 
 @dataclass
+class IconConfig:
+    icon_size: int = 16
+    icon_theme: Optional[str] = None
+
+    def __post_init__(self):
+        gtk = configparser.ConfigParser()
+        gtk.read(Path.home().joinpath(".config/gtk-4.0/settings.ini"))
+        if gtk.has_option("Settings", "gtk-icon-theme-name"):
+            self.icon_theme = gtk.get("Settings", "gtk-icon-theme-name")
+
+
+@dataclass
 class BarConfig:
     size: int = 28
     border_width: int = 0
@@ -31,6 +43,7 @@ class BarConfig:
 class PinPConfig:
     scale_down: float = 3.2
     margin: int = 3
+    pinp_scale_down: float = 3.2
     target_cls_name: list[str] = field(
         default_factory=lambda: [
             "Picture in picture",
@@ -94,9 +107,10 @@ class Global:
         self.monitors_w_pentablet = utils.get_n_monitors(False)
 
 
-PinPConf = PinPConfig()
 FontConf = FontConfig()
+IconConf = IconConfig()
 BarConf = BarConfig()
+PinPConf = PinPConfig()
 WindowConf = WindowConfig()
 GlobalConf = Global()
 

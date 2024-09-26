@@ -58,13 +58,13 @@ in
       shade = if flavor == "day" then "Day" else "Storm";
     in
     {
+      "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
       "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
         globalSection = {
           Theme = "Tokyonight-${shade}";
           DarkTHeme = "Tokyonight-${shade}";
         };
       };
-      "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
       "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
       "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
     };

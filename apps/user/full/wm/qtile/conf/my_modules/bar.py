@@ -6,14 +6,14 @@ from pathlib import Path
 
 # from libqtile import widget
 from libqtile import bar
-from libqtile.backend.base import core
 from libqtile.log_utils import logger
 from qtile_extras import widget
 
 from my_modules.colorset import ColorSet
-from my_modules.variables import BarConf, FontConf, GlobalConf, WindowConf
+from my_modules.variables import BarConf, FontConf, GlobalConf, IconConf, WindowConf
 
 fc = asdict(FontConf)
+ic = asdict(IconConf)
 
 
 right_corner = {"decorations": [widget.decorations.PowerLineDecoration(path="rounded_right")]}
@@ -129,10 +129,7 @@ def sysctrl(is_tray=False):
     ]
     if is_tray:
         base += [
-            widget.StatusNotifier(
-                icon_theme="Papirus-Dark",
-                **left_corner,
-            ),
+            widget.StatusNotifier(**ic, **left_corner),
         ]
 
     return base
@@ -141,7 +138,7 @@ def sysctrl(is_tray=False):
 def lifeinfo():
     return [
         widget.TextBox(padding=0, background=ColorSet.transparent, **right_corner),
-        widget.Wttr(format="%c%t/%p", location={"Yonezawa": "Yonezawa"}, **fc, **left_corner),
+        widget.Wttr(format="%c%t/%p", **fc, **left_corner),
         widget.Clock(
             format="%y-%m-%d(%a) %H:%M:%S",
             foreground=ColorSet.background,

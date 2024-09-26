@@ -108,7 +108,7 @@ in
   mother = settings {
     hostname = "mother";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-storm";
     inherit user;
   };
   zephyrus = settings {

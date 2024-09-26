@@ -31,7 +31,7 @@ def get_pinp_size_pos(init=True):
     screen_pos = (qtile.current_screen.x, qtile.current_screen.y)
     pinp_size = [int(s // PinPConf.pinp_scale_down) for s in screen_size]
     pinp_pos = [ss + sp - p for ss, sp, p in zip(screen_size, screen_pos, pinp_size)]
-    pinp_pos[0] = pinp_pos[0] - PinPConf.pinp_margin
+    pinp_pos[0] = pinp_pos[0] - PinPConf.margin - WindowConf.border
 
     return pinp_size, pinp_pos
 
