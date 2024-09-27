@@ -109,33 +109,24 @@ def set_keys():
         Key([GlobalConf.mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
         Key([GlobalConf.mod, "control", "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         # Launch rofi
-        Key(
-            [GlobalConf.mod],
-            "space",
-            lazy.spawn("rofi -combi-modi window,drun -show combi"),
-            desc="show rofi",
-        ),
-        Key(
-            [GlobalConf.mod, "shift"],
-            "space",
-            lazy.spawn("rofi -show run"),
-            desc="run rofi as shell mode",
-        ),
+        Key([GlobalConf.mod], "space", lazy.spawn("rofi -show"), desc="show rofi"),
+        Key([GlobalConf.mod, "shift"], "space", lazy.spawn("rofi -show run"), desc="run rofi as shell mode"),
         Key(
             [GlobalConf.mod, "control"],
             "space",
-            lazy.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu"),
+            lazy.spawn("rofi -modi power-menu:rofi-power-menu -show power-menu "),
             desc="show power-menu",
         ),
-        # Toggle copyq and calculator
-        Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
-        Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
-        Key([GlobalConf.mod], "s", lazy.spawn("copyq toggle")),
         Key(
             [GlobalConf.mod],
             "equal",
             lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort"),
         ),
+        Key([GlobalConf.mod], "e", lazy.spawn("rofi -modi emoji -show emoji"), desc="show rofi-emoji"),
+        # Toggle application
+        Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
+        Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
+        Key([GlobalConf.mod], "s", lazy.spawn("copyq toggle")),
         # Lock screen
         Key(
             [GlobalConf.mod, "control"],

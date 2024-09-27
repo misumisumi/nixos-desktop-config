@@ -41,6 +41,7 @@ in
       enable = true;
       plugins = with pkgs; [
         rofi-calc
+        rofi-emoji
         rofi-catppuccin
       ];
 
@@ -49,7 +50,8 @@ in
       theme = "catppuccin-custom";
 
       extraConfig = {
-        modi = "window,run,drun";
+        modi = "window,drun,run";
+        combi-modi = "window,drun";
         show-icons = true;
         icon-theme = "Papirus-Dark";
         drun-show-actions = false;
