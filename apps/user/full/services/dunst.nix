@@ -37,21 +37,14 @@
           notification_limit = 5;
         };
         urgency_low = {
-          background = "#222222";
-          foreground = "#888888";
           timeout = 8;
         };
 
         urgency_normal = {
-          background = "#222d32";
-          foreground = "#cfd8dc";
           timeout = 8;
         };
 
         urgency_critical = {
-          background = "#900000";
-          foreground = "#ffffff";
-          frame_color = "#ff0000";
           timeout = 0;
         };
         vivaldi-stable = {

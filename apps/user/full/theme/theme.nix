@@ -11,10 +11,6 @@ in
       package = pkgs.noto-fonts-cjk-sans;
       size = 12;
     };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
     gtk3.extraConfig = extraConfig;
     gtk4.extraConfig = extraConfig;
   };

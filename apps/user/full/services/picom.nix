@@ -74,7 +74,7 @@
           "window_type = 'dock'"
           "window_type = 'desktop'"
           "class_g = 'fcitx'"
-          "class_g = 'dunst'"
+          "class_g = 'Dunst'"
         ];
         blur-method = "dual_kawase";
         blur-size = 8;

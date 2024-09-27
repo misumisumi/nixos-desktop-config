@@ -68,16 +68,22 @@ in
       "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
       "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
     };
-  gtk.theme =
-    let
-      shade = if flavor == "day" then "Light-hdpi" else "Dark-hdpi";
-    in
-    {
-      name = "Tokyonight-${shade}";
-      package = pkgs.tokyonight-gtk-theme;
-    };
-  home.pointerCursor = {
-    name = "Dracula-cursors";
-    package = pkgs.dracula-theme;
+  gtk = {
+    theme =
+      let
+        shade = if flavor == "day" then "Light" else "Dark";
+      in
+      {
+        name = "Tokyonight-${shade}";
+        package = pkgs.tokyonight-gtk-theme;
+      };
+    # iconTheme = {
+    #   name = "Papirus-Dark";
+    #   package = pkgs.papirus-icon-theme;
+    # };
   };
+  # home.pointerCursor = {
+  #   name = "Dracula-cursors";
+  #   package = pkgs.dracula-theme;
+  # };
 }

@@ -1,3 +1,3 @@
 return {
-    color_scheme = "Tokyo Night Storm",
+    color_scheme = "tokyonight_storm",
 }

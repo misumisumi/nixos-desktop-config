@@ -48,14 +48,16 @@ in
 }
 // lib.optionals (scheme == "full") {
   i18n.inputMethod.fcitx5.catppuccin.enable = true;
-  gtk.theme =
-    let
-      shade = if flavor == "latte" then "Light" else "Dark";
-    in
-    {
-      name = "Catppuccin-GTK-${shade}-hdpi";
-      package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
-    };
+  gtk = {
+    theme =
+      let
+        shade = if flavor == "latte" then "Light" else "Dark";
+      in
+      {
+        name = "Catppuccin-GTK-${shade}";
+        package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
+      };
+  };
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
     "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
