@@ -57,6 +57,10 @@ in
         name = "Catppuccin-GTK-${shade}";
         package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
       };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
   };
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;

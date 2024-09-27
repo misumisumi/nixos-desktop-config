@@ -49,9 +49,13 @@
       name = "Nordic-darker";
       package = pkgs.nordic;
     };
+    iconTheme = {
+      name = "Nordzy-dark";
+      package = pkgs.nordzy-icon-theme;
+    };
   };
-  # home.pointerCursor = {
-  #   name = "Nordzy-cursors";
-  #   package = pkgs.nordzy-cursor-theme;
-  # };
+  home.pointerCursor = {
+    name = "Nordzy-cursors";
+    package = pkgs.nordzy-cursor-theme;
+  };
 }

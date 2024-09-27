@@ -53,21 +53,21 @@ in
 }
 // lib.optionals (scheme == "full") {
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
-  xdg.configFile =
-    let
-      shade = if flavor == "day" then "Day" else "Storm";
-    in
-    {
-      "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
-      "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
+  xdg.configFile = {
+    "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
+    "fcitx5/conf/classicui.conf".text =
+      let
+        shade = if flavor == "day" then "Day" else "Storm";
+      in
+      lib.generators.toINIWithGlobalSection { } {
         globalSection = {
           Theme = "Tokyonight-${shade}";
           DarkTHeme = "Tokyonight-${shade}";
         };
       };
-      "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
-      "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
-    };
+    "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
+    "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
+  };
   gtk = {
     theme =
       let
@@ -77,13 +77,13 @@ in
         name = "Tokyonight-${shade}";
         package = pkgs.tokyonight-gtk-theme;
       };
-    # iconTheme = {
-    #   name = "Papirus-Dark";
-    #   package = pkgs.papirus-icon-theme;
-    # };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
   };
-  # home.pointerCursor = {
-  #   name = "Dracula-cursors";
-  #   package = pkgs.dracula-theme;
-  # };
+  home.pointerCursor = {
+    name = "Dracula-cursors";
+    package = pkgs.dracula-theme;
+  };
 }

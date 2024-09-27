@@ -1,6 +1,8 @@
-{ wm, ... }:
+{ wm, colorTheme, ... }:
+with builtins;
 {
   imports = [
+    ../../apps/system/color-theme/${head (split "-" colorTheme)}
     ../../apps/system/documentation
     ../../apps/system/nix-ld
     ../../apps/system/pkgs
