@@ -40,11 +40,11 @@ def get_monitor_status() -> dict:
     return status
 
 
-def get_wallpapers(home: Path, laptop: bool) -> list[str]:
+def get_wallpapers(path: Path, laptop: bool) -> list[str]:
     if laptop:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "fixed").glob("*.png"))
+        wallpapers = list(path.joinpath("fixed").glob("*.png"))
     else:
-        wallpapers = list(home.joinpath("Pictures", "wallpapers", "unfixed").glob("*.png"))
+        wallpapers = list(path.joinpath("unfixed").glob("*.png"))
     wallpapers.sort()
 
     return [str(wallpaper) for wallpaper in wallpapers]

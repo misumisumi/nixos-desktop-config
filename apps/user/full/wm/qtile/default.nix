@@ -3,15 +3,10 @@
   NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
   However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 */
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}:
-{
-  home = {
-    packages = with pkgs; [ xorg.xmodmap ];
-  };
+  home.packages = with pkgs; [ xorg.xmodmap ];
+  systemd.user.targets.tray.Unit.ExecPost = "${pkgs.coreutils}/bin/sleep 3";
 
   xdg = {
     portal = {
@@ -45,9 +40,7 @@
       command =
         let
           qtile = pkgs.python3.pkgs.qtile.override {
-            extraPackages = with pkgs.python3.pkgs; [
-              qtile-extras
-            ];
+            extraPackages = with pkgs.python3.pkgs; [ qtile-extras ];
           };
         in
         ''

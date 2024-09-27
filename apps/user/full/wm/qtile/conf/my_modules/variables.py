@@ -57,11 +57,9 @@ class Global:
     terminal_class: str = "org.wezfurlong.wezterm"
 
     home: Path = Path.home()
-    capture_path: Path = home.joinpath("Pictures", "screenshot")
-    if not capture_path.exists():
-        os.mkdir(capture_path)
+    wallpapers_path: Path = Path(os.getenv("XDG_PICTURES_DIR")).joinpath("wallpapers")
     wallpapers: list[str] = field(init=False)
-    screen_saver: str = str(home.joinpath("Pictures", "wallpapers", "screen_saver.png"))
+    screen_saver: str = str(wallpapers_path.joinpath("screen_saver.png"))
 
     has_pentablet: bool = True if os.uname()[1] in ["mother"] else False
 
@@ -88,7 +86,7 @@ class Global:
     wmname: str = "LG3D"
 
     def __post_init__(self):
-        self.wallpapers = utils.get_wallpapers(self.home, self.laptop)
+        self.wallpapers = utils.get_wallpapers(self.wallpapers_path, self.laptop)
         self.update_monitors()
 
     def update_monitors(self):

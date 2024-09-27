@@ -352,9 +352,9 @@ def to_from_pentablet(qtile):
 def capture_screen(qtile, is_clipboard=False):
     idx = qtile.current_screen.index
     if is_clipboard:
-        qtile.spawn("flameshot screen -n {} -c".format(idx))
+        qtile.spawn(f"flameshot screen -n {idx} -c")
     else:
-        qtile.spawn("flameshot screen -n {} -p {}".format(idx, GlobalConf.capture_path))
+        qtile.spawn(f"flameshot screen -n {idx}")
 
 
 def _reload_screens(qtile):

@@ -127,18 +127,11 @@ def set_groups():
                 layouts = layouts[1]
             else:
                 layouts = layouts[0]
-            name = "{}-{}".format(n, k)
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
-            groups.append(Group(name, layouts=layouts, matches=matches, label=label))
+            groups.append(Group(f"{n}-{k}", layouts=layouts, matches=matches, label=label))
     if GlobalConf.has_pentablet:
         name = list(_pentablet.keys())[0]
-        groups.append(
-            Group(
-                "{}".format(name),
-                layouts=_pentablet[name][1],
-                label=_pentablet[name][0],
-            )
-        )
+        groups.append(Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0]))
     groups.append(ScratchPad("scratchpad", _rule_scratchpad))
 
     return groups

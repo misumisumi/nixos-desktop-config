@@ -144,7 +144,9 @@ def set_keys():
             desc="lock PC",
         ),
         # Screenshot
-        Key([], "Print", lazy.spawn("flameshot full -p {}".format(str(GlobalConf.capture_path)))),
+        Key([], "Print", lazy.spawn("flameshot full")),
+        Key(["shift"], "Print", lazy.spawn("flameshot full -c")),
+        Key(["shift", "control"], "Print", lazy.spawn("flameshot gui")),
         Key([GlobalConf.mod], "Print", F.capture_screen(is_clipboard=False)),
         Key([GlobalConf.mod, "shift"], "Print", F.capture_screen(is_clipboard=True)),
         # Function keys
@@ -173,14 +175,14 @@ def set_keys():
         Key(
             [],
             "XF86KbdBrightnessUp",
-            lazy.spawn("light -Ars {} 1".format("sysfs/leds/asus::kbd_backlight")),
+            lazy.spawn("light -Ars sysfs/leds/asus::kbd_backlight 1"),
         ),
         Key(
             [],
             "XF86KbdBrightnessDown",
-            lazy.spawn("light -Urs {} 1".format("sysfs/leds/asus::kbd_backlight")),
+            lazy.spawn("light -Urs sysfs/leds/asus::kbd_backlight 1"),
         ),
-        Key([], "XF86Launch1", lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
+        # Key([], "XF86Launch1", lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
         Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
         # PinP operationes
         KeyChord(
@@ -237,14 +239,14 @@ def set_keys():
                     str(i + 1),
                     F.focus_n_screen_group(i),
                     F.keep_pinp,
-                    desc="Switch to group idx {}".format(i + 1),
+                    desc=f"Switch to group idx {i+1}",
                 ),
                 Key(
                     [GlobalConf.mod, "shift"],
                     str(i + 1),
                     F.move_n_screen_group(i),
                     F.keep_pinp,
-                    desc="Switch to & move focused window to group idx {}".format(i + 1),
+                    desc=f"Switch to & move focused window to group idx {i+1}",
                 ),
             ]
         )
