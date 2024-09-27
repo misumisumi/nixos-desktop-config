@@ -3,11 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class ColorSet:
-    # define catppuccino-mocha
+    transparent: str = "#00000000"
+
     background: str = "#1e1e2e"
     foreground: str = "#cdd6f4"
-
-    transparent: str = "#00000000"
 
     black: str = "#45475a"
     red: str = "#f38ba8"

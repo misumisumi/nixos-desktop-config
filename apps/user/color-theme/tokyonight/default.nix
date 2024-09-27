@@ -3,34 +3,36 @@
   lib,
   config,
   scheme ? "small",
+  colorTheme ? "tokyonight-storm",
   ...
 }:
 let
-  flavor = "tokyonight_storm";
+  flavor = builtins.replaceStrings [ "tokyonight-" ] [ "" ] colorTheme;
   pack = pkgs.callPackage ./pack.nix { };
+  kittyAttrName =
+    if (lib.versionAtLeast config.home.version.release "24.11") then "themeFile" else "theme";
 in
 {
   programs = {
-    alacritty.settings = lib.importTOML "${pack}/alacritty/${flavor}.toml";
-    starship.settings = lib.importTOML ./starship/tokyonight.toml;
-    kitty.themeFile = "${builtins.replaceStrings [ "tokyonight" ] [ "tokyo_night" ] flavor}";
-    yazi.theme = lib.importTOML "${pack}/yazi/${flavor}.toml";
+    alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
+    starship.settings = lib.importTOML ./starship/${flavor}.toml;
+    kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
+    yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
+      manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
+    };
     bat = {
       config.theme = flavor;
       themes.${flavor} = {
         src = pack;
-        file = "bat/${flavor}.tmTheme";
+        file = "sublime/tokyonight_${flavor}.tmTheme";
       };
     };
     btop.settings = {
       color_theme = "tokyo-night";
     };
-    git = {
-      includes = [ { path = "${pack}/delta/${flavor}.gitconfig"; } ];
-      delta.options.features = "${flavor}";
-    };
+    git.includes = [ { path = "${pack}/delta/tokyonight_${flavor}.gitconfig"; } ];
     zathura.extraConfig = ''
-      include ${pack + "/zatura/${flavor}.zathurarc"}
+      include ${pack + "/zatura/tokyonight_${flavor}.zathurarc"}
     '';
   };
 }
@@ -46,27 +48,34 @@ in
             "${config.home.homeDirectory}/Library/Application Support";
         configFile = "${configDirectory}/lazygit/config.yml";
       in
-      "${pack}/lazygit/${flavor}.yml,${configFile}";
+      "${pack}/lazygit/tokyonight_${flavor}.yml,${configFile}";
   };
 }
 // lib.optionals (scheme == "full") {
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
-  xdg.configFile = {
-    "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
-      globalSection = {
-        Theme = "Tokyonight-Storm";
-        DarkTHeme = "Tokyonight-Storm";
+  xdg.configFile =
+    let
+      shade = if flavor == "day" then "Day" else "Storm";
+    in
+    {
+      "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
+        globalSection = {
+          Theme = "Tokyonight-${shade}";
+          DarkTHeme = "Tokyonight-${shade}";
+        };
       };
+      "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
+      "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
+      "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
     };
-    "wezterm/color-scheme.lua".source = ./wezterm/color-scheme.lua;
-    "qtile/my_modules/colorset.py".source = ./qtile/colorset.py;
-    "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/${flavor}.dunstrc";
-    "yazi/${flavor}.tmTheme".source = "${pack}/bat/${flavor}.tmTheme";
-  };
-  gtk.theme = {
-    name = "Tokyonight-Dark";
-    package = pkgs.tokyonight-gtk-theme;
-  };
+  gtk.theme =
+    let
+      shade = if flavor == "day" then "Light-hdpi" else "Dark-hdpi";
+    in
+    {
+      name = "Tokyonight-${shade}";
+      package = pkgs.tokyonight-gtk-theme;
+    };
   home.pointerCursor = {
     name = "Dracula-cursors";
     package = pkgs.dracula-theme;

@@ -1,4 +1,4 @@
-local color_scheme = "Catppuccin Macchiato"
+local color_scheme = "Catppuccin Frappe"
 local wezterm = require("wezterm")
 local tab_col = wezterm.color.get_builtin_schemes()[color_scheme].tab_bar
 

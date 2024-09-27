@@ -30,7 +30,7 @@ format = '[$ssh_symbol$hostname ]($style)'
 style = "fg:fg bg:terminal_dark"
 
 [username]
-style_root = "fg:magenta2 bg:terminal_dark"
+style_root = "fg:magenta bg:terminal_dark"
 style_user = "fg:fg bg:terminal_dark"
 format = "[ $user/]($style)"
 show_always = false
@@ -42,11 +42,11 @@ format = "[ 󱦟 took $duration ]($style)"
 
 [git_branch]
 symbol = " "
-style = "fg:green1 bg:terminal_dark"
+style = "fg:cyan bg:terminal_dark"
 format = '[ $symbol$branch ]($style)'
 
 [git_metrics]
-added_style = "fg:green1 bg:terminal_dark"
+added_style = "fg:cyan bg:terminal_dark"
 deleted_style = "fg:red bg:terminal_dark"
 format = "([+$added ]($added_style))([-$deleted]($deleted_style) )"
 disabled = false
@@ -103,7 +103,7 @@ format = '[[ $symbol ($version) ](fg:fg bg:terminal_dark)]($style)'
 
 [directory]
 read_only = " "
-read_only_style = "fg:magenta2 bg:terminal_dark"
+read_only_style = "fg:magenta bg:terminal_dark"
 style = "fg:cyan bg:terminal_dark"
 format = '[  $path]($style)[$read_only ]($read_only_style)'
 truncation_length = 0

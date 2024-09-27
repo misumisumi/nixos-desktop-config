@@ -3,11 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class ColorSet:
-    # define tokyo-night
+    transparent: str = "#00000000"
+
     background: str = "#1a1b26"
     foreground: str = "#c0caf5"
-
-    transparent: str = "#00000000"
 
     black: str = "#15161e"
     red: str = "#f7768e"

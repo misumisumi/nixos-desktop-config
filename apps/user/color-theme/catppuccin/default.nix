@@ -3,11 +3,15 @@
   lib,
   config,
   scheme ? "small",
+  colorTheme ? "catppuccin-macchiato",
   ...
 }:
+let
+  flavor = builtins.replaceStrings [ "catppuccin-" ] [ "" ] colorTheme;
+in
 {
   catppuccin = {
-    flavor = "mocha";
+    inherit flavor;
     pointerCursor.enable = true;
   };
   programs = {
@@ -20,17 +24,18 @@
     starship = {
       catppuccin.enable = true;
       settings = {
-        palettes.catppuccin_mocha =
+        palettes."catppuccin_${flavor}" =
           let
             palette =
-              (lib.importTOML "${config.catppuccin.sources.starship}/themes/mocha.toml")
-              .palettes.catppuccin_mocha;
+              (lib.importTOML "${config.catppuccin.sources.starship}/themes/${flavor}.toml")
+              .palettes."catppuccin_${flavor}";
           in
           {
-            terminal_dark = palette.base;
+            bg = palette.base;
+            terminal_dark = palette.surface0;
             fg = palette.text;
-            magenta2 = palette.maroon;
-            green1 = palette.teal;
+            magenta = palette.maroon;
+            cyan = palette.teal;
           };
       };
     };
@@ -40,15 +45,19 @@
   services = {
     dunst.catppuccin.enable = true;
   };
-  gtk.theme = {
-    name = "Catppuccin-GTK-Dark";
-    package = pkgs.magnetic-catppuccin-gtk;
-  };
 }
 // lib.optionals (scheme == "full") {
   i18n.inputMethod.fcitx5.catppuccin.enable = true;
+  gtk.theme =
+    let
+      shade = if flavor == "latte" then "Light" else "Dark";
+    in
+    {
+      name = "Catppuccin-GTK-${shade}-hdpi";
+      package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
+    };
   xdg.configFile = {
-    "wezterm/color-scheme.lua".source = ./wezterm/color-scheme.lua;
-    "qtile/my_modules/colorset.py".source = ./qtile/colorset.py;
+    "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
+    "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
   };
 }
