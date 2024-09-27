@@ -1,0 +1,15 @@
+palette = "nord"
+
+[palettes.nord]
+bg = "#2e3440"
+fg = "#d8dee9"
+terminal_black = "#4c566a"
+terminal_dark = "#3b4252"
+blue = "#81a1c1"
+cyan = "#88c0d0"
+green = "#a3be8c"
+magenta = "#b48ead"
+orange = "#d08770"
+red = "#bf616a"
+yellow = "#ebcb8b"
+white = "#E5E9F0"

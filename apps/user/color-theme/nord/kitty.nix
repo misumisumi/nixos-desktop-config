@@ -1,4 +1,6 @@
-#NOTE: color palette is based on the nord theme (https://github.com/connorholyday/nord-kitty)
+# Copyright (c) Connor Holyday <connorholyday@gmail.com> (holyday.me)
+# MIT License
+# https://github.com/connorholyday/nord-kitty
 {
   programs.kitty.settings = {
     font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";

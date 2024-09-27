@@ -1,3 +1,5 @@
+# https://github.com/nordtheme/alacritty/blob/main/src/nord.yaml
+
 {
   programs.alacritty.settings.colors = {
     primary = {
