@@ -46,7 +46,7 @@
   };
 }
 // lib.optionals (scheme == "full") {
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ catppuccin-fcitx5 ];
+  i18n.inputMethod.fcitx5.catppuccin.enable = true;
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/color-scheme.lua;
     "qtile/my_modules/colorset.py".source = ./qtile/colorset.py;

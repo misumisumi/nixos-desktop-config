@@ -52,6 +52,12 @@ in
 // lib.optionals (scheme == "full") {
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
   xdg.configFile = {
+    "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
+      globalSection = {
+        Theme = "Tokyonight-Storm";
+        DarkTHeme = "Tokyonight-Storm";
+      };
+    };
     "wezterm/color-scheme.lua".source = ./wezterm/color-scheme.lua;
     "qtile/my_modules/colorset.py".source = ./qtile/colorset.py;
     "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/${flavor}.dunstrc";
