@@ -8,7 +8,7 @@ from my_modules.colorset import ColorSet
 from my_modules.variables import FontConfig, WindowConf
 
 _settings = {
-    "border_focus": ColorSet.cyan,
+    "border_focus": ColorSet.accent,
     "border_normal": ColorSet.background,
     "border_width": WindowConf.border,
     "margin": WindowConf.margin,
@@ -16,14 +16,14 @@ _settings = {
 
 _floating_settings = {
     "border_width": WindowConf.border,
-    "border_focus": ColorSet.cyan,
+    "border_focus": ColorSet.accent,
     "border_normal": ColorSet.background,
 }
 # for default
 layout1 = [
     layout.Columns(
         **_settings,
-        border_focus_stack=ColorSet.cyan,
+        border_focus_stack=ColorSet.accent,
         border_normal_stack=ColorSet.background,
         border_on_single=True,
         fair=False,
@@ -31,7 +31,11 @@ layout1 = [
         insert_position=1,
         margin_on_single=WindowConf.margin,
         split=False,
+        wrap_focus_columns=False,
+        wrap_focus_row=False,
+        wrap_focus_stacks=False,
     ),
+    layout.Max(**_settings),
 ]
 # For code
 layout2 = [
@@ -46,19 +50,8 @@ layout2 = [
     layout.Max(**_settings),
 ]
 
-layout3 = [
-    layout.MonadTall(
-        **_settings,
-        align=layout.MonadTall._left,
-        ratio=0.65,
-        new_client_position="bottom",
-        single_border_width=WindowConf.border,
-        single_margin=WindowConf.margin,
-    ),
-    layout.Max(**_settings),
-]
 # For full
-layout4 = [
+layout3 = [
     layout.Max(margin=0),
 ]
 

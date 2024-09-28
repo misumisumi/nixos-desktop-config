@@ -7,7 +7,7 @@ from libqtile.backend import base
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
 
-from my_modules.layouts import layout1, layout2, layout3, layout4
+from my_modules.layouts import layout1, layout2, layout3
 from my_modules.utils import get_n_monitors
 from my_modules.variables import GlobalConf
 
@@ -20,8 +20,6 @@ _rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
 
 _rule_analyze = [
     {"title": "WaveSurfer 1.8.8p5"},
-    {"wm_class": "thunar"},
-    {"wm_class": "nemo"},
 ]
 
 _rule_full = [
@@ -45,21 +43,15 @@ _rule_sns = [
     {"wm_class": "element"},
     {"wm_class": "ferdium"},
     {"wm_class": "zoom"},
-]
-
-_rule_media = [
     {"wm_class": "spotify"},
-    {"wm_class": "pavucontrol"},
-    {"wm_class": ".blueman-manager-wrapped"},
 ]
 
 group_and_rule = {
-    "code": ("", (layout2, layout3), _rule_code),
+    "code": ("", (layout2,), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
     "analyze": ("󰉕", (layout1,), _rule_analyze),
-    "full": ("󰓓", (layout4,), _rule_full),
-    "sns": ("󰡠", (layout1,), _rule_sns),
-    "media": ("󰓇", (layout2, layout3), _rule_media),
+    "full": ("󰓓", (layout3,), _rule_full),
+    "sns": ("", (layout1,), _rule_sns),
 }
 
 
@@ -113,7 +105,7 @@ class MatchWithCurrentScreen(Match):
         return True
 
 
-_pentablet = {"creation": ("󰂫", layout4)}
+_pentablet = {"creation": ("󰂫", layout3)}
 
 GROUP_PER_SCREEN = len(group_and_rule)
 

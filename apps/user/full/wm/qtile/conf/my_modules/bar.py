@@ -1,7 +1,6 @@
 """widgets for qtile bar"""
 
-import copy
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from pathlib import Path
 
 # from libqtile import widget
@@ -47,10 +46,10 @@ def groupbox():
     return [
         widget.TextBox(padding=2, **only_one_group),
         widget.GroupBox(
-            this_current_screen_border=ColorSet.cyan,
-            this_screen_border=ColorSet.blue,
-            other_current_screen_border=ColorSet.cyan,
-            other_screen_border=ColorSet.blue,
+            this_current_screen_border=ColorSet.accent,
+            this_screen_border=ColorSet.foreground,
+            other_current_screen_border=ColorSet.accent,
+            other_screen_border=ColorSet.foreground,
             use_mouse_wheel=False,
             highlight_method="line",
             active=ColorSet.white,
@@ -75,7 +74,7 @@ def sysinfo():
             format=" {load_percent:0=4.1f}%",
             **fc,
             foreground=ColorSet.background,
-            background=ColorSet.blue,
+            background=ColorSet.accent,
             **left_corner,
         ),
         widget.Memory(
@@ -90,7 +89,7 @@ def sysinfo():
             visible_on_warn=False,
             partition="/home",
             foreground=ColorSet.background,
-            background=ColorSet.blue,
+            background=ColorSet.accent,
             **fc,
             **left_corner,
         ),
@@ -112,7 +111,7 @@ def sysctrl(is_tray=False):
                     fmt=" {}",
                     backlight_name=backlight[0],
                     foreground=ColorSet.background,
-                    background=ColorSet.blue,
+                    background=ColorSet.accent,
                     **fc,
                     **left_corner,
                 ),
@@ -125,6 +124,14 @@ def sysctrl(is_tray=False):
             volume_up_command=["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
             volume_down_command=["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
             **fc,
+            **left_corner,
+        ),
+        widget.CurrentLayout(
+            max_chars=2,
+            foreground=ColorSet.background,
+            background=ColorSet.accent,
+            **fc,
+            **left_corner,
         ),
     ]
     if is_tray:
@@ -142,7 +149,7 @@ def lifeinfo():
         widget.Clock(
             format="%y-%m-%d(%a) %H:%M:%S",
             foreground=ColorSet.background,
-            background=ColorSet.blue,
+            background=ColorSet.accent,
             **fc,
             **left_corner,
         ),
@@ -160,7 +167,7 @@ def tasklist():
     return [
         widget.TextBox(padding=0, **only_one_group),
         widget.TaskList(
-            border=ColorSet.blue,
+            border=ColorSet.accent,
             markup_focused="<span foreground=" + f'"{ColorSet.background}"' + ">{}</span>",
             theme_mode="fallback",
             txt_floating="󱂬 ",
@@ -191,22 +198,19 @@ def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = F
         top_widgets += spacer()
     else:
         top_widgets += groupbox()
+        top_widgets += spacer(length=10)
+        top_widgets += chord()
         if under_fhd:
             top_widgets += spacer()
         else:
-            top_widgets += spacer(length=50)
+            top_widgets += spacer(length=10)
             top_widgets += tasklist()
             top_widgets += spacer(length=20)
         top_widgets += lifeinfo()
         top_widgets += spacer()
 
-        if under_fhd:
-            top_widgets += spacer()
-            top_widgets += spacer(length=10)
-        else:
+        if not under_fhd:
             top_widgets += sysinfo()
-            top_widgets += spacer(length=20)
-        top_widgets += chord()
         top_widgets += spacer(length=10)
         top_widgets += sysctrl(is_tray)
 
