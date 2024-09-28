@@ -3,12 +3,7 @@
 # https://github.com/connorholyday/nord-kitty
 {
   programs.kitty.settings = {
-    font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
-
     ackground = "#282a36";
-    background_opacity = "0.80";
-    clear_all_shortcuts = "yes";
-    enable_audio_bell = "no";
 
     foreground = "#D8DEE9";
     background = "#2E3440";
@@ -39,7 +34,6 @@
     # Cursor;
     cursor = "#81A1C1";
     cursor_text_color = "#24283b";
-    cursor_blink_interval = 0;
     # Selection="highlight";
     selection_foreground = "#000000";
     selection_background = "#FFFACD";

@@ -25,3 +25,5 @@ class ColorSet:
     bmagenta: str = "#c099ff"
     bcyan: str = "#86e1fc"
     bwhite: str = "#c8d3f5"
+
+    accent: str = blue

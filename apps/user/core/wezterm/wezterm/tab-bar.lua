@@ -19,7 +19,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     -- The filled in variant of the > symbol
     local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
 
-    local edge_background = tab_col.inactive_tab_edge
+    local edge_background = tab_col.inactive_tab.bg_color
     local right_edge_background = nil
     local background = tab_col.inactive_tab.bg_color
     local foreground = tab_col.inactive_tab.fg_color

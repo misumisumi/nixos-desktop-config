@@ -1,10 +1,5 @@
 { config, lib, ... }:
 {
-  xdg = {
-    configFile = {
-      "starship".source = ./starship;
-    };
-  };
   programs =
     let
       starshipCmd = "${config.home.profileDirectory}/bin/starship";

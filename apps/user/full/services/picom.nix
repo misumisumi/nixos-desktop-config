@@ -75,6 +75,7 @@
           "window_type = 'desktop'"
           "class_g = 'fcitx'"
           "class_g = 'Dunst'"
+          "class_g = 'Rofi'"
         ];
         blur-method = "dual_kawase";
         blur-size = 8;

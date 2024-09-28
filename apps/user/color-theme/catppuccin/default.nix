@@ -10,6 +10,9 @@ let
   flavor = builtins.replaceStrings [ "catppuccin-" ] [ "" ] colorTheme;
 in
 {
+  imports = [
+    ./rofi.nix
+  ];
   catppuccin = {
     inherit flavor;
     pointerCursor.enable = true;
@@ -46,8 +49,8 @@ in
     dunst.catppuccin.enable = true;
   };
 }
-// lib.optionals (scheme == "full") {
-  i18n.inputMethod.fcitx5.catppuccin.enable = true;
+// lib.optionalAttrs (scheme == "full") {
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-catppuccin ];
   gtk = {
     theme =
       let
@@ -65,5 +68,11 @@ in
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
     "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
+    "fcitx5/conf/classicui.conf".text = lib.generators.toINIWithGlobalSection { } {
+      globalSection = {
+        Theme = "catppuccin-${flavor}-blue";
+        DarkTHeme = "catppuccin-${flavor}-blue";
+      };
+    };
   };
 }

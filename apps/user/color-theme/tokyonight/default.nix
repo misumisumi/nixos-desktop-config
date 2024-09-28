@@ -15,7 +15,7 @@ in
 {
   programs = {
     alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
-    starship.settings = lib.importTOML ./starship/${flavor}.toml;
+    starship.settings =  lib.importTOML ./starship/${flavor}.toml;
     kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
     yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
       manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
@@ -36,7 +36,7 @@ in
     '';
   };
 }
-// lib.optionals (scheme != "core") {
+// lib.optionalAttrs (scheme != "core") {
   home.sessionVariables = {
     LG_CONFIG_FILE =
       let
@@ -51,7 +51,8 @@ in
       "${pack}/lazygit/tokyonight_${flavor}.yml,${configFile}";
   };
 }
-// lib.optionals (scheme == "full") {
+// lib.optionalAttrs (scheme == "full") {
+  imports = [ ./rofi ];
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
