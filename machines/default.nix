@@ -9,16 +9,16 @@ let
       system ? "x86_64-linux",
       homeDirectory ? "",
       scheme ? "minimal",
-      colorTheme ? "tokyonight",
+      colorTheme ? "tokyonight-moon",
       useNixOSWallpaper ? false,
       wm ? "qtile",
     }:
-    with lib;
-    nixosSystem {
+    lib.nixosSystem {
       inherit system;
       specialArgs = {
         inherit
           self
+          colorTheme
           inputs
           hostname
           user
@@ -66,6 +66,9 @@ let
                 self.homeManagerModules.zotero
               ];
               users."${user}" = {
+                imports =
+                  lib.optional (lib.pathExists ../users/${user}) ../users/${user}
+                  ++ lib.optional (lib.pathExists ./machines/${hostname}/home.nix) ./machines/${hostname}/home.nix;
                 dotfilesActivation = true;
                 home.stateVersion = config.system.stateVersion;
               };
@@ -80,7 +83,7 @@ in
     hostname = "liveimg";
     user = "nixos";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     useNixOSWallpaper = true;
   };
   liveimg-gui = settings {
@@ -88,7 +91,7 @@ in
     user = "nixos";
     wm = "gnome";
     scheme = "small";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     useNixOSWallpaper = true;
   };
   liveimg-cui-iso = settings {
@@ -96,38 +99,38 @@ in
     user = "nixos";
     wm = "";
     scheme = "core";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   liveimg-cui = settings {
     hostname = "liveimg";
     user = "nixos";
     wm = "";
     scheme = "small";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   mother = settings {
     hostname = "mother";
     scheme = "full";
-    colorTheme = "tokyonight-storm";
+    colorTheme = "tokyonight-moon";
     inherit user;
   };
   zephyrus = settings {
     hostname = "zephyrus";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     inherit user;
   };
   stacia = settings {
     hostname = "stacia";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     inherit user;
   };
   soleus = settings {
     hostname = "soleus";
     user = "kobayashi";
     scheme = "small";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     useNixOSWallpaper = true;
     wm = "gnome";
   };

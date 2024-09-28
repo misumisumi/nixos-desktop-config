@@ -2,7 +2,6 @@
   config,
   lib,
   user,
-  hostname,
   scheme ? "small",
   colorTheme ? "tokyonight",
   wm ? "",
@@ -19,9 +18,7 @@ with builtins;
       removeFlavor = head (split "-" colorTheme);
     in
     lib.optionals (scheme != "none") (
-      lib.optional (pathExists ../../users/${user}) ../../users/${user}
-      ++ lib.optional (pathExists ../../machines/${hostname}/home.nix) ../../machines/${hostname}/home.nix
-      ++ lib.optional (pathExists ../../apps/user/color-theme/${removeFlavor}) ../../apps/user/color-theme/${removeFlavor}
+      lib.optional (pathExists ../../apps/user/color-theme/${removeFlavor}) ../../apps/user/color-theme/${removeFlavor}
       ++ [
         ../../settings/user/nix
         ../../apps/user/core/bash

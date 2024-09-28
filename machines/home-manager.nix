@@ -6,13 +6,14 @@ let
       user,
       system ? "x86_64-linux",
       scheme ? "",
-      colorTheme ? "tokyonight",
+      colorTheme ? "tokyonight-moon",
       homeDirectory ? "",
       useNixOSWallpaper ? true,
       wm ? "none",
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
+      inherit (inputs.nixpkgs) lib;
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -41,7 +42,7 @@ let
         (
           { config, ... }:
           {
-            imports = [ ../settings/user ];
+            imports = [ ../settings/user ] ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
             dotfilesActivation = true;
             home.stateVersion = config.home.version.release;
           }
@@ -54,31 +55,31 @@ in
     hostname = "system";
     user = "hm-user";
     scheme = "core";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   small = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "small";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   medium = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "medium";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   full = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
   };
   test = settings {
     hostname = "liveimg";
     user = "hm-user";
     scheme = "full";
-    colorTheme = "tokyonight";
+    colorTheme = "tokyonight-moon";
     wm = "qtile";
   };
 }
