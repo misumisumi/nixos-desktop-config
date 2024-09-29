@@ -10,9 +10,7 @@
       };
       extensions = with pkgs.zotero-addons; [
         zotero-better-bibtex
-        zotero-night
         zotero-pdf-translate
-        zotero-zotfile
       ];
     };
   };
