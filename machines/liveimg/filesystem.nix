@@ -1,4 +1,3 @@
-{ lib, ... }:
 let
   device = "/dev/disk/by-id/usb-SAMSUNG_MZALQ128HBHQ_DD56419883ED9-0:0";
 in

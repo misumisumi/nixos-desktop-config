@@ -1,11 +1,13 @@
 # From https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3
-{ lib
-, pkgs
-, config
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  ...
 }:
 with lib;
-with types; let
+with types;
+let
   cfg = config.virtualisation.vfio;
   # acscommit = "1ec4cb0753488353e111496a90bdfbe2a074827e";
   hookModules = submodule {
@@ -42,7 +44,11 @@ in
   options.virtualisation.vfio = {
     enable = mkEnableOption "VFIO Configuration";
     IOMMUType = mkOption {
-      type = types.enum [ "intel" "amd" "both" ];
+      type = types.enum [
+        "intel"
+        "amd"
+        "both"
+      ];
       example = "intel";
       description = "Type of the IOMMU used";
     };
@@ -55,13 +61,19 @@ in
     devices = mkOption {
       type = types.listOf (types.strMatching "[0-9a-f]{4}:[0-9a-f]{4}");
       default = [ ];
-      example = [ "10de:1b80" "10de:10f0" ];
+      example = [
+        "10de:1b80"
+        "10de:10f0"
+      ];
       description = "PCI IDs of devices to bind to vfio-pci";
     };
     deviceDomains = mkOption {
       type = types.listOf (types.strMatching "[0-9]{4}:[0-9]{2}:[0-9]{2}.[0-9]");
       default = [ ];
-      example = [ "0000:01:00.0" "0000:01:00.1" ];
+      example = [
+        "0000:01:00.0"
+        "0000:01:00.1"
+      ];
       description = "PCI Domains of devices to bind to vfio-pci";
     };
     disableEFIfb = mkOption {
@@ -117,18 +129,19 @@ in
     boot = {
       kernelParams =
         (
-          if cfg.IOMMUType == "both"
-          then [
-            "intel_iommu=on"
-            "intel_iommu=igfx_off"
-            "amd_iommu=on"
-          ]
-          else if cfg.IOMMUType == "intel"
-          then [
-            "intel_iommu=on"
-            "intel_iommu=igfx_off"
-          ]
-          else [ "amd_iommu=on" ]
+          if cfg.IOMMUType == "both" then
+            [
+              "intel_iommu=on"
+              "intel_iommu=igfx_off"
+              "amd_iommu=on"
+            ]
+          else if cfg.IOMMUType == "intel" then
+            [
+              "intel_iommu=on"
+              "intel_iommu=igfx_off"
+            ]
+          else
+            [ "amd_iommu=on" ]
         )
         ++ (optionals cfg.applyACSpatch [
           "pcie_acs_override=downstream,multifunction"
@@ -144,7 +157,10 @@ in
           ("vfio-pci.ids=" + (concatStringsSep "," cfg.devices))
           "vfio-pci.disable_vga=1"
         ])
-        ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [ "kvm_intel.nested=1" "kvm_amd.nested=1" ])
+        ++ (optionals (cfg.enableNestedVirtualization && cfg.IOMMUType == "both") [
+          "kvm_intel.nested=1"
+          "kvm_amd.nested=1"
+        ])
         ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "intel") "kvm_intel.nested=1")
         ++ (optional (cfg.enableNestedVirtualization && cfg.IOMMUType == "amd") "kvm_amd.nested=1");
 
@@ -158,10 +174,18 @@ in
             echo "vfio-pci" > "/sys/bus/pci/devices/''$DEV/driver_override"
           done
         '';
-        kernelModules = mkBefore (optionals (cfg.devices != [ ]) [ "vfio_pci" "vfio" "vfio_iommu_type1" ]);
+        kernelModules = mkBefore (
+          optionals (cfg.devices != [ ]) [
+            "vfio_pci"
+            "vfio"
+            "vfio_iommu_type1"
+          ]
+        );
       };
-      blacklistedKernelModules =
-        optionals cfg.blacklistNvidia [ "nvidia" "nouveau" ];
+      blacklistedKernelModules = optionals cfg.blacklistNvidia [
+        "nvidia"
+        "nouveau"
+      ];
 
       kernelPatches = optionals cfg.applyACSpatch [
         {
@@ -190,21 +214,21 @@ in
     system.activationScripts.libvirt-hooks.text = optionalString cfg.hook.enable ''
       ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
     '';
-    environment.etc =
-      mkIf cfg.hook.enable
-        ((attrsets.mapAttrs'
-          (vm: value:
-            attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/prepare/begin/10-pre-hook.sh") {
-              text = value;
-              mode = "0755";
-            })
-          cfg.hook.preHook)
-        // (attrsets.mapAttrs'
-          (vm: value:
-            attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/release/end/10-post-hook.sh") {
-              text = value;
-              mode = "0755";
-            })
-          cfg.hook.postHook));
+    environment.etc = mkIf cfg.hook.enable (
+      (attrsets.mapAttrs' (
+        vm: value:
+        attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/prepare/begin/10-pre-hook.sh") {
+          text = value;
+          mode = "0755";
+        }
+      ) cfg.hook.preHook)
+      // (attrsets.mapAttrs' (
+        vm: value:
+        attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/release/end/10-post-hook.sh") {
+          text = value;
+          mode = "0755";
+        }
+      ) cfg.hook.postHook)
+    );
   };
 }

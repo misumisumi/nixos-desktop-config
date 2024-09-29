@@ -1,9 +1,10 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  ...
 }:
 {
   home = {
-    packages = with pkgs;[
+    packages = with pkgs; [
       ascii-image-converter # Make ascii art
       cmatrix # Lain of character
       ffmpeg # Multi media solution

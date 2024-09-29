@@ -1,10 +1,18 @@
 # ranger (CLI Filer) conf
 # ranger need writable conf dir.
 # If you want to edit rc.conf (ranger preferences), you muse use nixpkgs override like this.
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   home = {
-    packages = with pkgs; [ ranger trash-cli ];
+    packages = with pkgs; [
+      ranger
+      trash-cli
+    ];
     activation = {
       rangerActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -d ${config.xdg.configHome}/ranger ]; then

@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 {
   imports = [
@@ -8,7 +9,7 @@
     ../../apps/user/full/programs/vivaldi.nix
   ] ++ (import ../../apps/user/full/ime);
   home = {
-    packages = with pkgs;[
+    packages = with pkgs; [
       ffmpeg # Multi media solution
       graphicsmagick # CLI Image Editor
       nomacs # Image Viewer

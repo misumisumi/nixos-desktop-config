@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-with builtins;
 with lib;
 let
   lines2list = x: remove "" (map (x: if (match "#.*" x) == null then x else "") x);

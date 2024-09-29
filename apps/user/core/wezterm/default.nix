@@ -21,11 +21,8 @@
   programs.wezterm = {
     enable = true;
   };
-  xdg.configFile = lib.mapAttrs' (
-    f: _:
-    lib.nameValuePair "wezterm/${f}" {
-      enable = true;
-      source = ./wezterm/${f};
-    }
-  ) (builtins.readDir ./wezterm);
+  xdg.configFile.wezterm = {
+    source = ./wezterm;
+    recursive = true;
+  };
 }

@@ -1,14 +1,20 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ rofi-power-menu ];
+  home.packages = with pkgs; [
+    rofi-power-menu
+    rofimoji
+  ];
+
+  xdg.configFile."rofimoji.rc".text = ''
+    action = copy
+    files = [emojis, kaomoji]
+    skin-tone = moderate
+  '';
 
   programs = {
     rofi = {
       enable = true;
-      plugins = with pkgs; [
-        rofi-calc
-        rofi-emoji
-      ];
+      plugins = with pkgs; [ rofi-calc ];
 
       font = "Moralerspace Neon NF 14";
       terminal = "wezterm";

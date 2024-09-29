@@ -1,40 +1,47 @@
 # From https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3
-{ lib
-, pkgs
-, config
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.virtualisation;
   tmpfileEntry = name: f: "f /dev/shm/${name} ${f.mode} ${f.user} ${f.group} -";
 in
 {
   options.virtualisation = {
     sharedMemoryFiles = mkOption {
-      type = types.attrsOf (types.submodule ({ name, ... }: {
-        options = {
-          name = mkOption {
-            visible = false;
-            default = name;
-            type = types.str;
-          };
-          user = mkOption {
-            type = types.str;
-            default = "root";
-            description = "Owner of the memory file";
-          };
-          group = mkOption {
-            type = types.str;
-            default = "root";
-            description = "Group of the memory file";
-          };
-          mode = mkOption {
-            type = types.str;
-            default = "0600";
-            description = "Group of the memory file";
-          };
-        };
-      }));
+      type = types.attrsOf (
+        types.submodule (
+          { name, ... }:
+          {
+            options = {
+              name = mkOption {
+                visible = false;
+                default = name;
+                type = types.str;
+              };
+              user = mkOption {
+                type = types.str;
+                default = "root";
+                description = "Owner of the memory file";
+              };
+              group = mkOption {
+                type = types.str;
+                default = "root";
+                description = "Group of the memory file";
+              };
+              mode = mkOption {
+                type = types.str;
+                default = "0600";
+                description = "Group of the memory file";
+              };
+            };
+          }
+        )
+      );
       default = { };
     };
     hugepages = {
@@ -63,15 +70,16 @@ in
     # Place the virtiofsd directory in an FHS compliant location
     system.activationScripts.virtiofs.text =
       let
-        check_virtualisation = with config.virtualisation; lxc.enable || lxd.enable || incus.enable || libvirtd.enable;
+        check_virtualisation =
+          with config.virtualisation;
+          lxc.enable || lxd.enable || incus.enable || libvirtd.enable;
       in
       optionalString check_virtualisation ''
         mkdir -p /usr/lib/qemu
         ln -sf ${pkgs.virtiofsd}/bin/virtiofsd /usr/lib/qemu/virtiofsd
       '';
 
-    systemd.tmpfiles.rules =
-      mapAttrsToList tmpfileEntry cfg.sharedMemoryFiles;
+    systemd.tmpfiles.rules = mapAttrsToList tmpfileEntry cfg.sharedMemoryFiles;
 
     boot.kernelParams = optionals cfg.hugepages.enable [
       "default_hugepagesz=${cfg.hugepages.defaultPageSize}"
@@ -84,7 +92,10 @@ in
         description = "Scream Receiver (For windows VM)";
         wantedBy = [ "default.target" ];
         # wants = [ "network-online.target" "pulseaudio.service" ]; # For pulseaudio
-        wants = [ "network-online.target" "pipewire-pulse.service" ];
+        wants = [
+          "network-online.target"
+          "pipewire-pulse.service"
+        ];
         environment.IS_SERVICE = "1";
         unitConfig = {
           StartLimitInterval = 200;

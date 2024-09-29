@@ -1,21 +1,22 @@
-{ lib
-, stdenv
-, fetchzip
-, libusb1
-, glibc
-, libGL
-, xorg
-, makeWrapper
-, makeDesktopItem
-, qtx11extras
-, wrapQtAppsHook
-, autoPatchelfHook
-, libX11
-, libXtst
-, libXi
-, libXrandr
-, libXinerama
-, copyDesktopItems
+{
+  lib,
+  stdenv,
+  fetchzip,
+  libusb1,
+  glibc,
+  libGL,
+  xorg,
+  makeWrapper,
+  makeDesktopItem,
+  qtx11extras,
+  wrapQtAppsHook,
+  autoPatchelfHook,
+  libX11,
+  libXtst,
+  libXi,
+  libXrandr,
+  libXinerama,
+  copyDesktopItems,
 }:
 
 let
@@ -26,14 +27,17 @@ in
 stdenv.mkDerivation rec {
   inherit pname version;
   src = fetchzip {
-    url =
-      "https://download01.xp-pen.com/file/2023/11/XPPenLinux${version}.tar.gz";
+    url = "https://download01.xp-pen.com/file/2023/11/XPPenLinux${version}.tar.gz";
     name = "XPPenLinux${version}.tar.gz";
     sha256 = "sha256-A/dv6DpelH0NHjlGj32tKv37S+9q3F8cYByiYlMuqLg=";
   };
 
-  nativeBuildInputs =
-    [ wrapQtAppsHook autoPatchelfHook makeWrapper copyDesktopItems ];
+  nativeBuildInputs = [
+    wrapQtAppsHook
+    autoPatchelfHook
+    makeWrapper
+    copyDesktopItems
+  ];
 
   dontBuild = true;
   dontWrapQtApps = true; # this is done manually
@@ -82,7 +86,10 @@ stdenv.mkDerivation rec {
       exec = "xp-pentablet";
       icon = "xppentablet";
       comment = "XPPen graphical tablet drivers";
-      categories = [ "Utility" "Graphics" ];
+      categories = [
+        "Utility"
+        "Graphics"
+      ];
     })
   ];
 
@@ -92,7 +99,11 @@ stdenv.mkDerivation rec {
     description = "Drivers for the XP-PEN drawing tablets";
     platforms = [ "x86_64-linux" ];
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-    maintainers = with maintainers; [ virchau13 ivar sochotnicky ];
+    maintainers = with maintainers; [
+      virchau13
+      ivar
+      sochotnicky
+    ];
     license = licenses.unfree;
   };
 }

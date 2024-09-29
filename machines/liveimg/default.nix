@@ -1,7 +1,8 @@
-{ lib
-, hostname
-, wm
-, ...
+{
+  lib,
+  hostname,
+  wm,
+  ...
 }:
 {
   imports =
@@ -21,8 +22,9 @@
       ./system.nix
       ./user.nix
       ./zfs.nix
-    ] ++ lib.optional (wm == "gnome") ../../apps/gnome
-    ++ lib.optionals (! lib.hasSuffix "iso" hostname) [
+    ]
+    ++ lib.optional (wm == "gnome") ../../apps/gnome
+    ++ lib.optionals (!lib.hasSuffix "iso" hostname) [
       ../../settings/system/bluetooth
       ../../settings/system/fonts
       ../../settings/system/pulseaudio
@@ -30,6 +32,5 @@
       ./gpu.nix
       ./hardware-configuration.nix
     ]
-    ++ lib.optional (lib.hasSuffix "iso" hostname) ./iso.nix
-  ;
+    ++ lib.optional (lib.hasSuffix "iso" hostname) ./iso.nix;
 }

@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   systemd.user.startServices = "sd-switch";
   sops = {

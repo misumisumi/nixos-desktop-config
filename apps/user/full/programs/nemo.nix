@@ -1,9 +1,15 @@
-{ lib
-, pkgs
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }:
 let
-  nemo-with-extensions = pkgs.nemo-with-extensions.override { extensions = [ pkgs.nemo-emblems pkgs.nemo-fileroller ]; };
+  nemo-with-extensions = pkgs.nemo-with-extensions.override {
+    extensions = [
+      pkgs.nemo-emblems
+      pkgs.nemo-fileroller
+    ];
+  };
 in
 {
   home = {

@@ -1,7 +1,6 @@
-/*
-  waydroid (Android emulater) conf
-*/
-{ pkgs, ... }: {
+# waydroid (Android emulater) conf
+{ pkgs, ... }:
+{
   virtualisation = {
     waydroid = {
       enable = true;

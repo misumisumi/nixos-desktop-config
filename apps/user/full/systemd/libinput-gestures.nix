@@ -6,7 +6,6 @@
     };
   };
 
-
   systemd.user.services = {
     libinput-gestures = {
       Unit = {

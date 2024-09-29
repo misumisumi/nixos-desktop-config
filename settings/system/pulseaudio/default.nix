@@ -1,11 +1,16 @@
-{ pkgs
-, user
-, ...
-}: {
+{
+  pkgs,
+  user,
+  ...
+}:
+{
   users.groups = {
     audio.members = [ "${user}" ];
   };
-  boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
+  boot.kernelModules = [
+    "snd-seq"
+    "snd-rawmidi"
+  ];
   nixpkgs.config.pulseaudio = true; # 一部パッケージのビルド時にpulseaudioを使うように指示する
   environment.systemPackages = with pkgs; [
     portaudio

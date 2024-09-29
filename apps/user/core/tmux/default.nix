@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     xsel
@@ -45,6 +41,7 @@
           '';
         }
         {
+          # color theme is fixed to dracula because the settings are too complicated
           plugin = dracula;
           extraConfig = ''
             set -g @dracula-show-battery false

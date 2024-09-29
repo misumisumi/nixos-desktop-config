@@ -1,6 +1,7 @@
 # User level systemd-unit
 # Please read each description
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   systemd.user.services = {
     setxkbmap.Service = {
       Restart = "on-failure";

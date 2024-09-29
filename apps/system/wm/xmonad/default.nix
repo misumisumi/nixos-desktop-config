@@ -1,12 +1,10 @@
-{ hostname
-, pkgs
-, ...
-}:
+{ hostname, pkgs, ... }:
 let
   png =
-    if hostname != "general"
-    then "${pkgs.my-wallpapers}/wallpapers/background.png"
-    else "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
+    if hostname != "general" then
+      "${pkgs.my-wallpapers}/wallpapers/background.png"
+    else
+      "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
   script = pkgs.writeShellApplication {
     name = "open-wezterm-here";
     text = ''
