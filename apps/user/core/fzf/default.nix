@@ -1,9 +1,10 @@
-{ pkgs, ... }:
 {
   programs = {
+    bash.initExtra = ''
+      bind '"\eg": fzf-file-widget'
+    '';
     zsh.initExtra = ''
-      bindkey '^[t' fzf-file-widget
-      bindkey '^T' transpose-chars
+      bindkey '^[g' fzf-file-widget
     '';
     fzf = {
       enable = true;

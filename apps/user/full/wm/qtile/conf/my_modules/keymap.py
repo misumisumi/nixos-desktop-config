@@ -122,7 +122,7 @@ def set_keys():
             "equal",
             lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort"),
         ),
-        Key([GlobalConf.mod], "e", lazy.spawn("rofi -modi emoji -show emoji"), desc="show rofi-emoji"),
+        Key([GlobalConf.mod], "e", lazy.spawn("rofimoji"), desc="show rofimoji"),
         # Toggle application
         Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
         Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
@@ -173,7 +173,6 @@ def set_keys():
             "XF86KbdBrightnessDown",
             lazy.spawn("light -Urs sysfs/leds/asus::kbd_backlight 1"),
         ),
-        # Key([], "XF86Launch1", lazy.spawn('sh -c "/home/sumi/bin/swich_gpu_mode"')),
         Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
         # PinP operationes
         KeyChord(
