@@ -5,7 +5,7 @@ from libqtile.config import Match
 from libqtile.log_utils import logger
 
 from my_modules.colorset import ColorSet
-from my_modules.variables import FontConfig, WindowConf
+from my_modules.variables import WindowConf
 
 _settings = {
     "border_focus": ColorSet.accent,
@@ -52,7 +52,7 @@ layout2 = [
 
 # For full
 layout3 = [
-    layout.Max(margin=0),
+    layout.Max(border_width=0, margin=0),
 ]
 
 

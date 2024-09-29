@@ -6,7 +6,6 @@
 {
   config,
   lib,
-  user,
   pkgs,
   useNixOSWallpaper ? true,
   ...
@@ -32,7 +31,7 @@
 
     Service = {
       Type = "oneshot";
-      ExecStart = "${config.services.betterlockscreen.package}/bin/betterlockscreen -u ${config.home.homeDirectory}/Pictures/wallpapers/screen_saver.png";
+      ExecStart = "${config.services.betterlockscreen.package}/bin/betterlockscreen -u ${config.xdg.userDirs.pictures}/Pictures/wallpapers/screen_saver.png";
     };
   };
 

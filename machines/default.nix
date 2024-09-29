@@ -68,7 +68,7 @@ let
               users."${user}" = {
                 imports =
                   lib.optional (lib.pathExists ../users/${user}) ../users/${user}
-                  ++ lib.optional (lib.pathExists ./machines/${hostname}/home.nix) ./machines/${hostname}/home.nix;
+                  ++ lib.optional (lib.pathExists ./${hostname}/home.nix) ./${hostname}/home.nix;
                 dotfilesActivation = true;
                 home.stateVersion = config.system.stateVersion;
               };
