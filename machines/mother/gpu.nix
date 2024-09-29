@@ -1,11 +1,5 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
-  # boot.extraModprobeConfig = lib.mkAfter ''
-  #   softdep snd_hda_intel pre: vfio-pci
-  #   softdep nouveau pre: vfio-pci
-  #   softdep nvidia pre: vfio-pci
-  #   softdep xhci_hcd pre: vfio-pci
-  # '';
   services = {
     xserver = {
       videoDrivers = [
