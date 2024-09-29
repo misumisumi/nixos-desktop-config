@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   scheme,
   ...
 }:
@@ -16,12 +17,23 @@
       ./kitty.nix
       ./rofi.nix
     ];
-  programs = {
-    starship.settings = lib.importTOML ./starship/nord.toml;
-    yazi.theme = lib.importTOML ./yazi/nord.toml;
-    bat.config.theme = "nord";
-    btop.settings.color_theme = "nord";
-  };
+  programs =
+    {
+      starship.settings = lib.importTOML ./starship/nord.toml;
+      yazi.theme = lib.importTOML ./yazi/nord.toml;
+      bat.config.theme = "nord";
+      btop.settings.color_theme = "nord";
+    }
+    // lib.optionalAttrs (scheme == "full") {
+      spicetify =
+        let
+          spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+        in
+        {
+          theme = spicePkgs.themes.nord;
+          colorScheme = "Nord";
+        };
+    };
   xdg.configFile =
     {
       "bat/Nord.tmTheme".source = ./sublime/Nord.tmTheme;

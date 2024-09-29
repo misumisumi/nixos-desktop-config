@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   config,
   scheme ? "small",
   colorTheme ? "catppuccin-macchiato",
@@ -17,34 +18,45 @@ in
     inherit flavor;
     pointerCursor.enable = true;
   };
-  programs = {
-    alacritty.catppuccin.enable = true;
-    bat.catppuccin.enable = true;
-    btop.catppuccin.enable = true;
-    git.delta.catppuccin.enable = true;
-    kitty.catppuccin.enable = true;
-    obs-studio.catppuccin.enable = true;
-    starship = {
-      catppuccin.enable = true;
-      settings = {
-        palettes."catppuccin_${flavor}" =
-          let
-            palette =
-              (lib.importTOML "${config.catppuccin.sources.starship}/themes/${flavor}.toml")
-              .palettes."catppuccin_${flavor}";
-          in
-          {
-            bg = palette.base;
-            terminal_dark = palette.surface0;
-            fg = palette.text;
-            magenta = palette.maroon;
-            cyan = palette.teal;
-          };
+  programs =
+    {
+      alacritty.catppuccin.enable = true;
+      bat.catppuccin.enable = true;
+      btop.catppuccin.enable = true;
+      git.delta.catppuccin.enable = true;
+      kitty.catppuccin.enable = true;
+      obs-studio.catppuccin.enable = true;
+      starship = {
+        catppuccin.enable = true;
+        settings = {
+          palettes."catppuccin_${flavor}" =
+            let
+              palette =
+                (lib.importTOML "${config.catppuccin.sources.starship}/themes/${flavor}.toml")
+                .palettes."catppuccin_${flavor}";
+            in
+            {
+              bg = palette.base;
+              terminal_dark = palette.surface0;
+              fg = palette.text;
+              magenta = palette.maroon;
+              cyan = palette.teal;
+            };
+        };
       };
+      yazi.catppuccin.enable = true;
+      zathura.catppuccin.enable = true;
+    }
+    // lib.optionalAttrs (scheme == "full") {
+      spicetify =
+        let
+          spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+        in
+        {
+          theme = spicePkgs.themes.catppuccin;
+          colorScheme = "${flavor}";
+        };
     };
-    yazi.catppuccin.enable = true;
-    zathura.catppuccin.enable = true;
-  };
   services = {
     dunst.catppuccin.enable = true;
   };

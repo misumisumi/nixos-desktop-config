@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   scheme ? "small",
   colorTheme ? "tokyonight-storm",
   ...
@@ -13,28 +14,45 @@ let
     if (lib.versionAtLeast config.home.version.release "24.11") then "themeFile" else "theme";
 in
 {
-  programs = {
-    alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
-    starship.settings = lib.importTOML ./starship/${flavor}.toml;
-    kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
-    yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
-      manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
-    };
-    bat = {
-      config.theme = flavor;
-      themes.${flavor} = {
-        src = pack;
-        file = "sublime/tokyonight_${flavor}.tmTheme";
+  programs =
+    {
+      alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
+      starship.settings = lib.importTOML ./starship/${flavor}.toml;
+      kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
+      yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
+        manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
       };
+      bat = {
+        config.theme = flavor;
+        themes.${flavor} = {
+          src = pack;
+          file = "sublime/tokyonight_${flavor}.tmTheme";
+        };
+      };
+      btop.settings = {
+        color_theme = "tokyo-night";
+      };
+      git.includes = [ { path = "${pack}/delta/tokyonight_${flavor}.gitconfig"; } ];
+      zathura.extraConfig = ''
+        include ${pack + "/zatura/tokyonight_${flavor}.zathurarc"}
+      '';
+    }
+    // lib.optionalAttrs (scheme == "full") {
+      spicetify =
+        let
+          spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+          fixedFlavor = {
+            day = "latte";
+            storm = "frappe";
+            moon = "macchiato";
+            night = "mocha";
+          };
+        in
+        {
+          theme = spicePkgs.themes.catppuccin;
+          colorScheme = "${fixedFlavor.${flavor}}";
+        };
     };
-    btop.settings = {
-      color_theme = "tokyo-night";
-    };
-    git.includes = [ { path = "${pack}/delta/tokyonight_${flavor}.gitconfig"; } ];
-    zathura.extraConfig = ''
-      include ${pack + "/zatura/tokyonight_${flavor}.zathurarc"}
-    '';
-  };
 }
 // lib.optionalAttrs (scheme != "core") {
   home.sessionVariables = {
