@@ -15,7 +15,7 @@ in
 {
   programs = {
     alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
-    starship.settings =  lib.importTOML ./starship/${flavor}.toml;
+    starship.settings = lib.importTOML ./starship/${flavor}.toml;
     kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
     yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
       manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";

@@ -77,21 +77,11 @@ let
         text-color: @bg-col;
     }
   '';
-  rofi-tokyonight = pkgs.stdenvNoCC.mkDerivation {
-    name = "rofi-tokyonight";
-    dontUnpack = true;
-    dontConfigure = true;
-    dontBuild = true;
-    installPhase = ''
-      mkdir -p $out/share/rofi/themes
-      find ${pkgs.catppuccin} -name '*.rasi' -exec cp {} $out/share/rofi/themes/ \;
-      cp ${tokyonight-rasi} $out/share/rofi/themes/tokyonight.rasi
-    '';
-  };
 in
 {
-  programs.rofi = {
-    plugins = [ rofi-tokyonight ];
-    theme = "tokyonight";
+  xdg.configFile = {
+    "rofi/themes/catppuccin-macchiato.rasi".source = "${pkgs.catppuccin}/rofi/catppuccin-macchiato.rasi";
+    "rofi/themes/${colorTheme}.rasi".source = tokyonight-rasi;
   };
+  programs.rofi.theme = "${colorTheme}";
 }

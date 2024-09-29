@@ -46,8 +46,6 @@ let
   };
 in
 {
-  programs.rofi = {
-    plugins = [ rofi-catppuccin ];
-    theme = "catppuccin-custom";
-  };
+  xdg.configFile."rofi/themes/catppuccin-custom.rasi".source = catppuccin-custom;
+  programs.rofi.theme = "catppuccin-custom";
 }

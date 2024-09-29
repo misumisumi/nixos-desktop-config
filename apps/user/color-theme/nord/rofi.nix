@@ -1,10 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, config, ... }:
 let
-  nord = pkgs.writeText "nord.rasi" ''
+  nord-rasi = pkgs.writeText "nord.rasi" ''
     @theme "catppuccin-macchiato"
 
     * {
@@ -45,13 +41,14 @@ let
     installPhase = ''
       mkdir -p $out/share/rofi/themes
       find ${pkgs.catppuccin} -name '*.rasi' -exec cp {} $out/share/rofi/themes/ \;
-      cp ${nord} $out/share/rofi/themes/nord.rasi
+      cp ${nord-rasi} $out/share/rofi/themes/nord.rasi
     '';
   };
 in
 {
-  programs.rofi = {
-    plugins = [ rofi-nord ];
-    theme = "nord";
+  xdg.configFile."rofi/themes" = {
+    "catppuccin-macchiato".source = "${pkgs.catppuccin}/rofi/catppuccin-macchiato.rasi";
+    "nord.rasi".source = nord-rasi;
   };
+  programs.rofi.theme = "nord";
 }
