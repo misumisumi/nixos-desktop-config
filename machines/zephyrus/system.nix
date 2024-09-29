@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ config, ... }:
 {
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -18,6 +14,7 @@
       "snd-aloop"
     ];
   };
+  hardware.brillo.enable = true;
   programs.nix-ld.enable = true;
   services = {
     upower.enable = true;

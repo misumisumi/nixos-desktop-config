@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   user,
@@ -12,10 +11,7 @@
   users.groups = {
     video.members = [ "${user}" ];
   };
-  programs = {
-    gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
-    light.enable = true;
-  };
+  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   services = {
     libinput = {

@@ -19,7 +19,7 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      prime.offloadCfg.enableOffloadCmd = true;
+      prime.offload.enableOffloadCmd = true;
       open = false;
     };
     graphics.extraPackages = with pkgs; [

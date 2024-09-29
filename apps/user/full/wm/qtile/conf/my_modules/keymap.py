@@ -25,18 +25,8 @@ def set_keys():
         Key([GlobalConf.mod], "k", lazy.layout.up(), desc="Move focus up"),
         Key([GlobalConf.mod], "tab", lazy.next_layout(), desc="next layout"),
         Key([GlobalConf.mod, "shift"], "tab", lazy.previous_layout(), desc="previous layout"),
-        Key(
-            [GlobalConf.mod, "shift"],
-            "h",
-            lazy.layout.shuffle_left(),
-            desc="Move window to the left",
-        ),
-        Key(
-            [GlobalConf.mod, "shift"],
-            "l",
-            lazy.layout.shuffle_right(),
-            desc="Move window to the right",
-        ),
+        Key([GlobalConf.mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+        Key([GlobalConf.mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
         Key(
             [GlobalConf.mod, "shift"],
             "j",
@@ -44,43 +34,13 @@ def set_keys():
             lazy.layout.section_down(),
             desc="Move window down",
         ),
-        Key(
-            [GlobalConf.mod, "shift"],
-            "k",
-            lazy.layout.shuffle_up(),
-            lazy.layout.section_up(),
-            desc="Move window up",
-        ),
+        Key([GlobalConf.mod, "shift"], "k", lazy.layout.shuffle_up(), lazy.layout.section_up(), desc="Move window up"),
         Key([GlobalConf.mod, "control"], "c", lazy.window.kill(), desc="Kill focused window"),
         # Operate window between workspaces
-        Key(
-            [GlobalConf.mod, "control"],
-            "h",
-            F.focus_previous_group(),
-            F.keep_pinp(),
-            desc="focus prev group",
-        ),
-        Key(
-            [GlobalConf.mod, "control"],
-            "l",
-            F.focus_next_group(),
-            F.keep_pinp(),
-            desc="focus next group",
-        ),
-        Key(
-            [GlobalConf.mod, "control"],
-            "j",
-            F.window_to_previous_group(),
-            F.keep_pinp(),
-            desc="window to prev group",
-        ),
-        Key(
-            [GlobalConf.mod, "control"],
-            "k",
-            F.window_to_next_group(),
-            F.keep_pinp(),
-            desc="window to next group",
-        ),
+        Key([GlobalConf.mod, "control"], "h", F.focus_previous_group(), F.keep_pinp(), desc="focus prev group"),
+        Key([GlobalConf.mod, "control"], "l", F.focus_next_group(), F.keep_pinp(), desc="focus next group"),
+        Key([GlobalConf.mod, "control"], "j", F.window_to_previous_group(), F.keep_pinp(), desc="window to prev group"),
+        Key([GlobalConf.mod, "control"], "k", F.window_to_next_group(), F.keep_pinp(), desc="window to next group"),
         # Operate floating window
         Key([GlobalConf.mod], "period", F.float_cycle(forward=True)),
         Key([GlobalConf.mod], "comma", F.float_cycle(forward=True, focus=True)),
@@ -117,23 +77,14 @@ def set_keys():
             lazy.spawn("rofi -modi power-menu:rofi-power-menu -show power-menu "),
             desc="show power-menu",
         ),
-        Key(
-            [GlobalConf.mod],
-            "equal",
-            lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort"),
-        ),
+        Key([GlobalConf.mod], "equal", lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort")),
         Key([GlobalConf.mod], "e", lazy.spawn("rofimoji"), desc="show rofimoji"),
         # Toggle application
         Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
         Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
         Key([GlobalConf.mod], "s", lazy.spawn("copyq toggle")),
         # Lock screen
-        Key(
-            [GlobalConf.mod, "control"],
-            "b",
-            lazy.spawn("loginctl lock-session"),
-            desc="lock PC",
-        ),
+        Key([GlobalConf.mod, "control"], "b", lazy.spawn("loginctl lock-session"), desc="lock PC"),
         # Screenshot
         Key([], "Print", lazy.spawn("flameshot full")),
         Key(["shift"], "Print", lazy.spawn("flameshot full -c")),
@@ -141,39 +92,14 @@ def set_keys():
         Key([GlobalConf.mod], "Print", F.capture_screen(is_clipboard=False)),
         Key([GlobalConf.mod, "shift"], "Print", F.capture_screen(is_clipboard=True)),
         # Function keys
-        Key(
-            [],
-            "XF86AudioRaiseVolume",
-            lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
-        ),
-        Key(
-            [],
-            "XF86AudioLowerVolume",
-            lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
-        ),
+        Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
+        Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
         Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
-        Key(
-            [],
-            "XF86AudioMicMute",
-            lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"),
-        ),
+        Key([], "XF86AudioMicMute", lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle")),
         Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
         Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause")),
         Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
         Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
-        Key([], "XF86MonBrightnessUp", lazy.spawn("light -A 5")),
-        Key([], "XF86MonBrightnessDown", lazy.spawn("light -U 5")),
-        Key(
-            [],
-            "XF86KbdBrightnessUp",
-            lazy.spawn("light -Ars sysfs/leds/asus::kbd_backlight 1"),
-        ),
-        Key(
-            [],
-            "XF86KbdBrightnessDown",
-            lazy.spawn("light -Urs sysfs/leds/asus::kbd_backlight 1"),
-        ),
-        Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
         # PinP operationes
         KeyChord(
             [GlobalConf.mod],
@@ -204,6 +130,11 @@ def set_keys():
         ]
     if GlobalConf.laptop:
         keys += [
+            Key([], "XF86MonBrightnessUp", lazy.spawn("brillo -A 5")),
+            Key([], "XF86MonBrightnessDown", lazy.spawn("brillo -U 5")),
+            Key([], "XF86KbdBrightnessUp", lazy.spawn("brillo -kr -A 1")),
+            Key([], "XF86KbdBrightnessDown", lazy.spawn("brillo -kr -U 1")),
+            Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
             # Attach Screen
             KeyChord(
                 [GlobalConf.mod],
@@ -247,16 +178,6 @@ def set_keys():
 def set_mouse():
     # Drag floating layouts.
     return [
-        Drag(
-            [GlobalConf.mod],
-            "Button1",
-            lazy.window.set_position_floating(),
-            start=lazy.window.get_position(),
-        ),
-        Drag(
-            [GlobalConf.mod, "shift"],
-            "Button1",
-            lazy.window.set_size_floating(),
-            start=lazy.window.get_size(),
-        ),
+        Drag([GlobalConf.mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+        Drag([GlobalConf.mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     ]
