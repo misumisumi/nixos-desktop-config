@@ -40,5 +40,8 @@ if not GlobalConf.laptop:
 def init_screen_wallpapers():
     feh = "feh"
     for i, _ in enumerate(qtile.screens):
-        feh += f" --bg-fill {GlobalConf.wallpapers[i]}"
+        if i < len(GlobalConf.wallpapers):
+            feh += f" --bg-fill {GlobalConf.wallpapers[i]}"
+        else:
+            feh += f" --bg-fill {GlobalConf.wallpapers[0]}"
     subprocess.run(feh, shell=True)
