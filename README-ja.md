@@ -3,50 +3,54 @@
 nix の世界へようこそ!!  
 これは[misumisumi](https://github.com/misumisumi)のNixOSおよびhome-managerの設定です。
 
-リカバリー用の設定使って NixOS を試すことができます。(Bootable Disk or LiveCD)
+![thumbnail](./assets/thumbnail.png)
 
 ## 説明
 
 - このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
-- リカバリー用のgnomeまたはCLI環境を試用することができます。
-- 各マシンの設定は[machines](./machines)にあります。
-- ユーザー環境でのみ`nix`を使いたい場合は`home-manager`を試すことができます。
-
-- system-wide
+- デスクトップ環境、CLI環境で試用することができます。
+  - DE: Qtile or GNOME
+- スタンドアローン[home-manager](https://github.com/nix-community/home-manager)のサポート
+- 複数カラースキームのサポート
 
 ```
 nixos-desktop-config
 ├── apps           # settings for installing apps
-│   ├── system     # system wide
-│   └── user       # user wide
+│   ├── system     # system wide application configurations (NixOS options)
+│   └── user       # user wide application configurations (home-manager options)
 │       ├── core   # common installing apps
 │       ├── full   # include GUI
 │       ├── medium # include latex
-│       └── small  # include neovim and zsh
-├── machines       # settings for each machine
-├── modules        # nixosModules and homeManagerModules
+│       └── small  # include neovim and useful apps
+├── machines       # settings for each my machines
+├── modules        # my custom nixosModules and homeManagerModules
 ├── patches        # patch of package
-├── settings       # common machine settings
+├── settings       # common system settings
 │   ├── system     # system wide
 │   └── user       # user wide
 ├── sops           # secrets
-└── users          # settings for each user
+└── users          # settings for each users
 ```
 
-- only user-wide (home-manager)
+## Module Usage
 
+```nix
+{
+  inputs = {
+    dotfiles.url = "github:misumisumi/nixos-desktop-config"
+    # ...
+  };
+  # ...
+  # import nixosModules by inputs.dotfiles.nixosModules.<module-name>
+  # import homeManageModules by inputs.dotfiles.homeManagerModules.<module-name>
+}
 ```
-# core config (Please see apps/user/core)
-home-manager switch --flake ".#core"
 
-# small config (Please see apps/user/small, Include `core`)
-home-manager switch --flake ".#small"
+## Installation Guide
 
-# full config (Please see apps/user/full, Include `core` and `small`)
-home-manager switch --flake ".#full"
-```
-
-## インストールガイド
+> [!WARNING]  
+> 自分の環境で動くことに主眼を置いてメンテナンスしています。  
+> `liveimg-*`及びスタンドアローン`home-manager`は十分にテストされていません。
 
 ### NixOS
 
@@ -63,30 +67,49 @@ home-manager switch --flake ".#full"
 
 3. インストール
 
-   - Bootable External Disk
+   - リポジトリをcloneした場合は`--flake .#<flake-name>`に読み替える
 
-   ```sh
-   # Create key file for luks
-   echo <password> > /tmp/luks.key
-   # In root env
+#### Bootable External Disk
 
-   # Format disk and mount to `/mnt`
-   # "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
-   nix run nixpkgs#disko -- -m disko --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
+```sh
+# 1. Create key file for luks
+echo <password> > /tmp/luks.key
 
-   # Install NixOS to `/mnt`
-   nixos-install --no-root-passwd --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
-   ```
+# 2. Edit `device` in machines/liveimg/filesystem
 
-   - Create LiveCD
+# 3. Check flake name (liveimg-cui-* or liveimg-gui-*, *-iso is for ISO creation, not use here)
 
-   ```sh
-   # Create .iso file
-   nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#liveimg-iso
+# 4. Format disk and mount to `/mnt`
+# "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
+nix run nixpkgs#disko -- -m disko --flake "github:misumisumi/nixos-desktop-config#<flake-name>"
 
-   # Write iso to device
-   dd if=result/iso/*.iso of=/dev/sdX status=progress
-   ```
+# Install NixOS to `/mnt`
+nixos-install --no-root-passwd --flake "github:misumisumi/nixos-desktop-config#<flake-name>"
+```
+
+#### Create LiveCD
+
+```sh
+# 1. Check flake name (liveimg-iso-*)
+# 2. Create .iso file (build takes a long time)
+nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#<flake-name>
+
+# Write iso to device
+dd if=result/iso/*.iso of=/dev/sdX status=progress
+```
+
+#### スタンドアローンhome-manager
+
+1. Setup home-manager
+
+- See [home-manager official manual](https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone)
+
+2. Switch to config
+
+```sh
+
+  home-manager switch --flake github:misumisumi/nixos-desktop-config#<core or small or medium or full>
+```
 
 ## Appendix
 
@@ -94,24 +117,28 @@ home-manager switch --flake ".#full"
 
 - Common Compornents
 
-|              |       Linux       |       macOS       |
-| :----------: | :---------------: | :---------------: |
-|    Shell     |        Zsh        |        Zsh        |
-|   Terminal   |      Wezterm      |      Wezterm      |
-|    Editor    |      Neovim       |      Neovim       |
-|   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
-| Input Method | Fcitx5+mozc & skk |        \-         |
-|   Launcher   |       Rofi        |        \-         |
-|  GTK Theme   | Adapta-Nokto-Eta  |        \-         |
-|  Icon Theme  |   Papirus-Dark    |        \-         |
-| System Font  |  Source Han Sans  |        \-         |
+|               |        Linux (GNOME)         |        Linux (Qtile)         |
+| :-----------: | :--------------------------: | :--------------------------: |
+| window system |       Wayland or Xorg        |             Xorg             |
+|     Shell     |             Zsh              |             Zsh              |
+|   Terminal    |           Wezterm            |           Wezterm            |
+|    Editor     |            Neovim            |            Neovim            |
+|    Browser    |      Vivaldi & Firefox       |      Vivaldi & Firefox       |
+| Input Method  |      Fcitx5+mozc & skk       |         Fcitx5 & skk         |
+|   Launcher    |             Rofi             |             Rofi             |
+|     Theme     | catppuccin, nord, tokyonight | catppuccin, nord, tokyonight |
+|  System Font  |        Noto Fonts CJK        |        Noto Fonts CJK        |
 
-|  DE   |  Window System  |
-| :---: | :-------------: |
-| gnome | Wayland or Xorg |
-| QTile |      Xorg       |
-| Yabai |      macOS      |
+### Gallery
 
-## ToDO
+<h4 style="text-align: center">catppuccin-macchiato</h4>
 
-- [ ] support macOS
+![tumbnail catppuccin-macchiato](./assets/catppuccin-macchiato.png)
+
+<h4 style="text-align: center">nord</h4>
+
+![tumbnail nord](./assets/nord.png)
+
+<h4 style="text-align: center">tokyonight-moon</h4>
+
+![tumbnail tokyonight-moon](./assets/tokyonight-moon.png)
