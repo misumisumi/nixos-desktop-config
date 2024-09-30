@@ -3,7 +3,7 @@
   NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
   However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
 */
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [ xorg.xmodmap ];
   systemd.user.targets.tray.Unit.ExecPost = "${pkgs.coreutils}/bin/sleep 3";

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Optional, Union
 
 from libqtile.log_utils import logger
+from xdg import BaseDirectory
 
 from my_modules import utils
 from my_modules.colorset import ColorSet
@@ -71,8 +72,10 @@ class Global:
 
     home: Path = Path.home()
     wallpapers_path: Path = Path(os.getenv("XDG_PICTURES_DIR")).joinpath("wallpapers")
+    wallpapers_cache_path: Path = Path(BaseDirectory.save_cache_path("qtile/wallpapers"))
     wallpapers: list[str] = field(init=False)
-    screen_saver: str = str(wallpapers_path.joinpath("screen_saver.png"))
+    cached_wallpapers: list[str] = field(default_factory=lambda: [])
+    use_cached_wallpapers: bool = True
 
     has_pentablet: bool = True if os.uname()[1] in ["mother"] else False
 
@@ -104,7 +107,6 @@ class Global:
 
     def update_monitors(self):
         self.monitors = utils.get_n_monitors(self.has_pentablet)
-        self.monitors_w_pentablet = utils.get_n_monitors(False)
 
 
 FontConf = FontConfig()

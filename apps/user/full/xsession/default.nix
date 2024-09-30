@@ -11,32 +11,14 @@
   ...
 }:
 {
-  services = {
-    screen-locker.xautolock.enable = true;
-    betterlockscreen = {
-      enable = true;
-      inactiveInterval = 40;
-      arguments = [ "--show-layout" ];
-    };
-  };
-  systemd.user.services.betterlockscreen-update = {
-    Unit = {
-      Description = "";
-      After = [ "graphical-session.target" ];
-    };
-
-    Install = {
-      WantedBy = [ " graphical-session.target " ];
-    };
-
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${config.services.betterlockscreen.package}/bin/betterlockscreen -u ${config.xdg.userDirs.pictures}/wallpapers/screen_saver.png";
-    };
-  };
-
   home = {
-    packages = with pkgs; [ betterlockscreen ];
+    packages = with pkgs; [
+      xclip
+      xorg.xev
+      xorg.xhost
+      xorg.xkill
+      xorg.xrandr
+    ];
     file =
       lib.optionalAttrs useNixOSWallpaper (
         builtins.listToAttrs (
@@ -49,23 +31,20 @@
               };
             })
             [
-              "fixed/0_main.png"
-              "fixed/1_main.png"
-              "unfixed/main.png"
+              "fixed/00_main.png"
+              "unfixed/00_main.png"
               "background.png"
               "screen_saver.png"
             ]
         )
       )
-      // lib.optionalAttrs (!useNixOSWallpaper) (
-        lib.mapAttrs' (
-          f: _:
-          lib.nameValuePair "${config.home.homeDirectory}/Pictures/wallpapers/${f}" {
-            enable = true;
-            source = ./wallpapers/${f};
-          }
-        ) (builtins.readDir ./wallpapers)
-      );
+      // lib.optionalAttrs (!useNixOSWallpaper) {
+        wallpapers = {
+          source = ./wallpapers;
+          target = "${config.xdg.userDirs.pictures}/wallpapers";
+          recursive = true;
+        };
+      };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
@@ -86,7 +65,6 @@
     preferStatusNotifierItems = true;
 
     profileExtra = ''
-      export GLFW_IM_MODULE=ibus
       export SDL_JOYSTICK_HIDAPI=0
       xhost si:localuser:$USER &
     '';

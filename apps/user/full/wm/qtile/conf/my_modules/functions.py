@@ -7,7 +7,7 @@ from libqtile import hook, qtile
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
-from my_modules import groups, screens, startup
+from my_modules import groups, screens, startup, wallpaper
 from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, group_and_rule
 from my_modules.utils import get_monitor_status
@@ -357,6 +357,12 @@ def capture_screen(qtile, is_clipboard=False):
         qtile.spawn(f"flameshot screen -n {idx}")
 
 
+@lazy.function
+def reload_config_alt(qtile):
+    wallpaper.mk_wallpaper_cache()
+    qtile.reload_config()
+
+
 def _reload_screens(qtile):
     GlobalConf.update_monitors()
     qtile.config.screens = screens.make_screens(manually=True)
@@ -373,6 +379,7 @@ def reload_screens(qtile):
 async def reinit_screen():
     await asyncio.sleep(0.6)
     screens.set_bar_property()
+    wallpaper.mk_wallpaper_cache()
     qtile.reload_config()
     startup.autostart()
 

@@ -47,4 +47,4 @@ def get_wallpapers(path: Path, laptop: bool) -> list[str]:
         wallpapers = list(path.joinpath("unfixed").glob("*.png"))
     wallpapers.sort()
 
-    return [str(wallpaper) for wallpaper in wallpapers]
+    return wallpapers

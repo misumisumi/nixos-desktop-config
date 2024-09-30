@@ -70,12 +70,4 @@
       '';
     };
   };
-  environment.systemPackages = with pkgs; [
-    xclip
-    xorg.xhost
-    xorg.xev
-    xorg.xkill
-    xorg.xrandr
-    xterm
-  ];
 }
