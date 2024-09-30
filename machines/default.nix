@@ -10,7 +10,8 @@ let
       homeDirectory ? "",
       scheme ? "minimal",
       colorTheme ? "tokyonight-moon",
-      useNixOSWallpaper ? false,
+      useNixOSWallpaper ? true,
+      excludeShells ? [ ],
       wm ? "qtile",
     }:
     lib.nixosSystem {
@@ -51,6 +52,7 @@ let
                   homeDirectory
                   scheme
                   colorTheme
+                  excludeShells
                   useNixOSWallpaper
                   wm
                   ;
@@ -79,12 +81,26 @@ let
     };
 in
 {
-  liveimg-gui-full = settings {
+  liveimg-gui-qtile = settings {
     hostname = "liveimg";
     user = "nixos";
+    wm = "gnome";
     scheme = "full";
     colorTheme = "tokyonight-moon";
-    useNixOSWallpaper = true;
+  };
+  liveimg-gui-gnome = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "gnome";
+    scheme = "full";
+    colorTheme = "tokyonight-moon";
+  };
+  liveimg-gui-iso = settings {
+    hostname = "liveimg";
+    user = "nixos";
+    wm = "gnome";
+    scheme = "small";
+    colorTheme = "tokyonight-moon";
   };
   liveimg-gui = settings {
     hostname = "liveimg";
@@ -92,7 +108,6 @@ in
     wm = "gnome";
     scheme = "small";
     colorTheme = "tokyonight-moon";
-    useNixOSWallpaper = true;
   };
   liveimg-cui-iso = settings {
     hostname = "liveimg";
@@ -112,18 +127,21 @@ in
     hostname = "mother";
     scheme = "full";
     colorTheme = "tokyonight-moon";
+    useNixOSWallpaper = false;
     inherit user;
   };
   zephyrus = settings {
     hostname = "zephyrus";
     scheme = "full";
     colorTheme = "tokyonight-moon";
+    useNixOSWallpaper = false;
     inherit user;
   };
   stacia = settings {
     hostname = "stacia";
     scheme = "full";
     colorTheme = "tokyonight-moon";
+    useNixOSWallpaper = false;
     inherit user;
   };
   soleus = settings {
@@ -131,7 +149,6 @@ in
     user = "kobayashi";
     scheme = "small";
     colorTheme = "tokyonight-moon";
-    useNixOSWallpaper = true;
     wm = "gnome";
   };
 }

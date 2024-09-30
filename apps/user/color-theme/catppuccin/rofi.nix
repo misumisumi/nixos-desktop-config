@@ -31,21 +31,13 @@ let
         text-color: @bg-col;
     }
   '';
-  rofi-catppuccin = pkgs.stdenvNoCC.mkDerivation {
-    name = "rofi-catppuccin";
-    dontUnpack = true;
-    dontConfigure = true;
-    dontBuild = true;
-    installPhase = ''
-      mkdir -p $out/share/rofi/themes
-      find ${
-        pkgs.catppuccin.override { variant = "${flavor}"; }
-      } -name '*.rasi' -exec cp {} $out/share/rofi/themes/ \;
-      cp ${catppuccin-custom} $out/share/rofi/themes/catppuccin-custom.rasi
-    '';
-  };
 in
 {
-  xdg.configFile."rofi/themes/catppuccin-custom.rasi".source = catppuccin-custom;
+  xdg.configFile = {
+    "rofi/themes/catppuccin-${flavor}.rasi".source = "${
+      pkgs.catppuccin.override { variant = "${flavor}"; }
+    }/rofi/catppuccin-${flavor}.rasi";
+    "rofi/themes/catppuccin-custom.rasi".source = catppuccin-custom;
+  };
   programs.rofi.theme = "catppuccin-custom";
 }

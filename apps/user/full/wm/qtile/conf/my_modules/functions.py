@@ -284,7 +284,7 @@ def window_to_next_group(qtile):
 def focus_n_screen_group(qtile, idx):
     groups = qtile.groups
     s_idx = qtile.current_screen.index
-    if idx < GROUP_PER_SCREEN:
+    if s_idx < GlobalConf.monitors and idx < GROUP_PER_SCREEN:
         qtile.current_screen.set_group(groups[int(idx + GROUP_PER_SCREEN * s_idx)])
 
 
@@ -292,7 +292,7 @@ def focus_n_screen_group(qtile, idx):
 def move_n_screen_group(qtile, idx):
     groups = qtile.groups
     s_idx = qtile.current_screen.index
-    if idx < GROUP_PER_SCREEN:
+    if s_idx < GlobalConf.monitors and idx < GROUP_PER_SCREEN:
         qtile.current_window.togroup(groups[int(idx + GROUP_PER_SCREEN * s_idx)].name, switch_group=True)
 
 

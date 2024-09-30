@@ -10,11 +10,14 @@
       ../../apps/system/documentation
       ../../apps/system/pkgs
       ../../apps/system/programs
+      ../../settings/system/bluetooth
       ../../settings/system/console
       ../../settings/system/environment
+      ../../settings/system/fonts
       ../../settings/system/locale
       ../../settings/system/network
       ../../settings/system/nix
+      ../../settings/system/pipewire
       ../../settings/system/security
       ../init
       ./network.nix
@@ -23,11 +26,8 @@
       ./user.nix
       ./zfs.nix
     ]
-    ++ lib.optional (wm == "gnome") ../../apps/gnome
+    ++ lib.optional (wm == "gnome") ../../apps/system/gnome
     ++ lib.optionals (!lib.hasSuffix "iso" hostname) [
-      ../../settings/system/bluetooth
-      ../../settings/system/fonts
-      ../../settings/system/pulseaudio
       ./filesystem.nix
       ./gpu.nix
       ./hardware-configuration.nix

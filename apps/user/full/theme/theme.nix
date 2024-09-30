@@ -4,6 +4,7 @@ let
   extraConfig = { };
 in
 {
+  home.pointerCursor.gtk.enable = true;
   gtk = {
     enable = true;
     font = {

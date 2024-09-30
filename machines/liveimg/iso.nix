@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -16,7 +15,4 @@
     "cifs"
   ];
   isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-  environment.systemPackages = with pkgs; [
-    neovim
-  ];
 }

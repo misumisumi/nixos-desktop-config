@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 let
   browsers = [
     "vivaldi-stable.desktop"

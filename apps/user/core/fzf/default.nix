@@ -6,6 +6,10 @@
     zsh.initExtra = ''
       bindkey '^[g' fzf-file-widget
     '';
+
+    fd.enable = true;
+    ripgrep.enable = true;
+
     fzf = {
       enable = true;
       enableZshIntegration = false; # Confilict "jeffreytse/zsh-vi-mode" so init my self

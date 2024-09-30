@@ -5,11 +5,12 @@ let
       hostname,
       user,
       system ? "x86_64-linux",
+      homeDirectory ? "",
       scheme ? "",
       colorTheme ? "tokyonight-moon",
-      homeDirectory ? "",
       useNixOSWallpaper ? true,
-      wm ? "none",
+      excludeShells ? [ ],
+      wm ? "",
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -25,6 +26,7 @@ let
           user
           scheme
           colorTheme
+          excludeShells
           homeDirectory
           useNixOSWallpaper
           wm
@@ -42,7 +44,10 @@ let
         (
           { config, ... }:
           {
-            imports = [ ../settings/user ] ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
+            imports = [
+              ../settings/user
+              ../settings/user/nixpkgs
+            ] ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
             dotfilesActivation = true;
             home.stateVersion = config.home.version.release;
           }
@@ -56,24 +61,28 @@ in
     user = "hm-user";
     scheme = "core";
     colorTheme = "tokyonight-moon";
+    excludeShells = [ "bash" ];
   };
   small = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "small";
     colorTheme = "tokyonight-moon";
+    excludeShells = [ "bash" ];
   };
   medium = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "medium";
     colorTheme = "tokyonight-moon";
+    excludeShells = [ "bash" ];
   };
   full = settings {
     hostname = "system";
     user = "hm-user";
     scheme = "full";
     colorTheme = "tokyonight-moon";
+    excludeShells = [ "bash" ];
   };
   test = settings {
     hostname = "liveimg";

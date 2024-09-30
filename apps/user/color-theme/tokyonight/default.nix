@@ -72,6 +72,7 @@ in
 // lib.optionalAttrs (scheme == "full") {
   imports = [ ./rofi ];
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
+  services.dunst.settings = lib.importTOML "${pack}/dunst/tokyonight_${flavor}.dunstrc";
   xdg.configFile = {
     "wezterm/color-scheme.lua".source = ./wezterm/${flavor}.lua;
     "fcitx5/conf/classicui.conf".text =
@@ -85,7 +86,6 @@ in
         };
       };
     "qtile/my_modules/colorset.py".source = ./qtile/${flavor}.py;
-    "dunst/dunstrc.d/00-${flavor}.dunstrc".source = "${pack}/themes/dunst/tokyonight_${flavor}.dunstrc";
   };
   gtk = {
     theme =

@@ -1,13 +1,11 @@
 /*
   Manage xsession from home-manager.
   NixOS is not manager Keyboard if you use this, so you must manage xkb keyboard from this.
-  However, mouse and trackpad are managed from xserver. (conf is ./xserver.nix)
+  However, mouse and trackpad are managed from xserver. (conf is apps/system/xserver)
 */
 {
-  config,
   lib,
   pkgs,
-  useNixOSWallpaper ? true,
   ...
 }:
 {
@@ -19,32 +17,6 @@
       xorg.xkill
       xorg.xrandr
     ];
-    file =
-      lib.optionalAttrs useNixOSWallpaper (
-        builtins.listToAttrs (
-          map
-            (x: {
-              name = "${config.home.homeDirectory}/Pictures/wallpapers/${x}";
-              value = {
-                enable = true;
-                source = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
-              };
-            })
-            [
-              "fixed/00_main.png"
-              "unfixed/00_main.png"
-              "background.png"
-              "screen_saver.png"
-            ]
-        )
-      )
-      // lib.optionalAttrs (!useNixOSWallpaper) {
-        wallpapers = {
-          source = ./wallpapers;
-          target = "${config.xdg.userDirs.pictures}/wallpapers";
-          recursive = true;
-        };
-      };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
@@ -55,7 +27,6 @@
     };
     pointerCursor = {
       x11.enable = true;
-      gtk.enable = true;
       size = lib.mkDefault 24;
     };
   };

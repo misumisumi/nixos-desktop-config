@@ -6,7 +6,7 @@
 {
   environment.pathsToLink = [ "/share/bash-completion" ];
   programs.bash = {
-    enableCompletion = true;
+    completion.enable = true;
     enableLsColors = true;
     vteIntegration = true;
   };

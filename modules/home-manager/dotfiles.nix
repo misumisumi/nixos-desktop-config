@@ -68,7 +68,7 @@ in
         ../../apps/user/full/xdg
       ]
     )
-    ++ lib.optionals (wm != "" || wm != "gnome") [
+    ++ lib.optionals (wm != "" && wm != "gnome") [
       ../../apps/user/full/xsession
       ../../apps/user/full/wm
       ../../apps/user/full/wm/${wm}
@@ -95,7 +95,7 @@ in
           '';
         }
       ]
-      ++ lib.optionals (wm != "" || wm != "gnome" && scheme == "full") [
+      ++ lib.optionals (wm != "" && wm != "gnome" && scheme == "full") [
         {
           assertion = pathExists ../../apps/user/full/wm/${wm};
           message = ''
