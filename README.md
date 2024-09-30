@@ -119,7 +119,7 @@ dd if=result/iso/*.iso of=/dev/sdX status=progress
 
 |               |        Linux (GNOME)         |        Linux (Qtile)         |
 | :-----------: | :--------------------------: | :--------------------------: |
-| window system |       Wayland or Xorg        |             Xorg             |
+| window system |        Wayland or X11        |             X11              |
 |     Shell     |             Zsh              |             Zsh              |
 |   Terminal    |           Wezterm            |           Wezterm            |
 |    Editor     |            Neovim            |            Neovim            |
@@ -133,12 +133,12 @@ dd if=result/iso/*.iso of=/dev/sdX status=progress
 
 <h4 style="text-align: center">catppuccin-macchiato</h4>
 
-![tumbnail catppuccin-macchiato](./assets/catppuccin-macchiato.png)
+![catppuccin-macchiato](./assets/catppuccin-macchiato.png)
 
 <h4 style="text-align: center">nord</h4>
 
-![tumbnail nord](./assets/nord.png)
+![nord](./assets/nord.png)
 
 <h4 style="text-align: center">tokyonight-moon</h4>
 
-![tumbnail tokyonight-moon](./assets/tokyonight-moon.png)
+![tokyonight-moon](./assets/tokyonight-moon.png)

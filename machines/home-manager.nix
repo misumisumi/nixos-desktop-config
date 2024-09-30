@@ -10,7 +10,7 @@ let
       colorTheme ? "tokyonight-moon",
       useNixOSWallpaper ? true,
       excludeShells ? [ ],
-      wm ? "",
+      wm ? "none",
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};

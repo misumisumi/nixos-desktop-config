@@ -4,7 +4,7 @@
   user,
   scheme ? "small",
   colorTheme ? "tokyonight",
-  wm ? "",
+  wm ? "none",
   homeDirectory ? "",
   excludeShells ? [ ],
   ...
@@ -94,8 +94,14 @@ in
             See supported color theme list in apps/user/color-theme.
           '';
         }
+        {
+          assertion = wm != "";
+          message = ''
+            wm must be set to 'none' or 'gnome' or wm name in apps/user/full/wm/.
+          '';
+        }
       ]
-      ++ lib.optionals (wm != "" && wm != "gnome" && scheme == "full") [
+      ++ lib.optionals (wm != "none" && wm != "gnome" && scheme == "full") [
         {
           assertion = pathExists ../../apps/user/full/wm/${wm};
           message = ''

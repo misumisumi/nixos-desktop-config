@@ -12,7 +12,7 @@ let
       colorTheme ? "tokyonight-moon",
       useNixOSWallpaper ? true,
       excludeShells ? [ ],
-      wm ? "qtile",
+      wm ? "none",
     }:
     lib.nixosSystem {
       inherit system;
@@ -112,14 +112,14 @@ in
   liveimg-cui-iso = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "";
+    wm = "none";
     scheme = "core";
     colorTheme = "tokyonight-moon";
   };
   liveimg-cui = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "";
+    wm = "none";
     scheme = "small";
     colorTheme = "tokyonight-moon";
   };
@@ -128,6 +128,7 @@ in
     scheme = "full";
     colorTheme = "tokyonight-moon";
     useNixOSWallpaper = false;
+    wm = "qtile";
     inherit user;
   };
   zephyrus = settings {
@@ -135,6 +136,7 @@ in
     scheme = "full";
     colorTheme = "tokyonight-moon";
     useNixOSWallpaper = false;
+    wm = "qtile";
     inherit user;
   };
   stacia = settings {
@@ -142,6 +144,7 @@ in
     scheme = "full";
     colorTheme = "tokyonight-moon";
     useNixOSWallpaper = false;
+    wm = "qtile";
     inherit user;
   };
   soleus = settings {
