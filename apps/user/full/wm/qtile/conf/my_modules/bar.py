@@ -126,10 +126,11 @@ def sysctrl(is_tray=False):
             **fc,
             **left_corner,
         ),
-        widget.CurrentLayout(
-            max_chars=2,
+        widget.CurrentLayoutIcon(
             foreground=ColorSet.background,
             background=ColorSet.accent,
+            padding=0,
+            scale=0.6,
             **fc,
             **left_corner,
         ),

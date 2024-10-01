@@ -71,3 +71,7 @@ def set_floating_layout():
         ],
         **_floating_settings,
     )
+
+
+def set_layouts():
+    return layout1 + layout2 + layout3
