@@ -11,7 +11,6 @@
   home = {
     packages = with pkgs; [
       ranger
-      trash-cli
     ];
     activation = {
       rangerActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -19,13 +18,6 @@
           mkdir ${config.xdg.configHome}/ranger
         fi
       '';
-    };
-    shellAliases = {
-      tm = "trash-put";
-      tls = "trash-list";
-      tre = "trash-restore";
-      temp = "trash-empty";
-      trm = "trash-rm";
     };
   };
   xdg = {
