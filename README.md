@@ -51,7 +51,7 @@ nixos-desktop-config
 
 ## Installation Guide
 
-> [!WARNING] ⚠️  
+> [!WARNING]  
 > I maintain it with a focus on making it work in my own environment.  
 > `liveimg-*` and standalone `home-manager` are not well tested.
 
@@ -131,14 +131,14 @@ dd if=result/iso/*.iso of=/dev/sdX status=progress
 
 ### Gallery
 
-<h4 style="text-align: center">catppuccin-macchiato</h4>
+<h4 align="center">catppuccin-macchiato</h4>
 
 ![catppuccin-macchiato](./assets/catppuccin-macchiato.png)
 
-<h4 style="text-align: center">nord</h4>
+<h4 align="center">nord</h4>
 
 ![nord](./assets/nord.png)
 
-<h4 style="text-align: center">tokyonight-moon</h4>
+<h4 align="center">tokyonight-moon</h4>
 
 ![tokyonight-moon](./assets/tokyonight-moon.png)
