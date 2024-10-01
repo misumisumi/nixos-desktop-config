@@ -7,8 +7,8 @@
       settings = {
         global = {
           font = "Noto Sans CJK JP 12";
-          min_icon_size = 64;
-          min_max_size = 256;
+          min_icon_size = 32;
+          max_icon_size = 128;
           monitor = 0;
           width = 400;
           height = 200;

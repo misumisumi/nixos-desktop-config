@@ -2,10 +2,11 @@
 [default.extend-words]
 hda = "hda"
 HD = "HD"
+tre = "tre"
 
 [files]
 extend-exclude = [
-    "sops",
+    "sops/**",
     "flake.lock",
     "CHANGELOG.md",
     "apps/user/core/ranger/default.nix",

@@ -1,13 +1,3 @@
-{ pkgs, ... }:
-let
-  useDict = "Combined";
-  dicts = {
-    "Minimal" = "SKK-JISYO.S";
-    "Middle" = "SKK-JISYO.M";
-    "Large" = "SKK-JISYO.L";
-    "Combined" = "SKK-JISYO.combined";
-  };
-in
 {
   services.yaskkserv2.enable = true;
   xdg = {

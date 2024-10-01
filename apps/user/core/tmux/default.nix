@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    xsel
-    bc
-  ];
   programs = {
     fzf = {
       tmux = {
@@ -92,7 +88,6 @@
       keyMode = "vi";
       resizeAmount = 5;
       baseIndex = 1;
-      shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
         if-shell '[ $SSH_CONNECTION ]' {
@@ -121,7 +116,7 @@
         set -g monitor-activity on
         set -g visual-activity off
 
-        # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
+        # Emulate visual-mode in copy-mode of tmux & copy to buffer
         bind -T copy-mode-vi v send -X begin-selection
         bind -T copy-mode-vi C-v send -X rectangle-toggle
         bind -T copy-mode-vi y send -X copy-selection-and-cancel

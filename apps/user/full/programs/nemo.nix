@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   nemo-with-extensions = pkgs.nemo-with-extensions.override {
     extensions = [
