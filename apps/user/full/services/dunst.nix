@@ -28,10 +28,10 @@
           word_wrap = true;
           show_indicators = true;
           sticky_history = true;
-          context = "ctrl+shift+period";
-          history = "ctrl+shift+comma";
-          close = "ctrl+space";
-          close_all = "ctrl+shift+space";
+          context = "shift+space";
+          history = "ctrl+period";
+          close = "ctrl+comma";
+          close_all = "ctrl+shift+comma";
           dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst";
           right_click = "context";
           notification_limit = 5;
