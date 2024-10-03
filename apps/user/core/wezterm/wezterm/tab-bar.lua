@@ -84,9 +84,8 @@ wezterm.on("update-status", function(window, pane)
     -- This will pick up the hostname for the remote host if your
     -- shell is using OSC 7 on the remote host.
     local cwd_uri = pane:get_current_working_dir()
+    local hostname = ""
     if cwd_uri then
-        local hostname = ""
-
         if type(cwd_uri) == "userdata" then
             -- Running on a newer version of wezterm and we have
             -- a URL object here, making this simple!
@@ -100,7 +99,6 @@ wezterm.on("update-status", function(window, pane)
                 hostname = cwd_uri:sub(1, slash - 1)
             end
         end
-
         -- Remove the domain name portion of the hostname
         local dot = hostname:find("[.]")
         if dot then
@@ -109,8 +107,15 @@ wezterm.on("update-status", function(window, pane)
         if hostname == "" then
             hostname = wezterm.hostname()
         end
+    end
 
-        table.insert(cells, hostname)
+    -- experiencing delays on your multiplexer client?
+    local meta = pane:get_metadata() or {}
+    if meta.is_tardy then
+        local secs = meta.since_last_response_ms / 1000.0 or 0
+        table.insert(cells, string.format("%s (%5.1fs󰔟)", hostname, secs))
+    else
+        table.insert(cells, string.format("%s", hostname))
     end
 
     -- I like my date/time in this style: "Wed Mar 3 08:14"
@@ -119,8 +124,8 @@ wezterm.on("update-status", function(window, pane)
 
     -- Color palette for the backgrounds of each cell
     local colors = {
+        { bg = tab_col.inactive_tab.bg_color, fg = tab_col.active_tab.bg_color },
         { bg = tab_col.active_tab.bg_color, fg = tab_col.active_tab.fg_color },
-        { bg = tab_col.new_tab_hover.bg_color, fg = tab_col.new_tab_hover.fg_color },
     }
 
     -- The elements to be formatted
