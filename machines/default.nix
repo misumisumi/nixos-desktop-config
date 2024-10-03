@@ -63,9 +63,7 @@ let
                 inputs.nvimdots.homeManagerModules.nvimdots
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
-                self.homeManagerModules.dotfiles
-                self.homeManagerModules.zinit
-                self.homeManagerModules.zotero
+                self.homeManagerModules.default
               ];
               users."${user}" = {
                 imports =
