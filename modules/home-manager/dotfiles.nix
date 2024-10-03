@@ -33,7 +33,6 @@ in
       ../../apps/user/core/man
       ../../apps/user/core/pkgs
       ../../apps/user/core/programs
-      ../../apps/user/core/sops
       ../../apps/user/core/ssh
       ../../apps/user/core/starship
       ../../apps/user/core/tmux
