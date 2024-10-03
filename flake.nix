@@ -62,40 +62,53 @@
   };
 
   outputs =
-    inputs@{ self, flake-parts, ... }:
+    inputs@{
+      self,
+      flake-parts,
+      nixpkgs,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.devshell.flakeModule ];
-      flake = {
-        overlay = self.overlays.default;
-        overlays.default =
-          let
-            nixpkgs-stable = import inputs.nixpkgs-stable {
-              system = "x86_64-linux";
-              config = {
-                allowUnfree = true;
+      flake =
+        let
+          inherit (nixpkgs) lib;
+        in
+        {
+          overlay = self.overlays.default;
+          overlays.default =
+            let
+              nixpkgs-stable = import inputs.nixpkgs-stable {
+                system = "x86_64-linux";
+                config = {
+                  allowUnfree = true;
+                };
               };
-            };
-          in
-          import ./patches { inherit nixpkgs-stable; };
-        homeManagerModules = {
-          dotfiles = import ./modules/home-manager/dotfiles.nix;
-          zinit = import ./modules/home-manager/zinit.nix;
-          zotero = import ./modules/home-manager/zotero.nix;
+            in
+            import ./patches { inherit nixpkgs-stable; };
+          homeManagerModules =
+            let
+              modulePath = ./modules/home-manager;
+            in
+            lib.mapAttrs' (
+              f: _: lib.nameValuePair (lib.removeSuffix ".nix" f) (import (modulePath + "/${f}"))
+            ) (builtins.readDir modulePath);
+          nixosModules =
+            let
+              modulePath = ./modules/nixos;
+            in
+            lib.mapAttrs' (
+              f: _: lib.nameValuePair (lib.removeSuffix ".nix" f) (import (modulePath + "/${f}"))
+            ) (builtins.readDir modulePath);
+          homeConfigurations = import ./machines/home-manager.nix {
+            inherit (inputs.nixpkgs) lib;
+            inherit inputs self;
+          };
+          nixosConfigurations = import ./machines {
+            inherit (inputs.nixpkgs) lib;
+            inherit inputs self;
+          };
         };
-        nixosModules = {
-          vfio = import ./modules/nixos/vfio.nix;
-          virtualisation = import ./modules/nixos/virtualisation.nix;
-          xp-pentablet = import ./modules/nixos/xp-pentablet.nix;
-        };
-        homeConfigurations = import ./machines/home-manager.nix {
-          inherit (inputs.nixpkgs) lib;
-          inherit inputs self;
-        };
-        nixosConfigurations = import ./machines {
-          inherit (inputs.nixpkgs) lib;
-          inherit inputs self;
-        };
-      };
       systems = [ "x86_64-linux" ];
       perSystem =
         { pkgs, system, ... }:
