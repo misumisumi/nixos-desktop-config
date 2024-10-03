@@ -101,21 +101,22 @@ def sysctrl(is_tray=False):
         widget.TextBox(padding=0, background=ColorSet.transparent, **right_corner),
     ]
     if GlobalConf.laptop:
-        base += [
-            widget.UPowerWidget(**left_corner),
-        ]
         backlight = list(Path("/sys/class/backlight/").glob("*"))
         if not len(backlight) == 0:
             base += [
                 widget.Backlight(
                     fmt=" {}",
                     backlight_name=backlight[0],
-                    foreground=ColorSet.background,
-                    background=ColorSet.accent,
                     **fc,
                     **left_corner,
                 ),
             ]
+        vol_colors = {
+            "foreground": ColorSet.background,
+            "background": ColorSet.accent,
+        }
+    else:
+        vol_colors = {}
     base += [
         widget.Volume(
             fmt=" {}",
@@ -123,9 +124,18 @@ def sysctrl(is_tray=False):
             mute_command=["pactl set-source-mute @DEFAULT_SOURCE@ toggle"],
             volume_up_command=["pactl set-sink-volume @DEFAULT_SINK@ +5%"],
             volume_down_command=["pactl set-sink-volume @DEFAULT_SINK@ -5%"],
+            **vol_colors,
             **fc,
             **left_corner,
         ),
+    ]
+    if GlobalConf.laptop:
+        base += [
+            widget.UPowerWidget(
+                **left_corner,
+            ),
+        ]
+    base += [
         widget.CurrentLayoutIcon(
             foreground=ColorSet.background,
             background=ColorSet.accent,

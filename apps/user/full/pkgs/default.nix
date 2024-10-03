@@ -3,6 +3,7 @@
   home = {
     shellAliases = {
       actpd = "DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock act";
+      pdfpc = "WEBKIT_DISABLE_DMABUF_RENDERER=1 pdfpc"; # Workaround for speaker notes not displaying properly
     };
     packages = with pkgs; [
       # android-tools
@@ -34,7 +35,7 @@
       mesa-demos # OpenGL utility
       nomacs # Image Viewer
       obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files
-      pympress # PDF reader for presentations
+      pdfpc # Presenter console with multi-monitor support for PDF files
       remmina # Remote desktop client
       simple-scan # Scaner
       slack # chat

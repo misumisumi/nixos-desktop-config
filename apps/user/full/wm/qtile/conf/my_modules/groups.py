@@ -16,7 +16,10 @@ _rule_code = [
     {"wm_class": GlobalConf.terminal_class if GlobalConf.terminal_class is not None else GlobalConf.terminal},
 ]
 
-_rule_browse = [{"wm_class": "vivaldi-stable"}, {"wm_class": "firefox"}]
+_rule_browse = [
+    {"wm_class": "firefox"},
+    {"wm_class": "vivaldi-stable"},
+]
 
 _rule_analyze = [
     {"title": "WaveSurfer 1.8.8p5"},
@@ -24,27 +27,28 @@ _rule_analyze = [
 
 _rule_full = [
     {"title": "Steam"},
-    {"wm_class": "lutris"},
-    {"wm_class": "resolve"},
-    {"wm_class": "krita"},
-    {"wm_class": "Gimp"},
     {"wm_class": "Blender"},
-    {"wm_class": "unityhub"},
-    {"wm_class": "Unity"},
-    {"wm_class": "obs"},
-    {"wm_class": ".obs-wrapped_"},
-    {"wm_class": "audacity"},
+    {"wm_class": "Gimp"},
     {"wm_class": "Looking Glass (client)"},
+    {"wm_class": "Unity"},
+    {"wm_class": "audacity"},
+    {"wm_class": "krita"},
+    {"wm_class": "lutris"},
+    {"wm_class": "obs"},
+    {"wm_class": "pdfpc"},
+    {"wm_class": "resolve"},
+    {"wm_class": "unityhub"},
 ]
 
 _rule_sns = [
-    {"wm_class": "slack"},
     {"wm_class": "discord"},
     {"wm_class": "element"},
     {"wm_class": "ferdium"},
+    {"wm_class": "slack"},
     {"wm_class": "zoom"},
-    {"wm_class": "spotify"},
 ]
+
+_rule_music = [{"wm_class": "spotify"}]
 
 group_and_rule = {
     "code": ("", (layout2,), _rule_code),
@@ -52,6 +56,7 @@ group_and_rule = {
     "analyze": ("󰉕", (layout1,), _rule_analyze),
     "full": ("󰓓", (layout3,), _rule_full),
     "sns": ("", (layout1,), _rule_sns),
+    "music": ("", (layout1,), _rule_music),
 }
 
 
