@@ -1,6 +1,9 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   systemd.user.startServices = "sd-switch";
+  home.packages = with pkgs; [
+    sops
+  ];
   sops = {
     age = {
       generateKey = true;

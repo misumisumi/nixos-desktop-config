@@ -1,9 +1,10 @@
 {
   lib,
   hostname,
-  wm,
+  colorTheme,
   ...
 }:
+with builtins;
 {
   imports =
     [
@@ -26,7 +27,8 @@
       ./user.nix
       ./zfs.nix
     ]
-    ++ lib.optional (wm == "gnome") ../../apps/system/gnome
+    ++ lib.optional (colorTheme != null) ../../apps/color-theme/system/${head (split "-" colorTheme)}
+    ++ lib.optional ((lib.match ".*(gnome).*" hostname) != null) ../../apps/system/gnome
     ++ lib.optionals (!lib.hasSuffix "iso" hostname) [
       ./filesystem.nix
       ./gpu.nix

@@ -3,11 +3,9 @@
   pkgs,
   user,
   useNixOSWallpaper,
-  wm,
   ...
 }:
 {
-  imports = lib.optional (wm != "gnome") ./gsettings.nix;
   users.groups = {
     video.members = [ "${user}" ];
   };

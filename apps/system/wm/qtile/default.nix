@@ -1,5 +1,8 @@
 {
-  imports = [ ../../xserver ];
+  imports = [
+    ../gsettings
+    ../../xserver
+  ];
   services.displayManager.defaultSession = "none+xsession";
   environment.pathsToLink = [
     "/share/xdg-desktop-portal"

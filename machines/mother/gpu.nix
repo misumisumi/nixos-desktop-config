@@ -4,7 +4,6 @@
     xserver = {
       videoDrivers = [
         "nvidia"
-        "modesetting"
         "fbdev"
       ];
       deviceSection = ''
@@ -31,7 +30,6 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      modesetting.enable = true;
       open = false;
     };
     graphics = {

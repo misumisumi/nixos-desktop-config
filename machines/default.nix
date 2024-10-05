@@ -8,11 +8,9 @@ let
       user,
       system ? "x86_64-linux",
       homeDirectory ? "",
-      scheme ? "minimal",
-      colorTheme ? "tokyonight-moon",
+      schemes ? [ ],
+      colorTheme ? null,
       useNixOSWallpaper ? true,
-      excludeShells ? [ ],
-      wm ? "none",
     }:
     lib.nixosSystem {
       inherit system;
@@ -24,7 +22,6 @@ let
           hostname
           user
           useNixOSWallpaper
-          wm
           ;
       }; # specialArgs give some args to modules
       modules = [
@@ -34,9 +31,7 @@ let
         inputs.musnix.nixosModules.musnix
         inputs.nur.nixosModules.nur
         inputs.sops-nix.nixosModules.sops
-        self.nixosModules.vfio
-        self.nixosModules.virtualisation
-        self.nixosModules.xp-pentablet
+        self.nixosModules.default
         (./. + "/${hostname}") # Each machine conf
         (
           { config, ... }:
@@ -50,11 +45,9 @@ let
                   hostname
                   user
                   homeDirectory
-                  scheme
+                  schemes
                   colorTheme
-                  excludeShells
                   useNixOSWallpaper
-                  wm
                   ;
               };
               sharedModules = [
@@ -77,79 +70,91 @@ let
         )
       ];
     };
+
+  desktopSchemes = [
+    "desktop/env/qtile"
+    "presets/full"
+    "shell"
+  ];
+
+  laptopSchemes = [
+    "desktop/laptop"
+  ] ++ desktopSchemes;
+
+  cliIsoSchemes = [
+    "presets/small"
+    "shell"
+  ];
+  guiIsoSchemes = [
+    "presets/large"
+    "desktop/env/core/ime/fcitx5"
+    "shell"
+  ];
+  guiLiveImgSchemes = [
+    "presets/huge"
+    "desktop/env/core/ime/fcitx5"
+    "shell"
+  ];
 in
 {
-  liveimg-gui-qtile = settings {
+  liveimg-qtile = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "gnome";
-    scheme = "full";
     colorTheme = "tokyonight-moon";
+    schemes = guiLiveImgSchemes ++ [ "desktop/env/qtile" ];
   };
-  liveimg-gui-gnome = settings {
+  liveimg-gnome = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "gnome";
-    scheme = "full";
     colorTheme = "tokyonight-moon";
+    schemes = guiLiveImgSchemes;
   };
-  liveimg-gui-iso = settings {
+  liveimg-gnome-iso = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "gnome";
-    scheme = "small";
     colorTheme = "tokyonight-moon";
+    schemes = guiIsoSchemes;
   };
-  liveimg-gui = settings {
+  liveimg-cli-iso = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "gnome";
-    scheme = "small";
     colorTheme = "tokyonight-moon";
+    schemes = cliIsoSchemes;
   };
-  liveimg-cui-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    wm = "none";
-    scheme = "core";
-    colorTheme = "tokyonight-moon";
-  };
-  liveimg-cui = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    wm = "none";
-    scheme = "small";
-    colorTheme = "tokyonight-moon";
-  };
+
   mother = settings {
     hostname = "mother";
-    scheme = "full";
     colorTheme = "tokyonight-moon";
+    schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    wm = "qtile";
     inherit user;
   };
   zephyrus = settings {
     hostname = "zephyrus";
-    scheme = "full";
     colorTheme = "tokyonight-moon";
+    schemes = laptopSchemes;
     useNixOSWallpaper = false;
-    wm = "qtile";
     inherit user;
   };
   stacia = settings {
     hostname = "stacia";
-    scheme = "full";
     colorTheme = "tokyonight-moon";
+    schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    wm = "qtile";
     inherit user;
   };
-  soleus = settings {
-    hostname = "soleus";
-    user = "kobayashi";
-    scheme = "small";
-    colorTheme = "tokyonight-moon";
-    wm = "gnome";
-  };
+  soleus =
+    let
+      schemes = [
+        "presets/large"
+        "desktop/env/core/ime/fcitx5"
+        "shell"
+      ];
+    in
+    settings {
+      hostname = "soleus";
+      user = "kobayashi";
+      colorTheme = "tokyonight-moon";
+      inherit schemes;
+    };
 }

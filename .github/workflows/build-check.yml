@@ -64,7 +64,7 @@ jobs:
 
       - name: Build check
         if: steps.change.outputs.nix == 'true'
-        run: nix build --no-link ".#nixosConfigurations.liveimg-gui-qtile.config.system.build.toplevel"
+        run: nix build --no-link ".#nixosConfigurations.zephyrus.config.system.build.toplevel"
 
   post-workflow:
     uses: ./.github/workflows/agent-of-me.yml

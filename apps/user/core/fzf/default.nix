@@ -12,6 +12,7 @@
 
     fzf = {
       enable = true;
+      enableBashIntegration = true;
       enableZshIntegration = false; # Confilict "jeffreytse/zsh-vi-mode" so init my self
       # ALT+C option
       changeDirWidgetCommand = "fd --type d";

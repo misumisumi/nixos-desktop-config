@@ -1,20 +1,19 @@
 { self, inputs, ... }:
+with builtins;
 let
+  inherit (inputs.nixpkgs) lib;
   settings =
     {
       hostname,
       user,
       system ? "x86_64-linux",
       homeDirectory ? "",
-      scheme ? "",
-      colorTheme ? "tokyonight-moon",
+      schemes ? [ ],
+      colorTheme ? null,
       useNixOSWallpaper ? true,
-      excludeShells ? [ ],
-      wm ? "none",
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      inherit (inputs.nixpkgs) lib;
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -24,12 +23,10 @@ let
           inputs
           hostname
           user
-          scheme
-          colorTheme
-          excludeShells
           homeDirectory
+          schemes
+          colorTheme
           useNixOSWallpaper
-          wm
           ;
       };
       modules = [
@@ -38,9 +35,7 @@ let
         inputs.nvimdots.homeManagerModules.nvimdots
         inputs.sops-nix.homeManagerModules.sops
         inputs.spicetify-nix.homeManagerModules.default
-        self.homeManagerModules.dotfiles
-        self.homeManagerModules.zinit
-        self.homeManagerModules.zotero
+        self.homeManagerModules.default
         (
           { config, ... }:
           {
@@ -54,41 +49,33 @@ let
         )
       ];
     };
+  presetAndShell = [
+    "small"
+    "small-bash"
+    "small-zsh"
+    "medium"
+    "medium-bash"
+    "medium-zsh"
+    "huge"
+    "huge-bash"
+    "huge-zsh"
+  ];
 in
-{
-  core = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "core";
-    colorTheme = "tokyonight-moon";
-    excludeShells = [ "bash" ];
-  };
-  small = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "small";
-    colorTheme = "tokyonight-moon";
-    excludeShells = [ "bash" ];
-  };
-  medium = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "medium";
-    colorTheme = "tokyonight-moon";
-    excludeShells = [ "bash" ];
-  };
-  full = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "full";
-    colorTheme = "tokyonight-moon";
-    excludeShells = [ "bash" ];
-  };
-  test = settings {
-    hostname = "liveimg";
-    user = "hm-user";
-    scheme = "full";
-    colorTheme = "tokyonight-moon";
-    wm = "qtile";
-  };
-}
+listToAttrs (
+  map (name: {
+    inherit name;
+    value =
+      let
+        preset = head (lib.splitString "-" name);
+        shell = tail (lib.splitString "-" name);
+      in
+      settings {
+        hostname = "system";
+        user = "hm-user";
+        colorTheme = "tokyonight-moon";
+        schemes = [
+          "presets/${preset}"
+        ] ++ lib.optional (shell != "") "shell/${shell}";
+      };
+  }) presetAndShell
+)

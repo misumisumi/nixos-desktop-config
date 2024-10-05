@@ -9,7 +9,8 @@ extend-exclude = [
     "sops/**",
     "flake.lock",
     "CHANGELOG.md",
-    "apps/user/core/ranger/default.nix",
-    "apps/user/core/ranger/config/*",
-    "apps/user/full/ime/skk-config/libskk/rom-kana/default.json",
+    "apps/user/cli/develop/ranger/default.nix",
+    "apps/user/cli/develop/ranger/config/*",
+    "apps/user/desktop/env/core/ime/skk/fcitx5/**",
+    "apps/user/desktop/env/core/ime/skk/libskk/**",
 ]

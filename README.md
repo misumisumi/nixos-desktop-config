@@ -16,26 +16,29 @@ This is [misumisumi](https://github.com/misumisumi)'s NixOS and home-manager con
 - Support selecting color-scheme
 - Providing my custom modules
 
-```
-nixos-desktop-config
-├── apps           # settings for installing apps
-│   ├── system     # system wide application configurations (NixOS options)
-│   └── user       # user wide application configurations (home-manager options)
-│       ├── core   # common installing apps
-│       ├── full   # include GUI
-│       ├── medium # include latex
-│       └── small  # include neovim and useful apps
-├── machines       # settings for each my machines
-├── modules        # my custom nixosModules and homeManagerModules
-├── patches        # patch of package
-├── settings       # common system settings
-│   ├── system     # system wide
-│   └── user       # user wide
-├── sops           # secrets
-└── users          # settings for each users
+```nixos-desktop-config
+├── apps
+│   ├── color-theme  # color themes
+│   ├── system       # system wide application configurations (NixOS options)
+│   └── user         # user wide application configurations (home-manager options)
+│       ├── cli          # settings of cli app
+│       ├── core         # apps required for the minimum user environment
+│       ├── desktop      # settings of desktop app
+│       ├── presets  # environment presets
+│       └── shell    # bash and zsh settings
+├── machines         # settings for each my machines
+├── modules          # my custom nixosModules and homeManagerModules
+├── patches          # patch of package
+├── settings         # common system settings
+│   ├── system       # system wide
+│   └── user         # user wide
+├── sops             # secrets
+└── users            # settings for each users
 ```
 
 ## Module Usage
+
+See details on [./machines/default.nix](./machines/home-manager.nix) or [./machines/home-manager.nix](./machines/home-manager.nix)
 
 ```nix
 {
@@ -78,10 +81,10 @@ echo <password> > /tmp/luks.key
 
 # 2. Edit `device` in machines/liveimg/filesystem
 
-# 3. Check flake name (liveimg-cui-* or liveimg-gui-*, *-iso is for ISO creation, not use here)
+# 3. Check flake name (liveimg-cli-* or liveimg-<DE>-*, *-iso is for ISO creation, not use here)
 
 # 4. Format disk and mount to `/mnt`
-# "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
+# "liveimg-cli" for CLI env, "liveimg-<DE>" for Desktop Environment
 nix run nixpkgs#disko -- -m disko --flake "github:misumisumi/nixos-desktop-config#<flake-name>"
 
 # Install NixOS to `/mnt`
@@ -108,7 +111,12 @@ dd if=result/iso/*.iso of=/dev/sdX status=progress
 2. Switch to config
 
 ```sh
-  home-manager switch --flake github:misumisumi/nixos-desktop-config#<core or small or medium or full>
+
+  # Flace name is <preset> or <preset>-<shell>
+  # For <preset>, `small` is CLI env, `medium` is CLI with texlive, and `huge` is GUI env.
+  # <shell> is managed by home-manager, so choose something other than the user's default
+  # no `-<shell>` does not include shell.
+  home-manager switch --flake github:misumisumi/nixos-desktop-config#small-zsh
 ```
 
 ## Appendix
