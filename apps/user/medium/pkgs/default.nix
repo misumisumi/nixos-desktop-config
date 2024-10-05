@@ -8,7 +8,6 @@
       figlet # Make AA from character
       graphicsmagick # CLI Image Editor
       pandoc # Document Converter
-      playerctl # CLI control media
       sox # CLI Sound Editor
     ];
   };

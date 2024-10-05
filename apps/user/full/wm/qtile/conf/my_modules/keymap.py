@@ -78,7 +78,8 @@ def set_keys():
             desc="show power-menu",
         ),
         Key([GlobalConf.mod], "equal", lazy.spawn("rofi -show calc -modi calc -no-show-match -no-sort")),
-        Key([GlobalConf.mod], "e", lazy.spawn("rofimoji"), desc="show rofimoji"),
+        Key([GlobalConf.mod], "e", lazy.spawn("rofimoji"), desc="show rofimoji by default config"),
+        Key([GlobalConf.mod, "control"], "e", lazy.spawn("rofimoji -f nerd"), desc="show rofimoji for searting nerd"),
         # Toggle application
         Key([GlobalConf.mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
         Key([GlobalConf.mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),

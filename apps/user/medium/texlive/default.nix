@@ -5,7 +5,7 @@
     lmodern # Font for LaTex
     poppler_utils # A PDF rendering
   ];
-  xdg.configFile."latexmkrc" = {
+  xdg.configFile."latexmk/latexmkrc" = {
     enable = true;
     source = ./latexmkrc;
   };

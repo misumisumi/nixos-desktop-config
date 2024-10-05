@@ -16,5 +16,6 @@
   xsession.windowManager.qtile = {
     enable = true;
     configSource = ./conf;
+    extraPackages = with pkgs.python3.pkgs; [ qtile-extras ];
   };
 }
