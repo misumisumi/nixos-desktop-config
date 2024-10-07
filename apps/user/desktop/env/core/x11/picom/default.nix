@@ -18,7 +18,7 @@
       activeOpacity = 0.75;
       inactiveOpacity = 0.75;
       opacityRules = [
-        "100:QTILE_BAR:32c = 1"
+        "100:QTILE_INTERNAL = 1"
         "100:class_g = 'Alacritty'"
         "100:class_g = 'Blender'"
         "100:class_g = 'PenTablet'"
@@ -45,8 +45,8 @@
 
       shadow = true;
       shadowExclude = [
-        "QTILE_BAR:32c = 1"
-        "_GTK_FRAME_EXTENTS@:c"
+        "QTILE_INTERNAL = 1"
+        "_GTK_FRAME_EXTENTS@"
         "class_g = 'Cairo-clock'"
         "class_g = 'Conky'"
         "class_g = 'Pdfpc'"
@@ -71,6 +71,9 @@
         shadow-radius = 16;
         frame-opacity = 0.8;
         corner-radius = 16;
+        forcus-exclude = [
+          "QTILE_INTERNAL = 1"
+        ];
         rounded-corners-exclude = [
           "window_type = 'dock'"
           "window_type = 'desktop'"
@@ -86,11 +89,11 @@
         blur-bluer-kern = "3x3box";
         blur-background-exclude = [
           "class_g = 'kdeconnectd && !focused'"
-          "_NET_WM_NAME@:s *= 'KDE Connect Daemon'"
-          "QTILE_BAR:32c = 1"
+          "_NET_WM_NAME@ *= 'KDE Connect Daemon'"
+          "QTILE_INTERNAL = 1"
           "window_type = 'dock'"
           "window_type = 'desktop'"
-          "_GTK_FRAME_EXTENTS@:c"
+          "_GTK_FRAME_EXTENTS@"
         ];
         mark-wmwin-focused = true;
         mark-overdir-focused = false;
