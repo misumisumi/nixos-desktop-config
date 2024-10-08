@@ -13,7 +13,7 @@
           width = 400;
           height = 200;
           enable_posix_regex = true;
-          offset = "-30x30";
+          offset = "10x40";
           origin = "top-right";
           indicate_hidden = false;
           transparency = 0;
