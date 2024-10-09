@@ -1,7 +1,8 @@
-{ colorTheme, ... }:
+{ inputs, colorTheme, ... }:
 with builtins;
 {
   imports = [
+    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
     ../../apps/color-theme/system/${head (split "-" colorTheme)}
     ../../apps/system/documentation
     ../../apps/system/nix-ld
