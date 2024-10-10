@@ -1,7 +1,5 @@
-{ pkgs
-, user
-, ...
-}: {
+{ pkgs, user, ... }:
+{
   users.groups = {
     lp.members = [ "${user}" ];
     scanner.members = [ "${user}" ];
@@ -11,7 +9,10 @@
   services = {
     printing = {
       enable = true;
-      drivers = with pkgs; [ cnijfilter2 ricoh-sp-c260series-ppd ];
+      drivers = with pkgs; [
+        cnijfilter2
+        ricoh-sp-c260series-ppd
+      ];
     };
     avahi = {
       enable = true;

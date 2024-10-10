@@ -1,4 +1,9 @@
-{ self, inputs, pkgs, ... }:
+{
+  self,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   nix.package = pkgs.nixVersions.latest;
   nixpkgs = {

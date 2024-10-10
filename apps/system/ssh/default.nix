@@ -1,6 +1,5 @@
-{ config
-, ...
-}: {
+{ config, ... }:
+{
   programs.ssh = {
     askPassword = "";
   };

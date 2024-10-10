@@ -1,7 +1,5 @@
-{ config
-, pkgs
-, ...
-}: {
+{ config, ... }:
+{
   boot = {
     supportedFilesystems = [ "ntfs" ];
     tmp = {
@@ -16,8 +14,10 @@
       "snd-aloop"
     ];
   };
+  hardware.brillo.enable = true;
   programs.nix-ld.enable = true;
   services = {
+    upower.enable = true;
     asusd = {
       enableUserService = true;
       profileConfig = "quiet";

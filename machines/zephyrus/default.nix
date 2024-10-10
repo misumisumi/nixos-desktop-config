@@ -1,7 +1,9 @@
-{ inputs, wm, ... }:
+{ inputs, colorTheme, ... }:
+with builtins;
 {
   imports = [
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
+    ../../apps/color-theme/system/${head (split "-" colorTheme)}
     ../../apps/system/documentation
     ../../apps/system/nix-ld
     ../../apps/system/pkgs
@@ -10,7 +12,8 @@
     ../../apps/system/services
     ../../apps/system/sops
     ../../apps/system/ssh
-    ../../apps/system/wm/${wm}
+    ../../apps/system/steam
+    ../../apps/system/wm/qtile
     ../../settings/system
     ../../settings/system/bluetooth
     ../../settings/system/pipewire

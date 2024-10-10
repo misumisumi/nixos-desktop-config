@@ -1,18 +1,9 @@
-{ pkgs
-, config
-, ...
-}: {
-  # boot.extraModprobeConfig = lib.mkAfter ''
-  #   softdep snd_hda_intel pre: vfio-pci
-  #   softdep nouveau pre: vfio-pci
-  #   softdep nvidia pre: vfio-pci
-  #   softdep xhci_hcd pre: vfio-pci
-  # '';
+{ pkgs, ... }:
+{
   services = {
     xserver = {
       videoDrivers = [
         "nvidia"
-        "modesetting"
         "fbdev"
       ];
       deviceSection = ''
@@ -39,8 +30,7 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-      modesetting.enable = true;
+      open = false;
     };
     graphics = {
       enable32Bit = true;

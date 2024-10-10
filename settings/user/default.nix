@@ -1,3 +1,6 @@
 {
-  imports = [ ./nixpkgs ];
+  imports = [
+    ./nix
+    ./session
+  ];
 }

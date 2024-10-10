@@ -1,8 +1,5 @@
-{ config
-, pkgs
-, user
-, ...
-}: {
+{ config, ... }:
+{
   boot = {
     loader.timeout = 10;
     extraModulePackages = with config.boot.kernelPackages; [
@@ -17,8 +14,10 @@
       tmpfsSize = "50%";
     };
   };
-  services.xserver.xp-pentablet.enable = true;
-  services.xserver.displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
+  services.xserver = {
+    xp-pentablet.enable = true;
+    displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
+  };
   nix = {
     settings = {
       cores = 6;

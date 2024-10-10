@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 {
   networking.hosts = {
@@ -22,9 +23,13 @@
     "splab" = {
       device = "ei5nas3:/volume7/splab3etc/6";
       fsType = "nfs";
-      options = [ "noauto" "rw" "hard" "intr" ];
+      options = [
+        "noauto"
+        "rw"
+        "hard"
+        "intr"
+      ];
       mountPoint = "/home/speech/splab/6";
     };
   };
 }
-

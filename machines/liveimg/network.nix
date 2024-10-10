@@ -1,7 +1,9 @@
-{ lib
-, hostname
-, ...
-}: {
+{
+  lib,
+  hostname,
+  ...
+}:
+{
   networking = {
     wireless.enable = false;
     hostName = "${hostname}";

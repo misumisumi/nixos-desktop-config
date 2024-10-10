@@ -1,105 +1,160 @@
-{ self
-, inputs
-, ...
-}:
+{ self, inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
   user = "sumi";
   settings =
-    { hostname
-    , user
-    , system ? "x86_64-linux"
-    , homeDirectory ? ""
-    , scheme ? "minimal"
-    , useNixOSWallpaper ? false
-    , wm ? "qtile"
+    {
+      hostname,
+      user,
+      system ? "x86_64-linux",
+      homeDirectory ? "",
+      schemes ? [ ],
+      colorTheme ? null,
+      useNixOSWallpaper ? true,
     }:
-      with lib;
-      nixosSystem {
-        inherit system;
-        specialArgs = { inherit self inputs hostname user useNixOSWallpaper wm; }; # specialArgs give some args to modules
-        modules =
-          [
-            inputs.disko.nixosModules.disko
-            inputs.home-manager.nixosModules.home-manager
-            inputs.musnix.nixosModules.musnix
-            inputs.nur.nixosModules.nur
-            inputs.sops-nix.nixosModules.sops
-            self.nixosModules.vfio
-            self.nixosModules.virtualisation
-            self.nixosModules.xp-pentablet
-            (./. + "/${hostname}") # Each machine conf
-            ({ config, ... }: {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit inputs hostname user homeDirectory scheme useNixOSWallpaper wm;
-                };
-                sharedModules = [
-                  inputs.flakes.homeManagerModules.default
-                  inputs.nvimdots.homeManagerModules.nvimdots
-                  inputs.sops-nix.homeManagerModules.sops
-                  inputs.spicetify-nix.homeManagerModules.default
-                  self.homeManagerModules.dotfiles
-                  self.homeManagerModules.zinit
-                  self.homeManagerModules.zotero
-                ];
-                users."${user}" = {
-                  dotfilesActivation = true;
-                  home.stateVersion = config.system.stateVersion;
-                };
+    lib.nixosSystem {
+      inherit system;
+      specialArgs = {
+        inherit
+          self
+          colorTheme
+          inputs
+          hostname
+          user
+          useNixOSWallpaper
+          ;
+      }; # specialArgs give some args to modules
+      modules = [
+        inputs.catppuccin.nixosModules.catppuccin
+        inputs.disko.nixosModules.disko
+        inputs.home-manager.nixosModules.home-manager
+        inputs.musnix.nixosModules.musnix
+        inputs.nur.nixosModules.nur
+        inputs.sops-nix.nixosModules.sops
+        self.nixosModules.default
+        (./. + "/${hostname}") # Each machine conf
+        (
+          { config, ... }:
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit
+                  inputs
+                  hostname
+                  user
+                  homeDirectory
+                  schemes
+                  colorTheme
+                  useNixOSWallpaper
+                  ;
               };
-            })
-          ];
-      };
+              sharedModules = [
+                inputs.catppuccin.homeManagerModules.catppuccin
+                inputs.flakes.homeManagerModules.default
+                inputs.nvimdots.homeManagerModules.nvimdots
+                inputs.sops-nix.homeManagerModules.sops
+                inputs.spicetify-nix.homeManagerModules.default
+                self.homeManagerModules.default
+              ];
+              users."${user}" = {
+                imports =
+                  lib.optional (lib.pathExists ../users/${user}) ../users/${user}
+                  ++ lib.optional (lib.pathExists ./${hostname}/home.nix) ./${hostname}/home.nix;
+                dotfilesActivation = true;
+                home.stateVersion = config.system.stateVersion;
+              };
+            };
+          }
+        )
+      ];
+    };
+
+  desktopSchemes = [
+    "desktop/env/qtile"
+    "presets/full"
+    "shell"
+  ];
+
+  laptopSchemes = [
+    "desktop/laptop"
+  ] ++ desktopSchemes;
+
+  cliIsoSchemes = [
+    "presets/small"
+    "shell"
+  ];
+  guiIsoSchemes = [
+    "presets/large"
+    "desktop/env/core/ime/fcitx5"
+    "shell"
+  ];
+  guiLiveImgSchemes = [
+    "presets/huge"
+    "desktop/env/core/ime/fcitx5"
+    "shell"
+  ];
 in
 {
-  liveimg-gui-full = settings {
+  liveimg-qtile = settings {
     hostname = "liveimg";
     user = "nixos";
-    scheme = "full";
-    useNixOSWallpaper = true;
+    colorTheme = "tokyonight-moon";
+    schemes = guiLiveImgSchemes ++ [ "desktop/env/qtile" ];
   };
-  liveimg-gui = settings {
+  liveimg-gnome = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "gnome";
-    scheme = "small";
-    useNixOSWallpaper = true;
+    colorTheme = "tokyonight-moon";
+    schemes = guiLiveImgSchemes;
   };
-  liveimg-cui-iso = settings {
+  liveimg-gnome-iso = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "";
-    scheme = "core";
+    colorTheme = "tokyonight-moon";
+    schemes = guiIsoSchemes;
   };
-  liveimg-cui = settings {
+  liveimg-cli-iso = settings {
     hostname = "liveimg";
     user = "nixos";
-    wm = "";
-    scheme = "small";
+    colorTheme = "tokyonight-moon";
+    schemes = cliIsoSchemes;
   };
+
   mother = settings {
     hostname = "mother";
-    scheme = "full";
+    colorTheme = "tokyonight-moon";
+    schemes = desktopSchemes;
+    useNixOSWallpaper = false;
     inherit user;
   };
   zephyrus = settings {
     hostname = "zephyrus";
-    scheme = "full";
+    colorTheme = "tokyonight-moon";
+    schemes = laptopSchemes;
+    useNixOSWallpaper = false;
     inherit user;
   };
   stacia = settings {
     hostname = "stacia";
-    scheme = "full";
+    colorTheme = "tokyonight-moon";
+    schemes = desktopSchemes;
+    useNixOSWallpaper = false;
     inherit user;
   };
-  soleus = settings {
-    hostname = "soleus";
-    user = "kobayashi";
-    scheme = "small";
-    useNixOSWallpaper = true;
-    wm = "gnome";
-  };
+  soleus =
+    let
+      schemes = [
+        "presets/large"
+        "desktop/env/core/ime/fcitx5"
+        "shell"
+      ];
+    in
+    settings {
+      hostname = "soleus";
+      user = "kobayashi";
+      colorTheme = "tokyonight-moon";
+      inherit schemes;
+    };
 }

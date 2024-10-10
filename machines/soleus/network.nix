@@ -1,7 +1,9 @@
-{ lib
-, hostname
-, ...
-}: {
+{
+  lib,
+  hostname,
+  ...
+}:
+{
   services = {
     nscd = {
       enable = true;

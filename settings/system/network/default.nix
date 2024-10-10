@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   systemd = {
     network = {
       enable = true;
@@ -24,7 +25,10 @@
 
   networking = {
     useDHCP = lib.mkDefault false; # Setting each network interafces
-    nameservers = [ "1.1.1.1" "2606:4700:4700::1111" ];
+    nameservers = [
+      "1.1.1.1"
+      "2606:4700:4700::1111"
+    ];
   };
   # system.nssModules = lib.mkForce [];
 }

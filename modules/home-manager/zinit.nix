@@ -1,12 +1,14 @@
 # This is home-manager module
 # Prezto modules setting write to programs.zsh.prezto.<modules> or initExtra
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
-with types; let
+with types;
+let
   cfg = config.programs.zsh.zinit;
   strListOrSingleton = coercedTo (either (listOf str) str) toList (listOf str);
   toZinitSyntax = x: intersperse " \\\n  " x;
@@ -137,11 +139,14 @@ in
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ zinit subversion ];
+    home.packages = with pkgs; [
+      zinit
+      subversion
+    ];
 
-    programs.zsh.prezto.pmodules = mkIf
-      (cfg.prezto.enable && (cfg.prezto.pmodules != [ ] || cfg.prezto.pmodulesWithModifier))
-      (mkOrder 1200 [ ]);
+    programs.zsh.prezto.pmodules = mkIf (
+      cfg.prezto.enable && (cfg.prezto.pmodules != [ ] || cfg.prezto.pmodulesWithModifier)
+    ) (mkOrder 1200 [ ]);
     programs.zsh.initExtraBeforeCompInit = ''
       declare -A ZINIT
       ZINIT_HOME=${cfg.zinitHome}
@@ -155,29 +160,30 @@ in
 
       ${cfg.initConfig}
 
-      ${optionalString (cfg.prezto.pmodules != []) ''
+      ${optionalString (cfg.prezto.pmodules != [ ]) ''
         # zinit wait lucid for \
         zinit for \
           ${concatStrings (toPZTM cfg.prezto.pmodules)}
       ''}
 
-      ${optionalString (cfg.prezto.pmodulesWithModifier != []) ''
+      ${optionalString (cfg.prezto.pmodulesWithModifier != [ ]) ''
         ${concatStrings (
-          toZinitSyntax
-          (mapAttrsToList (modifier: modules: "zinit ${modifier} for \\\n ${concatStrings (toPZTM modules)}") cfg.prezto.pmodulesWithModifier)
+          toZinitSyntax (
+            mapAttrsToList (
+              modifier: modules: "zinit ${modifier} for \\\n ${concatStrings (toPZTM modules)}"
+            ) cfg.prezto.pmodulesWithModifier
+          )
         )}
       ''}
 
-      ${optionalString (cfg.plugins != {}) ''
+      ${optionalString (cfg.plugins != { }) ''
         ${concatMapStrings (x: x + "\n") (
-          mapAttrsToList (modifier: plugins: "zinit ${modifier} for \\\n  ${
-            concatStrings (toZinitSyntax plugins)
-          }")
-          cfg.plugins
+          mapAttrsToList (
+            modifier: plugins: "zinit ${modifier} for \\\n  ${concatStrings (toZinitSyntax plugins)}"
+          ) cfg.plugins
         )}
       ''}
       ${cfg.extraConfig}
     '';
   };
 }
-

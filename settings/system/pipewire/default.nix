@@ -1,8 +1,9 @@
 # Please add apps/security for enabling rtkit
-{ lib
-, pkgs
-, user
-, ...
+{
+  lib,
+  pkgs,
+  user,
+  ...
 }:
 {
   environment.systemPackages = with pkgs; [

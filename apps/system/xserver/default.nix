@@ -1,19 +1,15 @@
-{ config
-, lib
-, pkgs
-, user
-, useNixOSWallpaper
-, wm
-, ...
-}: {
-  imports = lib.optional (wm != "gnome") ./gsettings.nix;
+{
+  lib,
+  pkgs,
+  user,
+  useNixOSWallpaper,
+  ...
+}:
+{
   users.groups = {
     video.members = [ "${user}" ];
   };
-  programs = {
-    gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
-    light.enable = true;
-  };
+  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   services = {
     libinput = {
@@ -37,26 +33,15 @@
         lightdm = {
           enable = true;
           background =
-            if useNixOSWallpaper
-            then "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}"
-            else ./wallpapers/background.png;
+            if useNixOSWallpaper then
+              "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}"
+            else
+              ./wallpapers/background.png;
           greeters = {
             slick = {
               enable = true;
               draw-user-backgrounds = true;
-              cursorTheme = {
-                name = "Dracula-cursors";
-                package = pkgs.dracula-theme;
-                size = lib.mkDefault 24;
-              };
-              iconTheme = {
-                name = "Papirus-Dark";
-                package = pkgs.papirus-icon-theme;
-              };
-              theme = {
-                name = "Adapta-Nokto-Eta";
-                package = pkgs.adapta-gtk-theme;
-              };
+              cursorTheme.size = lib.mkDefault 24;
             };
           };
         };
@@ -83,12 +68,4 @@
       '';
     };
   };
-  environment.systemPackages = with pkgs; [
-    xclip
-    xorg.xhost
-    xorg.xev
-    xorg.xkill
-    xorg.xrandr
-    xterm
-  ];
 }

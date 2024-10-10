@@ -1,4 +1,6 @@
 {
-  musnix.enable = true;
-  musnix.alsaSeq.enable = true;
+  musnix = {
+    enable = true;
+    alsaSeq.enable = true;
+  };
 }

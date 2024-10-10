@@ -1,16 +1,20 @@
-{ self
-, config
-, pkgs
-, inputs
-, user
-, ...
+{
+  self,
+  config,
+  pkgs,
+  inputs,
+  user,
+  ...
 }:
 {
   nix = {
     package = pkgs.nixVersions.latest;
     settings = {
       # flakeの有効化
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       # ビルド時の依存関係を維持(オフラインでも再ビルド可能にする)
       keep-outputs = true;
       keep-derivations = true;
@@ -24,7 +28,10 @@
         "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       ];
-      trusted-users = [ "root" "${user}" ];
+      trusted-users = [
+        "root"
+        "${user}"
+      ];
     };
     gc = {
       # 1週間ごとに7日前のイメージを削除
@@ -42,7 +49,9 @@
       inputs.flakes.overlays.default
       self.overlays.default
     ];
-    config = { allowUnfree = true; };
+    config = {
+      allowUnfree = true;
+    };
   };
 
   system = {

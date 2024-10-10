@@ -1,11 +1,8 @@
-{ config, ... }:
 {
   networking.hostId = "7dfa348e";
+  imports = [ ../init/zfs.nix ];
   boot = {
-    initrd.supportedFilesystems = [ "zfs" ];
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     kernelParams = [ "nohibernate" ];
-    zfs.forceImportRoot = false;
   };
   services.zfs = {
     trim.enable = true;

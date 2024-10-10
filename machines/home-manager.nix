@@ -1,68 +1,81 @@
-{ self
-, inputs
-, ...
-}:
+{ self, inputs, ... }:
+with builtins;
 let
+  inherit (inputs.nixpkgs) lib;
   settings =
-    { hostname
-    , user
-    , system ? "x86_64-linux"
-    , scheme ? ""
-    , homeDirectory ? ""
-    , useNixOSWallpaper ? true
-    , wm ? "none"
+    {
+      hostname,
+      user,
+      system ? "x86_64-linux",
+      homeDirectory ? "",
+      schemes ? [ ],
+      colorTheme ? null,
+      useNixOSWallpaper ? true,
     }:
     let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit self inputs hostname user scheme homeDirectory useNixOSWallpaper wm; };
+      extraSpecialArgs = {
+        inherit
+          self
+          inputs
+          hostname
+          user
+          homeDirectory
+          schemes
+          colorTheme
+          useNixOSWallpaper
+          ;
+      };
       modules = [
-        inputs.nur.nixosModules.nur
-        inputs.sops-nix.homeManagerModules.sops
-        inputs.spicetify-nix.homeManagerModules.default
-
+        inputs.catppuccin.homeManagerModules.catppuccin
         inputs.flakes.homeManagerModules.default
         inputs.nvimdots.homeManagerModules.nvimdots
-        self.homeManagerModules.dotfiles
-        self.homeManagerModules.zinit
-        self.homeManagerModules.zotero
-        ({ config, ... }: {
-          imports = [
-            ../settings/user
-          ];
-          dotfilesActivation = true;
-          home.stateVersion = config.home.version.release;
-        })
+        inputs.sops-nix.homeManagerModules.sops
+        inputs.spicetify-nix.homeManagerModules.default
+        self.homeManagerModules.default
+        (
+          { config, ... }:
+          {
+            imports = [
+              ../settings/user
+              ../settings/user/nixpkgs
+            ] ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
+            dotfilesActivation = true;
+            home.stateVersion = config.home.version.release;
+          }
+        )
       ];
     };
+  presetAndShell = [
+    "small"
+    "small-bash"
+    "small-zsh"
+    "medium"
+    "medium-bash"
+    "medium-zsh"
+    "huge"
+    "huge-bash"
+    "huge-zsh"
+  ];
 in
-{
-  core = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "core";
-  };
-  small = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "small";
-  };
-  medium = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "medium";
-  };
-  full = settings {
-    hostname = "system";
-    user = "hm-user";
-    scheme = "full";
-  };
-  test = settings {
-    hostname = "liveimg";
-    user = "hm-user";
-    scheme = "full";
-    wm = "qtile";
-  };
-}
+listToAttrs (
+  map (name: {
+    inherit name;
+    value =
+      let
+        preset = head (lib.splitString "-" name);
+        shell = tail (lib.splitString "-" name);
+      in
+      settings {
+        hostname = "system";
+        user = "hm-user";
+        colorTheme = "tokyonight-moon";
+        schemes = [
+          "presets/${preset}"
+        ] ++ lib.optional (shell != "") "shell/${shell}";
+      };
+  }) presetAndShell
+)

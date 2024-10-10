@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   boot = {
     loader.timeout = 10;
     tmp = {
@@ -16,7 +17,14 @@
   services.pipewire.extraConfig.pipewire-pulse = {
     native-protocol-tcp = {
       pulse.cmd = [
-        { cmd = "load-module"; args = "module-native-protocol-tcp"; flags = [ "port=4656" "auth-anonymous=1" ]; }
+        {
+          cmd = "load-module";
+          args = "module-native-protocol-tcp";
+          flags = [
+            "port=4656"
+            "auth-anonymous=1"
+          ];
+        }
       ];
     };
   };
@@ -30,4 +38,3 @@
     '';
   };
 }
-

@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }:
+{
   services = {
     xserver = {
       exportConfiguration = true;
@@ -16,8 +17,9 @@
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      powerManagement.enable = true;
       nvidiaPersistenced = true;
+      open = false;
+      powerManagement.enable = true;
     };
     graphics.extraPackages = with pkgs; [
       amdvlk
