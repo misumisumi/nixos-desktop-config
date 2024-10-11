@@ -3,50 +3,75 @@
 nix の世界へようこそ!!  
 これは[misumisumi](https://github.com/misumisumi)のNixOSおよびhome-managerの設定です。
 
-リカバリー用の設定使って NixOS を試すことができます。(Bootable Disk or LiveCD)
+![thumbnail](./assets/thumbnail.png)
 
 ## 説明
 
 - このリポジトリは[Nix Flakes](https://nixos.wiki/wiki/Flakes)によって管理されています。
-- リカバリー用のgnomeまたはCLI環境を試用することができます。
-- 各マシンの設定は[machines](./machines)にあります。
-- ユーザー環境でのみ`nix`を使いたい場合は`home-manager`を試すことができます。
+- デスクトップ環境、CLI環境で試用することができます。
+  - DE: Qtile or GNOME
+- スタンドアローン[home-manager](https://github.com/nix-community/home-manager)のサポート
+- 複数カラースキームのサポート
 
-- system-wide
-
-```
-nixos-desktop-config
-├── apps           # settings for installing apps
-│   ├── system     # system wide
-│   └── user       # user wide
-│       ├── core   # common installing apps
-│       ├── full   # include GUI
-│       ├── medium # include latex
-│       └── small  # include neovim and zsh
-├── machines       # settings for each machine
-├── modules        # nixosModules and homeManagerModules
-├── patches        # patch of package
-├── settings       # common machine settings
-│   ├── system     # system wide
-│   └── user       # user wide
-├── sops           # secrets
-└── users          # settings for each user
-```
-
-- only user-wide (home-manager)
-
-```
-# core config (Please see apps/user/core)
-home-manager switch --flake ".#core"
-
-# small config (Please see apps/user/small, Include `core`)
-home-manager switch --flake ".#small"
-
-# full config (Please see apps/user/full, Include `core` and `small`)
-home-manager switch --flake ".#full"
+```nixos-desktop-config
+├── apps
+│   ├── color-theme  # color themes
+│   ├── system       # system wide application configurations (NixOS options)
+│   └── user         # user wide application configurations (home-manager options)
+│       ├── cli          # settings of cli app
+│       ├── core         # apps required for the minimum user environment
+│       ├── desktop      # settings of desktop app
+│       ├── presets  # environment presets
+│       └── shell    # bash and zsh settings
+├── machines         # settings for each my machines
+├── modules          # my custom nixosModules and homeManagerModules
+├── patches          # patch of package
+├── settings         # common system settings
+│   ├── system       # system wide
+│   └── user         # user wide
+├── sops             # secrets
+└── users            # settings for each users
 ```
 
-## インストールガイド
+## Module Usage
+
+詳細は[./machines/default.nix](./machines/home-manager.nix)または[./machines/home-manager.nix](./machines/home-manager.nix)を参照
+
+```nix
+{
+  inputs = {
+    dotfiles.url = "github:misumisumi/nixos-desktop-config"
+    # ...
+  };
+  # ...
+  # import nixosModules by inputs.dotfiles.nixosModules.<module-name>
+  # import homeManageModules by inputs.dotfiles.homeManagerModules.<module-name>
+  outputs = inputs@{...}: {
+    homeConfigurations = {
+      myenv = inputs.home-manager.lib.homeManagerConfiguration {
+        ...
+        extraSpecialArgs = {
+          hostname = "nixos";
+          user = "hogehoge";
+          homeDirectory = "";
+          schemes = [
+            "presets/large"
+          ];
+          colorTheme = "tokyonight-moon"
+          inherit inputs;
+        };
+        ...
+      };
+    };
+  };
+}
+```
+
+## Installation Guide
+
+> [!WARNING]  
+> 自分の環境で動くことに主眼を置いてメンテナンスしています。  
+> `liveimg-*`及びスタンドアローン`home-manager`は十分にテストされていません。
 
 ### NixOS
 
@@ -63,30 +88,53 @@ home-manager switch --flake ".#full"
 
 3. インストール
 
-   - Bootable External Disk
+   - リポジトリをcloneした場合は`--flake .#<flake-name>`に読み替える
 
-   ```sh
-   # Create key file for luks
-   echo <password> > /tmp/luks.key
-   # In root env
+#### Bootable External Disk
 
-   # Format disk and mount to `/mnt`
-   # "liveimg-cui" for CUI env, "liveimg-gui" for GUI env
-   nix run nixpkgs#disko -- -m disko --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
+```sh
+# 1. Create key file for luks
+echo <password> > /tmp/luks.key
 
-   # Install NixOS to `/mnt`
-   nixos-install --no-root-passwd --flake ("github:misumisumi/nixos-desktop-config#liveimg-cui" or "github:misumisumi/nixos-desktop-config#liveimg-gui")
-   ```
+# 2. Edit `device` in machines/liveimg/filesystem
 
-   - Create LiveCD
+# 3. Check flake name (liveimg-cli-* or liveimg-<DE>-*, *-iso is for ISO creation, not use here)
 
-   ```sh
-   # Create .iso file
-   nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#liveimg-iso
+# 4. Format disk and mount to `/mnt`
+# "liveimg-cli" for CLI env, "liveimg-<DE>" for Desktop Environment
+nix run nixpkgs#disko -- -m disko --flake "github:misumisumi/nixos-desktop-config#<flake-name>"
 
-   # Write iso to device
-   dd if=result/iso/*.iso of=/dev/sdX status=progress
-   ```
+# Install NixOS to `/mnt`
+nixos-install --no-root-passwd --flake "github:misumisumi/nixos-desktop-config#<flake-name>"
+```
+
+#### Create LiveCD
+
+```sh
+# 1. Check flake name (liveimg-*-iso)
+# 2. Create .iso file (build takes a long time)
+nix run nixpkgs#nixos-generators -- --format iso -o result --flake github:misumisumi/nixos-desktop-config#<flake-name>
+
+# Write iso to device
+dd if=result/iso/*.iso of=/dev/sdX status=progress
+```
+
+#### スタンドアローンhome-manager
+
+1. Setup home-manager
+
+- See [home-manager official manual](https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone)
+
+2. Switch to config
+
+```sh
+
+  # Flace name is <preset> or <preset>-<shell>
+  # For <preset>, `small` is CLI env, `medium` is CLI with texlive, and `huge` is GUI env.
+  # <shell> is managed by home-manager, so choose something other than the user's default
+  # no `-<shell>` does not include shell.
+  home-manager switch --flake github:misumisumi/nixos-desktop-config#small-zsh
+```
 
 ## Appendix
 
@@ -94,24 +142,28 @@ home-manager switch --flake ".#full"
 
 - Common Compornents
 
-|              |       Linux       |       macOS       |
-| :----------: | :---------------: | :---------------: |
-|    Shell     |        Zsh        |        Zsh        |
-|   Terminal   |      Wezterm      |      Wezterm      |
-|    Editor    |      Neovim       |      Neovim       |
-|   Browser    | Vivaldi & Firefox | Vivaldi & Firefox |
-| Input Method | Fcitx5+mozc & skk |        \-         |
-|   Launcher   |       Rofi        |        \-         |
-|  GTK Theme   | Adapta-Nokto-Eta  |        \-         |
-|  Icon Theme  |   Papirus-Dark    |        \-         |
-| System Font  |  Source Han Sans  |        \-         |
+|               |        Linux (GNOME)         |        Linux (Qtile)         |
+| :-----------: | :--------------------------: | :--------------------------: |
+| window system |        Wayland or X11        |             X11              |
+|     Shell     |             Zsh              |             Zsh              |
+|   Terminal    |           Wezterm            |           Wezterm            |
+|    Editor     |            Neovim            |            Neovim            |
+|    Browser    |      Vivaldi & Firefox       |      Vivaldi & Firefox       |
+| Input Method  |      Fcitx5+mozc & skk       |         Fcitx5 & skk         |
+|   Launcher    |             Rofi             |             Rofi             |
+|     Theme     | catppuccin, nord, tokyonight | catppuccin, nord, tokyonight |
+|  System Font  |        Noto Fonts CJK        |        Noto Fonts CJK        |
 
-|  DE   |  Window System  |
-| :---: | :-------------: |
-| gnome | Wayland or Xorg |
-| QTile |      Xorg       |
-| Yabai |      macOS      |
+### Gallery
 
-## ToDO
+<h4 align="center">catppuccin-macchiato</h4>
 
-- [ ] support macOS
+![catppuccin-macchiato](./assets/catppuccin-macchiato.png)
+
+<h4 align="center">nord</h4>
+
+![nord](./assets/nord.png)
+
+<h4 align="center">tokyonight-moon</h4>
+
+![tumbnail tokyonight-moon](./assets/tokyonight-moon.png)

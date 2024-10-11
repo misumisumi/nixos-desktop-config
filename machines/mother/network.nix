@@ -1,4 +1,5 @@
-{ hostname, ... }: {
+{ hostname, ... }:
+{
   services = {
     nscd = {
       enable = true;
@@ -99,7 +100,11 @@
       networks = {
         "10-wired" = {
           name = "enp5s0";
-          vlan = [ "devnode" "devk8s" "devnfs" ];
+          vlan = [
+            "devnode"
+            "devk8s"
+            "devnfs"
+          ];
           bridge = [ "br0" ];
         };
         "20-br0" = {

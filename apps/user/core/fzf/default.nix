@@ -1,28 +1,22 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ fd ];
+{
   programs = {
-    bat = {
-      enable = true;
-      config = {
-        map-syntax = [
-        ];
-        style = "numbers,changes,header";
-        pager = "less -FR";
-        theme = "TwoDark";
-      };
-    };
-    zsh.initExtra = ''
-      bindkey '^[t' fzf-file-widget
-      bindkey '^T' transpose-chars
+    bash.initExtra = ''
+      bind '"\eg": fzf-file-widget'
     '';
+    zsh.initExtra = ''
+      bindkey '^[g' fzf-file-widget
+    '';
+
+    fd.enable = true;
+    ripgrep.enable = true;
+
     fzf = {
       enable = true;
+      enableBashIntegration = true;
       enableZshIntegration = false; # Confilict "jeffreytse/zsh-vi-mode" so init my self
       # ALT+C option
       changeDirWidgetCommand = "fd --type d";
-      changeDirWidgetOptions = [
-        "--preview 'tree -C {} | tree -200'"
-      ];
+      changeDirWidgetOptions = [ "--preview 'tree -C {} | tree -200'" ];
       # CTRL+T option
       fileWidgetCommand = "fd --type f";
       fileWidgetOptions = [
@@ -37,9 +31,6 @@
         "--color header:italic"
         "--header 'Press CTRL-Y to copy command into clipboard'"
       ];
-    };
-    dircolors = {
-      enable = true;
     };
   };
 }

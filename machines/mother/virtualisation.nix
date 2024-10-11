@@ -10,7 +10,10 @@
     vfio = {
       enable = true;
       IOMMUType = "amd";
-      devices = [ "10de:2504" "10de:228e" ];
+      devices = [
+        "10de:2504"
+        "10de:228e"
+      ];
       # deviceDomains = [ "0000:09:00.0" "0000:09:00.1" ];
       blacklistNvidia = false;
       disableEFIfb = false;

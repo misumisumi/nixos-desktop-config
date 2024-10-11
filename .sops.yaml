@@ -7,7 +7,7 @@ keys:
   - &desktops:
     - &mother age1dx0hn7ug2nfd9sxw0q3hvegh8llqt0084x7gzk20s20lptrujs6sv48akw
     - &stacia age12994fjtztfkz06rtg0w6gxrzne3z0y223zumu293jtdsfukukussq233na
-    - &soleus age1ncv9a4ex3mt22a7sx9x7rqa3fs6ykjmq7fnjj6cnew23kefa4ffq8xjdhg
+    - &soleus age1qz3tcqfgaxhhq2nemjc9x4wq2je47a9m3840xwxy0a979c8vh3gsj7w2yf
     - &zephyrus age1lc2dnrqr84rat2aqmm9g78mssuxm40vsswr7lnaz59n97qjgg9csx2wekj
 creation_rules:
   - path_regex: sops/hosts/mother/secrets.yaml

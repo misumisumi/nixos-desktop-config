@@ -1,11 +1,15 @@
 # libvirt conf
-{ pkgs
-, user
-, ...
-}: {
+{ pkgs, user, ... }:
+{
   users.groups = {
-    libvirt.members = [ "root" "${user}" ];
-    kvm.members = [ "root" "${user}" ];
+    libvirt.members = [
+      "root"
+      "${user}"
+    ];
+    kvm.members = [
+      "root"
+      "${user}"
+    ];
   };
   environment.systemPackages = with pkgs; [
     win-virtio

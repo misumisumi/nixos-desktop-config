@@ -1,6 +1,8 @@
-{ wm, ... }:
+{ colorTheme, ... }:
+with builtins;
 {
   imports = [
+    ../../apps/color-theme/system/${head (split "-" colorTheme)}
     ../../apps/system/documentation
     ../../apps/system/nix-ld
     ../../apps/system/pkgs
@@ -9,7 +11,7 @@
     ../../apps/system/services
     ../../apps/system/sops
     ../../apps/system/ssh
-    ../../apps/system/wm/${wm}
+    ../../apps/system/wm/qtile
     ../../settings/system
     ../../settings/system/bluetooth
     ../../settings/system/musnix

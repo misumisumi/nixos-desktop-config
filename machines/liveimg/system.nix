@@ -2,7 +2,15 @@
 {
   boot = {
     loader.timeout = 10;
-    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+    supportedFilesystems = lib.mkForce [
+      "btrfs"
+      "reiserfs"
+      "vfat"
+      "f2fs"
+      "xfs"
+      "ntfs"
+      "cifs"
+    ];
     # Use RAM disk as /tmp
     tmp = {
       useTmpfs = true;

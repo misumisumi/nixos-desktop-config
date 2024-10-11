@@ -1,12 +1,11 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   systemd.user.startServices = "sd-switch";
   sops = {
     age = {
-      # keyFile = "${config.home.homeDirectory}/.age-key.txt";
-      # sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
-      keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-      sshKeyPaths = [ ];
+      generateKey = true;
+      keyFile = "${config.home.homeDirectory}/.age-key.txt";
+      sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     };
     secrets."ssh.lua" = {
       path = "${config.xdg.configHome}/wezterm/ssh.lua";

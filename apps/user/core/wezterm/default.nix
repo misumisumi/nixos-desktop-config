@@ -1,12 +1,11 @@
-{ lib
-, pkgs
-, scheme
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }:
 {
   home.packages = with pkgs; [
     moralerspace-nerd-fonts
-  ] ++ lib.optionals (scheme != "core") [
     (nerdfonts.override {
       # Nerdfont override
       fonts = [
@@ -17,13 +16,8 @@
   programs.wezterm = {
     enable = true;
   };
-  xdg = {
-    configFile = lib.mapAttrs'
-      (f: _:
-        lib.nameValuePair "wezterm/${f}" {
-          enable = true;
-          source = ./wezterm/${f};
-        })
-      (builtins.readDir ./wezterm);
+  xdg.configFile.wezterm = {
+    source = ./wezterm;
+    recursive = true;
   };
 }

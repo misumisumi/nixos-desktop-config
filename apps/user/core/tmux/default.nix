@@ -1,8 +1,5 @@
-{ lib
-, pkgs
-, ...
-}: {
-  home.packages = with pkgs; [ xsel bc ];
+{ pkgs, ... }:
+{
   programs = {
     fzf = {
       tmux = {
@@ -40,6 +37,7 @@
           '';
         }
         {
+          # color theme is fixed to dracula because the settings are too complicated
           plugin = dracula;
           extraConfig = ''
             set -g @dracula-show-battery false
@@ -90,7 +88,6 @@
       keyMode = "vi";
       resizeAmount = 5;
       baseIndex = 1;
-      shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
         if-shell '[ $SSH_CONNECTION ]' {
@@ -119,7 +116,7 @@
         set -g monitor-activity on
         set -g visual-activity off
 
-        # Emulate visual-mode in copy-mode of tmux & copy buffer to xsel
+        # Emulate visual-mode in copy-mode of tmux & copy to buffer
         bind -T copy-mode-vi v send -X begin-selection
         bind -T copy-mode-vi C-v send -X rectangle-toggle
         bind -T copy-mode-vi y send -X copy-selection-and-cancel

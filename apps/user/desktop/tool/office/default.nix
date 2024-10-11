@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./libreoffice
+    ./pdfpc
+    ./zathura
+  ];
+}
