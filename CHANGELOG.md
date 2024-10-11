@@ -1,5 +1,90 @@
 # Changelog
 
+## [3.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.6...v3.0.0) (2024-10-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* refactor nixos and home-manager config!
+
+### Features
+
+* add color-theme for system ([e684714](https://github.com/misumisumi/nixos-desktop-config/commit/e68471459d96098988a6fb6ddcbef067e75bb03a))
+* **color-theme:** support selecting sub color sheme ([4b19079](https://github.com/misumisumi/nixos-desktop-config/commit/4b19079865dda748909add25ba81eb0be2cc8392))
+* **hm/qtile:** add qtile module ([8070604](https://github.com/misumisumi/nixos-desktop-config/commit/8070604a127ade67a76b7f53765bd5e737de1929))
+* **hm/qtile:** add qtile module ([cd5af49](https://github.com/misumisumi/nixos-desktop-config/commit/cd5af491ad4fe84d22685ad5f87e201a5b46a165))
+* **nord:** add nord color theme ([12ad445](https://github.com/misumisumi/nixos-desktop-config/commit/12ad445adf1aaca42310dbde25d1418e588ef8ed))
+* **steam:** add steam ([84174a4](https://github.com/misumisumi/nixos-desktop-config/commit/84174a44b60e56d5206816bf8609ed102e3df945))
+* **theme:** add nord and tokyo-night theme ([bf999d7](https://github.com/misumisumi/nixos-desktop-config/commit/bf999d7db278ddfb4716507b571cf9f534f29e85))
+* **vimium:** add theme css ([ee30e57](https://github.com/misumisumi/nixos-desktop-config/commit/ee30e57db02ab082ffc5d6fe134cc6d16ce899ea))
+
+
+### Bug Fixes
+
+* **aichat:** fix aichat roles ([e38ea57](https://github.com/misumisumi/nixos-desktop-config/commit/e38ea575548d801dd46f12b6751bc5e23f00f207))
+* bug and sytle fix ([e7656e6](https://github.com/misumisumi/nixos-desktop-config/commit/e7656e64fcfbd93e807cd66cda8e5a88f928c3c2))
+* bug fix ([0d35c6a](https://github.com/misumisumi/nixos-desktop-config/commit/0d35c6a0ca76f4d6df91597c65e88b3ae2435539))
+* **color-theme:** fix some config ([3d033d0](https://github.com/misumisumi/nixos-desktop-config/commit/3d033d019751b3808a5ec384aebfa3410f206882))
+* **color-theme:** put theme for rofi under XDGConfig ([dc1a6e4](https://github.com/misumisumi/nixos-desktop-config/commit/dc1a6e409f75fa475ce78dfeb7ee5c67b65b82aa))
+* **color-theme:** some fix ([1814bf2](https://github.com/misumisumi/nixos-desktop-config/commit/1814bf2b92de08fd7091f36bea76716480fce4a2))
+* **color-theme:** some fix ([e0002ed](https://github.com/misumisumi/nixos-desktop-config/commit/e0002edaf515d1a61eac4c6a18233dbc8af64ad6))
+* **desktop:** fix dunst config and add obsidian ([8253e15](https://github.com/misumisumi/nixos-desktop-config/commit/8253e156cd5ce5e8d6acc34ca114b56547741a54))
+* **dunst:** fix keybind and icon size ([4846b05](https://github.com/misumisumi/nixos-desktop-config/commit/4846b057298a299b2f3c09eb8c2d96fe2ea663f4))
+* **editorconfig:** add config for terraform ([301cd1a](https://github.com/misumisumi/nixos-desktop-config/commit/301cd1a7fd3ddaac1333a5ca89fbaa1191404f28))
+* fix backlight control ([57b3a83](https://github.com/misumisumi/nixos-desktop-config/commit/57b3a834f7910114d6204aa83da4e53e0471c044))
+* fix keymap ([c492cce](https://github.com/misumisumi/nixos-desktop-config/commit/c492cce216e808f03f7d8fddce3f9881405562d9))
+* fix screenshot settings ([03f61e1](https://github.com/misumisumi/nixos-desktop-config/commit/03f61e1bbcbef1a871706a61f38d5e324a5a54bb))
+* fix submodule and remove zotero-extensions ([97e735b](https://github.com/misumisumi/nixos-desktop-config/commit/97e735b4198e3178a4aadb3a19aab43c40112033))
+* **fonts:** remove ignore comment ([9654abf](https://github.com/misumisumi/nixos-desktop-config/commit/9654abffbcce903a478044f613986dd781e7ca89))
+* **hm-module:** remove user and host-specific imports ([8d3bff8](https://github.com/misumisumi/nixos-desktop-config/commit/8d3bff846b4810a7f398bca9add5711d4bc637ea))
+* **locale:** enable geoclue2 ([e09c660](https://github.com/misumisumi/nixos-desktop-config/commit/e09c6608eabc2a9f91d886e8894cfd83b201727f))
+* **machines:** add `hardware.nvidia.open=false;` ([de7249b](https://github.com/misumisumi/nixos-desktop-config/commit/de7249be1d7ef6c41987d17b54972d346f2be6c9))
+* **modules:** fix adding module ([8070604](https://github.com/misumisumi/nixos-desktop-config/commit/8070604a127ade67a76b7f53765bd5e737de1929))
+* **modules:** fix adding module ([75636a4](https://github.com/misumisumi/nixos-desktop-config/commit/75636a440465d7a575862b4cf7b6b0ad243fd555))
+* **modules:** remove scheme 'none' ([d3fe79e](https://github.com/misumisumi/nixos-desktop-config/commit/d3fe79ef818cdc1389526e18af99a0c7453cdfa9))
+* **mother:** fix mother config ([c75778d](https://github.com/misumisumi/nixos-desktop-config/commit/c75778d83dbd375edc1a78a915e8d489760d07ff))
+* move `trash-cli` to core/programs ([34f0f9f](https://github.com/misumisumi/nixos-desktop-config/commit/34f0f9f6e042985b63ecf91582cd2d49a8426a8a))
+* **picom:** fix picom config ([1344077](https://github.com/misumisumi/nixos-desktop-config/commit/13440776a4960cdbe642e640f123eff01380924e))
+* **picom:** fix picom config ([a1b2e17](https://github.com/misumisumi/nixos-desktop-config/commit/a1b2e17f9b9c2f128c01b2dd5ecdaad3ffd3b013))
+* **podman:** fix nvidia-container config ([d292800](https://github.com/misumisumi/nixos-desktop-config/commit/d29280045e1a51fe55a9e6f65c473f187c3418f6))
+* **qtile:** enphance dynamic monitor attach ([c13b7ba](https://github.com/misumisumi/nixos-desktop-config/commit/c13b7bac4cf1d4962cd3f6ab58c3ccdb427baff9))
+* **qtile:** fix bug of wallpaper and window rule ([34e70c4](https://github.com/misumisumi/nixos-desktop-config/commit/34e70c4b634cf8ca629e8620a4ac613232f8972e))
+* **qtile:** fix config ([4d58f26](https://github.com/misumisumi/nixos-desktop-config/commit/4d58f26eb37833eda71c6bc5c4394df3c279f2a6))
+* **qtile:** fix config ([7e4c12a](https://github.com/misumisumi/nixos-desktop-config/commit/7e4c12a69aba3e7f5023ae3e1678232966d4668f))
+* **qtile:** fix pentablet config ([1cc7438](https://github.com/misumisumi/nixos-desktop-config/commit/1cc74383a889551e2b8fa92c278e69e2767ad71d))
+* **qtile:** fix some bug ([1d9bd99](https://github.com/misumisumi/nixos-desktop-config/commit/1d9bd99b26299bbcdbb338537e464b895cf3875e))
+* **qtile:** modifying dynamic display settings ([c4e3df9](https://github.com/misumisumi/nixos-desktop-config/commit/c4e3df9a040f775832071f932649cf339718c2f3))
+* **qtile:** redule ws and fix color conf ([6cda66b](https://github.com/misumisumi/nixos-desktop-config/commit/6cda66b87d6be330b5b9e98d873eec9386d83661))
+* **README:** fix README ([1faa4e1](https://github.com/misumisumi/nixos-desktop-config/commit/1faa4e136b4f68c9a9393acdadaa7a2e34b5b9d2))
+* rename pkg.gnome.* to pkg.* ([2833384](https://github.com/misumisumi/nixos-desktop-config/commit/2833384fda39a607eae21630e4e01a4a9c2bc5d5))
+* **rofi:** add rofi-emoji ([75099d8](https://github.com/misumisumi/nixos-desktop-config/commit/75099d8c5628e65da2c385ca0e27b4c7dbd3dbc5))
+* **soleus:** fix soleus config ([f08061a](https://github.com/misumisumi/nixos-desktop-config/commit/f08061a4ba27d61e53c004c031c4a34fa375da65))
+* **sops:** fix age key dir ([59ddb5c](https://github.com/misumisumi/nixos-desktop-config/commit/59ddb5c24b9cec6611ad59b6794fe6cb9def11ca))
+* **sops:** fix wifi password ([89a6a5a](https://github.com/misumisumi/nixos-desktop-config/commit/89a6a5a7c16df81fd37bf6fb1027c9d87136ce4e))
+* **sops:** move sops setting to per users ([26e1f3b](https://github.com/misumisumi/nixos-desktop-config/commit/26e1f3b28a1f6189f199af095710d859b2b9c741))
+* **sops:** move sops setting to per users ([a2b0614](https://github.com/misumisumi/nixos-desktop-config/commit/a2b0614bee649f9f94e9555dc8345256a38fa117))
+* **sops:** update keys ([459d653](https://github.com/misumisumi/nixos-desktop-config/commit/459d653530f6243f562e101e2f02dcea7ee792ba))
+* **spicitify:** support selecting color theme ([abba01b](https://github.com/misumisumi/nixos-desktop-config/commit/abba01b7cfe86282c58046c20a9203e34b8be113))
+* **texlive:** remove some package ([3c7b47a](https://github.com/misumisumi/nixos-desktop-config/commit/3c7b47af588978d04030f025a147d577e2030f35))
+* **texlive:** remove some package ([5eb54a3](https://github.com/misumisumi/nixos-desktop-config/commit/5eb54a3ac1e1579f662c25ab361ed58bfdafa841))
+* **theme:** fix config ([60decdb](https://github.com/misumisumi/nixos-desktop-config/commit/60decdb365152f3092f53e42f28a036566b6b675))
+* var of wm must set `none` or WM name ([77c99bf](https://github.com/misumisumi/nixos-desktop-config/commit/77c99bff2d8dbb235923a0fb162167ad749ef8af))
+* **wallpaper:** renew wallpaper ([ced9464](https://github.com/misumisumi/nixos-desktop-config/commit/ced94640829c45447a02a1c4b5652ccadf6697bc))
+* **wezterm:** add response time in tab bar ([1330eaf](https://github.com/misumisumi/nixos-desktop-config/commit/1330eaffe02fec33a3253e246d3f4741ee11eea5))
+* **wezterm:** add response time in tab bar ([910abcb](https://github.com/misumisumi/nixos-desktop-config/commit/910abcb73e83733a380666c083ed6d539f416ee7))
+* **wezterm:** incompatible with nvidia's latest drivers ([8d48c7c](https://github.com/misumisumi/nixos-desktop-config/commit/8d48c7cf642e2160edcb56ccde2c516904b3b2d5))
+* **wm:** some fix ([567e8e9](https://github.com/misumisumi/nixos-desktop-config/commit/567e8e9cbd791c8a238eb8c32776abb3014c3920))
+* **zephyrus:** a setting `hardware.nvidia.open` is required ([4f3b780](https://github.com/misumisumi/nixos-desktop-config/commit/4f3b780a5b84a9403fe04ffc79b95d8d6c13ddb6))
+* **zephyrus:** add prime run ([e51a909](https://github.com/misumisumi/nixos-desktop-config/commit/e51a909bfb9f4edfbfd64b7ff27ff499509478ae))
+* **zephyrus:** fix deprecated conf ([98cecae](https://github.com/misumisumi/nixos-desktop-config/commit/98cecaed3369fb3a04a8c804d97f99734597f7d8))
+* **zephyrus:** fix gpu config ([10424cd](https://github.com/misumisumi/nixos-desktop-config/commit/10424cd0d847b4afec2e1aa646e88723218df1a1))
+* **zephyrus:** recover nixos-hardware ([f9233fd](https://github.com/misumisumi/nixos-desktop-config/commit/f9233fdcc4a4da99751d6aec179c7c0799210f1a))
+
+
+### Code Refactoring
+
+* refactor nixos and home-manager config! ([cd87488](https://github.com/misumisumi/nixos-desktop-config/commit/cd874884a99da824aeacd893d0e787d25ae497e7))
+
 ## [2.2.6](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.5...v2.2.6) (2024-08-30)
 
 
