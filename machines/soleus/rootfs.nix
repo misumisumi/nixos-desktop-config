@@ -1,6 +1,6 @@
 let
-  root_device = "/dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_76C4P16JT";
-  root_device_size = 465.8; # GB
+  root_device = "/dev/disk/by-id/ata-TOSHIBA_THNSNJ256GCSU_84MS106NT7SW";
+  root_device_size = 238.5; # GB
   home_device = "/dev/disk/by-id/ata-WDC_WD40EZRZ-00GXCB0_WD-WCC7K5DFP3YA";
   home_device_size = 3726; # GB
   reserved_size = device_size: device_size * (1 - 0.89);
