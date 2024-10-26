@@ -39,8 +39,10 @@ def get_pinp_size_pos(init=True):
 # 一部のソフトは起動直後はwindow nameを出さないため数msのdelayを設ける
 @hook.subscribe.client_new
 async def move_speclific_apps(window):
+    if window.name == "KDE Connect Daemon":
+        window.toggle_maximize()
     await asyncio.sleep(0.01)
-    if window.name.split(" - ")[-1] in PinPConf.target_cls_name:
+    if window.name is not None and window.name.split(" - ")[-1] in PinPConf.target_cls_name:
         # 画面サイズに合わせて自動的にPinPのサイズとポジションを決定する
         pinp_size, pinp_pos = get_pinp_size_pos()
 
@@ -57,8 +59,6 @@ async def move_speclific_apps(window):
             margin=None,
         )
         keep_focus_window_in_tiling()
-    elif window.name == "WaveSurfer 1.8.8p5":
-        window.togroup("0-analyze")
     elif PINP_WINDOW is not None:
         PINP_WINDOW["window"].bring_to_front()
 
