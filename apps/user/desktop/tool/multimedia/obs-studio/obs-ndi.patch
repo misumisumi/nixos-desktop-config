@@ -1,0 +1,11 @@
+--- src/forms/update.cpp	2024-10-21 12:04:28.226835449 +0900
++++ src/forms/update.cpp	2024-10-21 12:05:09.937827059 +0900
+@@ -183,7 +183,7 @@
+ 		ui->checkBoxAutoCheckForUpdates->setChecked(
+ 			config->AutoCheckForUpdates());
+ 		connect(ui->checkBoxAutoCheckForUpdates,
+-			&QCheckBox::stateChanged, this, [](int state) {
++			&QCheckBox::checkStateChanged, this, [](int state) {
+ 				Config::Current(false)->AutoCheckForUpdates(
+ 					state == Qt::Checked);
+ 			});

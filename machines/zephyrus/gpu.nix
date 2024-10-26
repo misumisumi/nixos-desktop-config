@@ -32,7 +32,7 @@
     graphics.extraPackages = with pkgs; [
       libvdpau-va-gl
       vaapiVdpau
-      rocm-opencl-icd
+      rocmPackages.clr.icd
     ];
   };
 }
