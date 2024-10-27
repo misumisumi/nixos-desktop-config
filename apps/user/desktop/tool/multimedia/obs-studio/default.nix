@@ -8,7 +8,9 @@
         looking-glass-obs
         obs-pipewire-audio-capture
         droidcam-obs
-        obs-ndi
+        (obs-ndi.overrideAttrs (old: {
+          patches = old.patches ++ [ ./obs-ndi.patch ];
+        }))
       ];
     };
   };
