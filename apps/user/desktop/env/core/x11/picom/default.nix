@@ -55,10 +55,10 @@
         "class_g = 'kdeconnect-indicator'"
         "class_g = 'kdeconnect-sms'"
         "class_g = 'kdeconnect-sms-handler'"
-        "class_g = 'kdeconnectd'"
         "class_g = 'rofi'"
         "class_g ?= 'Notify-osd'"
         "name = 'Notification'"
+        "name = 'KDE Connect Daemon'"
         "name *?= 'pdfpc - presentation'"
       ];
       shadowOffsets = [

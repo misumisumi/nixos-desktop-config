@@ -1,0 +1,30 @@
+diff --git a/src/forms/obsndi-update.cpp b/src/forms/obsndi-update.cpp
+index 0c447af..a29db61 100644
+--- a/src/forms/obsndi-update.cpp
++++ b/src/forms/obsndi-update.cpp
+@@ -46,6 +46,7 @@
+ // #include <QNetworkRequest>
+ #include <QPointer>
+ #include <QSslSocket>
++#include <QTimeZone>
+ #include <QTimer>
+ #include <QUrlQuery>
+ 
+@@ -174,7 +175,7 @@
+ 
+ 		auto utcDateTime = QDateTime::fromString(
+ 			pluginUpdateInfo.releaseDate, Qt::ISODate);
+-		utcDateTime.setTimeSpec(Qt::UTC);
++		utcDateTime.setTimeZone(QTimeZone::UTC);
+ 		auto formattedUtcDateTime =
+ 			utcDateTime.toString("yyyy-MM-dd hh:mm:ss 'UTC'");
+ 		textTemp = QString("<h3>%1</h3>")
+@@ -190,7 +191,7 @@
+ 		ui->checkBoxAutoCheckForUpdates->setChecked(
+ 			config->AutoCheckForUpdates());
+ 		connect(ui->checkBoxAutoCheckForUpdates,
+-			&QCheckBox::stateChanged, this, [](int state) {
++			&QCheckBox::checkStateChanged, this, [](int state) {
+ 				Config::Current()->AutoCheckForUpdates(
+ 					state == Qt::Checked);
+ 			});

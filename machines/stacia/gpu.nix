@@ -25,7 +25,7 @@
       amdvlk
       libvdpau-va-gl
       vaapiVdpau
-      rocm-opencl-icd
+      rocmPackages.clr.icd
     ];
   };
 }
