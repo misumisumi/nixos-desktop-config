@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v3.0.0...v3.0.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **machines:** fix opencl driver for AMD ([01e42fa](https://github.com/misumisumi/nixos-desktop-config/commit/01e42fad9ce3e0a8f6c8f98950799564f1c6f47e))
+* **obs-ndi:** add patch for deprecating Qt function ([6232667](https://github.com/misumisumi/nixos-desktop-config/commit/6232667f75f281ff2cfc337269db9db2315d60f7))
+* **qtile:** fix for kdeconnect ([b64242c](https://github.com/misumisumi/nixos-desktop-config/commit/b64242c4849f07ffdb3436f2529bf476f3d8e77d))
+* **soleus:** fix rootfs disk ([bb38609](https://github.com/misumisumi/nixos-desktop-config/commit/bb38609e550cf55b8977414c232e312fb6d52332))
+
 ## [3.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v2.2.6...v3.0.0) (2024-10-11)
 
 
