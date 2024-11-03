@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   update-repo:
@@ -38,6 +39,7 @@ jobs:
       - name: Check evaluation warning
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          nix run nixpkgs#nixos-rebuild dry-build --flake ".#zephyrus" --option pure-eval false --option eval-cache false 2>&1 | grep "evaluation warning" > eval_warning.log
+          nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#zephyrus" --option pure-eval false --option eval-cache false 2>&1 | grep "evaluation warning" > eval_warning.log
           gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
