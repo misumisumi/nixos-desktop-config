@@ -67,6 +67,7 @@ class Global:
     laptop: bool = Path("/sys/class/power_supply/BAT0").exists()
 
     mod: str = "mod1"  # super key is 'mod4', alt is 'mod1'
+    sub_mod: str = "mod4"
     terminal: str = "wezterm"
     terminal_class: str = "org.wezfurlong.wezterm"
 
