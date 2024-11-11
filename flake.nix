@@ -1,17 +1,24 @@
 {
   description = "Each my machine NixOS System Flake Configuration";
   nixConfig = {
-    extra-substituters = [ "https://misumisumi.cachix.org" ];
+    extra-substituters = [
+      "https://misumisumi.cachix.org"
+      "https://cuda-maintainers.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
     nur.url = "github:nix-community/NUR";
     catppuccin.url = "github:catppuccin/nix";
     flakes = {

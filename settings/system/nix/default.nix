@@ -20,13 +20,14 @@
       keep-derivations = true;
       auto-optimise-store = true; # Optimise syslinks
       substituters = [
-        "https://cache.nixos.org/"
         "https://misumisumi.cachix.org"
         "https://cuda-maintainers.cachix.org"
+        "https://nix-community.cachix.org"
       ];
       trusted-public-keys = [
         "misumisumi.cachix.org-1:f+5BKpIhAG+00yTSoyG/ihgCibcPuJrfQL3M9qw1REY="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
       trusted-users = [
         "root"
@@ -44,9 +45,10 @@
   };
   nixpkgs = {
     overlays = [
-      inputs.nur.overlay
-      inputs.nixgl.overlay
+      inputs.blender-bin.overlays.default
       inputs.flakes.overlays.default
+      inputs.nixgl.overlay
+      inputs.nur.overlay
       self.overlays.default
     ];
     config = {
