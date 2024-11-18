@@ -21,10 +21,7 @@
     blender-bin.url = "github:edolstra/nix-warez?dir=blender";
     nur.url = "github:nix-community/NUR";
     catppuccin.url = "github:catppuccin/nix";
-    flakes = {
-      url = "github:misumisumi/flakes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flakes.url = "github:misumisumi/flakes";
     nvimdots = {
       url = "github:misumisumi/nvimdots";
       inputs.nixpkgs.follows = "nixpkgs";

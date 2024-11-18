@@ -6,6 +6,7 @@
     protontricks.enable = true;
     extraCompatPackages = [
       pkgs.proton-ge-bin
+      pkgs.proton-ge-rtsp-bin
     ];
   };
   programs.gamemode = {
