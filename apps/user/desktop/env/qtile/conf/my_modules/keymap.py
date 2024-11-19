@@ -136,7 +136,13 @@ def set_keys():
                 Key([], "XF86MonBrightnessDown", lazy.spawn("brillo -U 5")),
                 Key([], "XF86KbdBrightnessUp", lazy.spawn("brillo -kr -A 1")),
                 Key([], "XF86KbdBrightnessDown", lazy.spawn("brillo -kr -U 1")),
-                Key([], "XF86Launch4", lazy.spawn("asusctl profile -n")),
+                Key(
+                    [],
+                    "XF86Launch4",
+                    lazy.spawn(
+                        "sh -c \"asusctl profile -n && dunstify -h string:x-dunst-stack-tag:asusctl -a asusctl $(asusctl profile -p | tail -n1 | awk -F' ' '{print $4}')\""
+                    ),
+                ),
                 # Attach Screen
                 KeyChord(
                     [mod],

@@ -197,7 +197,7 @@ def tasklist():
 
 
 def chord():
-    return [widget.Chord(**fc, **only_one_group)]
+    return [widget.Chord(chords_colors=BarConf.chords_colors, **fc, **only_one_group)]
 
 
 def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False) -> tuple:

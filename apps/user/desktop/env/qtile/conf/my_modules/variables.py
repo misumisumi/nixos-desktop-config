@@ -38,6 +38,7 @@ class BarConfig:
     top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 0, 20])
     bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [0, 10, 5, 10])
     opacity: int = 1
+    chords_colors: dict = field(default_factory=lambda: {"mod4": (ColorSet.transparent, ColorSet.red)})
 
 
 @dataclass
