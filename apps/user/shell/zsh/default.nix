@@ -113,6 +113,7 @@
       };
       shellAliases = {
         nix = "noglob nix";
+        nixos-rebuild = "noglob nix rebuild";
       };
       localVariables = {
         ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj";
@@ -122,6 +123,10 @@
         ZVM_LAZY_KEYBINDINGS = false;
         ABBR_QUIET = 1;
       };
+      envExtra = ''
+        # Compatibilize with bash
+        export HOSTNAME=$(hostname)
+      '';
       # 既にsessionが起動しているかつattach済なら新しくsessionを作成する
       # そうでなればsessionにattachする
       initExtraFirst = ''
