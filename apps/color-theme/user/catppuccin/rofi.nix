@@ -14,7 +14,7 @@ let
     }
 
     window {
-        width: 30%;
+        width: 40%;
         orientation: horizontal;
         location: center;
         anchor: center;
