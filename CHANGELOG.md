@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v3.0.1...v3.1.0) (2024-12-02)
+
+
+### Features
+
+* **nix:** add blender-bin (GPU support) and fix cache settings ([d7d6693](https://github.com/misumisumi/nixos-desktop-config/commit/d7d66930cc2852ae48562ee74db9eefe6ec18b7d))
+* **virtualisation:** add virtiofsd for supporting virtiofs ([fb456ba](https://github.com/misumisumi/nixos-desktop-config/commit/fb456ba4da8d393974e19ffdfb5b0e751dbbe205))
+
+
+### Bug Fixes
+
+* **fcitx5-skk:** fix missing json format ([92931e6](https://github.com/misumisumi/nixos-desktop-config/commit/92931e66ec21061abb45f42e545bee7b652bdf24))
+* fix tool configs ([cc2c821](https://github.com/misumisumi/nixos-desktop-config/commit/cc2c8214688cf1b07f775d9b2d3ecc8ca654321b))
+* **nix:** remove nix-community cache ([c59757f](https://github.com/misumisumi/nixos-desktop-config/commit/c59757f8b5186a08c8e9a11ac98ad19eab13b6cc))
+* **qtile:** add border to Max layout ([3769f62](https://github.com/misumisumi/nixos-desktop-config/commit/3769f62c65fa9b57c9d7297c79b47c8e6980cd84))
+* **qtile:** add color for `mod4` of chord and fix keymap ([66bbc9c](https://github.com/misumisumi/nixos-desktop-config/commit/66bbc9ca8b43acfaf50eb341b49abe1f2e8cb776))
+* **qtile:** support replacing mod key ([dfad961](https://github.com/misumisumi/nixos-desktop-config/commit/dfad9616b9cc19816b046d0306962fdd18b42eb1))
+* **rofi:** fix window width ([4c84f8a](https://github.com/misumisumi/nixos-desktop-config/commit/4c84f8ae5e35b3a87276d40230b0bab9cffacb0c))
+* **steam:** add proton-ge-rtsp ([f78d99c](https://github.com/misumisumi/nixos-desktop-config/commit/f78d99c8b3b49456af6111b6a93ea1d3c085f1c3))
+* **tokyonight:** fix typo ([7aeef7d](https://github.com/misumisumi/nixos-desktop-config/commit/7aeef7d583b7ce7f0c88b9fce1b1b78f602ce749))
+* **yazi:** add disableInitExecTls=true ([9c26f50](https://github.com/misumisumi/nixos-desktop-config/commit/9c26f5035d5b727acac07db0bcec2b3752cf7aa9))
+* **yq:** replace to yq from yq-go ([cbce51d](https://github.com/misumisumi/nixos-desktop-config/commit/cbce51d391989880120339246e8e1c21db4915aa))
+* **zsh:** add shellAlias ([db42063](https://github.com/misumisumi/nixos-desktop-config/commit/db420638f86e0f4e51526f4f08fc8dce11856916))
+* **zsh:** fix zshenv ([629257d](https://github.com/misumisumi/nixos-desktop-config/commit/629257d6411b3ac1b042ca108b17ad5fbefc2e52))
+
 ## [3.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v3.0.0...v3.0.1) (2024-10-28)
 
 
