@@ -113,7 +113,7 @@
       };
       shellAliases = {
         nix = "noglob nix";
-        nixos-rebuild = "noglob nix rebuild";
+        nixos-rebuild = "noglob nixos-rebuild";
       };
       localVariables = {
         ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj";
