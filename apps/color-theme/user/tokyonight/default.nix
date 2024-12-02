@@ -33,7 +33,7 @@ in
     };
     git.includes = [ { path = "${pack}/delta/tokyonight_${flavor}.gitconfig"; } ];
     zathura.extraConfig = ''
-      include ${pack + "/zatura/tokyonight_${flavor}.zathurarc"}
+      include ${pack + "/zathura/tokyonight_${flavor}.zathurarc"}
     '';
     spicetify =
       let

@@ -11,7 +11,7 @@
       killall # Process killer
       progress # Show progress of coreutils programs
       tree # Show file tree
-      yq-go # YAML processor
+      yq # YAML processor
     ];
   };
 }

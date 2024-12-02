@@ -52,7 +52,12 @@ layout2 = [
 
 # For full
 layout3 = [
-    layout.Max(border_width=0, margin=0),
+    layout.Max(
+        margin=0,
+        border_width=1,
+        border_focus=ColorSet.accent,
+        border_normal=ColorSet.background,
+    ),
 ]
 
 

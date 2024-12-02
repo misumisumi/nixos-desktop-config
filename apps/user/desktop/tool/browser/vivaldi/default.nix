@@ -18,6 +18,7 @@
       { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
       { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
+      { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; } # obsidian web clipper
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ldgfbffkinooeloadekpmfoklnobpien"; } # raindrop.io
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko

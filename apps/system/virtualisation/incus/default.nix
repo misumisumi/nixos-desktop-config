@@ -1,5 +1,8 @@
-{ user, ... }:
+{ pkgs, user, ... }:
 {
+  environment.systemPackages = with pkgs; [
+    virtiofsd
+  ];
   users.groups = {
     incus-admin.members = [
       "root"

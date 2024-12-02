@@ -12,9 +12,10 @@
     ];
   };
   environment.systemPackages = with pkgs; [
-    win-virtio
-    virt-manager
     dmidecode # Show BIOS info
+    virt-manager
+    virtiofsd
+    win-virtio
   ];
   virtualisation = {
     libvirtd = {

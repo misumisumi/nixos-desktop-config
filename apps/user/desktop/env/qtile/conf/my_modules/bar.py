@@ -6,9 +6,10 @@ from pathlib import Path
 # from libqtile import widget
 from libqtile import bar
 from libqtile.log_utils import logger
+from qtile_extras import widget
+
 from my_modules.colorset import ColorSet
 from my_modules.variables import BarConf, FontConf, GlobalConf, IconConf, WindowConf
-from qtile_extras import widget
 
 fc = asdict(FontConf)
 ic = asdict(IconConf)
@@ -196,7 +197,7 @@ def tasklist():
 
 
 def chord():
-    return [widget.Chord(**fc, **only_one_group)]
+    return [widget.Chord(chords_colors=BarConf.chords_colors, **fc, **only_one_group)]
 
 
 def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False) -> tuple:

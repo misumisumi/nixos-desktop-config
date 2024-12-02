@@ -38,6 +38,7 @@ class BarConfig:
     top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 0, 20])
     bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [0, 10, 5, 10])
     opacity: int = 1
+    chords_colors: dict = field(default_factory=lambda: {"mod4": (ColorSet.transparent, ColorSet.red)})
 
 
 @dataclass
@@ -67,6 +68,7 @@ class Global:
     laptop: bool = Path("/sys/class/power_supply/BAT0").exists()
 
     mod: str = "mod1"  # super key is 'mod4', alt is 'mod1'
+    sub_mod: str = "mod4"
     terminal: str = "wezterm"
     terminal_class: str = "org.wezfurlong.wezterm"
 

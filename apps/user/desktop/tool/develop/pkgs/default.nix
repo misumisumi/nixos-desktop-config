@@ -6,7 +6,7 @@
       # matlab # Followed by nix-matlab
       # sidequest                     # Meta Quest side loading tool
       audacity # GUI Sound Editor
-      blender # 3DCG modeling tool
+      blender_4_2 # 3DCG modeling tool
       carla # audio plugin host
       gimp # image editor
       google-fonts
