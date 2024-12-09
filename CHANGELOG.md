@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.0...v3.1.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* fix deprecated config ([03ee793](https://github.com/misumisumi/nixos-desktop-config/commit/03ee793f98967ad94eb99edd9273a5e79a05495a))
+* **flake:** fix flake inputs ([4552f86](https://github.com/misumisumi/nixos-desktop-config/commit/4552f864d84c31431ae315f80acf6742a9e5ac4f))
+
 ## [3.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v3.0.1...v3.1.0) (2024-12-02)
 
 
