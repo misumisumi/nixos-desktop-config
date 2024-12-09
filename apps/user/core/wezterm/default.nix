@@ -1,17 +1,11 @@
 {
-  lib,
   pkgs,
   ...
 }:
 {
   home.packages = with pkgs; [
     moralerspace-nerd-fonts
-    (nerdfonts.override {
-      # Nerdfont override
-      fonts = [
-        "FiraCode"
-      ];
-    })
+    nerd-fonts.fira-code
   ];
   programs.wezterm = {
     enable = true;
