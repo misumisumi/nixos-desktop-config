@@ -38,4 +38,7 @@
       };
     };
   };
+  programs.dotnet.dev = {
+    package = pkgs.pkgs.dotnet-sdk_8;
+  };
 }
