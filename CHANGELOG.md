@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.1...v3.1.2) (2024-12-13)
+
+
+### Bug Fixes
+
+* **qtile:** respect aspect ratio for PinP ([9036489](https://github.com/misumisumi/nixos-desktop-config/commit/9036489aaf6261505fb82acb2b50e443b0058308))
+
 ## [3.1.1](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.0...v3.1.1) (2024-12-09)
 
 
