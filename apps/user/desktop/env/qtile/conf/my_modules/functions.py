@@ -26,10 +26,18 @@ def keep_focus_window_in_tiling(window=None):
     qtile.current_group.focus(window, True)
 
 
-def get_pinp_size_pos(init=True):
+def get_pinp_size_pos():
     screen_size = (qtile.current_screen.width, qtile.current_screen.height)
     screen_pos = (qtile.current_screen.x, qtile.current_screen.y)
-    pinp_size = [int(s // PinPConf.pinp_scale_down) for s in screen_size]
+    if PINP_WINDOW is None:
+        pinp_size = qtile.current_window.get_size()
+        aspect_ratio = pinp_size[0] / pinp_size[1]
+        pinp_size = [
+            int(screen_size[1] // PinPConf.pinp_scale_down * aspect_ratio),
+            int(screen_size[1] // PinPConf.pinp_scale_down),
+        ]
+    else:
+        pinp_size = PINP_WINDOW["window"].get_size()
     pinp_pos = [ss + sp - p for ss, sp, p in zip(screen_size, screen_pos, pinp_size)]
     pinp_pos[0] = pinp_pos[0] - PinPConf.margin - WindowConf.border
 
@@ -140,7 +148,7 @@ def move_pinp(qtile, pos):
     if PINP_WINDOW is not None and idx == PINP_WINDOW["idx"]:
         screen_size = (qtile.current_screen.width, qtile.current_screen.height)
         screen_pos = (qtile.current_screen.x, qtile.current_screen.y)
-        pinp_size = [int(s // PinPConf.pinp_scale_down) for s in screen_size]
+        pinp_size = PINP_WINDOW["window"].get_size()
         pinp_pos = [PINP_WINDOW["window"].float_x, PINP_WINDOW["window"].float_y]
 
         if pos == "up":
