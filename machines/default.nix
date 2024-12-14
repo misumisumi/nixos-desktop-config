@@ -29,7 +29,7 @@ let
         inputs.disko.nixosModules.disko
         inputs.home-manager.nixosModules.home-manager
         inputs.musnix.nixosModules.musnix
-        inputs.nur.nixosModules.nur
+        inputs.nur.modules.nixos.default
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
         (./. + "/${hostname}") # Each machine conf
