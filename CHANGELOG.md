@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.2...v3.1.3) (2024-12-15)
+
+
+### Bug Fixes
+
+* **flake:** fix attr name of nur ([17f8f44](https://github.com/misumisumi/nixos-desktop-config/commit/17f8f44f351574f66a05b01a4da9fa38cc6c16ba))
+
 ## [3.1.2](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.1...v3.1.2) (2024-12-13)
 
 
