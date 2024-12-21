@@ -1,0 +1,5 @@
+[".config/nvim"]
+type = "git-repo"
+url = "https://github.com/misumisumi/nvimdots"
+executable = true
+refreshPeriod = "168h"

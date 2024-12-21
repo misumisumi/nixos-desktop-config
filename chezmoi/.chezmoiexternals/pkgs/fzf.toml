@@ -1,0 +1,7 @@
+[".local/bin/fzf"]
+url = "https://github.com/junegunn/fzf/releases/download/{{ (gitHubLatestRelease "junegunn/fzf").TagName }}/fzf-{{ (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+path = "fzf"
+type = "archive-file"
+executable = true
+readonly = true
+refreshPeriod = "168h"

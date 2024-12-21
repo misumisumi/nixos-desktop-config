@@ -1,5 +1,6 @@
 {
   pkgs,
+  chezmoiToNix,
   ...
 }:
 {
@@ -10,8 +11,8 @@
   programs.wezterm = {
     enable = true;
   };
-  xdg.configFile.wezterm = {
-    source = ./wezterm;
+  xdg.configFile = chezmoiToNix {
+    chezmoiSrc = "dot_config/wezterm";
     recursive = true;
   };
 }

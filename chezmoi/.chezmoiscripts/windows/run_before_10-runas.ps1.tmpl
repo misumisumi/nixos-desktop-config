@@ -1,0 +1,46 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+{{ range $key, $value := .windows.registers }}
+Set-ItemProperty {{ $key | quote }} -Name ${{ $value.name | quote }} -Value {{ $value.value }}
+{{ end }}
+
+$enableFeatures = @(
+  {{ .windows.optional_features.enabled | join "\n  " }}
+)
+foreach ($enableFeature in $enableFeatures) {
+  if ((Get-WindowsOptionalFeature -Online -FeatureName $enableFeature).State -eq "Disabled") {
+    Write-Output "Try to enable $enableFeature"
+    Enable-WindowsOptionalFeature -Online -All -NoRestart -FeatureName $enableFeature
+  }
+  else {
+    Write-Output "$enableFeature has been already enabled"
+  }
+}
+
+$disableFeatures = @(
+  {{ .windows.optional_features.disabled | join "\n  " }}
+)
+foreach ($disableFeature in $disableFeatures) {
+  if ((Get-WindowsOptionalFeature -Online -FeatureName $disableFeature).State -eq "Enabled") {
+    Write-Output "Try to disable $disableFeature"
+    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName $disableFeature
+  }
+  else {
+    Write-Output "$disableFeature has been already disabled"
+  }
+}
+
+# Remove unnecessary default apps and settings
+#INFO: https://github.com/Raphire/Win11Debloat
+& ([scriptblock]::Create((irm "https://win11debloat.raphi.re/"))) -RunDefaults -Silent
+
+# Enable/Disable natural-scroll (from: https://gist.github.com/gagarine/d313ee6510009b3f3973c6e0929b1e1c)
+$mode={{ .windows.devices.mouse.natural_scroll | quote }}
+Get-PnpDevice -Class Mouse -PresentOnly -Status OK | ForEach-Object { "$($_.Name): $($_.DeviceID)" `
+  Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters" -Name FlipFlopWheel -Value $mode; `
+  "+--- Value of FlipFlopWheel is set to " + (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters").FlipFlopWheel + "`n"
+}
+
+Write-Host "Finish script running as root!"
+
+{{ end }}

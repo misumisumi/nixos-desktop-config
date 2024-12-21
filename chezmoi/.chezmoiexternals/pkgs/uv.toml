@@ -1,0 +1,8 @@
+[".local/bin/uv"]
+url = "https://github.com/astral-sh/uv/releases/download/{{ (gitHubLatestRelease "astral-sh/uv").TagName }}/uv-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}.tar.gz"
+path = "uv-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/uv"
+
+type = "archive-file"
+executable = true
+readonly = true
+refreshPeriod = "168h"

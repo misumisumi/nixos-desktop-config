@@ -1,0 +1,9 @@
+[".local/state/share"]
+url = "https://github.com/ajeetdsouza/zoxide/releases/download/{{ (gitHubLatestRelease "ajeetdsouza/zoxide").TagName }}/zoxide-{{ (gitHubLatestRelease "ajeetdsouza/zoxide").TagName | trimPrefix "v" }}-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc.zip{{ else if eq .chezmoi.os "darwin" }}apple-darwin.tar.gz{{ else }}unknown-linux-musl.tar.gz{{ end }}"
+path = "zoxide"
+type = "archive-file"
+executable = true
+readonly = true
+refreshPeriod = "168h"
+
+#TODO: extracting completion

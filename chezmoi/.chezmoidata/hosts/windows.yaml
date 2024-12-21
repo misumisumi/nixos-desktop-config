@@ -1,0 +1,297 @@
+windows:
+  devices:
+    mouse:
+      natural_scroll: 1
+  registers:
+    # Long path Support (for komorebi)
+    'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem':
+      name: LongPathsEnabled
+      value: 1
+    # use UTC for hardware clock (fix time between linux and windows)
+    'HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation':
+      name: RealTimeIsUniversal
+      value: 1
+    # Print build version of windows
+    'HKCU:\Control Panel\Desktop':
+      name: PaintDesktopVersion
+      value: 1
+  defender:
+    exclution-paths:
+      - $env:USERPROFILE\.cache
+      - $env:USERPROFILE\.config
+      - $env:USERPROFILE\.dotfiles
+      - $env:USERPROFILE\bin
+      - $env:USERPROFILE\scoop
+      - $env:USERPROFILE\src
+      - $env:USERPROFILE\pkg
+      - $env:USERPROFILE\Hyper-V
+      - $env:USERPROFILE\VirtualBox VMs
+      - $env:ProgramData\scoop
+  optional_features:
+    enabled:
+      - Containers
+      - Microsoft-Hyper-V
+      - Microsoft-Windows-Subsystem-Linux
+      - HypervisorPlatform
+      - VirtualMachinePlatform
+    disabled:
+      - WorkFolders-Client
+  env:
+    PATH:
+      - $env:LOCALAPPDATA\Microsoft\WindowsApps
+      - $env:USERPROFILE\.dotnet\tools
+      - $env:USERPROFILE\bin
+      - $env:USERPROFILE\.local\bin
+      - $env:USERPROFILE\scoop\apps\git\current\mingw64\bin
+      - $env:USERPROFILE\scoop\apps\git\current\mingw64\libexec\git-core
+      - $env:USERPROFILE\scoop\apps\git\current\usr\bin
+      - $env:USERPROFILE\scoop\apps\nodejs-lts\current
+      - $env:USERPROFILE\scoop\apps\nodejs-lts\current\bin
+      - $env:USERPROFILE\scoop\apps\python\current
+      - $env:USERPROFILE\scoop\apps\python\current\Scripts
+      - $env:USERPROFILE\scoop\apps\ruby\current\bin
+      - $env:USERPROFILE\scoop\apps\ruby\current\gems\bin
+      - $env:USERPROFILE\scoop\shims
+    FZF_ALT_C_COMMAND: "fd --type d"
+    FZF_ALT_C_OPTS: "--preview 'tree -C {} | tree -200'"
+    FZF_CTRL_R_OPTS: "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+    FZF_CTRL_T_COMMAND: "fd --type f"
+    FZF_CTRL_T_OPTS: "--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+    JAVA_TOOL_OPTIONS: -Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8
+    KOMOREBI_CONFIG_HOME: $env:USERPROFILE\.config\komorebi
+    STARSHIP_CONFIG: $env:USERPROFILE\.config\starship.toml
+    YAZI_FILE_ONE: $env:USERPROFILE\scoop\apps\git\current\usr\bin\file.exe
+  packages:
+    powershell:
+      modules:
+        - M365PSProfile
+        - PSFzf
+        - PSWindowsUpdate
+        - Terminal-Icons
+        - WslInterop
+        - syntax-highlighting
+    winget:
+      apps:
+        - Adobe.CreativeCloud
+        - BlenderFoundation.Blender
+        - Discord.Discord
+        - GIMP.GIMP
+        - GaijinNetwork.WarThunder
+        - Git.Git
+        - KDE.Krita
+        - LGUG2Z.komorebi
+        - LGUG2Z.whkd
+        - Meta.Oculus
+        - MichaelTippach.ASIO4ALL
+        - Microsoft.PowerToys
+        - Microsoft.VCRedist.2008.x64
+        - Microsoft.VCRedist.2010.x64
+        - Microsoft.VCRedist.2010.x86
+        - Microsoft.VCRedist.2012.x64
+        - Microsoft.VCRedist.2012.x86
+        - Microsoft.VCRedist.2013.x64
+        - Microsoft.VCRedist.2015+.x86
+        - Microsoft.VisualStudio.2022.Community
+        - Microsoft.WindowsSDK.10.0.19041
+        - Microsoft.WindowsSDK.10.0.22000
+        - Microsoft.WindowsTerminal
+        - Microsoft.WingetCreate
+        - Mozilla.Firefox
+        - NDI.NDI5Runtime
+        - Nvidia.GeForceExperience
+        - Nvidia.RTXVoice
+        - OBSProject.OBSStudio
+        - RussellBanks.Komac
+        - SlackTechnologies.Slack
+        - Unity.UnityHub
+        - VRChat.CreatorCompanion
+        - Valve.Steam
+        - VirtualDesktop.Streamer
+        - Zoom.Zoom
+        - nathancorvussolis.corvusskk
+        # - univrsal.scrab
+        - wez.wezterm
+    scoop:
+      buckets:
+        extras: https://github.com/ScoopInstaller/Extras
+        java: https://github.com/ScoopInstaller/Java
+        main: https://github.com/ScoopInstaller/Main
+        my-bucket: https://github.com/Sumi-Sumi/scoop-bucket
+        versions: https://github.com/ScoopInstaller/Versions
+      apps:
+        # utils
+        - main/7zip
+        - main/bat
+        - main/btop
+        - main/chezmoi
+        - main/delta
+        - main/fastfetch
+        - main/fd
+        - main/ffmpeg
+        - main/fzf
+        - main/git
+        - main/imagemagick
+        - main/lazygit
+        - main/neovim
+        - main/openssh
+        - main/poppler
+        - main/ripgrep
+        - main/starship
+        - main/sudo
+        - main/tree-sitter
+        - main/wget
+        - main/zoxide
+        # font
+        # - my-bucket/moralerspace
+        # development
+        - java/microsoft-lts-jdk
+        - main/clangd
+        - main/cmake
+        - main/ctags
+        - main/curl
+        - main/deno
+        - main/gcc
+        - main/go
+        - main/jq
+        - main/make
+        - main/nodejs-lts
+        - main/python
+        - main/ruby
+        - main/rustup
+        - main/sqlite
+        - versions/python310
+  debloat:
+    options:
+      - -RemoveAppsCustom
+      - -DisableDVR # disable GameBar
+      - -ClearStart # remove pinns from start menu
+      - -DisableTelemetry
+      - -DisableBing
+      - -DisableSuggestions
+      - -DisableLockscreenTips
+      - -ShowHiddenFolders
+      - -ShowKnownFileExt
+      - -HideSearchTb
+      - -HideChat
+      - -DisableWidgets
+      - -DisableRecall
+    remove_custom_apps:
+      - Clipchamp.Clipchamp
+      - Microsoft.3DBuilder
+      - Microsoft.549981C3F5F10 #Cortana app
+      - Microsoft.BingFinance
+      - Microsoft.BingFoodAndDrink
+      - Microsoft.BingHealthAndFitness
+      - Microsoft.BingNews
+      - Microsoft.BingSports
+      - Microsoft.BingTranslator
+      - Microsoft.BingTravel
+      - Microsoft.BingWeather
+      - Microsoft.Getstarted # Cannot be uninstalled in Windows 11
+      - Microsoft.Messaging
+      - Microsoft.Microsoft3DViewer
+      - Microsoft.MicrosoftJournal
+      # - Microsoft.MicrosoftOfficeHub
+      - Microsoft.MicrosoftPowerBIForWindows
+      - Microsoft.MicrosoftSolitaireCollection
+      - Microsoft.MicrosoftStickyNotes
+      - Microsoft.MixedReality.Portal
+      - Microsoft.NetworkSpeedTest
+      - Microsoft.News
+      - Microsoft.Office.OneNote
+      - Microsoft.Office.Sway
+      - Microsoft.OneConnect
+      - Microsoft.Print3D
+      - Microsoft.SkypeApp
+      - Microsoft.Todos
+      # - Microsoft.WindowsAlarms
+      - Microsoft.WindowsFeedbackHub
+      - Microsoft.WindowsMaps
+      # - Microsoft.WindowsSoundRecorder
+      - Microsoft.XboxApp # Old Xbox Console Companion App, no longer supported
+      - Microsoft.ZuneVideo
+      - MicrosoftCorporationII.MicrosoftFamily # Family Safety App
+      - MicrosoftCorporationII.QuickAssist
+      - MicrosoftTeams # Old MS Teams personal (MS Store)
+      - MSTeams # New MS Teams app
+      # Third Party Apps
+      - ACGMediaPlayer
+      - ActiproSoftwareLLC
+      - AdobeSystemsIncorporated.AdobePhotoshopExpress
+      - Amazon.com.Amazon
+      - AmazonVideo.PrimeVideo
+      - Asphalt8Airborne
+      - AutodeskSketchBook
+      - CaesarsSlotsFreeCasino
+      - COOKINGFEVER
+      - CyberLinkMediaSuiteEssentials
+      - DisneyMagicKingdoms
+      - Disney
+      - DrawboardPDF
+      - Duolingo-LearnLanguagesforFree
+      - EclipseManager
+      - Facebook
+      - FarmVille2CountryEscape
+      - fitbit
+      - Flipboard
+      - HiddenCity
+      - HULULLC.HULUPLUS
+      - iHeartRadio
+      - Instagram
+      - king.com.BubbleWitch3Saga
+      - king.com.CandyCrushSaga
+      - king.com.CandyCrushSodaSaga
+      - LinkedInforWindows
+      - MarchofEmpires
+      - Netflix
+      - NYTCrossword
+      - OneCalendar
+      - PandoraMediaInc
+      - PhototasticCollage
+      - PicsArt-PhotoStudio
+      - Plex
+      - PolarrPhotoEditorAcademicEdition
+      - Royal Revolt
+      - Shazam
+      - Sidia.LiveWallpaper
+      - SlingTV
+      - Spotify
+      - TikTok
+      - TuneInRadio
+      - Twitter
+      - Viber
+      - WinZipUniversal
+      - Wunderlist
+      - XING
+      -
+      - Microsoft.BingSearch # Web Search from Microsoft Bing (Integrates into Windows Search)
+      - Microsoft.Copilot # New Windows Copilot app
+      # - Microsoft.Edge                         # Edge browser (Can only be uninstalled in European Economic Area)
+      # - Microsoft.GetHelp # Required for some Windows 11 Troubleshooters
+      - Microsoft.MSPaint # Paint 3D
+      - Microsoft.OneDrive # OneDrive consumer
+      - Microsoft.Paint # Classic Paint
+      - Microsoft.ScreenSketch # Snipping Tool
+      - Microsoft.Whiteboard # Only preinstalled on devices with touchscreen and/or pen support
+      # - Microsoft.Windows.Photos
+      # - Microsoft.WindowsCalculator
+      # - Microsoft.WindowsCamera
+      - Microsoft.WindowsNotepad
+      # - Microsoft.WindowsStore # Microsoft Store, WARNING: This app cannot be reinstalled!
+      # - Microsoft.WindowsTerminal # New default terminal app in windows 11
+      # - Microsoft.Xbox.TCUI                    # UI framework, seems to be required for MS store, photos and certain games
+      # - Microsoft.XboxIdentityProvider         # Xbox sign-in framework, required for some games
+      # - Microsoft.XboxSpeechToTextOverlay      # Might be required for some games, WARNING: This app cannot be reinstalled!
+      - Microsoft.YourPhone # Phone link
+      - Microsoft.ZuneMusic # Modern Media Player
+      - MicrosoftWindows.CrossDevice # Phone integration within File Explorer, Camera and more
+      -
+      - Microsoft.GamingApp # Modern Xbox Gaming App, required for installing some PC games
+      - Microsoft.OutlookForWindows # New mail app: Outlook for Windows
+      - Microsoft.People # Required for & included with Mail & Calendar
+      # - Microsoft.PowerAutomateDesktop
+      # - Microsoft.RemoteDesktop
+      - Microsoft.Windows.DevHome
+      - Microsoft.windowscommunicationsapps # Mail & Calendar
+      # - Microsoft.XboxGameOverlay # Game overlay, required/useful for some games
+      # - Microsoft.XboxGamingOverlay # Game overlay, required/useful for some games

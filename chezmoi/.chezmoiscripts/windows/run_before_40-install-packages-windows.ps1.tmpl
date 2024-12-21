@@ -1,0 +1,47 @@
+{{ if eq .chezmoi.os "windows" -}}
+try {
+  Get-Command -Name winget -ErrorAction Stop
+} catch [System.Management.Automation.CommandNotFoundException] {
+  Write-Host "'winget' is not exist in your machine."
+  Write-Host "Need install 'winget' before run this script."
+  exit
+}
+
+# Set-ExecutionPolicy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+winget install `
+  --accept-package-agreements `
+  --accept-source-agreements `
+  --disable-interactivity `
+  --ignore-security-hash `
+  --ignore-unavailable `
+  --id `
+  --exact `
+  {{ initial .windows.packages.winget.apps | join "`\n  " }}
+  {{ last .windows.packages.winget.apps }}
+
+try {
+  Get-Command -Name scoop -ErrorAction Stop
+} catch [System.Management.Automation.CommandNotFoundException] {
+  Write-Host "'scoop' is not exist in your machine."
+  Write-Host "Installing 'scoop' ..."
+  Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+# Support multi session download
+scoop install aria2
+
+# Install extracting tools and
+scoop install dark innounp lessmsi
+
+# Install user define apps
+scoop install `
+  {{ .windows.packages.scoop.apps | join "`\n  " }}
+
+{{ range .windows.packages.powershell.modules -}}
+Install-Module -Force -Scope CurrentUser {{ . }}
+{{ end }}
+
+Write-Host "Finish installing packages!"
+{{ end }}

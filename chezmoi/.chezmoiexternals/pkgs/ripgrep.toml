@@ -1,0 +1,15 @@
+[".local/bin/rg"]
+url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}/ripgrep-{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc.zip{{ else if eq .chezmoi.os "darwin" }}apple-darwin.tar.gz{{ else }}unknown-linux-musl.tar.gz{{ end }}"
+path = "ripgrep-{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/rg"
+type = "archive-file"
+executable = true
+readonly = true
+refreshPeriod = "168h"
+
+#TODO: extracting completion
+# [".local/share/rg"]
+# type = "archive-file"
+# url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}/ripgrep-{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}-{{ .chezmoi.arch }}-{{ if eq .chezmoi.os "windows" }}pc{{ else if eq .chezmoi.os "darwin" }}apple{{ else }}unknown{{ end }}-{{ .chezmoi.os }}{{ if eq .chezmoi.os "windows" }}-msvc.zip{{ else if eq .chezmoi.os "darwin" }}.tar.gz{{ else }}-gnu.tar.gz{{ end }}"
+# path = "ripgrep-{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}-{{ .chezmoi.arch }}-{{ if eq .chezmoi.os "windows" }}pc{{ else if eq .chezmoi.os "darwin" }}apple{{ else }}unknown{{ end }}-{{ .chezmoi.os }}{{ if eq .chezmoi.os "windows" }}-msvc{{ else if eq .chezmoi.os "linux" }}-gnu{{ end }}/rg"
+# executable = true
+# refreshPeriod = "168h"

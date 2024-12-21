@@ -1,0 +1,19 @@
+{{- if ne .chezmoi.os "windows" }}
+**/*.ps1
+**/*.ps1.tmpl
+.chezmoiscripts/windows
+{{- end }}
+
+
+{{- if not (has .chezmoi.hostname .not_use_pkg_mgnt.hosts) }}
+.chezmoiexternals
+{{- end }}
+
+{{- if ne .chezmoi.username "sumi" }}
+user/kobayashi.yaml
+user/pt_kobayashi.yaml
+{{- end }}
+
+{{- if or (ne .chezmoi.username "kobayashi") (ne .chezmoi.username "pt_kobayashi") }}
+user/sumi.yaml
+{{- end }}

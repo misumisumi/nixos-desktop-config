@@ -1,0 +1,9 @@
+[".local/bin/fd"]
+url = "https://github.com/sharkdp/fd/releases/download/{{ (gitHubLatestRelease "sharkdp/fd").TagName }}/fd-{{ (gitHubLatestRelease "sharkdp/fd").TagName }}-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc.zip{{ else if eq .chezmoi.os "darwin" }}apple-darwin.tar.gz{{ else }}unknown-linux-musl.tar.gz{{ end }}"
+path = "fd-{{ (gitHubLatestRelease "sharkdp/fd").TagName }}-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ else if eq .chezmoi.arch "386" }}i686{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/fd"
+type = "archive-file"
+executable = true
+readonly = true
+refreshPeriod = "168h"
+
+#TODO: extracting completion
