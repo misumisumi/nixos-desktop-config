@@ -1,0 +1,27 @@
+{{ if and (eq .chezmoi.os "windows") (hasKey .windows "user") -}}
+
+# Install scoop
+try {
+  Get-Command -Name scoop -ErrorAction Stop
+} catch [System.Management.Automation.CommandNotFoundException] {
+  Write-Host "'scoop' is not exist in your machine."
+  Write-Host "Installing 'scoop' ..."
+  Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+# Support multi session download
+scoop install git aria2
+
+# Install extracting tools and
+scoop install dark innounp lessmsi
+
+{{ range $name, $url := .windows.user.packages.scoop.buckets -}}
+scoop bucket add {{ $name }} {{ $url }}
+{{ end }}
+
+# Install user define apps
+scoop install `
+  {{ .windows.user.packages.scoop.apps | join " `\n  " }}
+
+Write-Host "Finish installing scoop packages!"
+{{ end }}

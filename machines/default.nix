@@ -41,6 +41,7 @@ let
               useUserPackages = true;
               extraSpecialArgs = {
                 inherit
+                  self
                   inputs
                   hostname
                   user
@@ -86,7 +87,7 @@ let
     "shell"
   ];
   guiIsoSchemes = [
-    "presets/large"
+    "presets/huge"
     "desktop/env/core/ime/fcitx5"
     "shell"
   ];
@@ -146,7 +147,7 @@ in
   soleus =
     let
       schemes = [
-        "presets/large"
+        "presets/huge"
         "desktop/env/core/ime/fcitx5"
         "shell"
       ];

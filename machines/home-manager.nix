@@ -49,17 +49,17 @@ let
         )
       ];
     };
-  presetAndShell = [
-    "small"
-    "small-bash"
-    "small-zsh"
-    "medium"
-    "medium-bash"
-    "medium-zsh"
-    "huge"
-    "huge-bash"
-    "huge-zsh"
-  ];
+  presetAndShell =
+    let
+      presets = lib.filterAttrs (n: v: v == "directory") (builtins.readDir ../apps/user/presets);
+    in
+    lib.flatten (
+      lib.mapAttrsToList (n: v: [
+        n
+        "${n}-bash"
+        "${n}-zsh"
+      ]) presets
+    );
 in
 listToAttrs (
   map (name: {
@@ -75,7 +75,7 @@ listToAttrs (
         colorTheme = "tokyonight-moon";
         schemes = [
           "presets/${preset}"
-        ] ++ lib.optional (shell != "") "shell/${shell}";
+        ] ++ lib.optional (shell != [ ]) "shell/${shell}";
       };
   }) presetAndShell
 )

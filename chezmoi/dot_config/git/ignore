@@ -1,6 +1,6 @@
 
 
-### Created by https://www.gitignore.io
+### Created by https://www.apps.gitignore.io
 ### Linux ###
 *~
 
@@ -230,8 +230,8 @@ dmypy.json
 cython_debug/
 
 # PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  JetBrains specific template is maintained in a separate JetBrains.apps.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.apps.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/

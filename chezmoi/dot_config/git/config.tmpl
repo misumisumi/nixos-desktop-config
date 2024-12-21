@@ -1,0 +1,21 @@
+[commit]
+    template = "~/.config/git/message"
+
+[core]
+    paper = {{- .apps.git.paper | quote }}
+
+[filter "lfs"]
+    clean = "git-lfs clean -- %f"
+    process = "git-lfs filter-process"
+    required = true
+    smudge = "git-lfs smudge -- %f"
+
+[init]
+    defaultBranch = "main"
+
+[interactive]
+    diffFilter = {{- .apps.git.diffFilter | quote }}
+
+[user]
+    email = {{- .apps.git.email | quote }}
+    name = {{- .apps.git.name | quote }}

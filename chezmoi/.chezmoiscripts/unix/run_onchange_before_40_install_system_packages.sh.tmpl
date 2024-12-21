@@ -1,0 +1,24 @@
+{{- if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+{{ $os := .chezmoi.os -}}
+{{ if hasKey (get . $os) "system" }}
+#!/usr/bin/env bash
+{{ $pkgs := get (get (get . $os) "system") "packages" }}
+{{- range $pkgmngr, $value := $pkgs -}}
+{{ if eq $pkgmngr "homebrew" }}
+brew install \
+  {{ $value.brew | join " \\\n  " }}
+{{ if eq $os "darwin" }}
+brew install --cask \
+  {{ $value.cask | join " \\\n  " }}
+{{ end -}}
+{{ else }}
+{{ or $value.extraPreInstall "" -}}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ or $value.extraPostInstall "" -}}
+{{ end -}}
+
+{{ end -}}
+{{ end -}}
+{{ end -}}

@@ -1,12 +1,7 @@
-{ config, ... }:
+{ chezmoiToNix, ... }:
 {
-  editorconfig = {
-    enable = true;
-  };
-  home = {
-    file."${config.home.homeDirectory}/.editorconfig" = {
-      enable = true;
-      source = ./.editorconfig;
-    };
+  editorconfig.enable = true;
+  home.file = chezmoiToNix {
+    chezmoiSrc = "dot_editorconfig";
   };
 }

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+{{- if and (eq .chezmoi.os "linux") (hasKey .linux "user") }}
+if [ ! -d ~/.asdf ]; then
+  if command -v brew &>/dev/null; then
+    brew install coreutils curl git asdf
+  else
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch {{ (gitHubLatestRelease "asdf-vm/asdf").TagName }}
+  fi
+fi
+{{- end -}}

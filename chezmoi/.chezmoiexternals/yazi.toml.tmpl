@@ -1,0 +1,23 @@
+{{- $os := .chezmoi.os -}}
+{{- $externals := get (get . $os) "externals" -}}
+{{ if (has "yazi" $externals) -}}
+[".local/bin/yazi"]
+url = 'https://github.com/sxyazi/yazi/releases/download/{{ (gitHubLatestRelease "sxyazi/yazi").TagName }}/yazi-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}.zip'
+path = 'yazi-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/yazi{{ if eq .chezmoi.os "windows" }}.exe{{ end }}'
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
+
+[".local/bin/ya"]
+url = 'https://github.com/sxyazi/yazi/releases/download/{{ (gitHubLatestRelease "sxyazi/yazi").TagName }}/yazi-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}.zip'
+path = 'yazi-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else if eq .chezmoi.arch "arm64" }}aarch64{{ end }}-{{ if eq .chezmoi.os "windows" }}pc-windows-msvc{{ else if eq .chezmoi.os "darwin" }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/ya{{ if eq .chezmoi.os "windows" }}.exe{{ end }}'
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
+
+#TODO: add yazi plugins
+# yazi provide plugin manager named `ya`
+# but I donot like exist many plugin manager in my system.
+# so I will manage it by chezmoi
+# or `ya pack -u` add run.sh and run.ps1 ?
+{{ end }}

@@ -1,0 +1,39 @@
+{{ if ne .chezmoi.os "windows" -}}
+**/*.ps1
+**/*.ps1.tmpl
+.chezmoiscripts/windows
+{{ end -}}
+
+{{ if eq .chezmoi.os "windows" -}}
+**/*.sh
+**/*.sh.tmpl
+*bash*
+*zsh*
+.bash_profile
+.chezmoiscripts/windows
+.dir_colors
+.profile
+.zprofile
+{{ end -}}
+
+{{ if (.chezmoi.username | contains "sumi") -}}
+user/kobayashi.yaml
+{{ end -}}
+{{ if (.chezmoi.username | contains "kobayashi") -}}
+user/sumi.yaml
+{{ end -}}
+
+{{- $ignore_win_host := list "hoge" -}}
+{{- $ignore_darwin_host := list "hoge" -}}
+{{- $ignore_linux_host := list "hoge" -}}
+{{ if has .chezmoi.hostname $ignore_win_host -}}
+.chezmoidata/hosts/windows
+{{ else if has .chezmoi.hostname $ignore_darwin_host -}}
+.chezmoidata/hosts/darwin
+{{ else if has .chezmoi.hostname $ignore_linux_host -}}
+.chezmoidata/hosts/linux
+{{ else -}}
+{{ end -}}
+
+.config/starship/starship.toml
+manualresources

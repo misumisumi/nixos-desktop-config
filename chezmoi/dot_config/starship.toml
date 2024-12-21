@@ -9,7 +9,6 @@ $git_status\
 [](fg:terminal_dark)\
 \n$character"""
 
-
 right_format = """
 [](fg:terminal_dark)\
 $cmd_duration\
@@ -21,8 +20,29 @@ $nodejs\
 $php\
 $python\
 $rust\
+$container\
 $username\
 $hostname"""
+
+palette = "tokyonight-moon"
+
+[palettes.tokyonight-moon]
+bg = "#222436"
+black = "#1b1d2b"
+blue = "#82aaff"
+cyan = "#86e1fc"
+fg = "#c8d3f5"
+green = "#c3e88d"
+magenta = "#c099ff"
+red = "#ff757f"
+terminal_black = "#414868"
+terminal_dark = "#303030"
+white = "#828bb8"
+yellow = "#ffc777"
+
+[container]
+format = '[$symbol \[$name\]]($style) '
+style = "fg:fg bg:terminal_dark"
 
 [hostname]
 ssh_only = true

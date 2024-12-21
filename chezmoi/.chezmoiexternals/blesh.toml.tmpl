@@ -1,0 +1,12 @@
+{{- if (ne .chezmoi.os "windows") -}}
+{{- $os := .chezmoi.os -}}
+{{- $externals := get (get . $os) "externals" -}}
+{{ if (has "blesh" $externals) -}}
+[".local/share/blesh"]
+url = "https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz"
+type = "archive"
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["*/**"]
+{{- end }}
+{{- end }}

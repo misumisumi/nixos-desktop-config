@@ -1,0 +1,40 @@
+{{ if and (eq .chezmoi.os "windows") (hasKey .windows "system") -}}
+
+# Set-ExecutionPolicy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
+  {{ range $key, $value := .windows.system.packages.winget.sources -}}
+  winget source add {{ $key }} {{ $value }}
+  {{ end -}}
+  {{ or .windows.system.packages.winget.preCmd "" }}
+  {{ if ne .windows.system.packages.winget.apps.sudo nil }}
+  sudo winget install `
+    --accept-package-agreements `
+    --accept-source-agreements `
+    --disable-interactivity `
+    --exact `
+    --no-upgrade `
+    --silent `
+    {{- range .windows.system.packages.winget.extraOptions }}
+    {{ . }} `
+    {{- end }}
+    {{ .windows.system.packages.winget.apps.sudo | join " `\n    " }}
+  {{ end }}
+  {{ if ne .windows.system.packages.winget.apps.no_sudo nil }}
+  winget install `
+    --accept-package-agreements `
+    --accept-source-agreements `
+    --disable-interactivity `
+    --exact `
+    --no-upgrade `
+    --silent `
+    {{- range .windows.system.packages.winget.extraOptions }}
+    {{ . }} `
+    {{- end }}
+    {{ .windows.system.packages.winget.apps.no_sudo | join " `\n    " }}
+  {{ end }}
+}
+
+Write-Host "Finish installing winget packages for system!"
+{{ end }}

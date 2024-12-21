@@ -1,0 +1,29 @@
+# Only source this once.
+if [ -n "$__HM_SESS_VARS_SOURCED" ]; then return; fi
+export __HM_SESS_VARS_SOURCED=1
+
+{{- template "dot_profile" . -}}
+
+{{- if eq .chezmoi.os "darwin" }}
+
+{{- range $key, $value := .darwin.user.env -}}
+{{ if eq $key "PATH" -}}
+export PATH={{ $value | join ":" }}:$PATH
+{{ else -}}
+export {{ $key }}="{{ $value }}"
+{{ end -}}
+{{ end -}}
+
+{{- else if eq .chezmoi.os "linux" }}
+
+{{- range $key, $value := .linux.user.env -}}
+{{ if eq $key "PATH" -}}
+export PATH={{ $value | join ":" }}:$PATH
+{{ else -}}
+export {{ $key }}="{{ $value }}"
+{{ end -}}
+{{ end -}}
+
+{{- end }}
+
+
