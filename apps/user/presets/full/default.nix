@@ -7,9 +7,10 @@
     ../../desktop/tool/graphics
     ../../desktop/tool/multimedia
     ../../desktop/tool/office
+    ../../desktop/tool/terminal/alacritty
     ../../desktop/tool/terminal/kitty
     ../../desktop/tool/utils
     ../../desktop/xdg
-    ../medium
+    ../large
   ];
 }

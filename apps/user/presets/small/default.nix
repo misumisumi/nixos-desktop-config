@@ -1,8 +1,6 @@
 {
   imports = [
-    ../../cli/develop
-    ../../cli/tool/multimedia
-    ../../cli/tool/utils
-    ../tiny
+    ../../cli/server
+    ../../core
   ];
 }
