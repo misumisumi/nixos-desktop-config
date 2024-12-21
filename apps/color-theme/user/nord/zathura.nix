@@ -1,8 +1,9 @@
 # Copyright (c) 2021 Lokesh Krishna
 # MIT License
 # https://github.com/lokesh-krishna/dotfiles
+{ lib, ... }:
 {
-  programs.zathura.extraConfig = ''
+  programs.zathura.extraConfig = lib.mkBefore ''
     set default-fg "#eceff4"
     set default-bg "#2e3440"
 
@@ -41,8 +42,8 @@
     set render-loading-bg "#2e3440"
     set render-loading-fg "#eceff4"
 
-    set highlight-color "#88c0d0"
-    set highlight-active-color "#5e81ac"
+    set highlight-color rgba(255,199,119,0.5)
+    set highlight-active-color rgba(195,232,141,0.5)
 
     set adjust-open "width"
   '';
