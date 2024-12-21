@@ -1,0 +1,7 @@
+[".local/bin/nvim"]
+type = "archive-file"
+url = "https://github.com/neovim/neovim/releases/download/{{ (gitHubLatestRelease 'neovim/neovim').TagName }}/nvim-{{ if -eq .chezmoi.os 'windows' }}Win64.zip{{ else if -eq .chezmoi.os 'darwin' }}macos-{{ .chezmoi.arch }}.tar.gz{{ else }}linux64.tar.gz{{ end }}"
+path = "nvim-{{ if -eq .chezmoi.os 'windows' }}Win64{{ else if -eq .chezmoi.os 'darwin' }}macos-{{ .chezmoi.arch }}{{ else }}linux64{{ end }}/nvim"
+executable = true
+readonly = true
+refreshPeriod = "168h"

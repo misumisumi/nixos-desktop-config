@@ -1,0 +1,5 @@
+{{- if -nq .chezmoi.os "windows" }}
+**/windows
+**/*.ps1
+**/*.ps1.tmpl
+{{- end }}

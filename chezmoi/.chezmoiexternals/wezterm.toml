@@ -1,0 +1,7 @@
+#TODO: split per os or remove this
+[".local/bin/wezterm"]
+type = "file"
+url = "https://github.com/wez/wezterm/releases/download/{{ (gitHubLatestRelease 'wez/wezterm').TagName }}/WezTerm-{{ if -eq .chezmoi.os 'windows' }}-windows{{ else if -eq .chezmoi.os 'darwin' }}-macos{{ end }}-{{ (gitHubLatestRelease 'wez/wezterm').TagName }}{{ if -eq .chezmoi.os 'windows' }}.zip{{ else if -eq .chezmoi.os 'darwin' }}.zip{{ else }}-Ubuntu20.04.AppImage{{ end }}"
+executable = true
+readonly = true
+refreshPeriod = "168h"

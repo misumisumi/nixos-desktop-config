@@ -1,0 +1,13 @@
+[".local/bin/yazi"]
+type = "archive-file"
+url = "https://github.com/sxyazi/yazi/releases/download/{{ (gitHubLatestRelease 'sxyazi/yazi').TagName }}/yazi-{{ (gitHubLatestRelease 'sxyazi/yazi').TagName }}-{{ .chezmoi.arch }}-{{ if -eq .chezmoi.os 'windows' }}pc-windows-msvc.zip{{ else if -eq .chezmoi.os 'darwin' }}apple-darwin.tar.gz{{ else }}unknown-linux-musl.tar.gz{{ end }}"
+path = "yazi-{{ (gitHubLatestRelease 'sxyazi/yazi').TagName }}-{{ .chezmoi.arch }}-{{ if -eq .chezmoi.os 'windows' }}pc-windows-msvc{{ else if -eq .chezmoi.os 'darwin' }}apple-darwin{{ else }}unknown-linux-musl{{ end }}/yazi"
+executable = true
+readonly = true
+refreshPeriod = "168h"
+
+#TODO: add yazi plugins
+# yazi provide plugin manager named `ya`
+# but I donot like exist many plugin manager in my system.
+# so I will manage it by chezmoi
+# or `ya pack -u` add run.sh and run.ps1 ?

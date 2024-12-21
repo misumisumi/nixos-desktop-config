@@ -1,0 +1,18 @@
+{{ if -eq .chezmoi.os "windows" -}}
+
+{{ range $key, $value := .windows.registers }}
+Set-ItemProperty {{ $key | quota }} -Name ${{ $value.name | quote }} -Value ${{ $value.value }}
+{{ end }}
+
+# Remove unnecessary default apps and settings
+#INFO: https://github.com/Raphire/Win11Debloat
+& ([scriptblock]::Create((irm "https://win11debloat.raphi.re/"))) -RunDefaults -Silent
+
+# Enable/Disable natural-scroll (from: https://gist.github.com/gagarine/d313ee6510009b3f3973c6e0929b1e1c)
+$mode = {{- .windows.devices.mouse.natural-scroll -}}
+Get-PnpDevice -Class Mouse -PresentOnly -Status OK | ForEach-Object { "$($_.Name): $($_.DeviceID)" `
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters" -Name FlipFlopWheel -Value $mode; `
+    "+--- Value of FlipFlopWheel is set to " + (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters").FlipFlopWheel + "`n"
+}
+
+{{ end }}

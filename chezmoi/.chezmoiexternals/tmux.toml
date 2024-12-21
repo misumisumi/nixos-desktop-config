@@ -1,0 +1,8 @@
+[".local/bin/nvim"]
+type = "file"
+# Third party URL (official repo not providing binaries)
+# fork nelsonenzo/tmux-appimage and build AppImage latest release
+url = "https://github.com/pythops/tmux-linux-binary/releases/download/{{ (gitHubLatestRelease 'pythops/tmux-linux-binary').TagName }}/tmux-linux-{{ .chezmoi.arch }}"
+executable = true
+readonly = true
+refreshPeriod = "168h"
