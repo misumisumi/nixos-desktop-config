@@ -4,6 +4,7 @@ from libqtile.log_utils import logger
 
 from my_modules import groups, keymap, screens, startup, wallpaper
 from my_modules import layouts as my_layouts
+from my_modules.functions import set_mouse
 from my_modules.variables import GlobalConf, set_bar_default
 
 groups = groups.set_groups()
@@ -11,7 +12,7 @@ layouts = my_layouts.set_layouts()
 floating_layout = my_layouts.set_floating_layout()
 screens = screens.make_screens()
 keys = keymap.set_keys()
-mouse = keymap.set_mouse()
+mouse = set_mouse()
 
 dgroups_key_binder = GlobalConf.dgroups_key_binder
 dgroups_app_rules = GlobalConf.dgroups_app_rules

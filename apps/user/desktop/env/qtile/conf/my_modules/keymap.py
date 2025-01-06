@@ -196,11 +196,3 @@ def set_keys():
     keys += [sub_mod_chord]
 
     return keys
-
-
-def set_mouse():
-    # Drag floating layouts.
-    return [
-        Drag([GlobalConf.mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-        Drag([GlobalConf.mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    ]
