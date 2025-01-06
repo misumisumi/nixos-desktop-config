@@ -5,6 +5,9 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
+    kernelParams = [
+      "amd_pstate=active"
+    ];
     kernelModules = [
       "v4l2loopback"
       "snd-aloop"
@@ -20,8 +23,8 @@
   };
   nix = {
     settings = {
-      cores = 6;
-      max-jobs = 4;
+      cores = 4;
+      max-jobs = 6;
     };
     extraOptions = ''
       binary-caches-parallel-connections = 24
