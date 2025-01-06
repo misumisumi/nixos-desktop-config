@@ -5,7 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
-    moralerspace-nerd-fonts
+    moralerspace-nerd-fonts-alt
     nerd-fonts.fira-code
   ];
   programs.wezterm = {
@@ -14,6 +14,6 @@
   xdg.configFile = chezmoiToNix {
     chezmoiSrc = "dot_config/wezterm";
     recursive = true;
-    ignores = [ "readonly_color-scheme.lua" ];
+    ignores = [ "color-scheme.lua" ];
   };
 }
