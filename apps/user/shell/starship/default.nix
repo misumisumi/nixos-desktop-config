@@ -9,7 +9,7 @@
         enable = true;
         enableBashIntegration = false;
         enableZshIntegration = false;
-        settings = importTOMLFromChezmoi "dot_config/readonly_starship.toml";
+        settings = importTOMLFromChezmoi "dot_config/starship/starship.toml";
       };
       # "Do not activate on tty console"
       bash.initExtra = ''
