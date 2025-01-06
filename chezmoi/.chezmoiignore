@@ -35,5 +35,11 @@ user/sumi.yaml
 {{ else -}}
 {{ end -}}
 
+{{ if (.chezmoi.hostname | contains "win-mother") -}}
+win-zephyrus
+{{ else if (.chezmoi.hostname | contains "win-zephyrus") -}}
+win-mother
+{{ end }}
+
 .config/starship/starship.toml
 manualresources

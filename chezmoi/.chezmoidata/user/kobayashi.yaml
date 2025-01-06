@@ -1,0 +1,14 @@
+apps:
+  git:
+    email: dragon511southern@gmail.com
+    name: misumisumi
+    paper: &delta $env:USERPROFILE\scoop\shims\delta
+    diffFilter: *delta
+  lazygit:
+    paper: $env:USERPROFILE\scoop\shims\delta --dark --paging=never
+
+linux:
+  user:
+    env:
+      LD_LIBRARY_PATH: find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name "lib64" -exec printf "%s:" {} + | sed 's/:$//'
+      CUDA_HOME: /disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64

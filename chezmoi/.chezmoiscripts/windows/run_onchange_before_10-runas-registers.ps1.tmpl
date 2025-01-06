@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "windows" -}}
+{{ if and (eq .chezmoi.os "windows") (hasKey .windows "system") -}}
 # Self-elevate the script if required
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
   if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
@@ -8,14 +8,14 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   }
 }
 
-{{ if hasKey .windows.system "optional_features" -}}
+{{ if hasKey .windows.system "registers " -}}
 {{ range $key, $value := .windows.system.registers -}}
 Write-Host "Set {{ $value.name | quote }} is {{ $value.value }}"
 Set-ItemProperty {{ $key | quote }} -Name {{ $value.name | quote }} -Value {{ $value.value }}
 {{- end }}
 {{- end }}
 
-{{ if hasKey .windows.system "devices" -}}
+{{ if hasKey .windows.system "natural_scroll" -}}
 $OS = Get-WmiObject -Class Win32_OperatingSystem
 $OSVersion = $OS.Version
 if ($OSVersion -ge "10.0.22631") { # first build number of 24H2 is 22631
@@ -23,7 +23,7 @@ if ($OSVersion -ge "10.0.22631") { # first build number of 24H2 is 22631
 } else {
   # Enable/Disable natural-scroll (from: https://gist.gitub.com/gagarine/d313ee6510009b3f3973c6e0929b1e1c)
   # windows 11 23H2 and older
-  $mode={{ .windows.system.devices.mouse.natural_scroll | quote }}
+  $mode={{ .windows.system.natural_scroll | quote }}
   Get-PnpDevice -Class Mouse -PresentOnly -Status OK | ForEach-Object { "$($_.Name): $($_.DeviceID)"; Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters" -Name FlipFlopWheel -Value $mode; "+--- Value of FlipFlopWheel is set to " + (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$($_.DeviceID)\Device Parameters").FlipFlopWheel + "`n" }
 }
 {{- end }}

@@ -143,6 +143,7 @@ windows:
           - Terminal-Icons
           - WslInterop
           - syntax-highlighting
+        scripts:
       winget:
         preCmd: |
         extraOptions:
@@ -171,7 +172,6 @@ windows:
             - VRChat.CreatorCompanion
             - Valve.Steam
             - VirtualDesktop.Streamer
-            - anatawa12.vrc-get
             # runtimes
             - Microsoft.VCRedist.2005.x86
             - Microsoft.VCRedist.2005.x64
@@ -191,6 +191,7 @@ windows:
             - LGUG2Z.whkd
             # tools
             - Microsoft.VisualStudio.2022.Community
+            - Microsoft.WinDbg
             - Microsoft.WindowsTerminal
             - Mozilla.Firefox
             - OBSProject.OBSStudio
@@ -203,6 +204,7 @@ windows:
             - nathancorvussolis.corvusskk
           no_sudo:
             - Spotify.Spotify
+          manifests:
       scoop:
         buckets:
           extras: https://github.com/ScoopInstaller/Extras
@@ -211,6 +213,7 @@ windows:
           my-bucket: https://github.com/Sumi-Sumi/scoop-bucket
           nerd-fonts: https://github.com/matthewjberger/scoop-nerd-fonts
           versions: https://github.com/ScoopInstaller/Versions
+          xrtools: "https://github.com/babo4d/scoop-xrtools"
         apps:
           # core utils
           - 7zip # A multi-format file archiver with high compression ratios
@@ -242,6 +245,9 @@ windows:
           - btop # system monitor
           - fastfetch # show system info
           - scoop-completion
+          # unity
+          - vrc-alcom
+          - vrc-get
           # font
           - my-bucket/moralerspace-nf
           - my-bucket/moralerspace-hw-nf

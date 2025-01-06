@@ -1,4 +1,6 @@
 {{ if and (eq .chezmoi.os "windows") (hasKey .windows "user") -}}
+{{ if hasKey .windows.user "packages" -}}
+{{ if hasKey .windows.user.packages "scoop" -}}
 
 # Install scoop
 try {
@@ -24,4 +26,7 @@ scoop install `
   {{ .windows.user.packages.scoop.apps | join " `\n  " }}
 
 Write-Host "Finish installing scoop packages!"
+
+{{ end }}
+{{ end }}
 {{ end }}

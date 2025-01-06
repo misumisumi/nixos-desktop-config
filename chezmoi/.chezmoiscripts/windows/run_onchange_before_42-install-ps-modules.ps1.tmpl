@@ -1,0 +1,18 @@
+{{ if and (eq .chezmoi.os "windows") (hasKey .windows "user") -}}
+{{ if hasKey .windows.user "packages" -}}
+{{ if hasKey .windows.user.packages "powershell" -}}
+
+Write-Host "Installing PowerShell Modules ..."
+{{ range .windows.user.packages.powershell.modules -}}
+Install-Module -Scope CurrentUser {{ . }}
+{{ end }}
+
+Write-Host "Installing PowerShell Scripts ..."
+{{ range .windows.user.packages.powershell.scripts -}}
+Install-Scripts -Scope CurrentUser {{ . }}
+{{ end }}
+
+Write-Host "Finish installing powershell modules!"
+{{ end }}
+{{ end }}
+{{ end }}

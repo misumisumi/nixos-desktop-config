@@ -1,0 +1,13 @@
+# Created using wingetcreate 1.9.3.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.9.0.schema.json
+
+PackageIdentifier: hyblocker.OpenVR-SpaceCalibrator
+PackageVersion: 1.5.1
+PackageLocale: en-US
+Publisher: hyblocker
+PackageName: OpenVR-SpaceCalibrator
+License: MIT License
+Copyright: Open source at https://github.com/hyblocker/OpenVR-SpaceCalibrator
+ShortDescription: Use tracked VR devices from one company with any other.
+ManifestType: defaultLocale
+ManifestVersion: 1.9.0

@@ -1,14 +1,16 @@
-{{ if and (eq .chezmoi.os "windows") (hasKey .windows "system") -}}
-
-# Set-ExecutionPolicy
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+{{ if eq .chezmoi.os "windows" -}}
 
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
   {{ range $key, $value := .windows.system.packages.winget.sources -}}
   winget source add {{ $key }} {{ $value }}
   {{ end -}}
+  {{ range $key, $value := .windows.user.packages.winget.sources -}}
+  winget source add {{ $key }} {{ $value }}
+  {{ end -}}
   {{ or .windows.system.packages.winget.preCmd "" }}
-  {{ if ne .windows.system.packages.winget.apps.sudo nil }}
+  {{ or .windows.user.packages.winget.preCmd "" }}
+  {{ $sudo_pkgs := concat (or .windows.system.packages.winget.apps.sudo list) (or .windows.user.packages.winget.apps.sudo list) }}
+  {{ if ne (len $sudo_pkgs) 0 }}
   sudo winget install `
     --accept-package-agreements `
     --accept-source-agreements `
@@ -19,9 +21,13 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     {{- range .windows.system.packages.winget.extraOptions }}
     {{ . }} `
     {{- end }}
-    {{ .windows.system.packages.winget.apps.sudo | join " `\n    " }}
+    {{- range .windows.user.packages.winget.extraOptions }}
+    {{ . }} `
+    {{- end }}
+    {{ $sudo_pkgs | join " `\n    " }}
   {{ end }}
-  {{ if ne .windows.system.packages.winget.apps.no_sudo nil }}
+  {{ $no_sudo_pkgs := concat (or .windows.system.packages.winget.apps.no_sudo list) (or .windows.user.packages.winget.apps.no_sudo list) }}
+  {{ if ne (len $no_sudo_pkgs) 0 }}
   winget install `
     --accept-package-agreements `
     --accept-source-agreements `
@@ -32,9 +38,13 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     {{- range .windows.system.packages.winget.extraOptions }}
     {{ . }} `
     {{- end }}
-    {{ .windows.system.packages.winget.apps.no_sudo | join " `\n    " }}
+    {{- range .windows.user.packages.winget.extraOptions }}
+    {{ . }} `
+    {{- end }}
+    {{ $no_sudo_pkgs | join " `\n    " }}
   {{ end }}
 }
 
 Write-Host "Finish installing winget packages for system!"
+
 {{ end }}

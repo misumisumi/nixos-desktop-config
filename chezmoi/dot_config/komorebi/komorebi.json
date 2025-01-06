@@ -1,82 +1,82 @@
 {
-  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.31/schema.json",
-  "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
-  "window_hiding_behaviour": "Cloak",
-  "cross_monitor_move_behaviour": "Insert",
-  "default_workspace_padding": 5,
-  "default_container_padding": 5,
-  "border": true,
-  "border_width": 2,
-  "border_offset": -1,
-  "theme": {
-    "palette": "Base16",
-    "name": "Ashes",
-    "unfocused_border": "Base03",
-    "bar_accent": "Base0D"
-  },
-  "stackbar": {
-    "height": 40,
-    "mode": "OnStack",
-    "tabs": {
-      "width": 300
-    }
-  },
-  "monitors": [
-    {
-      "workspaces": [
-        {
-          "name": "0-code",
-          "layout": "RightMainVerticalStack"
-        },
-        {
-          "name": "0-browse",
-          "layout": "RightMainVerticalStack"
-        },
-        {
-          "name": "0-analyze",
-          "layout": "RightMainVerticalStack"
-        },
-        {
-          "name": "0-full",
-          "layout": "UltrawideVerticalStack"
-        },
-        {
-          "name": "0-sns",
-          "layout": "Rows"
-        },
-        {
-          "name": "0-music",
-          "layout": "Rows"
-        }
-      ]
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.31/schema.json",
+    "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.json",
+    "window_hiding_behaviour": "Cloak",
+    "cross_monitor_move_behaviour": "Insert",
+    "default_workspace_padding": 5,
+    "default_container_padding": 5,
+    "border": true,
+    "border_width": 5,
+    "border_offset": -1,
+    "theme": {
+        "palette": "Base16",
+        "name": "Ashes",
+        "unfocused_border": "Base03",
+        "bar_accent": "Base0D"
     },
-    {
-      "workspaces": [
-        {
-          "name": "1-code",
-          "layout": "VerticalStack"
-        },
-        {
-          "name": "1-browse",
-          "layout": "VerticalStack"
-        },
-        {
-          "name": "1-analyze",
-          "layout": "VerticalStack"
-        },
-        {
-          "name": "1-full",
-          "layout": "UltrawideVerticalStack"
-        },
-        {
-          "name": "1-sns",
-          "layout": "Rows"
-        },
-        {
-          "name": "1-music",
-          "layout": "Rows"
+    "stackbar": {
+        "height": 40,
+        "mode": "OnStack",
+        "tabs": {
+            "width": 300
         }
-      ]
-    }
-  ]
+    },
+    "monitors": [
+        {
+            "workspaces": [
+                {
+                    "name": "0-code",
+                    "layout": "RightMainVerticalStack"
+                },
+                {
+                    "name": "0-browse",
+                    "layout": "RightMainVerticalStack"
+                },
+                {
+                    "name": "0-analyze",
+                    "layout": "RightMainVerticalStack"
+                },
+                {
+                    "name": "0-full",
+                    "layout": "UltrawideVerticalStack"
+                },
+                {
+                    "name": "0-sns",
+                    "layout": "Rows"
+                },
+                {
+                    "name": "0-music",
+                    "layout": "Rows"
+                }
+            ]
+        },
+        {
+            "workspaces": [
+                {
+                    "name": "1-code",
+                    "layout": "VerticalStack"
+                },
+                {
+                    "name": "1-browse",
+                    "layout": "VerticalStack"
+                },
+                {
+                    "name": "1-analyze",
+                    "layout": "VerticalStack"
+                },
+                {
+                    "name": "1-full",
+                    "layout": "UltrawideVerticalStack"
+                },
+                {
+                    "name": "1-sns",
+                    "layout": "Rows"
+                },
+                {
+                    "name": "1-music",
+                    "layout": "Rows"
+                }
+            ]
+        }
+    ]
 }

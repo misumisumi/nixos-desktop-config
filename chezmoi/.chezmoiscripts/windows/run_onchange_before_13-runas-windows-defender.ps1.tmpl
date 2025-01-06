@@ -1,4 +1,5 @@
-{{ if and (eq .chezmoi.os "windows") (hasKey .windows.system "defender") -}}
+{{ if and (eq .chezmoi.os "windows") (hasKey .windows "system") -}}
+{{ if hasKey .windows.system "defender" -}}
 # Self-elevate the script if required
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
   if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
@@ -16,4 +17,5 @@ Write-Host "Finish windows defender settings!"
 Write-Host "Close after 3s..."
 Start-Sleep -Seconds 3
 exit
+{{ end }}
 {{ end }}

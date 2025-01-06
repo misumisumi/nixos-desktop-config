@@ -1,4 +1,5 @@
-# Self-elevate the script if required
+Write-Host "Start to apply windows terminal setting..."
+
 $setting="$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 $tmp_setting="$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.tmp.json"
 $user_setting="$env:USERPROFILE\.config\windows-terminal\settings.json"
@@ -13,3 +14,5 @@ if((Test-Path $setting) -eq "True" -and (Test-Path $user_setting) -eq "True"){
   jq -a -s '.[0] * .[1]' $tmp_setting $user_setting > $setting
   rm $tmp_setting
 }
+
+Write-Host "Finish!"

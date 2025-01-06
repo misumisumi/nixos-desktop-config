@@ -7,7 +7,7 @@ alt + shift + control + q  : komorebic stop -whkd -bar
 
 # App shortcuts - these require shell to be pwsh / powershell
 # The apps will be focused if open, or launched if not open
-alt + enter             : if ($wshell.AppActivate('Wezterm') eq $False) { start wezterm }
+alt + return             : if ($wshell.AppActivate('Wezterm') -eq $False) { start wezterm-gui }
 
 alt + control + c       : komorebic close
 # alt + m                 : komorebic minimize
