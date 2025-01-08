@@ -15,8 +15,10 @@ This is [misumisumi](https://github.com/misumisumi)'s NixOS and home-manager con
 - Support standalone [home-manager](https://github.com/nix-community/home-manager)
 - Support selecting color-scheme
 - Providing my custom modules
+- Declarative environment construction in non-nix environments and multi-platforms using [chezmoi](./chezmoi)
+  - Since `nix` reads the files under `chezmoi`, settings do not overlap (with some exceptions)
 
-```nixos-desktop-config
+```shell
 ├── apps
 │   ├── color-theme  # color themes
 │   ├── system       # system wide application configurations (NixOS options)
@@ -26,6 +28,7 @@ This is [misumisumi](https://github.com/misumisumi)'s NixOS and home-manager con
 │       ├── desktop      # settings of desktop app
 │       ├── presets  # environment presets
 │       └── shell    # bash and zsh settings
+├── chezmoi          # dotfiles structure for chezmoi
 ├── machines         # settings for each my machines
 ├── modules          # my custom nixosModules and homeManagerModules
 ├── patches          # patch of package
