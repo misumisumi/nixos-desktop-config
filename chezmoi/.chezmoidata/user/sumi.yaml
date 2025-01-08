@@ -42,62 +42,59 @@ linux:
       XDG_VIDEOS_DIR: /home/$(whoami)/Videos
       XDG_WORKSPACE_DIR: /home/$(whoami)/workspace
     packages: # checking only homebrew or asdf
-      asdf:
-        plugins:
-          #TODO: add btop, yazi, poppler, wezterm
-          bat: https://gitlab.com/wt0f/asdf-bat.git
-          cmake: https://github.com/asdf-community/asdf-cmake.git
-          delta: https://github.com/andweeb/asdf-delta.git
-          deno: https://github.com/asdf-community/asdf-deno.git
-          fd: https://gitlab.com/wt0f/asdf-fd.git
-          ffmpeg: https://github.com/acj/asdf-ffmpeg
-          fzf: https://github.com/kompiro/asdf-fzf.git
-          go: https://github.com/asdf-community/asdf-golang.git
-          imagemagick: https://github.com/mangalakader/asdf-imagemagick.git
-          jq: https://github.com/lsanwick/asdf-jq.git
-          lazygit: https://github.com/nklmilojevic/asdf-lazygit.git
-          make: https://github.com/yacchi/asdf-make.git
-          neovim: https://github.com/richin13/asdf-neovim.git
-          nodejs: https://github.com/asdf-vm/asdf-nodejs.git
-          ripgrep: https://gitlab.com/wt0f/asdf-ripgrep.git
-          # ruby: https://github.com/asdf-vm/asdf-ruby.git
-          rust: https://github.com/code-lever/asdf-rust.git
-          starship: https://github.com/gr1m0h/asdf-starship.git
-          tmux: https://github.com/Dabolus/asdf-tmux.git
-          tree-sitter: https://github.com/ivanvc/asdf-tree-sitter.git
-          uv: https://github.com/asdf-community/asdf-uv.git
-          zoxide: https://github.com/nyrst/asdf-zoxide.git
+      mise:
+        # Packages I install globally use default aliases
+        settings:
+          idiomatic_version_file: true # enabled by default (unlike asdf)
+          always_keep_download: false # deleted after install by default
+          always_keep_install: false # deleted on failure by default
+          plugin_autoupdate_last_check_duration: "1 week" # set to 0 to disable updates
+          verbose: false # set to true to see full installation output, see `MISE_VERBOSE`
+          http_timeout: "30s" # set the timeout for http requests as duration string, see `MISE_HTTP_TIMEOUT`
+          jobs: 4 # number of plugins or runtimes to install in parallel. The default is `4`.
+          raw: false # set to true to directly pipe plugins to stdin/stdout/stderr
+          yes: false # set to true to automatically answer yes to all prompts
+          not_found_auto_install: true
+          auto_install: true # auto install missing development
+          experimental: true # enable experimental features
         apps:
-          - bat
-          - cmake
-          - delta
-          - deno
-          - fd
-          - ffmpeg
-          - fzf
-          - go
-          - imagemagick
-          - jq
-          - lazygit
-          - neovim
-          - nodejs
-          - ripgrep
-          - rust
-          - starship
-          - tree-sitter
-          - uv
-          - zoxide
+          bat: "latest"
+          btop: "latest"
+          cmake: "latest"
+          delta: "latest"
+          deno: "latest"
+          duf: "latest"
+          fd: "latest"
+          ffmpeg: "latest"
+          fzf: "latest"
+          github-cli: "latest"
+          go: "latest"
+          imagemagick: "latest"
+          jq: "latest"
+          lazygit: "latest"
+          neovim: "latest"
+          nodejs: "latest"
+          python: "latest"
+          ripgrep: "latest"
+          rust: "latest"
+          starship: "latest"
+          tmux: "latest"
+          tree-sitter: "latest"
+          uv: "latest"
+          yazi: "latest"
+          yt-dlp: "latest"
+          zoxide: "latest"
       # Other package managers may also work, but have not been thoroughly tested
       # Also, some package managers require permission to run sudo without a password.
       # apt:
-      #   installCmd: sudo apt install
+      #   installCmd: apt install
       #   options:
       #     - -y
       #   extraPreInstall: |
-      #     sudo add-apt-repository ppa:neovim-ppa/stable
-      #     sudo apt update
+      #     add-apt-repository ppa:neovim-ppa/stable
+      #     apt update
       #   extraPostInstall: |
-      #     sudo apt remove --autoremove
+      #     apt remove --autoremove
       #   apps:
       #     - neovim
       #     - sox

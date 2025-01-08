@@ -18,11 +18,12 @@ function _check_cmd() {
   command -v "$1" &>/dev/null
 }
 
-if _check_cmd brew && [ -f $(brew --prefix asdf)/libexec/asdf.sh ]; then
-  source $(brew --prefix asdf)/libexec/asdf.sh
-elif [ -f ~/.asdf/asdf.sh ]; then
-  source ~/.asdf/asdf.sh
-  source ~/.asdf/completions/asdf.bash
+if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
+  eval "$($(brew --prefix mise)/bin/mise activate bash)"
+  eval "$($(brew --prefix mise)/bin/mise completion bash)"
+elif [ -x ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate bash)"
+  eval "$(~/.local/bin/mise completion bash --include-bash-completion-lib )"
 fi
 
 if _check_cmd fastfetch; then

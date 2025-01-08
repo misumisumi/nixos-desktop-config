@@ -1,0 +1,44 @@
+{{- if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+{{ $os := .chezmoi.os -}}
+{{ $user_space_pkgmngr := list "homebrew" "mise" -}}
+#!/usr/bin/env bash
+
+{{ $pkgmngrs := (concat (or (get (get (get . $os) "system") "packages" | keys)) (or (get (get (get . $os) "user") "packages" | keys)) | uniq) -}}
+{{ $pkgmngrs := (get (get (get . $os) "user") "packages") | keys }}
+{{ $check_exe := "False" -}}
+{{ range $pkgmngr := $pkgmngrs -}}
+{{ if not (has $pkgmngr $user_space_pkgmngr) -}}
+{{- $check_exe = "True" -}}
+{{ end -}}
+{{ end -}}
+{{ if eq $check_exe "True" -}}
+ID=$(id -u)
+if [ $ID != 0 ]; then
+  sudo "$0" "$@"
+  exit
+fi
+{{ end -}}
+{{ $pkgs := get (get (get . $os) "system") "packages" }}
+{{- range $pkgmngr, $value := $pkgs -}}
+{{ if not (has $pkgmngr $user_space_pkgmngr) }}
+{{ or $value.extraPreInstall "" -}}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ or $value.extraPostInstall "" -}}
+{{ end -}}
+{{ end -}}
+
+{{ $pkgs := get (get (get . $os) "user") "packages" }}
+{{- range $pkgmngr, $value := $pkgs -}}
+{{ if not (has $pkgmngr $user_space_pkgmngr) }}
+{{ or $value.extraPreInstall "" -}}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ or $value.extraPostInstall "" -}}
+{{ end -}}
+{{ end -}}
+
+echo "Finish installing packages with sudo!"
+{{ end -}}

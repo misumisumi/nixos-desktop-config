@@ -16,11 +16,10 @@
 .zprofile
 {{ end -}}
 
-{{ if (.chezmoi.username | contains "sumi") -}}
-user/kobayashi.yaml
-{{ end -}}
 {{ if (.chezmoi.username | contains "kobayashi") -}}
 user/sumi.yaml
+{{ else }}
+user/kobayashi.yaml
 {{ end -}}
 
 {{- $ignore_win_host := list "hoge" -}}
@@ -35,10 +34,10 @@ user/sumi.yaml
 {{ else -}}
 {{ end -}}
 
-{{ if (.chezmoi.hostname | contains "win-mother") -}}
-win-zephyrus
-{{ else if (.chezmoi.hostname | contains "win-zephyrus") -}}
+{{ if (.chezmoi.hostname | contains "win-zephyrus") -}}
 win-mother
+{{ else -}}
+win-zephyrus
 {{ end }}
 
 .config/starship/starship.toml

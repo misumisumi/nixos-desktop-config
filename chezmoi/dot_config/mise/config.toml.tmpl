@@ -1,0 +1,16 @@
+{{- $os := .chezmoi.os -}}
+{{- $user_pkgs := (get (get (get . $os) "user") "packages") -}}
+{{- if hasKey $user_pkgs "mise" -}}
+[tools]
+{{ $mise_pkgs := get (get $user_pkgs "mise") "apps" -}}
+{{ range $pkg, $ver := $mise_pkgs -}}
+{{ $pkg }} = {{ $ver | quote }}
+{{ end }}
+
+[settings]
+{{ $mise_settings := get (get $user_pkgs "mise") "settings" -}}
+{{ range $key, $value := $mise_settings -}}
+{{ $key }} = {{ $value | quote }}
+{{ end -}}
+
+{{ end -}}

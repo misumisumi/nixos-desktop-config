@@ -1,0 +1,27 @@
+{{- if and (eq .chezmoi.os "linux") (hasKey .linux "user") -}}
+#!/usr/bin/env bash
+{{ $os := .chezmoi.os -}}
+{{ $pkgs := get (get (get . $os) "user") "packages" }}
+{{ if hasKey $pkgs "homebrew" -}}
+{{- $value := get ($pkgs) "homebrew" -}}
+brew install \
+  {{ $value.brew | join " \\\n  " }}
+{{ if and (eq $os "darwin") (hasKey $value "cask") }}
+brew install --cask \
+  {{ $value.cask | join " \\\n  " }}
+{{ end -}}
+{{ end }}
+
+{{ if hasKey $pkgs "mise" -}}
+if ! command -v mise &>/dev/null || [ ! -x ~/.local/bin/mise ]; then
+  curl https://mise.run | sh
+fi
+if command -v mise &>/dev/null; then
+  mise install
+else
+  $HOME/.local/bin/mise install
+fi
+{{ end }}
+
+echo "Finish installing packages without sudo"
+{{ end -}}
