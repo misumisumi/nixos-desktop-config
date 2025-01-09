@@ -14,8 +14,9 @@ with lib;
   programs = {
     git = {
       enable = true;
-      userEmail = "dragon511southern@gmail.com";
+      userEmail = "sumiharu@misumi-sumi.com";
       userName = "misumisumi";
+      signing.key = "F9C2261B92168D38";
       extraConfig = {
         init = {
           defaultBranch = "main";

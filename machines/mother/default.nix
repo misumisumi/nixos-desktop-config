@@ -12,6 +12,7 @@ with builtins;
     ../../apps/system/sops
     ../../apps/system/ssh
     ../../apps/system/steam
+    ../../apps/system/yubikey
     ../../apps/system/wm/qtile
     ../../settings/system
     ../../settings/system/bluetooth

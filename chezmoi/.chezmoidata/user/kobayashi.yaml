@@ -1,6 +1,6 @@
 apps:
   git:
-    email: dragon511southern@gmail.com
+    email: sumiharu@misumi-sumi.com
     name: misumisumi
     paper: &delta $env:USERPROFILE\scoop\shims\delta
     diffFilter: *delta

@@ -1,4 +1,6 @@
+{ pkgs, ... }:
 {
+  home.packages = [ pkgs.gcr ];
   programs.gpg = {
     enable = true;
     settings = {
@@ -75,9 +77,13 @@
       disable-ccid = true;
     };
   };
-  services.gpg-agent = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+  services = {
+    gpg-agent = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
   };
 }
