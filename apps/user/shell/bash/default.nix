@@ -3,7 +3,7 @@
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
-    historyControl = "ignoreboth";
+    historyControl = [ "ignoreboth" ];
     historyIgnore = [
       "builtin cd *"
       "cd *"
