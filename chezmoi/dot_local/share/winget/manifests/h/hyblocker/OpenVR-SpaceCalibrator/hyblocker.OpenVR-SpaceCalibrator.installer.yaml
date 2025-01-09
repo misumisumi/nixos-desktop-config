@@ -2,11 +2,11 @@
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.9.0.schema.json
 
 PackageIdentifier: hyblocker.OpenVR-SpaceCalibrator
-PackageVersion: 1.5.1
+PackageVersion: v1.5.1
 InstallerType: nullsoft
 Installers:
-- Architecture: x86
-  InstallerUrl: https://github.com/hyblocker/OpenVR-SpaceCalibrator/releases/download/v1.5.1/SpaceCalibrator-Installer-v1.5.1.exe
-  InstallerSha256: 38381DDE51A809C94B0E8F012B339D360A8EBDE6DACB947C27B40C0A9182F66E
+  - Architecture: x86
+    InstallerUrl: https://github.com/hyblocker/OpenVR-SpaceCalibrator/releases/download/v1.5.1/SpaceCalibrator-Installer-v1.5.1.exe
+    InstallerSha256: F9D3E9AAD532D4A9A804B14667FDCB71CD6AB8CBECA7089E49FBECA77AC7C653
 ManifestType: installer
 ManifestVersion: 1.9.0
