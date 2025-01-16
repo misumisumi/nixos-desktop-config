@@ -85,6 +85,11 @@ def set_keys():
             Key([mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
             Key([mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
             Key([mod], "s", lazy.spawn("copyq toggle")),
+            # dunst
+            Key(["shift"], "space", lazy.spawn("dunstctl context")),
+            Key([mod, "control"], "semicolon", lazy.spawn("dunstctl close-all")),
+            Key([mod, "shift"], "semicolon", lazy.spawn("dunstctl history-pop")),
+            Key([mod], "semicolon", lazy.spawn("dunstctl close")),
             # Lock screen
             Key([mod, "control"], "b", lazy.spawn("loginctl lock-session"), desc="lock PC"),
             # Screenshot
