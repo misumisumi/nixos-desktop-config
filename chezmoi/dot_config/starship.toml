@@ -48,6 +48,7 @@ style = "fg:fg bg:terminal_dark"
 ssh_only = true
 format = '[$ssh_symbol$hostname ]($style)'
 style = "fg:fg bg:terminal_dark"
+ssh_symbol = " "
 
 [username]
 style_root = "fg:magenta bg:terminal_dark"
