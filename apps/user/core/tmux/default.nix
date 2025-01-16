@@ -53,11 +53,10 @@
 
             if-shell '[ -z $SSH_CONNECTION ]' {
               set -g @dracula-plugins "time"
-              set -g @dracula-time-colors "dark_gray cyan"
-            }
-            if-shell '[ $SSH_CONNECTION ]' {
+              set -g @dracula-time-colors "dark_gray dark_purple"
+            } {
               set -g @dracula-plugins "cpu-usage gpu-usage ram-usage time"
-              set -g @dracula-time-colors "dark_purple dark_gray"
+              set -g @dracula-time-colors "dark_gray dark_purple"
               set -g @dracula-ram-usage-colors "dark_purple dark_gray"
               set -g @dracula-gpu-usage-colors "dark_gray dark_purple"
               set -g @dracula-cpu-usage-colors "dark_purple dark_gray"
