@@ -18,7 +18,7 @@
     paprefs
     jack2
   ];
-  hardware = {
+  services = {
     pulseaudio = {
       enable = true;
       package = pkgs.pulseaudioFull.override {
