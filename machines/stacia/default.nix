@@ -11,6 +11,7 @@ with builtins;
     ../../apps/system/services
     ../../apps/system/sops
     ../../apps/system/ssh
+    ../../apps/system/virtualsmartcard
     ../../apps/system/yubikey
     ../../apps/system/wm/qtile
     ../../settings/system
