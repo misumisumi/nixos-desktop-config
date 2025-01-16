@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/share/fonts/truetype/molalerspace-nerd-alt
 
-    find ./release_files -name \*.ttf -exec mv {} $out/share/fonts/truetype/molalerspace-nerd-alt \;
+    find ./release_files -name \*.ttf -exec cp {} $out/share/fonts/truetype/molalerspace-nerd-alt \;
 
     runHook postInstall
   '';
