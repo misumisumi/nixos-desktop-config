@@ -51,13 +51,5 @@ final: prev: {
   };
   moralerspace-nerd-fonts-alt = prev.callPackage ./moralerspace-nerd-fonts-alt.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
-  libskk = prev.libskk.overrideAttrs (old: {
-    postInstall =
-      let
-        correctJson = ../apps/user/desktop/env/core/ime/skk/libskk/rom-kana/default.json;
-      in
-      ''
-        cp ${correctJson} $out/share/libskk/rules/default/rom-kana/default.json
-      '';
-  });
+  inherit (nixpkgs-stable) gpick tree-sitter;
 }
