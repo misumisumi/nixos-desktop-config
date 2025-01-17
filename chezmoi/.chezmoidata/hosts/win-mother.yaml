@@ -10,7 +10,6 @@ windows:
         sources:
         apps:
           sudo:
-            - Nvidia.Broadcast
           no_sudo:
           manifests:
             - "h/hyblocker/OpenVR-SpaceCalibrator"

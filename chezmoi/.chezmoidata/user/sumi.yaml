@@ -195,6 +195,7 @@ windows:
             - Vivaldi.Vivaldi
             # utilities
             - File-New-Project.EarTrumpet
+            - GnuPG.Gpg4win
             - Microsoft.PowerToys
             - Microsoft.WingetCreate
             - RussellBanks.Komac
@@ -249,6 +250,12 @@ windows:
           - my-bucket/moralerspace-nf
           - my-bucket/moralerspace-hw-nf
           - nerd-fonts/FiraCode-NF
+          # yubikey
+          - yubico-piv-tool
+          - yubikey-manager-qt
+          - yubikey-personalization
+          - yubikey-personalization-gui
+          - yubioath
           # development
           # - java/microsoft-lts-jdk # runtime for java
           - cmake # cmake

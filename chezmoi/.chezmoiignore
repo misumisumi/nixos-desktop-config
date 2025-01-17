@@ -35,9 +35,9 @@ user/kobayashi.yaml
 {{ end -}}
 
 {{ if (.chezmoi.hostname | contains "win-zephyrus") -}}
-win-mother
+.chezmoidata/hosts/win-mother
 {{ else -}}
-win-zephyrus
+.chezmoidata/hosts/win-zephyrus
 {{ end }}
 
 .config/starship/starship.toml
