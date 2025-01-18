@@ -10,6 +10,7 @@ darwin:
   externals:
     - blesh
   user:
+    sops:
     env:
       PATH:
     packages:
@@ -26,6 +27,7 @@ linux:
   system:
     packages:
   user:
+    sops:
     env:
       XDG_CACHE_HOME: /home/$(whoami)/.cache
       XDG_CONFIG_HOME: /home/$(whoami)/.config
@@ -101,6 +103,8 @@ linux:
 windows:
   externals:
   user:
+    sops:
+      pkgs\ssh\desktops: .ssh\conf.d\hosts\desktops
     env:
       PATH:
         - $env:USERPROFILE\bin
@@ -124,6 +128,7 @@ windows:
       FZF_CTRL_T_OPTS: "--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
       JAVA_TOOL_OPTIONS: -Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8
       KOMOREBI_CONFIG_HOME: $env:USERPROFILE\.config\komorebi
+      SOPS_AGE_KEY_FILE: $env:USERPROFILE\.config\sops\age\keys.txt
       STARSHIP_CONFIG: $env:USERPROFILE\.config\starship.toml
       XDG_CACHE_HOME: $env:USERPROFILE\.cache
       XDG_CONFIG_HOME: $env:USERPROFILE\.config
@@ -231,6 +236,7 @@ windows:
           - poppler # lib of pdf rendering
           - psutils # unix like command line utilities
           - ripgrep # recursively searches dir for a regex pattern
+          - sops # Editor of encrypted file
           - starship # prompt decorator
           - tree-sitter # tree-sitter
           - wezterm # terminal

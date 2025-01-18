@@ -129,7 +129,7 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 {{ if eq $key "PATH" -}}
 $env:PATH = "{{ $value | join ";" }};" + "$env:PATH"
 {{- else -}}
-$env:{{- $key }} = "{{- $value -}}"
+$env:{{- $key }} = {{ $value | quote }}
 {{- end -}}
 {{ end }}
 

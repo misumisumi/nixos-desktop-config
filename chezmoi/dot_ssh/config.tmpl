@@ -1,0 +1,21 @@
+Include conf.d/hosts/*
+
+Host github
+  User git
+  HostName github.com
+Host github.com
+  Port 443
+  User git
+  HostName ssh.github.com
+
+Host *
+  ForwardAgent yes
+  AddKeysToAgent no
+  Compression no
+  ServerAliveInterval 30
+  ServerAliveCountMax 5
+  HashKnownHosts no
+  UserKnownHostsFile ~/.ssh/known_hosts
+  ControlMaster no
+  ControlPath ~/.ssh/master-%r@%n:%p
+  ControlPersist no

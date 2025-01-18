@@ -11,6 +11,7 @@ linux:
   externals:
     - blesh
   user:
+    sops:
     env:
       XDG_CACHE_HOME: /home/$(whoami)/.cache
       XDG_CONFIG_HOME: /home/$(whoami)/.config
