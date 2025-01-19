@@ -21,7 +21,7 @@ In other words, it is sufficient to manage only the dotfiles.
 - Executes custom scripts for additional processing
 
 In particular, script execution enables flexible operations such as declarative package installation and privileged operations in system space.
-By combining it with non-privileged package managers (unix=`mise`, windows=`scoop`), it is possible to set up the same development environment even on Windows or in restricted environments.
+By combining it with non-privileged package managers (unix=`mise`, windows=`scoop`), it is possible to set up the same development environment even in a restricted environments.
 
 ## Windows
 

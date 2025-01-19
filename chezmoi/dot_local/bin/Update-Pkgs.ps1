@@ -2,12 +2,12 @@ Write-Host "Update all installed packages..."
 
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
 Write-Host "Updating winget packages..."
-sudo winget install `
+sudo winget upgrade `
+    --all `
     --accept-package-agreements `
     --accept-source-agreements `
     --disable-interactivity `
-    --include-unknown `
-    --all
+    --include-unknown
 }
 
 if (Get-Command * | Where-Object { $_.Name -match "scoop" }) {
