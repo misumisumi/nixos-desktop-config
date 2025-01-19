@@ -4,7 +4,7 @@ let
 in
 {
   home.packages = [
-    pkgs.moralerspace-nerd-fonts-alt
+    pkgs.moralerspace-nf-fonts
   ];
   programs.alacritty = {
     enable = true;

@@ -1,12 +1,14 @@
 { pkgs, ... }:
 {
+  home.packages = [
+    pkgs.moralerspace-nf-fonts
+  ];
   programs = {
     kitty = {
       enable = true;
       font = {
         name = "Moralerspace Neon HWNF";
         size = 10.5;
-        # package = pkgs.udev-gothic-nf;
       };
       settings = {
         active_tab_font_style = "bold";

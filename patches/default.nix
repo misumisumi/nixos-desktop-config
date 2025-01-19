@@ -49,7 +49,6 @@ final: prev: {
       thumbnail = prev.haskell.lib.doJailbreak hsuper.thumbnail;
     };
   };
-  moralerspace-nerd-fonts-alt = prev.callPackage ./moralerspace-nerd-fonts-alt.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   inherit (nixpkgs-stable) gpick tree-sitter;
 }
