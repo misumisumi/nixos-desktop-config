@@ -1,6 +1,5 @@
 {
   imports = [
-    ./auth
     ./betterlockscreen
     ./dunst
     ./picom

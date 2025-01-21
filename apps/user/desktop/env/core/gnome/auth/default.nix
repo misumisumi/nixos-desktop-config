@@ -17,6 +17,5 @@
         WantedBy = [ "default.target" ];
       };
     };
-
   };
 }
