@@ -53,6 +53,7 @@
       };
       zinit = {
         enable = true;
+        enableAliases = false;
         promptTheme = {
           enable = false;
           theme = "romkatv/powerlevel10k";
