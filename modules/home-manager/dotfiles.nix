@@ -16,9 +16,12 @@ in
   options = {
     dotfilesActivation = lib.mkEnableOption "Activate dotfiles";
   };
-  imports = [
-    ../../settings/user
-  ] ++ schemePaths ++ lib.optional (colorTheme != null) ../../apps/color-theme/user/${removeFlavor};
+  imports =
+    [
+      ../../settings/user
+    ]
+    ++ schemePaths
+    ++ lib.optional (colorTheme != null) ../../apps/color-theme/user/${removeFlavor};
 
   config = lib.mkIf config.dotfilesActivation {
     programs.home-manager.enable = true;
