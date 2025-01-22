@@ -13,7 +13,6 @@ keys:
     - &zephyrus age1lc2dnrqr84rat2aqmm9g78mssuxm40vsswr7lnaz59n97qjgg9csx2wekj
 creation_rules:
   - path_regex: sops/hosts/mother/secrets.yaml
-    shamir_threshold: 2
     key_groups:
       - pgp:
           - *sumi

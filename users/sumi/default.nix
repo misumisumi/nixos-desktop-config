@@ -5,6 +5,9 @@
     sops
   ];
   sops = {
+    environment = {
+      GNUPGHOME = "~/.dummy"; # disable decryption using pgp key
+    };
     age = {
       generateKey = true;
       keyFile = "${config.home.homeDirectory}/.age-key.txt";
