@@ -50,5 +50,4 @@ final: prev: {
     };
   };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
-  inherit (nixpkgs-stable) gpick tree-sitter;
 }
