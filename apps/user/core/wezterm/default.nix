@@ -5,7 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
-    moralerspace-nf-fonts
+    moralerspace-nf
     nerd-fonts.fira-code
   ];
   programs.wezterm = {

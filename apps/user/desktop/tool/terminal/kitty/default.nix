@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.moralerspace-nf-fonts
+    pkgs.moralerspace-hwnf
   ];
   programs = {
     kitty = {
