@@ -68,7 +68,7 @@
           extraConfig = ''
             set -g @tilish-default 'main-horizontal'
             set -g @tilish-dmenu 'on'
-            set -g @tilish-prefix 'C-a'
+            set -g @tilish-prefix 'C-k'
             bind -T tailish f resize-pane -Z
             bind C-h previous-window
             bind C-l next-window
@@ -78,7 +78,7 @@
         }
       ];
 
-      prefix = "C-c";
+      prefix = "C-b";
       terminal = "tmux-256color";
       escapeTime = 10;
       clock24 = true;
@@ -89,10 +89,9 @@
       baseIndex = 1;
 
       extraConfig = ''
-        if-shell '[ $SSH_CONNECTION ]' {
-          set -g prefix2 C-b
-          bind C-b send-prefix 0
-        }
+        set -g prefix2 C-j
+        bind-key C-j send-prefix -2
+
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -s focus-events on
         setw -g xterm-keys on
