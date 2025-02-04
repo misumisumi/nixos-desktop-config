@@ -103,8 +103,8 @@ def set_keys():
             Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
             Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
             Key([], "XF86AudioMicMute", lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle")),
-            Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
-            Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause")),
+            Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause -a")),
+            Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause -a")),
             Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
             Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
             # PinP operationes
