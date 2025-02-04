@@ -23,7 +23,7 @@
     upower.enable = true;
     asusd = {
       enableUserService = true;
-      profileConfig = "quiet";
+      profileConfig.text = "quiet";
     };
     supergfxd = {
       enable = true;
