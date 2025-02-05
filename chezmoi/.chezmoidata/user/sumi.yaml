@@ -208,6 +208,10 @@ windows:
           no_sudo:
             - Spotify.Spotify
           manifests:
+      chocolatey:
+        apps:
+          sudo:
+          no_sudo:
       scoop:
         buckets:
           extras: https://github.com/ScoopInstaller/Extras

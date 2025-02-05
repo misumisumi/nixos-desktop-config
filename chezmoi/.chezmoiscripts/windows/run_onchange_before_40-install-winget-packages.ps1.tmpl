@@ -1,15 +1,16 @@
 {{ if eq .chezmoi.os "windows" -}}
+{{- $hostname := .chezmoi.hostname -}}
 
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
-  {{ range $key, $value := .windows.system.packages.winget.sources -}}
+  {{ range $key, $value := (get .windows $hostname).packages.winget.sources -}}
   winget source add {{ $key }} {{ $value }}
   {{ end -}}
   {{ range $key, $value := .windows.user.packages.winget.sources -}}
   winget source add {{ $key }} {{ $value }}
   {{ end -}}
-  {{ or .windows.system.packages.winget.preCmd "" }}
+  {{ or (get .windows $hostname).packages.winget.preCmd "" }}
   {{ or .windows.user.packages.winget.preCmd "" }}
-  {{ $sudo_pkgs := concat (or .windows.system.packages.winget.apps.sudo list) (or .windows.user.packages.winget.apps.sudo list) }}
+  {{ $sudo_pkgs := concat (or (get .windows $hostname).packages.winget.apps.sudo list) (or .windows.user.packages.winget.apps.sudo list) }}
   {{ if ne (len $sudo_pkgs) 0 }}
   sudo winget install `
     --accept-package-agreements `
@@ -18,7 +19,8 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     --exact `
     --no-upgrade `
     --silent `
-    {{- range .windows.system.packages.winget.extraOptions }}
+    {{ if or (hasKey (get .windows $hostname).packages "chocolatey") (hasKey .windows.user.packages "chocolatey")}}Chocolatey.Chocolatey `{{ end }}
+    {{- range (get .windows $hostname).packages.winget.extraOptions }}
     {{ . }} `
     {{- end }}
     {{- range .windows.user.packages.winget.extraOptions }}
@@ -26,7 +28,7 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     {{- end }}
     {{ $sudo_pkgs | join " `\n    " }}
   {{ end }}
-  {{ $no_sudo_pkgs := concat (or .windows.system.packages.winget.apps.no_sudo list) (or .windows.user.packages.winget.apps.no_sudo list) }}
+  {{ $no_sudo_pkgs := concat (or (get .windows $hostname).packages.winget.apps.no_sudo list) (or .windows.user.packages.winget.apps.no_sudo list) }}
   {{ if ne (len $no_sudo_pkgs) 0 }}
   winget install `
     --accept-package-agreements `
@@ -35,7 +37,7 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     --exact `
     --no-upgrade `
     --silent `
-    {{- range .windows.system.packages.winget.extraOptions }}
+    {{- range (get .windows $hostname).packages.winget.extraOptions }}
     {{ . }} `
     {{- end }}
     {{- range .windows.user.packages.winget.extraOptions }}

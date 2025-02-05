@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "windows" -}}
+{{ $hostname := .chezmoi.hostname -}}
+
+if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
+  {{ $sudo_pkgs := concat (or (get .windows $hostname).packages.chocolatey.apps.sudo list) (or .windows.user.packages.chocolatey.apps.sudo list) }}
+  {{ if ne (len $sudo_pkgs) 0 }}
+  sudo choco install -y `
+    {{ $sudo_pkgs | join " `\n    " }}
+  {{ end }}
+  {{ $no_sudo_pkgs := concat (or (get .windows $hostname).packages.chocolatey.apps.no_sudo list) (or .windows.user.packages.chocolatey.apps.no_sudo list) }}
+  {{ if ne (len $no_sudo_pkgs) 0 }}
+  choco install -y `
+    {{ $no_sudo_pkgs | join " `\n    " }}
+  {{ end }}
+}
+
+Write-Host "Finish installing chocolatey packages for system!"
+{{ end }}

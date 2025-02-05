@@ -31,14 +31,6 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-      - name: Update winget packages
-        run: |
-          chezmoi/scripts/update-winget-pkgs.sh
-
-      - name: Commit updated file
-        run: |
-          git commit -a -m "chore(winget): auto update package version"
-
       - uses: DeterminateSystems/update-flake-lock@v24
         id: update
         with:
