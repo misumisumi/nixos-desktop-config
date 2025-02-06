@@ -89,9 +89,6 @@
       baseIndex = 1;
 
       extraConfig = ''
-        set -g prefix2 C-j
-        bind-key C-j send-prefix -2
-
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -s focus-events on
         setw -g xterm-keys on
