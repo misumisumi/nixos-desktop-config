@@ -17,15 +17,7 @@ if wezterm.gui then
     })
     table.insert(copy_mode, {
         key = "c",
-        mods = "CTRL",
-        action = wezterm.action_callback(function(win, pane)
-            os.execute("fcitx5-remote -g SKK")
-            win:perform_action(act.CopyMode("Close"), pane)
-        end),
-    })
-    table.insert(copy_mode, {
-        key = "g",
-        mods = "CTRL",
+        mods = "CTRL|LEADER",
         action = wezterm.action_callback(function(win, pane)
             os.execute("fcitx5-remote -g SKK")
             win:perform_action(act.CopyMode("Close"), pane)
@@ -56,14 +48,6 @@ if wezterm.gui then
         end),
     })
     table.insert(search_mode, {
-        key = "g",
-        mods = "CTRL",
-        action = wezterm.action_callback(function(win, pane)
-            os.execute("fcitx5-remote -g SKK")
-            win:perform_action(act.CopyMode("Close"), pane)
-        end),
-    })
-    table.insert(search_mode, {
         key = "q",
         mods = "CTRL",
         action = wezterm.action_callback(function(win, pane)
@@ -76,63 +60,149 @@ end
 -- Use "SUPER" for Linux (qtile and xmonad cannot distinguish between left and right alt)
 -- Use "RightAlt" for Windows/Mac (Windows and mac cannot be used because shortcuts are assigned to super key.)
 local function with_mod()
-    local mod = wezterm.target_triple == "x86_64-unknown-linux-gnu" and "SUPER" or "LEADER"
-    return {
-        { key = "+", mods = string.format("%s", mod), action = act.IncreaseFontSize },
-        { key = "-", mods = string.format("%s", mod), action = act.DecreaseFontSize },
-        {
-            key = "/",
-            mods = string.format("%s", mod),
-            action = wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g EN")
-                win:perform_action(act.Search("CurrentSelectionOrEmptyString"), pane)
-            end),
-        },
-        { key = "f", mods = string.format("%s", mod), action = act.ScrollByPage(1) },
-        { key = "b", mods = string.format("%s", mod), action = act.ScrollByPage(-1) },
-        {
-            key = "Enter",
-            mods = string.format("SHIFT|%s", mod),
-            action = act.SplitPane({ direction = "Right", size = { Percent = 30 } }),
-        },
-        {
-            key = "Enter",
-            mods = string.format("%s", mod),
-            action = act.SplitPane({ direction = "Down", size = { Percent = 30 } }),
-        },
-        { key = "Space", mods = string.format("%s", mod), action = act.TogglePaneZoomState },
-        { key = "h", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Left") },
-        { key = "j", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Down") },
-        { key = "k", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Up") },
-        { key = "l", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Right") },
-        { key = "p", mods = string.format("%s", mod), action = act.ShowLauncher },
-        { key = "q", mods = string.format("%s", mod), action = act.QuickSelect },
-        {
-            key = "s",
-            mods = string.format("%s", mod),
-            action = act.PaneSelect({ alphabet = "", mode = "SwapWithActive" }),
-        },
-        {
-            key = "t",
-            mods = string.format("%s", mod),
-            action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
-        },
-        {
-            key = "u",
-            mods = string.format("%s", mod),
-            action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
-        },
-        { key = "c", mods = string.format("CTRL|%s", mod), action = act.CloseCurrentPane({ confirm = true }) },
-        { key = "w", mods = string.format("CTRL|%s", mod), action = act.CloseCurrentTab({ confirm = true }) },
-        {
-            key = "x",
-            mods = string.format("%s", mod),
-            action = wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g EN")
-                win:perform_action(act.ActivateCopyMode, pane)
-            end),
-        },
-    }
+    local keymaps_ctrl_as_mod = function(mod)
+        return {
+            -- easy split pane
+            {
+                key = "Enter",
+                mods = string.format("%s", mod),
+                action = act.SplitPane({ direction = "Down", size = { Percent = 30 } }),
+            },
+            {
+                key = "Enter",
+                mods = string.format("%s|SHIFT", mod),
+                action = act.SplitPane({ direction = "Right", size = { Percent = 30 } }),
+            },
+            -- cycle tabs
+            { key = "Tab", mods = string.format("%s", mod), action = act.ActivateTabRelative(1) },
+            { key = "Tab", mods = string.format("%s|SHIFT", mod), action = act.ActivateTabRelative(-1) },
+        }
+    end
+    local keymaps_ctrl_shift_as_mod = function(mod)
+        return {
+            -- navigations
+            { key = "h", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Left") },
+            { key = "j", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Down") },
+            { key = "k", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Up") },
+            { key = "l", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Right") },
+            {
+                key = "s",
+                mods = string.format("%s", mod),
+                action = act.PaneSelect({ alphabet = "", mode = "SwapWithActive" }),
+            },
+            { key = "b", mods = string.format("%s", mod), action = act.ScrollByPage(-1) },
+            { key = "f", mods = string.format("%s", mod), action = act.ScrollByPage(1) },
+            -- zoom pane
+            { key = "Space", mods = string.format("%s", mod), action = act.TogglePaneZoomState },
+            -- detach domain
+            {
+                key = "d",
+                mods = string.format("%s", mod),
+                action = act.DetachDomain("CurrentPaneDomain"),
+            },
+        }
+    end
+    local keymap_close_pane = function(mod)
+        -- close pane/tab
+        return { key = "q", mods = string.format("%s", mod), action = act.CloseCurrentPane({ confirm = true }) }
+    end
+    local keymaps_ctrl_leader_as_mod = function(mod)
+        return {
+            -- spawn new tab
+            {
+                key = "t",
+                mods = string.format("%s", mod),
+                action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
+            },
+            -- reload configuration
+            { key = "r", mods = string.format("%s", mod), action = act.ReloadConfiguration },
+            -- toggle tools
+            { key = "o", mods = string.format("%s", mod), action = act.ShowDebugOverlay },
+            { key = "p", mods = string.format("%s", mod), action = act.ShowLauncher },
+            { key = "/", mods = string.format("%s", mod), action = act.QuickSelect },
+            {
+                key = "x",
+                mods = string.format("%s", mod),
+                action = wezterm.action_callback(function(win, pane)
+                    os.execute("fcitx5-remote -g EN")
+                    win:perform_action(act.ActivateCopyMode, pane)
+                end),
+            },
+            {
+                key = "z",
+                mods = string.format("%s", mod),
+                action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
+            },
+        }
+    end
+    local keymaps_shift_leader_as_mod = function(mod)
+        return {
+            -- spawn new tab
+            { key = "T", mods = string.format("%s", mod), action = act.SpawnTab("CurrentPaneDomain") },
+            -- tmux like split pane
+            {
+                key = "%",
+                mods = string.format("%s", mod),
+                action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+            },
+            {
+                key = '"',
+                mods = string.format("%s", mod),
+                action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+            },
+            { key = "Q", mods = string.format("%s", mod), action = act.CloseCurrentTab({ confirm = true }) },
+            {
+                key = "?",
+                mods = string.format("%s", mod),
+                action = wezterm.action_callback(function(win, pane)
+                    os.execute("fcitx5-remote -g EN")
+                    win:perform_action(act.Search("CurrentSelectionOrEmptyString"), pane)
+                end),
+            },
+        }
+    end
+    local keymaps = keymaps_ctrl_as_mod("CTRL")
+    for _, v in ipairs(keymaps_ctrl_shift_as_mod("CTRL|SHIFT")) do
+        table.insert(keymaps, v)
+    end
+    table.insert(keymaps, keymap_close_pane("LEADER|CTRL"))
+    for _, v in ipairs(keymaps_ctrl_leader_as_mod("LEADER|CTRL")) do
+        table.insert(keymaps, v)
+    end
+    for _, v in ipairs(keymaps_shift_leader_as_mod("LEADER|SHIFT")) do
+        table.insert(keymaps, v)
+    end
+    local function check_desktop_session()
+        local session = os.getenv("DESKTOP_SESSION") or ""
+        local not_use_super_session = { "xsession", "wayland" }
+        for _, v in ipairs(not_use_super_session) do
+            if string.find(session, v) then
+                return true
+            end
+        end
+        return false
+    end
+    if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
+        local mod = "ALT"
+        if check_desktop_session() then
+            mod = "SUPER"
+        end
+        for _, v in ipairs(keymaps_ctrl_as_mod(mod)) do
+            table.insert(keymaps, v)
+        end
+        table.insert(keymaps, keymap_close_pane(string.format("%s|CTRL", mod)))
+        for _, v in ipairs(keymaps_ctrl_shift_as_mod(mod)) do
+            table.insert(keymaps, v)
+        end
+        for _, v in ipairs(keymaps_ctrl_leader_as_mod(mod)) do
+            table.insert(keymaps, v)
+        end
+        for _, v in ipairs(keymaps_shift_leader_as_mod(string.format("SHIFT|%s", mod))) do
+            table.insert(keymaps, v)
+        end
+    end
+
+    return keymaps
 end
 
 local config = {
@@ -143,36 +213,15 @@ local config = {
         search_mode = search_mode,
     },
     keys = {
-        { key = "%", mods = "SHIFT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-        { key = "+", mods = "SHIFT|CTRL", action = act.IncreaseFontSize },
+        -- common keymaps
+        -- font size
+        { key = "+", mods = "CTRL|SHIFT", action = act.IncreaseFontSize },
         { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
         { key = "=", mods = "CTRL", action = act.ResetFontSize },
-        {
-            key = "f",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g EN")
-                win:perform_action(act.Search("CurrentSelectionOrEmptyString"), pane)
-            end),
-        },
-        { key = "C", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
-        { key = "Enter", mods = "CTRL", action = act.SplitPane({ direction = "Down", size = { Percent = 30 } }) },
-        {
-            key = "Enter",
-            mods = "SHIFT|CTRL",
-            action = act.SplitPane({ direction = "Right", size = { Percent = 30 } }),
-        },
-        { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
-        { key = "Tab", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
-        { key = "V", mods = "SHIFT|CTRL", action = act.PasteFrom("Clipboard") },
-        {
-            key = "X",
-            mods = "CTRL|SHIFT",
-            action = wezterm.action_callback(function(win, pane)
-                os.execute("fcitx5-remote -g EN")
-                win:perform_action(act.ActivateCopyMode, pane)
-            end),
-        },
+        -- clipboard
+        { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+        { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
+        -- C-c passthrough
         {
             key = "c",
             mods = "CTRL|LEADER",
@@ -180,30 +229,6 @@ local config = {
                 win:perform_action(act.ScrollToBottom, pane)
                 win:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
             end),
-        },
-        { key = "Space", mods = "SHIFT|CTRL", action = act.TogglePaneZoomState },
-        { key = "h", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Left") },
-        { key = "j", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Down") },
-        { key = "k", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Up") },
-        { key = "l", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Right") },
-        { key = "o", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
-        { key = "q", mods = "CTRL|LEADER", action = act.QuickSelect },
-        { key = "R", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },
-        { key = "s", mods = "CTRL|SHIFT", action = act.PaneSelect({ alphabet = "", mode = "SwapWithActive" }) },
-        { key = "t", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
-        {
-            key = "u",
-            mods = "CTRL",
-            action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
-        },
-        { key = "c", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
-        { key = "w", mods = "CTRL|SHIFT", action = act.CloseCurrentTab({ confirm = true }) },
-        { key = '"', mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-        { key = "0", mods = "CTRL", action = act.ResetFontSize },
-        {
-            key = "D",
-            mods = "CTRL|SHIFT",
-            action = act.DetachDomain("CurrentPaneDomain"),
         },
     },
 }
