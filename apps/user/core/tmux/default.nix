@@ -31,12 +31,6 @@
           '';
         }
         {
-          plugin = vim-tmux-navigator;
-          extraConfig = ''
-            set -g @tilish-navigate 'on'
-          '';
-        }
-        {
           # color theme is fixed to dracula because the settings are too complicated
           plugin = dracula;
           extraConfig = ''
@@ -69,6 +63,7 @@
             set -g @tilish-default 'main-horizontal'
             set -g @tilish-dmenu 'on'
             set -g @tilish-prefix "C-n"
+            set -g @tilish-navigate 'on'
             bind -T tailish f resize-pane -Z
             bind C-h previous-window
             bind C-l next-window
