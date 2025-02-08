@@ -2,7 +2,7 @@
 {{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
 {{- $hostScoopConfig := or (get $hostPkgConfigs "scoop") dict -}}
 
-{{- $userName := .chezmoi.username -}}
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userScoopConfig := or (get $userPkgConfigs "scoop") dict -}}
 
@@ -17,8 +17,8 @@ try {
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
-{{ or (get $hostScoopConfig "preCmd") "" }}
-{{ or (get $userScoopConfig "preCmd") "" }}
+{{ or (get $hostScoopConfig "preInstallExtra") "" }}
+{{ or (get $userScoopConfig "preInstallExtra") "" }}
 
 # Support multi session download
 scoop install git aria2
@@ -34,8 +34,8 @@ scoop bucket add {{ $name }} {{ $url }}
 scoop install `
     {{ $scoopApps | join " `\n    " }}
 
-{{ or (get $hostScoopConfig "postCmd") "" }}
-{{ or (get $userScoopConfig "postCmd") "" }}
+{{ or (get $hostScoopConfig "postInstallExtra") "" }}
+{{ or (get $userScoopConfig "postInstallExtra") "" }}
 
 Write-Host "Finish installing scoop packages!"
 {{ end }}

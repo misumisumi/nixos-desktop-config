@@ -1,4 +1,7 @@
 {{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
 {{- $userConfig := or (get .apps.users $userName) dict -}}
 {{- $gitConfig := or (get $userConfig "git") dict -}}
 {{- if not (empty $gitConfig) -}}
@@ -21,6 +24,6 @@
     diffFilter = {{- $gitConfig.diffFilter | quote }}
 
 [user]
-    email = {{- $gitConfig.email | quote }}
-    name = {{- $gitConfig.name | quote }}
+    email = {{- $gitConfig.userEmail | quote }}
+    name = {{- $gitConfig.userName | quote }}
 {{- end -}}

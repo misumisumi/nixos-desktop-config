@@ -1,0 +1,25 @@
+format = """
+[ ](fg:fg bg:terminal_dark)\
+$os\
+[](fg:fg bg:terminal_dark)\
+$directory\
+[](fg:fg bg:terminal_dark)\
+$git_branch\
+$git_status\
+[](fg:terminal_dark)\
+\n$character"""
+
+right_format = """
+[](fg:terminal_dark)\
+$cmd_duration\
+$conda\
+$dart\
+$golang\
+$nix_shell\
+$nodejs\
+$php\
+$python\
+$rust\
+$container\
+$username\
+$hostname"""

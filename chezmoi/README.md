@@ -33,7 +33,20 @@ $env:PATH = "$env:USERPROFILE\scoop\apps\git\current\mingw64\bin;<span class="ma
 iex "&\{</span>(irm '[https://get.chezmoi.io/ps1](https://get.chezmoi.io/ps1)')} -b '~/.local/bin' -- init --apply misumisumi/nixos-desktop-config"
 ```
 
-### Installing with a Local Account
+### Package Manager
+
+Support declarative package installation using following package managers.
+See [.chezmoidata/users/sumi.toml](.chezmoidata/users/sumi.toml) for detail.
+
+| pkg manager |       admin        |
+| :---------: | :----------------: |
+|   winget    | yes (partially no) |
+| chocolatey  | yes (partially no) |
+|    scoop    |         no         |
+
+### Tips
+
+#### Installing with a Local Account
 
 - If you sign in with an Microsoft account during the initial setup, a user account will be created based on that account name.
 - To create a custom user account, you'll need to install using a local account.
@@ -44,7 +57,7 @@ iex "&\{</span>(irm '[https://get.chezmoi.io/ps1](https://get.chezmoi.io/ps1)')}
 oobe\bypassnro
 ```
 
-### How to make one storage bootable on both VM and bare metal
+#### How to make one storage bootable on both VM and bare metal
 
 1. Copy `$env:USERPROFILE/.local/share/startup/kvm_storage_boot.ps1` to `\Windows\System32\GroupPolicy\Machine\Scripts\Startup`.
 2. Open the Group Policy Editor by typing `gpedit.msc` into the `win+r` dialog.
@@ -53,22 +66,35 @@ oobe\bypassnro
 
 - Reference: [Cannot boot on bare metal windows anymore after importing in VM (libvirt)](https://www.reddit.com/r/VFIO/comments/kkoyvj/cannot_boot-on-bare-metal-windows-anymore-after/)
 
-## Unix
+## macOS & Linux
 
 ### Installation
 
 - Please check executes `git`
 
 ```sh
-# install brew (if need)
+# install homebrew (if need)
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # install chezmoi and apply dotfiles
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply "misumisumi/nixos-desktop-config"
 ```
 
+### Package Manager
+
+Support declarative package installation using mise and homebrew.
+You can also use the distribution standard package manager.
+See [.chezmoidata/users/sumi.toml](.chezmoidata/users/sumi.toml) for detail.
+
+|     pkg manager      |             admin              |
+| :------------------: | :----------------------------: |
+|         mise         |               no               |
+|       homebrew       | no (required for installation) |
+| apt, pacman, yum ... |              yes               |
+
 ### build requirements (Ubuntu)
 
 - `build-essential`
+- `git`
 - `nasm` # for ffmpeg
 - `ncurses-dev bison` # for tmux
-- [ruby wiki#suggested-build-environment](https://github.com/rbenv/ruby-build/wiki#suggested-build-environment)
+- [ruby wiki#suggested-build-environment](https://github.com/rbenv/ruby-build/wiki#suggested-build-environment) # for ruby

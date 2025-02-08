@@ -34,7 +34,20 @@ $env:PATH = "$env:USERPROFILE\scoop\apps\git\current\mingw64\bin;$env:PATH"
 iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply misumisumi/nixos-desktop-config"
 ```
 
-### ローカルアカウントでインストール
+### パッケージマネージャ
+
+次のパッケージマネージャを使った宣言的なパッケージインストールをサポートしています。
+詳しくは[.chezmoidata/users/sumi.toml](.chezmoidata/users/sumi.toml)をご覧ください。
+
+| pkg manager |      admin      |
+| :---------: | :-------------: |
+|   winget    | yes (partially) |
+| chocolatey  | yes (partially) |
+|    scoop    |       no        |
+
+### Tips
+
+#### ローカルアカウントでインストール
 
 - 初回設定時にMSアカウントでサインインしてしまうとアカウント名に基づいたユーザー名が登録されてしまう
 - 任意の名前を登録したい場合はローカルアカウントでインストールする必要がある
@@ -45,7 +58,7 @@ iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply mi
 oobe\bypassnro
 ```
 
-### 1つのストレージをVMとベアメタルで起動可能にする方法
+#### 1つのストレージをVMとベアメタルで起動可能にする方法
 
 - windowsは起動時に使わなかったストレージドライバーを次回起動時に不要としてマークする
 - そのため、virtio (VM)で起動後にnvme (ベアメタル)で起動できない
@@ -58,7 +71,7 @@ oobe\bypassnro
 
 - 参考: [Cannot boot on bare metal windows anymore after importing in VM (libvirt)](https://www.reddit.com/r/VFIO/comments/kkoyvj/cannot_boot_on_bare_metal_windows_anymore_after/)
 
-## Unix
+## macOS & Linux
 
 ### インストール
 
@@ -70,6 +83,18 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/in
 # install chezmoi and apply dotfiles
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply "misumisumi/nixos-desktop-config"
 ```
+
+### パッケージマネージャ
+
+`mise`と`homebrew`を使った宣言的なパッケージインストールをサポートしています。
+また、ディストリビューション標準のパッケージマネージャも使用できます。
+詳しくは[.chezmoidata/users/sumi.toml](.chezmoidata/users/sumi.toml)をご覧ください。
+
+|     pkg manager      |             admin              |
+| :------------------: | :----------------------------: |
+|         mise         |               no               |
+|       homebrew       | no (required for installation) |
+| apt, pacman, yum ... |              yes               |
 
 ### build requirements (Ubuntu)
 

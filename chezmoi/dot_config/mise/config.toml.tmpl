@@ -6,6 +6,9 @@
 {{- $hostMiseConfigs := or (get (or (get $hostConfig "packages") dict) "mise") dict -}}
 
 {{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "/") $userName -}}
+{{- end -}}
 {{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
 {{- $userMiseConfigs := or (get (or (get $userConfig "packages") dict) "mise") dict -}}
 

@@ -1,7 +1,7 @@
 {{- $hostName := .chezmoi.hostname -}}
 {{- $hostSopsConfig := or (get (or (get .windows.hosts $hostName) dict) "sops") dict -}}
 
-{{- $userName := .chezmoi.username -}}
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userSopsConfig := or (get (or (get .windows.users $userName) dict) "sops") dict -}}
 
 if (Get-Command * | Where-Object { $_.Name -match "sops" }) {

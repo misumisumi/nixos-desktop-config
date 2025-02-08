@@ -1,7 +1,9 @@
 {
   lib,
   pkgs,
-  chezmoiToNix,
+  user,
+  importFilesFromChezmoi,
+  importChezmoiData,
   ...
 }:
 with lib;
@@ -11,12 +13,14 @@ with lib;
     git-secret
     github-cli
   ];
-  programs = {
-    git = {
+  programs.git =
+    let
+      inherit (importChezmoiData "${user}") git;
+    in
+    {
       enable = true;
-      userEmail = "sumiharu@misumi-sumi.com";
-      userName = "misumisumi";
-      signing.key = "F9C2261B92168D38";
+      inherit (git) userEmail userName;
+      signing.key = git.signingKey;
       extraConfig = {
         init = {
           defaultBranch = "main";
@@ -28,9 +32,8 @@ with lib;
       delta.enable = true;
       lfs.enable = true;
     };
-  };
 
-  xdg.configFile = chezmoiToNix {
+  xdg.configFile = importFilesFromChezmoi {
     chezmoiSrc = "dot_config/git";
     recursive = true;
   };

@@ -1,0 +1,33 @@
+[windows.hosts.win-zephyrus.sops]
+
+[windows.hosts.win-zephyrus.env]
+PATH = []
+[windows.hosts.win-zephyrus.env.export]
+
+[windows.hosts.win-zephyrus.packages.powershell]
+extraPreInstall = ""
+extraPostInstall = ""
+modules = []
+scripts = []
+
+[windows.hosts.win-zephyrus.packages.winget]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-zephyrus.packages.winget.apps]
+sudo = ["Asus.ArmouryCrate"]
+no_sudo = []
+
+[windows.hosts.win-zephyrus.packages.chocolatey]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-zephyrus.packages.chocolatey.apps]
+sudo = ["nvidia-app", "nvidia-broadcast"]
+no_sudo = []
+
+[windows.hosts.win-zephyrus.packages.scoop]
+extraPreInstall = ""
+extraPostInstall = ""
+apps = []
+[windows.hosts.win-zephyrus.packages.scoop.buckets]

@@ -7,7 +7,7 @@
 {{- $hostConfig := or (get .windows.hosts $hostName) dict -}}
 {{- $hostEnvConfig := or (get $hostConfig "env") dict -}}
 
-{{- $userName := .chezmoi.username -}}
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userConfig := or (get .windows.users $userName) dict -}}
 {{- $userEnvConfig := or (get $userConfig "env") dict -}}
 {{ or (get $systemEnvConfig "initExtra") "" }}
@@ -160,6 +160,8 @@ if (Test-Path $localrc) {
 Invoke-Expression (& '~/scoop/apps/starship/current/starship.exe' init powershell --print-full-init | Out-String)
 # enable completion in current shell, use absolute path because PowerShell Core not respect $env:PSModulePath
 Import-Module "$($(Get-Item $(Get-Command scoop.ps1).Path).Directory.Parent.FullName)\modules\scoop-completion"
+# chezmoiの補完
+{{ completion "powershell" }}
 
 {{ or (get $systemEnvConfig "extraConfig") "" }}
 {{ or (get $userEnvConfig "extraConfig") "" }}

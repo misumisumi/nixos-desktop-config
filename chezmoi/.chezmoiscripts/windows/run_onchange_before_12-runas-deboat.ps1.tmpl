@@ -1,3 +1,6 @@
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostDebloatConfig := or (get (or (get .windows.hosts $hostName) dict) "debloat") dict -}}
+
 # Self-elevate the script if required
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
     if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
@@ -6,10 +9,6 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Exit
     }
 }
-
-{{ $hostName := .chezmoi.hostname -}}
-{{ $hostDebloatConfig := or (get (or (get .windows.hosts $hostName) dict) "debloat") dict -}}
-
 # Show error if current powershell environment does not have LanguageMode set to FullLanguage
 if ($ExecutionContext.SessionState.LanguageMode -ne "FullLanguage") {
      Write-Host "Error: Win11Debloat is unable to run on your system. Powershell execution is restricted by security policies" -ForegroundColor Red

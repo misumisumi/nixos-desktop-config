@@ -6,6 +6,9 @@
 {{- $hostExternals := or (get $hostConfig "externals") list -}}
 
 {{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
 {{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
 {{- $userExternals := or (get $userConfig "externals") list -}}
 

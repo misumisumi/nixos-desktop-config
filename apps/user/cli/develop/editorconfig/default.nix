@@ -1,7 +1,7 @@
-{ chezmoiToNix, ... }:
+{ importFilesFromChezmoi, ... }:
 {
   editorconfig.enable = true;
-  home.file = chezmoiToNix {
+  home.file = importFilesFromChezmoi {
     chezmoiSrc = "dot_editorconfig";
   };
 }

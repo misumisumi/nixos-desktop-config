@@ -2,13 +2,13 @@
 {{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
 {{- $hostWingetConfig := or (get $hostPkgConfigs "winget") dict -}}
 
-{{- $userName := .chezmoi.username -}}
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userWingetConfig := or (get $userPkgConfigs "winget") dict -}}
 
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
-    {{ or (get $hostWingetConfig "preCmd") "" }}
-    {{ or (get $userWingetConfig "preCmd") "" }}
+    {{ or (get $hostWingetConfig "preInstallExtra") "" }}
+    {{ or (get $userWingetConfig "preInstallExtra") "" }}
 
     {{- $sudo_pkgs := concat (or (get (or (get $hostWingetConfig "apps") dict) "sudo") list) (or (get (or (get $userWingetConfig "apps") dict) "sudo") list) -}}
     {{- $extraOptions := concat (or (get $hostWingetConfig "extraOptions") list) (or (get $userWingetConfig "extraOptions") list) -}}
@@ -42,8 +42,8 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
         {{ $no_sudo_pkgs | join " `\n        " }}
     {{ end }}
 
-    {{ or (get $hostWingetConfig "postCmd") "" }}
-    {{ or (get $userWingetConfig "postCmd") "" }}
+    {{ or (get $hostWingetConfig "postInstallExtra") "" }}
+    {{ or (get $userWingetConfig "postInstallExtra") "" }}
 }
 
 Write-Host "Finish installing winget packages!"

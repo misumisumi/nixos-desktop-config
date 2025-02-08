@@ -2,14 +2,14 @@
 {{ $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
 {{ $hostPSConfig := or (get $hostPkgConfigs "powershell") dict -}}
 
-{{- $userName := .chezmoi.username -}}
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userPSConfig := or (get $userPkgConfigs "powershell") dict -}}
 
 Write-Host "Installing PowerShell Modules ..."
 
-{{ or (get $hostPSConfig "preCmd") "" }}
-{{ or (get $userPSConfig "preCmd") "" }}
+{{ or (get $hostPSConfig "preInstallExtra") "" }}
+{{ or (get $userPSConfig "preInstallExtra") "" }}
 
 {{ range concat (or (get $hostPSConfig "modules") list) (or (get $userPSConfig "modules") list) -}}
 Install-Module -Scope CurrentUser {{ . }}
@@ -20,6 +20,6 @@ Write-Host "Installing PowerShell Scripts ..."
 Install-Scripts -Scope CurrentUser {{ . }}
 {{ end }}
 
-{{ or (get $hostPSConfig "postCmd") "" }}
-{{ or (get $userPSConfig "postCmd") "" }}
+{{ or (get $hostPSConfig "postInstallExtra") "" }}
+{{ or (get $userPSConfig "postInstallExtra") "" }}
 Write-Host "Finish installing powershell modules and scripts!"

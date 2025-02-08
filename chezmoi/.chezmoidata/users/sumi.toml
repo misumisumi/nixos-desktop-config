@@ -1,0 +1,283 @@
+[apps.users.sumi.git]
+userEmail = "sumiharu@misumi-sumi.com"
+userName = "misumisumi"
+signingKey = "F9C2261B92168D38"
+paper = "$env:USERPROFILE\\scoop\\shims\\delta"
+diffFilter = "$env:USERPROFILE\\scoop\\shims\\delta"
+
+[apps.users.sumi.lazygit]
+paper = "$env:USERPROFILE\\scoop\\shims\\delta --dark --paging=never"
+
+####################################################################################################
+# For darwin
+####################################################################################################
+[darwin]
+externals = ["blesh"]
+
+[darwin.users.sumi]
+externals = []
+[darwin.users.sumi.sops]
+
+[darwin.users.sumi.env]
+initExtra = ""
+extraConfig = ""
+[darwin.users.sumi.env.PATH]
+[darwin.users.sumi.env.export]
+[darwin.users.sumi.env.alias]
+
+[darwin.users.sumi.packages.homebrew]
+brew = ["sox", "neovim"]
+cask = ["vivaldi", "firefox"]
+
+####################################################################################################
+# For linux
+####################################################################################################
+[linux.users.sumi]
+externals = ["blesh", "tpm"]
+[linux.users.sumi.sops]
+
+[linux.users.sumi.env.PATH]
+[linux.users.sumi.env.export]
+EDITOR = "nvim"
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color: always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+FZF_TMUX = "1"
+FZF_TMUX_OPTS = "-p -w 80% -h 70%"
+JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
+LG_CONFIG_FILE = "/home/$(whoami)/.config/lazygit/config.yml"
+MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
+TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+[linux.users.sumi.env.alias]
+
+[linux.users.sumi.packages.mise.settings]
+idiomatic_version_file = true
+always_keep_download = false
+always_keep_install = false
+plugin_autoupdate_last_check_duration = "1 week"
+verbose = false
+http_timeout = "30s"
+jobs = 4
+raw = false
+yes = false
+not_found_auto_install = true
+auto_install = true
+experimental = true
+
+[linux.users.sumi.packages.mise.tools]
+bat = "latest"
+btop = "latest"
+cmake = "latest"
+delta = "latest"
+deno = "latest"
+duf = "latest"
+fd = "latest"
+ffmpeg = "latest"
+fzf = "latest"
+github-cli = "latest"
+go = "latest"
+imagemagick = "latest"
+jq = "latest"
+lazygit = "latest"
+neovim = "latest"
+nodejs = "latest"
+python = "latest"
+ripgrep = "latest"
+rust = "latest"
+starship = "latest"
+tmux = "latest"
+tree-sitter = "latest"
+uv = "latest"
+yazi = "latest"
+yt-dlp = "latest"
+zoxide = "latest"
+# darwin and linux support user define package manager
+# [linux.users.sumi.packages.apt]
+# need_sudo = true
+# installCmd = "apt install" # No need for sudo because it will be elevated to privileges inside the shell script
+# options = ["-y"]
+# preInstallExtra = """
+# apt add-apt-repository ppa:neovim-ppa/stable
+# apt update
+# """
+# postInstallExtra = """
+# apt remove --autoremove
+# """
+# apps = ["neovim", "sox"]
+
+####################################################################################################
+# For windows
+####################################################################################################
+[windows.users.sumi.sops]
+"pkgs\\ssh\\desktops" = ".ssh\\conf.d\\hosts\\desktops"
+
+[windows.users.sumi.env]
+PATH = [
+    "$env:USERPROFILE\\bin",
+    "$env:USERPROFILE\\.local\\bin",
+    "$env:USERPROFILE\\.dotnet\\tools",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\libexec\\git-core",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current",
+    "$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\python\\current",
+    "$env:USERPROFILE\\scoop\\apps\\python\\current\\Scripts",
+    "$env:USERPROFILE\\scoop\\apps\\ruby\\current\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\ruby\\current\\gems\\bin",
+    "$env:USERPROFILE\\scoop\\shims",
+    "$env:LOCALAPPDATA\\Microsoft\\WindowsApps",
+]
+[windows.users.sumi.env.export]
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+JAVA_TOOL_OPTIONS = "-Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8"
+KOMOREBI_CONFIG_HOME = "$env:USERPROFILE\\.config\\komorebi"
+SOPS_AGE_KEY_FILE = "$env:USERPROFILE\\.config\\sops\\age\\keys.txt"
+STARSHIP_CONFIG = "$env:USERPROFILE\\.config\\starship.toml"
+XDG_CACHE_HOME = "$env:USERPROFILE\\.cache"
+XDG_CONFIG_HOME = "$env:USERPROFILE\\.config"
+XDG_DATA_HOME = "$env:USERPROFILE\\.local\\share"
+XDG_STATE_HOME = "$env:USERPROFILE\\.local/state"
+YAZI_FILE_ONE = "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin\\file.exe"
+
+[windows.users.sumi.packages.powershell]
+extraPreInstall = ""
+extraPostInstall = ""
+modules = [
+    "NuGet",
+    "M365PSProfile",
+    "PSFzf",
+    "PSWindowsUpdate",
+    "Terminal-Icons",
+    "WslInterop",
+    "syntax-highlighting",
+]
+scripts = []
+
+[windows.users.sumi.packages.winget]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.users.sumi.packages.winget.apps]
+sudo = [
+    "Adobe.CreativeCloud",
+    "BlenderFoundation.Blender",
+    "GIMP.GIMP",
+    "KDE.Krita",
+    "Unity.UnityHub",
+    "Discord.Discord",
+    "Zoom.Zoom",
+    "MichaelTippach.ASIO4ALL",
+    "RedHat.VirtIO",
+    "WinFsp.WinFsp",
+    "Meta.Oculus",
+    "VRCX.VRCX",
+    "VRChat.CreatorCompanion",
+    "Valve.Steam",
+    "VirtualDesktop.Streamer",
+    "Microsoft.VCRedist.2005.x86",
+    "Microsoft.VCRedist.2005.x64",
+    "Microsoft.VCRedist.2008.x86",
+    "Microsoft.VCRedist.2008.x64",
+    "Microsoft.VCRedist.2010.x86",
+    "Microsoft.VCRedist.2010.x64",
+    "Microsoft.VCRedist.2012.x86",
+    "Microsoft.VCRedist.2012.x64",
+    "Microsoft.VCRedist.2013.x86",
+    "Microsoft.VCRedist.2013.x64",
+    "Microsoft.VCRedist.2015+.x86",
+    "Microsoft.VCRedist.2015+.x64",
+    "NDI.NDIRuntime",
+    "LGUG2Z.komorebi",
+    "LGUG2Z.whkd",
+    "Microsoft.VisualStudio.2022.Community",
+    "Microsoft.WinDbg",
+    "Microsoft.WindowsTerminal",
+    "Mozilla.Firefox",
+    "OBSProject.OBSStudio",
+    "Vivaldi.Vivaldi",
+    "File-New-Project.EarTrumpet",
+    "GnuPG.Gpg4win",
+    "Microsoft.PowerToys",
+    "Microsoft.WingetCreate",
+    "RussellBanks.Komac",
+    "nathancorvussolis.corvusskk",
+]
+no_sudo = ["Spotify.Spotify"]
+
+[windows.users.sumi.packages.chocolatey]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.users.sumi.packages.chocolatey.apps]
+sudo = []
+no_sudo = []
+
+[windows.users.sumi.packages.scoop]
+extraPreInstall = ""
+extraPostInstall = ""
+apps = [
+    "7zip",
+    "ctags",
+    "curl",
+    "delta",
+    "fd",
+    "ffmpeg",
+    "fzf",
+    "git",
+    "imagemagick",
+    "jq",
+    "lazygit",
+    "less",
+    "neovim",
+    "openssh",
+    "poppler",
+    "psutils",
+    "ripgrep",
+    "sops",
+    "starship",
+    "tree-sitter",
+    "wezterm",
+    "wget",
+    "yazi",
+    "yq",
+    "zoxide",
+    "bat",
+    "btop",
+    "fastfetch",
+    "scoop-completion",
+    "vrc-alcom",
+    "vrc-get",
+    "my-bucket/moralerspace-nf",
+    "my-bucket/moralerspace-hw-nf",
+    "nerd-fonts/FiraCode-NF",
+    "yubico-piv-tool",
+    "yubikey-manager-qt",
+    "yubikey-personalization",
+    "yubikey-personalization-gui",
+    "yubioath",
+    "cmake",
+    "deno",
+    "go",
+    "make",
+    "mingw",
+    "nodejs-lts",
+    "python",
+    "ruby",
+    "rustup",
+    "uv",
+]
+[windows.users.sumi.packages.scoop.buckets]
+extras = "https://github.com/ScoopInstaller/Extras"
+java = "https://github.com/ScoopInstaller/Java"
+main = "https://github.com/ScoopInstaller/Main"
+my-bucket = "https://github.com/Sumi-Sumi/scoop-bucket"
+nerd-fonts = "https://github.com/matthewjberger/scoop-nerd-fonts"
+versions = "https://github.com/ScoopInstaller/Versions"
+xrtools = "https://github.com/babo4d/scoop-xrtools"

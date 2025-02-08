@@ -1,3 +1,6 @@
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostFeaturesConfig := or (get (or (get .windows.hosts $hostName) dict) "optional_features") dict -}}
+
 # Self-elevate the script if required
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
     if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
@@ -6,10 +9,6 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Exit
     }
 }
-
-{{ $hostName := .chezmoi.hostname -}}
-{{ $hostFeaturesConfig := or (get (or (get .windows.hosts $hostName) dict) "optional_features") dict -}}
-
 {{ $enableFeatures := concat .windows.system.optional_features.enabled (or (get $hostFeaturesConfig "enabled") list) }}
 $enableFeatures = @(
     {{ $enableFeatures | quoteList | join "\n    " }}

@@ -25,7 +25,7 @@ in
     {
       importTOMLFromChezmoi = src: lib.importTOML (chezmoiRoot + "/${src}");
       importJSONFromChezmoi = src: lib.importJSON (chezmoiRoot + "/${src}");
-      chezmoiToNix =
+      importFilesFromChezmoi =
         {
           chezmoiSrc,
           recursive ? false,
@@ -64,5 +64,12 @@ in
               inherit source;
             };
           };
+      importChezmoiData =
+        username:
+        let
+          path = chezmoiRoot + "/.chezmoidata/users/${username}.toml";
+          conf = if lib.pathExists path then lib.importTOML path else { };
+        in
+        conf.apps.users.${username} // { inherit (conf.linux.users.${username}) env; };
     };
 }
