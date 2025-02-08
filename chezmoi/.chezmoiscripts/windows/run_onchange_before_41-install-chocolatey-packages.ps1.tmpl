@@ -1,18 +1,37 @@
-{{ if eq .chezmoi.os "windows" -}}
-{{ $hostname := .chezmoi.hostname -}}
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{- $hostChocoConfig := or (get $hostPkgConfigs "chocolatey") dict -}}
 
+{{- $userName := .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userChocoConfig := or (get $userPkgConfigs "chocolatey") dict -}}
 if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
-  {{ $sudo_pkgs := concat (or (get .windows $hostname).packages.chocolatey.apps.sudo list) (or .windows.user.packages.chocolatey.apps.sudo list) }}
-  {{ if ne (len $sudo_pkgs) 0 }}
-  sudo choco install -y `
-    {{ $sudo_pkgs | join " `\n    " }}
-  {{ end }}
-  {{ $no_sudo_pkgs := concat (or (get .windows $hostname).packages.chocolatey.apps.no_sudo list) (or .windows.user.packages.chocolatey.apps.no_sudo list) }}
-  {{ if ne (len $no_sudo_pkgs) 0 }}
-  choco install -y `
-    {{ $no_sudo_pkgs | join " `\n    " }}
-  {{ end }}
+    {{ or (get $hostChocoConfig "preCmd") "" }}
+    {{ or (get $userChocoConfig "preCmd") "" }}
+
+    {{- $sudo_pkgs := concat (or (get (or (get $hostChocoConfig "apps") dict) "sudo") list) (or (get (or (get $userChocoConfig "apps") dict) "sudo") list) -}}
+    {{- $extraOptions := concat (or (get $hostChocoConfig "extraOptions") list) (or (get $userChocoConfig "extraOptions") list) -}}
+    {{ if ne (len $sudo_pkgs) 0 -}}
+    sudo choco install \
+        -y `
+        {{- range $extraOptions }}
+        {{ . }} `
+        {{- end }}
+        {{ $sudo_pkgs | join " `\n        " }}
+    {{ end }}
+
+    {{- $no_sudo_pkgs := concat (or (get (or (get $hostChocoConfig "apps") dict) "no_sudo") list) (or (get (or (get $userChocoConfig "apps") dict) "no_sudo") list) -}}
+    {{ if ne (len $no_sudo_pkgs) 0 }}
+    choco install \
+        -y `
+        {{- range $extraOptions }}
+        {{ . }} `
+        {{- end }}
+        {{ $no_sudo_pkgs | join " `\n        " }}
+    {{ end }}
+
+    {{ or (get $hostChocoConfig "postCmd") "" }}
+    {{ or (get $userChocoConfig "postCmd") "" }}
 }
 
-Write-Host "Finish installing chocolatey packages for system!"
-{{ end }}
+Write-Host "Finish installing chocolatey packages!"

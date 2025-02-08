@@ -1,16 +1,24 @@
 {{- $os := .chezmoi.os -}}
-{{- $user_pkgs := (get (get (get . $os) "user") "packages") -}}
-{{- if hasKey $user_pkgs "mise" -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostMiseConfigs := or (get (or (get $hostConfig "packages") dict) "mise") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userMiseConfigs := or (get (or (get $userConfig "packages") dict) "mise") dict -}}
+
+# mise settings defined on the host take priority
 [tools]
-{{ $mise_pkgs := get (get $user_pkgs "mise") "apps" -}}
-{{ range $pkg, $ver := $mise_pkgs -}}
+{{ $miseTools := merge (or (get $hostMiseConfigs "tools") dict) (or (get $userMiseConfigs "tools") dict) -}}
+{{ range $pkg, $ver := $miseTools -}}
 {{ $pkg }} = {{ $ver | quote }}
 {{ end }}
 
 [settings]
-{{ $mise_settings := get (get $user_pkgs "mise") "settings" -}}
-{{ range $key, $value := $mise_settings -}}
+{{ $miseSettings := merge (or (get $hostMiseConfigs "settings") dict) (or (get $userMiseConfigs "settings") dict) -}}
+{{ range $key, $value := $miseSettings -}}
 {{ $key }} = {{ $value | quote }}
 {{ end -}}
 
-{{ end -}}

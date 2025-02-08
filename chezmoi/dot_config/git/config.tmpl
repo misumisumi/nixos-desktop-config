@@ -1,8 +1,12 @@
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $gitConfig := or (get $userConfig "git") dict -}}
+{{- if not (empty $gitConfig) -}}
 [commit]
     template = "~/.config/git/message"
 
 [core]
-    paper = {{- .apps.git.paper | quote }}
+    paper = {{- $gitConfig.paper | quote }}
 
 [filter "lfs"]
     clean = "git-lfs clean -- %f"
@@ -14,8 +18,9 @@
     defaultBranch = "main"
 
 [interactive]
-    diffFilter = {{- .apps.git.diffFilter | quote }}
+    diffFilter = {{- $gitConfig.diffFilter | quote }}
 
 [user]
-    email = {{- .apps.git.email | quote }}
-    name = {{- .apps.git.name | quote }}
+    email = {{- $gitConfig.email | quote }}
+    name = {{- $gitConfig.name | quote }}
+{{- end -}}

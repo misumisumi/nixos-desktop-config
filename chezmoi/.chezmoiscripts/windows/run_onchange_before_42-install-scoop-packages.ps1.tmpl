@@ -1,15 +1,24 @@
-{{ if and (eq .chezmoi.os "windows") (hasKey .windows "user") -}}
-{{ if hasKey .windows.user "packages" -}}
-{{ if hasKey .windows.user.packages "scoop" -}}
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{- $hostScoopConfig := or (get $hostPkgConfigs "scoop") dict -}}
 
+{{- $userName := .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userScoopConfig := or (get $userPkgConfigs "scoop") dict -}}
+
+{{- $scoopApps := concat (or (get $hostScoopConfig "apps") list) (or (get $userScoopConfig "apps") list) -}}
+{{- if ne (len $scoopApps) 0 -}}
 # Install scoop
 try {
-  Get-Command -Name scoop -ErrorAction Stop
+    Get-Command -Name scoop -ErrorAction Stop
 } catch [System.Management.Automation.CommandNotFoundException] {
-  Write-Host "'scoop' is not exist in your machine."
-  Write-Host "Installing 'scoop' ..."
-  Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    Write-Host "'scoop' is not exist in your machine."
+    Write-Host "Installing 'scoop' ..."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
+
+{{ or (get $hostScoopConfig "preCmd") "" }}
+{{ or (get $userScoopConfig "preCmd") "" }}
 
 # Support multi session download
 scoop install git aria2
@@ -17,16 +26,16 @@ scoop install git aria2
 # Install extracting tools and
 scoop install dark innounp lessmsi
 
-{{ range $name, $url := .windows.user.packages.scoop.buckets -}}
+{{ range $name, $url := merge (or (get $hostScoopConfig "buckets") dict) (or (get $userScoopConfig "buckets") dict) -}}
 scoop bucket add {{ $name }} {{ $url }}
 {{ end }}
 
 # Install user define apps
 scoop install `
-  {{ .windows.user.packages.scoop.apps | join " `\n  " }}
+    {{ $scoopApps | join " `\n    " }}
+
+{{ or (get $hostScoopConfig "postCmd") "" }}
+{{ or (get $userScoopConfig "postCmd") "" }}
 
 Write-Host "Finish installing scoop packages!"
-
-{{ end }}
-{{ end }}
 {{ end }}

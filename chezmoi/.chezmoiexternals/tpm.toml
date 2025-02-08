@@ -1,4 +1,0 @@
-[".tmux/plugins/tpm"]
-type = "git-repo"
-url = "https://github.com/tmux-plugins/tpm.git"
-refreshPeriod = "168h"

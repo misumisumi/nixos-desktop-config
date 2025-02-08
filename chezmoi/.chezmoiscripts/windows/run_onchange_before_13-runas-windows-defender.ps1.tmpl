@@ -1,21 +1,19 @@
-{{ if and (eq .chezmoi.os "windows") (hasKey .windows "system") -}}
-{{ if hasKey .windows.system "defender" -}}
 # Self-elevate the script if required
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-  if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-    $CommandLine = "-NoProfile -File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-    Start-Process -Wait -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-    Exit
-  }
+    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+        $CommandLine = "-NoProfile -File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+        Start-Process -Wait -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+        Exit
+    }
 }
 
-{{ range .windows.system.defender.exclution_paths  -}}
+{{ $hostName := .chezmoi.hostname -}}
+{{ $hostDefenderConfig := or (get (or (get .windows.hosts $hostName) dict) "defender") dict -}}
+
+{{ range (concat .windows.system.defender.exclution_paths (or (get $hostDefenderConfig "exclution_paths") list)) -}}
 Add-MpPreference -ExclusionPath {{ . | quote }}
 {{ end }}
 
 Write-Host "Finish windows defender settings!"
 Write-Host "Close after 3s..."
 Start-Sleep -Seconds 3
-exit
-{{ end }}
-{{ end }}

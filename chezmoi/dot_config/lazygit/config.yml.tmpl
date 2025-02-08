@@ -1,6 +1,10 @@
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $lazygitConfig := or (get $userConfig "lazygit") dict -}}
+{{- if not (empty $lazygitConfig) -}}
 git:
   paging:
-    paper: {{- .apps.lazygit.paper | quote }}
+    paper: {{- $lazygitConfig.paper | quote }}
 gui:
   theme:
     selectedLineBgColor:
@@ -11,3 +15,4 @@ os:
   editCommand: nvim
 refresher:
   refreshInterval: 3
+{{- end -}}

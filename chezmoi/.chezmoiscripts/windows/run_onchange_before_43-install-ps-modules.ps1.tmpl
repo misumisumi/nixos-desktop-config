@@ -1,18 +1,25 @@
-{{ if and (eq .chezmoi.os "windows") (hasKey .windows "user") -}}
-{{ if hasKey .windows.user "packages" -}}
-{{ if hasKey .windows.user.packages "powershell" -}}
+{{ $hostName := .chezmoi.hostname -}}
+{{ $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{ $hostPSConfig := or (get $hostPkgConfigs "powershell") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userPSConfig := or (get $userPkgConfigs "powershell") dict -}}
 
 Write-Host "Installing PowerShell Modules ..."
-{{ range .windows.user.packages.powershell.modules -}}
+
+{{ or (get $hostPSConfig "preCmd") "" }}
+{{ or (get $userPSConfig "preCmd") "" }}
+
+{{ range concat (or (get $hostPSConfig "modules") list) (or (get $userPSConfig "modules") list) -}}
 Install-Module -Scope CurrentUser {{ . }}
 {{ end }}
 
 Write-Host "Installing PowerShell Scripts ..."
-{{ range .windows.user.packages.powershell.scripts -}}
+{{ range concat (or (get $hostPSConfig "scripts") list) (or (get $userPSConfig "scripts") list) -}}
 Install-Scripts -Scope CurrentUser {{ . }}
 {{ end }}
 
-Write-Host "Finish installing powershell modules!"
-{{ end }}
-{{ end }}
-{{ end }}
+{{ or (get $hostPSConfig "postCmd") "" }}
+{{ or (get $userPSConfig "postCmd") "" }}
+Write-Host "Finish installing powershell modules and scripts!"

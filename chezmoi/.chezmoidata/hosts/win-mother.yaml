@@ -1,0 +1,17 @@
+windows:
+  hosts:
+    win-mother:
+      packages:
+        chocolatey:
+          apps:
+            sudo:
+              - nvidia-app
+              - nvidia-broadcast
+            no_sudo:
+        winget:
+          preCmd:
+          extraOptions:
+          sources:
+          apps:
+            sudo:
+            no_sudo:

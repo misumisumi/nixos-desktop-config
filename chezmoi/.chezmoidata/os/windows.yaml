@@ -1,39 +1,5 @@
 windows:
-  win-mother:
-    packages:
-      chocolatey:
-        apps:
-          sudo:
-            - nvidia-app
-            - nvidia-broadcast
-          no_sudo:
-      winget:
-        preCmd:
-        extraOptions:
-        sources:
-        apps:
-          sudo:
-          no_sudo:
-  win-zephyrus:
-    packages:
-      chocolatey:
-        apps:
-          sudo:
-            - nvidia-app
-            - nvidia-broadcast
-          no_sudo:
-      winget:
-        preCmd:
-        extraOptions:
-        sources:
-        apps:
-          sudo:
-            - Asus.ArmouryCrate
-          no_sudo:
   system:
-    # this setting effect only windows 11 23H2 and older
-    # can enable manually at settings->device->mouse if windows 11 24H2 and higher
-    natural_scroll: 1
     registers:
       # Long path Support (for komorebi)
       'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem':
@@ -87,7 +53,7 @@ windows:
         - -ShowHiddenFolders
         - -ShowKnownFileExt
         - -ShowSearchIconTb
-      remove_custom_apps:
+      remove_apps:
         - Clipchamp.Clipchamp
         - Microsoft.3DBuilder
         - Microsoft.549981C3F5F10 #Cortana app

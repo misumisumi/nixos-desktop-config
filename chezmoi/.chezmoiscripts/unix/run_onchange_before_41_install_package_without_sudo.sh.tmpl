@@ -1,27 +1,53 @@
-{{- if and (eq .chezmoi.os "linux") (hasKey .linux "user") -}}
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+
 #!/usr/bin/env bash
-{{ $os := .chezmoi.os -}}
-{{ $pkgs := get (get (get . $os) "user") "packages" }}
-{{ if hasKey $pkgs "homebrew" -}}
-{{- $value := get ($pkgs) "homebrew" -}}
+{{ range $pkgmngr, $value := $hostPkgConfigs -}}
+{{ if not (or (get $value "need_sudo") false) -}}
+{{ or (get $value "extraPreInstall") "" -}}
+{{ if eq $pkgmngr "homebrew" -}}
 brew install \
   {{ $value.brew | join " \\\n  " }}
 {{ if and (eq $os "darwin") (hasKey $value "cask") }}
 brew install --cask \
   {{ $value.cask | join " \\\n  " }}
 {{ end -}}
+{{ else if eq $pkgmngr "mise" -}}
+{{ else }}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
 {{ end }}
+{{ or (get $value "extraPostInstall") "" -}}
+{{ end -}}
+{{ end -}}
 
-{{ if hasKey $pkgs "mise" -}}
-if ! command -v mise &>/dev/null || [ ! -x ~/.local/bin/mise ]; then
-  curl https://mise.run | sh
-fi
-if command -v mise &>/dev/null; then
-  mise install
-else
-  $HOME/.local/bin/mise install
-fi
+{{ range $pkgmngr, $value := $userPkgConfigs -}}
+{{ if not (or (get $value "need_sudo") false) -}}
+{{ or (get $value "extraPreInstall") "" -}}
+{{ if eq $pkgmngr "homebrew" -}}
+brew install \
+  {{ $value.brew | join " \\\n  " }}
+{{ if and (eq $os "darwin") (hasKey $value "cask") }}
+brew install --cask \
+  {{ $value.cask | join " \\\n  " }}
+{{ end -}}
+{{ else if eq $pkgmngr "mise" -}}
+{{ else }}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
 {{ end }}
+{{ or (get $value "extraPostInstall") "" -}}
+{{ end -}}
+{{ end -}}
 
 echo "Finish installing packages without sudo"
-{{ end -}}

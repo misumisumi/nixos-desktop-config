@@ -1,7 +1,5 @@
 {{- if (ne .chezmoi.os "windows") -}}
 {{- $os := .chezmoi.os -}}
-
-{{- $os := .chezmoi.os -}}
 {{- $osConfig := or (get . $os) dict -}}
 
 {{- $hostName := .chezmoi.hostname -}}
@@ -13,12 +11,10 @@
 {{- $userExternals := or (get $userConfig "externals") list -}}
 
 {{- $externals := concat $hostExternals $userExternals | uniq -}}
-{{- if (has "blesh" $externals) -}}
-[".local/share/blesh"]
-url = "https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz"
-type = "archive"
+{{- if (has "tpm" $externals) -}}
+[".tmux/plugins/tpm"]
+type = "git-repo"
+url = "https://github.com/tmux-plugins/tpm.git"
 refreshPeriod = "168h"
-stripComponents = 1
-include = ["*/**"]
-{{- end }}
-{{- end }}
+{{- end -}}
+{{- end -}}

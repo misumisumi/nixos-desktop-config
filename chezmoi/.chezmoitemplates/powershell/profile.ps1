@@ -1,3 +1,19 @@
+{{- $hostName := .chezmoi.hostname -}}
+
+{{- $systemConfig := or (get .windows "system") dict -}}
+{{- $systemEnvConfig := or (get $systemConfig "env") dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get .windows.hosts $hostName) dict -}}
+{{- $hostEnvConfig := or (get $hostConfig "env") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get .windows.users $userName) dict -}}
+{{- $userEnvConfig := or (get $userConfig "env") dict -}}
+{{ or (get $systemEnvConfig "initExtra") "" }}
+{{ or (get $userEnvConfig "initExtra") "" }}
+{{ or (get $hostEnvConfig "initExtra") "" }}
+
 # Import modules
 Import-Module syntax-highlighting
 Import-Module Terminal-Icons
@@ -125,13 +141,12 @@ Set-PSReadLineKeyHandler -Chord Ctrl+d -ScriptBlock {
 # fzfの統合
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
-{{ range $key, $value := .windows.user.env }}
-{{ if eq $key "PATH" -}}
-$env:PATH = "{{ $value | join ";" }};" + "$env:PATH"
-{{- else -}}
+{{ $path := concat (or (get $hostEnvConfig "PATH") list) (or (get $userEnvConfig "PATH") list) (or (get $systemEnvConfig "PATH") list) }}
+$env:PATH = "{{ $path | join ";" }};" + $env:PATH
+{{ $exports := merge (or (get $hostEnvConfig "export") dict) (or (get $userEnvConfig "export") dict) (or (get $systemEnvConfig "export") dict) }}
+{{- range $key, $value := $exports -}}
 $env:{{- $key }} = {{ $value | quote }}
-{{- end -}}
-{{ end }}
+{{ end -}}
 
 $localrc = "$env:HOMEPATH/.profile.local.ps1"
 if (Test-Path $localrc) {
@@ -145,3 +160,7 @@ if (Test-Path $localrc) {
 Invoke-Expression (& '~/scoop/apps/starship/current/starship.exe' init powershell --print-full-init | Out-String)
 # enable completion in current shell, use absolute path because PowerShell Core not respect $env:PSModulePath
 Import-Module "$($(Get-Item $(Get-Command scoop.ps1).Path).Directory.Parent.FullName)\modules\scoop-completion"
+
+{{ or (get $systemEnvConfig "extraConfig") "" }}
+{{ or (get $userEnvConfig "extraConfig") "" }}
+{{ or (get $hostEnvConfig "extraConfig") "" }}
