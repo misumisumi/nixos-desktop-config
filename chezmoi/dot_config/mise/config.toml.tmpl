@@ -15,13 +15,8 @@
 # mise settings defined on the host take priority
 [tools]
 {{ $miseTools := merge (or (get $hostMiseConfigs "tools") dict) (or (get $userMiseConfigs "tools") dict) -}}
-{{ range $pkg, $ver := $miseTools -}}
-{{ $pkg }} = {{ $ver | quote }}
-{{ end }}
+{{ toToml $miseTools }}
 
 [settings]
 {{ $miseSettings := merge (or (get $hostMiseConfigs "settings") dict) (or (get $userMiseConfigs "settings") dict) -}}
-{{ range $key, $value := $miseSettings -}}
-{{ $key }} = {{ $value | quote }}
-{{ end -}}
-
+{{ toToml $miseSettings }}
