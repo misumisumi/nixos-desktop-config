@@ -1,3 +1,6 @@
+[windows.hosts.win-zephyrus]
+owner = true
+
 [windows.hosts.win-zephyrus.sops]
 
 [windows.hosts.win-zephyrus.env]

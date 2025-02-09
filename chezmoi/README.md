@@ -23,6 +23,21 @@ In other words, it is sufficient to manage only the dotfiles.
 In particular, script execution enables flexible operations such as declarative package installation and privileged operations in system space.
 By combining it with non-privileged package managers (unix=`mise`, windows=`scoop`), it is possible to set up the same development environment even in a restricted environments.
 
+## Settings
+
+### `.chezmoidata`
+
+`chezmoi` can change settings for each environment using `.chezmoidata.$FORMAT`
+This repository has settings for each OS, host machine, and user under `.chezmoidata`.
+See each files in [.chezmoidata](.chezmoidata).
+
+### `.chezmoiscripts`
+
+`chezmoi` support user script when you run `chezmoi apply`.  
+By writing `<os>.hosts.<hostname>.owner = true` in `.chezmoidata/hosts/*`, you can execute scripts that require administrator privileges (`.chezmoiscripts/**/*_admin_*`).
+
+`<os>.hosts.<hostname>.owner = true`とすることで、`.chezmoiscripts`以下の管理者権限を必要とするスクリプト(`*_admin_*`)を実行可能です。
+
 ## Windows
 
 ### Installation

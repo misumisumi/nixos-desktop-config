@@ -1,3 +1,6 @@
+[windows.hosts.win-mother]
+owner = true # if true, chezmoi will allow and running sudo and "*_admin_*" scripts as administrator
+
 [windows.hosts.win-mother.sops]
 
 [windows.hosts.win-mother.env]

@@ -1,5 +1,6 @@
 {{- $hostName := .chezmoi.hostname -}}
-{{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{- $hostConfig := or (get .windows.hosts $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
 {{- $hostWingetConfig := or (get $hostPkgConfigs "winget") dict -}}
 
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
@@ -12,7 +13,7 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
 
     {{- $sudo_pkgs := concat (or (get (or (get $hostWingetConfig "apps") dict) "sudo") list) (or (get (or (get $userWingetConfig "apps") dict) "sudo") list) -}}
     {{- $extraOptions := concat (or (get $hostWingetConfig "extraOptions") list) (or (get $userWingetConfig "extraOptions") list) -}}
-    {{ if ne (len $sudo_pkgs) 0 -}}
+    {{ if and (ne (len $sudo_pkgs) 0) (or (get $hostConfig "owner") false) -}}
     sudo winget install `
         --accept-package-agreements `
         --accept-source-agreements `

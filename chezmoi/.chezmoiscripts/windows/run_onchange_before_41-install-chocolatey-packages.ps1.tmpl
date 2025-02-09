@@ -1,5 +1,6 @@
 {{- $hostName := .chezmoi.hostname -}}
-{{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{- $hostConfig := or (get .windows.hosts $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
 {{- $hostChocoConfig := or (get $hostPkgConfigs "chocolatey") dict -}}
 
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
@@ -11,20 +12,14 @@ if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
 
     {{- $sudo_pkgs := concat (or (get (or (get $hostChocoConfig "apps") dict) "sudo") list) (or (get (or (get $userChocoConfig "apps") dict) "sudo") list) -}}
     {{- $extraOptions := concat (or (get $hostChocoConfig "extraOptions") list) (or (get $userChocoConfig "extraOptions") list) -}}
-    {{ if ne (len $sudo_pkgs) 0 -}}
-    sudo choco install -y `
-        {{- range $extraOptions }}
-        {{ . }} `
-        {{- end }}
+    {{ if and (ne (len $sudo_pkgs) 0) (or (get $hostConfig "owner") false) -}}
+    sudo choco install -y {{ $extraOptions | join " " }} `
         {{ $sudo_pkgs | join " `\n        " }}
     {{ end }}
 
     {{- $no_sudo_pkgs := concat (or (get (or (get $hostChocoConfig "apps") dict) "no_sudo") list) (or (get (or (get $userChocoConfig "apps") dict) "no_sudo") list) -}}
     {{ if ne (len $no_sudo_pkgs) 0 }}
-    choco install -y `
-        {{- range $extraOptions }}
-        {{ . }} `
-        {{- end }}
+    choco install -y {{ $extraOptions | join " " }} `
         {{ $no_sudo_pkgs | join " `\n        " }}
     {{ end }}
 

@@ -24,6 +24,19 @@ nixのインストールについても`/nix/store`を作成する都合上、�
 特にスクリプト実行により宣言的なパッケージインストールや特権付与によるシステム空間での処理といった柔軟な運用が可能になります。
 特権を必要としないパッケージマネージャー(unix=`mise`, windows=`scoop`)の併用することで、制限された環境でも同じ開発環境を整えることが可能です。
 
+## 設定
+
+### `.chezmoidata`
+
+`chezmoi`は、`.chezmoidata.$FORMAT`を使って環境毎に設定を変更することが可能です。  
+このリポジトリでは`.chezmoidata`以下に、OS・ホストマシン・ユーザー毎の設定を配置しています。  
+詳しくは各ファイルを参照してください。
+
+### `.chezmoiscripts`
+
+`chezmoi`は、`chezmoi apply`時にスクリプトを実行可能です。  
+`.chezmoidata/hosts/*`に`<os>.hosts.<hostname>.owner = true`を記載することで 、`.chezmoiscripts`以下の管理者権限を必要とするスクリプト(`*_admin_*`)を実行可能です。
+
 ## Windows
 
 ### インストール
