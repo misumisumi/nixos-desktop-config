@@ -9,37 +9,8 @@ with lib;
 with types;
 let
   cfg = config.virtualisation.vfio;
-  # acscommit = "1ec4cb0753488353e111496a90bdfbe2a074827e";
-  hookModules = submodule {
-    options = {
-      enable = mkEnableOption "Enable hook";
-      preHook = mkOption {
-        type = attrsOf str;
-        default = { };
-        example = {
-          windows = ''
-            echo hello
-          '';
-        };
-        description = ''
-          hook before start
-        '';
-      };
-      postHook = mkOption {
-        type = attrsOf str;
-        default = { };
-        example = {
-          windows = ''
-            echo hello
-          '';
-        };
-        description = ''
-          hook after shutdown
-        '';
-      };
-    };
-  };
 in
+# acscommit = "1ec4cb0753488353e111496a90bdfbe2a074827e";
 {
   options.virtualisation.vfio = {
     enable = mkEnableOption "VFIO Configuration";
@@ -102,11 +73,6 @@ in
           - Applies the i915-vga-arbiter patch
           - Adds pcie_acs_override=downstream to the command line
       '';
-    };
-    hook = mkOption {
-      type = hookModules;
-      default = { };
-      description = "Options to configure libvirt hook.";
     };
   };
   config = mkIf cfg.enable {
@@ -210,25 +176,5 @@ in
         }
       ];
     };
-
-    system.activationScripts.libvirt-hooks.text = optionalString cfg.hook.enable ''
-      ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
-    '';
-    environment.etc = mkIf cfg.hook.enable (
-      (attrsets.mapAttrs' (
-        vm: value:
-        attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/prepare/begin/10-pre-hook.sh") {
-          text = value;
-          mode = "0755";
-        }
-      ) cfg.hook.preHook)
-      // (attrsets.mapAttrs' (
-        vm: value:
-        attrsets.nameValuePair ("libvirt/hooks/qemu.d/" + vm + "/release/end/10-post-hook.sh") {
-          text = value;
-          mode = "0755";
-        }
-      ) cfg.hook.postHook)
-    );
   };
 }
