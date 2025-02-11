@@ -59,23 +59,26 @@
         }
         {
           plugin = tilish; # change tmux like i3wm
-          extraConfig = ''
-            set -g @tilish-default 'main-horizontal'
-            set -g @tilish-dmenu 'on'
-            set -g @tilish-prefix "C-n"
-            set -g @tilish-navigate 'on'
-            bind -T tailish f resize-pane -Z
-            bind C-h previous-window
-            bind C-l next-window
-            bind | split-window -v # 水平方向split
-            bind - split-window -h # 垂直方向split
-          '';
+          extraConfig =
+            let
+              tilish_prefix = "C-a";
+            in
+            ''
+              set -g @tilish-default 'main-horizontal'
+              set -g @tilish-dmenu 'on'
+              set -g @tilish-prefix "${tilish_prefix}"
+              set -g @tilish-navigate 'on'
+              bind -T tilish ${tilish_prefix} send-keys "${tilish_prefix}"
+              bind -T tilish f resize-pane -Z
+              bind | split-window -v # 水平方向split
+              bind - split-window -h # 垂直方向split
+            '';
         }
       ];
 
       prefix = "C-b";
       terminal = "tmux-256color";
-      escapeTime = 10;
+      escapeTime = 0;
       clock24 = true;
       historyLimit = 10000;
       customPaneNavigationAndResize = true;
