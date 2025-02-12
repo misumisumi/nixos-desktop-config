@@ -34,10 +34,12 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: change
         with:
+          base: ${{ github.ref }}
           filters: |
             nix:
               - "**.nix"
               - "flake.lock"
+              - chezmoi/dot_config/**
 
       - uses: easimon/maximize-build-space@master
         if: steps.change.outputs.nix == 'true'
