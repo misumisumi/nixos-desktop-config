@@ -70,6 +70,10 @@
               set -g @tilish-navigate 'on'
               bind -T tilish ${tilish_prefix} send-keys "${tilish_prefix}"
               bind -T tilish f resize-pane -Z
+              bind -T tilish C-j swap-pane -D
+              bind -T tilish C-k swap-pane -U
+              bind C-j swap-pane -D
+              bind C-k swap-pane -U
               bind | split-window -v # 水平方向split
               bind - split-window -h # 垂直方向split
             '';
@@ -117,8 +121,6 @@
         bind -T copy-mode-vi H send -X start-of-line
         bind -T copy-mode-vi L send -X end-of-line
 
-        bind q kill-pane
-        bind C-q kill-session
         bind C-t run "tmux last-pane || tmux last-window || tmux new-window"
         bind g popup -w90% -h90% -E lazygit # (prefix) gでlazygitを起動する
 

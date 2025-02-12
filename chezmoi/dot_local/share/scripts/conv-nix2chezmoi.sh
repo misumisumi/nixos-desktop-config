@@ -29,7 +29,7 @@ grep -n -E 'run-shell.*tmux-plugins' "$TMUXCONF" | while read -r line; do
   if [ -z "$plugin_repo" ]; then
     echo "plugin_repo not found: $plugin"
   else
-    sed -i -E "${n} s%run-shell.*%set -g @plugin ${plugin_repo}%g" "$CHEZMOI_TMUXCONF"
+    sed -i -E "${n} s%run-shell.*%set -g @plugin \'${plugin_repo}\'%g" "$CHEZMOI_TMUXCONF"
   fi
 done
 
