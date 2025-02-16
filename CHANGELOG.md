@@ -1,5 +1,83 @@
 # Changelog
 
+## [4.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.3...v4.0.0) (2025-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **chezmoi:** support to manage dotfiles by chezmoi
+
+### Features
+
+* **chezmoi:** add README ([76e0124](https://github.com/misumisumi/nixos-desktop-config/commit/76e0124ea53b6fd743b056c6009c5a987038575a))
+* **chezmoi:** support chocolatey package ([b3709f1](https://github.com/misumisumi/nixos-desktop-config/commit/b3709f132f5ed41ccdfe038681720c00ba784e62))
+* **chezmoi:** support decrypt sops file ([30d0409](https://github.com/misumisumi/nixos-desktop-config/commit/30d0409fa9d510782f0fdaa2250ba760e01f4171))
+* **gnome-keyring:** support gnome-keyring ([b9d4f37](https://github.com/misumisumi/nixos-desktop-config/commit/b9d4f37cdf268fc9206dc4b3ef2f2c8ac524f7a2))
+* **gpg:** support yubikey ([e607130](https://github.com/misumisumi/nixos-desktop-config/commit/e607130e1f88e1b9eafd704c683058f460b23fbf))
+* **virtualsmartcard:** support remote smartcard reader ([de8303d](https://github.com/misumisumi/nixos-desktop-config/commit/de8303d802eed69186c5caf01e479f684be72129))
+
+
+### Bug Fixes
+
+* **aichat:** fix completion url ([bbf3412](https://github.com/misumisumi/nixos-desktop-config/commit/bbf3412eea5a2eb5130dba4331c05320a12740d6))
+* **asusd:** follow up to upstream changes ([fcbbd40](https://github.com/misumisumi/nixos-desktop-config/commit/fcbbd4008afbc995aa1248e0f768eebb6a5fe5da))
+* **bash:** fix config ([90943c0](https://github.com/misumisumi/nixos-desktop-config/commit/90943c078732c2e633db88d6dce529726b61dc05))
+* **bash:** fix historyControl ([e304865](https://github.com/misumisumi/nixos-desktop-config/commit/e3048654e3f6125ba8d2e0081ca3055c4eb4ab54))
+* **chezmoi:** add "_admin_" as prefix to script ([6913a51](https://github.com/misumisumi/nixos-desktop-config/commit/6913a5187a9ef7f5e8712c425ec3ed86ceb272ca))
+* **chezmoi:** add install pkgs and generate ssh key script ([2d9b3a6](https://github.com/misumisumi/nixos-desktop-config/commit/2d9b3a64edb733e60a74c4a22bcc8a688d813614))
+* **chezmoi:** add reactivating storage drive script ([d0d6699](https://github.com/misumisumi/nixos-desktop-config/commit/d0d6699137d2affee5d5adcbaf9ba58eeb198e93))
+* **chezmoi:** deepening integration between nix and chezmoi ([4efe56b](https://github.com/misumisumi/nixos-desktop-config/commit/4efe56b95ec28fa4096ef89284b9d715cd350219))
+* **chezmoi:** fix externals and add tmux config ([66a5f6e](https://github.com/misumisumi/nixos-desktop-config/commit/66a5f6e00ca78f2ef09bddc5c51c2aac31f68c04))
+* **chezmoi:** fix script logic ([387a41b](https://github.com/misumisumi/nixos-desktop-config/commit/387a41b68c6ae3430bb006d71104c8b4990ab726))
+* **chezmoi:** manage some app settings with .chezmoidata ([8ef3641](https://github.com/misumisumi/nixos-desktop-config/commit/8ef3641c58b8dfc2d09c77380ea3b7dcd2a451ba))
+* **chezmoi:** missing config ([493fff8](https://github.com/misumisumi/nixos-desktop-config/commit/493fff8ec6344f834c60c8dafc3b3eb1d40a47c2))
+* **chezmoi:** replace mise from asdf ([dab0abc](https://github.com/misumisumi/nixos-desktop-config/commit/dab0abc0c83cbb1718cbc9d9d41f168d917b033e))
+* **chezmoi:** some fix ([acf2668](https://github.com/misumisumi/nixos-desktop-config/commit/acf2668715273c32aa1edfa9fc024b655b9c7862))
+* **chezmoi:** some fix ([786c0f7](https://github.com/misumisumi/nixos-desktop-config/commit/786c0f70f8285592912761dc05ab0f7d7446478d))
+* **chezmoi:** support to set each host machine and each user ([c6dbbc9](https://github.com/misumisumi/nixos-desktop-config/commit/c6dbbc9c85c1cd64666270d697beeccb6ca3a1e0))
+* enable amd_pstate ([4e226bb](https://github.com/misumisumi/nixos-desktop-config/commit/4e226bbc9a4020055a03eff0836ce370bd98a3c2))
+* fix keymap for dunst ([824d2bc](https://github.com/misumisumi/nixos-desktop-config/commit/824d2bc4e7520a54713612eda70107201c15af82))
+* fix workspace config ([12e65fd](https://github.com/misumisumi/nixos-desktop-config/commit/12e65fd57799236d8335bd230e61a33d50fba5b2))
+* fix zotero settings and sops encryption ([ed73ac8](https://github.com/misumisumi/nixos-desktop-config/commit/ed73ac8e45a77d91e77191440c56fc4a3cd6ef22))
+* **fonts:** fix and enable fontconfig on home-manager ([68203e8](https://github.com/misumisumi/nixos-desktop-config/commit/68203e85b6c8ec04150e580ec74a2b22719af50c))
+* **git:** need format ([fc125a3](https://github.com/misumisumi/nixos-desktop-config/commit/fc125a3c6a48ef94573cc7912fdd068049e1e7b3))
+* **incus:** add sshfs ([22e9071](https://github.com/misumisumi/nixos-desktop-config/commit/22e90717388017b1ba821e4d1fbdb2237a3f7bbe))
+* **moralerspace:** moralerspace was included in nixpkgs ([71c00ac](https://github.com/misumisumi/nixos-desktop-config/commit/71c00ac3ef8d1ae7e698925adeea958519423221))
+* **moralerspace:** update version of moralerspace ([1a308be](https://github.com/misumisumi/nixos-desktop-config/commit/1a308beaa3a4cce7cc5e4b41c75ee7367801837c))
+* **mpv:** enable hardware encoder if can use it ([88fc89c](https://github.com/misumisumi/nixos-desktop-config/commit/88fc89c3c4f5b06cb55fbcb7242308f9d9451123))
+* **nix:** nur.default is deprecated ([6339721](https://github.com/misumisumi/nixos-desktop-config/commit/6339721669e35c243e7445d65182b0b37e87b71c))
+* patch to moralerspace ([a4cea3f](https://github.com/misumisumi/nixos-desktop-config/commit/a4cea3f39882e0d3142ef822942615b30e86db14))
+* **patches:** fix moralerspace-nerd-fonts-alt ([64643c4](https://github.com/misumisumi/nixos-desktop-config/commit/64643c4f12b0ae2be89d83fa5e0cfc06a52c86d3))
+* **presets:** fix configs include each presets ([b478439](https://github.com/misumisumi/nixos-desktop-config/commit/b478439d369cabed688d8d46fb415b024544c229))
+* **pulseaudio:** replace to services.pulseaudio from hardware.* ([815b2b0](https://github.com/misumisumi/nixos-desktop-config/commit/815b2b0c0f425b3c4f4719c4c77a64e1fad64907))
+* **qtile:** add playerctl option ([a2b9ef6](https://github.com/misumisumi/nixos-desktop-config/commit/a2b9ef6530545a55ec3e6fa150e9c294204eccc5))
+* **qtile:** fix config ([516cc5e](https://github.com/misumisumi/nixos-desktop-config/commit/516cc5e3b249fb5ba0f8d8af1003dd9743780417))
+* **sops-nix:** donot use pgp when activate system ([698544e](https://github.com/misumisumi/nixos-desktop-config/commit/698544ec6052627b24a3ef96936322f28a516726))
+* **sops:** fix sops directory ([c7fdcd4](https://github.com/misumisumi/nixos-desktop-config/commit/c7fdcd4251a87eb9cb299bb17213262c8a61d75b))
+* **stacia:** add yubikey and fix gpu config ([3cd29d5](https://github.com/misumisumi/nixos-desktop-config/commit/3cd29d5a1f88784851cb5cd8f4e6f3bcd63db2f1))
+* **starship:** fix reading file path ([c6b8ab0](https://github.com/misumisumi/nixos-desktop-config/commit/c6b8ab0307a3d595484143cf3611dd655ca05cd3))
+* **starship:** replace to nerdfont for ssh_symbol ([2fbe726](https://github.com/misumisumi/nixos-desktop-config/commit/2fbe7267316b5e50d26404467d2bcfffac25a1da))
+* **system:** add utils for disk monitor ([8709ab3](https://github.com/misumisumi/nixos-desktop-config/commit/8709ab38d92899522cec312db00f68d1f7e8964b))
+* **texlive:** add filter-mermaid ([cdc657e](https://github.com/misumisumi/nixos-desktop-config/commit/cdc657e82c4a2a65c93e1542f7ffd38e4b06e5bd))
+* **tmux:** fix missing dracura plugin config ([6d3a994](https://github.com/misumisumi/nixos-desktop-config/commit/6d3a9946ee31e124015b7a1a71747db593f6a40d))
+* **tmux:** fix prefix ([85508ec](https://github.com/misumisumi/nixos-desktop-config/commit/85508ec64f416f4b0706495dc334f954f767bcd7))
+* **tmux:** fix prefix and color setting ([23ccb92](https://github.com/misumisumi/nixos-desktop-config/commit/23ccb920216d09d30e35d16d528404745cb6f871))
+* **tmux:** fix prefix for tilish ([57fb241](https://github.com/misumisumi/nixos-desktop-config/commit/57fb241d406c65ff5ed3b0c326ec4e2a3337ef4b))
+* **tmux:** remove keymap for kill-* and add keymap for swap ([8936c5b](https://github.com/misumisumi/nixos-desktop-config/commit/8936c5b38fd94a8e8d172be1700b11546c25dda2))
+* **tmux:** remove prefix2 ([c4f1863](https://github.com/misumisumi/nixos-desktop-config/commit/c4f186324effe780a99f14a730f62a4b66a941ac))
+* **vfio:** remove hooks option ([7410078](https://github.com/misumisumi/nixos-desktop-config/commit/741007863a2b0e9b0f1be898aeb1d0a464fd4e66))
+* **vivaldi:** remove `save to pocket` ([410f3fe](https://github.com/misumisumi/nixos-desktop-config/commit/410f3fe09938a939832020cd50738879c9420bdb))
+* **wezterm:** fix keymap ([169cd6f](https://github.com/misumisumi/nixos-desktop-config/commit/169cd6f5600950e8a60dce3faad2df31c8b469de))
+* **yazi:** add extra dependent package ([96f2800](https://github.com/misumisumi/nixos-desktop-config/commit/96f2800ac644b522dc9c8a6e8b0f153c8be19b7c))
+* **zathura:** adding syntax settings ([bb9f81f](https://github.com/misumisumi/nixos-desktop-config/commit/bb9f81f5cb9624971cc5460ea96ed939184fb9e3))
+* **zathura:** replace to rbga for highlight ([ca17010](https://github.com/misumisumi/nixos-desktop-config/commit/ca170104aa714ebef86c45986297e4bd1b8b8cef))
+* **zinit:** add option for no_alias ([d700118](https://github.com/misumisumi/nixos-desktop-config/commit/d700118ef6664ad48128cf96a1ff38be9f1692be))
+
+
+### Code Refactoring
+
+* **chezmoi:** support to manage dotfiles by chezmoi ([de9a58f](https://github.com/misumisumi/nixos-desktop-config/commit/de9a58f5b2279b5c769cc4753fe9ab7a29a93da3))
+
 ## [3.1.3](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.2...v3.1.3) (2024-12-15)
 
 
