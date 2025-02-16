@@ -4,6 +4,7 @@
     ./qtile.nix
     ./zinit.nix
     ./zotero.nix
-    ./lib/extend.nix
+    ./zsh.nix
+    ./lib/chezmoi.nix
   ];
 }

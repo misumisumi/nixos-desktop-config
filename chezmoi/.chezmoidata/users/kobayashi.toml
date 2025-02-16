@@ -1,13 +1,3 @@
-[apps.users.kobayashi.git]
-userEmail = "sumiharu@misumi-sumi.com"
-userName = "misumisumi"
-signingKey = "F9C2261B92168D38"
-paper = "$env:USERPROFILE\\scoop\\shims\\delta"
-diffFilter = "$env:USERPROFILE\\scoop\\shims\\delta"
-
-[apps.users.kobayashi.lazygit]
-paper = "$env:USERPROFILE\\scoop\\shims\\delta --dark --paging=never"
-
 ####################################################################################################
 # For linux
 ####################################################################################################
@@ -31,6 +21,7 @@ MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | ba
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
 CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
+
 [linux.users.kobayashi.env.alias]
 
 [linux.users.kobayashi.packages.mise.settings]
@@ -70,6 +61,7 @@ rust = "latest"
 starship = "latest"
 tmux = "latest"
 tree-sitter = "latest"
+usage = "latest"
 uv = "latest"
 yazi = "latest"
 yt-dlp = "latest"

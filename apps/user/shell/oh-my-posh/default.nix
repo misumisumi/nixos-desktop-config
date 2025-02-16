@@ -1,10 +1,10 @@
-let
-  inherit (builtins) fromJSON unsafeDiscardStringContext readFile;
-in
+{ importJSONFromChezmoi, ... }:
 {
   programs.oh-my-posh = {
-    enable = false;
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
     useTheme = "powerlevel10k_classic";
-    settings = fromJSON (unsafeDiscardStringContext (readFile ./oh-my-posh/config.json));
+    settings = importJSONFromChezmoi "dot_config/oh-my-posh/config.json";
   };
 }

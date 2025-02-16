@@ -1,26 +1,26 @@
-{ lib, ... }:
+{ self, lib, ... }:
 let
   inherit (builtins)
     all
     any
+    length
     readDir
     replaceStrings
-    length
     ;
   inherit (lib)
     filterAttrs
     hasSuffix
+    init
     last
     mapAttrs'
     nameValuePair
     splitString
-    init
     ;
 in
 {
   _module.args =
     let
-      chezmoiRoot = ../../../chezmoi;
+      chezmoiRoot = self.outPath + "/chezmoi";
     in
     {
       importTOMLFromChezmoi = src: lib.importTOML (chezmoiRoot + "/${src}");
@@ -65,11 +65,18 @@ in
             };
           };
       importChezmoiData =
-        username:
+        fpath:
         let
-          path = chezmoiRoot + "/.chezmoidata/users/${username}.toml";
+          path = chezmoiRoot + "/.chezmoidata/${fpath}";
           conf = if lib.pathExists path then lib.importTOML path else { };
         in
-        conf.apps.users.${username} // { inherit (conf.linux.users.${username}) env; };
+        conf;
+      importChezmoiUserAppData =
+        username:
+        let
+          path = chezmoiRoot + "/.chezmoidata/apps/${username}.toml";
+          conf = if lib.pathExists path then lib.importTOML path else { };
+        in
+        conf.apps.users.${username};
     };
 }

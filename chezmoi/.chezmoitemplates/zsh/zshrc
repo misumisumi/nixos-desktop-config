@@ -1,0 +1,103 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostAliasConfigs := or (get (or (get $hostConfig "env") dict) "alias") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userAliasConfigs := or (get (or (get $userConfig "env") dict) "alias") dict -}}
+
+{{- $appConfigs := .apps.users -}}
+{{- $userAppConfig := or (get $appConfigs $userName) dict -}}
+{{- $userShellConfig := or (get $userAppConfig "shell") dict -}}
+{{- $userZshConfig := or (get $userAppConfig "zsh") dict -}}
+{{- $userZinitConfig := or (get $userZshConfig "zinit") dict -}}
+
+{{ or (get $userZshConfig "initExtraFirst") "" }}
+
+typeset -U path cdpath fpath manpath
+
+for profile in ${(z)NIX_PROFILES}; do
+  fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
+done
+
+HELPDIR=/usr/share/zsh/"${ZSH_VERSION}"/help
+
+
+{{ range $key, $value := (or (get $userZshConfig "localVariables") dict) -}}
+{{ $key }}={{ $value }}
+{{ end }}
+# install zinit
+declare -A ZINIT
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+    # Binding keys for zsh-abbr
+if [[ $options[zle] = on ]]; then
+  if _check_cmd fzf; then
+    eval "$(fzf --zsh)"
+  fi
+fi
+
+}
+
+{{ range $key, $value := (or (get $userZinitConfig "plugins") dict) -}}
+zinit {{ $key }} for \
+  {{ $value | join " \\\n  " }}
+{{ end }}
+
+zinit for \
+  PZTM::{{ or (get (or (get $userZinitConfig "prezto") dict) "pmodules") dict | join " \\\n  PZTM::" }}
+{{ range $key, $value := (or (get (or (get $userZinitConfig "prezto") dict) "pmodulesWithModifier") dict) -}}
+zinit {{ $key }} for \
+  PZTM::{{ $value | join " \\\n  PZTM::" }}
+{{ end }}
+
+eval $(dircolors -b ~/.dir_colors)
+
+# History options should be set in .zshrc and after oh-my-zsh sourcing.
+# See https://github.com/nix-community/home-manager/issues/177.
+HISTSIZE="10000"
+SAVEHIST="10000"
+HISTORY_IGNORE='({{ or (get $userShellConfig "historyIgnore") dict | join " | " }})'
+HISTFILE="$HOME/.zsh_history"
+
+setopt HIST_FCNTL_LOCK
+unsetopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+unsetopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+unsetopt HIST_EXPIRE_DUPS_FIRST
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt autocd
+{{ range $value := (or (get $userZshConfig "extraOptions") dict) -}}
+setopt {{ $value }}
+{{ end -}}
+{{ $zfunctions := or (get $userZshConfig "extraFunctions") dict }}
+{{ if ne (len $zfunctions) 0 -}}
+autoload -Uz {{ $zfunctions | join " " -}}
+{{ end -}}
+{{ $zmodules := or (get $userZshConfig "extraModules") dict }}
+{{ if ne (len $zmodules) 0 -}}
+zmodload zsh/{{ $zmodules | join " zsh/" -}}
+{{ end -}}
+
+{{ or (get $userZshConfig "initExtraBeforeCompInit") ""}}
+
+# Enable bash completion
+autoload -U bashcompinit && bashcompinit
+
+{{ or (get $userZshConfig "initExtra") ""}}
+
+# Aliases
+{{ $aliases := merge $hostAliasConfigs $userAliasConfigs -}}
+{{ range $alias, $command := $aliases -}}
+alias -- {{ $alias }}='{{ $command }}'
+{{ end }}

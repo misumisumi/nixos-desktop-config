@@ -1,0 +1,61 @@
+function _check_cmd() {
+  command -v "$1" &>/dev/null
+}
+{{ template "zsh/zshrc" . -}}
+
+if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
+  eval "$($(brew --prefix mise)/bin/mise activate zsh)"
+  eval "$($(brew --prefix mise)/bin/mise completion zsh)"
+elif [ -x ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate zsh)"
+  eval "$(~/.local/bin/mise completion zsh)"
+fi
+
+if test -n "$KITTY_INSTALLATION_DIR"; then
+  export KITTY_SHELL_INTEGRATION="no-rc"
+  autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+  kitty-integration
+  unfunction kitty-integration
+fi
+
+if [[ $TERM != "dumb" && $TERM != "linux" ]]; then
+  if _check_cmd starship; then
+    eval "$(starship init zsh)"
+  fi
+fi
+
+if _check_cmd chezmoi; then
+  eval "$(chezmoi completion zsh)"
+fi
+
+if _check_cmd zoxide; then
+  eval "$(zoxide init zsh)"
+fi
+
+if _check_cmd yazi; then
+  function yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+fi
+
+if _check_cmd wezterm; then
+  eval "$(wezterm shell-completion --shell zsh)"
+fi
+
+if [[ $options[zle] = on ]]; then
+  if _check_cmd navi; then
+    eval "$(navi widget zsh)"
+  fi
+fi
+
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi

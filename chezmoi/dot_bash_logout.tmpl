@@ -1,0 +1,6 @@
+{{- $appConfigs := .apps.users -}}
+{{- $userName := .chezmoi.username -}}
+{{- $userAppConfig := or (get $appConfigs $userName) dict -}}
+{{- $userBashConfig := or (get $userAppConfig "bash") dict -}}
+
+{{ or (get $userBashConfig "logoutExtra") "" }}

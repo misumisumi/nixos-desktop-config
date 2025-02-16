@@ -3,7 +3,7 @@
   pkgs,
   user,
   importFilesFromChezmoi,
-  importChezmoiData,
+  importChezmoiUserAppData,
   ...
 }:
 with lib;
@@ -15,7 +15,7 @@ with lib;
   ];
   programs.git =
     let
-      inherit (importChezmoiData "${user}") git;
+      inherit (importChezmoiUserAppData "${user}") git;
     in
     {
       enable = true;

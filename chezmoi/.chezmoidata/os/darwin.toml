@@ -2,7 +2,7 @@
 [darwin.system.env.export]
 
 [darwin.system.env.alias]
-egrep = "grep -E --color: auto"
-fgrep = "grep -F --color: auto"
-grep = "grep --color: auto"
-ls = "ls --color: auto"
+egrep = "grep -E --color=auto"
+fgrep = "grep -F --color=auto"
+grep = "grep --color=auto"
+ls = "ls --color=auto"

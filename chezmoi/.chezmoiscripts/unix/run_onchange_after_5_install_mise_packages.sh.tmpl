@@ -16,6 +16,7 @@
 if ! command -v mise &>/dev/null || [ ! -x ~/.local/bin/mise ]; then
   curl https://mise.run | sh
 fi
+echo "Installing mise packages: {{ merge (or (get (or (get $hostPkgConfigs "mise") dict) "tools") dict) (or (get (or (get $userPkgConfigs "mise") dict) "tools") dict) | keys | uniq | sortAlpha | join " " }}"
 if command -v mise &>/dev/null; then
   mise install
 else

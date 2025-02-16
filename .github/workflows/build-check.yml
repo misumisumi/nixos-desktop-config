@@ -39,7 +39,8 @@ jobs:
             nix:
               - "**.nix"
               - "flake.lock"
-              - chezmoi/dot_config/**
+              - chezmoi/.chezmoidata/apps/**
+              - chezmoi/.chezmoitemplates/starship/**
 
       - uses: easimon/maximize-build-space@master
         if: steps.change.outputs.nix == 'true'

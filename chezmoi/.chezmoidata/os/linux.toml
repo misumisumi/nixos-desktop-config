@@ -16,7 +16,7 @@ XDG_VIDEOS_DIR = "/home/$(whoami)/Videos"
 XDG_WORKSPACE_DIR = "/home/$(whoami)/workspace"
 
 [linux.system.env.alias]
-egrep = "grep -E --color: auto"
-fgrep = "grep -F --color: auto"
-grep = "grep --color: auto"
-ls = "ls --color: auto"
+egrep = "grep -E --color=auto"
+fgrep = "grep -F --color=auto"
+grep = "grep --color=auto"
+ls = "ls --color=auto"

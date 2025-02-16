@@ -1,3 +1,5 @@
+.config/oh-my-posh
+
 {{- $os := .chezmoi.os -}}
 {{ if ne $os "windows" -}}
 .chezmoiscripts/windows/**

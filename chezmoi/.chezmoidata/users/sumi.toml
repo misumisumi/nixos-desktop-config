@@ -1,13 +1,3 @@
-[apps.users.sumi.git]
-userEmail = "sumiharu@misumi-sumi.com"
-userName = "misumisumi"
-signingKey = "F9C2261B92168D38"
-paper = "$env:USERPROFILE\\scoop\\shims\\delta"
-diffFilter = "$env:USERPROFILE\\scoop\\shims\\delta"
-
-[apps.users.sumi.lazygit]
-paper = "$env:USERPROFILE\\scoop\\shims\\delta --dark --paging=never"
-
 ####################################################################################################
 # For darwin
 ####################################################################################################
@@ -51,6 +41,7 @@ LG_CONFIG_FILE = "/home/$(whoami)/.config/lazygit/config.yml"
 MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 [linux.users.sumi.env.alias]
+vimdiff = "nvim -d"
 
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true
@@ -89,6 +80,7 @@ rust = "latest"
 starship = "latest"
 tmux = "latest"
 tree-sitter = "latest"
+usage = "latest"
 uv = "latest"
 yazi = "latest"
 yt-dlp = "latest"

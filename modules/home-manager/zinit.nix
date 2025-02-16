@@ -176,7 +176,7 @@ in
         ${concatStrings (
           toZinitSyntax (
             mapAttrsToList (
-              modifier: modules: "zinit ${modifier} for \\\n ${concatStrings (toPZTM modules)}"
+              modifier: modules: "zinit ${modifier} for \\\n  ${concatStrings (toPZTM modules)}"
             ) cfg.prezto.pmodulesWithModifier
           )
         )}

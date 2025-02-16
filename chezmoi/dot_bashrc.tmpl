@@ -1,18 +1,4 @@
-
-
-# Commands that should be applied only for interactive shells.
-[[ $- == *i* ]] || return
-
-HISTCONTROL=ignoreboth
-HISTFILESIZE=100000
-HISTIGNORE='trans *:builtin cd *:cd *:history *:kill *:ls *:mkdir *:pkill *:rm *'
-HISTSIZE=10000
-
-shopt -s histappend
-shopt -s checkwinsize
-shopt -s extglob
-shopt -s globstar
-shopt -s checkjobs
+{{- template "bash/bashrc" . -}}
 
 function _check_cmd() {
   command -v "$1" &>/dev/null
@@ -26,19 +12,6 @@ elif [ -x ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise completion bash --include-bash-completion-lib )"
 fi
 
-if _check_cmd fastfetch; then
-  alias neofetch='fastfetch -c neofetch.jsonc'
-fi
-if _check_cmd trash; then
-  alias temp=trash-empty
-  alias tls=trash-list
-  alias tm=trash-put
-  alias tre=trash-restore
-  alias trm=trash-rm
-fi
-if _check_cmd nvim; then
-  alias vimdiff='nvim -d'
-fi
 
 if ! shopt -oq posix; then
   if [ -f ~/.local/share/blesh/ble.sh ]; then

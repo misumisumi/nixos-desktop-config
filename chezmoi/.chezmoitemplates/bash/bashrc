@@ -1,0 +1,39 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostAliasConfigs := or (get (or (get $hostConfig "env") dict) "alias") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userAliasConfigs := or (get (or (get $userConfig "env") dict) "alias") dict -}}
+
+{{- $appConfigs := .apps.users -}}
+{{- $userAppConfig := or (get $appConfigs $userName) dict -}}
+{{- $userShellConfig := or (get $userAppConfig "shell") dict -}}
+{{- $userBashConfig := or (get $userAppConfig "bash") dict -}}
+
+{{ or (get $userBashConfig "bashrcExtra") "" -}}
+
+# Commands that should be applied only for interactive shells.
+[[ $- == *i* ]] || return
+
+HISTCONTROL=ignoreboth
+HISTFILESIZE=100000
+HISTIGNORE='{{ or (get $userShellConfig "historyIgnore") dict | join ":" }}'
+HISTSIZE=10000
+
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s extglob
+shopt -s globstar
+shopt -s checkjobs
+
+{{ or (get $userBashConfig "initExtra") "" -}}
+
+# Aliases
+{{ $aliases := merge $hostAliasConfigs $userAliasConfigs -}}
+{{ range $alias, $command := $aliases -}}
+alias {{ $alias }}='{{ $command }}'
+{{ end }}
