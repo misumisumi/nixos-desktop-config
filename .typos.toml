@@ -9,6 +9,7 @@ extend-exclude = [
     "sops/**",
     "flake.lock",
     "CHANGELOG.md",
+    "chezmoi/.chezmoidata/**",
     "apps/user/cli/develop/ranger/default.nix",
     "apps/user/cli/develop/ranger/config/*",
     "apps/user/desktop/env/core/ime/skk/fcitx5/**",

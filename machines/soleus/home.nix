@@ -12,7 +12,7 @@
   sops.secrets = {
     "univ" = {
       path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/univ";
-      sopsFile = ../../sops/user/ssh/univ;
+      sopsFile = ../../sops/pkgs/ssh/univ;
       format = "binary";
     };
   };

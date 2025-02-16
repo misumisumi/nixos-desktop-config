@@ -28,10 +28,6 @@
           word_wrap = true;
           show_indicators = true;
           sticky_history = true;
-          context = "shift+space";
-          history = "ctrl+period";
-          close = "ctrl+comma";
-          close_all = "ctrl+shift+comma";
           dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst";
           notification_limit = 5;
         };

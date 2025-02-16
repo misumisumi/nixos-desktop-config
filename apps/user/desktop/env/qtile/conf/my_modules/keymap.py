@@ -85,6 +85,11 @@ def set_keys():
             Key([mod], "b", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
             Key([mod], "m", lazy.group["scratchpad"].dropdown_toggle("volume")),
             Key([mod], "s", lazy.spawn("copyq toggle")),
+            # dunst
+            Key(["shift"], "space", lazy.spawn("dunstctl context")),
+            Key([mod, "control"], "semicolon", lazy.spawn("dunstctl close-all")),
+            Key([mod, "shift"], "semicolon", lazy.spawn("dunstctl history-pop")),
+            Key([mod], "semicolon", lazy.spawn("dunstctl close")),
             # Lock screen
             Key([mod, "control"], "b", lazy.spawn("loginctl lock-session"), desc="lock PC"),
             # Screenshot
@@ -98,8 +103,8 @@ def set_keys():
             Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
             Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
             Key([], "XF86AudioMicMute", lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle")),
-            Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
-            Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause")),
+            Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause -a")),
+            Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause -a")),
             Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
             Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
             # PinP operationes
@@ -196,11 +201,3 @@ def set_keys():
     keys += [sub_mod_chord]
 
     return keys
-
-
-def set_mouse():
-    # Drag floating layouts.
-    return [
-        Drag([GlobalConf.mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-        Drag([GlobalConf.mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    ]

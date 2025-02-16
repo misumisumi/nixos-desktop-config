@@ -9,6 +9,9 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
+    kernelParams = [
+      "amd_pstate=active"
+    ];
     kernelModules = [
       "v4l2loopback"
       "snd-aloop"
@@ -20,7 +23,7 @@
     upower.enable = true;
     asusd = {
       enableUserService = true;
-      profileConfig = "quiet";
+      profileConfig.text = "quiet";
     };
     supergfxd = {
       enable = true;

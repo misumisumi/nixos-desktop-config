@@ -1,0 +1,163 @@
+[completion.active]
+bg = "#2d3f76"
+fg = "#c8d3f5"
+
+[completion.border]
+fg = "#0db9d7"
+
+[completion.inactive]
+fg = "#c8d3f5"
+
+[[filetype.rules]]
+fg = "#ffc777"
+mime = "image/*"
+
+[[filetype.rules]]
+fg = "#c099ff"
+mime = "{audio,video}/*"
+
+[[filetype.rules]]
+fg = "#ff757f"
+mime = "application/*zip"
+
+[[filetype.rules]]
+fg = "#ff757f"
+mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}"
+
+[[filetype.rules]]
+fg = "#86e1fc"
+mime = "application/{pdf,doc,rtf,vnd.*}"
+
+[[filetype.rules]]
+bg = "#ff757f"
+is = "orphan"
+name = "*"
+
+[[filetype.rules]]
+fg = "#c3e88d"
+is = "exec"
+name = "*"
+
+[[filetype.rules]]
+fg = "#82aaff"
+name = "*/"
+
+[help.footer]
+bg = "#222436"
+fg = "#c8d3f5"
+
+[help.hovered]
+bg = "#2d3f76"
+
+[help.on]
+fg = "#c3e88d"
+
+[help.run]
+fg = "#c099ff"
+
+[input.border]
+fg = "#0db9d7"
+
+[input.selected]
+bg = "#2d3f76"
+
+[input.title]
+
+[input.value]
+fg = "#fca7ea"
+
+[manager]
+syntect_theme = "/nix/store/01q41lgrsy20d1w4aa2p6inm7ywa0y84-tokyo-night-theme/sublime/tokyonight_moon.tmTheme"
+
+[notify.title_error]
+fg = "#ff757f"
+
+[notify.title_info]
+fg = "#0db9d7"
+
+[notify.title_warn]
+fg = "#ffc777"
+
+[select.active]
+bg = "#2d3f76"
+fg = "#c8d3f5"
+
+[select.border]
+fg = "#589ed7"
+
+[select.inactive]
+fg = "#c8d3f5"
+
+[status]
+separator_close = ""
+separator_open = ""
+[status.mode_normal]
+bg = "#82aaff"
+bold = true
+fg = "#1e2030"
+
+[status.mode_select]
+bg = "#c099ff"
+bold = true
+fg = "#1e2030"
+
+[status.mode_unset]
+bg = "#fca7ea"
+bold = true
+fg = "#1e2030"
+
+[status.permissions_r]
+fg = "#ffc777"
+
+[status.permissions_s]
+fg = "#444a73"
+
+[status.permissions_t]
+fg = "#82aaff"
+
+[status.permissions_w]
+fg = "#ff757f"
+
+[status.permissions_x]
+fg = "#c3e88d"
+
+[status.progress_error]
+fg = "#ff757f"
+
+[status.progress_label]
+bold = true
+fg = "#828bb8"
+
+[status.progress_normal]
+fg = "#222436"
+
+[status.separator_style]
+bg = "#3b4261"
+fg = "#3b4261"
+
+[tasks.border]
+fg = "#589ed7"
+
+[tasks.hovered]
+bg = "#2d3f76"
+fg = "#c8d3f5"
+
+[tasks.title]
+
+[which]
+cols = 3
+separator = "  "
+[which.cand]
+fg = "#86e1fc"
+
+[which.desc]
+fg = "#c099ff"
+
+[which.mask]
+bg = "#1e2030"
+
+[which.rest]
+fg = "#82aaff"
+
+[which.separator_style]
+fg = "#636da6"

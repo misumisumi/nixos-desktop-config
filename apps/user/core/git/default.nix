@@ -1,20 +1,28 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  user,
+  importFilesFromChezmoi,
+  importChezmoiUserAppData,
+  ...
+}:
 with lib;
-let
-  lines2list = x: remove "" (map (x: if (match "#.*" x) == null then x else "") x);
-  gitignore = splitString "\n" (readFile ./gitignore);
-in
 {
   home.packages = with pkgs; [
     git-ignore
     git-secret
     github-cli
   ];
-  programs = {
-    git = {
+  programs.git =
+    let
+      inherit (importChezmoiUserAppData "${user}") git;
+    in
+    {
       enable = true;
-      userEmail = "dragon511southern@gmail.com";
-      userName = "misumisumi";
+      inherit (git) userEmail userName;
+      signing = {
+        inherit (git.signing) key format signByDefault;
+      };
       extraConfig = {
         init = {
           defaultBranch = "main";
@@ -23,15 +31,12 @@ in
           template = "~/.config/git/message";
         };
       };
-      ignores = lines2list gitignore;
       delta.enable = true;
       lfs.enable = true;
     };
-  };
-  xdg = {
-    configFile = {
-      "git/message".source = ./gitmessage;
-      "git/.commitlintrc.json".source = ./.commitlintrc.json;
-    };
+
+  xdg.configFile = importFilesFromChezmoi {
+    chezmoiSrc = "dot_config/git";
+    recursive = true;
   };
 }

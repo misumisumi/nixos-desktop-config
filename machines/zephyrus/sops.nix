@@ -11,7 +11,7 @@
         sopsFile = ../../sops/system/openfortivpn/config;
         format = "binary";
       };
-      password.neededForUsers = true;
+      hashedPassword.neededForUsers = true;
       wireless = {
         sopsFile = ../../sops/system/network/wireless;
         format = "binary";

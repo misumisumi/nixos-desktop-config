@@ -4,6 +4,7 @@ import asyncio
 import subprocess
 
 from libqtile import hook, qtile
+from libqtile.config import Drag
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
@@ -15,6 +16,7 @@ from my_modules.variables import GlobalConf, PinPConf, WindowConf
 
 PINP_WINDOW = None
 FLOATING_WINDOW_IDX = 0
+CHANGE_MOD = False
 
 
 # PinPの生成時とWS切替時にフォーカスを当てないようにする
@@ -413,3 +415,37 @@ def attach_screen(qtile, pos):
     popen = subprocess.Popen(cmd, shell=True)
     popen.wait(timeout=5)
     _reload_screens(qtile)
+
+
+def set_mouse(mod=None):
+    # Drag floating layouts.
+    mod = mod or GlobalConf.mod
+    return [
+        Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+        Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    ]
+
+
+@hook.subscribe.enter_chord
+def chord_mouse(chord_name):
+    logger.warning(f"chord: {chord_name}")
+    if chord_name == "mod4":
+        global CHANGE_MOD
+        CHANGE_MOD = True
+        qtile.core.ungrab_buttons()
+        qtile._mouse_map.clear()
+        qtile.config.mouse = set_mouse(GlobalConf.sub_mod)
+        for button in qtile.config.mouse:
+            qtile.grab_button(button)
+
+
+@hook.subscribe.leave_chord
+def dechord_mouse():
+    global CHANGE_MOD
+    if CHANGE_MOD:
+        CHANGE_MOD = False
+        qtile.core.ungrab_buttons()
+        qtile._mouse_map.clear()
+        qtile.config.mouse = set_mouse(GlobalConf.mod)
+        for button in qtile.config.mouse:
+            qtile.grab_button(button)

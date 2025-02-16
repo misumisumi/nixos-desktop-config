@@ -3,6 +3,7 @@
     ./btop
     ./fzf
     ./git
+    ./gpg
     ./man
     ./pkgs
     ./programs

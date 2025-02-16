@@ -1,17 +1,20 @@
 {
+  user,
+  importChezmoiUserAppData,
+  ...
+}:
+{
   programs.bash = {
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
-    historyIgnore = [
-      "builtin cd *"
-      "cd *"
-      "history *"
-      "kill *"
-      "ls *"
-      "mkdir *"
-      "pkill *"
-      "rm *"
-    ];
+    historyControl = [ "ignoreboth" ];
+    inherit ((importChezmoiUserAppData user).bash)
+      bashrcExtra
+      initExtra
+      logoutExtra
+      profileExtra
+      ;
+    inherit ((importChezmoiUserAppData user).shell) historyIgnore;
   };
 }

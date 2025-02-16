@@ -1,0 +1,36 @@
+[windows.hosts.win-mother]
+owner = true # if true, chezmoi will allow and running sudo and "*_admin_*" scripts as administrator
+
+[windows.hosts.win-mother.sops]
+
+[windows.hosts.win-mother.env]
+PATH = []
+[windows.hosts.win-mother.env.export]
+
+[windows.hosts.win-mother.packages.powershell]
+extraPreInstall = ""
+extraPostInstall = ""
+modules = []
+scripts = []
+
+[windows.hosts.win-mother.packages.winget]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-mother.packages.winget.apps]
+sudo = []
+no_sudo = []
+
+[windows.hosts.win-mother.packages.chocolatey]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-mother.packages.chocolatey.apps]
+sudo = ["nvidia-app", "nvidia-broadcast"]
+no_sudo = []
+
+[windows.hosts.win-mother.packages.scoop]
+extraPreInstall = ""
+extraPostInstall = ""
+apps = []
+[windows.hosts.win-mother.packages.scoop.buckets]

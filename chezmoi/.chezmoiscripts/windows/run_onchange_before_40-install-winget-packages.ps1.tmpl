@@ -1,0 +1,50 @@
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get .windows.hosts $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
+{{- $hostWingetConfig := or (get $hostPkgConfigs "winget") dict -}}
+
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userWingetConfig := or (get $userPkgConfigs "winget") dict -}}
+
+if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
+    {{ or (get $hostWingetConfig "preInstallExtra") "" }}
+    {{ or (get $userWingetConfig "preInstallExtra") "" }}
+
+    {{- $sudo_pkgs := concat (or (get (or (get $hostWingetConfig "apps") dict) "sudo") list) (or (get (or (get $userWingetConfig "apps") dict) "sudo") list) -}}
+    {{- $extraOptions := concat (or (get $hostWingetConfig "extraOptions") list) (or (get $userWingetConfig "extraOptions") list) -}}
+    {{ if and (ne (len $sudo_pkgs) 0) (or (get $hostConfig "owner") false) -}}
+    sudo winget install `
+        --accept-package-agreements `
+        --accept-source-agreements `
+        --disable-interactivity `
+        --exact `
+        --no-upgrade `
+        --silent `
+        {{- range $extraOptions }}
+        {{ . }} `
+        {{- end }}
+        {{ if or (hasKey $hostPkgConfigs "chocolatey") (hasKey $userPkgConfigs "chocolatey") }}Chocolatey.Chocolatey `{{ end }}
+        {{ $sudo_pkgs | join " `\n        " }}
+    {{ end }}
+
+    {{- $no_sudo_pkgs := concat (or (get (or (get $hostWingetConfig "apps") dict) "no_sudo") list) (or (get (or (get $userWingetConfig "apps") dict) "no_sudo") list) -}}
+    {{ if ne (len $no_sudo_pkgs) 0 }}
+    winget install `
+        --accept-package-agreements `
+        --accept-source-agreements `
+        --disable-interactivity `
+        --exact `
+        --no-upgrade `
+        --silent `
+        {{- range $extraOptions }}
+        {{ . }} `
+        {{- end }}
+        {{ $no_sudo_pkgs | join " `\n        " }}
+    {{ end }}
+
+    {{ or (get $hostWingetConfig "postInstallExtra") "" }}
+    {{ or (get $userWingetConfig "postInstallExtra") "" }}
+}
+
+Write-Host "Finish installing winget packages!"

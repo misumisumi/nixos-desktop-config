@@ -1,0 +1,36 @@
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $gitConfig := or (get $userConfig "git") dict -}}
+{{- if not (empty $gitConfig) -}}
+[commit]
+    template = "~/.config/git/message"
+    gpgSign = {{ $gitConfig.signing.signByDefault }}
+
+[filter "lfs"]
+    clean = "git-lfs clean -- %f"
+    process = "git-lfs filter-process"
+    required = true
+    smudge = "git-lfs smudge -- %f"
+
+[core]
+    paper = {{ $gitConfig.paper | quote }}
+
+[gpg]
+    format = {{ $gitConfig.signing.format | quote }}
+
+[init]
+    defaultBranch = "main"
+
+[interactive]
+    diffFilter = {{ $gitConfig.diffFilter | quote }}
+
+[tag]
+    gpgSign = {{ $gitConfig.signing.signByDefault }}
+
+[user]
+    email = {{ $gitConfig.userEmail | quote }}
+    name = {{ $gitConfig.userName | quote }}
+{{- end -}}

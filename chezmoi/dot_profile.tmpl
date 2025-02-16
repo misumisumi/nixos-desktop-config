@@ -1,0 +1,40 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $systemConfig := or (get $osConfig "system") dict -}}
+{{- $systemEnvConfig := or (get $systemConfig "env") dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostEnvConfig := or (get $hostConfig "env") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userEnvConfig := or (get $userConfig "env") dict -}}
+
+# Only source this once.
+if [ -n "$__HM_SESS_VARS_SOURCED" ]; then return; fi
+export __HM_SESS_VARS_SOURCED=1
+
+{{ or (get $systemEnvConfig "initExtra") "" }}
+{{ or (get $userEnvConfig "initExtra") "" }}
+{{ or (get $hostEnvConfig "initExtra") "" }}
+
+# env defined on the host take priority
+{{ $path := concat (or (get $hostEnvConfig "PATH") list) (or (get $userEnvConfig "PATH") list) (or (get $systemEnvConfig "PATH") list) }}
+export PATH={{ $path | join ":" }}:$PATH
+
+{{ $exports := merge (or (get $hostEnvConfig "export") dict) (or (get $userEnvConfig "export") dict) (or (get $systemEnvConfig "export") dict) }}
+{{- range $key, $value := $exports -}}
+export {{ $key }}="{{ $value }}"
+{{ end -}}
+
+{{ $alias := merge (or (get $hostEnvConfig "alias") dict) (or (get $userEnvConfig "alias") dict) (or (get $systemEnvConfig "alias") dict) }}
+{{- range $key, $value := $alias -}}
+alias {{ $key }}="{{ $value }}"
+{{ end -}}
+
+{{ or (get $systemEnvConfig "extraConfig") "" }}
+{{ or (get $userEnvConfig "extraConfig") "" }}
+{{ or (get $hostEnvConfig "extraConfig") "" }}

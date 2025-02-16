@@ -1,0 +1,26 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostSopsConfig := or (get $hostConfig "sops") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userSopsConfig := or (get $userConfig "sops") dict -}}
+
+{{- $sopsFiles := merge $hostSopsConfig $userSopsConfig -}}
+{{- $chezmoiSrcDir := .chezmoi.sourceDir -}}
+#!/usr/bin/env bash
+
+{{ if not (empty $sopsFiles) -}}
+if command -v sops &>/dev/null; then
+  {{ range $src, $tgt := $sopsFiles }}
+  echo "Decrypting {{ $src }}"
+  mkdir -p $(dirname $tgt)
+  sops decrypt "{{ $chezmoiSrcDir }}\..\sops/{{ $src }}" > "{{ $tgt }}"
+  {{ end }}
+else
+  echo "'sops' is not in PATH"
+fi
+{{ end -}}

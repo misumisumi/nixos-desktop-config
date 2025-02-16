@@ -22,7 +22,6 @@
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ldgfbffkinooeloadekpmfoklnobpien"; } # raindrop.io
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
-      { id = "niloccemoadcdkdjlinkgdfekeahmflj"; } # save to pocket
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller

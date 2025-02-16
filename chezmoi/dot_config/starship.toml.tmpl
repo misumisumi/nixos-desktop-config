@@ -1,0 +1,18 @@
+{{- template "starship/starship.toml" . }}
+palette = "tokyonight-moon"
+
+[palettes.tokyonight-moon]
+bg = "#222436"
+black = "#1b1d2b"
+blue = "#82aaff"
+cyan = "#86e1fc"
+fg = "#c8d3f5"
+green = "#c3e88d"
+magenta = "#c099ff"
+red = "#ff757f"
+terminal_black = "#414868"
+terminal_dark = "#303030"
+white = "#828bb8"
+yellow = "#ffc777"
+
+{{ template "starship/starship_modules.toml" . -}}

@@ -1,0 +1,41 @@
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostPkgConfigs := or (get (or (get .windows.hosts $hostName) dict) "packages") dict -}}
+{{- $hostScoopConfig := or (get $hostPkgConfigs "scoop") dict -}}
+
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userScoopConfig := or (get $userPkgConfigs "scoop") dict -}}
+
+{{- $scoopApps := concat (or (get $hostScoopConfig "apps") list) (or (get $userScoopConfig "apps") list) -}}
+{{- if ne (len $scoopApps) 0 -}}
+# Install scoop
+try {
+    Get-Command -Name scoop -ErrorAction Stop
+} catch [System.Management.Automation.CommandNotFoundException] {
+    Write-Host "'scoop' is not exist in your machine."
+    Write-Host "Installing 'scoop' ..."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+{{ or (get $hostScoopConfig "preInstallExtra") "" }}
+{{ or (get $userScoopConfig "preInstallExtra") "" }}
+
+# Support multi session download
+scoop install git aria2
+
+# Install extracting tools and
+scoop install dark innounp lessmsi
+
+{{ range $name, $url := merge (or (get $hostScoopConfig "buckets") dict) (or (get $userScoopConfig "buckets") dict) -}}
+scoop bucket add {{ $name }} {{ $url }}
+{{ end }}
+
+# Install user define apps
+scoop install `
+    {{ $scoopApps | join " `\n    " }}
+
+{{ or (get $hostScoopConfig "postInstallExtra") "" }}
+{{ or (get $userScoopConfig "postInstallExtra") "" }}
+
+Write-Host "Finish installing scoop packages!"
+{{ end }}

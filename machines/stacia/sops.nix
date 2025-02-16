@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   sops = {
     age = {
@@ -7,7 +6,7 @@
     };
     defaultSopsFile = ../../sops/hosts/stacia/secrets.yaml;
     secrets = {
-      password.neededForUsers = true;
+      hashedPassword.neededForUsers = true;
     };
   };
 }

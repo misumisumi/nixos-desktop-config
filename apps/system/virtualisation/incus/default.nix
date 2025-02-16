@@ -1,6 +1,7 @@
 { pkgs, user, ... }:
 {
   environment.systemPackages = with pkgs; [
+    sshfs
     virtiofsd
   ];
   users.groups = {

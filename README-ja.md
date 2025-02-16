@@ -12,8 +12,10 @@ nix の世界へようこそ!!
   - DE: Qtile or GNOME
 - スタンドアローン[home-manager](https://github.com/nix-community/home-manager)のサポート
 - 複数カラースキームのサポート
+- [chezmoi](./chezmoi)による非nix環境・マルチプラットフォームでの宣言的な環境構築
+  - `chezmoi`以下のファイルを`nix`が読み込むため設定が重複しない (一部除く)
 
-```nixos-desktop-config
+```shell
 ├── apps
 │   ├── color-theme  # color themes
 │   ├── system       # system wide application configurations (NixOS options)
@@ -23,6 +25,7 @@ nix の世界へようこそ!!
 │       ├── desktop      # settings of desktop app
 │       ├── presets  # environment presets
 │       └── shell    # bash and zsh settings
+├── chezmoi          # dotfiles structure for chezmoi
 ├── machines         # settings for each my machines
 ├── modules          # my custom nixosModules and homeManagerModules
 ├── patches          # patch of package

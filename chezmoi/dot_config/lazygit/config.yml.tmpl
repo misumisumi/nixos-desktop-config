@@ -1,0 +1,21 @@
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $lazygitConfig := or (get $userConfig "lazygit") dict -}}
+{{- if not (empty $lazygitConfig) -}}
+git:
+  paging:
+    paper: {{- $lazygitConfig.paper | quote }}
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
+os:
+  editCommand: nvim
+refresher:
+  refreshInterval: 3
+{{- end -}}

@@ -1,0 +1,27 @@
+.config/oh-my-posh
+
+{{- $os := .chezmoi.os -}}
+{{ if ne $os "windows" -}}
+.chezmoiscripts/windows/**
+**/*.ps1
+**/*.ps1.tmpl
+{{ end -}}
+
+{{ if eq $os "windows" -}}
+.chezmoiscripts/unix/**
+**/*.sh
+**/*.sh.tmpl
+*bash*
+*zsh*
+.bash_profile
+.dir_colors
+.profile
+.zprofile
+{{ end -}}
+
+{{- $osConfig := or (get . $os) dict -}}
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{ if not (or (get $hostConfig "owner") false) -}}
+.chezmoiscripts/**/*_admin_*
+{{ end }}

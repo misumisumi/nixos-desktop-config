@@ -1,6 +1,5 @@
 # Please add apps/security for enabling rtkit
 {
-  lib,
   pkgs,
   user,
   ...
@@ -13,7 +12,6 @@
     portaudio
   ];
   # environment.etc."pipewire/pipewire-pulse.conf".source = ./pipewire-conf/pipewire-pulse.conf;
-  hardware.pulseaudio.enable = lib.mkForce false;
   security.rtkit.enable = true;
   services = {
     pipewire = {

@@ -5,6 +5,7 @@
     liberation_ttf # Font for Latex (replacement for arial, times, courier)
     lmodern # Font for LaTex (default of lualatex)
     pandoc # Document Converter
+    mermaid-filter
     poppler_utils # A PDF rendering
   ];
   xdg.configFile."latexmk/latexmkrc" = {
@@ -27,6 +28,7 @@
         newtx
         newtxtt
         scheme-medium
+        tipa
         tlmgrbasics
         ;
     };

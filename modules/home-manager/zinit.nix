@@ -88,6 +88,11 @@ let
         apply = toString;
         description = "Path to zinit home directory.";
       };
+      enableAliases = mkOption {
+        type = bool;
+        default = true;
+        description = "Enable aliases";
+      };
       promptTheme = mkOption {
         type = zinitPromptModules;
         default = { };
@@ -151,6 +156,7 @@ in
       declare -A ZINIT
       ZINIT_HOME=${cfg.zinitHome}
       ZINIT[HOME_DIR]=''${ZINIT_HOME}
+      ZINIT[NO_ALIASES]=${if cfg.enableAliases then "0" else "1"}
       [[ -r ''${ZINIT_HOME} ]] || mkdir -p ''${ZINIT_HOME}
       source "${pkgs.zinit}/share/zinit/zinit.zsh"&>/dev/null
       ln -sf "${pkgs.zinit}/share/zsh/site-functions/_zinit" ''${ZINIT_HOME}/completions
@@ -170,7 +176,7 @@ in
         ${concatStrings (
           toZinitSyntax (
             mapAttrsToList (
-              modifier: modules: "zinit ${modifier} for \\\n ${concatStrings (toPZTM modules)}"
+              modifier: modules: "zinit ${modifier} for \\\n  ${concatStrings (toPZTM modules)}"
             ) cfg.prezto.pmodulesWithModifier
           )
         )}

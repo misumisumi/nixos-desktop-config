@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, importTOMLFromChezmoi, ... }:
 {
   programs =
     let
@@ -9,7 +9,9 @@
         enable = true;
         enableBashIntegration = false;
         enableZshIntegration = false;
-        settings = lib.importTOML ./starship/starship.toml;
+        settings =
+          (importTOMLFromChezmoi ".chezmoitemplates/starship/starship.toml")
+          // (importTOMLFromChezmoi ".chezmoitemplates/starship/starship_modules.toml");
       };
       # "Do not activate on tty console"
       bash.initExtra = ''

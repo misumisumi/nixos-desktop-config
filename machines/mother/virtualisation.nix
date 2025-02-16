@@ -10,6 +10,7 @@
     vfio = {
       enable = true;
       IOMMUType = "amd";
+      enableNestedVirtualization = true;
       devices = [
         "10de:2504"
         "10de:228e"

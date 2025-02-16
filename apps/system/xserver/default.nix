@@ -3,6 +3,7 @@
   pkgs,
   user,
   useNixOSWallpaper,
+  config,
   ...
 }:
 {
@@ -10,6 +11,11 @@
     video.members = [ "${user}" ];
   };
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+
+  security.pam.services = {
+    login.enableGnomeKeyring = true;
+    passwd.enableGnomeKeyring = true;
+  };
 
   services = {
     libinput = {
@@ -46,7 +52,7 @@
           };
         };
         sessionCommands = ''
-          # ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
+          ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
         '';
         session = [
           {

@@ -2,9 +2,11 @@
 {
   environment = {
     systemPackages = with pkgs; [
+      nvme-cli
       pciutils # Device utils
-      usbutils
       screen # Separate terminal
+      smartmontools
+      usbutils
     ];
   };
 }

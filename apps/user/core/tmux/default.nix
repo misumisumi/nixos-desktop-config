@@ -31,57 +31,58 @@
           '';
         }
         {
-          plugin = vim-tmux-navigator;
-          extraConfig = ''
-            set -g @tilish-navigate 'on'
-          '';
-        }
-        {
           # color theme is fixed to dracula because the settings are too complicated
           plugin = dracula;
           extraConfig = ''
+            set -g @dracula-cpu-usage-label "CPU"
+            set -g @dracula-gpu-usage-label "GPU"
+            set -g @dracula-ram-usage-label "RAM"
+            set -g @dracula-refresh-rate 5
             set -g @dracula-show-battery false
-            set -g @dracula-show-powerline true
+            set -g @dracula-show-fahrenheit false
             set -g @dracula-show-flags true
             set -g @dracula-show-left-icon session
-            set -g @dracula-refresh-rate 5
-            set -g @dracula-cpu-usage-label "CPU"
-            set -g @dracula-ram-usage-label "RAM"
-            set -g @dracula-gpu-usage-label "GPU"
+            set -g @dracula-show-powerline true
             set -g @dracula-show-timezone false
-            set -g @dracula-show-fahrenheit false
 
             if-shell '[ -z $SSH_CONNECTION ]' {
               set -g @dracula-plugins "time"
-              set -g @dracula-time-colors "dark_gray cyan"
-            }
-            if-shell '[ $SSH_CONNECTION ]' {
+              set -g @dracula-time-colors "dark_purple white"
+            } {
               set -g @dracula-plugins "cpu-usage gpu-usage ram-usage time"
-              set -g @dracula-time-colors "dark_purple dark_gray"
-              set -g @dracula-ram-usage-colors "dark_purple dark_gray"
-              set -g @dracula-gpu-usage-colors "dark_gray dark_purple"
-              set -g @dracula-cpu-usage-colors "dark_purple dark_gray"
+              set -g @dracula-time-colors "dark_purple white"
+              set -g @dracula-ram-usage-colors "white dark_purple"
+              set -g @dracula-gpu-usage-colors "dark_purple white"
+              set -g @dracula-cpu-usage-colors "white dark_purple"
             }
           '';
         }
         {
           plugin = tilish; # change tmux like i3wm
-          extraConfig = ''
-            set -g @tilish-default 'main-horizontal'
-            set -g @tilish-dmenu 'on'
-            set -g @tilish-prefix 'C-a'
-            bind -T tailish f resize-pane -Z
-            bind C-h previous-window
-            bind C-l next-window
-            bind | split-window -v # 水平方向split
-            bind - split-window -h # 垂直方向split
-          '';
+          extraConfig =
+            let
+              tilish_prefix = "C-a";
+            in
+            ''
+              set -g @tilish-default 'main-horizontal'
+              set -g @tilish-dmenu 'on'
+              set -g @tilish-prefix "${tilish_prefix}"
+              set -g @tilish-navigate 'on'
+              bind -T tilish ${tilish_prefix} send-keys "${tilish_prefix}"
+              bind -T tilish f resize-pane -Z
+              bind -T tilish C-j swap-pane -D
+              bind -T tilish C-k swap-pane -U
+              bind C-j swap-pane -D
+              bind C-k swap-pane -U
+              bind | split-window -v # 水平方向split
+              bind - split-window -h # 垂直方向split
+            '';
         }
       ];
 
-      prefix = "C-c";
+      prefix = "C-b";
       terminal = "tmux-256color";
-      escapeTime = 10;
+      escapeTime = 0;
       clock24 = true;
       historyLimit = 10000;
       customPaneNavigationAndResize = true;
@@ -90,10 +91,6 @@
       baseIndex = 1;
 
       extraConfig = ''
-        if-shell '[ $SSH_CONNECTION ]' {
-          set -g prefix2 C-b
-          bind C-b send-prefix 0
-        }
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -s focus-events on
         setw -g xterm-keys on
@@ -124,8 +121,6 @@
         bind -T copy-mode-vi H send -X start-of-line
         bind -T copy-mode-vi L send -X end-of-line
 
-        bind q kill-pane
-        bind C-q kill-session
         bind C-t run "tmux last-pane || tmux last-window || tmux new-window"
         bind g popup -w90% -h90% -E lazygit # (prefix) gでlazygitを起動する
 

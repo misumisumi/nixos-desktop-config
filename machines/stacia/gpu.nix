@@ -7,9 +7,19 @@
         "amdgpu"
         "nvidia"
       ];
+      serverFlagsSection = ''
+        Option "AutoAddGPU" "false"
+      '';
       deviceSection = ''
         Option "DRI" "3"
         Option "TearFree" "true"
+      '';
+      extraConfig = ''
+        Section "Device"
+          Identifier     "amdgpu"
+          Driver         "amdgpu"
+          BusID          "PCI:30:0:0"
+        EndSection
       '';
     };
   };

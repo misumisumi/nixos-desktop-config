@@ -8,7 +8,10 @@
     ];
   };
   programs = {
-    dotnet.dev.enable = true;
+    dotnet.dev = {
+      enable = true;
+      package = pkgs.pkgs.dotnet-sdk_8;
+    };
     java.enable = true;
     neovim = {
       viAlias = true;
@@ -37,8 +40,5 @@
         extraDependentPackages = with pkgs; [ icu ];
       };
     };
-  };
-  programs.dotnet.dev = {
-    package = pkgs.pkgs.dotnet-sdk_8;
   };
 }

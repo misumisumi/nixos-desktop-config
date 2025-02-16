@@ -1,12 +1,14 @@
 { pkgs, ... }:
 {
+  home.packages = [
+    pkgs.moralerspace-hwnf
+  ];
   programs = {
     kitty = {
       enable = true;
       font = {
-        package = pkgs.udev-gothic-nf;
-        name = "UDEV Gothic NF";
-        size = 11;
+        name = "Moralerspace Neon HWNF";
+        size = 10.5;
       };
       settings = {
         active_tab_font_style = "bold";
@@ -14,7 +16,7 @@
         clear_all_shortcuts = "yes";
         cursor_blink_interval = "0";
         enable_audio_bell = "no";
-        font_features = "UDEV Gothic NF +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+        font_features = "MoralerspaceNeonHWNF-Regular +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
         inactive_tab_font_style = "bold";
         tab_bar_style = "fade";
         tab_fade = "1";

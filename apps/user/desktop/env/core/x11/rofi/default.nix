@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    moralerspace-nf
     rofi-power-menu
     rofimoji
   ];
@@ -34,7 +35,7 @@
         sidebar-mode = true;
         # Keybindings
         kb-accept-entry = "Control+m,Return,KP_Enter";
-        kb-mode-complete = "Control+c";
+        kb-mode-complete = "Control+C";
         kb-remove-char-back = "BackSpace,Shift+BackSpace,Control+q";
         kb-remove-to-eol = "Control+D";
         kb-row-down = "Down,Control+n,Control+j";

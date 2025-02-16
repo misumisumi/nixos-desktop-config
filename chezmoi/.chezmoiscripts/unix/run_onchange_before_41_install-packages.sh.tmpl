@@ -1,0 +1,53 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+
+#!/usr/bin/env bash
+{{ range $pkgmngr, $value := $hostPkgConfigs -}}
+{{ if not (or (get $value "need_sudo") false) -}}
+{{ or (get $value "preInstallExtra") "" -}}
+{{ if eq $pkgmngr "homebrew" -}}
+brew install \
+  {{ $value.brew | join " \\\n  " }}
+{{ if and (eq $os "darwin") (hasKey $value "cask") }}
+brew install --cask \
+  {{ $value.cask | join " \\\n  " }}
+{{ end -}}
+{{ else if eq $pkgmngr "mise" -}}
+{{ else }}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ end }}
+{{ or (get $value "postInstallExtra") "" -}}
+{{ end -}}
+{{ end -}}
+
+{{ range $pkgmngr, $value := $userPkgConfigs -}}
+{{ if not (or (get $value "need_sudo") false) -}}
+{{ or (get $value "preInstallExtra") "" -}}
+{{ if eq $pkgmngr "homebrew" -}}
+brew install \
+  {{ $value.brew | join " \\\n  " }}
+{{ if and (eq $os "darwin") (hasKey $value "cask") }}
+brew install --cask \
+  {{ $value.cask | join " \\\n  " }}
+{{ end -}}
+{{ else if eq $pkgmngr "mise" -}}
+{{ else }}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ end }}
+{{ or (get $value "postInstallExtra") "" -}}
+{{ end -}}
+{{ end -}}
+
+echo "Finish installing packages without sudo"

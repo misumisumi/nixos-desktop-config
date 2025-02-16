@@ -1,0 +1,47 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+
+{{- $check_exe := false -}}
+{{ range $pkgmngr, $value := merge $hostPkgConfigs $userPkgConfigs -}}
+{{ if (or (get $value "need_sudo") false) -}}
+{{- $check_exe = true -}}
+{{ end -}}
+{{ end -}}
+#!/usr/bin/env bash
+
+{{ if $check_exe -}}
+ID=$(id -u)
+if [ $ID != 0 ]; then
+  sudo "$0" "$@"
+  exit
+fi
+{{ end -}}
+{{- range $pkgmngr, $value := $hostPkgConfigs -}}
+{{ if (or (get $value "need_sudo") false) -}}
+{{ or (get $value "preInstallExtra") "" -}}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ or (get $value "postInstallExtra") "" -}}
+{{ end -}}
+{{ end -}}
+
+{{- range $pkgmngr, $value := $userPkgConfigs -}}
+{{ if (or (get $value "need_sudo") false) -}}
+{{ or (get $value "preInstallExtra") "" -}}
+{{ $value.installCmd }} \
+  {{ $value.options | join " \\\n  " }} \
+  {{ $value.apps | join " \\\n  " }}
+{{ or (get $value "postInstallExtra") "" -}}
+{{ end -}}
+{{ end -}}
+
+echo "Finish installing packages with sudo!"

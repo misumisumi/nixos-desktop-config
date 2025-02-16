@@ -1,0 +1,22 @@
+[linux.system.env.PATH]
+[linux.system.env.export]
+XDG_CACHE_HOME = "/home/$(whoami)/.cache"
+XDG_CONFIG_HOME = "/home/$(whoami)/.config"
+XDG_DATA_HOME = "/home/$(whoami)/.local/share"
+XDG_DESKTOP_DIR = "/home/$(whoami)/Desktop"
+XDG_DOCUMENTS_DIR = "/home/$(whoami)/Documents"
+XDG_DOWNLOAD_DIR = "/home/$(whoami)/Downloads"
+XDG_GAME_DIR = "/home/$(whoami)/Game"
+XDG_MUSIC_DIR = "/home/$(whoami)/Music"
+XDG_PICTURES_DIR = "/home/$(whoami)/Pictures"
+XDG_PUBLICSHARE_DIR = "/home/$(whoami)/Public"
+XDG_STATE_HOME = "/home/$(whoami)/.local/state"
+XDG_TEMPLATES_DIR = "/home/$(whoami)/Templates"
+XDG_VIDEOS_DIR = "/home/$(whoami)/Videos"
+XDG_WORKSPACE_DIR = "/home/$(whoami)/workspace"
+
+[linux.system.env.alias]
+egrep = "grep -E --color=auto"
+fgrep = "grep -F --color=auto"
+grep = "grep --color=auto"
+ls = "ls --color=auto"

@@ -1,0 +1,43 @@
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostFeaturesConfig := or (get (or (get .windows.hosts $hostName) dict) "optional_features") dict -}}
+
+# Self-elevate the script if required
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+        $CommandLine = "-NoProfile -File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+        Start-Process -Wait -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+        Exit
+    }
+}
+{{ $enableFeatures := concat .windows.system.optional_features.enabled (or (get $hostFeaturesConfig "enabled") list) }}
+$enableFeatures = @(
+    {{ $enableFeatures | quoteList | join "\n    " }}
+)
+foreach ($enableFeature in $enableFeatures) {
+    if ((Get-WindowsOptionalFeature -Online -FeatureName $enableFeature).State -eq "Disabled") {
+        Write-Output "Try to enable $enableFeature"
+        Enable-WindowsOptionalFeature -Online -All -NoRestart -FeatureName $enableFeature
+    }
+    else {
+        Write-Output "$enableFeature has been already enabled"
+    }
+}
+
+{{ $disableFeatures := concat .windows.system.optional_features.disabled (or (get $hostFeaturesConfig "disabled") list) }}
+$disableFeatures = @(
+    {{ $disableFeatures | quoteList | join "\n    " }}
+)
+foreach ($disableFeature in $disableFeatures) {
+    if ((Get-WindowsOptionalFeature -Online -FeatureName $disableFeature).State -eq "Enabled") {
+        Write-Output "Try to disable $disableFeature"
+        Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName $disableFeature
+    }
+    else {
+        Write-Output "$disableFeature has been already disabled"
+    }
+}
+
+Write-Host "Finish windows features settings!"
+Write-Host "Close after 3s..."
+Start-Sleep -Seconds 3
+exit

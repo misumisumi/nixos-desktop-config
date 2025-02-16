@@ -17,7 +17,21 @@ in
   programs = {
     alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
     starship.settings = lib.importTOML ./starship/${flavor}.toml;
-    kitty."${kittyAttrName}" = "tokyo_night_${flavor}";
+    kitty = {
+      "${kittyAttrName}" = "tokyo_night_${flavor}";
+      settings = {
+        #NOTE: Dealing with the problem that if the background color of vim and kitty is the same, it is treated as transparent
+        background =
+          if flavor == "day" then
+            "#e1e2e8"
+          else if flavor == "moon" then
+            "#222437"
+          else if flavor == "night" then
+            "#1a1b27"
+          else
+            "#24283c";
+      };
+    };
     yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
       manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
     };
@@ -32,9 +46,36 @@ in
       color_theme = "tokyo-night";
     };
     git.includes = [ { path = "${pack}/delta/tokyonight_${flavor}.gitconfig"; } ];
-    zathura.extraConfig = ''
-      include ${pack + "/zathura/tokyonight_${flavor}.zathurarc"}
-    '';
+    zathura.extraConfig =
+      let
+        highlight =
+          if flavor == "day" then
+            {
+              color = "rgba(140,108,62,0.5)";
+              active = "rgba(88,117,57,0.5)";
+            }
+          else if flavor == "moon" then
+            {
+              color = "rgba(255,199,119,0.5)";
+              active = "rgba(195,232,141,0.5)";
+            }
+          else if flavor == "night" then
+            {
+              color = "rgba(224,175,104,0.5)";
+              active = "rgba(158,206,106,0.5)";
+            }
+          else
+            {
+              color = "rgba(224,175,104,0.5)";
+              active = "rgba(158,206,106,0.5)";
+            };
+      in
+      lib.mkBefore ''
+        include ${pack + "/zathura/tokyonight_${flavor}.zathurarc"}
+
+        set highlight-color ${highlight.color}
+        set highlight-active-color ${highlight.active}
+      '';
     spicetify =
       let
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};

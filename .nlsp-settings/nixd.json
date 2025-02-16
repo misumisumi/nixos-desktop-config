@@ -1,0 +1,25 @@
+{
+    "nixd": {
+        "nixpkgs": {
+            "expr": "import <nixpkgs> { }"
+        },
+        "formatting": {
+            "command": [
+                "nixfmt"
+            ]
+        },
+        "options": {
+            "nixos": {
+                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).nixosConfigurations.liveimg-gnome.options"
+            },
+            "home-manager": {
+                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).homeConfigurations.tiny.options"
+            }
+        },
+        "diagnostic": {
+            "suppress": [
+                "sema-extra-with"
+            ]
+        }
+    }
+}

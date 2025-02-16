@@ -1,5 +1,6 @@
 {
   imports = [
+    ./fonts
     ./nix
     ./session
   ];
