@@ -2,9 +2,12 @@
 [apps.users.kobayashi.git]
 userEmail = "sumiharu@misumi-sumi.com"
 userName = "misumisumi"
-signingKey = "F9C2261B92168D38"
 paper = "delta"
 diffFilter = "delta"
+[apps.users.sumi.git.signing]
+key = "F9C2261B92168D38"
+format = "openpgp"
+signByDefault = false
 
 [apps.users.kobayashi.lazygit]
 paper = "delta --dark --paging=never"

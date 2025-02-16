@@ -20,7 +20,9 @@ with lib;
     {
       enable = true;
       inherit (git) userEmail userName;
-      signing.key = git.signingKey;
+      signing = {
+        inherit (git.signing) key format signByDefault;
+      };
       extraConfig = {
         init = {
           defaultBranch = "main";

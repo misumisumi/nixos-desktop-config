@@ -2,7 +2,10 @@
 [apps.users.nixos.git]
 userEmail = ""
 userName = ""
-signingKey = ""
+[apps.users.sumi.git.signing]
+key = ""
+format = "openpgp"
+signByDefault = false
 
 [apps.users.nixos.lazygit]
 
