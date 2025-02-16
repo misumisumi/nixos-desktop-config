@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    exif
+    mediainfo
+  ];
   programs.yazi = {
     enable = true;
     package =
