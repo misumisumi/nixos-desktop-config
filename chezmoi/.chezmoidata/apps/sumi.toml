@@ -49,7 +49,7 @@ initExtraFirst = '''
 # zmodload zsh/zprof
 # zprof
 '''
-initExtraBeforeCompInit = ""
+initExtraBeforeCompInit = ''''''
 initExtra = '''
 # The plugin will auto execute this zvm_after_init function
 setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
@@ -76,17 +76,19 @@ ABBR_QUIET = 1
 
 [apps.users.sumi.zsh.zinit]
 [apps.users.sumi.zsh.zinit.plugins]
-"lucid blockf depth=1 light-mode" = [
-    "atload'zvm_init' jeffreytse/zsh-vi-mode",
-    "zsh-users/zsh-autosuggestions",
-    "marlonrichert/zsh-autocomplete",
+"lucid blockf depth=1 light-mode" = ["marlonrichert/zsh-autocomplete"]
+"wait'0a' lucid blockf depth=1 light-mode" = [
+    "atload'_zsh_autosuggest_start' zsh-users/zsh-autosuggestions",
+    "atload'zvm_init; zvm_update_cursor' jeffreytse/zsh-vi-mode",
 ]
-"wait'0b' lucid nocd depth=1 light-mode" = ["olets/zsh-abbr"]
-"wait'!1a' lucid blockf depth=1 light-mode" = [
+"wait'!0b' lucid blockf depth=1 light-mode" = [
     "zdharma-continuum/fast-syntax-highlighting",
 ]
-"wait'1b' lucid depth=1 light-mode" = ["hlissner/zsh-autopair"]
+"wait'!1a' lucid blockf depth=1 light-mode" = [
+    "hlissner/zsh-autopair",
+    "olets/zsh-abbr",
+]
 [apps.users.sumi.zsh.zinit.prezto]
-pmodules = ["environment", "terminal"]
+pmodules = ["helper", "spectrum"]
 [apps.users.sumi.zsh.zinit.prezto.pmodulesWithModifier]
-"wait'0a' lucid" = ["directory", "spectrum"]
+"wait'1c' lucid" = ["terminal", "directory"]
