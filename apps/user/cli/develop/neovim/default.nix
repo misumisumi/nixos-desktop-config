@@ -1,5 +1,10 @@
 # This is need `https://github.com/ayamir/nvimdots`
-{ pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 {
   home = {
     sessionVariables.EDITOR = "nvim";
@@ -39,6 +44,23 @@
         withHaskell = true;
         extraDependentPackages = with pkgs; [ icu ];
       };
+    };
+  };
+  xdg.configFile = {
+    "nvim/mason-lock.fixed.json" = {
+      source = inputs.nvimdots + "/mason-lock.json";
+      onChange = ''
+        if [ -f ${config.xdg.configHome}/nvim/mason-lock.json ]; then
+          tmp=$(mktemp)
+          ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/mason-lock.json ${
+            config.xdg.configFile."nvim/mason-lock.fixed.json".source
+          } > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/mason-lock.json
+        else
+          ${pkgs.rsync}/bin/rsync --chmod 644 ${
+            config.xdg.configFile."nvim/mason-lock.fixed.json".source
+          } ${config.xdg.configHome}/nvim/mason-lock.json
+        fi
+      '';
     };
   };
 }
