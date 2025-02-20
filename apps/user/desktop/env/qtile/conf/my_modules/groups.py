@@ -7,7 +7,7 @@ from libqtile.backend import base
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
 
-from my_modules.layouts import layout1, layout2, layout3
+from my_modules.layouts import layout1, layout2, layout3, layout4
 from my_modules.utils import get_n_monitors
 from my_modules.variables import GlobalConf
 
@@ -53,7 +53,7 @@ _rule_music = [{"wm_class": "spotify"}]
 group_and_rule = {
     "code": ("", (layout2,), _rule_code),
     "browse": ("", (layout1,), _rule_browse),
-    "analyze": ("󰉕", (layout1,), _rule_analyze),
+    "analyze": ("󰉕", (layout4,), _rule_analyze),
     "full": ("󰓓", (layout3,), _rule_full),
     "sns": ("", (layout1,), _rule_sns),
     "music": ("", (layout1,), _rule_music),
