@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.0...v4.0.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* **nvim:** support mason-lock ([633dab1](https://github.com/misumisumi/nixos-desktop-config/commit/633dab1c1087e0bfb5f2e91fec0392fca1325eb4))
+* **qtile:** add VerticalTile layout ([800b1c6](https://github.com/misumisumi/nixos-desktop-config/commit/800b1c661023b45282ff13727ff95ddf24fb341e))
+* **zinit:** optimizing plug-in loads ([0d4f316](https://github.com/misumisumi/nixos-desktop-config/commit/0d4f316c398fd073b1f37a0208affe04daa4374f))
+
 ## [4.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v3.1.3...v4.0.0) (2025-02-16)
 
 
