@@ -60,6 +60,29 @@ layout3 = [
     ),
 ]
 
+layout4 = [
+    layout.Columns(
+        **_settings,
+        border_focus_stack=ColorSet.accent,
+        border_normal_stack=ColorSet.background,
+        border_on_single=True,
+        fair=False,
+        num_columns=2,
+        insert_position=1,
+        margin_on_single=WindowConf.margin,
+        split=False,
+        wrap_focus_columns=False,
+        wrap_focus_row=False,
+        wrap_focus_stacks=False,
+    ),
+    layout.VerticalTile(
+        **_settings,
+        single_border_width=WindowConf.border,
+        single_margin=WindowConf.margin,
+    ),
+    layout.Max(**_settings),
+]
+
 
 def set_floating_layout():
     return layout.Floating(
@@ -80,4 +103,4 @@ def set_floating_layout():
 
 
 def set_layouts():
-    return layout1 + layout2 + layout3
+    return layout1 + layout2 + layout3 + layout4

@@ -74,19 +74,21 @@ ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT"
 ZVM_LAZY_KEYBINDINGS = false
 ABBR_QUIET = 1
 
-[apps.users.kobayashi.zsh.zinit]
-[apps.users.kobayashi.zsh.zinit.plugins]
-"lucid blockf depth=1 light-mode" = [
-    "atload'zvm_init' jeffreytse/zsh-vi-mode",
-    "zsh-users/zsh-autosuggestions",
-    "marlonrichert/zsh-autocomplete",
+[apps.users.sumi.zsh.zinit]
+[apps.users.sumi.zsh.zinit.plugins]
+"lucid blockf depth=1 light-mode" = ["marlonrichert/zsh-autocomplete"]
+"wait'0a' lucid blockf depth=1 light-mode" = [
+    "atload'_zsh_autosuggest_start' zsh-users/zsh-autosuggestions",
+    "atload'zvm_init; zvm_update_cursor' jeffreytse/zsh-vi-mode",
 ]
-"wait'0b' lucid nocd depth=1 light-mode" = ["olets/zsh-abbr"]
-"wait'!1a' lucid blockf depth=1 light-mode" = [
+"wait'!0b' lucid blockf depth=1 light-mode" = [
     "zdharma-continuum/fast-syntax-highlighting",
 ]
-"wait'1b' lucid depth=1 light-mode" = ["hlissner/zsh-autopair"]
-[apps.users.kobayashi.zsh.zinit.prezto]
-pmodules = ["environment", "terminal"]
-[apps.users.kobayashi.zsh.zinit.prezto.pmodulesWithModifier]
-"wait'0a' lucid" = ["directory", "spectrum"]
+"wait'!1a' lucid blockf depth=1 light-mode" = [
+    "hlissner/zsh-autopair",
+    "olets/zsh-abbr",
+]
+[apps.users.sumi.zsh.zinit.prezto]
+pmodules = ["helper", "spectrum"]
+[apps.users.sumi.zsh.zinit.prezto.pmodulesWithModifier]
+"wait'1c' lucid" = ["terminal", "directory"]
