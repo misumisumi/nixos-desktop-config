@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.1...v4.0.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* **obs-studio:** rm patch for obs-ndi and remove obs-droidcam ([5480899](https://github.com/misumisumi/nixos-desktop-config/commit/5480899d53d5c668f42a950dcfd52d791f5e585c))
+* **zsh:** disable remote file completion ([8d26f7e](https://github.com/misumisumi/nixos-desktop-config/commit/8d26f7e6ddf59591434f21a47b73c683d66d3c88))
+
 ## [4.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.0...v4.0.1) (2025-02-21)
 
 
