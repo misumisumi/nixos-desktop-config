@@ -58,6 +58,7 @@ set vi-ins-mode-string "\1\e[?0c\2"
 # For marlonrichert/zsh-autocomplete
 zstyle -e ':autocomplete:history-search-backward:*' list-lines 'reply=$(( LINES / 2 ))'
 zstyle ':autocomplete:*' min-delay 0.05
+zstyle ':completion:*' remote-access no
 zstyle ':completion:*' completer \
     _complete _complete:-fuzzy _correct _approximate _ignored
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
