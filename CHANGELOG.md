@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.3](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.2...v4.0.3) (2025-03-02)
+
+
+### Bug Fixes
+
+* **catppuccin:** follow upstream change and fix deprecated option ([38b3bbd](https://github.com/misumisumi/nixos-desktop-config/commit/38b3bbdce4bfa944d10e8bba648121037ef71774))
+* **firefox:** fix deprecated option ([b8de990](https://github.com/misumisumi/nixos-desktop-config/commit/b8de990bd62a511a32ed775791dce71b4c01be78))
+
 ## [4.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.1...v4.0.2) (2025-02-28)
 
 
