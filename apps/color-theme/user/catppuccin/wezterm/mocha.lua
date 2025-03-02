@@ -9,7 +9,7 @@ return {
         tab_bar = {
             new_tab = {
                 fg_color = tab_col.inactive_tab.fg_color,
-                bg_color = tab_col.inactive_tab.bg_color,
+                bg_color = tab_col.background,
             },
         },
     },
