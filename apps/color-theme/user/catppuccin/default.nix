@@ -15,35 +15,34 @@ in
   ];
   catppuccin = {
     inherit flavor;
-    pointerCursor.enable = true;
+    cursors.enable = true;
+    alacritty.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    dunst.enable = true;
+    delta.enable = true;
+    kitty.enable = true;
+    obs.enable = true;
+    starship.enable = true;
+    yazi.enable = true;
+    zathura.enable = true;
   };
   programs = {
-    alacritty.catppuccin.enable = true;
-    bat.catppuccin.enable = true;
-    btop.catppuccin.enable = true;
-    git.delta.catppuccin.enable = true;
-    kitty.catppuccin.enable = true;
-    obs-studio.catppuccin.enable = true;
-    starship = {
-      catppuccin.enable = true;
-      settings = {
-        palettes."catppuccin_${flavor}" =
-          let
-            palette =
-              (lib.importTOML "${config.catppuccin.sources.starship}/themes/${flavor}.toml")
-              .palettes."catppuccin_${flavor}";
-          in
-          {
-            bg = palette.base;
-            terminal_dark = palette.surface0;
-            fg = palette.text;
-            magenta = palette.maroon;
-            cyan = palette.teal;
-          };
-      };
+    starship.settings = {
+      palettes."catppuccin_${flavor}" =
+        let
+          palette =
+            (lib.importTOML "${config.catppuccin.sources.starship}/${flavor}.toml")
+            .palettes."catppuccin_${flavor}";
+        in
+        {
+          bg = palette.base;
+          terminal_dark = palette.surface0;
+          fg = palette.text;
+          magenta = palette.maroon;
+          cyan = palette.teal;
+        };
     };
-    yazi.catppuccin.enable = true;
-    zathura.catppuccin.enable = true;
     spicetify =
       let
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
@@ -52,9 +51,6 @@ in
         theme = spicePkgs.themes.catppuccin;
         colorScheme = "${flavor}";
       };
-  };
-  services = {
-    dunst.catppuccin.enable = true;
   };
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-catppuccin ];
   gtk = {
