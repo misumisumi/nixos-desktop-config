@@ -24,8 +24,8 @@ def set_keys():
             Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
             Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
             Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-            Key([mod], "tab", lazy.next_layout(), desc="next layout"),
-            Key([mod, "shift"], "tab", lazy.previous_layout(), desc="previous layout"),
+            Key([mod], "Tab", lazy.next_layout(), desc="next layout"),
+            Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="previous layout"),
             Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
             Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
             Key(
@@ -172,14 +172,14 @@ def set_keys():
                     str(i + 1),
                     F.focus_n_screen_group(i),
                     F.keep_pinp,
-                    desc=f"Switch to group idx {i+1}",
+                    desc=f"Switch to group idx {i + 1}",
                 ),
                 Key(
                     [mod, "shift"],
                     str(i + 1),
                     F.move_n_screen_group(i),
                     F.keep_pinp,
-                    desc=f"Switch to & move focused window to group idx {i+1}",
+                    desc=f"Switch to & move focused window to group idx {i + 1}",
                 ),
             ]
 
