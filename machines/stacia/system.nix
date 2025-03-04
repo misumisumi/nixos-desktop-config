@@ -37,7 +37,7 @@
       max-jobs = 3;
     };
     extraOptions = ''
-      binary-caches-parallel-connections = 24
+      http-connections = 50
     '';
   };
 }
