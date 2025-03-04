@@ -50,4 +50,23 @@ final: prev: {
     };
   };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
+  pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
+    version = "0.1.5";
+    src = prev.fetchPypi {
+      inherit (old) pname;
+      inherit version;
+      sha256 = "sha256-9qXeIZuCu44m9EoPCPL7MgEboEwN91OylLfbkwhkZYQ=";
+    };
+    pyproject = true;
+    propagatedBuildInputs =
+      with prev.python3Packages;
+      old.propagatedBuildInputs
+      ++ [
+        setuptools
+        setuptools-scm
+      ];
+    patchPhase = ''
+      substituteInPlace pandoc_plantuml_filter.py --replace "os.environ.get(\"PLANTUML_BIN\", \"plantuml\")" "os.environ.get(\"PLANTUML_BIN\", \"${prev.plantuml}/bin/plantuml\")"
+    '';
+  });
 }

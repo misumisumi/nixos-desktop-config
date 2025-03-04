@@ -65,11 +65,13 @@ jobs:
             accept-flake-config = true
             connect-timeout = 15
             cores = 2
+            http-connections = 100
             max-jobs = 2
             stalled-download-timeout = 15
 
       - name: Build check
         if: steps.change.outputs.nix == 'true'
+        timeout-minutes: 70
         run: nix build --no-link ".#nixosConfigurations.zephyrus.config.system.build.toplevel"
 
   post-workflow:

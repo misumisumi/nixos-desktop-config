@@ -29,11 +29,11 @@
   };
   nix = {
     settings = {
-      cores = 4;
-      max-jobs = 2;
+      cores = 2;
+      max-jobs = 4;
     };
     extraOptions = ''
-      binary-caches-parallel-connections = 8
+      http-connections = 50
     '';
   };
 }
