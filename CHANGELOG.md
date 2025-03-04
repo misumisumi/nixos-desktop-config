@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.4](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.3...v4.0.4) (2025-03-04)
+
+
+### Bug Fixes
+
+* **nix:** fix depricated alias (binary-caches-parallel-connections to http-connections) ([83ee79c](https://github.com/misumisumi/nixos-desktop-config/commit/83ee79c222ae477524c3768ef5af1225d0eb781c))
+* **pandoc:** split and add patch for pandoc-plantuml-filter ([6ac1347](https://github.com/misumisumi/nixos-desktop-config/commit/6ac1347f3299345386f701bc69221089c47a29f9))
+* **qtile:** fix missing function ([7a75aad](https://github.com/misumisumi/nixos-desktop-config/commit/7a75aad9c80b6816d5a4ffc0057afa5d73d50d82))
+
 ## [4.0.3](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.2...v4.0.3) (2025-03-02)
 
 
