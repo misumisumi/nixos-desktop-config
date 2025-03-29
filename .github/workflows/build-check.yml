@@ -58,7 +58,7 @@ jobs:
       - uses: actions/checkout@v4
         if: steps.change.outputs.nix == 'true'
 
-      - uses: cachix/install-nix-action@v30
+      - uses: cachix/install-nix-action@v31
         if: steps.change.outputs.nix == 'true'
         with:
           extra_nix_config: |
