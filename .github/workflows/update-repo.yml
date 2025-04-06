@@ -47,7 +47,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           TMPFILE=$(mktemp)
-          nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#stacia" --option pure-eval false --option eval-cache false 2>"${TMPFILE}"
+          nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#zephyrus" --option pure-eval false --option eval-cache false 2>>"${TMPFILE}"
 
           START=$(grep -n "evaluation warning:" "${TMPFILE}" | head -n1 | awk -F":" '{print $1}')
           if [ -n "${START}" ]; then
@@ -59,5 +59,5 @@ jobs:
             fi
 
             sed -n ''"${START}"','"${LAST}"'p' "${TMPFILE}" >eval_warning.log
-            gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
+          # gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
           fi
