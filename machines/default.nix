@@ -52,7 +52,7 @@ let
                   ;
               };
               sharedModules = [
-                inputs.catppuccin.homeManagerModules.catppuccin
+                inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
                 inputs.nvimdots.homeManagerModules.nvimdots
                 inputs.sops-nix.homeManagerModules.sops
