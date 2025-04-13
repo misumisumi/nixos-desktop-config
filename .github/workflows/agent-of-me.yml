@@ -14,8 +14,6 @@ on:
       AGENT_OF_ME_PRIVATE_KEY:
         required: true
 
-permissions: read-all
-
 jobs:
   workflow-status:
     runs-on: ubuntu-latest
