@@ -27,8 +27,7 @@
           from = 1714;
           to = 1764; # KDE-connect
         }
-        # {
-        #   from = 60000;
+        # { from = 60000;
         #   to = 60011; # Mosh
         # }
       ];
@@ -51,6 +50,7 @@
         "br0".netdevConfig = {
           Kind = "bridge";
           Name = "br0";
+          MACAddress = "2e:55:7e:5e:a3:0e";
         };
       };
       networks = {
@@ -60,13 +60,7 @@
         };
         "20-br0" = {
           name = "br0";
-          address = [ "133.24.91.38/23" ];
-          dns = [
-            "133.24.72.30"
-            "133.24.64.20"
-            "133.24.80.200"
-          ];
-          gateway = [ "133.24.90.254" ];
+          DHCP = "yes";
         };
       };
     };

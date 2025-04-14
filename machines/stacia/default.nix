@@ -19,6 +19,7 @@ with builtins;
     ../../settings/system/musnix
     ../../settings/system/pipewire
     ../init
+    ./fstab.nix
     ./gpu.nix
     ./hardware-configuration.nix
     ./network.nix

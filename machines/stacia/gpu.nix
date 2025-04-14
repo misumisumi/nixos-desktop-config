@@ -17,8 +17,21 @@
       extraConfig = ''
         Section "Device"
           Identifier     "amdgpu"
-          Driver         "amdgpu"
           BusID          "PCI:30:0:0"
+          Driver         "amdgpu"
+        EndSection
+
+        Section "Monitor"
+          Identifier     "DVI-D-0"
+          Option         "Primary" "true"
+          Option         "PreferredMode" "1920x1080"
+        EndSection
+
+        Section "Monitor"
+          Identifier     "HDMI-A-0"
+          Option         "PreferredMode" "1920x1080"
+          Option         "LeftOf" "DVI-D-0"
+          Option         "Rotate" "left"
         EndSection
       '';
     };
