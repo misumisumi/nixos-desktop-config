@@ -11,7 +11,7 @@
       enable = true;
       drivers = with pkgs; [
         cnijfilter2
-        ricoh-sp-c260series-ppd
+        canon-cups-ufr2
       ];
     };
     avahi = {
