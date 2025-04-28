@@ -13,6 +13,7 @@
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   security.pam.services = {
+    i3lock.enable = true;
     login.enableGnomeKeyring = true;
     passwd.enableGnomeKeyring = true;
   };

@@ -21,6 +21,6 @@
     in
     {
       bash.initExtra = removePath;
-      zsh.initExtra = removePath;
+      zsh.initContent = removePath;
     };
 }
