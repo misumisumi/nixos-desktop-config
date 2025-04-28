@@ -4,8 +4,15 @@ userEmail = "sumiharu@misumi-sumi.com"
 userName = "misumisumi"
 paper = "delta"
 diffFilter = "delta"
+[apps.users.kobayashi.git.aliases]
+tree = "log --graph --oneline --decorate --all"                                               # logのツリー表示
+co-fixup = "git commit --fixup"
+push-f = "push --force-with-lease"                                                            # pushの強制 (ローカルが最新で無い場合失敗する)
+rebase-i = "rebase -i --autosquash"                                                           #
+branch-clear = "!\"git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d\""
+rebase-origin = "!\"git fetch origin --prune && git rebase origin/HEAD\""
 [apps.users.sumi.git.signing]
-key = "F9C2261B92168D38"
+key = "2C0E62B7117471A5"
 format = "openpgp"
 signByDefault = false
 
