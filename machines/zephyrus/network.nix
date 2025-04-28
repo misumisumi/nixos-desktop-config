@@ -29,7 +29,15 @@
           priority = 100;
         };
         "SHIRASAGI_PR@NHK" = {
-          pskRaw = "ext:SOCIETY";
+          pskRaw = "ext:SHIRASAGI";
+          priority = 2;
+        };
+        "kosakaken4" = {
+          pskRaw = "ext:KOSAKAKEN_NEW";
+          priority = 2;
+        };
+        "kosakaken2-5G" = {
+          pskRaw = "ext:KOSAKAKEN_SEMINAR";
           priority = 2;
         };
         "50G_NETWORK_secure50" = {
@@ -39,10 +47,6 @@
         "ASUS_RT-AC85U_5G" = {
           pskRaw = "ext:LOGGE";
           priority = 6;
-        };
-        "YUNET_EDU" = {
-          priority = 21;
-          pskRaw = "ext:YUNET";
         };
         "eduroam" = {
           priority = 20;
@@ -57,17 +61,21 @@
             phase2="auth=MSCHAPV2"
           '';
         };
-        "kosakaken4" = {
-          pskRaw = "ext:KOSAKAKEN_NEW";
-          priority = 25;
+        "aitolab_wlan1-an" = {
+          pskRaw = "ext:ITONOSELAB";
+          priority = 30;
         };
-        "4CE67640131C" = {
-          pskRaw = "ext:KOSAKAKEN_OLD";
-          priority = 24;
+        "aitolab_wlan2-an" = {
+          pskRaw = "ext:ITONOSELAB";
+          priority = 30;
         };
-        "kosakaken2-5G" = {
-          pskRaw = "ext:KOSAKAKEN_SEMINAR";
-          priority = 25;
+        "aitolab_wlan3-an" = {
+          pskRaw = "ext:ITONOSELAB";
+          priority = 30;
+        };
+        "aitolab_wlan4-an_nose" = {
+          pskRaw = "ext:ITONOSELAB";
+          priority = 30;
         };
       };
     };
