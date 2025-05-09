@@ -42,13 +42,13 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  # xp-pentablet-unwrapped = prev.libsForQt5.callPackage ./xp-pen-drivers { };
-  haskellPackages = prev.haskellPackages.override {
-    overrides = hself: hsuper: {
-      # Can add/override packages here
-      thumbnail = prev.haskell.lib.doJailbreak hsuper.thumbnail;
+  evince = prev.evince.overrideAttrs (old: rec {
+    version = "48.0";
+    src = prev.fetchurl {
+      url = "mirror://gnome/sources/evince/${prev.lib.versions.major version}/evince-${version}.tar.xz";
+      sha256 = "sha256-zS9lg1X6kHX9+eW0SqCvOn4JKMVWFOsQQrNhds9FESY=";
     };
-  };
+  });
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
     version = "0.1.5";
@@ -69,4 +69,5 @@ final: prev: {
       substituteInPlace pandoc_plantuml_filter.py --replace "os.environ.get(\"PLANTUML_BIN\", \"plantuml\")" "os.environ.get(\"PLANTUML_BIN\", \"${prev.plantuml}/bin/plantuml\")"
     '';
   });
+  canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
 }
