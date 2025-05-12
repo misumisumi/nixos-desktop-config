@@ -52,13 +52,18 @@
           priority = 20;
           auth = ''
             scan_ssid=1
-            eap=PEAP
-            proto=RSN
+            eap=TLS
+            group=CCMP
             key_mgmt=WPA-EAP
-            identity="ext:EDUROAM_IDENTIFY"
-            password="ext:EDUROAM_PASS"
+            pairwise=CCMP
+            proto=WPA2
+            eap=PEAP
             phase1="peaplabel=auto peap_outer_success=1"
             phase2="auth=MSCHAPV2"
+            domain_match="ext:EDUROAM_DOMAIN"
+            identity="ext:EDUROAM_IDENTIFY"
+            anonymous_identity="ext:EDUROAM_ANONYMOUSID"
+            password="ext:EDUROAM_PASS"
           '';
         };
         "aitolab_wlan1-an" = {
