@@ -2,8 +2,10 @@
 # For linux
 ####################################################################################################
 [linux.users."sumiharu.kobayashi.r4"]
-externals = ["blesh", "tpm"]
+externals = ["tpm"]
 [linux.users."sumiharu.kobayashi.r4".sops]
+"pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
+"pkgs/codecompanion/api-keys.yaml" = "$XDG_CONFIG_HOME/codecompanion/api-keys.yaml"
 
 [linux.users."sumiharu.kobayashi.r4".env.PATH]
 [linux.users."sumiharu.kobayashi.r4".env.export]
