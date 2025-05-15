@@ -13,17 +13,10 @@
 {{- $userExternals := or (get $userConfig "externals") list -}}
 
 {{- $externals := concat $hostExternals $userExternals | uniq -}}
-{{- if (has "wezterm" $externals) -}}
-[".local/bin/wezterm"]
-type = {{ if eq .chezmoi.os "linux" }}"file"{{ else }}"archive-file"{{ end }}
-{{ if eq .chezmoi.os "linux" -}}
-url = {{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-*.AppImage" }}
-{{ else if eq .chezmoi.os "darwin" -}}
-url = {{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-macos-*.zip" }}
-{{ else -}}
-url = {{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-windows-*.zip" }}
-{{- end -}}
-path = "WezTerm{{ if eq .chezmoi.os "windows" }}-windows{{ else if eq .chezmoi.os "darwin" }}-macos{{ end }}-{{ (gitHubLatestRelease "wez/wezterm").TagName }}/wezterm"
+{{- if (has "sops" $externals) -}}
+[".local/bin/sops"]
+type = "file"
+url = {{ gitHubLatestReleaseAssetURL "getsops/sops" (printf "sops-*.%s.%s" .chezmoi.os .chezmoi.arch) }}
 executable = true
 refreshPeriod = "168h"
 {{- end -}}

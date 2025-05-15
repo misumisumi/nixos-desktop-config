@@ -2,7 +2,7 @@
 # For linux
 ####################################################################################################
 [linux.users."kobayashi.sumiharu.r4"]
-externals = ["tpm"]
+externals = ["lesspipe", "sops", "tpm"]
 [linux.users."kobayashi.sumiharu.r4".sops]
 "pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
 "pkgs/codecompanion/api-keys.yaml" = "$XDG_CONFIG_HOME/codecompanion/api-keys.yaml"
@@ -26,6 +26,8 @@ MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | ba
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
 CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
+LESSOPEN = "|$HOME/.local/bin/lesspipe.sh %s"
+LANG="en-US.UTF-8"
 
 [linux.users."kobayashi.sumiharu.r4".env.alias]
 
@@ -51,18 +53,14 @@ delta = "latest"
 deno = "latest"
 duf = "latest"
 fd = "latest"
-ffmpeg = "latest"
 fzf = "latest"
 github-cli = "latest"
 go = "latest"
-imagemagick = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "latest"
-nodejs = "latest"
 python = "latest"
 ripgrep = "latest"
-rust = "latest"
 starship = "latest"
 tree-sitter = "latest"
 usage = "latest"
