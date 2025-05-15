@@ -1,3 +1,6 @@
+{{- if (ne .chezmoi.os "windows") -}}
+{{- $os := .chezmoi.os -}}
+
 {{- $os := .chezmoi.os -}}
 {{- $osConfig := or (get . $os) dict -}}
 
@@ -6,17 +9,20 @@
 {{- $hostExternals := or (get $hostConfig "externals") list -}}
 
 {{- $userName := .chezmoi.username -}}
-{{ if eq .chezmoi.os "windows" }}
-{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
-{{- end -}}
 {{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
 {{- $userExternals := or (get $userConfig "externals") list -}}
 
 {{- $externals := concat $hostExternals $userExternals | uniq -}}
-{{- if (has "sops" $externals) -}}
-[".local/bin/sops"]
+{{- if (has "fzf-options" $externals) -}}
+[".local/bin/fzf-tmux"]
 type = "file"
-url = "{{ gitHubLatestReleaseAssetURL "getsops/sops" (printf "sops-*.%s.%s" .chezmoi.os .chezmoi.arch) }}"
+url = "https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-tmux"
 executable = true
 refreshPeriod = "168h"
-{{- end -}}
+[".local/bin/fzf-previwe.sh"]
+type = "file"
+url = "https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh"
+executable = true
+refreshPeriod = "168h"
+{{- end }}
+{{- end }}

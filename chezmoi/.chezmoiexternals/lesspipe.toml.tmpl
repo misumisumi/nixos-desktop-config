@@ -14,7 +14,7 @@
 
 {{- $externals := concat $hostExternals $userExternals | uniq -}}
 {{- if (has "lesspipe" $externals) -}}
-[".local/bin/lesspipe.sh"]
+[".local/bin/lesspipe"]
 type = "file"
 url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/lesspipe.sh"
 executable = true

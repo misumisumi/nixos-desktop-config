@@ -17,8 +17,8 @@
 if command -v sops &>/dev/null; then
   {{ range $src, $tgt := $sopsFiles }}
   echo "Decrypting {{ $src }}"
-  mkdir -p "$(dirname $tgt)"
-  sops decrypt "{{ $chezmoiSrcDir }}\..\sops/{{ $src }}" > "{{ $tgt }}"
+  mkdir -p $(dirname {{ $tgt }})
+  sops decrypt "{{ $chezmoiSrcDir }}/../sops/{{ $src }}" > "{{ $tgt }}"
   {{ end }}
 else
   echo "'sops' is not in PATH"

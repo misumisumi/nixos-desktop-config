@@ -9,17 +9,18 @@ if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
   eval "$($(brew --prefix mise)/bin/mise completion bash)"
 elif [ -x ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate bash)"
-  eval "$(~/.local/bin/mise completion bash)"
+  [ -f ${XDG_DATA_HOME}/bash-completion/completions/mise ] || echo $(~/.local/bin/mise completion zsh) > ${XDG_DATA_HOME}/zsh/completions/_mise
 fi
 
 
 if ! shopt -oq posix; then
-  if [ -f ~/.local/share/blesh/ble.sh ]; then
-    . ~/.local/share/blesh/ble.sh
-  elif [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  fi
+  if [ -f ~/.local/share/blesh/ble.sh ]; then
+    . ~/.local/share/blesh/ble.sh
   fi
 fi
 

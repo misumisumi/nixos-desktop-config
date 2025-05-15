@@ -2,7 +2,6 @@
 # For darwin
 ####################################################################################################
 [darwin]
-externals = ["blesh"]
 
 [darwin.users.sumi]
 externals = []
@@ -59,6 +58,7 @@ yes = false
 not_found_auto_install = true
 auto_install = true
 experimental = true
+idiomatic_version_file_enable_tools = []
 
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"

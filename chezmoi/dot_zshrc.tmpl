@@ -8,7 +8,7 @@ if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
   eval "$($(brew --prefix mise)/bin/mise completion zsh)"
 elif [ -x ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate zsh)"
-  eval "$(~/.local/bin/mise completion zsh)"
+  [ -f ${XDG_DATA_HOME}/zsh/completions/_mise ] || echo $(~/.local/bin/mise completion zsh) > ${XDG_DATA_HOME}/zsh/completions/_mise
 fi
 
 if test -n "$KITTY_INSTALLATION_DIR"; then
