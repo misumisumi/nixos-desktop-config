@@ -6,6 +6,11 @@
   home.pointerCursor = {
     size = 32;
   };
+  xdg.configFile = {
+    "codecompanion/api-keys.yaml" = {
+      source = ../../sops/pkgs/codecompanion/api-keys.yaml;
+    };
+  };
   sops.secrets = {
     "desktops" = {
       path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/desktops";

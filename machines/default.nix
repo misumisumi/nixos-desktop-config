@@ -54,7 +54,7 @@ let
               sharedModules = [
                 inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
-                inputs.nvimdots.homeManagerModules.nvimdots
+                inputs.nvimdots.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
                 self.homeManagerModules.default

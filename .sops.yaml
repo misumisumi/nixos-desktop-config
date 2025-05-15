@@ -73,7 +73,7 @@ creation_rules:
           - *kobayashi_soleus
           - *sumi_stacia
           - *sumi_zephyrus
-  - path_regex: sops/pkgs/aichat/config.yaml
+  - path_regex: sops/pkgs/[aichat,codecompanion]/*
     key_groups:
       - pgp:
           - *sumi
