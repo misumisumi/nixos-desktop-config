@@ -144,18 +144,4 @@ in
     useNixOSWallpaper = false;
     inherit user;
   };
-  soleus =
-    let
-      schemes = [
-        "presets/huge"
-        "desktop/env/core/ime/fcitx5"
-        "shell"
-      ];
-    in
-    settings {
-      hostname = "soleus";
-      user = "kobayashi";
-      colorTheme = "tokyonight-moon";
-      inherit schemes;
-    };
 }

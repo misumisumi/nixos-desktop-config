@@ -1,12 +1,12 @@
 ####################################################################################################
 # For linux
 ####################################################################################################
-[linux.users.sumi]
+[linux.users."sumiharu.kobayashi.r4"]
 externals = ["blesh", "tpm"]
-[linux.users.kobayashi.sops]
+[linux.users."sumiharu.kobayashi.r4".sops]
 
-[linux.users.kobayashi.env.PATH]
-[linux.users.kobayashi.env.export]
+[linux.users."sumiharu.kobayashi.r4".env.PATH]
+[linux.users."sumiharu.kobayashi.r4".env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
 FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
@@ -22,9 +22,9 @@ TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
 CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
 
-[linux.users.kobayashi.env.alias]
+[linux.users."sumiharu.kobayashi.r4".env.alias]
 
-[linux.users.kobayashi.packages.mise.settings]
+[linux.users."sumiharu.kobayashi.r4".packages.mise.settings]
 idiomatic_version_file = true
 always_keep_download = false
 always_keep_install = false
@@ -38,7 +38,7 @@ not_found_auto_install = true
 auto_install = true
 experimental = true
 
-[linux.users.kobayashi.packages.mise.tools]
+[linux.users."sumiharu.kobayashi.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"
 cmake = "latest"
