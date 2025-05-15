@@ -29,7 +29,7 @@ CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
 LESSOPEN = "|lesspipe %s"
 LANG = "en-US.UTF-8"
 LANGUAGE = "en_US"
-LC_ALL = ""
+LC_ALL = "en_US.UTF-8"
 
 [linux.users."kobayashi.sumiharu.r4".env.alias]
 
