@@ -17,7 +17,7 @@
 if command -v sops &>/dev/null; then
   {{ range $src, $tgt := $sopsFiles }}
   echo "Decrypting {{ $src }}"
-  mkdir -p $(dirname $tgt)
+  mkdir -p "$(dirname $tgt)"
   sops decrypt "{{ $chezmoiSrcDir }}\..\sops/{{ $src }}" > "{{ $tgt }}"
   {{ end }}
 else

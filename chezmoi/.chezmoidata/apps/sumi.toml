@@ -96,6 +96,9 @@ ABBR_QUIET = 1
     "hlissner/zsh-autopair",
     "olets/zsh-abbr",
 ]
+"wait'1c' lucid" = [
+    "atload'. ./aichat.zsh' https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/scripts/completions/aichat.zsh",
+]
 [apps.users.sumi.zsh.zinit.prezto]
 pmodules = ["helper", "spectrum"]
 [apps.users.sumi.zsh.zinit.prezto.pmodulesWithModifier]
