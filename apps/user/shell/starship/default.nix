@@ -20,7 +20,7 @@
         fi
       '';
       zsh = {
-        initExtra = ''
+        initContent = ''
           if [[ $TERM != "dumb" && $TERM != "linux" ]]; then
             eval "$(${starshipCmd} init zsh)"
           fi

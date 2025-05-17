@@ -1,0 +1,28 @@
+{{- if (ne .chezmoi.os "windows") -}}
+{{- $os := .chezmoi.os -}}
+
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostExternals := or (get $hostConfig "externals") list -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userExternals := or (get $userConfig "externals") list -}}
+
+{{- $externals := concat $hostExternals $userExternals | uniq -}}
+{{- if (has "fzf-options" $externals) -}}
+[".local/bin/fzf-tmux"]
+type = "file"
+url = "https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-tmux"
+executable = true
+refreshPeriod = "168h"
+[".local/bin/fzf-previwe.sh"]
+type = "file"
+url = "https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh"
+executable = true
+refreshPeriod = "168h"
+{{- end }}
+{{- end }}

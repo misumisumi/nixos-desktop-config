@@ -1,5 +1,5 @@
 # Assign long press of space to SHIFT
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   environment.etc."dual-function-keys/config.yaml".text = ''
     MAPPINGS:
@@ -14,8 +14,11 @@
       - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.dual-function-keys}/bin/dual-function-keys -c /etc/dual-function-keys/config.yaml | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
         DEVICE:
           EVENTS:
-            EV_KEY: [KEY_ENTER]
+            EV_KEY: [KEY_SPACE]
     '';
     plugins = [ pkgs.interception-tools-plugins.dual-function-keys ];
+  };
+  systemd.services.interception-tools = {
+    preStart = "${pkgs.coreutils}/bin/sleep 10";
   };
 }

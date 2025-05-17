@@ -1,0 +1,74 @@
+####################################################################################################
+# For linux
+####################################################################################################
+[linux.users."kobayashi.sumiharu.r4"]
+externals = ["blesh", "fzf-options", "lesspipe", "sops", "tpm"]
+[linux.users."kobayashi.sumiharu.r4".sops]
+"pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
+"pkgs/codecompanion/api-keys.yaml" = "$XDG_CONFIG_HOME/codecompanion/api-keys.yaml"
+
+[linux.users."kobayashi.sumiharu.r4".env]
+initExtra = ""
+extraConfig = ""
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
+[linux.users."kobayashi.sumiharu.r4".env.export]
+EDITOR = "nvim"
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color: always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+FZF_TMUX = "1"
+FZF_TMUX_OPTS = "-p -w 80% -h 70%"
+JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
+LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
+MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
+TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
+CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
+LESSOPEN = "|lesspipe %s"
+LANG = "en-US.UTF-8"
+LANGUAGE = "en_US"
+LC_ALL = "en_US.UTF-8"
+
+[linux.users."kobayashi.sumiharu.r4".env.alias]
+
+[linux.users."kobayashi.sumiharu.r4".packages.mise.settings]
+idiomatic_version_file = true
+always_keep_download = false
+always_keep_install = false
+plugin_autoupdate_last_check_duration = "1 week"
+verbose = false
+http_timeout = "30s"
+jobs = 4
+raw = false
+yes = false
+not_found_auto_install = true
+auto_install = true
+experimental = true
+idiomatic_version_file_enable_tools = []
+
+[linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
+bat = "latest"
+btop = "latest"
+cmake = "latest"
+delta = "latest"
+deno = "latest"
+duf = "latest"
+fd = "latest"
+fzf = "latest"
+github-cli = "latest"
+go = "latest"
+jq = "latest"
+lazygit = "latest"
+neovim = "latest"
+nodejs = "latest"
+python = "latest"
+ripgrep = "latest"
+starship = "latest"
+tree-sitter = "latest"
+usage = "latest"
+uv = "latest"
+yazi = "latest"
+yt-dlp = "latest"
+zoxide = "latest"

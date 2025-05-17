@@ -13,7 +13,7 @@
     ];
   };
   programs = {
-    dotnet.dev = {
+    dotnet = {
       enable = true;
       package = pkgs.pkgs.dotnet-sdk_8;
     };
@@ -47,17 +47,17 @@
     };
   };
   xdg.configFile = {
-    "nvim/mason-lock.fixed.json" = {
+    "nvim/mason-lock.nix.json" = {
       source = inputs.nvimdots + "/mason-lock.json";
       onChange = ''
         if [ -f ${config.xdg.configHome}/nvim/mason-lock.json ]; then
           tmp=$(mktemp)
           ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/mason-lock.json ${
-            config.xdg.configFile."nvim/mason-lock.fixed.json".source
+            config.xdg.configFile."nvim/mason-lock.nix.json".source
           } > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/mason-lock.json
         else
           ${pkgs.rsync}/bin/rsync --chmod 644 ${
-            config.xdg.configFile."nvim/mason-lock.fixed.json".source
+            config.xdg.configFile."nvim/mason-lock.nix.json".source
           } ${config.xdg.configHome}/nvim/mason-lock.json
         fi
       '';

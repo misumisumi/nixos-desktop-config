@@ -10,4 +10,9 @@
       format = "binary";
     };
   };
+  xdg.configFile = {
+    "codecompanion/api-keys.yaml" = {
+      source = ../../sops/pkgs/codecompanion/api-keys.yaml;
+    };
+  };
 }

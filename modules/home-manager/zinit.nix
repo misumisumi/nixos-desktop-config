@@ -152,7 +152,7 @@ in
     programs.zsh.prezto.pmodules = mkIf (
       cfg.prezto.enable && (cfg.prezto.pmodules != [ ] || cfg.prezto.pmodulesWithModifier)
     ) (mkOrder 1200 [ ]);
-    programs.zsh.initExtraBeforeCompInit = ''
+    programs.zsh.initContent = lib.mkOrder 550 ''
       declare -A ZINIT
       ZINIT_HOME=${cfg.zinitHome}
       ZINIT[HOME_DIR]=''${ZINIT_HOME}

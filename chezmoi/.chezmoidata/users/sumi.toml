@@ -2,7 +2,6 @@
 # For darwin
 ####################################################################################################
 [darwin]
-externals = ["blesh"]
 
 [darwin.users.sumi]
 externals = []
@@ -11,7 +10,7 @@ externals = []
 [darwin.users.sumi.env]
 initExtra = ""
 extraConfig = ""
-[darwin.users.sumi.env.PATH]
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
 [darwin.users.sumi.env.export]
 [darwin.users.sumi.env.alias]
 
@@ -26,7 +25,10 @@ cask = ["vivaldi", "firefox"]
 externals = ["blesh", "tpm"]
 [linux.users.sumi.sops]
 
-[linux.users.sumi.env.PATH]
+[linux.users.sumi.env]
+initExtra = ""
+extraConfig = ""
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
 [linux.users.sumi.env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
@@ -37,7 +39,7 @@ FZF_CTRL_T_OPTS = "--preview 'bat -n --color: always {}' --bind 'ctrl-/:change-p
 FZF_TMUX = "1"
 FZF_TMUX_OPTS = "-p -w 80% -h 70%"
 JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
-LG_CONFIG_FILE = "/home/$(whoami)/.config/lazygit/config.yml"
+LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
 MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 [linux.users.sumi.env.alias]
@@ -56,6 +58,7 @@ yes = false
 not_found_auto_install = true
 auto_install = true
 experimental = true
+idiomatic_version_file_enable_tools = []
 
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -37,6 +37,9 @@
         hotplug_type = "None";
       };
     };
+    printing.drivers = with pkgs; [
+      cnijfilter2
+    ];
   };
   systemd.sleep.extraConfig = ''
     # suspend=hybrid-sleep

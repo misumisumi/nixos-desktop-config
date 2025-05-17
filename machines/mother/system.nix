@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   boot = {
     loader.timeout = 10;
@@ -17,9 +17,14 @@
       tmpfsSize = "50%";
     };
   };
-  services.xserver = {
-    xp-pentablet.enable = true;
-    displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
+  services = {
+    printing.drivers = with pkgs; [
+      cnijfilter2
+    ];
+    xserver = {
+      xp-pentablet.enable = true;
+      displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
+    };
   };
   nix = {
     settings = {

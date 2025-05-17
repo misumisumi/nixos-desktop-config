@@ -3,7 +3,7 @@
     bash.initExtra = ''
       bind '"\eg": fzf-file-widget'
     '';
-    zsh.initExtra = ''
+    zsh.initContent = ''
       bindkey '^[g' fzf-file-widget
     '';
 

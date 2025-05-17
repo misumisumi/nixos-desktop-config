@@ -26,8 +26,12 @@
     catppuccin.url = "github:catppuccin/nix";
     flakes.url = "github:misumisumi/flakes";
     nvimdots = {
-      url = "github:misumisumi/nvimdots";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:misumisumi/nvimdots/feat/ai-chat";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     devshell = {
       url = "github:numtide/devshell";
@@ -75,6 +79,7 @@
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      debug = true;
       imports = [ inputs.devshell.flakeModule ];
       flake =
         let

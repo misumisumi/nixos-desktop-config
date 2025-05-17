@@ -31,7 +31,7 @@ in
   };
   config = mkIf cfg.enable {
     programs.zsh = {
-      initExtra = mkBefore ''
+      initContent = mkBefore ''
         # load extra zshoptions
         ${concatStringsSep "\n" (map (x: "setopt ${x}") cfg.extraOptions)}
         # load extra zshmodules

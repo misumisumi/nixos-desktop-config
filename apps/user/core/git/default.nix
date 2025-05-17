@@ -19,7 +19,7 @@ with lib;
     in
     {
       enable = true;
-      inherit (git) userEmail userName;
+      inherit (git) userEmail userName aliases;
       signing = {
         inherit (git.signing) key format signByDefault;
       };

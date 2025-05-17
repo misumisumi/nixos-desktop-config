@@ -1,0 +1,105 @@
+[apps.users."kobayashi.sumiharu.r4"]
+[apps.users."kobayashi.sumiharu.r4".git]
+userEmail = "sumiharu@misumi-sumi.com"
+userName = "misumisumi"
+paper = "delta"
+diffFilter = "delta"
+[apps.users."kobayashi.sumiharu.r4".git.aliases]
+tree = "log --graph --oneline --decorate --all"                                               # logのツリー表示
+co-fixup = "git commit --fixup"
+push-f = "push --force-with-lease"                                                            # pushの強制 (ローカルが最新で無い場合失敗する)
+rebase-i = "rebase -i --autosquash"                                                           #
+branch-clear = "!\"git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d\""
+rebase-origin = "!\"git fetch origin --prune && git rebase origin/HEAD\""
+[apps.users."kobayashi.sumiharu.r4".git.signing]
+key = "2C0E62B7117471A5"
+format = "openpgp"
+signByDefault = false
+
+[apps.users."kobayashi.sumiharu.r4".lazygit]
+paper = "delta --dark --paging=never"
+
+[apps.users."kobayashi.sumiharu.r4".shell]
+historyIgnore = [
+    "builtin cd *",
+    "cd *",
+    "history *",
+    "kill *",
+    "ls *",
+    "mkdir *",
+    "pkill *",
+    "rm *",
+]
+
+[apps.users."kobayashi.sumiharu.r4".bash]
+bashrcExtra = ""
+initExtra = ""
+logoutExtra = ""
+profileExtra = ""
+[apps.users."kobayashi.sumiharu.r4".bash.sessionVariables]
+
+[apps.users."kobayashi.sumiharu.r4".zsh]
+extraFunctions = ["zargs", "zmv", "zcp", "zln"]
+extraModules = ["attr"]
+extraOptions = [
+    "EXTENDED_GLOB",     # 拡張GRUBの有効化(^: 否定、~: 除外)
+    "BARE_GLOB_QUAL",    # 条件付け検索の有効化
+    "MAGIC_EQUAL_SUBST", # cmd a=/to/pathの時に補完を効かせる
+]
+
+envExtra = '''
+# Compatibilize with bash
+export HOSTNAME=$(hostname)
+'''
+initExtraFirst = '''
+# Calc startup time
+# zmodload zsh/zprof
+# zprof
+'''
+initExtraBeforeCompInit = ""
+initExtra = '''
+# The plugin will auto execute this zvm_after_init function
+setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
+setopt BARE_GLOB_QUAL        # 条件付け検索の有効化
+setopt MAGIC_EQUAL_SUBST     # cmd a=/to/pathの時に補完を効かせる
+
+set vi-cmd-mode-string "\1\e[?8c\2"
+set vi-ins-mode-string "\1\e[?0c\2"
+# For marlonrichert/zsh-autocomplete
+zstyle -e ':autocomplete:history-search-backward:*' list-lines 'reply=$(( LINES / 2 ))'
+zstyle ':autocomplete:*' min-delay 0.05
+zstyle ':completion:*' remote-access no
+zstyle ':completion:*' completer \
+    _complete _complete:-fuzzy _correct _approximate _ignored
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+'''
+[apps.users."kobayashi.sumiharu.r4".zsh.localVariables]
+ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj"
+ZVM_VI_VISUAL_ESCAPE_BINDKEY = "jj"
+ZVM_VI_OPPEND_ESCAPE_BINDKEY = "jj"
+ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT"
+ZVM_LAZY_KEYBINDINGS = false
+ABBR_QUIET = 1
+
+[apps.users."kobayashi.sumiharu.r4".zsh.zinit]
+[apps.users."kobayashi.sumiharu.r4".zsh.zinit.plugins]
+"lucid blockf depth=1 light-mode" = ["marlonrichert/zsh-autocomplete"]
+"wait'0a' lucid blockf depth=1 light-mode" = [
+    "atload'_zsh_autosuggest_start' zsh-users/zsh-autosuggestions",
+    "atload'zvm_init; zvm_update_cursor' jeffreytse/zsh-vi-mode",
+]
+"wait'!0b' lucid blockf depth=1 light-mode" = [
+    "zdharma-continuum/fast-syntax-highlighting",
+]
+"wait'!1a' lucid blockf depth=1 light-mode" = [
+    "hlissner/zsh-autopair",
+    "olets/zsh-abbr",
+]
+"wait'1c' lucid" = [
+    "atload'. ./aichat.zsh' https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/scripts/completions/aichat.zsh",
+]
+[apps.users."kobayashi.sumiharu.r4".zsh.zinit.prezto]
+pmodules = ["helper", "spectrum"]
+[apps.users."kobayashi.sumiharu.r4".zsh.zinit.prezto.pmodulesWithModifier]
+"wait'1c' lucid" = ["terminal", "directory"]

@@ -1,6 +1,7 @@
 {
   imports = [
     ./dotfiles.nix
+    ./dotnet.nix
     ./qtile.nix
     ./zinit.nix
     ./zotero.nix

@@ -19,6 +19,7 @@
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
       { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
       { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; } # obsidian web clipper
+      { id = "mhpjgcccinlocgiklkfllehilgmcnimp"; } # paperpal for overleaf beta
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ldgfbffkinooeloadekpmfoklnobpien"; } # raindrop.io
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
@@ -26,7 +27,6 @@
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
       { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
-      { id = "diapeboihmphompedonjjbmkbhflmcek"; } # vrc url pasteExtension
       { id = "oingodpdjohhkelnginmkagmkbplgema"; } # weblioポップアップ英和辞典
       { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; } # zotero connector
       {

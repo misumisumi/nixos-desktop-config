@@ -54,7 +54,7 @@ jobs:
 
   post-workflow:
     uses: ./.github/workflows/agent-of-me.yml
-    needs: reviewdog
+    needs: [pre-workflow, reviewdog]
     with:
       pr-number: ${{ github.event.pull_request.number }}
       triggered-name: "reviewdog"

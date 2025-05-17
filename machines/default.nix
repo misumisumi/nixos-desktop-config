@@ -52,9 +52,9 @@ let
                   ;
               };
               sharedModules = [
-                inputs.catppuccin.homeManagerModules.catppuccin
+                inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
-                inputs.nvimdots.homeManagerModules.nvimdots
+                inputs.nvimdots.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
                 self.homeManagerModules.default
@@ -144,18 +144,4 @@ in
     useNixOSWallpaper = false;
     inherit user;
   };
-  soleus =
-    let
-      schemes = [
-        "presets/huge"
-        "desktop/env/core/ime/fcitx5"
-        "shell"
-      ];
-    in
-    settings {
-      hostname = "soleus";
-      user = "kobayashi";
-      colorTheme = "tokyonight-moon";
-      inherit schemes;
-    };
 }
