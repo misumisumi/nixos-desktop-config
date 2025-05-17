@@ -76,7 +76,7 @@ jobs:
 
   post-workflow:
     uses: ./.github/workflows/agent-of-me.yml
-    needs: build-check
+    needs: [pre-workflow, build-check]
     with:
       pr-number: ${{ github.event.pull_request.number }}
       triggered-name: "build check"

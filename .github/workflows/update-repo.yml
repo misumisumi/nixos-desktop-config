@@ -58,6 +58,6 @@ jobs:
               LAST="$"
             fi
 
-            sed -n ''"${START}"','"${LAST}"'p' "${TMPFILE}" >eval_warning.log
-          # gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
+            sed -n ''"${START}"','"${LAST}"'p' <"${TMPFILE}" | grep -v "unpacking" | grep -v "copying path" | grep -v "building" >eval_warning.log
+            gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
           fi
