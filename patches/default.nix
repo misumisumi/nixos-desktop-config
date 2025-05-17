@@ -49,6 +49,7 @@ final: prev: {
       sha256 = "sha256-zS9lg1X6kHX9+eW0SqCvOn4JKMVWFOsQQrNhds9FESY=";
     };
   });
+  canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
     version = "0.1.5";
@@ -69,5 +70,11 @@ final: prev: {
       substituteInPlace pandoc_plantuml_filter.py --replace "os.environ.get(\"PLANTUML_BIN\", \"plantuml\")" "os.environ.get(\"PLANTUML_BIN\", \"${prev.plantuml}/bin/plantuml\")"
     '';
   });
-  canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
+  switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
+    nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
+    dontWrapGApps = true;
+    preFixup = ''
+      makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+    '';
+  });
 }
