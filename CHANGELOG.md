@@ -1,5 +1,41 @@
 # Changelog
 
+## [5.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.4...v5.0.0) (2025-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* some fix for updating neovim config
+
+### Bug Fixes
+
+* **aichat:** fix config ([f4856e5](https://github.com/misumisumi/nixos-desktop-config/commit/f4856e5e4065bb664b0506405c4a145628344c71))
+* **catppuccin:** rename homeManageModules to homeModules ([f9b98e2](https://github.com/misumisumi/nixos-desktop-config/commit/f9b98e2bc5fa697ccf0148c975818047094124a9))
+* **chezmoi:** add lesspipe and fix url format ([ba9d127](https://github.com/misumisumi/nixos-desktop-config/commit/ba9d12709aaceb5cc659c54e08efdf277f2dfee0))
+* **chezmoi:** add missing pkgs and update sops ([b16cc0f](https://github.com/misumisumi/nixos-desktop-config/commit/b16cc0fe8601a0befd922d6017303feba22463db))
+* **chezmoi:** fix missing scripts ([e78209a](https://github.com/misumisumi/nixos-desktop-config/commit/e78209ab6213e6ae77648f5cb845cb14cc7de579))
+* **chezmoi:** replace username ([d5cbfa9](https://github.com/misumisumi/nixos-desktop-config/commit/d5cbfa928d10012342d299b08fa4f8dd1a79af1e))
+* fix deprecated option ([56b461b](https://github.com/misumisumi/nixos-desktop-config/commit/56b461b3738d4282c8831add552f1c39b4ae82b8))
+* **interception-tools:** fix service setting ([e80652a](https://github.com/misumisumi/nixos-desktop-config/commit/e80652a053d6b3c42bf6d1f892f27d32d25841ae))
+* **nix:** deprecated cache of nixpkgs-cuda-ci ([e8f30db](https://github.com/misumisumi/nixos-desktop-config/commit/e8f30db2540799ec82acf6de72f201ab1961a470))
+* **obs:** patch looking-glass-obs ([db566a4](https://github.com/misumisumi/nixos-desktop-config/commit/db566a4474031ce947be4ffeaf41a4019376ecd5))
+* **obs:** rm patch ([080f949](https://github.com/misumisumi/nixos-desktop-config/commit/080f9495f89791958fcded24e024ce81c9dadb87))
+* **printer:** fix printer driver ([89720f0](https://github.com/misumisumi/nixos-desktop-config/commit/89720f031c233aaec7097bed6b1f40ac8aa81d39))
+* **printer:** patch canon-cups-ufr2 driver and fix config ([05b2810](https://github.com/misumisumi/nixos-desktop-config/commit/05b281012cccac726b9b1341895382dc3d2ce7ef))
+* **qtile:** support vertical display ([3a39b0f](https://github.com/misumisumi/nixos-desktop-config/commit/3a39b0f9fa023c1b93b25fce191c498367d535e5))
+* rename ([221e76f](https://github.com/misumisumi/nixos-desktop-config/commit/221e76fa04d05a9f8a47821b50f78fc2cbf6728c))
+* some fix for updating neovim config ([758f170](https://github.com/misumisumi/nixos-desktop-config/commit/758f170d7e2e4e04dedcc03f66007f066fba5a7e))
+* **sops:** fix pgp key and update ssh config ([ebff957](https://github.com/misumisumi/nixos-desktop-config/commit/ebff957cd866e657d76b65652964a5bee8b37c08))
+* **sops:** update ssh config ([5e95c86](https://github.com/misumisumi/nixos-desktop-config/commit/5e95c866866ee4a7e9d8ea965aba2653e3ec4279))
+* **ssh:** fix ssh config ([c7d0519](https://github.com/misumisumi/nixos-desktop-config/commit/c7d0519be6a28b800fd241c8f54962351df8e649))
+* **stacia:** fix config for univ-server ([04516d3](https://github.com/misumisumi/nixos-desktop-config/commit/04516d32840ae00627cd0b265495bdc71ec43d4c))
+* **stacia:** fix network setting ([66de369](https://github.com/misumisumi/nixos-desktop-config/commit/66de369615d3103b1875fab48f9703eeea305d97))
+* **vivaldi:** update extentions ([80b33bb](https://github.com/misumisumi/nixos-desktop-config/commit/80b33bb16fb5d4f227472ad9c6ee6dc13656da8e))
+* **zephyrus:** enable switchroo-control ([9c07602](https://github.com/misumisumi/nixos-desktop-config/commit/9c076020fd7998575d5f83fccb35376fcf3add60))
+* **zephyrus:** fix wireless setting ([f39ef29](https://github.com/misumisumi/nixos-desktop-config/commit/f39ef29d2719eabb54f1885270f6d3ed5c0206ac))
+* **zephyrus:** update wireless network config ([9795fb3](https://github.com/misumisumi/nixos-desktop-config/commit/9795fb335aabf0d05a944a65cc92cf75b3c530ff))
+* **zotero:** add add-on ([771ad5d](https://github.com/misumisumi/nixos-desktop-config/commit/771ad5ddb8b1a66690028f70e0b46a3f8c0109ad))
+
 ## [4.0.4](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.3...v4.0.4) (2025-03-04)
 
 
