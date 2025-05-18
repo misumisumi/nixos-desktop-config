@@ -1,0 +1,22 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostExternals := or (get $hostConfig "externals") list -}}
+
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userExternals := or (get $userConfig "externals") list -}}
+
+{{- $externals := concat $hostExternals $userExternals | uniq -}}
+{{- if (has "sops" $externals) -}}
+[".local/bin/sops"]
+type = "file"
+url = "{{ gitHubLatestReleaseAssetURL "getsops/sops" (printf "sops-*.%s.%s" .chezmoi.os .chezmoi.arch) }}"
+executable = true
+refreshPeriod = "168h"
+{{- end -}}

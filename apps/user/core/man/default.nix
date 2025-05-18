@@ -18,5 +18,6 @@
       generateCaches = true;
     };
     info.enable = true;
+    lesspipe.enable = true;
   };
 }

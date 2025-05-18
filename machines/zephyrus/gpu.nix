@@ -10,8 +10,8 @@
       exec "$@"
     '')
   ];
-
   services = {
+    switcherooControl.enable = true;
     xserver = {
       videoDrivers = [
         "amdgpu"

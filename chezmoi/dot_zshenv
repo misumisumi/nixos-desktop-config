@@ -3,6 +3,10 @@
 
 # Compatibilize with bash
 export HOSTNAME=$(hostname)
+# Set the default shell to zsh
+if [[ -z "$SHELL" || "$SHELL" != *zsh* ]]; then
+export SHELL=$(which zsh)
+fi
 
 #
 # Defines environment variables.

@@ -13,6 +13,8 @@
       extensions = with pkgs.zotero-addons; [
         zotero-better-bibtex
         zotero-pdf-translate
+        zotero-scipdf
+        zotero-zotmoov
       ];
     };
   };

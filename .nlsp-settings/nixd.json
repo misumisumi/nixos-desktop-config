@@ -14,6 +14,9 @@
             },
             "home-manager": {
                 "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).homeConfigurations.tiny.options"
+            },
+            "flake-parts": {
+                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).debug.options"
             }
         },
         "diagnostic": {

@@ -16,7 +16,13 @@
 {{- if (has "wezterm" $externals) -}}
 [".local/bin/wezterm"]
 type = {{ if eq .chezmoi.os "linux" }}"file"{{ else }}"archive-file"{{ end }}
-url = "https://github.com/wez/wezterm/releases/download/{{ (gitHubLatestRelease "wez/wezterm").TagName }}/WezTerm{{ if eq .chezmoi.os "windows" }}-windows{{ else if eq .chezmoi.os "darwin" }}-macos{{ end }}-{{ (gitHubLatestRelease "wez/wezterm").TagName }}{{ if eq .chezmoi.os "windows" }}.zip{{ else if eq .chezmoi.os "darwin" }}.zip{{ else }}-Ubuntu20.04.AppImage{{ end }}"
+{{ if eq .chezmoi.os "linux" -}}
+url = "{{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-*.AppImage" }}"
+{{ else if eq .chezmoi.os "darwin" -}}
+url = "{{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-macos-*.zip" }}"
+{{ else -}}
+url = "{{ gitHubLatestReleaseAssetURL "wez/wezterm" "WezTerm-windows-*.zip" }}"
+{{- end -}}
 path = "WezTerm{{ if eq .chezmoi.os "windows" }}-windows{{ else if eq .chezmoi.os "darwin" }}-macos{{ end }}-{{ (gitHubLatestRelease "wez/wezterm").TagName }}/wezterm"
 executable = true
 refreshPeriod = "168h"

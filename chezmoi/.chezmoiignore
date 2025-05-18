@@ -1,4 +1,5 @@
 .config/oh-my-posh
+README*
 
 {{- $os := .chezmoi.os -}}
 {{ if ne $os "windows" -}}

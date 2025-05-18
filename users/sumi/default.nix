@@ -10,7 +10,7 @@
     };
     age = {
       generateKey = true;
-      keyFile = "${config.home.homeDirectory}/.age-key.txt";
+      keyFile = "${config.xdg.configHome}}/sops/age/keys.txt";
       sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     };
     secrets = {
@@ -21,7 +21,7 @@
       };
       "aichat/config.yaml" = {
         path = "${config.xdg.configHome}/aichat/config.yaml";
-        sopsFile = ../../sops/pkgs/aichat/config.yaml;
+        sopsFile = ../../sops/pkgs/aichat/config.yaml.txt;
         format = "binary";
       };
     };

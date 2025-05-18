@@ -26,12 +26,22 @@
         extraModules
         extraOptions
         envExtra
-        initExtraFirst
-        initExtraBeforeCompInit
-        initExtra
         localVariables
         ;
 
+      initContent =
+        let
+          inherit ((importChezmoiUserAppData user).zsh)
+            initExtraFirst
+            initExtraBeforeCompInit
+            initExtra
+            ;
+        in
+        lib.mkMerge [
+          (lib.mkBefore initExtraFirst)
+          (lib.mkOrder 550 initExtraBeforeCompInit)
+          initExtra
+        ];
       autosuggestion.enable = false;
       enableCompletion = false;
       autocd = true;

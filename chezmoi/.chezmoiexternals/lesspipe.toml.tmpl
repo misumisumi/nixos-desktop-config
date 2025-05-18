@@ -1,0 +1,43 @@
+{{- if (ne .chezmoi.os "windows") -}}
+{{- $os := .chezmoi.os -}}
+
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostExternals := or (get $hostConfig "externals") list -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userExternals := or (get $userConfig "externals") list -}}
+
+{{- $externals := concat $hostExternals $userExternals | uniq -}}
+{{- if (has "lesspipe" $externals) -}}
+[".local/bin/lesspipe"]
+type = "file"
+url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/lesspipe.sh"
+executable = true
+refreshPeriod = "168h"
+[".local/bin/archive_color"]
+type = "file"
+url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/archive_color"
+executable = true
+refreshPeriod = "168h"
+[".local/bin/code2color"]
+type = "file"
+url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/code2color"
+executable = true
+refreshPeriod = "168h"
+[".local/bin/vimcolor"]
+type = "file"
+url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/vimcolor"
+executable = true
+refreshPeriod = "168h"
+[".local/bin/sxw2txt"]
+type = "file"
+url = "https://raw.githubusercontent.com/wofr06/lesspipe/refs/heads/lesspipe/sxw2txt"
+executable = true
+refreshPeriod = "168h"
+{{- end }}
+{{- end }}
