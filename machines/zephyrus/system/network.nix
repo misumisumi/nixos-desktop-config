@@ -52,18 +52,13 @@
           priority = 20;
           auth = ''
             scan_ssid=1
-            eap=TLS
-            group=CCMP
             key_mgmt=WPA-EAP
-            pairwise=CCMP
-            proto=WPA2
             eap=PEAP
-            phase1="peaplabel=auto peap_outer_success=1"
             phase2="auth=MSCHAPV2"
-            domain_match="ext:EDUROAM_DOMAIN"
-            identity="ext:EDUROAM_IDENTIFY"
-            anonymous_identity="ext:EDUROAM_ANONYMOUSID"
-            password="ext:EDUROAM_PASS"
+            identity="k4caffdb0y@student.tohoku.ac.jp"
+            altsubject_match="DNS:radius1.tains.tohoku.ac.jp"
+            anonymous_identity="anonymous@student.tohoku.ac.jp"
+            password=ext:EDUROAM_PASSWD
           '';
         };
         "aitolab_wlan1-an" = {

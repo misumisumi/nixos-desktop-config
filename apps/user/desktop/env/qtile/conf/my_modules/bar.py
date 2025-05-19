@@ -87,7 +87,7 @@ def sysinfo():
         widget.DF(
             format=" {uf}{m}/{s}{m}({r:.0f}%)",
             visible_on_warn=False,
-            partition="/home",
+            partition=BarConf.df_partition,
             foreground=ColorSet.background,
             background=ColorSet.accent,
             **fc,

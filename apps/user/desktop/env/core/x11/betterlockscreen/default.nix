@@ -40,15 +40,13 @@
 
   systemd.user.services = {
     betterlockscreen-update = {
-      Unit = {
-        Description = "";
-        After = [ "graphical-session.target" ];
-      };
-
       Install = {
-        WantedBy = [ " graphical-session.target " ];
+        WantedBy = [ "graphical-session.target" ];
       };
-
+      Unit = {
+        Description = "Update lock screen picture";
+        PartOf = [ "graphical-session.target" ];
+      };
       Service = {
         Type = "oneshot";
         ExecStart = "${config.services.betterlockscreen.package}/bin/betterlockscreen -u ${config.xdg.userDirs.pictures}/wallpapers/screen_saver.png";

@@ -98,6 +98,7 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/var/lib/cups/printers.conf"
       "/var/lib/cups/subscriptions.conf"
+      "/var/lib/sops-nix/key.txt"
     ];
     users.${user} = {
       directories = [
