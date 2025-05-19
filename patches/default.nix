@@ -51,6 +51,16 @@ final: prev: {
   });
   canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
+  vivaldi =
+    (prev.vivaldi.override {
+      commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+    }).overrideAttrs
+      (old: {
+        postInstall = ''
+          rm $out/opt/vivaldi/libvulkan.so.1
+          ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
+        '';
+      });
   pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
     version = "0.1.5";
     src = prev.fetchPypi {
