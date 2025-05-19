@@ -1,0 +1,38 @@
+[Groups/0]
+# Group Name
+Name=SKK
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=skk
+
+[Groups/0/Items/0]
+# Name
+Name=keyboard-us
+# Layout
+Layout=
+
+[Groups/0/Items/1]
+# Name
+Name=skk
+# Layout
+Layout=
+
+[Groups/1]
+# Group Name
+Name=EN
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=keyboard-us
+
+[Groups/1/Items/0]
+# Name
+Name=keyboard-us
+# Layout
+Layout=
+
+[GroupOrder]
+0=EN
+1=SKK
+

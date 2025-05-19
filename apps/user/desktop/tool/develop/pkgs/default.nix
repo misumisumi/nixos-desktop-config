@@ -9,7 +9,14 @@
       blender_4_2 # 3DCG modeling tool
       carla # audio plugin host
       gimp # image editor
-      google-fonts
+      (google-fonts.override {
+        fonts = [
+          "BIZUDMincho"
+          "BIZUDPMincho"
+          "BIZUDGothic"
+          "BIZUDPGothic"
+        ];
+      })
       gpick # color picker
       inkscape # SVG editor
       juce # VST plugin flamework

@@ -7,10 +7,9 @@ from pathlib import Path
 from typing import Optional, Union
 
 from libqtile.log_utils import logger
-from xdg import BaseDirectory
-
 from my_modules import utils
 from my_modules.colorset import ColorSet
+from xdg import BaseDirectory
 
 
 @dataclass
@@ -37,6 +36,7 @@ class BarConfig:
     border_width: int = 0
     top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 0, 20])
     bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [0, 10, 5, 10])
+    df_partition: str = "/"
     opacity: int = 1
     chords_colors: dict = field(default_factory=lambda: {"mod4": (ColorSet.transparent, ColorSet.red)})
 
@@ -74,12 +74,12 @@ class Global:
 
     home: Path = Path.home()
     wallpapers_path: Path = Path(os.getenv("XDG_PICTURES_DIR")).joinpath("wallpapers")
-    wallpapers_cache_path: Path = Path(BaseDirectory.save_cache_path("qtile/wallpapers"))
+    wallpapers_cache_path: Path = Path(BaseDirectory.save_data_path("qtile/wallpapers"))
     wallpapers: list[str] = field(init=False)
     cached_wallpapers: list[str] = field(default_factory=lambda: [])
     use_cached_wallpapers: bool = True
 
-    has_pentablet: bool = True if os.uname()[1] in ["mother"] else False
+    has_pentablet: bool = False
 
     auto_fullscreen: bool = True
     bring_front_click: str = "floating_only"
