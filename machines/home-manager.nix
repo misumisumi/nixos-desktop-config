@@ -32,6 +32,7 @@ let
       modules = [
         inputs.catppuccin.homeModules.catppuccin
         inputs.flakes.homeManagerModules.default
+        inputs.impermanence.homeManagerModules.impermanence
         inputs.nvimdots.homeManagerModules.default
         inputs.sops-nix.homeManagerModules.sops
         inputs.spicetify-nix.homeManagerModules.default

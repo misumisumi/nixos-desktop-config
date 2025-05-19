@@ -28,11 +28,12 @@ let
         inputs.catppuccin.nixosModules.catppuccin
         inputs.disko.nixosModules.disko
         inputs.home-manager.nixosModules.home-manager
+        inputs.impermanence.nixosModules.impermanence
         inputs.musnix.nixosModules.musnix
         inputs.nur.modules.nixos.default
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
-        (./. + "/${hostname}") # Each machine conf
+        (./. + "/${hostname}/system") # Each machine conf
         (
           { config, ... }:
           {
@@ -54,6 +55,7 @@ let
               sharedModules = [
                 inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
+                inputs.impermanence.homeManagerModules.impermanence
                 inputs.nvimdots.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
@@ -62,7 +64,7 @@ let
               users."${user}" = {
                 imports =
                   lib.optional (lib.pathExists ../users/${user}) ../users/${user}
-                  ++ lib.optional (lib.pathExists ./${hostname}/home.nix) ./${hostname}/home.nix;
+                  ++ lib.optional (lib.pathExists ./${hostname}/home) ./${hostname}/home;
                 dotfilesActivation = true;
                 home.stateVersion = config.system.stateVersion;
               };
