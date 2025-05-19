@@ -47,6 +47,7 @@
       autocd = true;
 
       history = {
+        path = "${config.xdg.dataHome}/zsh/history";
         ignorePatterns = (importChezmoiUserAppData user).shell.historyIgnore;
         expireDuplicatesFirst = true;
         extended = true;

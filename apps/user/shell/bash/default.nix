@@ -1,6 +1,7 @@
 {
   user,
   importChezmoiUserAppData,
+  config,
   ...
 }:
 {
@@ -9,6 +10,7 @@
     enableCompletion = true;
     enableVteIntegration = true;
     historyControl = [ "ignoreboth" ];
+    historyFile = "${config.xdg.dataHome}/bash/history";
     inherit ((importChezmoiUserAppData user).bash)
       bashrcExtra
       initExtra

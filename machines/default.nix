@@ -1,7 +1,6 @@
 { self, inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  user = "sumi";
   settings =
     {
       hostname,
@@ -28,11 +27,12 @@ let
         inputs.catppuccin.nixosModules.catppuccin
         inputs.disko.nixosModules.disko
         inputs.home-manager.nixosModules.home-manager
+        inputs.impermanence.nixosModules.impermanence
         inputs.musnix.nixosModules.musnix
         inputs.nur.modules.nixos.default
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
-        (./. + "/${hostname}") # Each machine conf
+        (./. + "/${hostname}/system") # Each machine conf
         (
           { config, ... }:
           {
@@ -54,6 +54,7 @@ let
               sharedModules = [
                 inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
+                inputs.impermanence.homeManagerModules.impermanence
                 inputs.nvimdots.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
@@ -62,7 +63,7 @@ let
               users."${user}" = {
                 imports =
                   lib.optional (lib.pathExists ../users/${user}) ../users/${user}
-                  ++ lib.optional (lib.pathExists ./${hostname}/home.nix) ./${hostname}/home.nix;
+                  ++ lib.optional (lib.pathExists ./${hostname}/home) ./${hostname}/home;
                 dotfilesActivation = true;
                 home.stateVersion = config.system.stateVersion;
               };
@@ -111,37 +112,37 @@ in
     schemes = guiLiveImgSchemes;
   };
   liveimg-gnome-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
     colorTheme = "tokyonight-moon";
+    hostname = "liveimg";
     schemes = guiIsoSchemes;
+    user = "nixos";
   };
   liveimg-cli-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
     colorTheme = "tokyonight-moon";
+    hostname = "liveimg";
     schemes = cliIsoSchemes;
+    user = "nixos";
   };
 
   mother = settings {
-    hostname = "mother";
     colorTheme = "tokyonight-moon";
+    hostname = "mother";
     schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
   zephyrus = settings {
-    hostname = "zephyrus";
     colorTheme = "tokyonight-moon";
+    hostname = "zephyrus";
     schemes = laptopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
   stacia = settings {
-    hostname = "stacia";
     colorTheme = "tokyonight-moon";
+    hostname = "stacia";
     schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
 }
