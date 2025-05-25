@@ -33,6 +33,5 @@ Name=keyboard-us
 Layout=
 
 [GroupOrder]
-0=EN
-1=SKK
+0=SKK
 

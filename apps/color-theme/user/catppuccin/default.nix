@@ -80,8 +80,9 @@ in
       enable = config.i18n.inputMethod.enabled == "fcitx5";
       text = lib.generators.toINIWithGlobalSection { } {
         globalSection = {
-          Theme = "catppuccin-${flavor}-blue";
-          DarkTHeme = "catppuccin-${flavor}-blue";
+          Theme = "catppuccin-${flavor}-pink";
+          DarkTHeme = "catppuccin-${flavor}-pink";
+          UseDarkTheme = if flavor == "latte" then "False" else "True"; # Follow system light/dark color scheme
         };
       };
     };

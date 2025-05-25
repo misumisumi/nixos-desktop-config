@@ -35,6 +35,7 @@
         globalSection = {
           Theme = "Nord-Dark";
           DarkTHeme = "Nord-Dark";
+          UseDarkTheme = "True"; # Follow system light/dark color scheme
         };
       };
     };
