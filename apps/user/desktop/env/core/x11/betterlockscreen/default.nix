@@ -45,7 +45,7 @@
       };
       Unit = {
         Description = "Update lock screen picture";
-        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
       };
       Service = {
         Type = "oneshot";
