@@ -109,26 +109,27 @@ in
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
 
   xdg.configFile = {
+    "fcitx5/conf/classicui.conf" = {
+      text = lib.generators.toINIWithGlobalSection { } {
+        globalSection = {
+          Theme = "Tokyonight-Day"; # Theme
+          DarkTheme = "Tokyonight-Storm"; # Dark Theme
+          UseDarkTheme = if flavor == "day" then "False" else "True"; # Follow system light/dark color scheme
+        };
+      };
+    };
     "wezterm/color-scheme.lua" = {
       inherit (config.programs.wezterm) enable;
       source = ./wezterm/${flavor}.lua;
     };
-    "fcitx5/conf/classicui.conf" = {
-      enable = config.i18n.inputMethod.enabled == "fcitx5";
-      text =
-        let
-          shade = if flavor == "day" then "Day" else "Storm";
-        in
-        lib.generators.toINIWithGlobalSection { } {
-          globalSection = {
-            Theme = "Tokyonight-${shade}";
-            DarkTHeme = "Tokyonight-${shade}";
-          };
-        };
-    };
     "qtile/my_modules/colorset.py" = {
       inherit (config.xsession.windowManager.qtile) enable;
       source = ./qtile/${flavor}.py;
+    };
+  };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = if flavor == "day" then "prefer-light" else "prefer-dark";
     };
   };
   gtk = {

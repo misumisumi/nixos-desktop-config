@@ -7,6 +7,20 @@ let
   flavor = builtins.replaceStrings [ "tokyonight-" ] [ "" ] colorTheme;
 in
 {
+  programs.dconf = {
+    enable = true;
+    profiles = {
+      user.databases = [
+        {
+          settings = {
+            "org/gnome/desktop/interface" = {
+              color-scheme = if flavor == "day" then "prefer-light" else "prefer-dark";
+            };
+          };
+        }
+      ];
+    };
+  };
   services.xserver.displayManager = {
     lightdm = {
       greeters = {
