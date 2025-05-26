@@ -13,8 +13,9 @@ with builtins;
     ../../apps/system/ssh
     ../../apps/system/steam
     ../../apps/system/virtualsmartcard
-    ../../apps/system/yubikey
+    ../../apps/system/wireshark
     ../../apps/system/wm/qtile
+    ../../apps/system/yubikey
     ../../settings/system
     ../../settings/system/bluetooth
     ../../settings/system/musnix

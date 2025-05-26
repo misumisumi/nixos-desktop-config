@@ -1,6 +1,9 @@
 # Auto launch apps
-{ config, ... }:
+{ lib, config, ... }:
 {
+  home.activation.mkSnapshotsDirAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    [ -d ${config.xdg.userDirs.pictures}/Screenshots ] || mkdir -p ${config.xdg.userDirs.pictures}/Screenshots
+  '';
   services = {
     blueman-applet.enable = true;
     copyq.enable = true;
