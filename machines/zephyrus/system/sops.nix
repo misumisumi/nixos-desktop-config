@@ -8,7 +8,7 @@
     };
     defaultSopsFile = ../../../sops/hosts/zephyrus/secrets.yaml;
     secrets = {
-      hashedPassword.neededForUsers = true;
+      hashedPasswordFile.neededForUsers = true;
       wireless = {
         sopsFile = ../../../sops/system/network/wireless;
         format = "binary";
