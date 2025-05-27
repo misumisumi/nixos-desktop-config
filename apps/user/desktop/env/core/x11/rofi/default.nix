@@ -25,7 +25,7 @@
         combi-modi = "window,drun";
         show-icons = true;
         icon-theme = "Papirus-Dark";
-        drun-show-actions = false;
+        drun-show-actions = true;
         drun-display-format = "{icon} {name}";
         display-drun = "   Apps ";
         display-run = "   Run ";

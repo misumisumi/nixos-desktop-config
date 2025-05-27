@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./mail
+  ];
   systemd.user.startServices = "sd-switch";
   home.packages = with pkgs; [
     sops
