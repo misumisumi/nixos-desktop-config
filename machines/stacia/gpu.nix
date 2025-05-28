@@ -24,7 +24,7 @@
         Section "Monitor"
           Identifier     "DVI-D-0"
           Option         "Primary" "true"
-          Option         "PreferredMode" "1920x1080"
+          Option         "PreferredMode" "1920x1200"
         EndSection
 
         Section "Monitor"
