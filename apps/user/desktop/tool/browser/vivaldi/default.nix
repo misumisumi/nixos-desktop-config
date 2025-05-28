@@ -17,7 +17,6 @@
       { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i don't care about cookies
       { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
-      { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # one tab
       { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; } # obsidian web clipper
       { id = "mhpjgcccinlocgiklkfllehilgmcnimp"; } # paperpal for overleaf beta
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
