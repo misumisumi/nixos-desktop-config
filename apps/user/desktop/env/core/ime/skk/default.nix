@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   i18n.inputMethod.fcitx5.addons = with pkgs; [
     fcitx5-skk
@@ -9,6 +9,14 @@
       recursive = true;
     };
     "fcitx5/conf/skk.conf".source = ./fcitx5/skk.conf;
+    "fcitx5/profile" = lib.mkForce {
+      source = ./fcitx5/profile;
+      force = true;
+    };
+    "fcitx5/config" = lib.mkForce {
+      source = ./fcitx5/config;
+      force = true;
+    };
   };
   home.file = {
     # Auto update skk dict
