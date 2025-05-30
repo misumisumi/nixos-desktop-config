@@ -1,20 +1,14 @@
 [Groups/0]
 # Group Name
-Name=Mozc
+Name=SKK
 # Layout
-Default Layout=us
+Default Layout=skk
 # Default Input Method
-DefaultIM=mozc
+DefaultIM=skk
 
 [Groups/0/Items/0]
 # Name
-Name=keyboard-us
-# Layout
-Layout=
-
-[Groups/0/Items/1]
-# Name
-Name=mozc
+Name=skk
 # Layout
 Layout=
 
