@@ -14,10 +14,10 @@ try:
 except:
     pass
 
+screens = screens.make_screens()
 groups = groups.set_groups()
 layouts = my_layouts.set_layouts()
 floating_layout = my_layouts.set_floating_layout()
-screens = screens.make_screens()
 keys = keymap.set_keys()
 mouse = set_mouse()
 

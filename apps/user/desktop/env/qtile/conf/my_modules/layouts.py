@@ -3,7 +3,6 @@
 from libqtile import layout
 from libqtile.config import Match
 from libqtile.log_utils import logger
-
 from my_modules.colorset import ColorSet
 from my_modules.variables import WindowConf
 
@@ -83,6 +82,27 @@ layout4 = [
     layout.Max(**_settings),
 ]
 
+# layouts for vertical display
+layout5 = [
+    layout.MonadWide(
+        **_settings,
+        ratio=0.70,
+        new_client_position="after_current",
+        single_border_width=WindowConf.border,
+        single_margin=WindowConf.margin,
+    ),
+    layout.Max(**_settings),
+]
+
+layout6 = [
+    layout.VerticalTile(
+        **_settings,
+        single_border_width=WindowConf.border,
+        single_margin=WindowConf.margin,
+    ),
+    layout.Max(**_settings),
+]
+
 
 def set_floating_layout():
     return layout.Floating(
@@ -103,4 +123,4 @@ def set_floating_layout():
 
 
 def set_layouts():
-    return layout1 + layout2 + layout3 + layout4
+    return layout1 + layout2 + layout3 + layout4 + layout5 + layout6

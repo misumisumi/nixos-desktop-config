@@ -6,9 +6,8 @@ from libqtile import qtile
 from libqtile.backend import base
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
-
-from my_modules.layouts import layout1, layout2, layout3, layout4
-from my_modules.utils import get_n_monitors
+from my_modules.layouts import layout1, layout2, layout3, layout4, layout5, layout6
+from my_modules.utils import get_phy_monitors
 from my_modules.variables import GlobalConf
 
 _rule_code = [
@@ -51,12 +50,12 @@ _rule_sns = [
 _rule_music = [{"wm_class": "spotify"}]
 
 group_and_rule = {
-    "code": ("", (layout2,), _rule_code),
-    "browse": ("", (layout1,), _rule_browse),
-    "analyze": ("󰉕", (layout4,), _rule_analyze),
-    "full": ("󰓓", (layout3,), _rule_full),
-    "sns": ("", (layout1,), _rule_sns),
-    "music": ("", (layout1,), _rule_music),
+    "code": ("", (layout2, layout5), _rule_code),
+    "browse": ("", (layout1, layout6), _rule_browse),
+    "analyze": ("󰉕", (layout4, layout6), _rule_analyze),
+    "full": ("󰓓", (layout3, layout3), _rule_full),
+    "sns": ("", (layout1, layout6), _rule_sns),
+    "music": ("", (layout1, layout6), _rule_music),
 }
 
 
@@ -117,15 +116,12 @@ GROUP_PER_SCREEN = len(group_and_rule)
 
 def set_groups():
     groups = []
-    n_monitors = get_n_monitors(GlobalConf.has_pentablet)
-    for n in range(n_monitors):
+    monitors = get_phy_monitors(GlobalConf.has_pentablet)
+    for n, (_, resolutions) in enumerate(monitors):
         for k, (label, layouts, rules) in group_and_rule.items():
-            if n == 1 and len(layouts) > 1:
-                layouts = layouts[1]
-            else:
-                layouts = layouts[0]
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
-            groups.append(Group(f"{n}-{k}", layouts=layouts, matches=matches, label=label))
+            select = 1 if resolutions[0] < resolutions[1] else 0  # get vertical or horizontal layout
+            groups.append(Group(f"{n}-{k}", layouts=layouts[select], matches=matches, label=label))
     if GlobalConf.has_pentablet:
         name = list(_pentablet.keys())[0]
         groups.append(Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0]))
