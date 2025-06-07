@@ -4,12 +4,12 @@ from pathlib import Path
 
 def get_n_monitors(has_pentablet: bool) -> str:
     cmd = [r"xrandr --listmonitors | head -n1 | awk -F' ' '{print $2}'"]
-    monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.replace("\n", "")
-    monitors = int(monitors)
+    num_monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.replace("\n", "")
+    num_monitors = int(num_monitors)
     if has_pentablet:
-        monitors -= 1
+        num_monitors -= 1
 
-    return monitors
+    return num_monitors
 
 
 def get_phy_monitors(has_pentablet: bool, activate_only: bool = False) -> list[tuple[str, tuple[str]]]:
@@ -19,7 +19,10 @@ def get_phy_monitors(has_pentablet: bool, activate_only: bool = False) -> list[t
         + r" | tail -n+2 | awk -F' ' '{print $2,$3}' | sed 's/\(.*\)\/.*x\(.*\)\/.*$/\1x\2/' | sed -E 's/\+\*?//g'"
     )
     monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.split("\n")[:-1]
-    monitors = [(output, tuple(resolution.split("x"))) for output, resolution in map(lambda x: x.split(" "), monitors)]
+    monitors = [
+        (output, tuple(map(lambda x: int(x), resolution.split("x"))))
+        for output, resolution in map(lambda x: x.split(" "), monitors)
+    ]
     if has_pentablet:
         monitors = monitors[:-1]
 
