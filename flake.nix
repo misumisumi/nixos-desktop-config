@@ -54,7 +54,7 @@
 
     flakes.url = "github:misumisumi/flakes";
     nvimdots = {
-      url = "github:misumisumi/nvimdots/feat/ai-chat";
+      url = "github:misumisumi/nvimdots/0.11";
       inputs = {
         flake-parts.follows = "flake-parts";
         home-manager.follows = "home-manager";

@@ -61,25 +61,6 @@ final: prev: {
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';
       });
-  pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
-    version = "0.1.5";
-    src = prev.fetchPypi {
-      inherit (old) pname;
-      inherit version;
-      sha256 = "sha256-9qXeIZuCu44m9EoPCPL7MgEboEwN91OylLfbkwhkZYQ=";
-    };
-    pyproject = true;
-    propagatedBuildInputs =
-      with prev.python3Packages;
-      old.propagatedBuildInputs
-      ++ [
-        setuptools
-        setuptools-scm
-      ];
-    patchPhase = ''
-      substituteInPlace pandoc_plantuml_filter.py --replace "os.environ.get(\"PLANTUML_BIN\", \"plantuml\")" "os.environ.get(\"PLANTUML_BIN\", \"${prev.plantuml}/bin/plantuml\")"
-    '';
-  });
   switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
     dontWrapGApps = true;
