@@ -1,7 +1,11 @@
+{ pkgs, ... }:
 {
   imports = [
     ./libreoffice
-    ./pdfpc
     ./zathura
+  ];
+  home.packages = with pkgs; [
+    pympress
+    xournalpp
   ];
 }

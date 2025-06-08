@@ -7,7 +7,7 @@
       enable = true;
       createDirectories = true;
       extraConfig = {
-        XDG_WORKSPACE_DIR = "${config.home.homeDirectory}/workspace";
+        XDG_WORKSPACE_DIR = "${config.home.homeDirectory}/Workspace";
       };
     };
   };
