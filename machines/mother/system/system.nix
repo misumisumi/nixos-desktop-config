@@ -1,7 +1,9 @@
 { pkgs, config, ... }:
 {
   boot = {
-    loader.timeout = 10;
+    kernel.sysctl = {
+      "vm.swappiness" = 0; # swap is only used when RAM is full
+    };
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];

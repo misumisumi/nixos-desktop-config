@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  user,
-  ...
-}:
+{ pkgs, config, ... }:
 {
   boot = {
     kernel.sysctl = {
@@ -20,7 +15,6 @@
       "snd-aloop"
     ];
   };
-  users.users.${user}.extraGroups = [ "user" ];
   services = {
     printing = {
       drivers = with pkgs; [
@@ -28,28 +22,18 @@
         canon-cups-ufr2
       ];
     };
-    pipewire.extraConfig.pipewire-pulse = {
-      native-protocol-tcp = {
-        pulse.cmd = [
-          {
-            cmd = "load-module";
-            args = "module-native-protocol-tcp";
-            flags = [
-              "port=4656"
-              "auth-anonymous=1"
-            ];
-          }
-        ];
-      };
+    xserver = {
+      xp-pentablet.enable = true;
+      displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
     };
   };
   nix = {
     settings = {
       cores = 4;
-      max-jobs = 3;
+      max-jobs = 6;
     };
     extraOptions = ''
-      http-connections = 50
+      http-connections = 256
     '';
   };
 }
