@@ -32,7 +32,7 @@ let
         inputs.nur.modules.nixos.default
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
-        (./. + "/${hostname}/system") # Each machine conf
+        (./. + "/${if (lib.match "(liveimg)-.*" hostname != null) then "liveimg" else hostname}/system") # Each machine conf
         (
           { config, ... }:
           {
@@ -83,44 +83,32 @@ let
     "desktop/laptop"
   ] ++ desktopSchemes;
 
-  cliIsoSchemes = [
+  minimalIsoSchemes = [
     "presets/small"
-    "shell"
+    "shell/bash"
+    "shell/starship"
   ];
-  guiIsoSchemes = [
-    "presets/huge"
+  gnomeIsoSchemes = [
     "desktop/env/core/ime/fcitx5"
-    "shell"
-  ];
-  guiLiveImgSchemes = [
-    "presets/huge"
-    "desktop/env/core/ime/fcitx5"
-    "shell"
+    "desktop/theme"
+    "desktop/tool/browser"
+    "desktop/tool/utils"
+    "presets/small"
+    "shell/bash"
+    "shell/starship"
   ];
 in
 {
-  liveimg-qtile = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    colorTheme = "tokyonight-moon";
-    schemes = guiLiveImgSchemes ++ [ "desktop/env/qtile" ];
-  };
-  liveimg-gnome = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    colorTheme = "tokyonight-moon";
-    schemes = guiLiveImgSchemes;
-  };
   liveimg-gnome-iso = settings {
     colorTheme = "tokyonight-moon";
-    hostname = "liveimg";
-    schemes = guiIsoSchemes;
+    hostname = "liveimg-gnome-iso";
+    schemes = gnomeIsoSchemes;
     user = "nixos";
   };
-  liveimg-cli-iso = settings {
+  liveimg-minimal-iso = settings {
     colorTheme = "tokyonight-moon";
-    hostname = "liveimg";
-    schemes = cliIsoSchemes;
+    hostname = "liveimg-minimal-iso";
+    schemes = minimalIsoSchemes;
     user = "nixos";
   };
 

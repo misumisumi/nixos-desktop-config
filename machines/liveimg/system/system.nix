@@ -11,11 +11,6 @@
       "ntfs"
       "cifs"
     ];
-    # Use RAM disk as /tmp
-    tmp = {
-      useTmpfs = true;
-      tmpfsSize = "80%";
-    };
   };
   nix = {
     # settings = {

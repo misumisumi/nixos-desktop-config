@@ -72,6 +72,11 @@ See [.chezmoidata/users/sumi.toml](.chezmoidata/users/sumi.toml) for detail.
 oobe\bypassnro
 ```
 
+- How to do something similar in ISOs with bypassnro removed
+  1.  Shift+F10 -> regedit
+  2.  `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\OOBE`
+  3.  `HideOnlineAccountScreens` -> 1
+
 #### How to make one storage bootable on both VM and bare metal
 
 1. Copy `$env:USERPROFILE/.local/share/startup/kvm_storage_boot.ps1` to `\Windows\System32\GroupPolicy\Machine\Scripts\Startup`.

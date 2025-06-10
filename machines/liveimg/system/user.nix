@@ -1,4 +1,5 @@
 {
+  lib,
   user,
   pkgs,
   ...
@@ -19,7 +20,7 @@
       "input"
     ];
     useDefaultShell = true;
-    password = "nixos";
+    initialHashedPassword = lib.mkForce "$y$j9T$VM2hWCk7A3S5QKFhO1STx1$2Pq/o43bzXFMnpKtxiZiaFZnMuMym3EgqgysBk8sgA/";
   };
-  users.users.root.password = "nixos";
+  users.users.root.initialHashedPassword = lib.mkForce "$y$j9T$VM2hWCk7A3S5QKFhO1STx1$2Pq/o43bzXFMnpKtxiZiaFZnMuMym3EgqgysBk8sgA/";
 }

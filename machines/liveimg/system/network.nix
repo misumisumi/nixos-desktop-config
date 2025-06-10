@@ -1,12 +1,11 @@
 {
   lib,
-  hostname,
   ...
 }:
 {
   networking = {
     wireless.enable = false;
-    hostName = "${hostname}";
+    hostName = "nixos";
 
     networkmanager = {
       enable = true;

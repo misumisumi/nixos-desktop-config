@@ -3,7 +3,6 @@
   pkgs,
   user,
   useNixOSWallpaper,
-  config,
   ...
 }:
 {
