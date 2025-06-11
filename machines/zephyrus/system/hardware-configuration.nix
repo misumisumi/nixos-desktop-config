@@ -7,7 +7,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../init/zfs.nix
   ];
   networking.hostId = "dade0dc9"; # for zfs
   boot = {
@@ -22,9 +21,6 @@
         "sd_mod"
       ];
     };
-    kernelParams = [
-      "amd_pstate=active"
-    ];
   };
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   systemd.tmpfiles.rules = [

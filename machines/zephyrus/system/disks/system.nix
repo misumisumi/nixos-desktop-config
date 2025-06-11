@@ -49,6 +49,9 @@ in
                     "/persist/var/log" = { }; # don't snapshot
                     "/persist/var/tmp" = { }; # don't snapshot
                     "/persist/home" = { };
+                    # snapshot dirs
+                    "/persist/.snapshot" = { };
+                    "/persist/home/.snapshot" = { };
                     # don't snapshot but place persisted files here
                     "/persist-alt" = {
                       mountpoint = "/nix/persist-alt";
@@ -72,8 +75,8 @@ in
                       ];
                     };
                     "/swap" = {
-                      mountpoint = "/.swapfile";
-                      swap.swapfile.size = "32G";
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "42G";
                     };
                   };
                 };
@@ -87,5 +90,6 @@ in
   fileSystems = {
     "/nix/persist".neededForBoot = true;
     "/nix/persist-alt".neededForBoot = true;
+    "/.swapvol".neededForBoot = true;
   };
 }

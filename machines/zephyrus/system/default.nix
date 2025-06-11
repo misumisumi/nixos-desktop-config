@@ -27,8 +27,8 @@ with builtins;
     ./persist/nix-daemon.nix
     ./persist/persistence.nix
     ./persist/snapper.nix
-    ./settings.nix
     ./sops.nix
+    ./system.nix
     ./virtualisation.nix
   ];
 }

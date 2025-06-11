@@ -1,6 +1,9 @@
 { pkgs, config, ... }:
 {
+  hardware.brillo.enable = true; # for brightness control from users in the video group
+  programs.nix-ld.enable = true;
   boot = {
+    initrd.systemd.enable = true;
     kernel.sysctl = {
       "vm.swappiness" = 0; # swap is only used when RAM is full
     };
@@ -16,6 +19,23 @@
     ];
   };
   services = {
+    upower.enable = true;
+    asusd = {
+      enableUserService = true;
+      profileConfig.text = "quiet";
+    };
+    supergfxd = {
+      enable = true;
+      settings = {
+        mode = "Integrated";
+        vfio_enable = true;
+        vfio_save = false;
+        always_reboot = false;
+        no_logind = false;
+        logout_timeout_s = 180;
+        hotplug_type = "None";
+      };
+    };
     printing = {
       drivers = with pkgs; [
         cnijfilter2
@@ -23,9 +43,19 @@
       ];
     };
     xserver = {
-      xp-pentablet.enable = true;
       displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
     };
+    power-profiles-daemon.enable = true;
+    logind = {
+      lidSwitch = "hybrid-sleep";
+      powerKey = "hibernate";
+      powerKeyLongPress = "poweroff";
+    };
+  };
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+    powertop.enable = true;
   };
   nix = {
     settings = {
@@ -33,7 +63,7 @@
       max-jobs = 6;
     };
     extraOptions = ''
-      http-connections = 256
+      http-connections = 25
     '';
   };
 }
