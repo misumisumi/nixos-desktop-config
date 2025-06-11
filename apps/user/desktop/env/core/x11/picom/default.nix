@@ -29,6 +29,7 @@
         "100:class_g = 'looking-glass-client'"
         "100:class_g = 'org.wezfurlong.wezterm'"
         "100:class_g = 'pentablet'"
+        "100:class_g = 'zoom'"
         "100:name *?= '.jpg'"
         "100:name *?= '.pdf'"
         "100:name *?= '.png'"
