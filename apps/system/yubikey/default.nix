@@ -33,10 +33,9 @@
       configsEnv;
     systemPackages = with pkgs; [
       # Yubico's official tools
+      yubico-piv-tool
       yubikey-manager
       yubikey-personalization
-      yubikey-personalization-gui
-      yubico-piv-tool
       yubioath-flutter
     ];
   };
