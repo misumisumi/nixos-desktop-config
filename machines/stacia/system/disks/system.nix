@@ -49,6 +49,9 @@ in
                     "/persist/var/log" = { }; # don't snapshot
                     "/persist/var/tmp" = { }; # don't snapshot
                     "/persist/home" = { };
+                    # snapshot dirs
+                    "/persist/.snapshot" = { };
+                    "/persist/home/.snapshot" = { };
                     # don't snapshot but place persisted files here
                     "/persist-alt" = {
                       mountpoint = "/nix/persist-alt";
@@ -64,15 +67,8 @@ in
                         "noatime"
                       ];
                     };
-                    "/snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
                     "/swap" = {
-                      mountpoint = "/.swapfile";
+                      mountpoint = "/.swapvol";
                       swap.swapfile.size = "32G";
                     };
                   };

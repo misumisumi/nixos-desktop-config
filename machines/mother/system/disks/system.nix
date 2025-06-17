@@ -1,5 +1,6 @@
 let
-  device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_296E079C18FC00597627";
+  # device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_296E079C18FC00597627";
+  device = "/dev/sda";
 in
 {
   disko.devices = {
@@ -49,6 +50,9 @@ in
                     "/persist/var/log" = { }; # don't snapshot
                     "/persist/var/tmp" = { }; # don't snapshot
                     "/persist/home" = { };
+                    # snapshot dirs
+                    "/persist/.snapshot" = { };
+                    "/persist/home/.snapshot" = { };
                     # don't snapshot but place persisted files here
                     "/persist-alt" = {
                       mountpoint = "/nix/persist-alt";
@@ -64,15 +68,8 @@ in
                         "noatime"
                       ];
                     };
-                    "/snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
                     "/swap" = {
-                      mountpoint = "/.swapfile";
+                      mountpoint = "/.swapvol";
                       swap.swapfile.size = "16G";
                     };
                   };
