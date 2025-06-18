@@ -1,7 +1,47 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
-  home.sessionVariables = {
-    CHROME_PATH = "${pkgs.vivaldi}/bin/vivaldi";
+  home = {
+    packages = [
+      (pkgs.writeShellApplication {
+        name = "export-vivaldi-config";
+        text = ''
+          PROFILE=''${1:-Default}
+          ITEMS=(
+            ".vivaldi.actions"
+            ".vivaldi.address_bar.inline_search"
+            ".vivaldi.address_bar.omnibox"
+            ".vivaldi.address_bar.search"
+            ".vivaldi.appearance"
+            ".vivaldi.chained_commands"
+            ".vivaldi.features"
+            ".vivaldi.mail"
+            ".vivaldi.mouse_wheel"
+            ".vivaldi.panels"
+            ".vivaldi.quick_commands"
+            ".vivaldi.tabs.bar"
+            ".vivaldi.toolbars"
+          )
+          # ITEMSを", "で連結、ただし、末尾に,を付けない
+          joined_string=''$(printf ", %s" "''${ITEMS[@]}")
+          joined_string=''${joined_string:2} # Remove the leading comma and space
+
+          jq -c "pick(''${joined_string})" "''${XDG_CONFIG_HOME}/vivaldi/''${PROFILE}/Preferences"
+        '';
+      })
+    ];
+    sessionVariables = {
+      CHROME_PATH = "${pkgs.vivaldi}/bin/vivaldi";
+    };
+  };
+  xdg.configFile."vivaldi/CommonPreferences" = {
+    source = ../../../../../../chezmoi/dot_config/vivaldi/CommonPreferences;
+    onChange = ''
+      find "${config.xdg.configHome}/vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
+        TMP="''${profile}/Preferences.tmp"
+        mv "''${profile}/Preferences" "''${TMP}"
+        ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${config.xdg.configHome}/vivaldi/CommonPreferences > "''${profile}/Preferences"
+      done
+    '';
   };
   programs.vivaldi = {
     enable = true;
