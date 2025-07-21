@@ -111,11 +111,15 @@ in
   xdg.configFile = {
     "fcitx5/conf/classicui.conf" = {
       text = lib.generators.toINIWithGlobalSection { } {
-        globalSection = {
-          Theme = "Tokyonight-Day"; # Theme
-          DarkTheme = "Tokyonight-Storm"; # Dark Theme
-          UseDarkTheme = if flavor == "day" then "False" else "True"; # Follow system light/dark color scheme
-        };
+        globalSection =
+          let
+            Theme = "Tokyonight-${if flavor == "day" then "Day" else "Storm"}";
+          in
+          {
+            inherit Theme;
+            DarkTheme = Theme;
+            UseDarkTheme = if flavor == "day" then "False" else "True"; # Follow system light/dark color scheme
+          };
       };
     };
     "wezterm/color-scheme.lua" = {
@@ -133,6 +137,7 @@ in
     };
   };
   gtk = {
+    # gtk3.extraConfig.gtk-application-prefer-dark-theme = flavor != "day";
     theme =
       let
         shade = if flavor == "day" then "Light" else "Dark";
