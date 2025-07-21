@@ -42,13 +42,6 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  evince = prev.evince.overrideAttrs (old: rec {
-    version = "48.0";
-    src = prev.fetchurl {
-      url = "mirror://gnome/sources/evince/${prev.lib.versions.major version}/evince-${version}.tar.xz";
-      sha256 = "sha256-zS9lg1X6kHX9+eW0SqCvOn4JKMVWFOsQQrNhds9FESY=";
-    };
-  });
   canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   vivaldi =
@@ -67,5 +60,10 @@ final: prev: {
     preFixup = ''
       makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
     '';
+  });
+  qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
+    patches = old.patches ++ [
+      ./qtile.patch
+    ];
   });
 }

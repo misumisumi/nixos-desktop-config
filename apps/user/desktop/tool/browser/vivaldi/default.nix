@@ -13,6 +13,7 @@
             ".vivaldi.address_bar.search"
             ".vivaldi.appearance"
             ".vivaldi.chained_commands"
+            ".vivaldi.dashboard"
             ".vivaldi.features"
             ".vivaldi.mail"
             ".vivaldi.mouse_wheel"
@@ -45,7 +46,6 @@
   };
   programs.vivaldi = {
     enable = true;
-    package = pkgs.vivaldi.override { proprietaryCodecs = true; };
     dictionaries = with pkgs; [ hunspellDictsChromium.en_US ];
     extensions = [
       { id = "joaffhoebddkohkafembmdkfmmcgmepj"; } # better vrchat

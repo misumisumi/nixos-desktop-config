@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def get_n_monitors(has_pentablet: bool) -> str:
-    cmd = [r"xrandr --listmonitors | head -n1 | awk -F' ' '{print $2}'"]
+    cmd = [r"xrandr --listactivemonitors | head -n1 | awk -F' ' '{print $2}'"]
     num_monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.replace("\n", "")
     num_monitors = int(num_monitors)
     if has_pentablet:
@@ -12,8 +12,8 @@ def get_n_monitors(has_pentablet: bool) -> str:
     return num_monitors
 
 
-def get_phy_monitors(has_pentablet: bool, activate_only: bool = False) -> list[tuple[str, tuple[str]]]:
-    xrandr = "xrandr --listmonitors" if activate_only else "xrandr --listmonitors"
+def get_phy_monitors(has_pentablet: bool) -> list[tuple[str, tuple[str]]]:
+    xrandr = "xrandr --listactivemonitors"
     cmd = (
         xrandr
         + r" | tail -n+2 | awk -F' ' '{print $2,$3}' | sed 's/\(.*\)\/.*x\(.*\)\/.*$/\1x\2/' | sed -E 's/\+\*?//g'"

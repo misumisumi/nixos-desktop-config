@@ -14,7 +14,7 @@ in
       enable = mkEnableOption "qtile window manager";
       package = mkOption {
         type = types.nullOr types.package;
-        default = pkgs.python3.pkgs.qtile;
+        default = pkgs.qtile-unwrapped;
         description = ''
           The qtile package to use.
         '';
