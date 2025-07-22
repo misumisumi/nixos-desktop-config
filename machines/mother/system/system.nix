@@ -8,8 +8,8 @@
       "amd_pstate=active"
     ];
     kernelModules = [
-      "v4l2loopback"
       "snd-aloop"
+      "v4l2loopback"
     ];
   };
   services = {
