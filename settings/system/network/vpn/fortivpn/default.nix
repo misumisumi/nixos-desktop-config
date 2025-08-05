@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 {
+  sops.secrets = {
+    "openfortivpn/config" = {
+      sopsFile = ../../../../../sops/system/openfortivpn/config;
+      format = "binary";
+      mode = "0600";
+    };
+  };
   systemd.services.openfortivpn = {
     description = "Launch openfortivpn";
     after = [ "network-online.target" ];

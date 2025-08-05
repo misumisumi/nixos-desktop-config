@@ -51,7 +51,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     flakes.url = "github:misumisumi/flakes";
     nvimdots = {
       url = "github:misumisumi/nvimdots/0.11";
@@ -61,7 +60,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs = {

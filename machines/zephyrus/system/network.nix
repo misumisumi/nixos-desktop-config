@@ -1,5 +1,9 @@
 { config, hostname, ... }:
 {
+  imports = [
+    ../../../settings/system/network/vpn/l2tp
+    ../../../settings/system/network/vpn/l2tp/tains.nix
+  ];
   services = {
     hostapd = {
       enable = false;

@@ -1,5 +1,9 @@
 { hostname, ... }:
 {
+  imports = [
+    ../../../settings/system/network/vpn/l2tp
+    ../../../settings/system/network/vpn/l2tp/tains.nix
+  ];
   services = {
     nscd = {
       enable = true;

@@ -42,7 +42,7 @@ creation_rules:
           - *sumi
         age:
           - *zephyrus
-  - path_regex: sops/system/openfortivpn/config
+  - path_regex: sops/system/[openfortivpn,ppp]/*
     key_groups:
       - pgp:
           - *sumi
