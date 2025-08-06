@@ -54,13 +54,13 @@
       { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark reader
       { id = "elfdpkmfllnhhgnicaaeacbilcallpbd"; } # flow chat for youtube live
       { id = "ghbmnnjooekpmoecnnnilnnbdlolhkhi"; } # google docs offline
+      { id = "dahenjhkoodjbpjheillcadbppiidmhp"; } # google scholar pdf reader
       { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i don't care about cookies
       { id = "neebplgakaahbhdphmkckjjcegoiijjo"; } # keepa
       { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # line
       { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; } # obsidian web clipper
       { id = "mhpjgcccinlocgiklkfllehilgmcnimp"; } # paperpal for overleaf beta
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
-      { id = "ldgfbffkinooeloadekpmfoklnobpien"; } # raindrop.io
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
