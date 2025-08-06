@@ -35,7 +35,6 @@
       # Yubico's official tools
       yubico-piv-tool
       yubikey-manager
-      yubikey-personalization
       yubioath-flutter
     ];
   };

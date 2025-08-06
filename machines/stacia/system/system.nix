@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   user,
@@ -7,7 +8,7 @@
 {
   boot = {
     kernel.sysctl = {
-      "vm.swappiness" = 0; # swap is only used when RAM is full
+      "vm.swappiness" = lib.mkForce 10; # swap is only used when RAM is full
     };
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
