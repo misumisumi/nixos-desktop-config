@@ -20,9 +20,9 @@
       # allowedUDPPorts = [
       #   4010
       # ];
-      # allowedTCPPorts = [
-      #   4713 # PulseAudio
-      # ];
+      allowedTCPPorts = [
+        4656 # PulseAudio
+      ];
       allowedUDPPortRanges = [
         {
           from = 1714;

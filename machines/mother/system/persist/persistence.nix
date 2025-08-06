@@ -1,7 +1,4 @@
-{
-  user,
-  ...
-}:
+{ user, ... }:
 let
   persistUserDirs = [
     ".config"

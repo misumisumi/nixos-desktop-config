@@ -12,14 +12,13 @@ with builtins;
     ../../../apps/system/sops
     ../../../apps/system/ssh
     ../../../apps/system/virtualsmartcard
-    ../../../apps/system/yubikey
     ../../../apps/system/wm/qtile
+    ../../../apps/system/yubikey
     ../../../settings/system
     ../../../settings/system/bluetooth
     ../../../settings/system/musnix
     ../../../settings/system/pipewire
     ../../init
-    # ./disks/home.nix
     ./disks/rootfs.nix
     ./disks/system.nix
     ./fstab.nix
