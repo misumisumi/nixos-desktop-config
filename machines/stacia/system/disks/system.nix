@@ -1,5 +1,5 @@
 let
-  device = "/dev/disk/by-id/ata-WDC_WDS100T2B0A-00SM50_2012A4445212";
+  device = "/dev/disk/by-id/usb-BIWIN_NV_7400_4TB_DD56419883ED9-0:0";
 in
 {
   disko.devices = {
