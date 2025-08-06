@@ -20,8 +20,8 @@
 typeset -U path cdpath fpath manpath
 
 # add user defined zsh completions
-fpath+=(${XDG_DATA_HOME}/zsh/completions)
-[ -d ${XDG_DATA_HOME}/zsh/completions ] || mkdir -p ${XDG_DATA_HOME}/zsh/completions
+fpath+=(${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/completions)
+[ -d ${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/completions ] || mkdir -p ${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/completions
 
 HELPDIR=/usr/share/zsh/"${ZSH_VERSION}"/help
 

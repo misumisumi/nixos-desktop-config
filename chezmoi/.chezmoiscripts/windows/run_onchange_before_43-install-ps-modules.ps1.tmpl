@@ -12,12 +12,12 @@ Write-Host "Installing PowerShell Modules ..."
 {{ or (get $userPSConfig "preInstallExtra") "" }}
 
 {{ range concat (or (get $hostPSConfig "modules") list) (or (get $userPSConfig "modules") list) -}}
-Install-Module -Scope CurrentUser {{ . }}
+Install-Module -Scope CurrentUser -Force {{ . }}
 {{ end }}
 
 Write-Host "Installing PowerShell Scripts ..."
 {{ range concat (or (get $hostPSConfig "scripts") list) (or (get $userPSConfig "scripts") list) -}}
-Install-Scripts -Scope CurrentUser {{ . }}
+Install-Scripts -Scope CurrentUser -Force {{ . }}
 {{ end }}
 
 {{ or (get $hostPSConfig "postInstallExtra") "" }}

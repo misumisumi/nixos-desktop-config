@@ -38,4 +38,4 @@ shopt -s checkjobs
 alias {{ $alias }}='{{ $command }}'
 {{ end }}
 
-[ -d ${XDG_DATA_HOME}/bash-completion ] || mkdir -p ${XDG_DATA_HOME}/bash-completion/completions
+[ -d ${XDG_DATA_HOME:-${HOME}/.local/share}/bash-completion ] || mkdir -p ${XDG_DATA_HOME:-${HOME}/.local/share}/bash-completion/completions

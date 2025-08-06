@@ -9,7 +9,6 @@ if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
   eval "$($(brew --prefix mise)/bin/mise completion bash)"
 elif [ -x ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate bash)"
-  [ -f ${XDG_DATA_HOME}/bash-completion/completions/mise ] || echo $(~/.local/bin/mise completion zsh) > ${XDG_DATA_HOME}/zsh/completions/_mise
 fi
 
 

@@ -6,6 +6,8 @@ keys:
     - &sumi_stacia age1znnqnxjkr0x70r5ys0n2k34ym5a3spn69yuveqa76wh0ng65catspphysl
     - &sumi_zephyrus age1svkysj8mj8u2k9cag4l0pthf7t3e8jn2jy0ygacper8f349k299q03nn9t
     - &kobayashi_univ age1g4d4ftujlypmh8z0g3s6w9k9kjjd4lped3k5egvxnzhyelp8945qzg35fn
+    - &work_laptop age12lsvwdrtnllmlxffy9077l7kjj85vz8sjkjl3nknfncaqpyqm9rq48urgf
+    - &work_server age1ppxdp9wsxpg8yr0a2wsc982x2ua22meh72kae0l2xln95px4jyxq90kuel
   - &desktops:
     - &mother age1dx0hn7ug2nfd9sxw0q3hvegh8llqt0084x7gzk20s20lptrujs6sv48akw
     - &stacia age12994fjtztfkz06rtg0w6gxrzne3z0y223zumu293jtdsfukukussq233na
@@ -42,7 +44,7 @@ creation_rules:
           - *sumi
         age:
           - *zephyrus
-  - path_regex: sops/system/[openfortivpn,ppp]/*
+  - path_regex: sops/system/openfortivpn/config
     key_groups:
       - pgp:
           - *sumi
@@ -73,6 +75,12 @@ creation_rules:
           - *sumi_stacia
           - *sumi_zephyrus
           - *kobayashi_univ
+  - path_regex: sops/pkgs/ssh/work$
+    key_groups:
+      - pgp:
+          - *sumi
+        age:
+          - *work_laptop
   - path_regex: sops/pkgs/[aichat,codecompanion]/*
     key_groups:
       - pgp:
@@ -90,3 +98,9 @@ creation_rules:
           - *sumi_mother
           - *sumi_stacia
           - *sumi_zephyrus
+  - path_regex: sops/users/work/secrets.yaml$
+    key_groups:
+      - pgp:
+          - *sumi
+        age:
+          - *work_server

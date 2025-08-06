@@ -38,9 +38,14 @@
     source = ../../../../../../chezmoi/dot_config/vivaldi/CommonPreferences;
     onChange = ''
       find "${config.xdg.configHome}/vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
-        TMP="''${profile}/Preferences.tmp"
+        TMP="''${profile}/Preferences.bak"
         mv "''${profile}/Preferences" "''${TMP}"
-        ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${config.xdg.configHome}/vivaldi/CommonPreferences > "''${profile}/Preferences"
+        ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${config.xdg.configHome}/vivaldi/CommonPreferences > "''${profile}/Preferences.new"
+        if [ -s "''${profile}/Preferences.new" ]; then
+          mv "''${profile}/Preferences.new" "''${profile}/Preferences"
+        else
+          rm "''${profile}/Preferences.new"
+        fi
       done
     '';
   };

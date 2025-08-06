@@ -19,7 +19,7 @@ local config = {
         bottom = 0,
     },
 
-    window_background_opacity = 0.8, -- For non linux
+    window_background_opacity = 0.92, -- For non linux
     inactive_pane_hsb = {
         saturation = 0.8,
         brightness = 0.4,

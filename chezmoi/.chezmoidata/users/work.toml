@@ -75,6 +75,8 @@ zoxide = "latest"
 # For windows
 ####################################################################################################
 [windows.users.'BB\kobayashis1033'.sops]
+"pkgs\\ssh\\work" = ".ssh\\conf.d\\hosts\\work"
+
 [windows.users.'BB\kobayashis1033'.env]
 PATH = [
     "$env:USERPROFILE\\bin",

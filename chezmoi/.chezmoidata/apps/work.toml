@@ -38,7 +38,9 @@ historyIgnore = [
 bashrcExtra = ""
 initExtra = ""
 logoutExtra = ""
-profileExtra = ""
+profileExtra = """
+eval "$(sops decrypt $HOME/.local/share/chezmoi/sops/users/work/secrets.yaml --extract '["bash"]["profileExtra"]')"
+"""
 [apps.users."sumiharu.kobayashi".bash.sessionVariables]
 
 
