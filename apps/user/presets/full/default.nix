@@ -12,5 +12,6 @@
     ../../desktop/tool/utils
     ../../desktop/xdg
     ../large
+    ../small
   ];
 }

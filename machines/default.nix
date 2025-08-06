@@ -81,7 +81,8 @@ let
 
   laptopSchemes = [
     "desktop/laptop"
-  ] ++ desktopSchemes;
+  ]
+  ++ desktopSchemes;
 
   minimalIsoSchemes = [
     "presets/small"
