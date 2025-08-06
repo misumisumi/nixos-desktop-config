@@ -1,7 +1,7 @@
 [apps.users.nixos]
 [apps.users.nixos.git]
-userEmail = "nixosharu@minixos-nixos.com"
-userName = "minixosnixos"
+userEmail = ""
+userName = ""
 paper = "delta"
 diffFilter = "delta"
 [apps.users.nixos.git.aliases]
@@ -12,7 +12,7 @@ rebase-i = "rebase -i --autosquash"                                             
 branch-clear = "!\"git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d\""
 rebase-origin = "!\"git fetch origin --prune && git rebase origin/HEAD\""
 [apps.users.nixos.git.signing]
-key = "2C0E62B7117471A5"
+key = ""
 format = "openpgp"
 signByDefault = false
 

@@ -1,6 +1,6 @@
 [apps.users.sumi]
 [apps.users.sumi.git]
-userEmail = "sumiharu@misumi-sumi.com"
+userEmail = "s.kobayashi@misumi-sumi.com"
 userName = "misumisumi"
 paper = "delta"
 diffFilter = "delta"

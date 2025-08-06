@@ -5,7 +5,7 @@ if($env:XDG_CONFIG_HOME -eq $null){
     if((Test-Path $nvimDir) -eq "False"){
         $nvimDir = "$env:LOCALAPPDATA\nvim"
     }
-}else{
+} else {
     $nvimDir = "$env:XDG_CONFIG_HOME\nvim"
 }
 

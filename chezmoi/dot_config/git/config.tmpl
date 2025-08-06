@@ -31,6 +31,7 @@
     gpgSign = {{ $gitConfig.signing.signByDefault }}
 
 [user]
-    email = {{ $gitConfig.userEmail | quote }}
-    name = {{ $gitConfig.userName | quote }}
+    {{ if not (empty $gitConfig.userEmail) -}}email = {{ $gitConfig.userEmail | quote }}{{- end }}
+    {{ if not (empty $gitConfig.userName) -}}name = {{ $gitConfig.userName | quote }}{{- end }}
+    {{ if not (empty $gitConfig.signing.key) -}}signingKey = {{ $gitConfig.signing.key | quote }}{{- end }}
 {{- end -}}

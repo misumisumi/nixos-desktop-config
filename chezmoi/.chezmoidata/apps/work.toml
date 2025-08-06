@@ -1,0 +1,64 @@
+####################################################################################################
+# For linux
+####################################################################################################
+[apps.users."sumiharu.kobayashi"]
+[apps.users."sumiharu.kobayashi".git]
+userEmail = "sumiharu.kobayashi@g.softbank.co.jp"
+userName = "Sumiharu Kobayashi"
+paper = "delta"
+diffFilter = "delta"
+[apps.users."sumiharu.kobayashi".git.aliases]
+tree = "log --graph --oneline --decorate --all"                                               # logのツリー表示
+co-fixup = "git commit --fixup"
+push-f = "push --force-with-lease"                                                            # pushの強制 (ローカルが最新で無い場合失敗する)
+rebase-i = "rebase -i --autosquash"                                                           #
+branch-clear = "!\"git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d\""
+rebase-origin = "!\"git fetch origin --prune && git rebase origin/HEAD\""
+[apps.users."sumiharu.kobayashi".git.signing]
+key = ""
+format = "openpgp"
+signByDefault = false
+
+[apps.users."sumiharu.kobayashi".lazygit]
+paper = "delta --dark --paging=never"
+
+[apps.users."sumiharu.kobayashi".shell]
+historyIgnore = [
+    "builtin cd *",
+    "cd *",
+    "history *",
+    "kill *",
+    "ls *",
+    "mkdir *",
+    "pkill *",
+    "rm *",
+]
+
+[apps.users."sumiharu.kobayashi".bash]
+bashrcExtra = ""
+initExtra = ""
+logoutExtra = ""
+profileExtra = ""
+[apps.users."sumiharu.kobayashi".bash.sessionVariables]
+
+
+[apps.users.'BB\kobayashis1033']
+[apps.users.'BB\kobayashis1033'.git]
+userEmail = "sumiharu.kobayashi@g.softbank.co.jp"
+userName = "Sumiharu Kobayashi"
+paper = "delta"
+diffFilter = "delta"
+[apps.users.'BB\kobayashis1033'.git.aliases]
+tree = "log --graph --oneline --decorate --all"                                               # logのツリー表示
+co-fixup = "git commit --fixup"
+push-f = "push --force-with-lease"                                                            # pushの強制 (ローカルが最新で無い場合失敗する)
+rebase-i = "rebase -i --autosquash"                                                           #
+branch-clear = "!\"git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d\""
+rebase-origin = "!\"git fetch origin --prune && git rebase origin/HEAD\""
+[apps.users.'BB\kobayashis1033'.git.signing]
+key = ""
+format = "openpgp"
+signByDefault = false
+
+[apps.users.'BB\kobayashis1033'.lazygit]
+paper = "delta --dark --paging=never"
