@@ -27,9 +27,14 @@
     };
   };
 
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=0"
+  ];
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
+      modesetting.enable = false;
       open = false;
     };
     graphics = {
