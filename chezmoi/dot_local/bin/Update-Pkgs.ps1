@@ -12,7 +12,7 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
 
 if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
     Write-Host "Updating chocolatey packages..."
-    sudo choco -y upgrade all
+    sudo choco upgrade -y all
 }
 
 if (Get-Command * | Where-Object { $_.Name -match "scoop" }) {
