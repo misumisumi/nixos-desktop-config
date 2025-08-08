@@ -28,7 +28,7 @@
         EndSection
 
         Section "Monitor"
-          Identifier     "HDMI-A-0"
+          Identifier     "HDMI-A-1"
           Option         "PreferredMode" "1920x1080"
           Option         "LeftOf" "DVI-D-0"
           Option         "Rotate" "left"
@@ -44,11 +44,13 @@
       open = false;
       powerManagement.enable = true;
     };
-    graphics.extraPackages = with pkgs; [
-      amdvlk
-      libvdpau-va-gl
-      vaapiVdpau
-      rocmPackages.clr.icd
-    ];
+    graphics = {
+      extraPackages = with pkgs; [
+        amdvlk
+        libvdpau-va-gl
+        vaapiVdpau
+        rocmPackages.clr.icd
+      ];
+    };
   };
 }
