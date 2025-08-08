@@ -171,6 +171,7 @@ apps = [
     "nodejs-lts",
     "openssh",
     "poppler",
+    "powertoys",
     "psutils",
     "python",
     "ripgrep",
