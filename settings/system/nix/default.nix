@@ -51,6 +51,9 @@
     ];
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "libxml2-2.13.8"
+      ];
     };
   };
 
