@@ -1,16 +1,19 @@
 {
+  config,
   pkgs,
   user,
   ...
 }:
 {
-  users.groups = {
-    audio.members = [ "${user}" ];
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback
+    ];
+    kernelModules = [
+      "snd-aloop"
+      "v4l2loopback"
+    ];
   };
-  boot.kernelModules = [
-    "snd-seq"
-    "snd-rawmidi"
-  ];
   nixpkgs.config.pulseaudio = true; # 一部パッケージのビルド時にpulseaudioを使うように指示する
   environment.systemPackages = with pkgs; [
     portaudio
@@ -31,5 +34,8 @@
         load-module module-native-protocol-unix auth-anonymous=1 socket=/run/user/1000/pulse/pulpul
       '';
     };
+  };
+  users.groups = {
+    audio.members = [ "${user}" ];
   };
 }

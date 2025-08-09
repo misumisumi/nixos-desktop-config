@@ -3,10 +3,10 @@
 {{- $userAppConfig := or (get $appConfigs $userName) dict -}}
 {{- $userBashConfig := or (get $userAppConfig "bash") dict -}}
 
-{{ or (get $userBashConfig "profileExtra") "" }}
-
 # include .profile if it exists
 [[ -f ~/.profile ]] && . ~/.profile
+
+{{ or (get $userBashConfig "profileExtra") "" }}
 
 # include .bashrc if it exists
 [[ -f ~/.bashrc ]] && . ~/.bashrc

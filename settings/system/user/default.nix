@@ -40,17 +40,10 @@
         }
       ];
     }
-    // lib.optionalAttrs (builtins.hasAttr "hashedPassword" config.sops) {
-      inherit (config.sops) hashedPassword;
-    }
-    // lib.optionalAttrs (!builtins.hasAttr "hashedPassword" config.sops) {
-      password = "nixos";
+    // lib.optionalAttrs (builtins.hasAttr "hashedPasswordFile" config.sops.secrets) {
+      hashedPasswordFile = config.sops.secrets.hashedPasswordFile.path;
     };
-  users.users.root =
-    lib.optionalAttrs (builtins.hasAttr "hashedPassword" config.sops) {
-      inherit (config.sops) hashedPassword;
-    }
-    // lib.optionalAttrs (!builtins.hasAttr "hashedPassword" config.sops) {
-      password = "nixos";
-    };
+  users.users.root = lib.optionalAttrs (builtins.hasAttr "hashedPasswordFile" config.sops.secrets) {
+    hashedPasswordFile = config.sops.secrets.hashedPasswordFile.path;
+  };
 }

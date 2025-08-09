@@ -71,6 +71,11 @@ iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply mi
 oobe\bypassnro
 ```
 
+- `bypassnro`が削除されたISOで同様のことをする方法
+  1.  Shift+F10 -> regedit
+  2.  `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\OOBE`
+  3.  `HideOnlineAccountScreens` -> 1
+
 #### 1つのストレージをVMとベアメタルで起動可能にする方法
 
 - windowsは起動時に使わなかったストレージドライバーを次回起動時に不要としてマークする

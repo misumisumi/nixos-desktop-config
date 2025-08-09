@@ -80,6 +80,12 @@ local function with_mod()
     end
     local keymaps_ctrl_shift_as_mod = function(mod)
         return {
+            -- spawn new tab
+            {
+                key = "t",
+                mods = string.format("%s", mod),
+                action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
+            },
             -- navigations
             { key = "h", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Left") },
             { key = "j", mods = string.format("%s", mod), action = act.ActivatePaneDirection("Down") },
@@ -108,12 +114,6 @@ local function with_mod()
     end
     local keymaps_ctrl_leader_as_mod = function(mod)
         return {
-            -- spawn new tab
-            {
-                key = "t",
-                mods = string.format("%s", mod),
-                action = act.SpawnCommandInNewTab({ domain = "CurrentPaneDomain", cwd = wezterm.home_dir }),
-            },
             -- reload configuration
             { key = "r", mods = string.format("%s", mod), action = act.ReloadConfiguration },
             -- toggle tools

@@ -3,18 +3,29 @@ let
   inherit (builtins)
     all
     any
+    head
     length
     readDir
     replaceStrings
+    tail
+    unique
     ;
   inherit (lib)
+    concatLists
     filterAttrs
     hasSuffix
+    importJSON
+    importTOML
     init
+    isAttrs
+    isList
     last
     mapAttrs'
+    mapAttrsToList
     nameValuePair
+    pathExists
     splitString
+    zipAttrsWith
     ;
 in
 {
@@ -23,8 +34,8 @@ in
       chezmoiRoot = self.outPath + "/chezmoi";
     in
     {
-      importTOMLFromChezmoi = src: lib.importTOML (chezmoiRoot + "/${src}");
-      importJSONFromChezmoi = src: lib.importJSON (chezmoiRoot + "/${src}");
+      importTOMLFromChezmoi = src: importTOML (chezmoiRoot + "/${src}");
+      importJSONFromChezmoi = src: importJSON (chezmoiRoot + "/${src}");
       importFilesFromChezmoi =
         {
           chezmoiSrc,
@@ -68,14 +79,35 @@ in
         fpath:
         let
           path = chezmoiRoot + "/.chezmoidata/${fpath}";
-          conf = if lib.pathExists path then lib.importTOML path else { };
+          conf = if pathExists path then importTOML path else { };
         in
         conf;
       importChezmoiUserAppData =
         username:
         let
-          path = chezmoiRoot + "/.chezmoidata/apps/${username}.toml";
-          conf = if lib.pathExists path then lib.importTOML path else { };
+          path = chezmoiRoot + "/.chezmoidata/apps";
+          files = readDir path;
+          recursiveMerge =
+            attrList:
+            let
+              f =
+                attrPath:
+                zipAttrsWith (
+                  n: values:
+                  if tail values == [ ] then
+                    head values
+                  else if all isList values then
+                    unique (concatLists values)
+                  else if all isAttrs values then
+                    f (attrPath ++ [ n ]) values
+                  else
+                    last values
+                );
+            in
+            f [ ] attrList;
+          conf = recursiveMerge (
+            mapAttrsToList (x: _: importTOML (path + "/${x}")) (filterAttrs (n: _: hasSuffix ".toml" n) files)
+          );
         in
         conf.apps.users.${username};
     };

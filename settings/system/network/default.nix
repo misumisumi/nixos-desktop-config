@@ -32,5 +32,4 @@
       "2001:4860:4860::8888"
     ];
   };
-  # system.nssModules = lib.mkForce [];
 }

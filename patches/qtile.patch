@@ -1,0 +1,22 @@
+--- a/libqtile/backend/x11/xcbq.py	1970-01-01 09:00:01.000000000 +0900
++++ b/libqtile/backend/x11/xcbq.py	2025-08-07 02:30:00.971405873 +0900
+@@ -497,9 +497,7 @@
+ 
+     @property
+     def pseudoscreens(self):
+-        if hasattr(self, "randr"):
+-            return self.randr.query_crtcs(self.screens[0].root.wid)
+-        elif hasattr(self, "xinerama"):
++        if hasattr(self, "xinerama"):
+             pseudoscreens = []
+             for i, s in enumerate(self.xinerama.query_screens()):
+                 scr = ScreenRect(
+@@ -510,6 +508,8 @@
+                 )
+                 pseudoscreens.append(scr)
+             return pseudoscreens
++        elif hasattr(self, "randr"):
++            return self.randr.query_crtcs(self.screens[0].root.wid)
+         raise Exception("no randr or xinerama?")
+ 
+     def enable_screen_change_notifications(self):

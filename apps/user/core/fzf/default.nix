@@ -1,12 +1,5 @@
 {
   programs = {
-    bash.initExtra = ''
-      bind '"\eg": fzf-file-widget'
-    '';
-    zsh.initContent = ''
-      bindkey '^[g' fzf-file-widget
-    '';
-
     fd.enable = true;
     ripgrep.enable = true;
 

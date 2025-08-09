@@ -8,7 +8,7 @@
 if [ ! -f ~/.age-key.txt ]; then
   echo "Generate age key..."
   if command -v go &>/dev/null; then
-    mkdir -p "$XDG_CONFIG_HOME/sops/age"
-    go run "github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest" -private-key -i ~/.ssh/id_ed25519 -o "$XDG_CONFIG_HOME/sops/age/keys.txt"
+    mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/sops/age"
+    go run "github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest" -private-key -i ~/.ssh/id_ed25519 -o "${XDG_CONFIG_HOME:-$HOME/.config}/sops/age/keys.txt"
   fi
 fi

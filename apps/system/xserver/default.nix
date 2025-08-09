@@ -3,7 +3,6 @@
   pkgs,
   user,
   useNixOSWallpaper,
-  config,
   ...
 }:
 {
@@ -53,7 +52,7 @@
           };
         };
         sessionCommands = ''
-          ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
+          ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all # for keyring
         '';
         session = [
           {

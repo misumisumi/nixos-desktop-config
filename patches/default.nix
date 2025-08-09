@@ -42,39 +42,28 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  evince = prev.evince.overrideAttrs (old: rec {
-    version = "48.0";
-    src = prev.fetchurl {
-      url = "mirror://gnome/sources/evince/${prev.lib.versions.major version}/evince-${version}.tar.xz";
-      sha256 = "sha256-zS9lg1X6kHX9+eW0SqCvOn4JKMVWFOsQQrNhds9FESY=";
-    };
-  });
   canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
-  pandoc-plantuml-filter = prev.pandoc-plantuml-filter.overridePythonAttrs (old: rec {
-    version = "0.1.5";
-    src = prev.fetchPypi {
-      inherit (old) pname;
-      inherit version;
-      sha256 = "sha256-9qXeIZuCu44m9EoPCPL7MgEboEwN91OylLfbkwhkZYQ=";
-    };
-    pyproject = true;
-    propagatedBuildInputs =
-      with prev.python3Packages;
-      old.propagatedBuildInputs
-      ++ [
-        setuptools
-        setuptools-scm
-      ];
-    patchPhase = ''
-      substituteInPlace pandoc_plantuml_filter.py --replace "os.environ.get(\"PLANTUML_BIN\", \"plantuml\")" "os.environ.get(\"PLANTUML_BIN\", \"${prev.plantuml}/bin/plantuml\")"
-    '';
-  });
+  vivaldi =
+    (prev.vivaldi.override {
+      commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+    }).overrideAttrs
+      (old: {
+        postInstall = ''
+          rm $out/opt/vivaldi/libvulkan.so.1
+          ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
+        '';
+      });
   switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
     dontWrapGApps = true;
     preFixup = ''
       makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
     '';
+  });
+  qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
+    patches = old.patches ++ [
+      ./qtile.patch
+    ];
   });
 }

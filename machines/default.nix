@@ -1,7 +1,6 @@
 { self, inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  user = "sumi";
   settings =
     {
       hostname,
@@ -28,11 +27,12 @@ let
         inputs.catppuccin.nixosModules.catppuccin
         inputs.disko.nixosModules.disko
         inputs.home-manager.nixosModules.home-manager
+        inputs.impermanence.nixosModules.impermanence
         inputs.musnix.nixosModules.musnix
         inputs.nur.modules.nixos.default
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
-        (./. + "/${hostname}") # Each machine conf
+        (./. + "/${if (lib.match "(liveimg)-.*" hostname != null) then "liveimg" else hostname}/system") # Each machine conf
         (
           { config, ... }:
           {
@@ -54,6 +54,7 @@ let
               sharedModules = [
                 inputs.catppuccin.homeModules.catppuccin
                 inputs.flakes.homeManagerModules.default
+                inputs.impermanence.homeManagerModules.impermanence
                 inputs.nvimdots.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops
                 inputs.spicetify-nix.homeManagerModules.default
@@ -62,7 +63,7 @@ let
               users."${user}" = {
                 imports =
                   lib.optional (lib.pathExists ../users/${user}) ../users/${user}
-                  ++ lib.optional (lib.pathExists ./${hostname}/home.nix) ./${hostname}/home.nix;
+                  ++ lib.optional (lib.pathExists ./${hostname}/home) ./${hostname}/home;
                 dotfilesActivation = true;
                 home.stateVersion = config.system.stateVersion;
               };
@@ -80,68 +81,57 @@ let
 
   laptopSchemes = [
     "desktop/laptop"
-  ] ++ desktopSchemes;
+  ]
+  ++ desktopSchemes;
 
-  cliIsoSchemes = [
+  minimalIsoSchemes = [
     "presets/small"
-    "shell"
+    "shell/bash"
+    "shell/starship"
   ];
-  guiIsoSchemes = [
-    "presets/huge"
+  gnomeIsoSchemes = [
     "desktop/env/core/ime/fcitx5"
-    "shell"
-  ];
-  guiLiveImgSchemes = [
-    "presets/huge"
-    "desktop/env/core/ime/fcitx5"
-    "shell"
+    "desktop/theme"
+    "desktop/tool/browser"
+    "desktop/tool/utils"
+    "presets/small"
+    "shell/bash"
+    "shell/starship"
   ];
 in
 {
-  liveimg-qtile = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    colorTheme = "tokyonight-moon";
-    schemes = guiLiveImgSchemes ++ [ "desktop/env/qtile" ];
-  };
-  liveimg-gnome = settings {
-    hostname = "liveimg";
-    user = "nixos";
-    colorTheme = "tokyonight-moon";
-    schemes = guiLiveImgSchemes;
-  };
   liveimg-gnome-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
     colorTheme = "tokyonight-moon";
-    schemes = guiIsoSchemes;
+    hostname = "liveimg-gnome-iso";
+    schemes = gnomeIsoSchemes;
+    user = "nixos";
   };
-  liveimg-cli-iso = settings {
-    hostname = "liveimg";
-    user = "nixos";
+  liveimg-minimal-iso = settings {
     colorTheme = "tokyonight-moon";
-    schemes = cliIsoSchemes;
+    hostname = "liveimg-minimal-iso";
+    schemes = minimalIsoSchemes;
+    user = "nixos";
   };
 
   mother = settings {
-    hostname = "mother";
     colorTheme = "tokyonight-moon";
+    hostname = "mother";
     schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
   zephyrus = settings {
-    hostname = "zephyrus";
     colorTheme = "tokyonight-moon";
+    hostname = "zephyrus";
     schemes = laptopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
   stacia = settings {
-    hostname = "stacia";
     colorTheme = "tokyonight-moon";
+    hostname = "stacia";
     schemes = desktopSchemes;
     useNixOSWallpaper = false;
-    inherit user;
+    user = "sumi";
   };
 }

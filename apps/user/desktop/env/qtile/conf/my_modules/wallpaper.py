@@ -5,6 +5,7 @@ from shutil import which
 
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
+
 from my_modules.groups import group_and_rule
 from my_modules.variables import GlobalConf
 
@@ -74,7 +75,6 @@ def init_screen_wallpapers():
             idx = screen.index if screen.index < num_horiz_wallpaper else 0
             fname = horiz_wallpaper[idx]
         feh += f" --bg-fill {fname}"
-        logger.warning(f"{feh}")
     subprocess.run(feh, shell=True)
 
 

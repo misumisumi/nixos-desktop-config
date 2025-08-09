@@ -5,8 +5,8 @@
       auto-optimise-store = true; # Optimise syslinks
       # flakeの有効化
       experimental-features = [
-        "nix-command"
         "flakes"
+        "nix-command"
       ];
       # ビルド時の依存関係を維持(オフラインでも再ビルド可能にする)
       keep-outputs = true;

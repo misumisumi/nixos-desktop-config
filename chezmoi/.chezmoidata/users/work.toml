@@ -1,0 +1,201 @@
+####################################################################################################
+# For linux
+####################################################################################################
+[linux.users."sumiharu.kobayashi"]
+externals = ["blesh", "fzf-options", "lesspipe", "sops", "tpm"]
+[linux.users."sumiharu.kobayashi".sops]
+
+[linux.users."sumiharu.kobayashi".env]
+initExtra = ""
+extraConfig = ""
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
+[linux.users."sumiharu.kobayashi".env.export]
+EDITOR = "nvim"
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color: always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+FZF_TMUX = "1"
+FZF_TMUX_OPTS = "-p -w 80% -h 70%"
+JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
+LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
+MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
+TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
+CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
+LESSOPEN = "|lesspipe %s"
+LANG = "en-US.UTF-8"
+LANGUAGE = "en_US"
+LC_ALL = "en_US.UTF-8"
+
+[linux.users."sumiharu.kobayashi".env.alias]
+
+[linux.users."sumiharu.kobayashi".packages.mise.settings]
+idiomatic_version_file = true
+always_keep_download = false
+always_keep_install = false
+plugin_autoupdate_last_check_duration = "1 week"
+verbose = false
+http_timeout = "30s"
+jobs = 4
+raw = false
+yes = false
+not_found_auto_install = true
+auto_install = true
+experimental = true
+idiomatic_version_file_enable_tools = []
+
+[linux.users."sumiharu.kobayashi".packages.mise.tools]
+bat = "latest"
+btop = "latest"
+cmake = "latest"
+delta = "latest"
+deno = "latest"
+duf = "latest"
+fd = "latest"
+fzf = "latest"
+github-cli = "latest"
+go = "latest"
+jq = "latest"
+lazygit = "latest"
+neovim = "latest"
+nodejs = "latest"
+python = "latest"
+ripgrep = "latest"
+starship = "latest"
+tree-sitter = "latest"
+usage = "latest"
+uv = "latest"
+yazi = "latest"
+yt-dlp = "latest"
+zoxide = "latest"
+
+####################################################################################################
+# For windows
+####################################################################################################
+[windows.users.'BB\kobayashis1033'.sops]
+"pkgs\\ssh\\work" = ".ssh\\conf.d\\hosts\\work"
+
+[windows.users.'BB\kobayashis1033'.env]
+PATH = [
+    "$env:USERPROFILE\\bin",
+    "$env:USERPROFILE\\.local\\bin",
+    "$env:USERPROFILE\\.dotnet\\tools",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\libexec\\git-core",
+    "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current",
+    "$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\python\\current",
+    "$env:USERPROFILE\\scoop\\apps\\python\\current\\Scripts",
+    "$env:USERPROFILE\\scoop\\apps\\ruby\\current\\bin",
+    "$env:USERPROFILE\\scoop\\apps\\ruby\\current\\gems\\bin",
+    "$env:USERPROFILE\\scoop\\shims",
+    "$env:LOCALAPPDATA\\Microsoft\\WindowsApps",
+]
+[windows.users.'BB\kobayashis1033'.env.export]
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+JAVA_TOOL_OPTIONS = "-Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8"
+KOMOREBI_CONFIG_HOME = "$env:USERPROFILE\\.config\\komorebi"
+SOPS_AGE_KEY_FILE = "$env:USERPROFILE\\.config\\sops\\age\\keys.txt"
+STARSHIP_CONFIG = "$env:USERPROFILE\\.config\\starship.toml"
+XDG_CACHE_HOME = "$env:USERPROFILE\\.cache"
+XDG_CONFIG_HOME = "$env:USERPROFILE\\.config"
+XDG_DATA_HOME = "$env:USERPROFILE\\.local\\share"
+XDG_STATE_HOME = "$env:USERPROFILE\\.local/state"
+YAZI_FILE_ONE = "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin\\file.exe"
+
+[windows.users.'BB\kobayashis1033'.packages.powershell]
+extraPreInstall = ""
+extraPostInstall = ""
+modules = [
+    "NuGet",
+    "M365PSProfile",
+    "PSFzf",
+    "PSWindowsUpdate",
+    "Terminal-Icons",
+    "WslInterop",
+    "syntax-highlighting",
+]
+scripts = []
+
+[windows.users.'BB\kobayashis1033'.packages.winget]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.users.'BB\kobayashis1033'.packages.winget.apps]
+sudo = []
+no_sudo = []
+
+[windows.users.'BB\kobayashis1033'.packages.chocolatey]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.users.'BB\kobayashis1033'.packages.chocolatey.apps]
+sudo = []
+no_sudo = []
+
+[windows.users.'BB\kobayashis1033'.packages.scoop]
+extraPreInstall = ""
+extraPostInstall = ""
+apps = [
+    "7zip",
+    "bat",
+    "btop",
+    "cmake",
+    "ctags",
+    "curl",
+    "delta",
+    "deno",
+    "fastfetch",
+    "fd",
+    "ffmpeg",
+    "fzf",
+    "git",
+    "go",
+    "imagemagick",
+    "jq",
+    "lazygit",
+    "less",
+    "make",
+    "mingw",
+    "my-bucket/moralerspace-hw-nf",
+    "my-bucket/moralerspace-nf",
+    "neovim",
+    "nerd-fonts/FiraCode-NF",
+    "nodejs-lts",
+    "openssh",
+    "poppler",
+    "powertoys",
+    "psutils",
+    "python",
+    "ripgrep",
+    "ruby",
+    "rustup",
+    "scoop-completion",
+    "sops",
+    "starship",
+    "tree-sitter",
+    "uv",
+    "wezterm",
+    "wget",
+    "windows-terminal",
+    "yazi",
+    "yq",
+    "yubico-piv-tool",
+    "yubioath",
+    "zoxide",
+]
+[windows.users.'BB\kobayashis1033'.packages.scoop.buckets]
+extras = "https://github.com/ScoopInstaller/Extras"
+java = "https://github.com/ScoopInstaller/Java"
+main = "https://github.com/ScoopInstaller/Main"
+my-bucket = "https://github.com/Sumi-Sumi/scoop-bucket"
+nerd-fonts = "https://github.com/matthewjberger/scoop-nerd-fonts"
+versions = "https://github.com/ScoopInstaller/Versions"
+xrtools = "https://github.com/babo4d/scoop-xrtools"

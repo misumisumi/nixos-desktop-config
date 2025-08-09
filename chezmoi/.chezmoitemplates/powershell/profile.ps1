@@ -157,7 +157,7 @@ if (Test-Path $localrc) {
 # Import-WslCommand "apt", "awk", "emacs", "find", "grep", "head", "less", "ls", "man", "sed", "seq", "ssh", "sudo", "tail", "touch"
 
 # starshipの有効化
-Invoke-Expression (& '~/scoop/apps/starship/current/starship.exe' init powershell --print-full-init | Out-String)
+Invoke-Expression (& $env:USERPROFILE/scoop/apps/starship/current/starship.exe init powershell --print-full-init | Out-String)
 # enable completion in current shell, use absolute path because PowerShell Core not respect $env:PSModulePath
 Import-Module "$($(Get-Item $(Get-Command scoop.ps1).Path).Directory.Parent.FullName)\modules\scoop-completion"
 # chezmoiの補完

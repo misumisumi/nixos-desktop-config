@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./mail
+  ];
   systemd.user.startServices = "sd-switch";
   home.packages = with pkgs; [
     sops
@@ -10,7 +13,7 @@
     };
     age = {
       generateKey = true;
-      keyFile = "${config.xdg.configHome}}/sops/age/keys.txt";
+      keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
       sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     };
     secrets = {
