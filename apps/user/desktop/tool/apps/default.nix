@@ -8,6 +8,6 @@
     nomacs # Image Viewer
     obsidian # Note taking app
     remmina # Remote desktop client
-    simple-scan # Scaner
+    simple-scan # Scanner
   ];
 }
