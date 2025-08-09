@@ -1,5 +1,68 @@
 # Changelog
 
+## [6.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v5.0.0...v6.0.0) (2025-08-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* update filesystem
+
+### Features
+
+* **L2TP/IPSec:** supporting L2TP/IPSec vpn ([4a9b2e0](https://github.com/misumisumi/nixos-desktop-config/commit/4a9b2e0430eeaa156b7421e97eca0653d7a5c5bf))
+* **thunderbird:** add thunderbird ([e643183](https://github.com/misumisumi/nixos-desktop-config/commit/e64318305702011b6f29dbaad1ef8a8e223807cf))
+* **usbip:** add usbip ([2903f0a](https://github.com/misumisumi/nixos-desktop-config/commit/2903f0afb6e9bf9b87dd093ad42877b576317b3a))
+* **vivaldi:** completion of missing settings ([72c0942](https://github.com/misumisumi/nixos-desktop-config/commit/72c09428398d27c13706cd81752d0f3de0c09482))
+
+
+### Bug Fixes
+
+* **apps:** package organizing ([8cb5aba](https://github.com/misumisumi/nixos-desktop-config/commit/8cb5abad3fad0c6676b470f45b0c0a9572659e3c))
+* **btrfs:** temporary response to the inability to use the trash bin when bind mounting with gnome ([0be1db8](https://github.com/misumisumi/nixos-desktop-config/commit/0be1db8737faf9c6539b45e7b67e01743e3e0151))
+* **chezmoi:** add some pkgs for windows ([438e36c](https://github.com/misumisumi/nixos-desktop-config/commit/438e36c545655b67f6e4036cb74047a95d284736))
+* **chezmoi:** add work environment config ([dedc4c4](https://github.com/misumisumi/nixos-desktop-config/commit/dedc4c4328511df0e6a78fca0ffe6f6040ef1920))
+* **chezmoi:** fix scripts and add encrypt file ([81dd56e](https://github.com/misumisumi/nixos-desktop-config/commit/81dd56e735fca62d2ce7717d0933602b5978b913))
+* **chezmoi:** fix Update-Pkgs.ps1 ([64003ac](https://github.com/misumisumi/nixos-desktop-config/commit/64003ac3114c1545a8e45ad0e385eaba9943ff1a))
+* **color-theme:** reliable color theme response to fctix5 ([d70104e](https://github.com/misumisumi/nixos-desktop-config/commit/d70104e32af40662bfa10d4b57195455d3530f45))
+* **console:** full path to font because systemd-vconsole-setup failed on stage 1 ([ab5df16](https://github.com/misumisumi/nixos-desktop-config/commit/ab5df16a1f95d5bda3cbd9f9b62edeab4c1072f9))
+* **desktop:** fix config for impermanence ([5eb4998](https://github.com/misumisumi/nixos-desktop-config/commit/5eb499873a3a24d7a6fdf15f28e07483c58805b2))
+* **fcitx5:** fix color-theme ([d74d048](https://github.com/misumisumi/nixos-desktop-config/commit/d74d0487abfc9f711a0c20f1c6e15365e1d24daf))
+* **filesystem:** split file related persistence ([5eb4998](https://github.com/misumisumi/nixos-desktop-config/commit/5eb499873a3a24d7a6fdf15f28e07483c58805b2))
+* fix format ([aa6fd96](https://github.com/misumisumi/nixos-desktop-config/commit/aa6fd9611ce525bb06425ca091085607be4c3089))
+* make subvolume for snapshot ([65a89bc](https://github.com/misumisumi/nixos-desktop-config/commit/65a89bc2bd9308a8a00c8441efcd4196ca72e801))
+* **mother:** fix no tty console ([e6c9629](https://github.com/misumisumi/nixos-desktop-config/commit/e6c9629d199127d018f1c057e27e7da4fae6b750))
+* **patches:** add patch for qtile and fix vivaldi ([49d6331](https://github.com/misumisumi/nixos-desktop-config/commit/49d63318121eab8d4dcc00f59c0557121909bae7))
+* **patches:** enable hardware acceleration for vivaldi ([557c1c7](https://github.com/misumisumi/nixos-desktop-config/commit/557c1c7eb54726cc07a0773f93976c9c2be83ae4))
+* **persistence:** add "go" dir ([5eb4998](https://github.com/misumisumi/nixos-desktop-config/commit/5eb499873a3a24d7a6fdf15f28e07483c58805b2))
+* **picom:** disable transparency for zoom ([a85abfa](https://github.com/misumisumi/nixos-desktop-config/commit/a85abfa9f89ea36c2a3a911281ec07867472aed2))
+* **presets:** preset small include in full ([ff46aa6](https://github.com/misumisumi/nixos-desktop-config/commit/ff46aa6e465aa506e6c8748226ccdb241c5bda99))
+* **qtile:** fix df target dir ([51a3b80](https://github.com/misumisumi/nixos-desktop-config/commit/51a3b802e6dd8602d2362884debf89f8aa580a0c))
+* **qtile:** support vertical display ([357f733](https://github.com/misumisumi/nixos-desktop-config/commit/357f7331ffeb2b9bac837a5ec10e351a7ed80baf))
+* revert key for fzf-file and fix keymap for new tab for wezterm ([a70257d](https://github.com/misumisumi/nixos-desktop-config/commit/a70257d34954f90afb1b2dfc2b91ee3d5c4f998c))
+* set swappiness=0 ([af23782](https://github.com/misumisumi/nixos-desktop-config/commit/af23782a5e696dc03dd9b011c23aebb5db0e1e39))
+* **settings/user:** fix hashedPasswordFile condition ([ee886b4](https://github.com/misumisumi/nixos-desktop-config/commit/ee886b4758008a85014bf3101840b58a79fc7497))
+* **skk:** improve switching skk and mozc ([8df85c3](https://github.com/misumisumi/nixos-desktop-config/commit/8df85c383ea955549031ac295f90c07f1ae59b0c))
+* **soleus:** remove config ([9da0736](https://github.com/misumisumi/nixos-desktop-config/commit/9da0736bc2efa9822f70083f30ed688a92d164b2))
+* **sops:** fix gemini api key ([51124ea](https://github.com/misumisumi/nixos-desktop-config/commit/51124ea1f4bbd5d6826abc05701c022ebb8a6254))
+* **sops:** fix key location ([6fbabbd](https://github.com/misumisumi/nixos-desktop-config/commit/6fbabbd6a076e76c95aed40185d6288911cd31c0))
+* **sops:** update age key ([88e60b4](https://github.com/misumisumi/nixos-desktop-config/commit/88e60b4a73d8b3ff65a0ee230b283c44c5c13463))
+* **ssh:** replace to ProxyJump ([a8ecc1c](https://github.com/misumisumi/nixos-desktop-config/commit/a8ecc1cc8d4565276b4147dc24d6d8dc0470404b))
+* **ssh:** update ssh config ([c5c66c6](https://github.com/misumisumi/nixos-desktop-config/commit/c5c66c6a2b0cc64c652bbd42bbd2a8e77555b55b))
+* **stacia:** fix disk id for system ([c0de248](https://github.com/misumisumi/nixos-desktop-config/commit/c0de24851645beae524e13b2bb80ca1e128752de))
+* **stacia:** fix display resolution ([d4033a6](https://github.com/misumisumi/nixos-desktop-config/commit/d4033a6142309214982102a97681ad334c645f36))
+* **stacia:** fix gpu config ([b8c8041](https://github.com/misumisumi/nixos-desktop-config/commit/b8c80416d4e2a68c02e1f0bf4533902c1b970985))
+* update flake and remove old packages ([3d62176](https://github.com/misumisumi/nixos-desktop-config/commit/3d62176d5d76f801cba76da270d7c83d2461dabe))
+* update flake.lock and fix settings ([bc31353](https://github.com/misumisumi/nixos-desktop-config/commit/bc313531bb3db53490c7d740a64de1a4edbfa10e))
+* **vivaldi:** remove one tab ([a011529](https://github.com/misumisumi/nixos-desktop-config/commit/a011529ce1cfe82040c4b2e1728ab81c05e91778))
+* **vivaldi:** update CommonPreferences ([bc84d7a](https://github.com/misumisumi/nixos-desktop-config/commit/bc84d7ad17602da6303a6754a9fcb35bde76fcab))
+* **zephyrus:** support hibernation ([c21039a](https://github.com/misumisumi/nixos-desktop-config/commit/c21039af30cc43b77a9affab7d7db0ae8a4f96f7))
+* **zotero:** do not use the system document viewer ([7cb5596](https://github.com/misumisumi/nixos-desktop-config/commit/7cb5596ac444445a50c74cb00e6393c11965cc58))
+
+
+### Code Refactoring
+
+* update filesystem ([5eb4998](https://github.com/misumisumi/nixos-desktop-config/commit/5eb499873a3a24d7a6fdf15f28e07483c58805b2))
+
 ## [5.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v4.0.4...v5.0.0) (2025-05-18)
 
 
