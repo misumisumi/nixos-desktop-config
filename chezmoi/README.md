@@ -44,8 +44,8 @@ By writing `<os>.hosts.<hostname>.owner = true` in `.chezmoidata/hosts/*`, you c
 
 ```ps1
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-$env:PATH = "$env:USERPROFILE\scoop\apps\git\current\mingw64\bin;<span class="math-inline">env\:PATH"
-iex "&\{</span>(irm '[https://get.chezmoi.io/ps1](https://get.chezmoi.io/ps1)')} -b '~/.local/bin' -- init --apply misumisumi/nixos-desktop-config"
+$env:PATH = "$env:USERPROFILE\scoop\apps\git\current\mingw64\bin;$env:PATH"
+iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply misumisumi/nixos-desktop-config"
 ```
 
 ### Package Manager
