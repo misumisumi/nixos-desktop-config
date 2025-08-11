@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.0...v6.0.1) (2025-08-11)
+
+
+### Bug Fixes
+
+* **qtile:** add missing func to mother/local_config.py ([a3b9089](https://github.com/misumisumi/nixos-desktop-config/commit/a3b9089786dd0b3c57c6a0a6544f5d940087736b))
+
 ## [6.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v5.0.0...v6.0.0) (2025-08-09)
 
 
