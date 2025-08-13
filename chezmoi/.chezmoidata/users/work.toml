@@ -182,6 +182,7 @@ apps = [
     "starship",
     "tree-sitter",
     "uv",
+    "wavesurfer",
     "wezterm",
     "wget",
     "windows-terminal",
