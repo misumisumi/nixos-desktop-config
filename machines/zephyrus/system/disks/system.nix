@@ -50,8 +50,8 @@ in
                     "/persist/var/tmp" = { }; # don't snapshot
                     "/persist/home" = { };
                     # snapshot dirs
-                    "/persist/.snapshot" = { };
-                    "/persist/home/.snapshot" = { };
+                    "/persist/.snapshots" = { };
+                    "/persist/home/.snapshots" = { };
                     # don't snapshot but place persisted files here
                     "/persist-alt" = {
                       mountpoint = "/nix/persist-alt";
