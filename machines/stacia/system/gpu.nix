@@ -36,7 +36,7 @@
       '';
     };
   };
-
+  environment.variables.MESA_VK_DEVICE_SELECT = "1002:1638!"; # force use amdgpu
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
@@ -44,12 +44,14 @@
       open = false;
       powerManagement.enable = true;
     };
+    amdgpu = {
+      amdvlk.enable = true;
+      opencl.enable = true;
+    };
     graphics = {
       extraPackages = with pkgs; [
-        amdvlk
         libvdpau-va-gl
         vaapiVdpau
-        rocmPackages.clr.icd
       ];
     };
   };
