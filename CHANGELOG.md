@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.3](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.2...v6.0.3) (2025-08-15)
+
+
+### Bug Fixes
+
+* **chezmoi:** changed to output similar to logging ([eedad0d](https://github.com/misumisumi/nixos-desktop-config/commit/eedad0d6c0406d6af5d4338128fe51e39127d60a))
+* **chezmoi:** changed to output similar to logging ([ceee2e8](https://github.com/misumisumi/nixos-desktop-config/commit/ceee2e835c37d471e540f921d2c50030eaec8503))
+
 ## [6.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.1...v6.0.2) (2025-08-15)
 
 
