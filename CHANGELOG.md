@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.1...v6.0.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* **chezmoi:** add wavesurfer ([d1714c3](https://github.com/misumisumi/nixos-desktop-config/commit/d1714c345296e0e009fd966211897b2019ce9166))
+* **chezmoi:** fix 50-apply-settings.ps1 ([da52269](https://github.com/misumisumi/nixos-desktop-config/commit/da52269a78e76e32a0f1ce122d148f9a75fa8444))
+* fix database name of btrfs for snapper ([6bc95a5](https://github.com/misumisumi/nixos-desktop-config/commit/6bc95a54effe35aba55b0a8d5360482b1334a2cd))
+* **ssh:** fix ip ([d938adf](https://github.com/misumisumi/nixos-desktop-config/commit/d938adf9a4339a9c69b7a5b6760feede16f21d5b))
+* **stacia:** replace amdgpu setting ([10d318d](https://github.com/misumisumi/nixos-desktop-config/commit/10d318dc6b068fa53af45af524ea044c28107fb5))
+
 ## [6.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.0...v6.0.1) (2025-08-11)
 
 
