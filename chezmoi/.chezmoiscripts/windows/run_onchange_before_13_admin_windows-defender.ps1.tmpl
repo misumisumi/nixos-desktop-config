@@ -8,11 +8,16 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Exit
     }
 }
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+Logging "Start"
 
 {{ range (concat .windows.system.defender.exclution_paths (or (get $hostDefenderConfig "exclution_paths") list)) -}}
 Add-MpPreference -ExclusionPath {{ . | quote }}
 {{ end }}
 
-Write-Host "Finish windows defender settings!"
-Write-Host "Close after 3s..."
-Start-Sleep -Seconds 3
+Logging "Finish"
+Start-Sleep -Seconds 1

@@ -10,6 +10,13 @@
 {{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
 
 #!/usr/bin/env bash
+
+function logging() {
+  echo "$(basename $0): $*"
+}
+
+logging "Start"
+
 {{ range $pkgmngr, $value := $hostPkgConfigs -}}
 {{ if not (or (get $value "need_sudo") false) -}}
 {{ or (get $value "preInstallExtra") "" -}}
@@ -50,4 +57,4 @@ brew install --cask \
 {{ end -}}
 {{ end -}}
 
-echo "Finish installing packages without sudo"
+logging "Finish"

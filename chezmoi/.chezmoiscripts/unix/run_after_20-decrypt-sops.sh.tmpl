@@ -13,14 +13,22 @@
 {{- $chezmoiSrcDir := .chezmoi.sourceDir -}}
 #!/usr/bin/env bash
 
+function logging() {
+  echo "$(basename $0): $*"
+}
+
 {{ if not (empty $sopsFiles) -}}
+logging "Start"
+
 if command -v sops &>/dev/null; then
   {{ range $src, $tgt := $sopsFiles }}
-  echo "Decrypting {{ $src }}"
+  logging "${FNAME}: Decrypting {{ $src }}"
   mkdir -p $(dirname {{ $tgt }})
   sops decrypt "{{ $chezmoiSrcDir }}/../sops/{{ $src }}" > "{{ $tgt }}"
   {{ end }}
 else
-  echo "'sops' is not in PATH"
+  logging "${FNAME}: 'sops' is not in PATH"
 fi
+
+logging "Finish"
 {{ end -}}

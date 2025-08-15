@@ -12,16 +12,25 @@
 {{- $useMise := has "mise" (concat ($hostPkgConfigs | keys) ($userPkgConfigs | keys) | uniq) -}}
 #!/usr/bin/env bash
 
+function logging() {
+  echo "$(basename $0): $*"
+}
+
 {{ if $useMise -}}
+logging "Start"
+
 if ! command -v mise &>/dev/null || [ ! -x ~/.local/bin/mise ]; then
+  logging "mise is not installed, installing it now"
   curl https://mise.run | sh
 fi
-echo "Installing mise packages: {{ merge (or (get (or (get $hostPkgConfigs "mise") dict) "tools") dict) (or (get (or (get $userPkgConfigs "mise") dict) "tools") dict) | keys | uniq | sortAlpha | join " " }}"
+
+logging "Installing packages..."
 if command -v mise &>/dev/null; then
   mise install
 else
   $HOME/.local/bin/mise install
 fi
+
+logging "Finish"
 {{- end }}
 
-echo "Finish installing mise packages"
