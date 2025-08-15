@@ -17,6 +17,10 @@
 {{ end -}}
 #!/usr/bin/env bash
 
+function logging() {
+  echo "$(basename $0): $*"
+}
+
 {{ if $check_exe -}}
 ID=$(id -u)
 if [ $ID != 0 ]; then
@@ -44,4 +48,4 @@ fi
 {{ end -}}
 {{ end -}}
 
-echo "Finish installing packages with sudo!"
+logging "Finish"

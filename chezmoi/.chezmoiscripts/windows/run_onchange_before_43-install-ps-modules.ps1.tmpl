@@ -5,8 +5,12 @@
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userPSConfig := or (get $userPkgConfigs "powershell") dict -}}
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
 
-Write-Host "Installing PowerShell Modules ..."
+Logging "Start"
 
 {{ or (get $hostPSConfig "preInstallExtra") "" }}
 {{ or (get $userPSConfig "preInstallExtra") "" }}
@@ -15,11 +19,12 @@ Write-Host "Installing PowerShell Modules ..."
 Install-Module -Scope CurrentUser -Force {{ . }}
 {{ end }}
 
-Write-Host "Installing PowerShell Scripts ..."
+Logging "Installing PowerShell Scripts ..."
 {{ range concat (or (get $hostPSConfig "scripts") list) (or (get $userPSConfig "scripts") list) -}}
 Install-Scripts -Scope CurrentUser -Force {{ . }}
 {{ end }}
 
 {{ or (get $hostPSConfig "postInstallExtra") "" }}
 {{ or (get $userPSConfig "postInstallExtra") "" }}
-Write-Host "Finish installing powershell modules and scripts!"
+
+Logging "Finish"

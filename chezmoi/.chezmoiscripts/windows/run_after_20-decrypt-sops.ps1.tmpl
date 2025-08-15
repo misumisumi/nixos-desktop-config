@@ -4,15 +4,24 @@
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userSopsConfig := or (get (or (get .windows.users $userName) dict) "sops") dict -}}
 
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+Logging "Start"
+
 if (Get-Command * | Where-Object { $_.Name -match "sops" }) {
+
     $SOPS_AGE_KEY_FILE="$env:USERPROFILE\.config\sops\age\keys.txt"
     {{- $chezmoiSrcDir := .chezmoi.sourceDir -}}
     {{ range $src, $tgt := merge $hostSopsConfig $userSopsConfig    }}
-    Write-Host "Decrypting {{ $src }}"
-    New-Item $(Split-Path -Parent {{ $tgt }}) -ItemType Directory -Force
+    Logging "Decrypting {{ $src }}"
+    $null = New-Item $(Split-Path -Parent {{ $tgt }}) -ItemType Directory -Force
     sops decrypt "{{ $chezmoiSrcDir }}\..\sops\{{ $src }}" | Out-File -FilePath {{ $tgt }} -Encoding ascii -Force
     {{ end }}
-    Write-Host "Finish!"
+
+    Logging "Finish"
 } else {
-    Write-Host "'sops' is not in PATH"
+    Logging "'sops' is not in PATH"
 }

@@ -6,7 +6,12 @@
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userWingetConfig := or (get $userPkgConfigs "winget") dict -}}
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
 
+Logging "Start"
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     {{ or (get $hostWingetConfig "preInstallExtra") "" }}
     {{ or (get $userWingetConfig "preInstallExtra") "" }}
@@ -47,4 +52,4 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
     {{ or (get $userWingetConfig "postInstallExtra") "" }}
 }
 
-Write-Host "Finish installing winget packages!"
+Logging "Finish"

@@ -6,7 +6,14 @@
 {{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
 {{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
 {{- $userChocoConfig := or (get $userPkgConfigs "chocolatey") dict -}}
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
 if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
+    Logging "Start"
+
     {{ or (get $hostChocoConfig "preInstallExtra") "" }}
     {{ or (get $userChocoConfig "preInstallExtra") "" }}
 
@@ -25,6 +32,6 @@ if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
 
     {{ or (get $hostChocoConfig "postInstallExtra") "" }}
     {{ or (get $userChocoConfig "postInstallExtra") "" }}
-}
 
-Write-Host "Finish installing chocolatey packages!"
+    Logging "Finish"
+}

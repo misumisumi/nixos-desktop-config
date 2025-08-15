@@ -9,34 +9,32 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Exit
     }
 }
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+Logging "Start"
+
 # Show error if current powershell environment does not have LanguageMode set to FullLanguage
 if ($ExecutionContext.SessionState.LanguageMode -ne "FullLanguage") {
-     Write-Host "Error: Win11Debloat is unable to run on your system. Powershell execution is restricted by security policies" -ForegroundColor Red
-     Write-Output ""
-     Write-Output "Press enter to exit..."
-     Read-Host | Out-Null
+     Logging "Error: Win11Debloat is unable to run on your system. Powershell execution is restricted by security policies" -ForegroundColor Red
+     Start-Sleep -Seconds 3
      Exit
 }
 
-Clear-Host
-Write-Output "-------------------------------------------------------------------------------------------"
-Write-Output " Win11Debloat Script - Get"
-Write-Output "-------------------------------------------------------------------------------------------"
-
-Write-Output "> Downloading Win11Debloat..."
+Logging "Downloading Win11Debloat..."
 
 # Download latest version of Win11Debloat from github as zip archive
 Invoke-WebRequest http://github.com/raphire/win11debloat/archive/master.zip -OutFile "$env:TEMP/win11debloat-temp.zip"
 
 # Remove old script folder if it exists, except for CustomAppsList and SavedSettings files
 if (Test-Path "$env:TEMP/Win11Debloat/Win11Debloat-master") {
-        Write-Output ""
-        Write-Output "> Cleaning up old Win11Debloat folder..."
+        Logging "Cleaning up old Win11Debloat folder..."
         Get-ChildItem -Path "$env:TEMP/Win11Debloat/Win11Debloat-master" -Exclude CustomAppsList,SavedSettings | Remove-Item -Recurse -Force
 }
 
-Write-Output ""
-Write-Output "> Unpacking..."
+Logging "Unpacking..."
 
 # Unzip archive to Win11Debloat folder
 Expand-Archive "$env:TEMP/win11debloat-temp.zip" "$env:TEMP/Win11Debloat"
@@ -47,7 +45,7 @@ Remove-Item "$env:TEMP/win11debloat-temp.zip"
 Set-Location -Path $env:TEMP\Win11Debloat\Win11Debloat-master
 
 {{ $removeApps := concat .windows.system.debloat.remove_apps (or (get $hostDebloatConfig "remove_apps") list) }}
-if ((Test-Path CustomAppsList) -eq "True"){
+if (Test-Path CustomAppsList) {
     rm CustomAppsList
 }
 @"
@@ -57,21 +55,19 @@ if ((Test-Path CustomAppsList) -eq "True"){
 {{ $debloatOptions := concat .windows.system.debloat.options (or (get $hostDebloatConfig "options") list)}}
 # Remove unnecessary default apps and settings
 #INFO: https://github.com/Raphire/Win11Debloat
-Write-Output "> Running Win11Debloat..."
+Logging "Running Win11Debloat..."
 .\Win11Debloat.ps1 {{ $debloatOptions | join " " }}
 
 Set-Location -Path $env:TEMP
 
 # Remove all remaining script files, except for CustomAppsList and SavedSettings files
 if (Test-Path "$env:TEMP/Win11Debloat/Win11Debloat-master") {
-    Write-Output ""
-    Write-Output "> Cleaning up..."
+    Logging "Cleaning up..."
 
     # Cleanup, remove Win11Debloat directory
     Get-ChildItem -Path "$env:TEMP/Win11Debloat/Win11Debloat-master" -Exclude CustomAppsList,SavedSettings | Remove-Item -Recurse -Force
 }
 
-Write-Host "Finish windows debloat!"
-Write-Host "Close after 3s..."
-Start-Sleep -Seconds 3
+Logging "Finish"
+Start-Sleep -Seconds 1
 exit

@@ -7,13 +7,20 @@
 {{- $userScoopConfig := or (get $userPkgConfigs "scoop") dict -}}
 
 {{- $scoopApps := concat (or (get $hostScoopConfig "apps") list) (or (get $userScoopConfig "apps") list) -}}
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
 {{- if ne (len $scoopApps) 0 -}}
+Logging "Start"
+
 # Install scoop
 try {
     Get-Command -Name scoop -ErrorAction Stop
 } catch [System.Management.Automation.CommandNotFoundException] {
-    Write-Host "'scoop' is not exist in your machine."
-    Write-Host "Installing 'scoop' ..."
+    Logging "'scoop' is not exist in your machine."
+    Logging "Installing 'scoop' ..."
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
@@ -37,5 +44,5 @@ scoop install `
 {{ or (get $hostScoopConfig "postInstallExtra") "" }}
 {{ or (get $userScoopConfig "postInstallExtra") "" }}
 
-Write-Host "Finish installing scoop packages!"
+Logging "Finish"
 {{ end }}

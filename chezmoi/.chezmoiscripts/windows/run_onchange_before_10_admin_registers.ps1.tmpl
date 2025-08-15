@@ -9,8 +9,15 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Exit
     }
 }
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+Logging "Start"
+
 {{ range $key, $value := (merge .windows.system.registers (or (get $hostConfig "registers") dict)) -}}
-Write-Host "Set {{ $value.name }} is {{ $value.value }}"
+Logging "Set {{ $value.name }} is {{ $value.value }}"
 Set-ItemProperty {{ $key | quote }} -Name {{ $value.name | quote }} -Value {{ $value.value }}
 {{ end -}}
 
@@ -18,7 +25,7 @@ Set-ItemProperty {{ $key | quote }} -Name {{ $value.name | quote }} -Value {{ $v
 $OS = Get-WmiObject -Class Win32_OperatingSystem
 $OSVersion = $OS.Version
 if ($OSVersion -ge "10.0.22631") { # first build number of 24H2 is 22631
-    Write-Host "Can enable natural scrolling at settings->device->mouse"
+    Logging "Can enable natural scrolling at settings->device->mouse"
 } else {
     # Enable/Disable natural-scroll (from: https://gist.gitub.com/gagarine/d313ee6510009b3f3973c6e0929b1e1c)
     # windows 11 23H2 and older
@@ -27,7 +34,6 @@ if ($OSVersion -ge "10.0.22631") { # first build number of 24H2 is 22631
 }
 {{- end }}
 
-Write-Host "Finish register settings!"
-Write-Host "Close after 3s..."
-Start-Sleep -Seconds 3
+Logging "Finish"
+Start-Sleep -Seconds 1
 exit
