@@ -55,7 +55,7 @@ jobs:
           remove-codeql: true
           remove-docker-images: true
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: steps.change.outputs.nix == 'true'
 
       - uses: cachix/install-nix-action@v31
