@@ -1267,7 +1267,7 @@
         "elements": [
           {
             "activeUrl": "https://gemini.google.com/app",
-            "faviconUrl": "https://gemini.google.com/app/18f12e2b09528c8b",
+            "faviconUrl": "https://gemini.google.com/app",
             "faviconUrlValid": true,
             "id": "WEBPANEL_4f2d325a-486d-44ba-a93f-f9fd487a3a44",
             "mobileMode": false,
@@ -1275,12 +1275,12 @@
             "resizable": false,
             "title": "Google Gemini",
             "url": "https://gemini.google.com/",
-            "width": 400,
+            "width": 540,
             "zoom": 1
           },
           {
             "activeUrl": "https://x.com/",
-            "faviconUrl": "https://x.com/i/flow/login?redirect_after_login=%2Fhome",
+            "faviconUrl": "https://x.com/home",
             "faviconUrlValid": true,
             "id": "WEBPANEL_c4d18e41-ff82-418f-93d9-2e0c19616edf",
             "mobileMode": false,
@@ -1305,15 +1305,14 @@
             "zoom": 1
           },
           {
-            "activeUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
-            "faviconUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/",
+            "faviconUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
             "faviconUrlValid": true,
             "id": "EXT_PANEL_cnjifjpddelmedmihgijeibhnjfabmlf",
             "mobileMode": true,
             "origin": "user",
             "resizable": false,
             "title": "Obsidian Web Clipper",
-            "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/",
+            "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
             "width": -1,
             "zoom": 1
           }
@@ -1435,6 +1434,31 @@
             "url": "https://x.com/i/tweetdeck",
             "width": -1,
             "zoom": 1
+          },
+          {
+            "activeUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
+            "faviconUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/",
+            "faviconUrlValid": true,
+            "id": "EXT_PANEL_cnjifjpddelmedmihgijeibhnjfabmlf",
+            "mobileMode": true,
+            "origin": "user",
+            "resizable": false,
+            "title": "Obsidian Web Clipper",
+            "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/",
+            "width": -1,
+            "zoom": 1
+          },
+          {
+            "faviconUrl": "vivaldi://extensions/",
+            "faviconUrlValid": true,
+            "id": "WEBPANEL_0c496eb6-9943-4775-a82b-7c738e8f3ed1",
+            "mobileMode": true,
+            "origin": "user",
+            "resizable": false,
+            "title": "",
+            "url": "vivaldi://extensions/",
+            "width": -1,
+            "zoom": 1
           }
         ]
       },
@@ -1444,8 +1468,8 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "PanelDownloads",
-        "width": 400
+        "selectedPanel": "WEBPANEL_4f2d325a-486d-44ba-a93f-f9fd487a3a44",
+        "width": 534
       }
     },
     "quick_commands": {
