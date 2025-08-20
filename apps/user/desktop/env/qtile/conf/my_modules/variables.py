@@ -14,7 +14,7 @@ from xdg import BaseDirectory
 
 @dataclass
 class FontConfig:
-    font: str = "Moralerspace Neon NF"
+    font: str = "Moralerspace Neon"
     fontsize: int = 16
 
 

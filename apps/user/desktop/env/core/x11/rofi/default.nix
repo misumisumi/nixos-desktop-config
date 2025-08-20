@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    moralerspace-nf
+    moralerspace
     rofi-power-menu
     rofimoji
   ];
@@ -17,7 +17,7 @@
       enable = true;
       plugins = with pkgs; [ rofi-calc ];
 
-      font = "Moralerspace Neon NF 14";
+      font = "Moralerspace Neon 14";
       terminal = "wezterm";
 
       extraConfig = {

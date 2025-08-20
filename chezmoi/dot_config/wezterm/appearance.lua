@@ -4,7 +4,7 @@ local config = {
     window_close_confirmation = "AlwaysPrompt",
     font = wezterm.font_with_fallback({
         {
-            family = "Moralerspace Neon NF",
+            family = "Moralerspace Neon",
             weight = "Regular",
             harfbuzz_features = { "liga", "calt", "ss01", "ss06", "ss07", "ss08", "ss09" },
         },

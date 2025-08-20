@@ -1,13 +1,13 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.moralerspace-hwnf
+    pkgs.moralerspace-hw
   ];
   programs = {
     kitty = {
       enable = true;
       font = {
-        name = "Moralerspace Neon HWNF";
+        name = "Moralerspace Neon HW";
         size = 10.5;
       };
       settings = {
@@ -16,7 +16,7 @@
         clear_all_shortcuts = "yes";
         cursor_blink_interval = "0";
         enable_audio_bell = "no";
-        font_features = "MoralerspaceNeonHWNF-Regular +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
+        font_features = "MoralerspaceNeonHW-Regular +liga +calt +ss01 +ss06 +ss07 +ss08 +ss09";
         inactive_tab_font_style = "bold";
         tab_bar_style = "fade";
         tab_fade = "1";
