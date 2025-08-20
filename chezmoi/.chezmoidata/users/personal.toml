@@ -164,7 +164,7 @@ sudo = [
     "Adobe.CreativeCloud",
     "BlenderFoundation.Blender",
     "Discord.Discord",
-    "GIMP.GIMP",
+    "GIMP.GIMP.3",
     "Insecure.Npcap",
     "KDE.Krita",
     "Meta.Oculus",
