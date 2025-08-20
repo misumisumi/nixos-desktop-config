@@ -3,7 +3,7 @@
         "defaults": {
             "acrylicOpacity": 0.8,
             "colorScheme": "Tokyo Night Moon",
-            "fontFace": "Moralerspace Neon HWNF",
+            "fontFace": "Moralerspace Neon HW",
             "fontSize": 11,
             "useAcrylic": true
         }

@@ -8,7 +8,12 @@
       audacity # GUI Sound Editor
       blender_4_2 # 3DCG modeling tool
       carla # audio plugin host
-      gimp3 # image editor
+      (gimp3-with-plugins.override {
+        plugins = with gimp3Plugins; [
+          gmic
+          lightning
+        ];
+      }) # image editor with plugins
       (google-fonts.override {
         fonts = [
           "BIZUDMincho"

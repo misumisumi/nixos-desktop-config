@@ -1,10 +1,10 @@
 { pkgs, ... }:
 let
-  font = "Moralerspace Neon NF";
+  font = "Moralerspace Neon";
 in
 {
   home.packages = [
-    pkgs.moralerspace-nf
+    pkgs.moralerspace
   ];
   programs.alacritty = {
     enable = true;
