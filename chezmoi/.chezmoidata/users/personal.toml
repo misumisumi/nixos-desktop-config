@@ -165,7 +165,6 @@ sudo = [
     "BlenderFoundation.Blender",
     "Discord.Discord",
     "GIMP.GIMP.3",
-    "Insecure.Npcap",
     "KDE.Krita",
     "Meta.Oculus",
     "MichaelTippach.ASIO4ALL",
