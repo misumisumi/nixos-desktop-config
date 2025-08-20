@@ -9,7 +9,12 @@ externals = ["blesh", "fzf-options", "lesspipe", "sops", "tpm"]
 
 [linux.users."kobayashi.sumiharu.r4".env]
 initExtra = ""
-extraConfig = ""
+extraConfig = ''''
+if [ "$SHELL" != "/usr/bin/zsh" ]
+then
+    exec /usr/bin/zsh -l
+fi
+''''
 PATH = ["$HOME/bin", "$HOME/.local/bin"]
 [linux.users."kobayashi.sumiharu.r4".env.export]
 EDITOR = "nvim"
