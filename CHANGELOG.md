@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.5](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.4...v6.0.5) (2025-08-20)
+
+
+### Bug Fixes
+
+* **chezmoi:** fix env var ([0fd3f55](https://github.com/misumisumi/nixos-desktop-config/commit/0fd3f55ee9bb12492e4be63a126d19c2f007ed44))
+* **ssh:** replace login shell exec ([ec5392d](https://github.com/misumisumi/nixos-desktop-config/commit/ec5392d0793895c822f3172542cbb1a0c3b49443))
+
 ## [6.0.4](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.3...v6.0.4) (2025-08-16)
 
 
