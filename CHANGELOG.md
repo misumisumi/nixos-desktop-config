@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.6](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.5...v6.0.6) (2025-08-20)
+
+
+### Bug Fixes
+
+* **moralerspace:** add patch for update v2.0.0 ([55300ca](https://github.com/misumisumi/nixos-desktop-config/commit/55300ca43c2b7bb11ad32056e8bf9efae37318bf))
+* update gimp to gimp3 ([cf0a9ab](https://github.com/misumisumi/nixos-desktop-config/commit/cf0a9aba8e440d1e51f368384b8108acb0b5093f))
+* **winget:** rm missing pkgs ([8c299fd](https://github.com/misumisumi/nixos-desktop-config/commit/8c299fd6f009bba3d58f94b0a3408a24b0a970f1))
+
 ## [6.0.5](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.4...v6.0.5) (2025-08-20)
 
 
