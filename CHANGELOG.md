@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.4](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.3...v6.0.4) (2025-08-16)
+
+
+### Bug Fixes
+
+* **vivaldi:** update CommonPreferences ([7c10db0](https://github.com/misumisumi/nixos-desktop-config/commit/7c10db0bb59aa6c8973f57e8a3121d60abc3b06a))
+
 ## [6.0.3](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.2...v6.0.3) (2025-08-15)
 
 
