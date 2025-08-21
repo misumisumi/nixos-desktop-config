@@ -21,14 +21,18 @@
 
 HISTCONTROL=ignoreboth
 HISTFILESIZE=100000
-HISTIGNORE='{{ or (get $userShellConfig "historyIgnore") dict | join ":" }}'
+HISTFILE="$HOME/.bash_history"
+HISTIGNORE='{{ or (get $userShellConfig "historyIgnore") dict | join ":" | replace " *" "" }}'
 HISTSIZE=10000
+mkdir -p "$(dirname "$HISTFILE")"
 
-shopt -s histappend
-shopt -s checkwinsize
-shopt -s extglob
-shopt -s globstar
-shopt -s checkjobs
+{{ range (or (get $userBashConfig "shellOptions") list) -}}
+{{ if (hasPrefix "-" .) -}}
+shopt -u {{ trimPrefix "-" . }}
+{{ else -}}
+shopt -s {{ . }}
+{{ end -}}
+{{ end -}}
 
 {{ or (get $userBashConfig "initExtra") "" -}}
 
