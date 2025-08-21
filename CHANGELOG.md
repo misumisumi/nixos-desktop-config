@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.7](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.6...v6.0.7) (2025-08-21)
+
+
+### Bug Fixes
+
+* **bash:** add HISTFILE and support share_history ([04f6c4b](https://github.com/misumisumi/nixos-desktop-config/commit/04f6c4be5fe71b70734315c0c822eea3f17878bb))
+* **wezterm:** fix keymap ([254a1f6](https://github.com/misumisumi/nixos-desktop-config/commit/254a1f6ea273bbc51a2d4fc4866e52e0c9e4f3ad))
+
 ## [6.0.6](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.5...v6.0.6) (2025-08-20)
 
 
