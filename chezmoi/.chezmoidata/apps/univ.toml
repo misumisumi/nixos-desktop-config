@@ -21,7 +21,7 @@ paper = "delta --dark --paging=never"
 
 [apps.users."kobayashi.sumiharu.r4".shell]
 historyIgnore = [
-    "builtin cd *",
+    "builtin *",
     "cd *",
     "history *",
     "kill *",
@@ -33,9 +33,23 @@ historyIgnore = [
 
 [apps.users."kobayashi.sumiharu.r4".bash]
 bashrcExtra = ""
-initExtra = ""
+initExtra = '''
+function share_history {  # 以下の内容を関数として定義
+    history -a  # .bash_historyに前回コマンドを1行追記
+    history -c  # 端末ローカルの履歴を一旦消去
+    history -r  # .bash_historyから履歴を読み込み直す
+}
+PROMPT_COMMAND="share_history; ${PROMPT_COMMAND}"  # 上記関数をプロンプト毎に自動実施
+'''
 logoutExtra = ""
 profileExtra = ""
+shellOptions = [
+    "-histappend",
+    "checkwinsize",
+    "extglob",
+    "globstar",
+    "checkjobs",
+]
 [apps.users."kobayashi.sumiharu.r4".bash.sessionVariables]
 
 [apps.users."kobayashi.sumiharu.r4".zsh]

@@ -1,4 +1,5 @@
 {
+  lib,
   user,
   importChezmoiUserAppData,
   config,
@@ -16,7 +17,10 @@
       initExtra
       logoutExtra
       profileExtra
+      shellOptions
       ;
-    inherit ((importChezmoiUserAppData user).shell) historyIgnore;
+    historyIgnore =
+      map (x: lib.removeSuffix " *" x)
+        (importChezmoiUserAppData user).shell.historyIgnore;
   };
 }
