@@ -218,6 +218,7 @@ local config = {
         { key = "+", mods = "CTRL|SHIFT", action = act.IncreaseFontSize },
         { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
         { key = "=", mods = "CTRL", action = act.ResetFontSize },
+        { key = "=", mods = "CTRL|SHIFT", action = act.ResetFontSize }, -- for jp key
         -- clipboard
         { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
         { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
