@@ -29,7 +29,7 @@
     gc = {
       # 1週間ごとに7日前のイメージを削除
       automatic = true;
-      frequency = "weekly";
+      dates = "weekly";
       options = "--delete-older-than 7d";
     };
     registry.nixpkgs.flake = inputs.nixpkgs;

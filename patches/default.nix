@@ -88,4 +88,5 @@ final: prev: {
       ./qtile.patch
     ];
   });
+  inherit (nixpkgs-stable) carla;
 }
