@@ -108,11 +108,7 @@ local function with_mod()
             },
         }
     end
-    local keymap_close_pane = function(mod)
-        -- close pane/tab
-        return { key = "q", mods = string.format("%s", mod), action = act.CloseCurrentPane({ confirm = true }) }
-    end
-    local keymaps_ctrl_leader_as_mod = function(mod)
+    local keymaps_leader_as_mod = function(mod)
         return {
             -- reload configuration
             { key = "r", mods = string.format("%s", mod), action = act.ReloadConfiguration },
@@ -133,6 +129,12 @@ local function with_mod()
                 mods = string.format("%s", mod),
                 action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
             },
+        }
+    end
+    local keymaps_ctrl_leader_as_mod = function(mod)
+        -- close pane/tab
+        return {
+            { key = "q", mods = string.format("%s", mod), action = act.CloseCurrentPane({ confirm = true }) },
         }
     end
     local keymaps_shift_leader_as_mod = function(mod)
@@ -165,7 +167,9 @@ local function with_mod()
     for _, v in ipairs(keymaps_ctrl_shift_as_mod("CTRL|SHIFT")) do
         table.insert(keymaps, v)
     end
-    table.insert(keymaps, keymap_close_pane("LEADER|CTRL"))
+    for _, v in ipairs(keymaps_leader_as_mod("LEADER")) do
+        table.insert(keymaps, v)
+    end
     for _, v in ipairs(keymaps_ctrl_leader_as_mod("LEADER|CTRL")) do
         table.insert(keymaps, v)
     end
@@ -190,8 +194,10 @@ local function with_mod()
         for _, v in ipairs(keymaps_ctrl_as_mod(mod)) do
             table.insert(keymaps, v)
         end
-        table.insert(keymaps, keymap_close_pane(string.format("%s|CTRL", mod)))
         for _, v in ipairs(keymaps_ctrl_shift_as_mod(mod)) do
+            table.insert(keymaps, v)
+        end
+        for _, v in ipairs(keymaps_leader_as_mod(mod)) do
             table.insert(keymaps, v)
         end
         for _, v in ipairs(keymaps_ctrl_leader_as_mod(mod)) do

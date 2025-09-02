@@ -17,12 +17,20 @@
 #  };
 # pythonPackages patch template
 # (final: prev: {
-#   python3Packages = prev.python3Packages.override {
-#     overrides = pfinal: pprev: {
-#       package = pprev.package.overridePythonAttrs (old: {
-#       });
-#     };
-#   };
+#   python3 =
+#     let
+#       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+#         (pfinal: pprev: {
+#           package = pprev.package.overridePythonAttrs (old: {
+#           });
+#         })
+#       ];
+#       self = prev.python3.override {
+#         inherit self;
+#         packageOverrides = prev.lib.composeManyExtensions pythonPackagesOverlays;
+#       };
+#     in
+#     self;
 # })
 # haskellPackages patch template
 # (final: prev: {
@@ -80,4 +88,5 @@ final: prev: {
       ./qtile.patch
     ];
   });
+  inherit (nixpkgs-stable) carla;
 }

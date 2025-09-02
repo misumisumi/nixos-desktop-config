@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 local config = {
+    audible_bell = "Disabled",
     window_close_confirmation = "AlwaysPrompt",
     font = wezterm.font_with_fallback({
         {

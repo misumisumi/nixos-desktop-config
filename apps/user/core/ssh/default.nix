@@ -16,11 +16,14 @@
   '';
   programs.ssh = {
     enable = true;
-    forwardAgent = true;
-    serverAliveInterval = 30;
-    serverAliveCountMax = 5;
     includes = [ "conf.d/hosts/*" ];
+    enableDefaultConfig = false;
     matchBlocks = {
+      "*" = {
+        forwardAgent = true;
+        serverAliveInterval = 30;
+        serverAliveCountMax = 5;
+      };
       "github" = {
         user = "git";
         hostname = "github.com";

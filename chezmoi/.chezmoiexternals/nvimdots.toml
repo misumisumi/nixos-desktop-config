@@ -2,3 +2,4 @@
 type = "git-repo"
 url = "https://github.com/misumisumi/nvimdots"
 refreshPeriod = "168h"
+pull.args = ["-Xtheirs", "--rebase"]
