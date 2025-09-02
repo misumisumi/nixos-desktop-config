@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.0.8](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.7...v6.0.8) (2025-09-02)
+
+
+### Bug Fixes
+
+* **chezmoi:** add pull.args ([99eeb0a](https://github.com/misumisumi/nixos-desktop-config/commit/99eeb0aa8f72b137bc1feee61ad7ee779d6bd9c3))
+* **incus:** enable incus web-ui ([8797bdc](https://github.com/misumisumi/nixos-desktop-config/commit/8797bdce451b5020a8049cad062ce22bf2b8c01a))
+* **sops/work:** update secret file ([fd511c6](https://github.com/misumisumi/nixos-desktop-config/commit/fd511c66747c12b33dbe0d86d81c06a51039b4e6))
+* **stacia:** disable nvidia-persistence ([36ef77b](https://github.com/misumisumi/nixos-desktop-config/commit/36ef77bd19222dc5c4ffbef020e87ae712a23e57))
+* **user/nix:** fix deprecated option ([8c6c814](https://github.com/misumisumi/nixos-desktop-config/commit/8c6c814ded4722500632fd67e7c4cb67aa45d89a))
+* **wezterm:** fix keymap and disable bell ([402e224](https://github.com/misumisumi/nixos-desktop-config/commit/402e224568cf65db40b1d8c1cc6d832adeb698d9))
+* **zsh-abbr:** add git push-f (push-f is alias of 'git push --force-with-lease') ([ec9a058](https://github.com/misumisumi/nixos-desktop-config/commit/ec9a058da2fdcdb990b686dbfba29e3226ea252c))
+
 ## [6.0.7](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.6...v6.0.7) (2025-08-21)
 
 
