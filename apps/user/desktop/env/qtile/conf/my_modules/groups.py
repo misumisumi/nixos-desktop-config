@@ -116,15 +116,18 @@ GROUP_PER_SCREEN = len(group_and_rule)
 
 def set_groups():
     groups = []
-    monitors = get_phy_monitors(GlobalConf.has_pentablet)
-    for n, (_, resolutions) in enumerate(monitors):
+    monitors = get_phy_monitors()
+    for n, (output, resolutions) in enumerate(monitors):
+        if GlobalConf.pentablet is not None and GlobalConf.pentablet[0] == n:
+            name = list(_pentablet.keys())[0]
+            groups.append(Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0]))
+
+            continue
+
         for k, (label, layouts, rules) in group_and_rule.items():
             matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
             select = 1 if resolutions[0] < resolutions[1] else 0  # get vertical or horizontal layout
             groups.append(Group(f"{n}-{k}", layouts=layouts[select], matches=matches, label=label))
-    if GlobalConf.has_pentablet:
-        name = list(_pentablet.keys())[0]
-        groups.append(Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0]))
     groups.append(ScratchPad("scratchpad", _rule_scratchpad))
 
     return groups

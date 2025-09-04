@@ -4,7 +4,6 @@ import subprocess
 
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
-
 from my_modules.groups import group_and_rule
 from my_modules.wallpaper import init_screen_wallpapers, mk_wallpaper_cache
 

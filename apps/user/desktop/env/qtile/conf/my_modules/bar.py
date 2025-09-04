@@ -6,10 +6,9 @@ from pathlib import Path
 # from libqtile import widget
 from libqtile import bar
 from libqtile.log_utils import logger
-from qtile_extras import widget
-
 from my_modules.colorset import ColorSet
 from my_modules.variables import BarConf, FontConf, GlobalConf, IconConf, WindowConf
+from qtile_extras import widget
 
 fc = asdict(FontConf)
 ic = asdict(IconConf)

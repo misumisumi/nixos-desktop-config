@@ -3,7 +3,6 @@
 from libqtile.config import Drag, Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
-
 from my_modules import functions as F
 from my_modules.groups import GROUP_PER_SCREEN
 from my_modules.variables import GlobalConf
@@ -123,7 +122,7 @@ def set_keys():
             ),
         ]
 
-        if GlobalConf.has_pentablet:
+        if GlobalConf.pentablet is not None:
             _keys += [
                 Key([mod], "t", F.focus_cycle_screen(pentablet=True), desc="forcus pentablet"),
                 Key(

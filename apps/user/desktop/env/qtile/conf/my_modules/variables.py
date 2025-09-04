@@ -79,7 +79,7 @@ class Global:
     cached_wallpapers: list[str] = field(default_factory=lambda: [])
     use_cached_wallpapers: bool = True
 
-    has_pentablet: bool = False
+    pentab_output: str = ""
 
     auto_fullscreen: bool = True
     bring_front_click: str = "floating_only"
@@ -108,7 +108,8 @@ class Global:
         self.update_monitors()
 
     def update_monitors(self):
-        self.monitors = utils.get_n_monitors(self.has_pentablet)
+        self.pentablet = utils.have_pentablet(self.pentab_output)
+        self.monitors = utils.get_n_monitors()
 
 
 FontConf = FontConfig()
