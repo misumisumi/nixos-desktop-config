@@ -46,11 +46,16 @@
     };
     power-profiles-daemon.enable = true;
     logind = {
-      lidSwitch = "hybrid-sleep";
-      powerKey = "hibernate";
-      powerKeyLongPress = "poweroff";
+      settings.Login = {
+        HandleLidSwitch = "suspend-then-hibernat";
+        HandlePowerKey = "hibernate";
+        HandlePowerKeyLongPress = "poweroff";
+      };
     };
   };
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+  '';
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "performance";
