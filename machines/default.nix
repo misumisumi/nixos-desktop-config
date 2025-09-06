@@ -26,6 +26,7 @@ let
       modules = [
         inputs.catppuccin.nixosModules.catppuccin
         inputs.disko.nixosModules.disko
+        inputs.flakes.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.impermanence.nixosModules.impermanence
         inputs.musnix.nixosModules.musnix
