@@ -1,32 +1,45 @@
 import subprocess
 from pathlib import Path
 
+from libqtile.log_utils import logger
 
-def get_n_monitors(has_pentablet: bool) -> str:
+
+def get_n_monitors() -> str:
     cmd = [r"xrandr --listactivemonitors | head -n1 | awk -F' ' '{print $2}'"]
     num_monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.replace("\n", "")
     num_monitors = int(num_monitors)
-    if has_pentablet:
-        num_monitors -= 1
 
     return num_monitors
 
 
-def get_phy_monitors(has_pentablet: bool) -> list[tuple[str, tuple[str]]]:
+def get_phy_monitors() -> list[tuple[str, tuple[str]]]:
     xrandr = "xrandr --listactivemonitors"
     cmd = (
         xrandr
         + r" | tail -n+2 | awk -F' ' '{print $2,$3}' | sed 's/\(.*\)\/.*x\(.*\)\/.*$/\1x\2/' | sed -E 's/\+\*?//g'"
     )
-    monitors = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.split("\n")[:-1]
+    cmd_result = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.split("\n")[:-1]
     monitors = [
         (output, tuple(map(lambda x: int(x), resolution.split("x"))))
-        for output, resolution in map(lambda x: x.split(" "), monitors)
+        for output, resolution in map(lambda x: x.split(" "), cmd_result)
     ]
-    if has_pentablet:
-        monitors = monitors[:-1]
 
     return monitors
+
+
+def have_pentablet(pentab_output_name: str) -> tuple[int, str] | None:
+    xrandr = "xrandr --listactivemonitors"
+    cmd = (
+        xrandr
+        + r" | tail -n+2 | awk -F' ' '{print $2,$3}' | sed 's/\(.*\)\/.*x\(.*\)\/.*$/\1x\2/' | sed -E 's/\+\*?//g'"
+    )
+    cmd_result = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.split("\n")[:-1]
+    for i, (output, resolution) in enumerate(map(lambda x: x.split(" "), cmd_result)):
+        logger.warning(f"Output: {output}, Resolution: {resolution}")
+        if pentab_output_name == output:
+            return (i, pentab_output_name)
+
+    return None
 
 
 def get_monitor_status() -> dict:

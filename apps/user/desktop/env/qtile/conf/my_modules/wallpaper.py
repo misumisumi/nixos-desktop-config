@@ -5,7 +5,6 @@ from shutil import which
 
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
-
 from my_modules.groups import group_and_rule
 from my_modules.variables import GlobalConf
 

@@ -7,7 +7,6 @@ from libqtile import hook, qtile
 from libqtile.config import Drag
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
-
 from my_modules import groups, screens, startup, wallpaper
 from my_modules.colorset import ColorSet
 from my_modules.groups import GROUP_PER_SCREEN, group_and_rule
@@ -310,16 +309,21 @@ def move_n_screen_group(qtile, idx):
 def focus_cycle_screen(qtile, backward=False, pentablet=False):
     idx = qtile.current_screen.index
     monitors = GlobalConf.monitors
-    if pentablet:
-        if idx < monitors:
-            to_idx = monitors
-        else:
-            to_idx = monitors - 1 if backward else 0
-    else:
+    pentablet = GlobalConf.pentablet
+
+    def _cycle(idx: int):
         if backward:
             to_idx = monitors - 1 if idx == 0 else idx - 1
         else:
             to_idx = 0 if idx + 1 >= monitors else idx + 1
+
+        if pentablet is not None and to_idx == pentablet[0]:
+            return _cycle(to_idx)
+        else:
+            return to_idx
+
+    to_idx = _cycle(idx)
+
     qtile.to_screen(to_idx)
 
 
@@ -408,10 +412,10 @@ def attach_screen(qtile, pos):
         for i, monitor in enumerate(conn):
             cmd += f" --output {monitor} --auto"
             if i > 0:
-                cmd += f" --{pos} {conn[i-1]}"
+                cmd += f" --{pos} {conn[i - 1]}"
         discon = monitor_status["disconnected"]
         if len(discon) > 0:
-            cmd += f" --output {discon[0]} --auto --{pos} {conn[i-1]}"
+            cmd += f" --output {discon[0]} --auto --{pos} {conn[i - 1]}"
     popen = subprocess.Popen(cmd, shell=True)
     popen.wait(timeout=5)
     _reload_screens(qtile)
