@@ -1,5 +1,15 @@
 # Changelog
 
+## [6.0.9](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.8...v6.0.9) (2025-09-09)
+
+
+### Bug Fixes
+
+* **modules:** move homeManagerModules and nixosModules to github:misumisumi/flakes ([8bd6c1f](https://github.com/misumisumi/nixos-desktop-config/commit/8bd6c1f512509c4abf873755bcc33aaadffdb136))
+* **qtile:** fix adding pentablet device logic ([2c4f79b](https://github.com/misumisumi/nixos-desktop-config/commit/2c4f79bf113499190f446dc26f3be41a5c6addf5))
+* **ssh:** fix config ([d453ff4](https://github.com/misumisumi/nixos-desktop-config/commit/d453ff4a512ac8ac12005e84e1b3604609a4cda0))
+* **zephyrus:** fix deprecated config ([421b854](https://github.com/misumisumi/nixos-desktop-config/commit/421b85439b4c178efe26b53ff6ac82cf18f6947d))
+
 ## [6.0.8](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.7...v6.0.8) (2025-09-02)
 
 
