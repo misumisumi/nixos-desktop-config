@@ -21,6 +21,7 @@ jobs:
     outputs:
       all-success: ${{ steps.workflow-status.outputs.all-success }}
       existing-review: ${{ steps.workflow-status.outputs.existing-review }}
+      pr-author-id: ${{ steps.workflow-status.outputs.pr-author-id }}
     steps:
       - name: Check workflow status
         id: workflow-status
@@ -31,11 +32,13 @@ jobs:
         run: |
           # no check agent-of-me workflow
           check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '[.[].[] | select(.name | test("workflow") | not) | .conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
-          existing_review=$(gh pr view "${PR_NUM}" --json reviews --jq ".reviews | length > 0")
-          echo "all-success is ${check_all_success}"
-          echo "existing-review is ${existing_review}"
-          echo "all-success=${check_all_success}" >> $GITHUB_OUTPUT
-          echo "existing-review=${existing_review}" >> $GITHUB_OUTPUT
+          existing_review=$(gh pr view "${PR_NUM}" --json reviews --jq '.reviews | length > 0')
+          pr_author_id=$(gh pr view "${PR_NUM}" --json author --jq '.author.id')
+          cat <<EOF >> "$GITHUB_OUTPUT"
+          existing-review=${existing_review}
+          all-success=${check_all_success}
+          pr-author-id=${pr_author_id}
+          EOF
 
   # INFO: https://github.com/cli/cli/issues/2342
   dismiss-reviews:
@@ -69,7 +72,7 @@ jobs:
     needs: workflow-status
     if: >-
       ${{
-        contains(fromJSON('["misumisumi"]'), github.actor) &&
+        needs.workflow-status.outputs.pr-author-id == 'MDQ6VXNlcjI0NDUxOTc4' &&
         needs.workflow-status.outputs.all-success == 'true'
        }}
     env:
