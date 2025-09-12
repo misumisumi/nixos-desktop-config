@@ -30,6 +30,7 @@
         "100:class_g = 'org.wezfurlong.wezterm'"
         "100:class_g = 'pentablet'"
         "100:class_g = 'zoom'"
+        "100:name *?= 'Pympress'"
         "100:name *?= '.jpg'"
         "100:name *?= '.pdf'"
         "100:name *?= '.png'"
@@ -61,6 +62,7 @@
         "name = 'Notification'"
         "name = 'KDE Connect Daemon'"
         "name *?= 'pdfpc - presentation'"
+        "name *?= 'Pympress'"
       ];
       shadowOffsets = [
         (-7)
@@ -81,6 +83,7 @@
           "class_g = 'fcitx'"
           "class_g = 'Dunst'"
           "class_g = 'Rofi'"
+          "name *?= 'Pympress'"
         ];
         blur-method = "dual_kawase";
         blur-size = 8;
