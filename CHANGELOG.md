@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.10](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.9...v6.0.10) (2025-09-16)
+
+
+### Bug Fixes
+
+* **picom:** add rule for pympress ([52ae59e](https://github.com/misumisumi/nixos-desktop-config/commit/52ae59e23403835f27d7ca1e5b0e9ff5bfe89592))
+* **wallpapers:** fix horiz_main for external monitor ([debe42a](https://github.com/misumisumi/nixos-desktop-config/commit/debe42a5946fd56d6c47761762da0f0d508ce138))
+* **wireless:** fix WiFi password ([e94a6c6](https://github.com/misumisumi/nixos-desktop-config/commit/e94a6c6813e6471dd2ccbe3184fda697766cc1f8))
+
 ## [6.0.9](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.8...v6.0.9) (2025-09-09)
 
 
