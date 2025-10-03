@@ -26,7 +26,7 @@
         [lac tains]
         lns = 130.34.40.195
         require pap = yes
-        require chap = no
+        require chap = yes
         require authentication = yes
         max redials = 6
         ppp debug = yes
