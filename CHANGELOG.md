@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.11](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.10...v6.0.11) (2025-10-03)
+
+
+### Bug Fixes
+
+* **vpn:** fix l2tp config ([f56f399](https://github.com/misumisumi/nixos-desktop-config/commit/f56f399ea28ce0b3c45e2e186406ba40285bff6c))
+* **wireless:** fix password ([b691d7d](https://github.com/misumisumi/nixos-desktop-config/commit/b691d7d7af81bb9e272584f8ada28e44f075f519))
+* **zephyrus:** fix monitor config and fix hibernate ([64b604d](https://github.com/misumisumi/nixos-desktop-config/commit/64b604d52f870285a3a021a498e2c37f59485561))
+
 ## [6.0.10](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.9...v6.0.10) (2025-09-16)
 
 
