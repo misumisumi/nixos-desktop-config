@@ -23,6 +23,14 @@
         Option "EnablePageFlip" "off"
         Option "TearFree" "false"
       '';
+      extraConfig = ''
+        Section "Monitor"
+          Identifier "eDP"
+          # Force 60Hz refresh rate to reduce power consumption
+          ModeLine "1920x1080_59.99" 144.370 1920 1968 2000 2080 1080 1083 1088 1157 +hsync +vsync
+          Option "PreferredMode" "1920x1080_59.99"
+        EndSection
+      '';
     };
   };
 

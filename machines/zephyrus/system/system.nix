@@ -47,7 +47,7 @@
     power-profiles-daemon.enable = true;
     logind = {
       settings.Login = {
-        HandleLidSwitch = "suspend-then-hibernat";
+        HandleLidSwitch = "suspend-then-hibernate";
         HandlePowerKey = "hibernate";
         HandlePowerKeyLongPress = "poweroff";
       };
