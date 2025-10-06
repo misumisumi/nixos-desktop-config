@@ -15,8 +15,8 @@ in
       {
         src = pkgs.fetchgit {
           url = "https://github.com/L3-N0X/spicetify-dj-info";
-          rev = "b55c9b8c8b00100b42e562829c77d012191f0c07";
-          hash = "sha256-cR1EndjBN7jGtD0zA1f/vjkjgqslBxTiNAGDxBGEYdE=";
+          rev = "c786a923eee564cff3fa5c5e0317b34cab7c80f3";
+          hash = "sha256-YRkLXJivnOuy4dLZ5qutyTf0NK05Zeiy676HU2FWC0A=";
         };
         name = "djinfo.js";
       }
