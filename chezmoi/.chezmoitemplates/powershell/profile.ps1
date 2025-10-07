@@ -15,10 +15,12 @@
 {{ or (get $hostEnvConfig "initExtra") "" }}
 
 # Import modules
+Import-Module PSReadline
 Import-Module syntax-highlighting
 Import-Module Terminal-Icons
 
 #NOTE: reference: https://qiita.com/AWtnb/items/5551fcc762ed2ad92a81#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E6%8B%AC%E5%BC%A7%E3%81%A7%E5%9B%B2%E3%82%80
+Set-PSReadLineOption -EditMode Emacs # Emacsモードに変更(Ctrl+a, Ctrl+eなどが使える)
 Set-PSReadLineOption -BellStyle None # ベルの無効化
 Set-PSReadLineOption -HistoryNoDuplicates # 重複したコマンドは履歴に残さない
 Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#`$%&_<>``「」（）『』『』［］、，。：；／　"
