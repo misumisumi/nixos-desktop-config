@@ -45,7 +45,6 @@
       powerManagement.enable = true;
     };
     amdgpu = {
-      amdvlk.enable = true;
       opencl.enable = true;
     };
     graphics = {
