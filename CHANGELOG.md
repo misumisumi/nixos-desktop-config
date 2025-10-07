@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.12](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.11...v6.0.12) (2025-10-07)
+
+
+### Bug Fixes
+
+* **chezmoi:** update powershell profile ([dc9771e](https://github.com/misumisumi/nixos-desktop-config/commit/dc9771e98b04f9a3a0ad08d6664a5c98a1394e16))
+* **spicitify:** update spcietify-dj-info ([8899ae5](https://github.com/misumisumi/nixos-desktop-config/commit/8899ae50444d06f8a53b70efad3be068d3d1ee6d))
+
 ## [6.0.11](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.10...v6.0.11) (2025-10-03)
 
 
