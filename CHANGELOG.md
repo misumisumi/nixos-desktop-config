@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.13](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.12...v6.0.13) (2025-10-08)
+
+
+### Bug Fixes
+
+* **git:** fix aliases ([b6a9b7b](https://github.com/misumisumi/nixos-desktop-config/commit/b6a9b7b2b0d020b313a1eddaaaafd73aa91b951c))
+* **stacia:** remove amdvlk because it have already include in mesa ([723e77d](https://github.com/misumisumi/nixos-desktop-config/commit/723e77d27fe37eb93f9b5f721dfdd7344b3e5f89))
+
 ## [6.0.12](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.11...v6.0.12) (2025-10-07)
 
 
