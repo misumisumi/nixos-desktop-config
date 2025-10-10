@@ -74,4 +74,7 @@ final: prev: {
       ./qtile.patch
     ];
   });
+  flameshot = prev.flameshot.overrideAttrs (old: {
+    qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
+  });
 }
