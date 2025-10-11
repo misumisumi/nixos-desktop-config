@@ -62,20 +62,6 @@ final: prev: {
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';
       });
-  moralerspace = prev.moralerspace.overrideAttrs (old: rec {
-    version = "2.0.0";
-    src = prev.fetchzip {
-      url = "https://github.com/yuru7/moralerspace/releases/download/v${version}/Moralerspace_v${version}.zip";
-      hash = "sha256-RWpJt59Yvt/nhu6xeyR3eJKRaw+477ZXAPztt7Clt7Q=";
-    };
-  });
-  moralerspace-hw = prev.moralerspace-hw.overrideAttrs (old: rec {
-    version = "2.0.0";
-    src = prev.fetchzip {
-      url = "https://github.com/yuru7/moralerspace/releases/download/v${version}/MoralerspaceHW_v${version}.zip";
-      hash = "sha256-gd195o0acZL8AhGvcLLQYxd1VWvUYjpVRMOT5D7zDME=";
-    };
-  });
   switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
     dontWrapGApps = true;
@@ -88,5 +74,7 @@ final: prev: {
       ./qtile.patch
     ];
   });
-  inherit (nixpkgs-stable) carla;
+  flameshot = prev.flameshot.overrideAttrs (old: {
+    qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
+  });
 }
