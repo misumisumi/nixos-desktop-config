@@ -1,5 +1,15 @@
 # Changelog
 
+## [6.0.14](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.13...v6.0.14) (2025-10-11)
+
+
+### Bug Fixes
+
+* **flameshot:** add patch for flameshot-org/flameshot[#4172](https://github.com/misumisumi/nixos-desktop-config/issues/4172) ([e5a6d99](https://github.com/misumisumi/nixos-desktop-config/commit/e5a6d991e74c69a14f13afe35886e26dff7df2ab))
+* **libvirt:** all OVMF images distributed with QEMU are now available by default ([c89ff94](https://github.com/misumisumi/nixos-desktop-config/commit/c89ff948f151b19df9ba4c9c870de200a1f856ab))
+* **obs:** replace to distroav from obs-ndi by NixOS/nixpkgs[#368924](https://github.com/misumisumi/nixos-desktop-config/issues/368924) ([3cf7145](https://github.com/misumisumi/nixos-desktop-config/commit/3cf71451af6dcaefe99cc387664a3b1979b54543))
+* **patches:** remove some patch ([748568b](https://github.com/misumisumi/nixos-desktop-config/commit/748568b5da052a18b0e7cba123c66a6f3f8eae91))
+
 ## [6.0.13](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.12...v6.0.13) (2025-10-08)
 
 
