@@ -7,7 +7,7 @@
       plugins = with pkgs.obs-studio-plugins; [
         looking-glass-obs
         obs-pipewire-audio-capture
-        obs-ndi
+        distroav
       ];
     };
   };
