@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  imports = [ ./interception-tools.nix ];
+  imports = [
+    ./interception-tools.nix
+    ./pcscd.nix
+  ];
   services = {
     blueman.enable = true;
     udisks2.enable = true;
