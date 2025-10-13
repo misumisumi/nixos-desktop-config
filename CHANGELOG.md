@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.15](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.14...v6.0.15) (2025-10-13)
+
+
+### Bug Fixes
+
+* split yubikey and pcscd ([8064409](https://github.com/misumisumi/nixos-desktop-config/commit/806440983e701bc349f33823dcc1cd51ca99f0af))
+* **zfs:** fix `zfsCompatibleKernelPackages` ([0f3aa28](https://github.com/misumisumi/nixos-desktop-config/commit/0f3aa2838893d15b360b0e0c99316305c32f3f2e))
+
 ## [6.0.14](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.13...v6.0.14) (2025-10-11)
 
 
