@@ -51,6 +51,7 @@ in
     # Please see https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_root-dotnet_rootx86
     home.sessionVariables = {
       DOTNET_ROOT = "${cfg.package}";
-    } // cfg.environmentVariables;
+    }
+    // cfg.environmentVariables;
   };
 }

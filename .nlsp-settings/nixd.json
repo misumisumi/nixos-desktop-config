@@ -1,28 +1,24 @@
 {
-    "nixd": {
-        "nixpkgs": {
-            "expr": "import <nixpkgs> { }"
-        },
-        "formatting": {
-            "command": [
-                "nixfmt"
-            ]
-        },
-        "options": {
-            "nixos": {
-                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).nixosConfigurations.liveimg-gnome.options"
-            },
-            "home-manager": {
-                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).homeConfigurations.tiny.options"
-            },
-            "flake-parts": {
-                "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).debug.options"
-            }
-        },
-        "diagnostic": {
-            "suppress": [
-                "sema-extra-with"
-            ]
-        }
+  "nixd": {
+    "nixpkgs": {
+      "expr": "import <nixpkgs> { }"
+    },
+    "formatting": {
+      "command": ["nixfmt"]
+    },
+    "options": {
+      "nixos": {
+        "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).nixosConfigurations.liveimg-gnome.options"
+      },
+      "home-manager": {
+        "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).homeConfigurations.tiny.options"
+      },
+      "flake-parts": {
+        "expr": "(builtins.getFlake (builtins.getEnv \"PWD\")).debug.options"
+      }
+    },
+    "diagnostic": {
+      "suppress": ["sema-extra-with"]
     }
+  }
 }

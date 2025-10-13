@@ -1,5 +1,5 @@
 # Assign long press of space to SHIFT
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   environment.etc."dual-function-keys/config.yaml".text = ''
     MAPPINGS:
