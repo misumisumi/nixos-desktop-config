@@ -43,7 +43,8 @@ let
             imports = [
               ../settings/user
               ../settings/user/nixpkgs
-            ] ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
+            ]
+            ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
             dotfilesActivation = true;
             home.stateVersion = config.home.version.release;
           }
@@ -76,7 +77,8 @@ listToAttrs (
         colorTheme = "tokyonight-moon";
         schemes = [
           "presets/${preset}"
-        ] ++ lib.optional (shell != [ ]) "shell/${shell}";
+        ]
+        ++ lib.optional (shell != [ ]) "shell/${shell}";
       };
   }) presetAndShell
 )
