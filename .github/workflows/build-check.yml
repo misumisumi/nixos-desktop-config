@@ -28,8 +28,19 @@ jobs:
       AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
       AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
 
-  build-check:
+  build-check-matrix:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hostname:
+          [
+            "mother",
+            "stacia",
+            "zephyrus",
+            "liveimg-minimal-iso",
+            "liveimg-gnome-iso",
+          ]
     steps:
       - uses: dorny/paths-filter@v3
         id: change
@@ -72,11 +83,24 @@ jobs:
       - name: Build check
         if: steps.change.outputs.nix == 'true'
         timeout-minutes: 70
-        run: nix build --no-link ".#nixosConfigurations.zephyrus.config.system.build.toplevel"
+        run: nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+
+  build-check-summary:
+    runs-on: ubuntu-latest
+    needs: [pre-workflow, build-check-matrix]
+    steps:
+      - name: build-check-success
+        if: needs.build-check-matrix.result == 'success'
+        run: |
+          exit 0
+      - name: build-check-failed
+        if: needs.build-check-matrix.result != 'success'
+        run: |
+          exit 1
 
   post-workflow:
     uses: ./.github/workflows/agent-of-me.yml
-    needs: [pre-workflow, build-check]
+    needs: [pre-workflow, build-check-summary]
     with:
       pr-number: ${{ github.event.pull_request.number }}
       triggered-name: "build check"
