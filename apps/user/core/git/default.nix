@@ -1,12 +1,12 @@
 {
-  lib,
-  pkgs,
+  config,
   user,
-  importFilesFromChezmoi,
-  importChezmoiUserAppData,
+  pkgs,
   ...
 }:
-with lib;
+let
+  inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData importFilesFromChezmoi;
+in
 {
   home.packages = with pkgs; [
     git-ignore

@@ -1,4 +1,7 @@
-{ importJSONFromChezmoi, ... }:
+{ config, ... }:
+let
+  inherit (config.lib.ndchm.chezmoi) importJSONFromChezmoi;
+in
 {
   programs.oh-my-posh = {
     enable = true;

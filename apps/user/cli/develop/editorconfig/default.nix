@@ -1,4 +1,7 @@
-{ importFilesFromChezmoi, ... }:
+{ config, ... }:
+let
+  inherit (config.lib.ndchm.chezmoi) importFilesFromChezmoi;
+in
 {
   editorconfig.enable = true;
   home.file = importFilesFromChezmoi {

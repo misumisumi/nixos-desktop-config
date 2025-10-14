@@ -1,10 +1,13 @@
 {
   lib,
   user,
-  importChezmoiUserAppData,
   config,
   ...
 }:
+let
+  inherit (lib) removeSuffix;
+  inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData;
+in
 {
   programs.bash = {
     enable = true;
@@ -19,8 +22,6 @@
       profileExtra
       shellOptions
       ;
-    historyIgnore =
-      map (x: lib.removeSuffix " *" x)
-        (importChezmoiUserAppData user).shell.historyIgnore;
+    historyIgnore = map (x: removeSuffix " *" x) (importChezmoiUserAppData user).shell.historyIgnore;
   };
 }

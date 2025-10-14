@@ -1,8 +1,11 @@
 {
   pkgs,
-  importFilesFromChezmoi,
+  config,
   ...
 }:
+let
+  inherit (config.lib.ndchm.chezmoi) importFilesFromChezmoi;
+in
 {
   home.packages = with pkgs; [
     moralerspace
