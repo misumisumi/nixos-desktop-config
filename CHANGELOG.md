@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.15...v7.0.0) (2025-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* create config.lib.ndchm and add lib.ndchm to lib in flake.nix
+
+### Bug Fixes
+
+* create config.lib.ndchm and add lib.ndchm to lib in flake.nix ([d94bd5a](https://github.com/misumisumi/nixos-desktop-config/commit/d94bd5a16a800df7ac76f9fce60de1aed4bed6c8))
+
 ## [6.0.15](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.14...v6.0.15) (2025-10-13)
 
 
