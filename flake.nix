@@ -124,6 +124,12 @@
             inherit (inputs.nixpkgs) lib;
             inherit inputs self;
           };
+          lib = {
+            ndchm = import ./modules/home-manager/lib {
+              inherit self;
+              inherit (inputs.nixpkgs) lib;
+            };
+          };
         };
       systems = [ "x86_64-linux" ];
       perSystem =

@@ -7,10 +7,17 @@
   config,
   pkgs,
   user,
-  importChezmoiUserAppData,
-  importFilesFromChezmoi,
   ...
 }:
+let
+  inherit (lib)
+    mkBefore
+    mkMerge
+    mkOrder
+    optionalString
+    ;
+  inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData importFilesFromChezmoi;
+in
 {
   home.packages = with pkgs; [ nix-zsh-completions ];
   xdg.configFile = importFilesFromChezmoi {
@@ -37,9 +44,9 @@
             initExtra
             ;
         in
-        lib.mkMerge [
-          (lib.mkBefore initExtraFirst)
-          (lib.mkOrder 550 initExtraBeforeCompInit)
+        mkMerge [
+          (mkBefore initExtraFirst)
+          (mkOrder 550 initExtraBeforeCompInit)
           initExtra
         ];
       autosuggestion.enable = false;
@@ -83,7 +90,7 @@
           };
           initConfig =
             let
-              init_fzf = lib.optionalString config.programs.fzf.enable ''
+              init_fzf = optionalString config.programs.fzf.enable ''
                 # Binding keys for zsh-abbr
                 if [[ $options[zle] = on ]]; then
                   eval "$(${pkgs.fzf}/bin/fzf --zsh)"

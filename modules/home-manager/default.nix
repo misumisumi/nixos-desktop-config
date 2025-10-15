@@ -1,9 +1,12 @@
+{ self, lib, ... }:
 {
   imports = [
     ./dotfiles.nix
     ./dotnet.nix
     ./qtile.nix
     ./zsh.nix
-    ./lib/chezmoi.nix
   ];
+  config.lib = {
+    ndchm = import ./lib { inherit self lib; };
+  };
 }

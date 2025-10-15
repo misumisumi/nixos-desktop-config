@@ -1,4 +1,7 @@
-{ config, importTOMLFromChezmoi, ... }:
+{ config, ... }:
+let
+  inherit (config.lib.ndchm.chezmoi) importTOMLFromChezmoi;
+in
 {
   programs =
     let
