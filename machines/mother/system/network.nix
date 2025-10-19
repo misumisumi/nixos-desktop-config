@@ -1,9 +1,19 @@
-{ hostname, ... }:
+{ hostname, pkgs, ... }:
 {
   imports = [
     ../../../settings/system/network/vpn/l2tp
     ../../../settings/system/network/vpn/l2tp/tains.nix
   ];
+  environment.systemPackages = with pkgs; [
+    mstflint-cx3-support
+  ];
+  hardware.infiniband = {
+    enable = true;
+    guids = [
+      "24be05ffff84ff60"
+      "24be05ffff84ff61"
+    ];
+  };
   services = {
     nscd = {
       enable = true;
@@ -18,15 +28,19 @@
       enable = true;
       trustedInterfaces = [
         "br0"
-        "incusbr0"
-        "k8sbr0"
         "waydroid0"
+        "dev*"
+        "incus*"
       ];
       allowedUDPPorts = [
         # 4010
+        # 53 # DNS for incus
+        # 67 # DHCP for incus
       ];
       allowedTCPPorts = [
         # 4713 # PulseAudio
+        # 53 # DNS for incus
+        # 67 # DHCP for incus
       ];
       allowedUDPPortRanges = [
         {
@@ -104,7 +118,9 @@
       };
       networks = {
         "10-wired" = {
-          name = "enp5s0";
+          matchConfig = {
+            MACAddress = "f0:2f:74:dc:3b:4b";
+          };
           vlan = [
             "devnode"
             "devk8s"

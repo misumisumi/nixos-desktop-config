@@ -259,11 +259,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1760727608,
-        "narHash": "sha256-pzuJWGpqQZjUNNL2yG5WsHjtghh+SywzPNZE1z4mRZA=",
+        "lastModified": 1760896995,
+        "narHash": "sha256-xcJ3OjCzr64ugHNMVYt6qjTqctDOYqH91b3K69BmUwM=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "d64fa6288a72b7b1dffd2b767ef25711027b50d1",
+        "rev": "68640f4dc09e5651e16e8f1fe749f592b98b91f8",
         "type": "github"
       },
       "original": {

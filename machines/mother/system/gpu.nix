@@ -10,7 +10,7 @@
         Driver         "nvidia"
         VendorName     "NVIDIA Corporation"
         BoardName      "NVIDIA GeForce GTX 1050 Ti"
-        BusID          "PCI:10:0:0"
+        BusID          "PCI:11:0:0"
       '';
       screenSection = ''
         DefaultDepth    24
