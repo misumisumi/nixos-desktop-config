@@ -41,13 +41,25 @@ jobs:
             dependencies
             automated
 
+  check-evaluation-warning:
+    runs-on: ubuntu-latest
+    needs: update-repo
+    strategy:
+      fail-fast: false
+      matrix:
+        hostname:
+          [
+            "mother",
+            "stacia",
+            "zephyrus",
+            "liveimg-minimal-iso",
+            "liveimg-gnome-iso",
+          ]
+    steps:
       - name: Check evaluation warning
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
-          GH_REPO: ${{ github.repository }}
         run: |
           TMPFILE=$(mktemp)
-          nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#zephyrus" --option pure-eval false --option eval-cache false 2>>"${TMPFILE}"
+          nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#${{ matrix.hostname }}" --option pure-eval false --option eval-cache false 2>>"${TMPFILE}"
 
           START=$(grep -n "evaluation warning:" "${TMPFILE}" | head -n1 | awk -F":" '{print $1}')
           if [ -n "${START}" ]; then
@@ -58,6 +70,36 @@ jobs:
               LAST="$"
             fi
 
-            sed -n ''"${START}"','"${LAST}"'p' <"${TMPFILE}" | grep -v "unpacking" | grep -v "copying path" | grep -v "building" >eval_warning.log
-            gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
+            sed -n ''"${START}"','"${LAST}"'p' <"${TMPFILE}" | grep -v "unpacking" | grep -v "copying path" | grep -v "building" | sed -e "s/'/\`/g" >eval_warning-${{ matrix.hostname }}.log
           fi
+
+      - name: upload-evaluation-result
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-warning-${{ matrix.hostname }}
+          path: eval_warning-${{ matrix.hostname }}.log
+          retention-days: 1
+
+  create-issue:
+    runs-on: ubuntu-latest
+    needs: check-evaluation-warning
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: download-evaluation-result
+        uses: actions/download-artifact@v5
+        with:
+          pattern: eval-warning-*
+          path: downloaded_eval-warnings
+
+      - name: gh-issue-create
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cat downloaded_eval-warnings/*.log | sort -k 5 -u > eval_warning.log
+          gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
