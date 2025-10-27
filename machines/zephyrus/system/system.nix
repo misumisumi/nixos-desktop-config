@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   hardware.brillo.enable = true; # for brightness control from users in the video group
   boot = {
@@ -17,8 +22,10 @@
       "snd-aloop"
     ];
   };
+  time.timeZone = lib.mkForce null;
   services = {
     upower.enable = true;
+    automatic-timezoned.enable = true;
     asusd = {
       enableUserService = true;
       profileConfig.text = "quiet";

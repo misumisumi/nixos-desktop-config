@@ -45,7 +45,6 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: change
         with:
-          base: ${{ github.ref }}
           filters: |
             nix:
               - "**.nix"
