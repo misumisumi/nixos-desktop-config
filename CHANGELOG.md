@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.0...v7.0.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* **chezmoi:** fix toml string ([e2b5d3f](https://github.com/misumisumi/nixos-desktop-config/commit/e2b5d3f0a9a9393d89d3d3a82a65658b6815062c))
+* **mother:** add support infiniband and fix pcie id ([b519f9d](https://github.com/misumisumi/nixos-desktop-config/commit/b519f9d7ebfa7f7a8a46674430ee1a847c6ba979))
+* **stacia:** add support for zfs ([ec455ba](https://github.com/misumisumi/nixos-desktop-config/commit/ec455bac17014935f2eb4d50c28f3f7715ae48bd))
+* **zephyrus:** fix network config and enable automatic set timezone ([7ead209](https://github.com/misumisumi/nixos-desktop-config/commit/7ead209adac27898b0b023f2eb4670922203795b))
+
 ## [7.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v6.0.15...v7.0.0) (2025-10-15)
 
 
