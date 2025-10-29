@@ -618,11 +618,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761560398,
-        "narHash": "sha256-3O3gXHoLLTEm3sk969adINRZp9fMOOz75nU6YGZLzSI=",
+        "lastModified": 1761751734,
+        "narHash": "sha256-wfTBZOll3xZCmYwDVfDRSqsB72D+X795ivXAwWfMBcU=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "fb4d9e65ee24fbb9e7fdbb6fd23d143774f3ed87",
+        "rev": "38a822734948e2ac9b2b85478b5b2ddfa261e9a5",
         "type": "github"
       },
       "original": {
