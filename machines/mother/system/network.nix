@@ -28,9 +28,9 @@
       enable = true;
       trustedInterfaces = [
         "br0"
-        "waydroid0"
         "dev*"
         "incus*"
+        "waydroid0"
       ];
       allowedUDPPorts = [
         # 4010
