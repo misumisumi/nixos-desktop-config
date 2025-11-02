@@ -15,6 +15,7 @@
     ];
   };
   virtualisation = {
+    vswitch.enable = true;
     incus = {
       enable = true;
       ui.enable = true;

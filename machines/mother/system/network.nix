@@ -81,102 +81,61 @@
             Name = "br1";
           };
           bridgeConfig = {
-            VLANFiltering = true;
-            DefaultPVID = 101;
+            VLANFiltering = false;
+            DefaultPVID = 1;
           };
         };
-        devnode = {
-          netdevConfig = {
-            Kind = "vlan";
-            Name = "devnode";
-            MACAddress = "6d:ff:2e:62:27:31";
-          };
-          vlanConfig = {
-            Id = 101;
-          };
-        };
-        devk8s = {
-          netdevConfig = {
-            Kind = "vlan";
-            Name = "devk8s";
-            MACAddress = "ef:e2:93:7e:94:e5";
-          };
-          vlanConfig = {
-            Id = 102;
-          };
-        };
-        devnfs = {
-          netdevConfig = {
-            Kind = "vlan";
-            Name = "devnfs";
-            MACAddress = "23:ad:d6:5b:f1:5a";
-          };
-          vlanConfig = {
-            Id = 103;
-          };
-        };
+        # dev-cluster-lan = {
+        #   netdevConfig = {
+        #     Kind = "vlan";
+        #     Name = "dev-cluster-lan";
+        #     MACAddress = "6d:ff:2e:62:27:31";
+        #   };
+        #   vlanConfig = {
+        #     Id = 210;
+        #   };
+        # };
       };
       networks = {
         "10-wired" = {
           matchConfig = {
             MACAddress = "f0:2f:74:dc:3b:4b";
           };
-          vlan = [
-            "devnode"
-            "devk8s"
-            "devnfs"
-          ];
           bridge = [ "br0" ];
         };
         "20-br0" = {
           name = "br0";
           DHCP = "yes";
         };
-        "20-devnode" = {
-          name = "devnode";
-          bridge = [ "br1" ];
-          bridgeVLANs = [
-            {
-              PVID = 101;
-              EgressUntagged = 101;
-            }
-          ];
-        };
-        "20-devk8s" = {
-          name = "devk8s";
-          bond = [ "br1" ];
-          bridgeVLANs = [
-            {
-              PVID = 102;
-              EgressUntagged = 102;
-            }
-          ];
-        };
-        "20-devnfs" = {
-          name = "devnfs";
-          bond = [ "devbr1" ];
-          bridgeVLANs = [
-            {
-              PVID = 103;
-              EgressUntagged = 103;
-            }
-          ];
-        };
-        "30-br1" = {
-          name = "br1";
-          networkConfig = {
-            LinkLocalAddressing = "no";
-            LLDP = "no";
-            EmitLLDP = "no";
-            IPv6AcceptRA = "no";
-            IPv6SendRA = "no";
-          };
-          bridgeVLANs = [
-            {
-              VLAN = "101-103";
-            }
-          ];
-        };
+        # "20-devnode" = {
+        #   name = "devnode";
+        #   bridge = [ "br1" ];
+        #   bridgeVLANs = [
+        #     {
+        #       PVID = 101;
+        #       EgressUntagged = 101;
+        #     }
+        #   ];
+        # };
+        # "20-dev-cluster-lan" = {
+        #   name = "devnode";
+        #   bridge = [ "br1" ];
+        # };
+        # "30-br1" = {
+        #   name = "br1";
+        #   networkConfig = {
+        #     LinkLocalAddressing = "no";
+        #     LLDP = "no";
+        #     EmitLLDP = "no";
+        #     IPv6AcceptRA = "no";
+        #     IPv6SendRA = "no";
+        #   };
+        #   bridgeVLANs = [
+        #     {
+        #       VLAN = "210";
+        #     }
+        #   ];
+        # };
       };
     };
   };
