@@ -40,9 +40,9 @@
     graphics = {
       enable32Bit = true;
       extraPackages = with pkgs; [
+        libva-vdpau-driver
         libvdpau-va-gl
         nvidia-vaapi-driver
-        vaapiVdpau
       ];
     };
   };
