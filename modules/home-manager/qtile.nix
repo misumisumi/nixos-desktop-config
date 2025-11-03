@@ -12,13 +12,7 @@ in
   options = {
     xsession.windowManager.qtile = {
       enable = mkEnableOption "qtile window manager";
-      package = mkOption {
-        type = types.nullOr types.package;
-        default = pkgs.qtile-unwrapped;
-        description = ''
-          The qtile package to use.
-        '';
-      };
+      package = mkPackageOption pkgs [ "python3" "pkgs" "qtile" ] { };
       extraPackages = mkOption {
         type = types.listOf types.package;
         default = [ ];

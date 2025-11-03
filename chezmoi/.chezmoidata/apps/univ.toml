@@ -1,10 +1,18 @@
 [apps.users."kobayashi.sumiharu.r4"]
-[apps.users."kobayashi.sumiharu.r4".git]
-userEmail = "s.kobayashi@misumi-sumi.com"
-userName = "misumisumi"
+
+[apps.users."kobayashi.sumiharu.r4".delta]
+[apps.users."kobayashi.sumiharu.r4".delta.git]
+[apps.users."kobayashi.sumiharu.r4".delta.git.core]
 paper = "delta"
-diffFilter = "delta"
-[apps.users."kobayashi.sumiharu.r4".git.aliases]
+[apps.users."kobayashi.sumiharu.r4".delta.git.interactive]
+diffFilter = "delta --color-only"
+[apps.users."kobayashi.sumiharu.r4".delta.git.delta]
+
+[apps.users."kobayashi.sumiharu.r4".git]
+[apps.users."kobayashi.sumiharu.r4".git.settings.user]
+email = "s.kobayashi@misumi-sumi.com"
+name = "misumisumi"
+[apps.users."kobayashi.sumiharu.r4".git.settings.aliases]
 tree = "log --graph --oneline --decorate --all"                                           # logのツリー表示
 co-fixup = "commit --fixup"
 push-f = "push --force-with-lease"                                                        # pushの強制 (ローカルが最新で無い場合失敗する)

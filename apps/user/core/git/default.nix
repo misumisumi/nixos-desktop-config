@@ -13,26 +13,31 @@ in
     git-secret
     github-cli
   ];
-  programs.git =
+  programs =
     let
-      inherit (importChezmoiUserAppData "${user}") git;
+      inherit (importChezmoiUserAppData "${user}") git delta;
     in
     {
-      enable = true;
-      inherit (git) userEmail userName aliases;
-      signing = {
-        inherit (git.signing) key format signByDefault;
-      };
-      extraConfig = {
-        init = {
-          defaultBranch = "main";
+      git = {
+        enable = true;
+        settings = git.settings // {
+          init = {
+            defaultBranch = "main";
+          };
+          commit = {
+            template = "~/.config/git/message";
+          };
         };
-        commit = {
-          template = "~/.config/git/message";
+        signing = {
+          inherit (git.signing) key format signByDefault;
         };
+        lfs.enable = true;
       };
-      delta.enable = true;
-      lfs.enable = true;
+      delta = {
+        enable = true;
+        enableGitIntegration = true;
+        options = delta.git.delta;
+      };
     };
 
   xdg.configFile = importFilesFromChezmoi {

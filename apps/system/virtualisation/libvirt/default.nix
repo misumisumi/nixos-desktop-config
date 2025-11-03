@@ -15,7 +15,7 @@
     dmidecode # Show BIOS info
     virt-manager
     virtiofsd
-    win-virtio
+    virtio-win
   ];
   virtualisation = {
     libvirtd = {
