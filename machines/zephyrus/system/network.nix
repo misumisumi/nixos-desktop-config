@@ -89,9 +89,9 @@
       enable = true;
       trustedInterfaces = [
         "br0"
-        "waydroid0"
         "dev*"
         "incus*"
+        "waydroid0"
       ];
       allowedTCPPorts = [
         5353 # avahi

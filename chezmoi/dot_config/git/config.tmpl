@@ -4,6 +4,7 @@
 {{- end -}}
 {{- $userConfig := or (get .apps.users $userName) dict -}}
 {{- $gitConfig := or (get $userConfig "git") dict -}}
+{{- $deltaGitSettings := or (get (or (get $userConfig "delta") dict) "git") dict -}}
 {{- if not (empty $gitConfig) -}}
 [commit]
     template = "~/.config/git/message"
@@ -15,23 +16,15 @@
     required = true
     smudge = "git-lfs smudge -- %f"
 
-[core]
-    paper = {{ $gitConfig.paper | quote }}
-
 [gpg]
     format = {{ $gitConfig.signing.format | quote }}
 
-[init]
-    defaultBranch = "main"
-
-[interactive]
-    diffFilter = {{ $gitConfig.diffFilter | quote }}
-
 [tag]
     gpgSign = {{ $gitConfig.signing.signByDefault }}
-
-[user]
-    {{ if not (empty $gitConfig.userEmail) -}}email = {{ $gitConfig.userEmail | quote }}{{- end }}
-    {{ if not (empty $gitConfig.userName) -}}name = {{ $gitConfig.userName | quote }}{{- end }}
-    {{ if not (empty $gitConfig.signing.key) -}}signingKey = {{ $gitConfig.signing.key | quote }}{{- end }}
+{{ range $name, $settings := merge (or (get $gitConfig "settings") dict) $deltaGitSettings }}
+[{{ $name }}]
+    {{- range $key, $value := $settings }}
+    {{ $key }} = {{ $value | quote }}
+    {{- end }}
+{{ end }}
 {{- end -}}

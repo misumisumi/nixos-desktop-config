@@ -69,12 +69,24 @@ final: prev: {
       makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
     '';
   });
-  qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (old: {
-    patches = old.patches ++ [
-      ./qtile.patch
-    ];
-  });
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
+  python3 =
+    let
+      pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+        (pfinal: pprev: {
+          qtile = pprev.qtile.overrideAttrs (old: {
+            patches = old.patches or [ ] ++ [
+              ./qtile.patch
+            ];
+          });
+        })
+      ];
+      self = prev.python3.override {
+        inherit self;
+        packageOverrides = prev.lib.composeManyExtensions pythonPackagesOverlays;
+      };
+    in
+    self;
 }

@@ -14,7 +14,8 @@
       enable = true;
       trustedInterfaces = [
         "br0"
-        "incusbr0"
+        "dev*"
+        "incus*"
         "k8sbr0"
       ];
       # allowedUDPPorts = [

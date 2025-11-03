@@ -4,7 +4,7 @@
     evince # PDF viewer
     liberation_ttf # Font for Latex (replacement for arial, times, courier)
     lmodern # Font for LaTex (default of lualatex)
-    poppler_utils # A PDF rendering
+    poppler-utils # A PDF rendering
   ];
   xdg.configFile."latexmk/latexmkrc" = {
     enable = true;

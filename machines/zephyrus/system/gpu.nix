@@ -38,8 +38,8 @@
     nvidia-container-toolkit.enable = true;
     nvidia.open = false;
     graphics.extraPackages = with pkgs; [
+      libva-vdpau-driver
       libvdpau-va-gl
-      vaapiVdpau
       rocmPackages.clr.icd
     ];
   };

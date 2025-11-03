@@ -52,18 +52,10 @@ jobs:
               - chezmoi/.chezmoidata/apps/**
               - chezmoi/.chezmoitemplates/starship/**
 
-      - uses: easimon/maximize-build-space@master
-        if: steps.change.outputs.nix == 'true'
+      - uses: wimpysworld/nothing-but-nix@main
         with:
-          root-reserve-mb: 8192
-          swap-size-mb: 1024
-          temp-reserve-mb: 1024
-          build-mount-path: "/nix/store"
-          remove-dotnet: true
-          remove-android: true
-          remove-haskell: true
-          remove-codeql: true
-          remove-docker-images: true
+          hatchet-protocol: "rampage" # Options: holster, carve, cleave (default), rampage
+          root-safe-haven: "8192"
 
       - uses: actions/checkout@v5
         if: steps.change.outputs.nix == 'true'
