@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.1...v7.0.2) (2025-11-03)
+
+
+### Bug Fixes
+
+* deprecated packages ([cfc0604](https://github.com/misumisumi/nixos-desktop-config/commit/cfc0604df1c985dde13d2220aea42b9c72f361b3))
+* fix network for incus ([8f03a4b](https://github.com/misumisumi/nixos-desktop-config/commit/8f03a4b356da5c3cb70e307048e9096d1cc1a7b8))
+* fix some deprecated packages and options ([4e790ca](https://github.com/misumisumi/nixos-desktop-config/commit/4e790ca0cba5dd75319fb1ea593008d664c95191))
+* **incus:** add support open-vswitch and comment out old vlan interfaces ([3fb1150](https://github.com/misumisumi/nixos-desktop-config/commit/3fb1150f9b341544a1fb149b2fd7a240b5c3921e))
+
 ## [7.0.1](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.0...v7.0.1) (2025-10-27)
 
 
