@@ -12,7 +12,7 @@ diffFilter = "delta --color-only"
 [apps.users."kobayashi.sumiharu.r4".git.settings.user]
 email = "s.kobayashi@misumi-sumi.com"
 name = "misumisumi"
-[apps.users."kobayashi.sumiharu.r4".git.settings.aliases]
+[apps.users."kobayashi.sumiharu.r4".git.settings.alias]
 tree = "log --graph --oneline --decorate --all"                                           # logのツリー表示
 co-fixup = "commit --fixup"
 push-f = "push --force-with-lease"                                                        # pushの強制 (ローカルが最新で無い場合失敗する)
