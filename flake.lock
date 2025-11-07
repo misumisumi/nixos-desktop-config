@@ -259,11 +259,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1761982955,
-        "narHash": "sha256-hhi0Q7ajQoHGkCf3jtxBU7+GQmp8uc/sN7gBjUMcGRc=",
+        "lastModified": 1762526916,
+        "narHash": "sha256-p48PnLc/YlAvh5fdDPAytZYyiSYr7y/arYYnRorOWXg=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "5ba212d54499c5ac6d2c73ed0e1725637e4b15c0",
+        "rev": "28363505eb1f99c92173212a8f9ddc323bafe906",
         "type": "github"
       },
       "original": {
@@ -304,6 +304,26 @@
       "original": {
         "owner": "nix-community",
         "repo": "impermanence",
+        "type": "github"
+      }
+    },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762323829,
+        "narHash": "sha256-35bdOH7fGch+iHAwMVIGxtbl/zWKZlJZJ9Kl96PU/K8=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "23bbe6045f69a7497e2e65fe15e473a173425598",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
         "type": "github"
       }
     },
@@ -618,11 +638,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761977303,
-        "narHash": "sha256-Wk4MCIYXCCGSDrrgm2ZV0FB9ldljDj24TDeCKHEyeeo=",
+        "lastModified": 1762517430,
+        "narHash": "sha256-jXIG++5ILmsjEaZJ2ARWiwkB9bPdAWliFy/tApnam0o=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "98e5fcf4d981d769b09a07305f7c8f1bd456dd88",
+        "rev": "5e4caecea246ec8f5aa2dea73c45e998e3b19e64",
         "type": "github"
       },
       "original": {
@@ -641,6 +661,7 @@
         "flakes": "flakes",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "mcp-servers-nix": "mcp-servers-nix",
         "musnix": "musnix",
         "nixgl": "nixgl",
         "nixos-anywhere": "nixos-anywhere",

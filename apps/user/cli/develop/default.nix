@@ -1,6 +1,6 @@
 {
   imports = [
-    ./aichat
+    ./ai-tools
     ./direnv
     ./editorconfig
     ./fastfetch

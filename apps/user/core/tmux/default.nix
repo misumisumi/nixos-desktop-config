@@ -91,6 +91,8 @@
       baseIndex = 1;
 
       extraConfig = ''
+        set  -s repeat-time       0
+
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -s focus-events on
         setw -g xterm-keys on

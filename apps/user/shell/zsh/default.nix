@@ -50,7 +50,7 @@ in
           initExtra
         ];
       autosuggestion.enable = false;
-      enableCompletion = false;
+      enableCompletion = true;
       autocd = true;
 
       history = {

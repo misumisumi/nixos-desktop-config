@@ -27,6 +27,47 @@ signByDefault = false
 [apps.users.sumi.lazygit]
 paper = "delta --dark --paging=never"
 
+[apps.users.sumi.gemini-cli]
+defaultModel = "gemini-2.5-flash"
+[apps.users.sumi.gemini-cli.settings]
+[apps.users.sumi.gemini-cli.settings.general]
+vimMode = true
+disableAutoUpdate = true
+disableUpdateNag = true
+[apps.users.sumi.gemini-cli.settings.ui]
+theme = "GitHub"
+useAlternateBuffer = true
+[apps.users.sumi.gemini-cli.settings.security]
+[apps.users.sumi.gemini-cli.settings.security.auth]
+selectedType = "gemini-api-key"
+
+# MCP Servers settings
+[apps.users.sumi.mcp.mcpServers]
+[apps.users.sumi.mcp.mcpServers.github]
+command = "github-mcp-server"
+args = ["stdio", "--dynamic-toolsets"]
+[apps.users.sumi.mcp.mcpServers.github.env]
+GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT}"
+[apps.users.sumi.mcp.mcpServers.paper_search]
+command = "paper-search-mcp" # wrapped command made by me
+# [apps.users.sumi.mcp.mcpServers.discord]
+# command = "discord-mcp" # wrapped command made by me
+[apps.users.sumi.mcp.mcpServers.nixos]
+command = "mcp-nixos" # wrapped command made by me
+# [apps.users.sumi.mcp.mcpServers.terraform]
+# command = "terraform-mcp-server" # wrapped command made by me
+[apps.users.sumi.mcp.mcpServers.filesystem]
+command = "mcp-server-filesystem"              # wrapped command made by me
+args = ["~/Documents/", "~/Documents/memopad"]
+[apps.users.sumi.mcp.mcpServers.fetch]
+command = "mcp-server-fetch" # wrapped command made by me
+[apps.users.sumi.mcp.mcpServers.git]
+command = "mcp-server-git" # wrapped command made by me
+[apps.users.sumi.mcp.mcpServers.context7]
+command = "context7-mcp" # wrapped command made by me
+[apps.users.sumi.mcp.mcpServers.context7.env]
+CONTEXT7_API_KEY = "${CONTEXT7_API_KEY}"
+
 [apps.users.sumi.shell]
 historyIgnore = [
     "builtin *",
@@ -84,6 +125,14 @@ initExtra = '''
 setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
 setopt BARE_GLOB_QUAL        # 条件付け検索の有効化
 setopt MAGIC_EQUAL_SUBST     # cmd a=/to/pathの時に補完を効かせる
+
+# bind zoxide zi to Ctrl+D
+if [[ "$(whence -w __zoxide_zi | cut -d' ' -f2)" == "function" ]]; then
+  zle     -N             __zoxide_zi
+  bindkey -M emacs '\ed' __zoxide_zi
+  bindkey -M vicmd '\ed' __zoxide_zi
+  bindkey -M viins '\ed' __zoxide_zi
+fi
 
 set vi-cmd-mode-string "\1\e[?8c\2"
 set vi-ins-mode-string "\1\e[?0c\2"
