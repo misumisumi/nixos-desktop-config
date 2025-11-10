@@ -1,5 +1,7 @@
 {
   imports = [
     ./pkgs
+    ./yazi
+    ./zoxide
   ];
 }

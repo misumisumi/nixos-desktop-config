@@ -10,7 +10,5 @@
     ./pkgs
     ./translate-shell
     ./yaskkserv2
-    ./yazi
-    ./zoxide
   ];
 }

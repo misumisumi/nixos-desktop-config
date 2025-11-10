@@ -38,6 +38,15 @@ historyIgnore = [
     "mkdir *",
     "pkill *",
     "rm *",
+    # git commands
+    "git branch *",
+    "git checkout *",
+    "git log *",
+    "git pull *",
+    "git status*",
+    # zoxide
+    "z *",
+    "zi *",
 ]
 
 [apps.users.nixos.bash]
