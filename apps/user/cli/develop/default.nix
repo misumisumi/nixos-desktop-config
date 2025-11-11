@@ -1,6 +1,6 @@
 {
   imports = [
-    ./aichat
+    ./ai-tools
     ./direnv
     ./editorconfig
     ./fastfetch
@@ -10,7 +10,5 @@
     ./pkgs
     ./translate-shell
     ./yaskkserv2
-    ./yazi
-    ./zoxide
   ];
 }

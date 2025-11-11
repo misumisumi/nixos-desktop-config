@@ -619,6 +619,11 @@
             "ctrl+f12"
           ]
         },
+        "COMMAND_SHOW_TAB_BUTTON_POPOUT": {
+          "shortcuts": [
+            "ctrl+shift+a"
+          ]
+        },
         "COMMAND_SHOW_WEB_PANEL_1": {
           "shortcuts": [
             "shift+1",
@@ -1119,7 +1124,7 @@
         },
         {
           "background": "semi-transparent",
-          "folderId": "52",
+          "folderId": "221",
           "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
           "showThumbnail": false,
           "showTitle": false,
@@ -1151,6 +1156,7 @@
       "mail": false
     },
     "mail": {
+      "accounts": [],
       "auto_mark_as_read": false,
       "contact_default_action": 1,
       "counters": {
@@ -1177,7 +1183,7 @@
       "view_layout": 1
     },
     "mouse_wheel": {
-      "tab_switch": true
+      "tab_switch": false
     },
     "panels": {
       "as_overlay": {
@@ -1197,7 +1203,7 @@
         {
           "id": "PanelDownloads",
           "resizable": false,
-          "width": 400
+          "width": 534
         },
         {
           "id": "PanelHistory",
@@ -1313,7 +1319,7 @@
             "resizable": false,
             "title": "Obsidian Web Clipper",
             "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
-            "width": -1,
+            "width": 534,
             "zoom": 1
           }
         ],
@@ -1459,6 +1465,18 @@
             "url": "vivaldi://extensions/",
             "width": -1,
             "zoom": 1
+          },
+          {
+            "faviconUrl": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
+            "faviconUrlValid": true,
+            "id": "EXT_PANEL_cnjifjpddelmedmihgijeibhnjfabmlf",
+            "mobileMode": true,
+            "origin": "user",
+            "resizable": false,
+            "title": "Obsidian Web Clipper",
+            "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
+            "width": -1,
+            "zoom": 1
           }
         ]
       },
@@ -1468,7 +1486,7 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "WEBPANEL_4f2d325a-486d-44ba-a93f-f9fd487a3a44",
+        "selectedPanel": "PanelDownloads",
         "width": 534
       }
     },
@@ -1503,7 +1521,7 @@
         "height": 30,
         "position": 1,
         "slider_ypos": 31,
-        "width": 187
+        "width": 180
       }
     },
     "toolbars": {
@@ -1538,6 +1556,11 @@
         "EXT_PANEL_cnjifjpddelmedmihgijeibhnjfabmlf",
         "PanelWeb",
         "FlexibleSpacer"
+      ],
+      "tabbar_after": [
+        "NewTab",
+        "FlexibleSpacer",
+        "TabButton"
       ]
     }
   }

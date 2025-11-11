@@ -1,6 +1,10 @@
+{ pkgs, ... }:
 {
   imports = [
-    ../../cli/server
+    ../../cli/common
     ../../core
+  ];
+  home.packages = with pkgs; [
+    vim
   ];
 }

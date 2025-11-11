@@ -46,9 +46,10 @@ let
                   inputs
                   hostname
                   user
+                  colorTheme
                   homeDirectory
                   schemes
-                  colorTheme
+                  system
                   useNixOSWallpaper
                   ;
               };

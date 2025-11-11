@@ -10,6 +10,7 @@ in
 {
   home.packages = with pkgs; [
     git-ignore
+    git-crypt
     git-secret
     github-cli
   ];

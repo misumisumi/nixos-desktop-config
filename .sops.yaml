@@ -81,7 +81,7 @@ creation_rules:
           - *sumi
         age:
           - *work_laptop
-  - path_regex: sops/pkgs/[aichat,codecompanion]/*
+  - path_regex: sops/pkgs/ai-tools/*
     key_groups:
       - pgp:
           - *sumi

@@ -24,7 +24,7 @@
       };
       "aichat/config.yaml" = {
         path = "${config.xdg.configHome}/aichat/config.yaml";
-        sopsFile = ../../sops/pkgs/aichat/config.yaml.txt;
+        sopsFile = ../../sops/pkgs/ai-tools/config.yaml.txt;
         format = "binary";
       };
     };
