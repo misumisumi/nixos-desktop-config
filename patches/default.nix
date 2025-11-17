@@ -73,6 +73,8 @@ final: prev: {
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
+  # carla = prev.carla.overrideAttrs (old: {
+  # });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
