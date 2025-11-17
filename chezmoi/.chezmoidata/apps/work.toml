@@ -1,6 +1,7 @@
 ####################################################################################################
 # For linux
 ####################################################################################################
+# for server of work
 [apps.users."sumiharu.kobayashi"]
 
 [apps.users."sumiharu.kobayashi".delta]
@@ -29,7 +30,7 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users."sumiharu.kobayashi".lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"
 
 [apps.users."sumiharu.kobayashi".shell]
 historyIgnore = [
@@ -75,7 +76,7 @@ shellOptions = [
 ]
 [apps.users."sumiharu.kobayashi".bash.sessionVariables]
 
-
+# for laptop of work
 [apps.users.'BB\kobayashis1033']
 [apps.users.'BB\kobayashis1033'.git]
 userEmail = "sumiharu.kobayashi@g.softbank.co.jp"
@@ -95,4 +96,4 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users.'BB\kobayashis1033'.lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"

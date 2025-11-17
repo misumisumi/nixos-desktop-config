@@ -26,7 +26,7 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users.nixos.lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"
 
 [apps.users.nixos.shell]
 historyIgnore = [

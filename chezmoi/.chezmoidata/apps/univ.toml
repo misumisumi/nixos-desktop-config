@@ -25,7 +25,7 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users."kobayashi.sumiharu.r4".lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"
 
 [apps.users."kobayashi.sumiharu.r4".shell]
 historyIgnore = [

@@ -25,7 +25,7 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users.sumi.lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"
 
 [apps.users.sumi.gemini-cli]
 defaultModel = "gemini-2.5-flash"

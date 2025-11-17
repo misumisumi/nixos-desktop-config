@@ -238,6 +238,7 @@
             "ctrl+k"
           ]
         },
+        "COMMAND_FOCUS_TABBAR": {},
         "COMMAND_FOCUS_WEBVIEW": {
           "shortcuts": [
             "f9",
@@ -364,7 +365,9 @@
           "shortcuts": []
         },
         "COMMAND_MAIN_TOGGLE_TAB_BAR": {
-          "shortcuts": []
+          "shortcuts": [
+            "ctrl+i"
+          ]
         },
         "COMMAND_MAIN_TOGGLE_UI": {
           "shortcuts": [
