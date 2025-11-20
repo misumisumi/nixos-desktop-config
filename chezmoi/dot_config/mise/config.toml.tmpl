@@ -17,6 +17,10 @@
 {{ $miseTools := merge (or (get $hostMiseConfigs "tools") dict) (or (get $userMiseConfigs "tools") dict) -}}
 {{ toToml $miseTools }}
 
+[plugins]
+{{ $miseTools := merge (or (get $hostMiseConfigs "plugins") dict) (or (get $userMiseConfigs "plugins") dict) -}}
+{{ toToml $miseTools }}
+
 [settings]
 {{ $miseSettings := merge (or (get $hostMiseConfigs "settings") dict) (or (get $userMiseConfigs "settings") dict) -}}
 {{ toToml $miseSettings }}
