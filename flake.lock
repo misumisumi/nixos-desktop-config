@@ -638,11 +638,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763141305,
-        "narHash": "sha256-PTzbh+39UPWl5u3ckTwkgUKsr/Wn36bGs8UcGdXC6YA=",
+        "lastModified": 1763628032,
+        "narHash": "sha256-3J+JM+KSYWvlUWKaPmSAVyx39HxK1NlhnPrdskqy/r0=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "3b31a44da1aaea5c231fcb7a4e29b275be0c244b",
+        "rev": "4d4916ba0dd914f1f8a43bc56f958107fd6c320c",
         "type": "github"
       },
       "original": {
