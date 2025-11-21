@@ -84,7 +84,7 @@ jobs:
           fi
 
       - name: upload-evaluation-result
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: eval-warning-${{ matrix.hostname }}
           path: eval_warning-${{ matrix.hostname }}.log
