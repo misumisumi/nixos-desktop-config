@@ -1,5 +1,32 @@
 # Changelog
 
+## [8.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.2...v8.0.0) (2025-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename apps/user/cli/server to apps/user/cli/common
+
+### Features
+
+* add nvtop to desktop reset ([70f574f](https://github.com/misumisumi/nixos-desktop-config/commit/70f574fa2c03437c873d4e29fde660d0e66f8664))
+* enhanced ai-powered work tools ([783853b](https://github.com/misumisumi/nixos-desktop-config/commit/783853bf3491545ec619edac593d9d00f87db1f0))
+
+
+### Bug Fixes
+
+* **chezmoi:** fix mise install pkgs and tmux config ([2e2760e](https://github.com/misumisumi/nixos-desktop-config/commit/2e2760e273b9450307dbbdefca6542c84f300fc4))
+* **chezmoi:** fix missing git config ([be6acb6](https://github.com/misumisumi/nixos-desktop-config/commit/be6acb6b2b740bf482b16a78be1a3246eb47d546))
+* config ([1647dc7](https://github.com/misumisumi/nixos-desktop-config/commit/1647dc7b93d57d0b629ab529bd9f9b8c1a0209b4))
+* deprecated attr ([bcb4d2e](https://github.com/misumisumi/nixos-desktop-config/commit/bcb4d2e1955bcbd444ca11d7908f069f621fdc0b))
+* fix some missing config ([a8f5788](https://github.com/misumisumi/nixos-desktop-config/commit/a8f5788e246b7b32d686899b1f2f5c41875b4367))
+* **podman:** add support podman-compose ([07a053e](https://github.com/misumisumi/nixos-desktop-config/commit/07a053e4ea72b7223a862815f29f16252765f584))
+* rename apps/user/cli/server to apps/user/cli/common ([0c1b57f](https://github.com/misumisumi/nixos-desktop-config/commit/0c1b57fbbd4a07a59ccc13d0043efad6395ff0aa))
+* **stacia:** fix an issue where video output names would change depending on the situation ([4002b3b](https://github.com/misumisumi/nixos-desktop-config/commit/4002b3b110049c38e1cf977a91b4660d70ab5d62))
+* **stacia:** fix display device config ([35f5743](https://github.com/misumisumi/nixos-desktop-config/commit/35f5743b1c08ea4761fb15d3f6cb23f55c90e637))
+* **vivaldi:** update CommonPreferences and re-add enableWidevine ([15f79ea](https://github.com/misumisumi/nixos-desktop-config/commit/15f79eaeb2947a29a6631ea9eb2c37289de5d40d))
+* **zotero:** add better-bibtex config ([eb06adb](https://github.com/misumisumi/nixos-desktop-config/commit/eb06adb54a6766b1b962ff5f58a635db870c9f4b))
+
 ## [7.0.2](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.1...v7.0.2) (2025-11-03)
 
 
