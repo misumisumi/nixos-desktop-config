@@ -3,6 +3,7 @@
   services = {
     xserver = {
       exportConfiguration = true;
+      enableTearFree = true;
       videoDrivers = [
         "amdgpu"
         "nvidia"
@@ -12,7 +13,6 @@
       '';
       deviceSection = ''
         Option "DRI" "3"
-        Option "TearFree" "true"
       '';
       extraConfig = ''
         Section "Device"
@@ -25,6 +25,13 @@
           Identifier     "DVI-D-0"
           Option         "Primary" "true"
           Option         "PreferredMode" "1920x1200"
+        EndSection
+
+        Section "Monitor"
+          Identifier     "HDMI-A-0"
+          Option         "PreferredMode" "1920x1080"
+          Option         "LeftOf" "DVI-D-0"
+          Option         "Rotate" "left"
         EndSection
 
         Section "Monitor"

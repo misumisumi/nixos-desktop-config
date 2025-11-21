@@ -74,7 +74,13 @@ jobs:
               LAST="$"
             fi
 
-            sed -n ''"${START}"','"${LAST}"'p' <"${TMPFILE}" | grep -v "unpacking" | grep -v "copying path" | grep -v "building" | sed -e "s/'/\`/g" >eval_warning-${{ matrix.hostname }}.log
+            # shellcheck disable=SC2016
+            sed -n ''"${START}"','"${LAST}"'p' <"${TMPFILE}" \
+              | grep -v "unpacking" \
+              | grep -v "copying path" \
+              | grep -v "building" \
+              | grep -v '`system` has been renamed to/replaced by `stdenv.hostPlatform.system`' \
+              | sed -e "s/'/\`/g" > "eval_warning-${{ matrix.hostname }}.log"
           fi
 
       - name: upload-evaluation-result

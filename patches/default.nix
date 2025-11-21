@@ -55,6 +55,7 @@ final: prev: {
   vivaldi =
     (prev.vivaldi.override {
       commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+      enableWidevine = true;
     }).overrideAttrs
       (old: {
         postInstall = ''
@@ -72,6 +73,8 @@ final: prev: {
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
+  # carla = prev.carla.overrideAttrs (old: {
+  # });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [

@@ -91,10 +91,16 @@
       baseIndex = 1;
 
       extraConfig = ''
+        set -g repeat-time 0
+
         set -ag terminal-overrides ",xterm-256color:RGB"
         set -s focus-events on
         setw -g xterm-keys on
         set -g mouse on
+        # clipboard
+        set -g set-clipboard external
+        set -g allow-passthrough on
+        set -g terminal-features 'xterm*:clipboard'
 
         setw -g window-active-style fg='#c0caf5',bg='#24283b'
         setw -g window-style fg='#a9b1d6',bg='#1d202f'

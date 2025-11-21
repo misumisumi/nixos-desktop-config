@@ -29,7 +29,7 @@ JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
 LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
 MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
-LD_LIBRARY_PATH = "find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'"
+LD_LIBRARY_PATH = "$(find /disk/fs1/soft/cuda/cuda-* -maxdepth 1 -name \"lib64\" -exec printf \"%s:\" {} + | sed 's/:$//'):$LD_LIBRARY_PATH"
 CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.4.1_cudnn-9.2.0.82/lib64"
 LESSOPEN = "|lesspipe %s"
 LANG = "en-US.UTF-8"
@@ -52,7 +52,8 @@ not_found_auto_install = true
 auto_install = true
 experimental = true
 idiomatic_version_file_enable_tools = []
-
+[linux.users.sumi.packages.mise.plugins]
+neovim = "asdf:neovim"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"

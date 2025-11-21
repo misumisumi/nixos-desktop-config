@@ -14,6 +14,9 @@
 
   environment = {
     # etc."nvidia-container-runtime/config.toml".source = "${pkgs.nvidia-podman}/etc/nvidia-container-runtime/config.toml";
-    systemPackages = with pkgs; [ buildah ];
+    systemPackages = with pkgs; [
+      buildah
+      podman-compose
+    ];
   };
 }

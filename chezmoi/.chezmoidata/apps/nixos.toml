@@ -13,7 +13,7 @@ diffFilter = "delta --color-only"
 [apps.users.nixos.git.settings.user]
 email = ""
 name = ""
-[apps.users.nixos.git.settings.aliases]
+[apps.users.nixos.git.settings.alias]
 tree = "log --graph --oneline --decorate --all"                                           # logのツリー表示
 co-fixup = "commit --fixup"
 push-f = "push --force-with-lease"                                                        # pushの強制 (ローカルが最新で無い場合失敗する)
@@ -26,7 +26,7 @@ format = "openpgp"
 signByDefault = false
 
 [apps.users.nixos.lazygit]
-paper = "delta --dark --paging=never"
+paper = "delta --paging=never"
 
 [apps.users.nixos.shell]
 historyIgnore = [
@@ -38,6 +38,15 @@ historyIgnore = [
     "mkdir *",
     "pkill *",
     "rm *",
+    # git commands
+    "git branch *",
+    "git checkout *",
+    "git log *",
+    "git pull *",
+    "git status*",
+    # zoxide
+    "z *",
+    "zi *",
 ]
 
 [apps.users.nixos.bash]
