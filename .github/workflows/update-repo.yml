@@ -101,7 +101,7 @@ jobs:
           private_key: ${{ secrets.PRIVATE_KEY }}
 
       - name: download-evaluation-result
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: eval-warning-*
           path: downloaded_eval-warnings
