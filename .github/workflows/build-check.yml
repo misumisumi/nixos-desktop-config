@@ -57,7 +57,7 @@ jobs:
           hatchet-protocol: "rampage" # Options: holster, carve, cleave (default), rampage
           root-safe-haven: "8192"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         if: steps.change.outputs.nix == 'true'
 
       - uses: cachix/install-nix-action@v31
