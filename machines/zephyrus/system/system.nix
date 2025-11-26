@@ -24,6 +24,7 @@
   };
   time.timeZone = lib.mkForce null;
   services = {
+    checkLinkBeforeShutdown.enable = true;
     upower.enable = true;
     automatic-timezoned.enable = true;
     asusd = {

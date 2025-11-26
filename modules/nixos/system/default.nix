@@ -1,0 +1,99 @@
+{
+  lib,
+  pkgs,
+  config,
+  user,
+  self,
+  ...
+}:
+with lib;
+{
+  options = {
+    system.linkCheck = mkOption {
+      type = types.package;
+      internal = true;
+    };
+  };
+  config = {
+    system.linkCheck =
+      let
+        storeDir = lib.escapeShellArg builtins.storeDir;
+        dontCheck = [ "resolv.conf" ];
+        srcTargetPathes = lib.concatStringsSep " " (
+          lib.mapAttrsToList (name: value: "${value.source}=${value.target}") (
+            lib.filterAttrs (n: v: (all (x: x != n) dontCheck) && v.mode == "symlink") config.environment.etc
+          )
+        );
+        check = pkgs.replaceVarsWith {
+          src = ./check-link-targets.sh;
+          isExecutable = true;
+          replacements = {
+            inherit storeDir srcTargetPathes;
+          };
+        };
+      in
+      pkgs.writeShellScriptBin "nixos-link-check" ''
+        ${check}
+        ${optionalString
+          (
+            builtins.hasAttr "home-manager" config
+            && builtins.hasAttr "linkCheck" config.home-manager.users.${user}.home
+          )
+          ''
+            if [ -z "''${SUDO_USER}" ]; then
+              ${config.home-manager.users.${user}.home.linkCheck}/bin/home-manager-link-check
+            else
+              ${pkgs.sudo}/bin/sudo -u "''${SUDO_USER}" ${
+                config.home-manager.users.${user}.home.linkCheck
+              }/bin/home-manager-link-check
+            fi
+          ''
+        }
+      '';
+    #NOTE: nixos-rebuild-ng have been default since 25.11
+    # Old nixos-rebuild cmd can use by settings system.rebuild.enableNg = false but this option will be removed in the future
+    # So I override the nixos-rebuild to always use nixos-rebuild-ng here with custom wrapper script
+    system.build.nixos-rebuild = lib.mkForce (
+      let
+        nixos-rebuild' = pkgs.nixos-rebuild-ng.override {
+          withReexec = true;
+          withNgSuffix = false;
+        };
+      in
+      pkgs.writeShellScriptBin "nixos-rebuild" ''
+        set -euo pipefail
+
+        parse_params() {
+          # default values of variables set from params
+          count=0
+          flake=""
+          boot=0
+          while (( $# > 0 )) do
+            count=''$((count + 1))
+            case "''${1-}" in
+            --flake) shift
+              flake=''${1-}
+              flake=''${flake//.*#/}
+              count="''$((count + 1))"
+              break
+            ;;
+            boot) boot=1 ;;
+            esac
+            shift
+          done
+
+          count="''$((count + 1))"
+          return 0
+        }
+
+        parse_params "''$@"
+        ${nixos-rebuild'}/bin/nixos-rebuild "''$@"
+
+        if [ "''${boot}" -eq 1 ]; then
+          echo "Running link check for flake: ''${flake}"
+          nix run "${self}#nixosConfigurations.''${flake}.config.system.linkCheck" --offline
+        fi
+      ''
+    );
+  };
+}

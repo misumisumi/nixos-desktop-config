@@ -23,6 +23,7 @@
   };
   users.users.${user}.extraGroups = [ "user" ];
   services = {
+    checkLinkBeforeShutdown.enable = true;
     printing = {
       drivers = with pkgs; [
         cnijfilter2

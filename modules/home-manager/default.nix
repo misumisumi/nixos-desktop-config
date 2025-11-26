@@ -1,8 +1,13 @@
-{ self, lib, ... }:
+{
+  self,
+  lib,
+  ...
+}:
 {
   imports = [
     ./dotfiles.nix
     ./dotnet.nix
+    ./home.nix
     ./qtile.nix
     ./zsh.nix
   ];

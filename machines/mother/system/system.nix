@@ -13,6 +13,7 @@
     ];
   };
   services = {
+    checkLinkBeforeShutdown.enable = true;
     printing.drivers = with pkgs; [
       cnijfilter2
     ];
