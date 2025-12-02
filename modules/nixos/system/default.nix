@@ -71,13 +71,14 @@ with lib;
           while (( $# > 0 )) do
             count=''$((count + 1))
             case "''${1-}" in
-            --flake) shift
+            --flake)
+              shift
               flake=''${1-}
               flake=''${flake//.*#/}
               count="''$((count + 1))"
-              break
-            ;;
-            boot) boot=1 ;;
+              ;;
+            boot) boot=1
+              ;;
             esac
             shift
           done
@@ -89,9 +90,9 @@ with lib;
         parse_params "''$@"
         ${nixos-rebuild'}/bin/nixos-rebuild "''$@"
 
-        if [ "''${boot}" -eq 1 ]; then
+        if [ "''${SHLVL}" -eq 1 ] && [ "''${boot}" -eq 1 ] && [ "''${flake}" != "" ]; then
           echo "Running link check for flake: ''${flake}"
-          nix run "${self}#nixosConfigurations.''${flake}.config.system.linkCheck" --offline
+          nix run --offline "${self}#nixosConfigurations.''${flake}.config.system.linkCheck"
         fi
       ''
     );

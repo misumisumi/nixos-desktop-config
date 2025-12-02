@@ -1,7 +1,7 @@
 {
   imports = [
     ./system
-    ./system/service.nix
+    ./system/programs.nix
     ./xp-pentablet.nix
   ];
 }

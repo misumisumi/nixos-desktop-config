@@ -23,8 +23,8 @@
     ];
   };
   time.timeZone = lib.mkForce null;
+  programs.poweroff'.enable = true;
   services = {
-    checkLinkBeforeShutdown.enable = true;
     upower.enable = true;
     automatic-timezoned.enable = true;
     asusd = {

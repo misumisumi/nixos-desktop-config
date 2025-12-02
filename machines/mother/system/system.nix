@@ -12,8 +12,8 @@
       "v4l2loopback"
     ];
   };
+  programs.poweroff'.enable = true;
   services = {
-    checkLinkBeforeShutdown.enable = true;
     printing.drivers = with pkgs; [
       cnijfilter2
     ];
