@@ -50,7 +50,6 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  canon-cups-ufr2 = prev.callPackage ./canon-cups-ufr2.nix { };
   xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   vivaldi =
     (prev.vivaldi.override {

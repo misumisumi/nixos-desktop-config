@@ -24,12 +24,6 @@
   users.users.${user}.extraGroups = [ "user" ];
   services = {
     checkLinkBeforeShutdown.enable = true;
-    printing = {
-      drivers = with pkgs; [
-        cnijfilter2
-        canon-cups-ufr2
-      ];
-    };
     pipewire.extraConfig.pipewire-pulse = {
       native-protocol-tcp = {
         pulse.cmd = [
