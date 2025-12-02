@@ -43,20 +43,23 @@ in
     ])
     ++ [
       # mcp servers
-      mcp-nixos
       github-mcp-server
-      paper-search-mcp
+      mcp-nixos
       mcp-server-filesystem
       mcp-server-memory
-      (inputs.mcp-servers-nix.packages.${system}.mcp-server-fetch.overrideAttrs (old: {
+      mcp-server-sequential-thinking
+      paper-search-mcp
+    ]
+    ++ (with inputs.mcp-servers-nix.packages.${system}; [
+      (mcp-server-fetch.overrideAttrs (old: {
         postPatch = ''
           substituteInPlace src/mcp_server_fetch/server.py \
           --replace-fail "AsyncClient(proxies=" "AsyncClient(proxy="
         '';
       }))
-      inputs.mcp-servers-nix.packages.${system}.mcp-server-git
-      inputs.mcp-servers-nix.packages.${system}.context7-mcp
-    ];
+      mcp-server-git
+      context7-mcp
+    ]);
   xdg.configFile = {
     "aichat/roles" = {
       source = ./roles;
