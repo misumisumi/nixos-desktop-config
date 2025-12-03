@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.0.0...v8.1.0) (2025-12-03)
+
+
+### Features
+
+* add symlink check scripts and systemd.service, extended nixos-rebuild ([06ff24d](https://github.com/misumisumi/nixos-desktop-config/commit/06ff24d292598ff015ba097f832700f7c903f8f9))
+
+
+### Bug Fixes
+
+* **flake:** NixOS 25.05 deprecated so replace to 25.11 ([fa95fd2](https://github.com/misumisumi/nixos-desktop-config/commit/fa95fd2d89c5a763bb68633f7f3243c739b21d4e))
+* **nixosModules:** replace systemd.service to cmd ([30a47ef](https://github.com/misumisumi/nixos-desktop-config/commit/30a47efbcccce91b45995a11efae709117fc2d44))
+* **patches:** remove canon-cups-ufr2 driver ([6cd07aa](https://github.com/misumisumi/nixos-desktop-config/commit/6cd07aaf247bd46b7892f3b818c22a726c661b43))
+* **sops:** update ssh config ([26b5193](https://github.com/misumisumi/nixos-desktop-config/commit/26b5193527cc88b70611d136b2b1210bcb058f6f))
+
 ## [8.0.0](https://github.com/misumisumi/nixos-desktop-config/compare/v7.0.2...v8.0.0) (2025-11-21)
 
 
