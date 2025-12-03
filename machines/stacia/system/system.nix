@@ -22,13 +22,8 @@
     ];
   };
   users.users.${user}.extraGroups = [ "user" ];
+  programs.poweroff'.enable = true;
   services = {
-    printing = {
-      drivers = with pkgs; [
-        cnijfilter2
-        canon-cups-ufr2
-      ];
-    };
     pipewire.extraConfig.pipewire-pulse = {
       native-protocol-tcp = {
         pulse.cmd = [
