@@ -1,0 +1,134 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+{{- $mcpServers := or (get $userPkgConfigs "mcp-servers") dict -}}
+
+#!/usr/bin/env bash
+
+function logging() {
+  echo "$(basename "$0"): $*"
+}
+
+if command -v mise &>/dev/null; then
+  eval "$("$(brew --prefix mise)/bin/mise activate bash")"
+elif [ -x "$HOME/.local/bin/mise" ]; then
+  eval "$("$HOME/.local/bin/mise" activate bash)"
+fi
+if ! command -v npm &>/dev/null; then
+  logging "npm is not installed. Please install Node.js and npm first."
+  exit 1
+fi
+if ! command -v python &>/dev/null; then
+  logging "python is not installed. Please install Python first."
+  exit 1
+fi
+if ! command -v go &>/dev/null; then
+  logging "Go is not installed. Please install Go first."
+  exit 1
+fi
+
+function install_node_package() {
+  name=$1
+  pname=$2
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Installing package: $1 ..."
+
+  mkdir -p "${_PKGDIR}"
+  pushd "${_PKGDIR}" || return
+  npm install "${pname}"
+  ln -sf "${_PKGDIR}/node_modules/.bin/${name}" "${BINDIR}/${name}"
+  popd || return
+
+  logging "Package '${name}' installed successfully."
+}
+
+# Function to install a Python package
+function install_pip_package() {
+  name=$1
+  pname=$2
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Installing package: $name ..."
+
+  mkdir -p "${_PKGDIR}"
+  pushd "${_PKGDIR}" || return
+  python -m venv venv
+  "${_PKGDIR}/venv/bin/python" -m pip install "${pname}"
+  ln -sf "${_PKGDIR}/venv/bin/${name}" "${BINDIR}/${name}"
+  popd || return
+
+  logging "Package '${name}' installed successfully."
+}
+
+function install_python_package() {
+  name=$1
+  giturl=$2
+  mname=$3
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Installing package: $name ..."
+
+  mkdir -p "${_PKGDIR}"
+  pushd "${_PKGDIR}" || return
+  git clone "${giturl}" .
+  python -m venv venv
+  "${_PKGDIR}/venv/bin/python" -m pip install -e .
+  if [ "${mname##*.}" == ".py" ]; then
+    script=$(find "${_PKGDIR}" -type f -name "${mname}")
+    cat <<EOF >"${BINDIR}/${name}"
+#!/usr/bin/env bash
+
+exec "${_PKGDIR}/venv/bin/python" ${script} "$@"
+EOF
+  else
+    cat <<EOF >"${BINDIR}/${pname}"
+#!/usr/bin/env bash
+
+exec "${_PKGDIR}/venv/bin/python" -m ${mname} "$@"
+EOF
+  fi
+  popd || return
+
+  logging "Package '${name}' installed successfully."
+}
+
+MCP_SERVERS_ROOT="${MCP_SERVERS_ROOT:-$XDG_DATA_HOME/mcp-servers}"
+PKGDIR="${MCP_SERVERS_ROOT}/packages"
+BINDIR="${MCP_SERVERS_ROOT}/bin"
+mkdir -p "${BINDIR}"
+
+{{ range $type, $pkgs := $mcpServers -}}
+{{ if (eq $type "node") -}}
+{{ range $name, $pname := $pkgs -}}
+install_node_package {{ $name }} {{ $pname }}
+{{ end -}}
+{{ else if (eq $type "pip") -}}
+{{ range $name, $pname := $pkgs -}}
+install_pip_package {{ $name }} {{ $pname }}
+{{ end -}}
+{{ else if (eq $type "python") -}}
+{{ range $name, $value := $pkgs -}}
+install_python_package {{ $name }} {{ $value.giturl }} {{ $value.module }}
+{{ end -}}
+{{ else if (eq $type "general") -}}
+{{ range $name, $value := $pkgs -}}
+name={{ $name }}
+_PKGDIR="${PKGDIR}/${name}"
+
+logging "Installing package: $name ..."
+
+mkdir -p "${_PKGDIR}"
+pushd "${_PKGDIR}" || return
+{{ $value }}
+popd || return
+
+logging "Package '${name}' installed successfully."
+{{ end -}}
+{{ end -}}
+{{ end -}}
+
+logging "Finish"

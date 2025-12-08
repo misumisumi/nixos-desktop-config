@@ -45,6 +45,21 @@ TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 [linux.users.sumi.env.alias]
 vimdiff = "nvim -d"
 
+[linux.users.sumi.packages.mcp-servers.node] # name = "package_name", name is executable name
+mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
+context7-mcp = "@upstash/context7-mcp"
+[linux.users.sumi.packages.mcp-servers.pip] # name = "module_name", name is executable name
+mcp-server-git = "mcp_server_git"
+mcp-nixos = "mcp_nixos"
+[linux.users.sumi.packages.mcp-servers.general] # name = "module_name", name is executable name
+github-mcp-server = """
+curl -L https://github.com/github/github-mcp-server/releases/download/v0.22.0/github-mcp-server_Linux_x86_64.tar.gz -o /tmp/github-mcp-server.tar.gz
+tar -xvf /tmp/github-mcp-server.tar.gz -C "${_PKGDIR}"
+ln -rsf "${_PKGDIR}/github-mcp-server" "${BINDIR}/github-mcp-server"
+"""
+
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true
 always_keep_download = false
