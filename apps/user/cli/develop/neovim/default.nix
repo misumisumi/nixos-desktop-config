@@ -22,6 +22,15 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      extraWrapperArgs = [
+        "--set"
+        "NPM_CONFIG_PREFIX"
+        "${config.home.homeDirectory}/.local"
+        "--prefix"
+        "PATH"
+        ":"
+        "${config.home.homeDirectory}/.local/bin"
+      ];
       extraPackages = with pkgs; [
         (commitlint.withPlugins (
           ps: with ps; [

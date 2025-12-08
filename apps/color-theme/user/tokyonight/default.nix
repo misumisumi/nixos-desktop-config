@@ -91,18 +91,26 @@ in
         colorScheme = "${fixedFlavor.${flavor}}";
       };
   };
-  home.sessionVariables = {
-    LG_CONFIG_FILE =
-      let
-        enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-        configDirectory =
-          if enableXdgConfig then
-            config.xdg.configHome
-          else
-            "${config.home.homeDirectory}/Library/Application Support";
-        configFile = "${configDirectory}/lazygit/config.yml";
-      in
-      "${pack}/lazygit/tokyonight_${flavor}.yml,${configFile}";
+  home = {
+    sessionVariables = {
+      LG_CONFIG_FILE =
+        let
+          enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
+          configDirectory =
+            if enableXdgConfig then
+              config.xdg.configHome
+            else
+              "${config.home.homeDirectory}/Library/Application Support";
+          configFile = "${configDirectory}/lazygit/config.yml";
+        in
+        "${pack}/lazygit/tokyonight_${flavor}.yml,${configFile}";
+    };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    pointerCursor = {
+      name = "Dracula-cursors";
+      package = pkgs.dracula-theme;
+    };
   };
   services.dunst.settings = lib.importTOML "${pack}/dunst/tokyonight_${flavor}.dunstrc";
 
@@ -146,13 +154,11 @@ in
         name = "Tokyonight-${shade}";
         package = pkgs.tokyonight-gtk-theme;
       };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-  };
-  home.pointerCursor = {
-    name = "Dracula-cursors";
-    package = pkgs.dracula-theme;
   };
 }
