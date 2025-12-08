@@ -5,7 +5,13 @@
   ...
 }:
 {
-  hardware.brillo.enable = true; # for brightness control from users in the video group
+  hardware = {
+    brillo.enable = true; # for brightness control from users in the video group
+    keyboard.qmk = {
+      enable = true;
+      keychronSupport = true;
+    };
+  };
   boot = {
     initrd.systemd.enable = true;
     kernel.sysctl = {
