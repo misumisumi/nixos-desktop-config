@@ -6,7 +6,6 @@ let
       hostname,
       user,
       system ? "x86_64-linux",
-      homeDirectory ? "",
       schemes ? [ ],
       colorTheme ? null,
       useNixOSWallpaper ? true,
@@ -47,7 +46,6 @@ let
                   hostname
                   user
                   colorTheme
-                  homeDirectory
                   schemes
                   system
                   useNixOSWallpaper

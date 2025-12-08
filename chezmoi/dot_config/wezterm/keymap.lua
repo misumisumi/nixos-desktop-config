@@ -224,7 +224,9 @@ local config = {
         { key = "+", mods = "CTRL|SHIFT", action = act.IncreaseFontSize },
         { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
         { key = "=", mods = "CTRL", action = act.ResetFontSize },
-        { key = "=", mods = "CTRL|SHIFT", action = act.ResetFontSize }, -- for jp key
+        -- for jp key
+        { key = ";", mods = "CTRL", action = act.IncreaseFontSize },
+        { key = "=", mods = "CTRL|SHIFT", action = act.ResetFontSize },
         -- clipboard
         { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
         { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
@@ -237,6 +239,8 @@ local config = {
                 win:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
             end),
         },
+        -- for jp key}
+        { key = "¥", mods = "ALT", action = act.SendString("\\") },
     },
 }
 

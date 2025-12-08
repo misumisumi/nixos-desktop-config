@@ -259,11 +259,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1764961670,
-        "narHash": "sha256-wL4SDfzSX6cVBjr9mEMj3/NACMjIdxqaapPIbnAqYMU=",
+        "lastModified": 1765240286,
+        "narHash": "sha256-n6HLHjgAn5OFka6XQOZ0qIhWkJveliEYMpLBhHgUHzs=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "0057cf70a121b59cc18e894bb2f61803b763430a",
+        "rev": "2c4b9877f8d37775ce722862b3e8b71e8193d35a",
         "type": "github"
       },
       "original": {
@@ -344,6 +344,26 @@
       "original": {
         "owner": "musnix",
         "repo": "musnix",
+        "type": "github"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765065051,
+        "narHash": "sha256-b7W9WsvyMOkUScNxbzS45KEJp0iiqRPyJ1I3JBE+oEE=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "7e22bf538aa3e0937effcb1cee73d5f1bcc26f79",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
         "type": "github"
       }
     },
@@ -663,6 +683,7 @@
         "impermanence": "impermanence",
         "mcp-servers-nix": "mcp-servers-nix",
         "musnix": "musnix",
+        "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",

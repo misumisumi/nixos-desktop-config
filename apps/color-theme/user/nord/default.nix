@@ -28,6 +28,12 @@
         colorScheme = "Nord";
       };
   };
+  home = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    home.pointerCursor = {
+      name = "Nordzy-cursors";
+      package = pkgs.nordzy-cursor-theme;
+    };
+  };
   xdg.configFile = {
     "fcitx5/conf/classicui.conf" = {
       enable = config.i18n.inputMethod.enabled == "fcitx5";
@@ -62,13 +68,11 @@
       name = "Nordic-darker";
       package = pkgs.nordic;
     };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {
       name = "Nordzy-dark";
       package = pkgs.nordzy-icon-theme;
     };
-  };
-  home.pointerCursor = {
-    name = "Nordzy-cursors";
-    package = pkgs.nordzy-cursor-theme;
   };
 }

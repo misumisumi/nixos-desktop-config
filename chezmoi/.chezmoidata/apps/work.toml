@@ -1,6 +1,154 @@
 ####################################################################################################
 # For linux
 ####################################################################################################
+# for macbook of work
+[apps.users."kobayashis1033"]
+
+[apps.users."kobayashis1033".delta]
+[apps.users."kobayashis1033".delta.git]
+[apps.users."kobayashis1033".delta.git.core]
+paper = "delta"
+[apps.users."kobayashis1033".delta.git.interactive]
+diffFilter = "delta --color-only"
+[apps.users."kobayashis1033".delta.git.delta]
+
+[apps.users."kobayashis1033".git]
+useDelta = true
+[apps.users."kobayashis1033".git.settings.user]
+email = "kobayashis1033@g.softbank.co.jp"
+name = "Sumiharu Kobayashi"
+[apps.users."kobayashis1033".git.settings.alias]
+tree = "log --graph --oneline --decorate --all"                                           # logのツリー表示
+co-fixup = "commit --fixup"
+push-f = "push --force-with-lease"                                                        # pushの強制 (ローカルが最新で無い場合失敗する)
+rebase-i = "rebase -i --autosquash"                                                       #
+branch-clear = "!git branch --merged origin/HEAD | grep -vE 'HEAD' | xargs git branch -d"
+rebase-origin = "!git fetch origin --prune && git rebase origin/HEAD"
+[apps.users."kobayashis1033".git.signing]
+key = ""
+format = "openpgp"
+signByDefault = false
+
+[apps.users."kobayashis1033".lazygit]
+paper = "delta --paging=never"
+
+[apps.users."kobayashis1033".shell]
+historyIgnore = [
+    "builtin *",
+    "cd *",
+    "history *",
+    "kill *",
+    "ls *",
+    "mkdir *",
+    "pkill *",
+    "rm *",
+    # git commands
+    "git branch *",
+    "git checkout *",
+    "git log *",
+    "git pull *",
+    "git status*",
+    # zoxide
+    "z *",
+    "zi *",
+]
+
+[apps.users."kobayashis1033".bash]
+bashrcExtra = ""
+initExtra = '''
+function share_history {  # 以下の内容を関数として定義
+    history -a  # .bash_historyに前回コマンドを1行追記
+    history -c  # 端末ローカルの履歴を一旦消去
+    history -r  # .bash_historyから履歴を読み込み直す
+}
+PROMPT_COMMAND="share_history; ${PROMPT_COMMAND}"  # 上記関数をプロンプト毎に自動実施
+'''
+logoutExtra = ""
+profileExtra = """
+eval "$(sops decrypt $HOME/.local/share/chezmoi/sops/users/work/secrets.yaml --extract '["bash"]["profileExtra"]')"
+"""
+shellOptions = [
+    "-histappend",
+    "checkwinsize",
+    "extglob",
+    "globstar",
+    "checkjobs",
+]
+[apps.users."kobayashis1033".bash.sessionVariables]
+[apps.users.kobayashis1033.zsh]
+extraFunctions = ["zargs", "zmv", "zcp", "zln"]
+extraModules = ["attr"]
+extraOptions = [
+    "EXTENDED_GLOB",     # 拡張GRUBの有効化(^: 否定、~: 除外)
+    "BARE_GLOB_QUAL",    # 条件付け検索の有効化
+    "MAGIC_EQUAL_SUBST", # cmd a=/to/pathの時に補完を効かせる
+]
+
+envExtra = '''
+# Compatibilize with bash
+export HOSTNAME=$(hostname)
+'''
+initExtraFirst = '''
+# Calc startup time
+# zmodload zsh/zprof
+# zprof
+'''
+initExtraBeforeCompInit = ''''''
+initExtra = '''
+# The plugin will auto execute this zvm_after_init function
+setopt EXTENDED_GLOB         # 拡張GRUBの有効化(^: 否定、~: 除外)
+setopt BARE_GLOB_QUAL        # 条件付け検索の有効化
+setopt MAGIC_EQUAL_SUBST     # cmd a=/to/pathの時に補完を効かせる
+
+# bind zoxide zi to Ctrl+D
+if [[ "$(whence -w __zoxide_zi | cut -d' ' -f2)" == "function" ]]; then
+  zle     -N             __zoxide_zi
+  bindkey -M emacs '\ed' __zoxide_zi
+  bindkey -M vicmd '\ed' __zoxide_zi
+  bindkey -M viins '\ed' __zoxide_zi
+fi
+
+set vi-cmd-mode-string "\1\e[?8c\2"
+set vi-ins-mode-string "\1\e[?0c\2"
+# For marlonrichert/zsh-autocomplete
+zstyle -e ':autocomplete:history-search-backward:*' list-lines 'reply=$(( LINES / 2 ))'
+zstyle ':autocomplete:*' min-delay 0.1
+zstyle ':completion:*' remote-access no
+zstyle ':completion:*' completer \
+    _complete _complete:-fuzzy _correct _approximate _ignored
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+'''
+[apps.users.kobayashis1033.zsh.localVariables]
+ZVM_VI_INSERT_ESCAPE_BINDKEY = "jj"
+ZVM_VI_VISUAL_ESCAPE_BINDKEY = "jj"
+ZVM_VI_OPPEND_ESCAPE_BINDKEY = "jj"
+ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT"
+ZVM_LAZY_KEYBINDINGS = false
+ABBR_QUIET = 1
+
+[apps.users.kobayashis1033.zsh.zinit]
+[apps.users.kobayashis1033.zsh.zinit.plugins]
+"lucid blockf depth=1 light-mode" = ["marlonrichert/zsh-autocomplete"]
+"wait'0a' lucid blockf depth=1 light-mode" = [
+    "atload'_zsh_autosuggest_start' zsh-users/zsh-autosuggestions",
+    "atload'zvm_init; zvm_update_cursor' jeffreytse/zsh-vi-mode",
+]
+"wait'!0b' lucid blockf depth=1 light-mode" = [
+    "zdharma-continuum/fast-syntax-highlighting",
+]
+"wait'!1a' lucid blockf depth=1 light-mode" = [
+    "hlissner/zsh-autopair",
+    "olets/zsh-abbr",
+]
+"wait'1c' lucid" = [
+    "atload'. ./aichat.zsh' https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/scripts/completions/aichat.zsh",
+]
+[apps.users.kobayashis1033.zsh.zinit.prezto]
+pmodules = ["helper", "spectrum"]
+[apps.users.kobayashis1033.zsh.zinit.prezto.pmodulesWithModifier]
+"wait'1c' lucid" = ["terminal", "directory"]
+
 # for server of work
 [apps.users."sumiharu.kobayashi"]
 
