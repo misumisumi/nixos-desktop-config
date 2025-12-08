@@ -7,6 +7,7 @@ keys:
     - &sumi_zephyrus age1svkysj8mj8u2k9cag4l0pthf7t3e8jn2jy0ygacper8f349k299q03nn9t
     - &kobayashi_univ age1g4d4ftujlypmh8z0g3s6w9k9kjjd4lped3k5egvxnzhyelp8945qzg35fn
     - &work_laptop age12lsvwdrtnllmlxffy9077l7kjj85vz8sjkjl3nknfncaqpyqm9rq48urgf
+    - &work_macbook age1ksl95mpqux9awxlx2rqaetzm9su3mnstwt73xq678wp3mvdajghqqrp7rr
     - &work_server age1ppxdp9wsxpg8yr0a2wsc982x2ua22meh72kae0l2xln95px4jyxq90kuel
   - &desktops:
     - &mother age1dx0hn7ug2nfd9sxw0q3hvegh8llqt0084x7gzk20s20lptrujs6sv48akw
@@ -81,6 +82,7 @@ creation_rules:
           - *sumi
         age:
           - *work_laptop
+          - *work_macbook
   - path_regex: sops/pkgs/ai-tools/*
     key_groups:
       - pgp:
