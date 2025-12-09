@@ -91,6 +91,7 @@ creation_rules:
           - *sumi_mother
           - *sumi_stacia
           - *sumi_zephyrus
+          - *sumi_win-mother
           - *kobayashi_univ
   - path_regex: sops/pkgs/wezterm/[^/]+\.lua$
     key_groups:

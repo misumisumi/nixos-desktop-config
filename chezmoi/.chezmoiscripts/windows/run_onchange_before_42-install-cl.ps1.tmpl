@@ -1,0 +1,9 @@
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
+{{- $userPkgConfigs := or (get (or (get .windows.users $userName) dict) "packages") dict -}}
+{{- $userClConfig := or (get $userPkgConfigs "vs_buildtools") dict -}}
+
+{{- if eq (or (get $userClConfig "install") false) true -}}
+Invoke-RestMethod -Uri https://aka.ms/vs/17/release/vs_buildtools.exe -OutFile vs_buildtools.exe
+Start-Process -FilePath vs_buildtools.exe -ArgumentList "--add", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64", "--add", "Microsoft.VisualStudio.Component.Windows10SDK.19041", "--norestart", "--passive", "--wait" -Wait -PassThru
+Remove-Item vs_buildtools.exe
+{{ end }}

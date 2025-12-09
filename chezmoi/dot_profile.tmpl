@@ -17,6 +17,21 @@
 if [ -n "$__HM_SESS_VARS_SOURCED" ]; then return; fi
 export __HM_SESS_VARS_SOURCED=1
 
+function _check_cmd() {
+  command -v "$1" &>/dev/null
+}
+
+function wrapEnv() {
+    local command=$1
+    local file="$HOME/.env"
+    if [ -f "$file" ]; then
+      set -a
+      source "$file"
+      set +a
+    fi
+    "$command" "${@:2}"
+}
+
 {{ or (get $systemEnvConfig "initExtra") "" }}
 {{ or (get $userEnvConfig "initExtra") "" }}
 {{ or (get $hostEnvConfig "initExtra") "" }}
@@ -34,6 +49,13 @@ export {{ $key }}="{{ $value }}"
 {{- range $key, $value := $alias -}}
 alias {{ $key }}="{{ $value }}"
 {{ end -}}
+
+_SHELL=$(basename "${SHELL}")
+if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
+  eval "$($(brew --prefix mise)/bin/mise activate ${_SHELL})"
+elif [ -x ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate ${_SHELL})"
+fi
 
 {{ or (get $systemEnvConfig "extraConfig") "" }}
 {{ or (get $userEnvConfig "extraConfig") "" }}

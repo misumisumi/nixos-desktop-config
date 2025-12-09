@@ -9,15 +9,18 @@ function Logging($1) {
     Write-Output "${FNAME}: $1"
 }
 
+$env:PATH="$env:USERPROFILE\\scoop\\shims;$env:USERPROFILE\\.local\\bin;"+$env:PATH
+
 Logging "Start"
-
 if (Get-Command * | Where-Object { $_.Name -match "sops" }) {
-
     $SOPS_AGE_KEY_FILE="$env:USERPROFILE\.config\sops\age\keys.txt"
     {{- $chezmoiSrcDir := .chezmoi.sourceDir -}}
     {{ range $src, $tgt := merge $hostSopsConfig $userSopsConfig    }}
     Logging "Decrypting {{ $src }}"
-    $null = New-Item $(Split-Path -Parent {{ $tgt }}) -ItemType Directory -Force
+    # check parent dir is not empty
+    if (-not [string]::IsNullOrEmpty($(Split-Path -Parent {{ $tgt }}))) {
+        $null = New-Item $(Split-Path -Parent {{ $tgt }}) -ItemType Directory -Force
+    }
     sops decrypt "{{ $chezmoiSrcDir }}\..\sops\{{ $src }}" | Out-File -FilePath {{ $tgt }} -Encoding ascii -Force
     {{ end }}
 
