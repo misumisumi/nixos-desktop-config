@@ -28,7 +28,26 @@ jobs:
       AGENT_OF_ME_APP_ID: ${{ secrets.AGENT_OF_ME_APP_ID }}
       AGENT_OF_ME_PRIVATE_KEY: ${{ secrets.AGENT_OF_ME_PRIVATE_KEY }}
 
+  pre-build:
+    runs-on: ubuntu-latest
+    outputs:
+      check: ${{ steps.change.outputs.nix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/flake-checker-action@main
+      - uses: dorny/paths-filter@v3
+        id: change
+        with:
+          filters: |
+            nix:
+              - "**.nix"
+              - "flake.lock"
+              - chezmoi/.chezmoidata/apps/**
+              - chezmoi/.chezmoitemplates/starship/**
+
   build-check-matrix:
+    needs: [pre-build]
+    if: needs.pre-build.outputs.check == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -42,28 +61,16 @@ jobs:
             "liveimg-gnome-iso",
           ]
     steps:
-      - uses: dorny/paths-filter@v3
-        id: change
-        with:
-          filters: |
-            nix:
-              - "**.nix"
-              - "flake.lock"
-              - chezmoi/.chezmoidata/apps/**
-              - chezmoi/.chezmoitemplates/starship/**
-
       - uses: wimpysworld/nothing-but-nix@main
         with:
           hatchet-protocol: "rampage" # Options: holster, carve, cleave (default), rampage
           root-safe-haven: "8192"
 
       - uses: actions/checkout@v6
-        if: steps.change.outputs.nix == 'true'
 
-      - uses: cachix/install-nix-action@v31
-        if: steps.change.outputs.nix == 'true'
+      - uses: DeterminateSystems/nix-installer-action@v21
         with:
-          extra_nix_config: |
+          extra-conf: |
             accept-flake-config = true
             connect-timeout = 15
             cores = 2
@@ -72,16 +79,19 @@ jobs:
             stalled-download-timeout = 15
 
       - name: Build check
-        if: steps.change.outputs.nix == 'true'
         timeout-minutes: 70
         run: nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
   build-check-summary:
     runs-on: ubuntu-latest
-    needs: [pre-workflow, build-check-matrix]
+    needs: [pre-build, build-check-matrix]
     steps:
       - name: build-check-success
         if: needs.build-check-matrix.result == 'success'
+        run: |
+          exit 0
+      - name: build-check-skipped
+        if: ${{ needs.pre-build.outputs.check == 'false' && needs.build-check-matrix.result == 'skipped' }}
         run: |
           exit 0
       - name: build-check-failed
