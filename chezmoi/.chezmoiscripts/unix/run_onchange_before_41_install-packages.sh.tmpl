@@ -28,6 +28,7 @@ brew install --cask \
   {{ $value.cask | join " \\\n  " }}
 {{ end -}}
 {{ else if eq $pkgmngr "mise" -}}
+{{ else if eq $pkgmngr "mcpServers" -}}
 {{ else }}
 {{ $value.installCmd }} \
   {{ $value.options | join " \\\n  " }} \
@@ -48,6 +49,7 @@ brew install --cask \
   {{ $value.cask | join " \\\n  " }}
 {{ end -}}
 {{ else if eq $pkgmngr "mise" -}}
+{{ else if eq $pkgmngr "mcpServers" -}}
 {{ else }}
 {{ $value.installCmd }} \
   {{ $value.options | join " \\\n  " }} \

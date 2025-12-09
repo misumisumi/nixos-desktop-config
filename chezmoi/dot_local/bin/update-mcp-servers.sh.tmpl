@@ -12,91 +12,73 @@ function logging() {
   echo "$(basename "$0"): $*"
 }
 
-if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
+if command -v mise &>/dev/null; then
   eval "$("$(brew --prefix mise)/bin/mise activate bash")"
 elif [ -x "$HOME/.local/bin/mise" ]; then
   eval "$("$HOME/.local/bin/mise" activate bash)"
 fi
 if ! command -v npm &>/dev/null; then
-  logging "npm is not installed. Please install Node.js and npm first."
+  logging "npm is not update. Please install Node.js and npm first."
   exit 1
 fi
 if ! command -v python &>/dev/null; then
-  logging "python is not installed. Please install Python first."
+  logging "python is not update. Please install Python first."
   exit 1
 fi
 if ! command -v go &>/dev/null; then
-  logging "Go is not installed. Please install Go first."
+  logging "Go is not update. Please install Go first."
   exit 1
 fi
 
-function install_node_package() {
+function update_node_package() {
   name=$1
   pname=$2
   _PKGDIR="${PKGDIR}/${name}"
 
-  logging "Installing package: $1 ..."
+  logging "Updating package: $1 ..."
 
   mkdir -p "${_PKGDIR}"
   pushd "${_PKGDIR}" || return
-  npm install "${pname}"
-  ln -sf "${_PKGDIR}/node_modules/.bin/${name}" "${BINDIR}/${name}"
+  npm update "${pname}"
   popd || return
 
-  logging "Package '${name}' installed successfully."
+  logging "Package '${name}' update successfully."
 }
 
 # Function to install a Python package
-function install_pip_package() {
+function update_pip_package() {
   name=$1
   pname=$2
   _PKGDIR="${PKGDIR}/${name}"
 
-  logging "Installing package: $name ..."
+  logging "Updating package: $name ..."
 
   mkdir -p "${_PKGDIR}"
   pushd "${_PKGDIR}" || return
-  python -m venv venv
-  "${_PKGDIR}/venv/bin/python" -m pip install "${pname}"
-  ln -sf "${_PKGDIR}/venv/bin/${name}" "${BINDIR}/${name}"
+  "${_PKGDIR}/venv/bin/python" -m pip update
   popd || return
 
-  logging "Package '${name}' installed successfully."
+  logging "Package '${name}' update successfully."
 }
 
-function install_python_package() {
+function update_python_package() {
   name=$1
   giturl=$2
   mname=$3
   _PKGDIR="${PKGDIR}/${name}"
 
-  logging "Installing package: $name ..."
+  logging "Updating package: $name ..."
 
-  mkdir -p "${_PKGDIR}"
   pushd "${_PKGDIR}" || return
-  git clone "${giturl}" .
-  python -m venv venv
-  "${_PKGDIR}/venv/bin/python" -m pip install -e .
-  if [ "${mname##*.}" == ".py" ]; then
-    script=$(find "${_PKGDIR}" -type f -name "${mname}")
-    cat <<EOF >"${BINDIR}/${name}"
-#!/usr/bin/env bash
-
-exec "${_PKGDIR}/venv/bin/python" ${script} "$@"
-EOF
-  else
-    cat <<EOF >"${BINDIR}/${pname}"
-#!/usr/bin/env bash
-
-exec "${_PKGDIR}/venv/bin/python" -m ${mname} "$@"
-EOF
-  fi
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  git pull origin "${branch}"
+  "${_PKGDIR}/venv/bin/python" -m pip update
   popd || return
 
-  logging "Package '${name}' installed successfully."
+  logging "Package '${name}' update successfully."
 }
 
-function install_github_package() {
+function update_github_package() {
   name=$1
   owner=$2
   repo=$3
@@ -104,7 +86,7 @@ function install_github_package() {
   exeFile=$5
   _PKGDIR="${PKGDIR}/${name}"
 
-  logging "Installing package: $name ..."
+  logging "Updating package: $name ..."
   if [ -d "${_PKGDIR}" ]; then
       rm -rf "${_PKGDIR}"
   fi
@@ -126,7 +108,7 @@ function install_github_package() {
   ln -sf "${_PKGDIR}/${exeFile}" "${BINDIR}/${name}"
   popd || return
 
-  logging "Package '${name}' installed successfully."
+  logging "Package '${name}' update successfully."
 }
 
 MCP_SERVERS_ROOT="${MCP_SERVERS_ROOT:-$XDG_DATA_HOME/mcp-servers}"
@@ -137,35 +119,36 @@ mkdir -p "${BINDIR}"
 {{ range $type, $pkgs := $mcpServers -}}
 {{ if (eq $type "node") -}}
 {{ range $name, $pname := $pkgs -}}
-install_node_package {{ $name }} {{ $pname }}
+update_node_package {{ $name }} {{ $pname }}
 {{ end -}}
 {{ else if (eq $type "pip") -}}
 {{ range $name, $pname := $pkgs -}}
-install_pip_package {{ $name }} {{ $pname }}
+update_pip_package {{ $name }} {{ $pname }}
 {{ end -}}
 {{ else if (eq $type "python") -}}
 {{ range $name, $value := $pkgs -}}
-install_python_package {{ $name }} {{ $value.giturl }} {{ $value.module }}
+update_python_package {{ $name }} {{ $value.giturl }} {{ $value.module }}
 {{ end -}}
 {{ else if (eq $type "github") -}}
 {{ range $name, $value := $pkgs -}}
-install_github_package "{{ $name }}" "{{ $value.owner }}" "{{ $value.repo }}" "{{ $value.srcFile }}" "{{ $value.exeFile }}"
+update_github_package {{ $name }} {{ $value.owner }} {{ $value.repo }} {{ $value.srcFile }} {{ $value.exeFile }}
 {{ end -}}
 {{ else if (eq $type "general") -}}
 {{ range $name, $value := $pkgs -}}
 name={{ $name }}
 _PKGDIR="${PKGDIR}/${name}"
 
-logging "Installing package: $name ..."
+logging "Updating package: $name ..."
 
 mkdir -p "${_PKGDIR}"
 pushd "${_PKGDIR}" || return
 {{ $value }}
 popd || return
 
-logging "Package '${name}' installed successfully."
+logging "Package '${name}' update successfully."
 {{ end -}}
 {{ end -}}
 {{ end -}}
 
 logging "Finish"
+

@@ -17,17 +17,23 @@ function logging() {
   echo "$(basename $0): $*"
 }
 
+_PATH="$HOME/.local/bin"
+if [ -d "$HOME/.local/share/mise/installs/sops"  ]; then
+  _PATH="$(find "$HOME/.local/share/mise/installs/sops" -type f -name sops -exec dirname {} \; | sort -u | head -n1):$_PATH"
+fi
+
+export PATH="$_PATH:$PATH"
+
 {{ if not (empty $sopsFiles) -}}
 logging "Start"
-
 if command -v sops &>/dev/null; then
   {{ range $src, $tgt := $sopsFiles }}
-  logging "${FNAME}: Decrypting {{ $src }}"
+  logging "Decrypting {{ $src }}"
   mkdir -p $(dirname {{ $tgt }})
   sops decrypt "{{ $chezmoiSrcDir }}/../sops/{{ $src }}" > "{{ $tgt }}"
   {{ end }}
 else
-  logging "${FNAME}: 'sops' is not in PATH"
+  logging "'sops' is not in PATH"
 fi
 
 logging "Finish"
