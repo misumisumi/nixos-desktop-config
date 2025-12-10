@@ -82,9 +82,47 @@ jobs:
         timeout-minutes: 70
         run: nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
+  build-check-matrix-darwin:
+    needs: [pre-build]
+    if: needs.pre-build.outputs.check == 'true'
+    runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        hostname: ["work"]
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: DeterminateSystems/nix-installer-action@v21
+        with:
+          extra-conf: |
+            accept-flake-config = true
+            connect-timeout = 15
+            http-connections = 25
+            max-jobs = 3
+            stalled-download-timeout = 15
+
+      - name: Remove unused packages of macos
+        if: runner.os == 'macOS'
+        run: |
+          df -h
+          # shellcheck disable=SC2046
+          brew uninstall --force $(brew list)
+          brew cleanup
+
+          sudo rm -rf /Applications/Xcode.app
+          sudo xcode-select --reset
+          sudo rm -rf /Library/Developer/CommandLineTools
+          sudo rm -rf ~/Library/Developer/Xcode
+          df -h
+
+      - name: Build check
+        timeout-minutes: 70
+        run: nix run nix-darwin/master#darwin-rebuild -- build --flake ".#${{ matrix.hostname }}"
+
   build-check-summary:
     runs-on: ubuntu-latest
-    needs: [pre-build, build-check-matrix]
+    needs: [pre-build, build-check-matrix, build-check-matrix-darwin]
     steps:
       - name: build-check-success
         if: needs.build-check-matrix.result == 'success'
