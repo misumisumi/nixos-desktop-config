@@ -18,13 +18,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# activate mise is included in .profile
-if _check_cmd mise && [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise" ]; then
-  mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions"
-  if [ "${BASH_COMP}" -eq 1 ]; then
-    mise completion bash --include-bash-completion-lib > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
-  else
-    mise completion bash > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
+if _check_cmd mise; then
+  eval "$(mise activate bash)"
+  if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise" ]; then
+    mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions"
+    if [ "${BASH_COMP}" -eq 1 ]; then
+      mise completion bash --include-bash-completion-lib > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
+    else
+      mise completion bash > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
+    fi
   fi
 fi
 

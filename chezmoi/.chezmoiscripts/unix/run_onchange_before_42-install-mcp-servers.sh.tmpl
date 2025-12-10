@@ -12,6 +12,10 @@ function logging() {
   echo "$(basename "$0"): $*"
 }
 
+function _check_cmd() {
+  command -v "$1" &>/dev/null
+}
+
 if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
   eval "$("$(brew --prefix mise)/bin/mise activate bash")"
 elif [ -x "$HOME/.local/bin/mise" ]; then

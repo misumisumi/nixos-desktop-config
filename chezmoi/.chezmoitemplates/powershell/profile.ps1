@@ -155,6 +155,11 @@ if (Test-Path $localrc) {
   . $localrc
 }
 
+# miseの有効化
+if (Get-Command * | Where-Object { $_.Name -match "mise" }) {
+  Invoke-Expression "$(mise activate pwsh)"
+}
+
 # WSLのコマンドをpowershellから呼び出す
 # Import-WslCommand "apt", "awk", "emacs", "find", "grep", "head", "less", "ls", "man", "sed", "seq", "ssh", "sudo", "tail", "touch"
 

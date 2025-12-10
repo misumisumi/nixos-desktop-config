@@ -10,27 +10,21 @@
 {{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
 
 {{- $useMise := has "mise" (concat ($hostPkgConfigs | keys) ($userPkgConfigs | keys) | uniq) -}}
-#!/usr/bin/env bash
-
-function logging() {
-  echo "$(basename $0): $*"
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
 }
 
-{{ if $useMise -}}
-logging "Start"
+$env:PATH="$env:USERPROFILE\\scoop\\shims;$env:USERPROFILE\\.local\\bin;"+$env:PATH
 
-if ! command -v mise &>/dev/null || [ ! -x ~/.local/bin/mise ]; then
-  logging "mise is not installed, installing it now"
-  curl https://mise.run | sh
-fi
+try {
+    Get-Command -Name mise -ErrorAction Stop
+} catch [System.Management.Automation.CommandNotFoundException] {
+    Logging "'mise' is not exist in your machine."
+    Logging "Must install 'mise' first before installing packages."
+    Exit 1
+}
 
-logging "Installing packages..."
-if command -v mise &>/dev/null; then
-  mise install
-else
-  $HOME/.local/bin/mise install
-fi
-
-logging "Finish"
+Logging "Installing packages..."
+mise install
 {{- end }}
-

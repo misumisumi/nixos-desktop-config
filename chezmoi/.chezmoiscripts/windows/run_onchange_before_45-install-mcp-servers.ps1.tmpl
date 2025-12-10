@@ -19,6 +19,9 @@ function Check-Command {
         exit 1
     }
 }
+if (Get-Command * | Where-Object { $_.Name -match "mise" }) {
+  Invoke-Expression "$(mise activate pwsh)"
+}
 
 Check-Command "npm"
 Check-Command "python"

@@ -1,0 +1,27 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostExternals := or (get $hostConfig "externals") list -}}
+
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userExternals := or (get $userConfig "externals") list -}}
+
+{{- $externals := concat $hostExternals $userExternals | uniq -}}
+{{- if (has "mise" $externals) -}}
+[".local/bin/mise.exe"]
+type = "archive-file"
+{{ if eq .chezmoi.arch "amd64" -}}
+url = "{{ gitHubLatestReleaseAssetURL "jdx/mise" "mise-*-windows-x64.zip" }}"
+{{ else if eq .chezmoi.arch "arm64" -}}
+url = "{{ gitHubLatestReleaseAssetURL "jdx/mise" "mise-*-windows-arm64.zip" }}"
+{{- end -}}
+path = "mise/bin/mise.exe"
+executable = true
+refreshPeriod = 0 # mise can update self
+{{ end }}

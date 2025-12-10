@@ -50,11 +50,13 @@ export {{ $key }}="{{ $value }}"
 alias {{ $key }}="{{ $value }}"
 {{ end -}}
 
-_SHELL=$(basename "${SHELL}")
-if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
-  eval "$($(brew --prefix mise)/bin/mise activate ${_SHELL})"
-elif [ -x ~/.local/bin/mise ]; then
-  eval "$(~/.local/bin/mise activate ${_SHELL})"
+if [ "${LOGIN:-1}" -eq 0 ]; then
+  _SHELL=$(basename "${SHELL}")
+  if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
+    eval "$($(brew --prefix mise)/bin/mise activate ${_SHELL})"
+  elif [ -x ~/.local/bin/mise ]; then
+    eval "$(~/.local/bin/mise activate ${_SHELL})"
+  fi
 fi
 
 {{ or (get $systemEnvConfig "extraConfig") "" }}
