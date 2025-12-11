@@ -1,5 +1,4 @@
 {
-  location.provider = "geoclue2";
   time.timeZone = "Asia/Tokyo"; # Time zone and internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
