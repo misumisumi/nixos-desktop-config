@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.2.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.0...v8.2.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* **chezmoi:** fix missing code ([c77f47c](https://github.com/misumisumi/nixos-desktop-config/commit/c77f47cec0c1376ae53e74e84f403686712d85b9))
+* **chezmoi:** fix missing code ([0cd1702](https://github.com/misumisumi/nixos-desktop-config/commit/0cd1702e736638a34268d5eb8dac1b698ebaa044))
+
 ## [8.2.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.1.0...v8.2.0) (2025-12-11)
 
 
