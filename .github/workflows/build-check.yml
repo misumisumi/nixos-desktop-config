@@ -123,23 +123,25 @@ jobs:
   build-check-summary:
     runs-on: ubuntu-latest
     needs: [pre-build, build-check-matrix, build-check-matrix-darwin]
+    if: ${{ !cancelled() }}
     steps:
-      - name: build-check-success
-        if: needs.build-check-matrix.result == 'success'
-        run: |
-          exit 0
       - name: build-check-skipped
         if: ${{ needs.pre-build.outputs.check == 'false' && needs.build-check-matrix.result == 'skipped' }}
         run: |
           exit 0
+      - name: build-check-success
+        if: ${{ needs.pre-build.outputs.check == 'true' && needs.build-check-matrix.result == 'success' }}
+        run: |
+          exit 0
       - name: build-check-failed
-        if: needs.build-check-matrix.result != 'success'
+        if: ${{ needs.pre-build.outputs.check == 'true' && needs.build-check-matrix.result != 'success' }}
         run: |
           exit 1
 
   post-workflow:
     uses: ./.github/workflows/agent-of-me.yml
     needs: [pre-workflow, build-check-summary]
+    if: ${{ !cancelled() }}
     with:
       pr-number: ${{ github.event.pull_request.number }}
       triggered-name: "build check"
