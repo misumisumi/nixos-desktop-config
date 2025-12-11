@@ -1,5 +1,24 @@
 # Changelog
 
+## [8.2.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.1.0...v8.2.0) (2025-12-11)
+
+
+### Features
+
+* **chezmoi:** add mcp server install script ([f56e60e](https://github.com/misumisumi/nixos-desktop-config/commit/f56e60ea01ef7ae3dc70411b3849bbc98222e66d))
+* support nix-darwin ([967461b](https://github.com/misumisumi/nixos-desktop-config/commit/967461b214f21605fc402255444cceab8d22cc98))
+
+
+### Bug Fixes
+
+* add support qmk for keyboard ([847dd18](https://github.com/misumisumi/nixos-desktop-config/commit/847dd188c1a37769d727b6010a2317582be3a87b))
+* **chezmoi:** add externals of mise for windows and rename files ([24f395b](https://github.com/misumisumi/nixos-desktop-config/commit/24f395b2a78f69496fba25a76f8350ba2598a0a5))
+* **chezmoiexternals:** remove sxw2txt by upstream ([cd5420d](https://github.com/misumisumi/nixos-desktop-config/commit/cd5420d1b12390347ea3a5b9e2a7013da69d2daf))
+* **chezmoiscripts:** some fix ([1d40326](https://github.com/misumisumi/nixos-desktop-config/commit/1d403266fa89aceda6eb3c3ec3599564a7df21d5))
+* fix config including presets and update sops ([b9042cc](https://github.com/misumisumi/nixos-desktop-config/commit/b9042cca70f0468351fdb6353a96ed4bc3c5d4d4))
+* **vivaldi:** replace to "I still don't care about coockie" ([75a92c0](https://github.com/misumisumi/nixos-desktop-config/commit/75a92c09dfd9c7a868103f4e7e0188fd4f9c3d52))
+* **zephyrus:** use services.automatic-timezoned for auto setting timezone ([a42c998](https://github.com/misumisumi/nixos-desktop-config/commit/a42c998c560217b83d42c0e08ee5a2a05038e7d5))
+
 ## [8.1.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.0.0...v8.1.0) (2025-12-03)
 
 
