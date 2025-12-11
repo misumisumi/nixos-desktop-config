@@ -31,7 +31,7 @@ jobs:
           PR_NUM: ${{ inputs.pr-number }}
         run: |
           # no check agent-of-me workflow
-          check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '[.[].[] | select(.name | test("workflow") | not) | .conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "NEUTRAL")')
+          check_all_success=$(gh pr view "${PR_NUM}" --json statusCheckRollup --jq '[.[].[] | select(.name | test("workflow") | not) | .conclusion] | map(if . == "" then "-" else . end) | all(. == "SUCCESS" or . == "SKIPPED")')
           existing_review=$(gh pr view "${PR_NUM}" --json reviews --jq '.reviews | length > 0')
           pr_author_id=$(gh pr view "${PR_NUM}" --json author --jq '.author.id')
           cat <<EOF >> "$GITHUB_OUTPUT"
