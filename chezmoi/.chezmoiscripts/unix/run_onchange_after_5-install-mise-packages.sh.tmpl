@@ -27,6 +27,7 @@ if ! command -v mise &>/dev/null; then
 fi
 
 logging "Installing packages..."
+mise self-update -y
 mise install
 
 logging "Finish"

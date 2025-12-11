@@ -14,7 +14,7 @@ $FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
 function Logging($1) {
     Write-Output "${FNAME}: $1"
 }
-
+{{ if $useMise }}
 $env:PATH="$env:USERPROFILE\\scoop\\shims;$env:USERPROFILE\\.local\\bin;"+$env:PATH
 
 try {
@@ -26,5 +26,6 @@ try {
 }
 
 Logging "Installing packages..."
+mise self-update -y
 mise install
 {{- end }}
