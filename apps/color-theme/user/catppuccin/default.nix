@@ -62,6 +62,8 @@ in
         name = "Catppuccin-GTK-${shade}";
         package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
       };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

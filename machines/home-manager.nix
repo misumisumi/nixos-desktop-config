@@ -7,7 +7,7 @@ let
       hostname,
       user,
       system ? "x86_64-linux",
-      homeDirectory ? "",
+      homeDirectory ? null,
       schemes ? [ ],
       colorTheme ? null,
       useNixOSWallpaper ? true,
@@ -24,7 +24,6 @@ let
           hostname
           user
           colorTheme
-          homeDirectory
           schemes
           system
           useNixOSWallpaper
@@ -47,7 +46,10 @@ let
             ]
             ++ lib.optional (lib.pathExists ../users/${user}) ../users/${user};
             dotfilesActivation = true;
-            home.stateVersion = config.home.version.release;
+            home = {
+              stateVersion = config.home.version.release;
+              inherit homeDirectory;
+            };
           }
         )
       ];

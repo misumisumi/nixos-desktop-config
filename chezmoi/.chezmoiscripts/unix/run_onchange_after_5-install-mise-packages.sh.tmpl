@@ -1,0 +1,33 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+
+{{- $useMise := has "mise" (concat ($hostPkgConfigs | keys) ($userPkgConfigs | keys) | uniq) -}}
+#!/usr/bin/env bash
+
+function logging() {
+  echo "$(basename $0): $*"
+}
+
+{{ if $useMise -}}
+PATH="$HOME/.local/bin:$PATH"
+
+logging "Start"
+
+if ! command -v mise &>/dev/null; then
+  logging "mise is not installed, installing it now"
+  curl https://mise.run | sh
+fi
+
+logging "Installing packages..."
+mise install
+
+logging "Finish"
+{{- end }}

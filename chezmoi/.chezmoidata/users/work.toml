@@ -2,7 +2,7 @@
 # For linux
 ####################################################################################################
 [linux.users."sumiharu.kobayashi"]
-externals = ["blesh", "fzf-options", "lesspipe", "sops", "tpm"]
+externals = ["blesh", "fzf-options", "lesspipe", "tpm"]
 [linux.users."sumiharu.kobayashi".sops]
 
 [linux.users."sumiharu.kobayashi".env]
@@ -46,6 +46,7 @@ idiomatic_version_file_enable_tools = []
 [linux.users.sumi.packages.mise.plugins]
 neovim = "asdf:neovim"
 [linux.users."sumiharu.kobayashi".packages.mise.tools]
+aws = "latest"
 bat = "latest"
 btop = "latest"
 cmake = "latest"
@@ -59,9 +60,10 @@ go = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "latest"
-nodejs = "latest"
+node = "latest"
 python = "latest"
 ripgrep = "latest"
+sops = "latest"
 starship = "latest"
 tree-sitter = "latest"
 usage = "latest"
@@ -121,6 +123,9 @@ modules = [
     "syntax-highlighting",
 ]
 scripts = []
+
+[windows.users.'BB\kobayashis1033'.packages.vs_buildtools]
+install = true
 
 [windows.users.'BB\kobayashis1033'.packages.winget]
 extraPreInstall = ""

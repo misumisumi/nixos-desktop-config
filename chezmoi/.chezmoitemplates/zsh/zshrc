@@ -25,6 +25,16 @@ fpath+=(${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/completions)
 
 HELPDIR=/usr/share/zsh/"${ZSH_VERSION}"/help
 
+wrapEnv() {
+    local command=$1
+    local file="$HOME/.env"
+    if [ -f "$file" ]; then
+      set -a
+      source "$file"
+      set +a
+    fi
+    "$command" "${@:2}"
+}
 
 {{ range $key, $value := (or (get $userZshConfig "localVariables") dict) -}}
 {{ $key }}={{ $value }}

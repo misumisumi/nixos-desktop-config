@@ -3,12 +3,12 @@ function _check_cmd() {
 }
 {{ template "zsh/zshrc" . -}}
 
-if _check_cmd brew && [ -x $(brew --prefix mise)/bin/mise ]; then
-  eval "$($(brew --prefix mise)/bin/mise activate zsh)"
-  eval "$($(brew --prefix mise)/bin/mise completion zsh)"
-elif [ -x ~/.local/bin/mise ]; then
-  eval "$(~/.local/bin/mise activate zsh)"
-  [ -f ${XDG_DATA_HOME}/zsh/completions/_mise ] || echo $(~/.local/bin/mise completion zsh) > ${XDG_DATA_HOME}/zsh/completions/_mise
+if _check_cmd mise; then
+  eval "$(mise activate zsh)"
+  if [ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise ]; then
+    mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions
+    mise completion zsh > ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise
+  fi
 fi
 
 if test -n "$KITTY_INSTALLATION_DIR"; then

@@ -4,7 +4,6 @@
   user,
   schemes ? [ ],
   colorTheme ? null,
-  homeDirectory ? "",
   ...
 }:
 with builtins;
@@ -39,10 +38,7 @@ in
         '';
       }
     ];
-    home = {
-      username = "${user}";
-      homeDirectory = if homeDirectory == "" then "/home/${user}" else homeDirectory;
-    };
+    home.username = "${user}";
     fonts.fontconfig.enable = true;
   };
 }

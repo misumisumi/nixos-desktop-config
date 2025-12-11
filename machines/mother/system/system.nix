@@ -1,5 +1,9 @@
 { pkgs, config, ... }:
 {
+  hardware.keyboard.qmk = {
+    enable = true;
+    keychronSupport = true;
+  };
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback

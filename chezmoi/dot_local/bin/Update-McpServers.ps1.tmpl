@@ -1,0 +1,146 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+{{- $mcpServers := or (get $userPkgConfigs "mcpServers") dict -}}
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+$env:PATH="$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current;$env:USERPROFILE\\scoop\\apps\\nodejs-lts\\current\\bin;$env:USERPROFILE\\scoop\\apps\\python\\current;$env:USERPROFILE\\scoop\\apps\\python\\current\\Scripts;$env:USERPROFILE\\scoop\\apps\\ruby\\current\\bin;$env:USERPROFILE\\scoop\\apps\\ruby\\current\\gems\\bin;$env:USERPROFILE\\scoop\\shims;"+$env:PATH
+
+function Check-Command {
+    param([string]$cmd)
+    if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) {
+        Logging "$cmd is not installed. Please install $cmd first."
+        exit 1
+    }
+}
+
+Check-Command "npm"
+Check-Command "python"
+Check-Command "go"
+
+function BinWrapper {
+    param (
+        [string]$OutputPath,
+        [string]$CommandPath
+    )
+
+    $scriptContent = @"
+@ECHO off
+goto #_undefined_# 2>NUL || title %COMSPEC% & "$CommandPath" %*
+"@
+
+    Set-Content -Path $OutputPath -Value $scriptContent -Encoding ASCII
+}
+
+function Update-NodePackage {
+    param($name, $pname)
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Updating package: $name ..."
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    npm update $pname
+    Pop-Location
+    Logging "Package '$name' update successfully."
+}
+
+function Update-PipPackage {
+    param($name, $pname)
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Updating package: $name ..."
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    & "$pkgDir\venv\Scripts\python.exe" -m venv venv --upgrade
+    & "$pkgDir\venv\Scripts\python.exe" -m pip update
+    Pop-Location
+    Logging "Package '$name' update successfully."
+}
+
+function Update-PythonPackage {
+    param($name, $giturl, $mname)
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Updating package: $name ..."
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    $branch = git rev-parse --abbrev-ref HEAD
+    git pull origin $branch
+    & "$pkgDir\venv\Scripts\python.exe" -m pip update
+    Pop-Location
+    Logging "Package '$name' update successfully."
+}
+
+function Update-GitHubPackage {
+    param($name, $owner, $repo, $srcFile, $exeFile)
+
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Updating package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+    New-Item -ItemType Directory -Force -Path $PKGDIR | Out-Null
+
+    $tmpFile = Join-Path $env:TEMP $srcFile
+    $url = "https://api.github.com/repos/$owner/$repo/releases/latest"
+    $response = Invoke-RestMethod -Uri $url
+    $latestVersion = $response.tag_name
+    wget https://github.com/$owner/$repo/releases/download/$latestVersion/$srcFile -o $tmpFile
+
+    # if the srcFile is a zip file, unzip it
+    if ($srcFile -match "\.zip$") {
+        Expand-Archive -Path $tmpFile -DestinationPath $pkgDir -Force
+    } elseif ($srcFile -match "\.tar\.gz$") {
+        tar -xvf $tmpFile -C $pkgDir
+    } else {
+        Logging "Unsupported archive format: $srcFile"
+        exit 1
+    }
+
+    Push-Location $pkgDir
+    $binPath = Join-Path $BINDIR "$name.cmd"
+    BinWrapper -OutputPath $binPath -Command "$(Join-Path $pkgDir $exeFile)"
+    Pop-Location
+
+    Logging "Package '$name' installed successfully."
+}
+
+$MCP_SERVERS_ROOT = $env:MCP_SERVERS_ROOT
+if (-not $MCP_SERVERS_ROOT) { $MCP_SERVERS_ROOT = Join-Path $env:XDG_DATA_HOME "mcp-servers" }
+$PKGDIR = Join-Path $MCP_SERVERS_ROOT "packages"
+$BINDIR = Join-Path $MCP_SERVERS_ROOT "bin"
+New-Item -ItemType Directory -Force -Path $BINDIR | Out-Null
+
+{{ range $type, $pkgs := $mcpServers -}}
+{{ if (eq $type "node") -}}
+{{ range $name, $pname := $pkgs -}}
+Update-NodePackage "{{ $name }}" "{{ $pname }}"
+{{ end -}}
+{{ else if (eq $type "pip") -}}
+{{ range $name, $pname := $pkgs -}}
+Update-PipPackage "{{ $name }}" "{{ $pname }}"
+{{ end -}}
+{{ else if (eq $type "python") -}}
+{{ range $name, $value := $pkgs -}}
+Update-PythonPackage "{{ $name }}" "{{ $value.giturl }}" "{{ $value.module }}"
+{{ end -}}
+{{ else if (eq $type "github") -}}
+{{ range $name, $value := $pkgs -}}
+Update-GitHubPackage "{{ $name }}" "{{ $value.owner }}" "{{ $value.repo }}" "{{ $value.srcFile }}" "{{ $value.exeFile }}"
+{{ end -}}
+{{ else if (eq $type "general") -}}
+{{ range $name, $value := $pkgs -}}
+$name = "{{ $name }}"
+$pkgDir = Join-Path $PKGDIR $name
+Logging "Updating package: $name ..."
+{{ $value }}
+Logging "Package '$name' update successfully."
+{{ end -}}
+{{ end -}}
+{{ end -}}
+
+Logging "Finish"

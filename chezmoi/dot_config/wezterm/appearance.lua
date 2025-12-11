@@ -11,7 +11,7 @@ local config = {
         },
         "FiraCode Nerd Font Mono",
     }),
-    font_size = 10.0,
+    font_size = wezterm.target_triple:match("darwin") ~= nil and 14 or 10,
     enable_scroll_bar = true,
     window_padding = {
         left = 0,

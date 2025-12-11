@@ -1,11 +1,15 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
-  home.packages = with pkgs; [
-    noto-fonts-color-emoji
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    papirus-icon-theme # Icons
-  ];
+  home.packages =
+    with pkgs;
+    [
+      noto-fonts-color-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+      papirus-icon-theme # Icons
+    ];
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {

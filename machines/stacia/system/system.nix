@@ -6,6 +6,10 @@
   ...
 }:
 {
+  hardware.keyboard.qmk = {
+    enable = true;
+    keychronSupport = true;
+  };
   boot = {
     kernel.sysctl = {
       "vm.swappiness" = lib.mkForce 10; # swap is only used when RAM is full

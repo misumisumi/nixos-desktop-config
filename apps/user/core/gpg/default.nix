@@ -83,7 +83,8 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableSshSupport = true;
-      pinentry.package = pkgs.pinentry-gnome3;
+      pinentry.package =
+        if pkgs.stdenv.hostPlatform.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome3;
     };
   };
 }

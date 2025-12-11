@@ -259,11 +259,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1764961670,
-        "narHash": "sha256-wL4SDfzSX6cVBjr9mEMj3/NACMjIdxqaapPIbnAqYMU=",
+        "lastModified": 1765278175,
+        "narHash": "sha256-k6eNyZgVryEVoR7M+EC/SuKqpk6NM/hSXzibK5kclMA=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "0057cf70a121b59cc18e894bb2f61803b763430a",
+        "rev": "b720e801f2fa3b8a3e4db701410efe7ed30b0764",
         "type": "github"
       },
       "original": {
@@ -344,6 +344,26 @@
       "original": {
         "owner": "musnix",
         "repo": "musnix",
+        "type": "github"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765065051,
+        "narHash": "sha256-b7W9WsvyMOkUScNxbzS45KEJp0iiqRPyJ1I3JBE+oEE=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "7e22bf538aa3e0937effcb1cee73d5f1bcc26f79",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
         "type": "github"
       }
     },
@@ -638,11 +658,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764955770,
-        "narHash": "sha256-PlJb9oMtkmgpEYbBKDRUj8yZu0wZRnjPhh+QzdTDVfA=",
+        "lastModified": 1765358063,
+        "narHash": "sha256-1P5BaeOEOjSWHVExhOuNZhJGGEhXwm9GgW8AHS0ZH2Q=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "1f6a7a17237e7ed1d4e501e9f6c43c9c50340f42",
+        "rev": "4cd77a9cfc4e3d0e7d1d9e753aab8f1f76aa0ed6",
         "type": "github"
       },
       "original": {
@@ -663,6 +683,7 @@
         "impermanence": "impermanence",
         "mcp-servers-nix": "mcp-servers-nix",
         "musnix": "musnix",
+        "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",

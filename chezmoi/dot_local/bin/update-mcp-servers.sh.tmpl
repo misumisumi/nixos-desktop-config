@@ -1,0 +1,155 @@
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
+{{- $mcpServers := or (get $userPkgConfigs "mcpServers") dict -}}
+
+#!/usr/bin/env bash
+
+function logging() {
+  echo "$(basename "$0"): $*"
+}
+
+if command -v mise &>/dev/null; then
+  eval "$("$(brew --prefix mise)/bin/mise activate bash")"
+elif [ -x "$HOME/.local/bin/mise" ]; then
+  eval "$("$HOME/.local/bin/mise" activate bash)"
+fi
+if ! command -v npm &>/dev/null; then
+  logging "npm is not update. Please install Node.js and npm first."
+  exit 1
+fi
+if ! command -v python &>/dev/null; then
+  logging "python is not update. Please install Python first."
+  exit 1
+fi
+if ! command -v go &>/dev/null; then
+  logging "Go is not update. Please install Go first."
+  exit 1
+fi
+
+function update_node_package() {
+  name=$1
+  pname=$2
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Updating package: $1 ..."
+
+  mkdir -p "${_PKGDIR}"
+  pushd "${_PKGDIR}" || return
+  npm update "${pname}"
+  popd || return
+
+  logging "Package '${name}' update successfully."
+}
+
+# Function to install a Python package
+function update_pip_package() {
+  name=$1
+  pname=$2
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Updating package: $name ..."
+
+  mkdir -p "${_PKGDIR}"
+  pushd "${_PKGDIR}" || return
+  "${_PKGDIR}/venv/bin/python" -m venv venv --upgrade
+  "${_PKGDIR}/venv/bin/python" -m pip update
+  popd || return
+
+  logging "Package '${name}' update successfully."
+}
+
+function update_python_package() {
+  name=$1
+  giturl=$2
+  mname=$3
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Updating package: $name ..."
+
+  pushd "${_PKGDIR}" || return
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  git pull origin "${branch}"
+  "${_PKGDIR}/venv/bin/python" -m pip update
+  popd || return
+
+  logging "Package '${name}' update successfully."
+}
+
+function update_github_package() {
+  name=$1
+  owner=$2
+  repo=$3
+  srcFile=$4
+  exeFile=$5
+  _PKGDIR="${PKGDIR}/${name}"
+
+  logging "Updating package: $name ..."
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
+  mkdir -p "${PKGDIR}"
+
+  tmpFile="/tmp/${srcFile}"
+  url="https://api.github.com/repos/${owner}/${repo}/releases/latest"
+  latestReleaseTag=$(curl -s "${url}" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+  curl -L "https://github.com/${owner}/${repo}/releases/download/${latestReleaseTag}/${srcFile}" -o "${tmpFile}"
+
+  if [ "${srcFile##*.}" == "zip" ]; then
+      unzip "${tmpFile}" -d "${_PKGDIR}"
+  elif [[ "${srcFile}" == "*.tar.gz" ]]; then
+      tar -xvf "${tmpFile}" -C "${_PKGDIR}"
+  else
+    logging "Unsupported source file format: ${srcFile}"
+  fi
+  pushd "${_PKGDIR}" || return
+  ln -sf "${_PKGDIR}/${exeFile}" "${BINDIR}/${name}"
+  popd || return
+
+  logging "Package '${name}' update successfully."
+}
+
+MCP_SERVERS_ROOT="${MCP_SERVERS_ROOT:-$XDG_DATA_HOME/mcp-servers}"
+PKGDIR="${MCP_SERVERS_ROOT}/packages"
+BINDIR="${MCP_SERVERS_ROOT}/bin"
+mkdir -p "${BINDIR}"
+
+{{ range $type, $pkgs := $mcpServers -}}
+{{ if (eq $type "node") -}}
+{{ range $name, $pname := $pkgs -}}
+update_node_package {{ $name }} {{ $pname }}
+{{ end -}}
+{{ else if (eq $type "pip") -}}
+{{ range $name, $pname := $pkgs -}}
+update_pip_package {{ $name }} {{ $pname }}
+{{ end -}}
+{{ else if (eq $type "python") -}}
+{{ range $name, $value := $pkgs -}}
+update_python_package {{ $name }} {{ $value.giturl }} {{ $value.module }}
+{{ end -}}
+{{ else if (eq $type "github") -}}
+{{ range $name, $value := $pkgs -}}
+update_github_package {{ $name }} {{ $value.owner }} {{ $value.repo }} {{ $value.srcFile }} {{ $value.exeFile }}
+{{ end -}}
+{{ else if (eq $type "general") -}}
+{{ range $name, $value := $pkgs -}}
+name={{ $name }}
+_PKGDIR="${PKGDIR}/${name}"
+
+logging "Updating package: $name ..."
+
+mkdir -p "${_PKGDIR}"
+pushd "${_PKGDIR}" || return
+{{ $value }}
+popd || return
+
+logging "Package '${name}' update successfully."
+{{ end -}}
+{{ end -}}
+{{ end -}}
+
+logging "Finish"
+

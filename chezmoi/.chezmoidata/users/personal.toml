@@ -6,6 +6,8 @@
 [darwin.users.sumi]
 externals = []
 [darwin.users.sumi.sops]
+"pkgs/ai-tools/env" = ".env"
+"pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
 
 [darwin.users.sumi.env]
 initExtra = ""
@@ -24,11 +26,13 @@ cask = ["vivaldi", "firefox"]
 [linux.users.sumi]
 externals = ["blesh", "tpm"]
 [linux.users.sumi.sops]
+"pkgs/ai-tools/env" = ".env"
+"pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
 
 [linux.users.sumi.env]
 initExtra = ""
 extraConfig = ""
-PATH = ["$HOME/bin", "$HOME/.local/bin"]
+PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
 [linux.users.sumi.env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
@@ -44,6 +48,25 @@ MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | ba
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 [linux.users.sumi.env.alias]
 vimdiff = "nvim -d"
+copilot = "wrapEnv copilot"
+mcp-hub = "wrapEnv mcp-hub"
+
+[linux.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
+mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
+context7-mcp = "@upstash/context7-mcp"
+copilot = "@github/copilot"
+gemini = "@google/gemini-cli"
+mcp-hub = "mcp-hub@latest"
+[linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
+mcp-server-git = "mcp_server_git"
+mcp-nixos = "mcp_nixos"
+[linux.users.sumi.packages.mcpServers.github] # name = "module_name", name is executable name
+owner = "github"
+repo = "github-mcp-server"
+srcFile = "github-mcp-server_Windows_x86_64.zip"
+exeFile = "github-mcp-server.exe"
 
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true
@@ -77,10 +100,11 @@ imagemagick = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "latest"
-nodejs = "latest"
+node = "latest"
 python = "latest"
 ripgrep = "latest"
 rust = "latest"
+sops = "latest"
 starship = "latest"
 tmux = "latest"
 tree-sitter = "latest"
@@ -107,12 +131,15 @@ zoxide = "latest"
 # For windows
 ####################################################################################################
 [windows.users.sumi.sops]
+"pkgs\\ai-tools\\api-keys.yaml" = ".config\\codecompanion\\api-keys.yaml"
+"pkgs\\ai-tools\\env" = ".env"
 "pkgs\\ssh\\desktops" = ".ssh\\conf.d\\hosts\\desktops"
 
 [windows.users.sumi.env]
 PATH = [
     "$env:USERPROFILE\\bin",
     "$env:USERPROFILE\\.local\\bin",
+    "$env:USERPROFILE\\.local\\share\\mcp-servers\\bin",
     "$env:USERPROFILE\\.dotnet\\tools",
     "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\bin",
     "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\libexec\\git-core",
@@ -126,6 +153,45 @@ PATH = [
     "$env:USERPROFILE\\scoop\\shims",
     "$env:LOCALAPPDATA\\Microsoft\\WindowsApps",
 ]
+extraConfig = '''
+function WrapEnv {
+    param (
+        [string]$Command,
+        [Parameter(ValueFromRemainingArguments = $true)]
+        $Args
+    )
+    $VarsFile = "$env:USERPROFILE\.env"
+    if (Test-Path $VarsFile) {
+        Get-Content $VarsFile | ForEach-Object {
+            if ($_ -match '^(.*?)=(.*)$') {
+                $name = $matches[1]
+                $value = $matches[2]
+                [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+            }
+        }
+    }
+    $processArgs = @($Command) + $Args
+    & $Command @Args
+}
+
+function WrapCopilot {
+    param (
+        [Parameter(ValueFromRemainingArguments = $true)]
+        $Args
+    )
+    WrapEnv copilot.cmd $Args
+}
+function WrapMcpHub {
+    param (
+        [Parameter(ValueFromRemainingArguments = $true)]
+        $Args
+    )
+    WrapEnv mcp-hub.cmd $Args
+}
+
+Set-Alias -Name copilot -Value WrapCopilot
+Set-Alias -Name mcp-hub -Value WrapMcpHub
+'''
 [windows.users.sumi.env.export]
 FZF_ALT_C_COMMAND = "fd --type d"
 FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
@@ -142,6 +208,23 @@ XDG_DATA_HOME = "$env:USERPROFILE\\.local\\share"
 XDG_STATE_HOME = "$env:USERPROFILE\\.local/state"
 YAZI_FILE_ONE = "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin\\file.exe"
 
+[windows.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
+mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
+context7-mcp = "@upstash/context7-mcp"
+copilot = "@github/copilot"
+gemini = "@google/gemini-cli"
+mcp-hub = "mcp-hub@latest"
+[windows.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
+mcp-server-git = "mcp_server_git"
+mcp-nixos = "mcp_nixos"
+[windows.users.sumi.packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
+owner = "github"
+repo = "github-mcp-server"
+srcFile = "github-mcp-server_Windows_x86_64.zip"
+exeFile = "github-mcp-server.exe"
+
 [windows.users.sumi.packages.powershell]
 extraPreInstall = ""
 extraPostInstall = ""
@@ -156,9 +239,13 @@ modules = [
 ]
 scripts = []
 
+[windows.users.sumi.packages.vs_buildtools]
+install = false
 [windows.users.sumi.packages.winget]
 extraPreInstall = ""
-extraPostInstall = ""
+extraPostInstall = '''
+sudo winget install Microsoft.VisualStudio.2022.Community --override "--quiet --add Microsoft.VisualStudio.Workload.NativeDesktop"
+'''
 extraOptions = []
 [windows.users.sumi.packages.winget.apps]
 sudo = [
@@ -194,7 +281,6 @@ sudo = [
     "NDI.NDIRuntime",
     "LGUG2Z.komorebi",
     "LGUG2Z.whkd",
-    "Microsoft.VisualStudio.2022.Community",
     "Microsoft.WinDbg",
     "Microsoft.WindowsTerminal",
     "Mozilla.Firefox",

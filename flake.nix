@@ -27,6 +27,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -120,6 +124,10 @@
             lib.mapAttrs' (
               f: _: lib.nameValuePair (lib.removeSuffix ".nix" f) (import (modulePath + "/${f}"))
             ) (builtins.readDir modulePath);
+          darwinConfigurations = import ./machines/darwin.nix {
+            inherit (inputs.nixpkgs) lib;
+            inherit inputs self;
+          };
           homeConfigurations = import ./machines/home-manager.nix {
             inherit (inputs.nixpkgs) lib;
             inherit inputs self;

@@ -2,20 +2,35 @@
 # For linux
 ####################################################################################################
 [linux.users."kobayashi.sumiharu.r4"]
-externals = ["blesh", "fzf-options", "lesspipe", "sops", "tpm"]
+externals = ["blesh", "fzf-options", "lesspipe", "tpm"]
 [linux.users."kobayashi.sumiharu.r4".sops]
+"pkgs/ai-tools/env" = ".env"
 "pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
-"pkgs/codecompanion/api-keys.yaml" = "$XDG_CONFIG_HOME/codecompanion/api-keys.yaml"
 
 [linux.users."kobayashi.sumiharu.r4".env]
 initExtra = ""
 extraConfig = """
-if [ "$SHELL" != "/usr/bin/zsh" ]
-then
-    exec /usr/bin/zsh -l
+if [ "$SHELL" != "/usr/bin/zsh" ] && [ "${LOGIN:-1}" -eq 1 ]; then
+  exec /usr/bin/zsh -l
 fi
 """
-PATH = ["$HOME/bin", "$HOME/.local/bin"]
+PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
+[linux.users."kobayashi.sumiharu.r4".packages.mcpServers.node] # name = "package_name", name is executable name
+mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
+context7-mcp = "@upstash/context7-mcp"
+copilot = "@github/copilot"
+gemini = "@google/gemini-cli"
+mcp-hub = "mcp-hub@latest"
+[linux.users."kobayashi.sumiharu.r4".packages.mcpServers.pip] # name = "module_name", name is executable name
+mcp-server-git = "mcp_server_git"
+mcp-nixos = "mcp_nixos"
+[linux.users."kobayashi.sumiharu.r4".packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
+owner = "github"
+repo = "github-mcp-server"
+srcFile = "github-mcp-server_Windows_x86_64.zip"
+exeFile = "github-mcp-server.exe"
 [linux.users."kobayashi.sumiharu.r4".env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
@@ -37,6 +52,8 @@ LANGUAGE = "en_US"
 LC_ALL = "en_US.UTF-8"
 
 [linux.users."kobayashi.sumiharu.r4".env.alias]
+copilot = "wrapEnv copilot"
+mcp-hub = "wrapEnv mcp-hub"
 
 [linux.users."kobayashi.sumiharu.r4".packages.mise.settings]
 idiomatic_version_file = true
@@ -68,9 +85,10 @@ go = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "latest"
-nodejs = "latest"
+node = "latest"
 python = "latest"
 ripgrep = "latest"
+sops = "latest"
 starship = "latest"
 tree-sitter = "latest"
 usage = "latest"
