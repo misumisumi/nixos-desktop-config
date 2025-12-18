@@ -154,6 +154,10 @@ in
         name = "Tokyonight-${shade}";
         package = pkgs.tokyonight-gtk-theme;
       };
+    gtk4.theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyonight-gtk-theme;
+    };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {

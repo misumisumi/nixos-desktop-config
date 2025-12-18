@@ -68,6 +68,12 @@
       name = "Nordic-darker";
       package = pkgs.nordic;
     };
+    gtk4 = {
+      theme = {
+        name = "Nordic-darker";
+        package = pkgs.nordic;
+      };
+    };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {

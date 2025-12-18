@@ -62,6 +62,16 @@ in
         name = "Catppuccin-GTK-${shade}";
         package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
       };
+    gtk4 = {
+      theme =
+        let
+          shade = if flavor == "latte" then "Light" else "Dark";
+        in
+        {
+          name = "Catppuccin-GTK-${shade}";
+          package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
+        };
+    };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     iconTheme = {
