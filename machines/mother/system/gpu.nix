@@ -4,14 +4,21 @@
     xserver = {
       videoDrivers = [
         "nvidia"
+        # "amdgpu"
         "fbdev"
       ];
       deviceSection = ''
         Driver         "nvidia"
         VendorName     "NVIDIA Corporation"
         BoardName      "NVIDIA GeForce GTX 1050 Ti"
-        BusID          "PCI:11:0:0"
+        BusID          "PCI:03:0:0"
       '';
+      # deviceSection = ''
+      #   Driver         "amdgpu"
+      #   VendorName     "AMD"
+      #   BoardName      "Radeon Graphics"
+      #   BusID          "PCI:0e:0:0"
+      # '';
       screenSection = ''
         DefaultDepth    24
         Option         "Stereo" "0"

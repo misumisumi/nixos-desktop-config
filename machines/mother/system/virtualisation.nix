@@ -5,14 +5,16 @@
     ../../../apps/system/virtualisation/podman
     ../../../apps/system/virtualisation/waydroid
   ];
+  boot.kernelParams = [ "kvm_amd.avic=1" ];
   virtualisation = {
     vfio = {
       enable = true;
       IOMMUType = "amd";
       enableNestedVirtualization = true;
       devices = [
-        "10de:2504"
-        "10de:228e"
+        "10de:2c05"
+        "10de:22e9"
+        "1e0f:0009"
       ];
       # deviceDomains = [ "0000:09:00.0" "0000:09:00.1" ];
       blacklistNvidia = false;
