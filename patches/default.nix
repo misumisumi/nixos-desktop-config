@@ -54,6 +54,7 @@ final: prev: {
   vivaldi =
     (prev.vivaldi.override {
       commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+      proprietaryCodecs = true;
       enableWidevine = true;
     }).overrideAttrs
       (old: {
