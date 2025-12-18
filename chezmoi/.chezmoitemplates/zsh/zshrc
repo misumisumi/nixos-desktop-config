@@ -25,6 +25,9 @@ fpath+=(${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/completions)
 
 HELPDIR=/usr/share/zsh/"${ZSH_VERSION}"/help
 
+_check_cmd() {
+  command -v "$1" &>/dev/null
+}
 wrapEnv() {
     local command=$1
     local file="$HOME/.env"
@@ -103,6 +106,14 @@ zmodload zsh/{{ $zmodules | join " zsh/" -}}
 
 # Enable bash completion
 autoload -U bashcompinit && bashcompinit
+
+if _check_cmd mise; then
+  eval "$(mise activate zsh)"
+  if [ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise ]; then
+    mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions
+    mise completion zsh > ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise
+  fi
+fi
 
 {{ or (get $userZshConfig "initExtra") ""}}
 
