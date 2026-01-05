@@ -87,6 +87,7 @@ final: prev: {
               ./qtile.patch
             ];
           });
+          fastmcp = pprev.fastmcp';
         })
       ];
       self = prev.python3.override {
