@@ -54,12 +54,6 @@ with lib;
     # Old nixos-rebuild cmd can use by settings system.rebuild.enableNg = false but this option will be removed in the future
     # So I override the nixos-rebuild to always use nixos-rebuild-ng here with custom wrapper script
     system.build.nixos-rebuild = lib.mkForce (
-      let
-        nixos-rebuild' = pkgs.nixos-rebuild-ng.override {
-          withReexec = true;
-          withNgSuffix = false;
-        };
-      in
       pkgs.writeShellScriptBin "nixos-rebuild" ''
         set -euo pipefail
 
@@ -88,7 +82,7 @@ with lib;
         }
 
         parse_params "''$@"
-        ${nixos-rebuild'}/bin/nixos-rebuild "''$@"
+        ${pkgs.nixos-rebuild-ng}/bin/nixos-rebuild "''$@"
 
         if [ "''${SHLVL}" -eq 1 ] && [ "''${boot}" -eq 1 ] && [ "''${flake}" != "" ]; then
           echo "Running link check for flake: ''${flake}"

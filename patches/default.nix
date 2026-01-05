@@ -73,6 +73,9 @@ final: prev: {
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
+  cnijfilter2 = prev.cnijfilter2.overrideAttrs (old: {
+    env.NIX_CFLAGS_COMPILE = "-std=gnu17";
+  });
   # carla = prev.carla.overrideAttrs (old: {
   # });
   python3 =
