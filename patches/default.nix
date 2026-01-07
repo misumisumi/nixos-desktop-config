@@ -50,7 +50,6 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   vivaldi =
     (prev.vivaldi.override {
       commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
@@ -63,21 +62,12 @@ final: prev: {
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';
       });
-  switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
-    nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
-    dontWrapGApps = true;
-    preFixup = ''
-      makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
-    '';
-  });
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
   cnijfilter2 = prev.cnijfilter2.overrideAttrs (old: {
     env.NIX_CFLAGS_COMPILE = "-std=gnu17";
   });
-  # carla = prev.carla.overrideAttrs (old: {
-  # });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
