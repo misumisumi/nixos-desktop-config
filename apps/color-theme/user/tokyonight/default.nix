@@ -32,7 +32,7 @@ in
             "#24283c";
       };
     };
-    yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
+    yazi.theme = lib.importTOML ./yazi/tokyonight_${flavor}.toml // {
       manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
     };
     bat = {
