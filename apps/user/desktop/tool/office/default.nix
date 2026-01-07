@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./libreoffice
+    ./onlyoffice
     ./zathura
   ];
   home.packages = with pkgs; [
