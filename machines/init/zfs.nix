@@ -8,15 +8,13 @@
   ...
 }:
 let
-  isUnstable = config.boot.zfs.package == pkgs.zfs_unstable;
+  zfs = config.boot.zfs.package;
   zfsCompatibleKernelPackages = lib.filterAttrs (
     name: kernelPackages:
     (builtins.match "linux_[0-9]+_[0-9]+" name) != null
     && (builtins.tryEval kernelPackages).success
-    && (
-      (!isUnstable && !kernelPackages.${pkgs.zfs.kernelModuleAttribute}.meta.broken)
-      || (isUnstable && !kernelPackages.${pkgs.zfs.kernelModuleAttribute}.meta.broken)
-    )
+    && !kernelPackages.${zfs.kernelModuleAttribute}.meta.broken
+
   ) pkgs.linuxKernel.packages;
   latestKernelPackage = lib.last (
     lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
@@ -27,8 +25,9 @@ in
 {
   #NOTE: this might jump back and worth as kernel get added or removed.
   boot = {
-    kernelPackages = latestKernelPackage;
+    kernelPackages = lib.trace "kernel: ${latestKernelPackage.kernel.version}" latestKernelPackage;
     supportedFilesystems = [ "zfs" ];
     zfs.forceImportRoot = false;
+    zfs.package = pkgs.zfs_unstable;
   };
 }
