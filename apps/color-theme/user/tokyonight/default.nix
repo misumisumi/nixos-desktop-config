@@ -8,6 +8,7 @@
 }:
 let
   flavor = builtins.replaceStrings [ "tokyonight-" ] [ "" ] colorTheme;
+  shade = if flavor == "day" then "Light" else "Dark";
   pack = pkgs.callPackage ./pack.nix { };
   kittyAttrName =
     if (lib.versionAtLeast config.home.version.release "24.11") then "themeFile" else "theme";
@@ -117,6 +118,8 @@ in
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
 
   xdg.configFile = {
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/Breeze${shade}.colors";
     "fcitx5/conf/classicui.conf" = {
       text = lib.generators.toINIWithGlobalSection { } {
         globalSection =
@@ -144,16 +147,14 @@ in
       color-scheme = if flavor == "day" then "prefer-light" else "prefer-dark";
     };
   };
+  qt.style.name = "breeze";
   gtk = {
+    colorScheme = lib.toLower shade;
     # gtk3.extraConfig.gtk-application-prefer-dark-theme = flavor != "day";
-    theme =
-      let
-        shade = if flavor == "day" then "Light" else "Dark";
-      in
-      {
-        name = "Tokyonight-${shade}";
-        package = pkgs.tokyonight-gtk-theme;
-      };
+    theme = {
+      name = "Tokyonight-${shade}";
+      package = pkgs.tokyonight-gtk-theme;
+    };
     gtk4.theme = {
       name = "Tokyonight-Dark";
       package = pkgs.tokyonight-gtk-theme;

@@ -8,6 +8,7 @@
 }:
 let
   flavor = builtins.replaceStrings [ "catppuccin-" ] [ "" ] colorTheme;
+  shade = if flavor == "latte" then "Light" else "Dark";
 in
 {
   imports = [
@@ -54,14 +55,11 @@ in
   };
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-catppuccin ];
   gtk = {
-    theme =
-      let
-        shade = if flavor == "latte" then "Light" else "Dark";
-      in
-      {
-        name = "Catppuccin-GTK-${shade}";
-        package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
-      };
+    colorScheme = lib.toLower shade;
+    theme = {
+      name = "Catppuccin-GTK-${shade}";
+      package = pkgs.magnetic-catppuccin-gtk.override { shade = lib.toLower shade; };
+    };
     gtk4 = {
       theme =
         let
@@ -80,6 +78,8 @@ in
     };
   };
   xdg.configFile = {
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/Breeze${shade}.colors";
     "wezterm/color-scheme.lua" = {
       inherit (config.programs.wezterm) enable;
       source = ./wezterm/${flavor}.lua;

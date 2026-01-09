@@ -35,6 +35,8 @@
     };
   };
   xdg.configFile = {
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
     "fcitx5/conf/classicui.conf" = {
       enable = config.i18n.inputMethod.enabled == "fcitx5";
       text = lib.generators.toINIWithGlobalSection { } {
@@ -63,7 +65,9 @@
     };
   };
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-nord ];
+  qt.style.name = "breeze";
   gtk = {
+    colorScheme = "dark";
     theme = {
       name = "Nordic-darker";
       package = pkgs.nordic;
