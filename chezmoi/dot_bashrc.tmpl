@@ -1,35 +1,5 @@
 {{- template "bash/bashrc" . -}}
 
-function _check_cmd() {
-  command -v "$1" &>/dev/null
-}
-
-BASH_COMP=0
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-    BASH_COMP=1
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-    BASH_COMP=1
-  fi
-  if [ -f ~/.local/share/blesh/ble.sh ]; then
-    . ~/.local/share/blesh/ble.sh
-  fi
-fi
-
-if _check_cmd mise; then
-  eval "$(mise activate bash)"
-  if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise" ]; then
-    mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions"
-    if [ "${BASH_COMP}" -eq 1 ]; then
-      mise completion bash --include-bash-completion-lib > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
-    else
-      mise completion bash > "${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions/mise"
-    fi
-  fi
-fi
-
 if test -n "$KITTY_INSTALLATION_DIR"; then
   export KITTY_SHELL_INTEGRATION="no-rc"
   source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"

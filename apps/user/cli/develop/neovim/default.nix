@@ -41,7 +41,7 @@
         deno
         go
         nixd
-        nixfmt-rfc-style
+        nixfmt
         statix
       ];
       extraPython3Packages = ps: with ps; [ jupynium ];

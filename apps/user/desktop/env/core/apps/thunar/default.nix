@@ -15,7 +15,7 @@ in
   home = {
     packages = with pkgs; [
       thunar-with-plugins
-      xfce.xfconf
+      xfconf
       xfce.exo
 
       shared-mime-info # For FileManager

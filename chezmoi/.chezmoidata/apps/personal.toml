@@ -31,9 +31,10 @@ paper = "delta --paging=never"
 defaultModel = "gemini-2.5-flash"
 [apps.users.sumi.gemini-cli.settings]
 [apps.users.sumi.gemini-cli.settings.general]
-vimMode = true
 disableAutoUpdate = true
 disableUpdateNag = true
+previewFeatures = true
+vimMode = true
 [apps.users.sumi.gemini-cli.settings.ui]
 theme = "GitHub"
 useAlternateBuffer = true
@@ -45,7 +46,7 @@ selectedType = "gemini-api-key"
 [apps.users.sumi.mcp.mcpServers]
 [apps.users.sumi.mcp.mcpServers.github]
 command = "github-mcp-server"
-args = ["stdio", "--dynamic-toolsets"]
+args = ["stdio"]
 [apps.users.sumi.mcp.mcpServers.github.env]
 GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT}"
 [apps.users.sumi.mcp.mcpServers.paper_search]

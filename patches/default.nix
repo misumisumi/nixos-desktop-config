@@ -50,10 +50,10 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  xp-pentablet = prev.libsForQt5.callPackage ./xp-pen-drivers.nix { };
   vivaldi =
     (prev.vivaldi.override {
       commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+      proprietaryCodecs = true;
       enableWidevine = true;
     }).overrideAttrs
       (old: {
@@ -62,18 +62,12 @@ final: prev: {
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';
       });
-  switcheroo-control = prev.switcheroo-control.overridePythonAttrs (old: {
-    nativeBuildInputs = old.nativeBuildInputs ++ [ prev.wrapGAppsNoGuiHook ];
-    dontWrapGApps = true;
-    preFixup = ''
-      makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
-    '';
-  });
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });
-  # carla = prev.carla.overrideAttrs (old: {
-  # });
+  cnijfilter2 = prev.cnijfilter2.overrideAttrs (old: {
+    env.NIX_CFLAGS_COMPILE = "-std=gnu17";
+  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
@@ -83,6 +77,7 @@ final: prev: {
               ./qtile.patch
             ];
           });
+          fastmcp = pprev.fastmcp';
         })
       ];
       self = prev.python3.override {
@@ -91,4 +86,9 @@ final: prev: {
       };
     in
     self;
+  #BUG: https://bugs.kde.org/show_bug.cgi?id=513536
+  # 25/01/10: Ver 25.12.1ではログイン毎にBT backendをON→OFFしなければ問題の一時解決も機能しない
+  kdePackages = prev.kdePackages // {
+    inherit (nixpkgs-stable.kdePackages) kdeconnect-kde;
+  };
 }

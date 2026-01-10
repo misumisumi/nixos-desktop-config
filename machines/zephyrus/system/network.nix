@@ -25,7 +25,7 @@
   networking = {
     wireless = {
       enable = true;
-      userControlled.enable = true;
+      userControlled = true;
       secretsFile = config.sops.secrets.wireless.path;
       networks = {
         "Pixel_3770" = {

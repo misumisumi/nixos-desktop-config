@@ -16,13 +16,18 @@
       "v4l2loopback"
     ];
   };
-  programs.poweroff'.enable = true;
+  programs = {
+    poweroff'.enable = true;
+    xppen = {
+      enable = true;
+      package = pkgs.xppen_3;
+    };
+  };
   services = {
     printing.drivers = with pkgs; [
       cnijfilter2
     ];
     xserver = {
-      xp-pentablet.enable = true;
       displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
     };
   };
