@@ -25,7 +25,8 @@ in
 {
   #NOTE: this might jump back and worth as kernel get added or removed.
   boot = {
-    kernelPackages = lib.trace "kernel: ${latestKernelPackage.kernel.version}" latestKernelPackage;
+    # kernelPackages = lib.trace "kernel: ${latestKernelPackage.kernel.version}" latestKernelPackage;
+    kernelPackages = latestKernelPackage;
     supportedFilesystems = [ "zfs" ];
     zfs.forceImportRoot = false;
     zfs.package = pkgs.zfs_unstable;
