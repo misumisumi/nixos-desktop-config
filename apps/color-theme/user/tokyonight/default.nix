@@ -8,6 +8,7 @@
 }:
 let
   flavor = builtins.replaceStrings [ "tokyonight-" ] [ "" ] colorTheme;
+  shade = if flavor == "day" then "Light" else "Dark";
   pack = pkgs.callPackage ./pack.nix { };
   kittyAttrName =
     if (lib.versionAtLeast config.home.version.release "24.11") then "themeFile" else "theme";
@@ -32,7 +33,7 @@ in
             "#24283c";
       };
     };
-    yazi.theme = lib.importTOML "${pack}/yazi/tokyonight_${flavor}.toml" // {
+    yazi.theme = lib.importTOML ./yazi/tokyonight_${flavor}.toml // {
       manager.syntect_theme = "${pack}/sublime/tokyonight_${flavor}.tmTheme";
     };
     bat = {
@@ -113,9 +114,31 @@ in
     };
   };
   services.dunst.settings = lib.importTOML "${pack}/dunst/tokyonight_${flavor}.dunstrc";
-
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-tokyonight ];
-
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = if flavor == "day" then "prefer-light" else "prefer-dark";
+    };
+  };
+  qt.style.name = "adwaita-${lib.toLower shade}";
+  gtk = {
+    colorScheme = lib.toLower shade;
+    # gtk3.extraConfig.gtk-application-prefer-dark-theme = flavor != "day";
+    theme = {
+      name = "Tokyonight-${shade}";
+      package = pkgs.tokyonight-gtk-theme;
+    };
+    gtk4.theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyonight-gtk-theme;
+    };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
   xdg.configFile = {
     "fcitx5/conf/classicui.conf" = {
       text = lib.generators.toINIWithGlobalSection { } {
@@ -138,27 +161,9 @@ in
       inherit (config.xsession.windowManager.qtile) enable;
       source = ./qtile/${flavor}.py;
     };
-  };
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = if flavor == "day" then "prefer-light" else "prefer-dark";
-    };
-  };
-  gtk = {
-    # gtk3.extraConfig.gtk-application-prefer-dark-theme = flavor != "day";
-    theme =
-      let
-        shade = if flavor == "day" then "Light" else "Dark";
-      in
-      {
-        name = "Tokyonight-${shade}";
-        package = pkgs.tokyonight-gtk-theme;
-      };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/Breeze${shade}.colors";
   };
 }

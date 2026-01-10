@@ -1,15 +1,4 @@
-function _check_cmd() {
-  command -v "$1" &>/dev/null
-}
 {{ template "zsh/zshrc" . -}}
-
-if _check_cmd mise; then
-  eval "$(mise activate zsh)"
-  if [ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise ]; then
-    mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions
-    mise completion zsh > ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/completions/_mise
-  fi
-fi
 
 if test -n "$KITTY_INSTALLATION_DIR"; then
   export KITTY_SHELL_INTEGRATION="no-rc"

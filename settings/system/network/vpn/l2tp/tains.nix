@@ -3,10 +3,11 @@
   services = {
     xl2tpd.extraXl2tpOptions =
       let
+        # NOTE: SubIDを変更したらここも変更する必要あり
         tains-ppp-options = pkgs.writeText "tains-ppp-options" ''
           ipparam tains:130.34.40.195
-          user "k4caffdb0y@student.tohoku.ac.jp"
-          name "k4caffdb0y@student.tohoku.ac.jp"
+          user "dizzy6572@student.tohoku.ac.jp"
+          name "dizzy6572@student.tohoku.ac.jp"
           nodetach
           noauth
           usepeerdns

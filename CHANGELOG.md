@@ -1,5 +1,30 @@
 # Changelog
 
+## [8.2.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.1...v8.2.2) (2026-01-10)
+
+
+### Bug Fixes
+
+* breeze no support to darwin and support wireless on liveimg ([674fdac](https://github.com/misumisumi/nixos-desktop-config/commit/674fdacb37523dcc265597319b6a8847e78182a5))
+* **chezmoi:** fix activate mise logic ([c6da4f6](https://github.com/misumisumi/nixos-desktop-config/commit/c6da4f6a113a22bb2595881d62837303452da7bf))
+* **chezmoi:** update config ([ae90eb8](https://github.com/misumisumi/nixos-desktop-config/commit/ae90eb89429cd791c9d11c0cae18b1ac281ada5e))
+* **color-theme:** add tokyo-night flavor for yazi ([3b32273](https://github.com/misumisumi/nixos-desktop-config/commit/3b3227313e67a3725d4f2483e3388fd023c72145))
+* **color-theme:** fix not applying color-theme on gtk4 ([f913447](https://github.com/misumisumi/nixos-desktop-config/commit/f9134479aefb4b584d3d595122aec580346c5c84))
+* **color-theme:** resolve that kdeconnect not apply color-theme ([87c7231](https://github.com/misumisumi/nixos-desktop-config/commit/87c723135e080a781f87e9c23bab9d9f82fc711c))
+* **impermanence:** deprecated homeManagerModules and support trash in upstream now ([0b70d35](https://github.com/misumisumi/nixos-desktop-config/commit/0b70d352212357ed755e310e81033f689f7879a0))
+* **kdeconnect:** downgrade version ([3023a59](https://github.com/misumisumi/nixos-desktop-config/commit/3023a594b71f6bd016a249749050c573d26f3353))
+* **mother:** update machine components ([3b2ee89](https://github.com/misumisumi/nixos-desktop-config/commit/3b2ee89ecb794b435d038be569bb18522ea10480))
+* replace to onlyoffice from libreoffice ([9bdf463](https://github.com/misumisumi/nixos-desktop-config/commit/9bdf4636258e40e6b73e679a42424b5bb882564c))
+* rm trace kernel and check kernel version in nixos-rebuild ([3ec9837](https://github.com/misumisumi/nixos-desktop-config/commit/3ec9837bcea97b39638be3075dec68fb1b5c75cd))
+* **sops:** update username and password for ppp ([46a3a51](https://github.com/misumisumi/nixos-desktop-config/commit/46a3a5135ff061600777fbd85b015d925c75ea6f))
+* **tmux:** check tmux version for passthrough option ([4a6959a](https://github.com/misumisumi/nixos-desktop-config/commit/4a6959a5369ed7d1290e1571fa7740f977ff2f6a))
+* update flake.lock and fix deprecated options ([593bbda](https://github.com/misumisumi/nixos-desktop-config/commit/593bbdad68f41ea8e6f79deda42baf9212f67e0b))
+* update flake.lock and fix deprecated options ([c31a927](https://github.com/misumisumi/nixos-desktop-config/commit/c31a92773645d0f22d3aac37baeac2af04593a90))
+* **vivaldi:** include proprietaryCode ([5642648](https://github.com/misumisumi/nixos-desktop-config/commit/56426486083934278dac61ef194f5312d41cd43d))
+* **xp-pentablet:** remove xp-pentablet ([917667a](https://github.com/misumisumi/nixos-desktop-config/commit/917667ae2c64426a3cb3a7e52af3b8b45bd0409f))
+* **zephyrus:** fix default locale for auto locale ([fe79b7c](https://github.com/misumisumi/nixos-desktop-config/commit/fe79b7c7b5636836bcbfa66500574332fc78baa5))
+* **zfs:** use unstable version and simplifying kernel version determination ([cbaa01c](https://github.com/misumisumi/nixos-desktop-config/commit/cbaa01caa71d2065961e0f64d12de217d651cba1))
+
 ## [8.2.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.0...v8.2.1) (2025-12-11)
 
 

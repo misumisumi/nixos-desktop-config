@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
-  time.timeZone = "Asia/Tokyo"; # Time zone and internationalisation
+  time.timeZone = lib.mkDefault "Asia/Tokyo"; # Time zone and internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
     supportedLocales = [

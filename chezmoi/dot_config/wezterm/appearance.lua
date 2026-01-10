@@ -33,19 +33,10 @@ local config = {
     quick_select_patterns = {
         "(?<=[\\(|{|`|'|\"])[^[\\(|{|`|'|\"][\\)|}|`|'|\"]]+(?=[\\)|}|`|'|\"])",
     },
-    front_end = "WebGpu",
+    front_end = "OpenGL",
 }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { "powershell.exe", "-NoLogo" }
-end
-
--- Set "WebGpu" as frontend when you can use "Vulkan".
-for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
-    if gpu.backend == "Vulkan" and gpu.device_type == "IntegratedGpu" then
-        config.webgpu_preferred_adapter = gpu
-        config.front_end = "WebGpu"
-        break
-    end
 end
 
 return config

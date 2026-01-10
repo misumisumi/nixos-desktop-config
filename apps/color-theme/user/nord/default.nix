@@ -34,6 +34,27 @@
       package = pkgs.nordzy-cursor-theme;
     };
   };
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-nord ];
+  qt.style.name = "adwaita-dark";
+  gtk = {
+    colorScheme = "dark";
+    theme = {
+      name = "Nordic-darker";
+      package = pkgs.nordic;
+    };
+    gtk4 = {
+      theme = {
+        name = "Nordic-darker";
+        package = pkgs.nordic;
+      };
+    };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    iconTheme = {
+      name = "Nordzy-dark";
+      package = pkgs.nordzy-icon-theme;
+    };
+  };
   xdg.configFile = {
     "fcitx5/conf/classicui.conf" = {
       enable = config.i18n.inputMethod.enabled == "fcitx5";
@@ -61,18 +82,9 @@
       inherit (config.programs.yazi) enable;
       source = ./sublime/Nord.tmTheme;
     };
-  };
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-nord ];
-  gtk = {
-    theme = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
-    };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    iconTheme = {
-      name = "Nordzy-dark";
-      package = pkgs.nordzy-icon-theme;
-    };
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
   };
 }
