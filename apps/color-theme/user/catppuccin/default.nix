@@ -54,6 +54,7 @@ in
       };
   };
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-catppuccin ];
+  qt.style.name = "adwaita-${lib.toLower shade}";
   gtk = {
     colorScheme = lib.toLower shade;
     theme = {
@@ -78,8 +79,6 @@ in
     };
   };
   xdg.configFile = {
-    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
-    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/Breeze${shade}.colors";
     "wezterm/color-scheme.lua" = {
       inherit (config.programs.wezterm) enable;
       source = ./wezterm/${flavor}.lua;
@@ -98,5 +97,9 @@ in
         };
       };
     };
+  }
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    # NOTE: https://forum.endeavouros.com/t/getting-kdeconnect-to-use-kvantum-theme-outside-of-plasma/57717
+    "kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
   };
 }
