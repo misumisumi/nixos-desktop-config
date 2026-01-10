@@ -7,7 +7,7 @@
   services = {
     blueman.enable = true;
     udisks2.enable = true;
-    dbus.packages = with pkgs; [ xfce.xfconf ];
+    dbus.packages = with pkgs; [ xfconf ];
     gvfs.enable = true; # Mount, trash, and other functions
     tumbler.enable = true; # Thumbnail supoport for images
   };

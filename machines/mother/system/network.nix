@@ -22,7 +22,7 @@
   networking = {
     hostName = "${hostname}";
     hostId = "bcf1bfe4";
-    interfaces.enp5s0.wakeOnLan.enable = true;
+    # interfaces.enp5s0.wakeOnLan.enable = true;
     nftables.enable = true;
     firewall = {
       enable = true;
@@ -97,9 +97,15 @@
         # };
       };
       networks = {
-        "10-wired" = {
+        # "10-wired-2.5G" = {
+        #   matchConfig = {
+        #     MACAddress = "60:cf:84:a1:c1:18"; # 2.5G
+        #   };
+        #   bridge = [ "br0" ];
+        # };
+        "10-wired-1.0G" = {
           matchConfig = {
-            MACAddress = "f0:2f:74:dc:3b:4b";
+            MACAddress = "60:cf:84:a1:c1:19"; # 1G
           };
           bridge = [ "br0" ];
         };

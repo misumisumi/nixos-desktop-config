@@ -4,9 +4,7 @@
 }:
 {
   networking = {
-    wireless.enable = false;
     hostName = "nixos";
-
     networkmanager = {
       enable = true;
       dhcp = "dhcpcd";

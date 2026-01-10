@@ -28,7 +28,6 @@
       "snd-aloop"
     ];
   };
-  time.timeZone = lib.mkForce null;
   programs.poweroff'.enable = true;
   services = {
     upower.enable = true;

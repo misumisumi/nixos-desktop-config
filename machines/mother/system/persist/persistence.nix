@@ -37,19 +37,12 @@ let
     "Downloads"
     "go"
   ];
-  addTrashOption = map (x: {
-    name =
-      if ((builtins.typeOf x) == "set") then "/home/${user}/${x.directory}" else "/home/${user}/${x}";
-    value = {
-      options = [ "x-gvfs-trash" ];
-    };
-  }) (persistUserDirs ++ persistAltUserDirs);
 in
 {
-  fileSystems = builtins.listToAttrs addTrashOption;
   environment.persistence."/nix/persist" = {
     enable = true;
     hideMounts = true;
+    allowTrash = true;
     directories = [
       "/etc/ssh" # system ssh dir
       "/var"
@@ -65,6 +58,7 @@ in
   environment.persistence."/nix/persist-alt" = {
     enable = true;
     hideMounts = true;
+    allowTrash = true;
     directories = [
       "/root/.local/share/nix"
     ];

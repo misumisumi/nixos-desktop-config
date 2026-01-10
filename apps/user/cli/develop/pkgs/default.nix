@@ -3,12 +3,14 @@ let
   pythonPkgs =
     ps: with ps; [
       numpy
+      pandas
     ];
 in
 {
   home = {
     packages = with pkgs; [
       (python3.withPackages pythonPkgs)
+      android-tools # Android platform tools (adb, fastboot, etc.
       cloc # A program that counts lines of source code
       convmv # convert encoding
       mosh # Mobile Shell

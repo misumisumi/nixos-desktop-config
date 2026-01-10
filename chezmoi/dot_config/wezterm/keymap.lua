@@ -239,7 +239,7 @@ local config = {
                 win:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
             end),
         },
-        -- for jp key}
+        -- for jp keyboard
         { key = "¥", mods = "ALT", action = act.SendString("\\") },
     },
 }

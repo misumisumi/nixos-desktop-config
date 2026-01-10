@@ -33,6 +33,7 @@ in
           if [ -f "${config.home.homeDirectory}/.env" ]; then
             export $(${getExe' pkgs.gnugrep "grep"} -v '^#' ${config.home.homeDirectory}/.env | xargs)
           fi
+          export SSL_CERT_DIR="${pkgs.cacert}/etc/ssl/certs"
           ${getExe' p exeName} "$@"
         '';
     in
