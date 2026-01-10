@@ -1,6 +1,5 @@
 let
-  # device = "/dev/disk/by-id/nvme-SPCC_M.2_PCIe_SSD_296E079C18FC00597627";
-  device = "/dev/sda";
+  device = "/dev/disk/by-id/nvme-FIKWOT_FN955_2TB_AA243820758";
 in
 {
   disko.devices = {
