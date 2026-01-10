@@ -86,4 +86,9 @@ final: prev: {
       };
     in
     self;
+  #BUG: https://bugs.kde.org/show_bug.cgi?id=513536
+  # 25/01/10: Ver 25.12.1ではログイン毎にBT backendをON→OFFしなければ問題の一時解決も機能しない
+  kdePackages = prev.kdePackages // {
+    inherit (nixpkgs-stable.kdePackages) kdeconnect-kde;
+  };
 }
