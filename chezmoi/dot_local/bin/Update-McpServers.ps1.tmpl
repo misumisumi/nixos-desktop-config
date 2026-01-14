@@ -56,7 +56,8 @@ function Update-PipPackage {
     New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
     Push-Location $pkgDir
     & "$pkgDir\venv\Scripts\python.exe" -m venv venv --upgrade
-    & "$pkgDir\venv\Scripts\python.exe" -m pip update
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U pip
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U $pname
     Pop-Location
     Logging "Package '$name' update successfully."
 }
@@ -69,7 +70,8 @@ function Update-PythonPackage {
     Push-Location $pkgDir
     $branch = git rev-parse --abbrev-ref HEAD
     git pull origin $branch
-    & "$pkgDir\venv\Scripts\python.exe" -m pip update
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U pip
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install -e .
     Pop-Location
     Logging "Package '$name' update successfully."
 }
