@@ -31,7 +31,6 @@
   programs.poweroff'.enable = true;
   services = {
     upower.enable = true;
-    automatic-timezoned.enable = true;
     asusd = {
       enableUserService = true;
       profileConfig.text = "quiet";
