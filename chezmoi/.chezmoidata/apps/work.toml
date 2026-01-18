@@ -14,6 +14,8 @@ diffFilter = "delta --color-only"
 
 [apps.users."kobayashis1033".git]
 useDelta = true
+[apps.users."kobayashis1033".git.core]
+fileMode = false
 [apps.users."kobayashis1033".git.settings.user]
 email = "kobayashis1033@g.softbank.co.jp"
 name = "Sumiharu Kobayashi"

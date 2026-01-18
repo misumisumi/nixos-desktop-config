@@ -1,36 +1,36 @@
-[windows.hosts.win-zephyrus]
+[windows.hosts.win-stacia]
 owner = true
 
-[windows.hosts.win-zephyrus.sops]
+[windows.hosts.win-stacia.sops]
 
-[windows.hosts.win-zephyrus.env]
+[windows.hosts.win-stacia.env]
 PATH = []
-[windows.hosts.win-zephyrus.env.export]
+[windows.hosts.win-stacia.env.export]
 
-[windows.hosts.win-zephyrus.packages.powershell]
+[windows.hosts.win-stacia.packages.powershell]
 extraPreInstall = ""
 extraPostInstall = ""
 modules = []
 scripts = []
 
-[windows.hosts.win-zephyrus.packages.winget]
+[windows.hosts.win-stacia.packages.winget]
 extraPreInstall = ""
 extraPostInstall = ""
 extraOptions = []
-[windows.hosts.win-zephyrus.packages.winget.apps]
+[windows.hosts.win-stacia.packages.winget.apps]
 sudo = []
 no_sudo = []
 
-[windows.hosts.win-zephyrus.packages.chocolatey]
+[windows.hosts.win-stacia.packages.chocolatey]
 extraPreInstall = ""
 extraPostInstall = ""
 extraOptions = []
-[windows.hosts.win-zephyrus.packages.chocolatey.apps]
+[windows.hosts.win-stacia.packages.chocolatey.apps]
 sudo = ["nvidia-app", "nvidia-broadcast"]
 no_sudo = []
 
-[windows.hosts.win-zephyrus.packages.scoop]
+[windows.hosts.win-stacia.packages.scoop]
 extraPreInstall = ""
 extraPostInstall = ""
 apps = []
-[windows.hosts.win-zephyrus.packages.scoop.buckets]
+[windows.hosts.win-stacia.packages.scoop.buckets]

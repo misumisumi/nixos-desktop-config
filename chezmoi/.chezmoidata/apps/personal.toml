@@ -9,6 +9,8 @@ diffFilter = "delta --color-only"
 [apps.users.sumi.delta.git.delta]
 
 [apps.users.sumi.git]
+[apps.users.sumi.git.core]
+fileMode = false
 [apps.users.sumi.git.settings.user]
 email = "s.kobayashi@misumi-sumi.com"
 name = "misumisumi"

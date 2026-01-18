@@ -184,6 +184,7 @@ apps = [
     "sops",
     "starship",
     "tree-sitter",
+    "unar",
     "uv",
     "wavesurfer",
     "wezterm",
@@ -193,6 +194,7 @@ apps = [
     "yq",
     "yubico-piv-tool",
     "yubioath",
+    "zip",
     "zoxide",
 ]
 [windows.users.'BB\kobayashis1033'.packages.scoop.buckets]
