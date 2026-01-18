@@ -12,14 +12,15 @@
   services = {
     resolved = {
       enable = true;
-      # dnssec = "allow-downgrade";
-      dnssec = lib.mkDefault "false";
-      fallbackDns = [
-        "1.1.1.1"
-        "2606:4700:4700::1111"
-        "8.8.8.8"
-        "2001:4860:4860::8888"
-      ];
+      settings.Resolve = {
+        DNSSEC = lib.mkDefault "false";
+        FallbackDNS = [
+          "1.1.1.1"
+          "2606:4700:4700::1111"
+          "8.8.8.8"
+          "2001:4860:4860::8888"
+        ];
+      };
     };
   };
 
