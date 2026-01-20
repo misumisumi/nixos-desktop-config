@@ -30,21 +30,21 @@ fi
 {{ end -}}
 {{- range $pkgmngr, $value := $hostPkgConfigs -}}
 {{ if (or (get $value "need_sudo") false) -}}
-{{ or (get $value "preInstallExtra") "" -}}
+{{ or (get $value "extraPreInstall") "" -}}
 {{ $value.installCmd }} \
   {{ $value.options | join " \\\n  " }} \
   {{ $value.apps | join " \\\n  " }}
-{{ or (get $value "postInstallExtra") "" -}}
+{{ or (get $value "extraPostInstall") "" -}}
 {{ end -}}
 {{ end -}}
 
 {{- range $pkgmngr, $value := $userPkgConfigs -}}
 {{ if (or (get $value "need_sudo") false) -}}
-{{ or (get $value "preInstallExtra") "" -}}
+{{ or (get $value "extraPreInstall") "" -}}
 {{ $value.installCmd }} \
   {{ $value.options | join " \\\n  " }} \
   {{ $value.apps | join " \\\n  " }}
-{{ or (get $value "postInstallExtra") "" -}}
+{{ or (get $value "extraPostInstall") "" -}}
 {{ end -}}
 {{ end -}}
 

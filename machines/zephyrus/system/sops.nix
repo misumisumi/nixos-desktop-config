@@ -12,6 +12,8 @@
       wireless = {
         sopsFile = ../../../sops/system/network/wireless;
         format = "binary";
+        owner = "wpa_supplicant";
+        group = "wpa_supplicant";
       };
     };
   };

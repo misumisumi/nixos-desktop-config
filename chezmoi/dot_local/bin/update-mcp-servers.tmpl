@@ -56,7 +56,8 @@ function update_pip_package() {
   mkdir -p "${_PKGDIR}"
   pushd "${_PKGDIR}" || return
   "${_PKGDIR}/venv/bin/python" -m venv venv --upgrade
-  "${_PKGDIR}/venv/bin/python" -m pip update
+  "${_PKGDIR}/venv/bin/python" -m pip install -U pip
+  "${_PKGDIR}/venv/bin/python" -m pip install -U "${pname}"
   popd || return
 
   logging "Package '${name}' update successfully."
@@ -73,7 +74,8 @@ function update_python_package() {
   pushd "${_PKGDIR}" || return
   branch=$(git rev-parse --abbrev-ref HEAD)
   git pull origin "${branch}"
-  "${_PKGDIR}/venv/bin/python" -m pip update
+  "${_PKGDIR}/venv/bin/python" -m pip install -U pip
+  "${_PKGDIR}/venv/bin/python" -m pip install -e .
   popd || return
 
   logging "Package '${name}' update successfully."

@@ -1,0 +1,36 @@
+[windows.hosts.win-stacia]
+owner = true
+
+[windows.hosts.win-stacia.sops]
+
+[windows.hosts.win-stacia.env]
+PATH = []
+[windows.hosts.win-stacia.env.export]
+
+[windows.hosts.win-stacia.packages.powershell]
+extraPreInstall = ""
+extraPostInstall = ""
+modules = []
+scripts = []
+
+[windows.hosts.win-stacia.packages.winget]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-stacia.packages.winget.apps]
+sudo = []
+no_sudo = []
+
+[windows.hosts.win-stacia.packages.chocolatey]
+extraPreInstall = ""
+extraPostInstall = ""
+extraOptions = []
+[windows.hosts.win-stacia.packages.chocolatey.apps]
+sudo = ["nvidia-app", "nvidia-broadcast"]
+no_sudo = []
+
+[windows.hosts.win-stacia.packages.scoop]
+extraPreInstall = ""
+extraPostInstall = ""
+apps = []
+[windows.hosts.win-stacia.packages.scoop.buckets]

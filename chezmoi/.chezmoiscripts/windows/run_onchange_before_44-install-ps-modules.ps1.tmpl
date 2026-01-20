@@ -12,8 +12,10 @@ function Logging($1) {
 
 Logging "Start"
 
-{{ or (get $hostPSConfig "preInstallExtra") "" }}
-{{ or (get $userPSConfig "preInstallExtra") "" }}
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+
+{{ or (get $hostPSConfig "extraPreInstall") "" }}
+{{ or (get $userPSConfig "extraPreInstall") "" }}
 
 {{ range concat (or (get $hostPSConfig "modules") list) (or (get $userPSConfig "modules") list) -}}
 Install-Module -Scope CurrentUser -Force {{ . }}
@@ -24,7 +26,7 @@ Logging "Installing PowerShell Scripts ..."
 Install-Scripts -Scope CurrentUser -Force {{ . }}
 {{ end }}
 
-{{ or (get $hostPSConfig "postInstallExtra") "" }}
-{{ or (get $userPSConfig "postInstallExtra") "" }}
+{{ or (get $hostPSConfig "extraPostInstall") "" }}
+{{ or (get $userPSConfig "extraPostInstall") "" }}
 
 Logging "Finish"

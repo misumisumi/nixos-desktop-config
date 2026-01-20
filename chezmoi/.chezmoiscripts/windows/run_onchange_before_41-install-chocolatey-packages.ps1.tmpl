@@ -14,8 +14,8 @@ function Logging($1) {
 if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
     Logging "Start"
 
-    {{ or (get $hostChocoConfig "preInstallExtra") "" }}
-    {{ or (get $userChocoConfig "preInstallExtra") "" }}
+    {{ or (get $hostChocoConfig "extraPreInstall") "" }}
+    {{ or (get $userChocoConfig "extraPreInstall") "" }}
 
     {{- $sudo_pkgs := concat (or (get (or (get $hostChocoConfig "apps") dict) "sudo") list) (or (get (or (get $userChocoConfig "apps") dict) "sudo") list) -}}
     {{- $extraOptions := concat (or (get $hostChocoConfig "extraOptions") list) (or (get $userChocoConfig "extraOptions") list) -}}
@@ -30,8 +30,8 @@ if (Get-Command * | Where-Object { $_.Name -match "choco" }) {
         {{ $no_sudo_pkgs | join " `\n        " }}
     {{ end }}
 
-    {{ or (get $hostChocoConfig "postInstallExtra") "" }}
-    {{ or (get $userChocoConfig "postInstallExtra") "" }}
+    {{ or (get $hostChocoConfig "extraPostInstall") "" }}
+    {{ or (get $userChocoConfig "extraPostInstall") "" }}
 
     Logging "Finish"
 }

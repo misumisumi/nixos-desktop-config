@@ -141,7 +141,9 @@ Set-PSReadLineKeyHandler -Chord Ctrl+d -ScriptBlock {
 }
 
 # fzfの統合
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+if (Get-Command * | Where-Object { $_.Name -match "Set-PsFzfOption" }) {
+  Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+}
 
 {{ $path := concat (or (get $hostEnvConfig "PATH") list) (or (get $userEnvConfig "PATH") list) (or (get $systemEnvConfig "PATH") list) }}
 $env:PATH = "{{ $path | join ";" }};" + $env:PATH

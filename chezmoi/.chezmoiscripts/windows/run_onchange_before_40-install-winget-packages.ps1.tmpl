@@ -13,8 +13,8 @@ function Logging($1) {
 
 Logging "Start"
 if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
-    {{ or (get $hostWingetConfig "preInstallExtra") "" }}
-    {{ or (get $userWingetConfig "preInstallExtra") "" }}
+    {{ or (get $hostWingetConfig "extraPreInstall") "" }}
+    {{ or (get $userWingetConfig "extraPreInstall") "" }}
 
     {{- $sudo_pkgs := concat (or (get (or (get $hostWingetConfig "apps") dict) "sudo") list) (or (get (or (get $userWingetConfig "apps") dict) "sudo") list) -}}
     {{- $extraOptions := concat (or (get $hostWingetConfig "extraOptions") list) (or (get $userWingetConfig "extraOptions") list) -}}
@@ -48,8 +48,8 @@ if (Get-Command * | Where-Object { $_.Name -match "winget" }) {
         {{ $no_sudo_pkgs | join " `\n        " }}
     {{ end }}
 
-    {{ or (get $hostWingetConfig "postInstallExtra") "" }}
-    {{ or (get $userWingetConfig "postInstallExtra") "" }}
+    {{ or (get $hostWingetConfig "extraPostInstall") "" }}
+    {{ or (get $userWingetConfig "extraPostInstall") "" }}
 }
 
 Logging "Finish"

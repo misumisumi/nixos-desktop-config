@@ -19,7 +19,7 @@ logging "Start"
 
 {{ range $pkgmngr, $value := $hostPkgConfigs -}}
 {{ if not (or (get $value "need_sudo") false) -}}
-{{ or (get $value "preInstallExtra") "" -}}
+{{ or (get $value "extraPreInstall") "" -}}
 {{ if eq $pkgmngr "homebrew" -}}
 brew install \
   {{ $value.brew | join " \\\n  " }}
@@ -34,13 +34,13 @@ brew install --cask \
   {{ $value.options | join " \\\n  " }} \
   {{ $value.apps | join " \\\n  " }}
 {{ end }}
-{{ or (get $value "postInstallExtra") "" -}}
+{{ or (get $value "extraPostInstall") "" -}}
 {{ end -}}
 {{ end -}}
 
 {{ range $pkgmngr, $value := $userPkgConfigs -}}
 {{ if not (or (get $value "need_sudo") false) -}}
-{{ or (get $value "preInstallExtra") "" -}}
+{{ or (get $value "extraPreInstall") "" -}}
 {{ if eq $pkgmngr "homebrew" -}}
 brew install \
   {{ $value.brew | join " \\\n  " }}
@@ -55,7 +55,7 @@ brew install --cask \
   {{ $value.options | join " \\\n  " }} \
   {{ $value.apps | join " \\\n  " }}
 {{ end }}
-{{ or (get $value "postInstallExtra") "" -}}
+{{ or (get $value "extraPostInstall") "" -}}
 {{ end -}}
 {{ end -}}
 

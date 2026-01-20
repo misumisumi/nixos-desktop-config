@@ -26,8 +26,8 @@ try {
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
-{{ or (get $hostScoopConfig "preInstallExtra") "" }}
-{{ or (get $userScoopConfig "preInstallExtra") "" }}
+{{ or (get $hostScoopConfig "extraPreInstall") "" }}
+{{ or (get $userScoopConfig "extraPreInstall") "" }}
 
 # Support multi session download
 scoop install git aria2
@@ -43,8 +43,8 @@ scoop bucket add {{ $name }} {{ $url }}
 scoop install `
     {{ $scoopApps | join " `\n    " }}
 
-{{ or (get $hostScoopConfig "postInstallExtra") "" }}
-{{ or (get $userScoopConfig "postInstallExtra") "" }}
+{{ or (get $hostScoopConfig "extraPostInstall") "" }}
+{{ or (get $userScoopConfig "extraPostInstall") "" }}
 
 Logging "Finish"
 {{ end }}

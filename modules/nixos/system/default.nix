@@ -62,6 +62,7 @@ with lib;
           count=0
           flake=""
           boot=0
+          offline=0
           check_kernel=0
           while (( $# > 0 )) do
             count=''$((count + 1))
@@ -71,6 +72,9 @@ with lib;
               flake=''${1-}
               flake=''${flake//.*#/}
               count="''$((count + 1))"
+              ;;
+            --offline)
+              offline=1
               ;;
             boot) boot=1
               ;;
@@ -89,10 +93,16 @@ with lib;
         parse_params "''$@"
         if [ "''${SHLVL}" -eq 1 ] && [ "''${flake}" != "" ]; then
           current_kernel="$(${pkgs.coreutils}/bin/uname -r)"
-          next_kernel="$(${pkgs.nix}/bin/nix eval "${self}#nixosConfigurations.''${flake}.config.boot.kernelPackages.kernel.version" --raw)"
+          cmd="${pkgs.nix}/bin/nix eval "${self}#nixosConfigurations.''${flake}.config.boot.kernelPackages.kernel.version" --raw"
+          if [ "''${offline}" -eq 0 ]; then
+            cmd="''${cmd} --refresh"
+          else
+            cmd="''${cmd} --offline"
+          fi
+          next_kernel="$(eval "''${cmd}")"
           echo "Kernel version: ''${current_kernel} -> ''${next_kernel}"
           if [ "''${current_kernel}" != "''${next_kernel}" ] && [ "''${check_kernel}" -eq 1 ]; then
-            echo "Need to reboot so use `nixos-rebuild boot`"
+            echo "Need to reboot so use 'nixos-rebuild boot'"
             exit 1
           fi
         fi

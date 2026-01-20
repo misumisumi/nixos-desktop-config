@@ -118,11 +118,11 @@ zoxide = "latest"
 # need_sudo = true
 # installCmd = "apt install" # No need for sudo because it will be elevated to privileges inside the shell script
 # options = ["-y"]
-# preInstallExtra = """
+# extraPreInstall = """
 # apt add-apt-repository ppa:neovim-ppa/stable
 # apt update
 # """
-# postInstallExtra = """
+# extraPostInstall = """
 # apt remove --autoremove
 # """
 # apps = ["neovim", "sox"]
@@ -244,7 +244,7 @@ install = false
 [windows.users.sumi.packages.winget]
 extraPreInstall = ""
 extraPostInstall = '''
-sudo winget install Microsoft.VisualStudio.2022.Community --override "--quiet --add Microsoft.VisualStudio.Workload.NativeDesktop"
+sudo winget install Microsoft.VisualStudio.Community --override "--quiet --add Microsoft.VisualStudio.Workload.NativeDesktop"
 '''
 extraOptions = []
 [windows.users.sumi.packages.winget.apps]
@@ -253,6 +253,7 @@ sudo = [
     "BlenderFoundation.Blender",
     "Discord.Discord",
     "GIMP.GIMP.3",
+    "KDE.KDEConnect",
     "KDE.Krita",
     "Meta.Oculus",
     "MichaelTippach.ASIO4ALL",
@@ -343,6 +344,7 @@ apps = [
     "sops",
     "starship",
     "tree-sitter",
+    "unar",
     "uv",
     "vrc-alcom",
     "vrc-get",
@@ -356,9 +358,12 @@ apps = [
     "yubikey-personalization",
     "yubikey-personalization-gui",
     "yubioath",
+    "zip",
     "zoxide",
     "my-bucket/moralerspace-hw-nf",
     "my-bucket/moralerspace-nf",
+    "my-bucket/wavesurfer",
+    "my-bucket/yaskkserv2",
     "nerd-fonts/FiraCode-NF",
 ]
 [windows.users.sumi.packages.scoop.buckets]

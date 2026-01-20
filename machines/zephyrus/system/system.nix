@@ -31,7 +31,6 @@
   programs.poweroff'.enable = true;
   services = {
     upower.enable = true;
-    automatic-timezoned.enable = true;
     asusd = {
       enableUserService = true;
       profileConfig.text = "quiet";
@@ -77,7 +76,7 @@
   nix = {
     settings = {
       cores = 4;
-      max-jobs = 6;
+      max-jobs = 4;
     };
     extraOptions = ''
       http-connections = 25
