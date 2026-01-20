@@ -17,6 +17,12 @@
     virt-manager
     virtio-win
     virtiofsd
+    (
+      let
+        inherit (builtins) readFile;
+      in
+      pkgs.writeShellScriptBin "motherboard2libvirt-xml" (readFile ./motherboard2libvirt-xml.sh)
+    )
   ];
   virtualisation = {
     libvirtd = {
