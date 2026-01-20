@@ -78,9 +78,12 @@ jobs:
             max-jobs = 2
             stalled-download-timeout = 15
 
+        #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
+      - run: nix profile add nixpkgs#cpulimit
+
       - name: Build check
         timeout-minutes: 70
-        run: nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+        run: cpulimit -l 90 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
   build-check-matrix-darwin:
     needs: [pre-build]
