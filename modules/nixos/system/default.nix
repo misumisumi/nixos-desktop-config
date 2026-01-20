@@ -102,7 +102,7 @@ with lib;
           next_kernel="$(eval "''${cmd}")"
           echo "Kernel version: ''${current_kernel} -> ''${next_kernel}"
           if [ "''${current_kernel}" != "''${next_kernel}" ] && [ "''${check_kernel}" -eq 1 ]; then
-            echo "Need to reboot so use `nixos-rebuild boot`"
+            echo "Need to reboot so use 'nixos-rebuild boot'"
             exit 1
           fi
         fi
