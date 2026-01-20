@@ -1,5 +1,21 @@
 # Changelog
 
+## [8.2.3](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.2...v8.2.3) (2026-01-20)
+
+
+### Bug Fixes
+
+* **chezmoi:** fix update-mcp-servers and add windows machines ([6c534d0](https://github.com/misumisumi/nixos-desktop-config/commit/6c534d058c66f81bd138856b86f10b1ab092da36))
+* fix missing option and update chezmoi config ([028056f](https://github.com/misumisumi/nixos-desktop-config/commit/028056f7f4827533a15dac06e6b55c663c2aa79b))
+* fix nixos-rebuild ([6a5679b](https://github.com/misumisumi/nixos-desktop-config/commit/6a5679b71320863768cdc6cae4be98da2b6a27a9))
+* **libvirt:** add hwloc for showing cpu topology ([6f49f91](https://github.com/misumisumi/nixos-desktop-config/commit/6f49f913f0ea42419fd2680b1461b703b26f2ed8))
+* **libvirt:** add script converting libvirt-xml from motherboard info ([cd912f5](https://github.com/misumisumi/nixos-desktop-config/commit/cd912f5f249487b467110150dc0a648c4636304c))
+* **modules/nixos:** fix backquote to quote in script ([95e41ee](https://github.com/misumisumi/nixos-desktop-config/commit/95e41eee7316bfa55b303e9ec884456f4a8a5ea6))
+* **sops:** add win-stacia ([ddc1338](https://github.com/misumisumi/nixos-desktop-config/commit/ddc1338fee351a96aa81413c06e6872937a01600))
+* **zephyrus:** fix building core and jobs ([0b05079](https://github.com/misumisumi/nixos-desktop-config/commit/0b0507983d7230b82507015acc5b21e0c4581bb2))
+* **zephyrus:** fix owner and group of wpa_supplicant password file ([06d277e](https://github.com/misumisumi/nixos-desktop-config/commit/06d277e0c4dbe2290ba8df1e24fc69b759e54e92))
+* **zephyrus:** remove automatic-timezoned ([e5fa5b9](https://github.com/misumisumi/nixos-desktop-config/commit/e5fa5b990c8d4f914a71d61f58bc4ad1c6e24796))
+
 ## [8.2.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.1...v8.2.2) (2026-01-10)
 
 
