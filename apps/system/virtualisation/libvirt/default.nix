@@ -13,9 +13,10 @@
   };
   environment.systemPackages = with pkgs; [
     dmidecode # Show BIOS info
+    hwloc # Show CPU topology
     virt-manager
-    virtiofsd
     virtio-win
+    virtiofsd
   ];
   virtualisation = {
     libvirtd = {
