@@ -76,7 +76,7 @@
   nix = {
     settings = {
       cores = 4;
-      max-jobs = 6;
+      max-jobs = 4;
     };
     extraOptions = ''
       http-connections = 25
