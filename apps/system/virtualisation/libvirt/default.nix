@@ -12,11 +12,11 @@
     ];
   };
   environment.systemPackages = with pkgs; [
+    cdrtools # For mkisofs
     dmidecode # Show BIOS info
     hwloc # Show CPU topology
     virt-manager
     virtio-win
-    virtiofsd
     (
       let
         inherit (builtins) readFile;
@@ -31,6 +31,7 @@
       onShutdown = "shutdown";
       qemu = {
         swtpm.enable = true;
+        vhostUserPackages = with pkgs; [ virtiofsd ];
       };
     };
     spiceUSBRedirection.enable = true; # USB passthrough

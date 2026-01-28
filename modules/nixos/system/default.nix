@@ -91,7 +91,7 @@ with lib;
         }
 
         parse_params "''$@"
-        if [ "''${SHLVL}" -eq 1 ] && [ "''${flake}" != "" ]; then
+        if [ "''${SHLVL}" -eq 2 ] && [ "''${flake}" != "" ]; then
           current_kernel="$(${pkgs.coreutils}/bin/uname -r)"
           cmd="${pkgs.nix}/bin/nix eval "${self}#nixosConfigurations.''${flake}.config.boot.kernelPackages.kernel.version" --raw"
           if [ "''${offline}" -eq 0 ]; then
@@ -109,7 +109,7 @@ with lib;
 
         ${pkgs.nixos-rebuild-ng}/bin/nixos-rebuild "''$@"
 
-        if [ "''${SHLVL}" -eq 1 ] && [ "''${boot}" -eq 1 ] && [ "''${flake}" != "" ]; then
+        if [ "''${SHLVL}" -eq 2 ] && [ "''${boot}" -eq 1 ] && [ "''${flake}" != "" ]; then
           echo "Running link check for flake: ''${flake}"
           ${pkgs.nix}/bin/nix run --offline "${self}#nixosConfigurations.''${flake}.config.system.linkCheck"
         fi
