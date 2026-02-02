@@ -73,8 +73,8 @@ jobs:
           extra-conf: |
             accept-flake-config = true
             connect-timeout = 15
-            cores = 2
             http-connections = 25
+            cores = 2
             max-jobs = 2
             stalled-download-timeout = 15
 
@@ -102,6 +102,7 @@ jobs:
             accept-flake-config = true
             connect-timeout = 15
             http-connections = 25
+            cores = 1
             max-jobs = 2
             stalled-download-timeout = 15
 
