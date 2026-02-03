@@ -95,8 +95,4 @@ final: prev: {
   kdePackages = prev.kdePackages // {
     inherit (nixpkgs-stable.kdePackages) kdeconnect-kde;
   };
-  #BUG: https://github.com/NixOS/nixpkgs/issues/483585
-  xorg = prev.xorg // {
-    inherit (nixpkgs-stable.xorg) xf86videoamdgpu;
-  };
 }
