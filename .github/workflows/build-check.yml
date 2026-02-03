@@ -73,8 +73,8 @@ jobs:
           extra-conf: |
             accept-flake-config = true
             connect-timeout = 15
-            cores = 2
             http-connections = 25
+            cores = 2
             max-jobs = 2
             stalled-download-timeout = 15
 
@@ -102,7 +102,8 @@ jobs:
             accept-flake-config = true
             connect-timeout = 15
             http-connections = 25
-            max-jobs = 3
+            cores = 1
+            max-jobs = 2
             stalled-download-timeout = 15
 
       - name: Remove unused packages of macos
@@ -119,9 +120,12 @@ jobs:
           sudo rm -rf ~/Library/Developer/Xcode
           df -h
 
+        #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
+      - run: nix profile add nixpkgs#cpulimit
+
       - name: Build check
         timeout-minutes: 70
-        run: nix run nix-darwin/master#darwin-rebuild -- build --flake ".#${{ matrix.hostname }}"
+        run: cpulimit -l 90 -i -- nix build --no-link ".#darwinConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
   build-check-summary:
     runs-on: ubuntu-latest
