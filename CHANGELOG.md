@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.2.4](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.3...v8.2.4) (2026-02-03)
+
+
+### Bug Fixes
+
+* change check phase to SHLVL=2 ([5d47875](https://github.com/misumisumi/nixos-desktop-config/commit/5d4787568dd11fab8d6c360c33719d949587aae4))
+* **libvirt:** fix unable to find a satisfying virtiofsd ([513070e](https://github.com/misumisumi/nixos-desktop-config/commit/513070eb2d988fec20509aa1e501fc64db5f10e9))
+* **onlyoffice:** add activate action for adding fonts ([dc227fa](https://github.com/misumisumi/nixos-desktop-config/commit/dc227fa5727dbc30b3b1b867d837e9437c3edc96))
+* **onlyoffice:** add activation script from NixOS/nixpkgs[#373521](https://github.com/misumisumi/nixos-desktop-config/issues/373521) ([fc9ed6a](https://github.com/misumisumi/nixos-desktop-config/commit/fc9ed6aac55645e7ad8ab271eee9bf690eb716d3))
+* update ssh config ([986537d](https://github.com/misumisumi/nixos-desktop-config/commit/986537d42e29dd1d825c33acb58e523b830aef66))
+* **xf86-amdgpu-driver:** fix in upstream so remove from patch ([6df114d](https://github.com/misumisumi/nixos-desktop-config/commit/6df114d9ae75e6ab312bff146d0d6267133d9dbd))
+
 ## [8.2.3](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.2...v8.2.3) (2026-01-20)
 
 
