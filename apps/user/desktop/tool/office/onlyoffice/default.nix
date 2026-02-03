@@ -26,7 +26,5 @@
       ${concatMapStringsSep "\n" (
         x: "find ${x} -regex $font_regexp -exec cp '{}' ~/.local/share/fonts/ \\;"
       ) fonts}
-      chmod 544 ~/.local/share/fonts
-      chmod 444 ~/.local/share/fonts/*
     '';
 }
