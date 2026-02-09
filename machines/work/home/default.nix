@@ -13,7 +13,7 @@
   };
   home.packages = with pkgs; [
     audacity
-    google-chrome
+    firefox
     mpv
   ];
 }
