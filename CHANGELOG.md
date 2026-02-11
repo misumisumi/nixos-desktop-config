@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.5](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.4...v8.2.5) (2026-02-11)
+
+
+### Bug Fixes
+
+* **work:** replace google-chrome to firefox because chrome on mac is breaking ([889d75f](https://github.com/misumisumi/nixos-desktop-config/commit/889d75fe5eb83d23f7216a90a1635a54619429cc))
+
 ## [8.2.4](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.3...v8.2.4) (2026-02-03)
 
 
