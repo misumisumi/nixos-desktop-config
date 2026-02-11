@@ -1,5 +1,6 @@
 { pkgs, user, ... }:
 {
+  system.primaryUser = user;
   fonts.packages = with pkgs; [
     noto-fonts-color-emoji
     noto-fonts-cjk-sans
