@@ -27,5 +27,10 @@
       sopsFile = ../../../sops/pkgs/ssh/univ;
       format = "binary";
     };
+    "id_ed25519.sshserver" = {
+      path = "${config.home.homeDirectory}/.ssh/id_ed25519.sshserver";
+      sopsFile = ../../../sops/pkgs/ssh/keys/id_ed25519.sshserver;
+      format = "binary";
+    };
   };
 }

@@ -79,6 +79,15 @@ creation_rules:
           - *sumi_stacia
           - *sumi_zephyrus
           - *kobayashi_univ
+  - path_regex: sops/pkgs/ssh/keys/id_ed25519.sshserver$
+    key_groups:
+      - pgp:
+          - *sumi
+        age:
+          - *sumi_mother
+          - *sumi_stacia
+          - *sumi_zephyrus
+          - *kobayashi_univ
   - path_regex: sops/pkgs/ssh/work$
     key_groups:
       - pgp:
