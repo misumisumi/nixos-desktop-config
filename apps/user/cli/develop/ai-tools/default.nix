@@ -81,7 +81,7 @@ in
   };
   programs.gemini-cli = {
     enable = true;
-    defaultModel = "gemini-2.5-flash";
+    defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
     settings = gemini-cli.settings // mcp;
   };
 }

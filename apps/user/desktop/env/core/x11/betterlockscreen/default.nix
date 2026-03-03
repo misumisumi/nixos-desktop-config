@@ -15,7 +15,7 @@
         builtins.listToAttrs (
           map
             (x: {
-              name = "${config.home.homeDirectory}/Pictures/wallpapers/${x}";
+              name = "${config.xdg.userDirs.pictures}/wallpapers/${x}";
               value = {
                 enable = true;
                 source = pkgs.nixos-artwork.wallpapers.catppuccin-mocha.gnomeFilePath;

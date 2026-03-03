@@ -30,11 +30,11 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users.sumi.gemini-cli]
-defaultModel = "gemini-2.5-flash"
+defaultModel = "gemini-3.0-flash-preview"
 [apps.users.sumi.gemini-cli.settings]
 [apps.users.sumi.gemini-cli.settings.general]
-disableAutoUpdate = true
-disableUpdateNag = true
+enableAutoUpdate = false
+enableAutoUpdateNotification = false
 previewFeatures = true
 vimMode = true
 [apps.users.sumi.gemini-cli.settings.ui]
