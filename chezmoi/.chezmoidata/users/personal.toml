@@ -59,6 +59,7 @@ context7-mcp = "@upstash/context7-mcp"
 copilot = "@github/copilot"
 gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
+mcp-obsidian = "@mauricio.wolff/mcp-obsidian@latest"
 [linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
 mcp-server-git = "mcp_server_git"
 mcp-nixos = "mcp_nixos"

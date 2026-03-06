@@ -17,7 +17,7 @@ in
       keyboardShortcut
       songStats
       {
-        inherit (pkgs.flakeSources.spicetify-dj-info) name src;
+        inherit (pkgs.spicetify-dj-info) src name;
       }
     ];
   };
