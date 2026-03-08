@@ -123,13 +123,4 @@ let
     };
 in
 {
-  work = settings {
-    colorTheme = "tokyonight-moon";
-    hostname = "work";
-    schemes = [
-      "presets/medium"
-      "shell"
-    ];
-    user = "kobayashis1033";
-  };
 }
