@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, getEncryptFile, ... }:
 {
   sops = {
     age = {
@@ -6,7 +6,7 @@
       keyFile = lib.mkForce "/nix/persist/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
-    defaultSopsFile = ../../../sops/hosts/stacia/secrets.yaml;
+    defaultSopsFile = getEncryptFile "hosts/stacia/secrets.yaml";
     secrets = {
       hashedPasswordFile.neededForUsers = true;
     };

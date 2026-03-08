@@ -1,0 +1,3 @@
+{
+  getEncryptFile = path: ./. + "/${path}";
+}

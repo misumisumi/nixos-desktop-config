@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  getEncryptFile,
+  ...
+}:
 {
   imports = [
     ./mail
@@ -19,12 +24,12 @@
     secrets = {
       "ssh.lua" = {
         path = "${config.xdg.configHome}/wezterm/ssh.lua";
-        sopsFile = ../../sops/pkgs/wezterm/ssh.lua;
+        sopsFile = getEncryptFile "pkgs/wezterm/ssh.lua";
         format = "binary";
       };
       "aichat/config.yaml" = {
         path = "${config.xdg.configHome}/aichat/config.yaml";
-        sopsFile = ../../sops/pkgs/ai-tools/config.yaml.txt;
+        sopsFile = getEncryptFile "pkgs/ai-tools/config.yaml.txt";
         format = "binary";
       };
     };
