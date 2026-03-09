@@ -37,6 +37,10 @@ enableAutoUpdate = false
 enableAutoUpdateNotification = false
 previewFeatures = true
 vimMode = true
+[apps.users.sumi.gemini-cli.settings.sessionRetention]
+warningAcknowledged = true
+enabled = true
+maxAge = "120d"
 [apps.users.sumi.gemini-cli.settings.ui]
 theme = "GitHub"
 useAlternateBuffer = true
