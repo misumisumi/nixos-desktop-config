@@ -1,7 +1,10 @@
 { config, getEncryptFile, ... }:
 {
   xresources = {
-    extraConfig = "Xft.dpi:100";
+    extraConfig = "Xft.dpi:150";
+  };
+  home.pointerCursor = {
+    size = 32;
   };
   xdg.configFile = {
     "qtile/local_config.py".source = ./qtile/local_config.py;
