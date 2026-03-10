@@ -17,11 +17,6 @@
       sopsFile = getEncryptFile "pkgs/ssh/desktops";
       format = "binary";
     };
-    "servers" = {
-      path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/servers";
-      sopsFile = getEncryptFile "pkgs/ssh/servers";
-      format = "binary";
-    };
     "univ" = {
       path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/univ";
       sopsFile = getEncryptFile "pkgs/ssh/univ";
