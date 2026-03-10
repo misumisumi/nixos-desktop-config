@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   accounts.email.accounts = {
     "sumi-sumi" = {
@@ -97,24 +97,26 @@
       "intl.locale.requested" = "ja";
       "mail.identity.default.suppress_signature_separator" = true;
     };
-    profiles = {
-      private = {
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          darkreader
-          languagetool
-          translate-web-pages
-          pkgs.nur.repos.sigprof.thunderbird-langpack-ja
-        ];
+    profiles =
+      let
+        inherit (lib) optional;
+        extensions =
+          with pkgs.nur.repos.rycee.firefox-addons;
+          [
+            darkreader
+            languagetool
+            translate-web-pages
+          ]
+          ++ optional pkgs.stdenv.hostPlatform.isLinux pkgs.nur.repos.sigprof.thunderbird-langpack-ja;
+      in
+      {
+        private = {
+          inherit extensions;
+        };
+        work = {
+          isDefault = true;
+          inherit extensions;
+        };
       };
-      work = {
-        isDefault = true;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          darkreader
-          languagetool
-          translate-web-pages
-          pkgs.nur.repos.sigprof.thunderbird-langpack-ja
-        ];
-      };
-    };
   };
 }

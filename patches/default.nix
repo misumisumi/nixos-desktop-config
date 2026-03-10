@@ -57,7 +57,7 @@ final: prev: {
       enableWidevine = true;
     }).overrideAttrs
       (old: {
-        postInstall = ''
+        postInstall = prev.lib.optionalString prev.stdenv.hostPlatform.isLinux ''
           rm $out/opt/vivaldi/libvulkan.so.1
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';

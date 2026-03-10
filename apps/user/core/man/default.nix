@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   #NOTE: https://github.com/sharkdp/bat/issues/2568
   home.sessionVariablesExtra = ''
@@ -16,6 +17,7 @@
     man = {
       enable = true;
       generateCaches = true;
+      package = pkgs.man;
     };
     info.enable = true;
     lesspipe.enable = true;

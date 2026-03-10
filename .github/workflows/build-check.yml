@@ -85,54 +85,54 @@ jobs:
         timeout-minutes: 70
         run: cpulimit -l 90 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
-  # build-check-matrix-darwin:
-  #   needs: [pre-build]
-  #   if: needs.pre-build.outputs.check == 'true'
-  #   runs-on: macos-26
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       hostname: []
-  #   steps:
-  #     - uses: actions/checkout@v6
+  build-check-matrix-darwin:
+    needs: [pre-build]
+    if: needs.pre-build.outputs.check == 'true'
+    runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        hostname: ["univmac"]
+    steps:
+      - uses: actions/checkout@v6
 
-  #     - uses: DeterminateSystems/nix-installer-action@v21
-  #       with:
-  #         extra-conf: |
-  #           accept-flake-config = true
-  #           connect-timeout = 15
-  #           http-connections = 25
-  #           cores = 1
-  #           max-jobs = 2
-  #           stalled-download-timeout = 15
+      - uses: DeterminateSystems/nix-installer-action@v21
+        with:
+          extra-conf: |
+            accept-flake-config = true
+            connect-timeout = 15
+            http-connections = 25
+            cores = 1
+            max-jobs = 2
+            stalled-download-timeout = 15
 
-  #     - name: Remove unused packages of macos
-  #       if: runner.os == 'macOS'
-  #       run: |
-  #         df -h
-  #         # shellcheck disable=SC2046
-  #         brew uninstall --force $(brew list)
-  #         brew cleanup
+      - name: Remove unused packages of macos
+        if: runner.os == 'macOS'
+        run: |
+          df -h
+          # shellcheck disable=SC2046
+          brew uninstall --force $(brew list)
+          brew cleanup
 
-  #         sudo rm -rf /Applications/Xcode.app
-  #         sudo xcode-select --reset
-  #         sudo rm -rf /Library/Developer/CommandLineTools
-  #         sudo rm -rf ~/Library/Developer/Xcode
-  #         df -h
+          sudo rm -rf /Applications/Xcode.app
+          sudo xcode-select --reset
+          sudo rm -rf /Library/Developer/CommandLineTools
+          sudo rm -rf ~/Library/Developer/Xcode
+          df -h
 
-  #       #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
-  #     - run: nix profile add nixpkgs#cpulimit
+        #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
+      - run: nix profile add nixpkgs#cpulimit
 
-  #     - name: Build check
-  #       timeout-minutes: 70
-  #       run: cpulimit -l 90 -i -- nix build --no-link ".#darwinConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+      - name: Build check
+        timeout-minutes: 70
+        run: cpulimit -l 90 -i -- nix build --no-link ".#darwinConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
   build-check-summary:
     runs-on: ubuntu-latest
     needs:
       - pre-build
       - build-check-matrix
-      # - build-check-matrix-darwin
+      - build-check-matrix-darwin
     if: ${{ !cancelled() }}
     steps:
       - name: build-check-skipped
