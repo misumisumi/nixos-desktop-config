@@ -55,7 +55,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flakes.url = "github:misumisumi/flakes/refactor/overlays";
+    flakes.url = "github:misumisumi/flakes";
     nvimdots = {
       url = "github:misumisumi/nvimdots";
       inputs = {
