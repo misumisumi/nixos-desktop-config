@@ -34,11 +34,17 @@ class IconConfig:
 class BarConfig:
     size: int = 28
     border_width: int = 0
-    top_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [10, 20, 0, 20])
-    bottom_bar_margin: Union[int, list[int]] = field(default_factory=lambda: [0, 10, 5, 10])
+    top_bar_margin: Union[int, list[int]] = field(
+        default_factory=lambda: [10, 20, 0, 20]
+    )
+    bottom_bar_margin: Union[int, list[int]] = field(
+        default_factory=lambda: [0, 10, 5, 10]
+    )
     df_partition: str = "/"
     opacity: int = 1
-    chords_colors: dict = field(default_factory=lambda: {"mod4": (ColorSet.transparent, ColorSet.red)})
+    chords_colors: dict = field(
+        default_factory=lambda: {"mod4": (ColorSet.transparent, ColorSet.red)}
+    )
 
 
 @dataclass
@@ -119,8 +125,17 @@ PinPConf = PinPConfig()
 WindowConf = WindowConfig()
 GlobalConf = Global()
 
+try:
+    import local_variables
+except:
+    logger.warning("Not import local_variables")
+    pass
+
 
 def set_bar_default():
+    logger.info("Configs")
+    logger.info(f"{FontConf=}")
+    logger.info(f"{IconConf=}")
     default_background = {
         "colour": ColorSet.transparent,
         "radius": 5,

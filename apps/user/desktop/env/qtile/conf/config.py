@@ -3,15 +3,16 @@
 from pathlib import Path
 
 from libqtile.log_utils import logger
+
 from my_modules import groups, keymap, screens, startup, wallpaper
 from my_modules import layouts as my_layouts
 from my_modules.functions import set_mouse
 from my_modules.variables import GlobalConf, set_bar_default
 
 try:
-    logger.warning("Try import")
     import local_config
 except:
+    logger.warning("Not import local_config")
     pass
 
 screens = screens.make_screens()

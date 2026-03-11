@@ -17,7 +17,7 @@
       enable = true;
       plugins = with pkgs; [ rofi-calc ];
 
-      font = "Moralerspace Neon 14";
+      font = "Moralerspace Neon 16";
       terminal = "wezterm";
 
       extraConfig = {
