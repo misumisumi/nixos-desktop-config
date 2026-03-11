@@ -21,7 +21,10 @@
       keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
       sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     };
+    defaultSopsFile = getEncryptFile "users/sumi/secrets.yaml";
     secrets = {
+      "bw/personal".mode = "0400";
+      "bw/univ".mode = "0400";
       "ssh.lua" = {
         path = "${config.xdg.configHome}/wezterm/ssh.lua";
         sopsFile = getEncryptFile "pkgs/wezterm/ssh.lua";
