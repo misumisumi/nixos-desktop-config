@@ -851,6 +851,11 @@
             "shift+esc"
           ]
         },
+        "COMMAND_TOGGLE_CARET_BROWSING": {
+          "shorcuts": [
+            "shift+f7"
+          ]
+        },
         "COMMAND_TOGGLE_FOOTER": {
           "shortcuts": [
             "ctrl+shift+s"
@@ -964,7 +969,10 @@
       }
     },
     "appearance": {
-      "density": true
+      "density": true,
+      "tree_columns": {
+        "entries": {}
+      }
     },
     "chained_commands": {
       "command_list": [
@@ -1111,44 +1119,70 @@
     },
     "dashboard": {
       "column_limit": 3,
+      "columns": 3,
       "enabled": true,
       "widgets": [
         {
           "background": "semi-transparent",
+          "folderPath": "/Bookmarks/Speed Dial",
+          "folderUUID": "44641543-f123-438f-bc5c-8da7bb7c6819",
+          "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
+          "position": {
+            "height": 1,
+            "left": 1,
+            "top": 0,
+            "width": 1
+          },
+          "showThumbnail": false,
+          "showTitle": false,
+          "size": "regular",
+          "speeddialGroupUUID": "-99",
+          "type": "shortcuts"
+        },
+        {
+          "background": "semi-transparent",
           "id": "463eade2-71f7-4f13-8b82-77b45a9eb84f",
           "locationId": 2111149,
+          "position": {
+            "height": 2,
+            "left": 0,
+            "top": 0,
+            "width": 1
+          },
           "precipitationUnit": "mm",
           "size": "double_height",
-          "speeddialGroupId": "-99",
+          "speeddialGroupUUID": "-99",
           "temperatureUnit": "celsius",
           "type": "weather",
           "view": "WEEK",
           "windspeedUnit": "ms"
         },
         {
-          "background": "semi-transparent",
-          "folderId": "221",
-          "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
-          "showThumbnail": false,
-          "showTitle": false,
-          "size": "regular",
-          "speeddialGroupId": "-99",
-          "type": "shortcuts"
-        },
-        {
           "background": "solid",
           "id": "15738c25-1521-4edb-a1a6-976c7d14f8f2",
+          "position": {
+            "height": 2,
+            "left": 2,
+            "top": 0,
+            "width": 1
+          },
           "shareTheme": false,
           "size": "double_height",
-          "speeddialGroupId": "-99",
+          "speeddialGroupUUID": "-99",
           "type": "webpage",
           "url": "https://www.nikkei.com/"
         },
         {
           "background": "semi-transparent",
           "id": "8aab2197-4d6e-4794-8695-31b409cc0a83",
+          "position": {
+            "height": 1,
+            "left": 1,
+            "top": 1,
+            "width": 1
+          },
           "size": "regular",
-          "speeddialGroupId": "-99",
+          "speeddialGroupUUID": "-99",
           "type": "top-sites"
         }
       ]
@@ -1489,7 +1523,7 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "PanelDownloads",
+        "selectedPanel": "PanelHistory",
         "width": 534
       }
     },
@@ -1524,7 +1558,7 @@
         "height": 30,
         "position": 1,
         "slider_ypos": 31,
-        "width": 180
+        "width": 183
       }
     },
     "toolbars": {
