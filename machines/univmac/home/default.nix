@@ -14,38 +14,46 @@ in
     ../../../apps/user/desktop/tool/develop/zotero
     ../../../apps/user/desktop/tool/multimedia/mpv
   ];
-  home = {
-    activation.apply-vivaldi-config = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if [ -d "$HOME/Library/Application Support/Vivaldi" ]; then
-        while read -r profile; do
-          TMP="''${profile}/Preferences.bak"
-          mv "''${profile}/Preferences" "''${TMP}"
-          ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${getChezmoiFilePath "dot_config/vivaldi/CommonPreferences"} > "''${profile}/Preferences.new"
-          if [ -s "''${profile}/Preferences.new" ]; then
-            mv "''${profile}/Preferences.new" "''${profile}/Preferences"
-          else
-            rm "''${profile}/Preferences.new"
-          fi
-        done < <(find "$HOME/Library/Application Support/Vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *")
-      fi
-    '';
-    packages = with pkgs; [
-      # comms
-      discord
-      slack
-      zoom-us
-      # develop
-      inkscape
-      (google-fonts.override {
-        fonts = [
-          "BIZUDMincho"
-          "BIZUDPMincho"
-          "BIZUDGothic"
-          "BIZUDPGothic"
-        ];
-      })
-    ];
-  };
+  home =
+    let
+      restore-vivaldi-config = pkgs.writeShellScriptBin "restore-vivaldi-config" ''
+        PROFILE_HOME="$HOME/Library/Application Support/Vivaldi"
+        if [ -d "''${PROFILE_HOME}" ]; then
+          while read -r profile; do
+            TMP="''${profile}/Preferences.bak"
+            mv "''${profile}/Preferences" "''${TMP}"
+            ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${getChezmoiFilePath "dot_config/vivaldi/CommonPreferences"} > "''${profile}/Preferences.new"
+            if [ -s "''${profile}/Preferences.new" ]; then
+              mv "''${profile}/Preferences.new" "''${profile}/Preferences"
+            else
+              rm "''${profile}/Preferences.new"
+            fi
+          done < <(find "''${PROFILE_HOME}" -maxdepth 1 -type d -name "Default" -or -name "Profile *")
+        fi
+      '';
+    in
+    {
+      activation.restoreVivaldiConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        ${restore-vivaldi-config}/bin/restore-vivaldi-config
+      '';
+      packages = with pkgs; [
+        restore-vivaldi-config
+        # comms
+        discord
+        slack
+        zoom-us
+        # develop
+        inkscape
+        (google-fonts.override {
+          fonts = [
+            "BIZUDMincho"
+            "BIZUDPMincho"
+            "BIZUDGothic"
+            "BIZUDPGothic"
+          ];
+        })
+      ];
+    };
   sops.secrets = {
     "env" = {
       path = "${config.home.homeDirectory}/.env";
