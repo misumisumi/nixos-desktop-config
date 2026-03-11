@@ -148,6 +148,7 @@
             overlays = [ ];
             config.allowUnfree = true;
           };
+          packages = import ./modules/packages.nix { inherit pkgs; };
           devshells.default = {
             commands = [
               {
