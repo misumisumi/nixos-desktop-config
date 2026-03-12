@@ -1,5 +1,34 @@
 # Changelog
 
+## [8.3.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.5...v8.3.0) (2026-03-12)
+
+
+### Features
+
+* add cp-ssh-keys script ([b1c0ffa](https://github.com/misumisumi/nixos-desktop-config/commit/b1c0ffa2f39e086eaeaab94b22d944228195f1e7))
+* **bitwarden-cli:** add bitwarden-cli and wrapper ([647aa4d](https://github.com/misumisumi/nixos-desktop-config/commit/647aa4d278e478bbe3b2f297e3e9c91e9e233324))
+* **univmac:** add nix-darwin config for univmac ([daef500](https://github.com/misumisumi/nixos-desktop-config/commit/daef500d90645710c1bf658ce4ac7b60b3e85669))
+
+
+### Bug Fixes
+
+* corrections due to changes in misumisumi/flakes ([a1a4b1a](https://github.com/misumisumi/nixos-desktop-config/commit/a1a4b1a9c50177f5dcd749648a55f81b3b4ee028))
+* corrections due to changes in misumisumi/flakes ([06fd29f](https://github.com/misumisumi/nixos-desktop-config/commit/06fd29fe82ba0202b1d8fd6a9c21bc6e3ebda508))
+* fix deprecated packages and options ([53ce7d5](https://github.com/misumisumi/nixos-desktop-config/commit/53ce7d5995ea849783e548fc62f44a1efb7e35c2))
+* **flake.lock:** update flake.lock and fix config ([3e488f8](https://github.com/misumisumi/nixos-desktop-config/commit/3e488f87bfbd3a0d8b4d8126be978368ba0b1c8a))
+* **flake.nix:** append supporing arch ([81cb376](https://github.com/misumisumi/nixos-desktop-config/commit/81cb376410ac53e37a593a1f7de505991fcaef95))
+* **looking-glass:** managing looking-glass/client.ini ([eb179ab](https://github.com/misumisumi/nixos-desktop-config/commit/eb179ab414d0e734aeabbf55d97a3e7315b00b52))
+* **onlyoffice:** fix adding fonts method ([69dfca7](https://github.com/misumisumi/nixos-desktop-config/commit/69dfca716b0cc59d4a70f5f8c850e1cdeadc2a0f))
+* **qtile:** fix variables override method ([ccb2ca9](https://github.com/misumisumi/nixos-desktop-config/commit/ccb2ca93029290f9e5d3e1fad986409604707139))
+* **sops:** changes related to ssh key management ([cb4a313](https://github.com/misumisumi/nixos-desktop-config/commit/cb4a313d9e2b04eb9457d9792163901658745260))
+* **sops:** fix encrypting ([b5b8912](https://github.com/misumisumi/nixos-desktop-config/commit/b5b8912296b4bd01eda6a43a21f55dfd451857e9))
+* **ssh:** add identity file for univ gateway ([2d11fba](https://github.com/misumisumi/nixos-desktop-config/commit/2d11fba2bcd565d219f0c107383e771a404da90c))
+* **stacia:** fix monitor config ([07ced94](https://github.com/misumisumi/nixos-desktop-config/commit/07ced94d498496a18a89781246fe566db8957cee))
+* **univmac:** fix restoring vivaldi config method ([3ca2bd3](https://github.com/misumisumi/nixos-desktop-config/commit/3ca2bd3d89ddc259f02b6c9c2613916458252e35))
+* **vivaldi:** update CommonPreferences ([95a6754](https://github.com/misumisumi/nixos-desktop-config/commit/95a67546af2b4c92b347128caeed5452860557df))
+* **work:** rm work machine config of nix-darwin ([6211e62](https://github.com/misumisumi/nixos-desktop-config/commit/6211e626115297460a525147c9f068f13d35fc3f))
+* **zephyrus:** fix deprecated options ([e034c36](https://github.com/misumisumi/nixos-desktop-config/commit/e034c3609db354d69e36cce46e79401f1e41aa62))
+
 ## [8.2.5](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.4...v8.2.5) (2026-02-11)
 
 
