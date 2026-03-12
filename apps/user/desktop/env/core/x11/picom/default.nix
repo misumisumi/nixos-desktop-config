@@ -27,6 +27,7 @@
         "100:class_g = 'kitty'"
         "100:class_g = 'krita'"
         "100:class_g = 'looking-glass-client'"
+        "100:class_g = 'org.remmina.Remmina'"
         "100:class_g = 'org.wezfurlong.wezterm'"
         "100:class_g = 'pentablet'"
         "100:class_g = 'zoom'"
@@ -104,8 +105,6 @@
         detect-rounded-corners = false;
         detect-client-opacity = true;
         detect-transient = true;
-        glx-no-stencil = true;
-        glx-no-rebind-pixmap = true;
         use-damage = false;
         xrender-sync-fence = true;
       };

@@ -3,11 +3,11 @@
   home = {
     packages = with pkgs; [
       xclip
-      xorg.xev
-      xorg.xhost
-      xorg.xkill
-      xorg.xrandr
-      xorg.xrdb
+      xev
+      xhost
+      xkill
+      xrandr
+      xrdb
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

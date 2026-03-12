@@ -6,7 +6,7 @@
       # matlab # Followed by nix-matlab
       # sidequest                     # Meta Quest side loading tool
       audacity # GUI Sound Editor
-      blender_4_2 # 3DCG modeling tool
+      blender-bin # 3DCG modeling tool
       carla # audio plugin host
       (gimp3-with-plugins.override {
         plugins = with gimp3Plugins; [

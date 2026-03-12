@@ -1,114 +1,89 @@
 keys:
   - &users:
-    - &sumi 2C0E62B7117471A5
-    - &sumi_mother age1w4dld6acqnhctzq32nhnajw0ewgkq7295k3ue3cgg0pwpt0re3asg4ajs3
-    - &sumi_win-mother age1vzlm35vjkyhgedm7vtafz8xfl2zq3e69plp5w7t4uueyjhy4p5ysanplm2
-    - &sumi_win-stacia age1y0w6xkc5renw0laxt23egtzddp3nwnwzu4tnhztssnstkxmwe42s5txas8
-    - &sumi_win-zephyrus
-    - &sumi_stacia age1znnqnxjkr0x70r5ys0n2k34ym5a3spn69yuveqa76wh0ng65catspphysl
-    - &sumi_zephyrus age1svkysj8mj8u2k9cag4l0pthf7t3e8jn2jy0ygacper8f349k299q03nn9t
-    - &kobayashi_univ age1g4d4ftujlypmh8z0g3s6w9k9kjjd4lped3k5egvxnzhyelp8945qzg35fn
-    - &work_laptop age12lsvwdrtnllmlxffy9077l7kjj85vz8sjkjl3nknfncaqpyqm9rq48urgf
-    - &work_macbook age1ksl95mpqux9awxlx2rqaetzm9su3mnstwt73xq678wp3mvdajghqqrp7rr
-    - &work_server age1ppxdp9wsxpg8yr0a2wsc982x2ua22meh72kae0l2xln95px4jyxq90kuel
+    - &sumi_pgp 2C0E62B7117471A5
+    - &sumi_age age1w4dld6acqnhctzq32nhnajw0ewgkq7295k3ue3cgg0pwpt0re3asg4ajs3
+    - &kobayashi_age age1g4d4ftujlypmh8z0g3s6w9k9kjjd4lped3k5egvxnzhyelp8945qzg35fn
   - &desktops:
     - &mother age1dx0hn7ug2nfd9sxw0q3hvegh8llqt0084x7gzk20s20lptrujs6sv48akw
     - &stacia age12994fjtztfkz06rtg0w6gxrzne3z0y223zumu293jtdsfukukussq233na
-    - &soleus age1qz3tcqfgaxhhq2nemjc9x4wq2je47a9m3840xwxy0a979c8vh3gsj7w2yf
     - &zephyrus age1lc2dnrqr84rat2aqmm9g78mssuxm40vsswr7lnaz59n97qjgg9csx2wekj
 creation_rules:
-  - path_regex: sops/hosts/mother/secrets.yaml
+  - path_regex: sops/hosts/mother/*
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
           - *mother
-  - path_regex: sops/hosts/stacia/secrets.yaml
+  - path_regex: sops/hosts/stacia/*
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
           - *stacia
-  - path_regex: sops/hosts/soleus/*
+  - path_regex: sops/hosts/zephyrus/*
     key_groups:
       - pgp:
-          - *sumi
-        age:
-          - *soleus
-  - path_regex: sops/hosts/zephyrus/secrets.yaml
-    key_groups:
-      - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
           - *zephyrus
+  - path_regex: sops/users/sumi/*
+    key_groups:
+      - pgp:
+          - *sumi_pgp
+        age:
+          - *sumi_age
+  - path_regex: sops/users/kobayashi/*
+    key_groups:
+      - pgp:
+          - *sumi_pgp
+        age:
+          - *kobayashi_age
+  # system scoop configs
   - path_regex: sops/system/network/wireless
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
           - *zephyrus
   - path_regex: sops/system/openfortivpn/config
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
           - *mother
           - *zephyrus
-  - path_regex: sops/pkgs/ssh/desktops$
+  - path_regex: sops/system/ppp
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
-          - *sumi_mother
-          - *sumi_zephyrus
-          - *sumi_win-mother
-          - *sumi_win-zephyrus
-  - path_regex: sops/pkgs/ssh/servers$
+          - *mother
+          - *zephyrus
+  # user scoop configs
+  - path_regex: sops/pkgs/ssh/{desktops,homelab}$
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
-          - *sumi_mother
-          - *sumi_zephyrus
+          - *sumi_age
   - path_regex: sops/pkgs/ssh/univ$
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
-          - *sumi_mother
-          - *sumi_stacia
-          - *sumi_zephyrus
-          - *kobayashi_univ
-  - path_regex: sops/pkgs/ssh/work$
-    key_groups:
-      - pgp:
-          - *sumi
-        age:
-          - *work_laptop
-          - *work_macbook
+          - *sumi_age
+          - *kobayashi_age
   - path_regex: sops/pkgs/ai-tools/*
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
-          - *sumi_mother
-          - *sumi_stacia
-          - *sumi_zephyrus
-          - *sumi_win-mother
-          - *sumi_win-stacia
-          - *sumi_win-zephyrus
-          - *kobayashi_univ
+          - *sumi_age
+          - *kobayashi_age
   - path_regex: sops/pkgs/wezterm/[^/]+\.lua$
     key_groups:
       - pgp:
-          - *sumi
+          - *sumi_pgp
         age:
-          - *sumi_mother
-          - *sumi_stacia
-          - *sumi_zephyrus
-  - path_regex: sops/users/work/secrets.yaml$
-    key_groups:
-      - pgp:
-          - *sumi
-        age:
-          - *work_server
+          - *sumi_age
+          - *kobayashi_age

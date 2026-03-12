@@ -57,21 +57,13 @@ final: prev: {
       enableWidevine = true;
     }).overrideAttrs
       (old: {
-        postInstall = ''
+        postInstall = prev.lib.optionalString prev.stdenv.hostPlatform.isLinux ''
           rm $out/opt/vivaldi/libvulkan.so.1
           ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
         '';
       });
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
-  });
-  #NOTE: Upstream URL does not support older versions, so import PR NixOS/nixpkgs##482405.
-  ndi-6 = prev.ndi-6.overrideAttrs (old: {
-    version = "6.3.0.3";
-    src = prev.fetchurl {
-      url = "https://downloads.ndi.tv/SDK/NDI_SDK_Linux/${old.installerName}.tar.gz";
-      hash = "sha256:bae544649fbda6bab8e7695d34ed171611b11e610c919da8fff673a67071fda8";
-    };
   });
   python3 =
     let

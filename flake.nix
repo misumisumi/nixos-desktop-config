@@ -70,10 +70,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    blender-bin = {
-      url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,7 +139,11 @@
             };
           };
         };
-      systems = [ "x86_64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
       perSystem =
         { pkgs, system, ... }:
         {
@@ -152,6 +152,7 @@
             overlays = [ ];
             config.allowUnfree = true;
           };
+          packages = import ./modules/packages.nix { inherit pkgs; };
           devshells.default = {
             commands = [
               {

@@ -30,6 +30,7 @@ let
   chezmoiRoot = self.outPath + "/chezmoi";
 in
 {
+  getChezmoiFilePath = src: chezmoiRoot + "/${src}";
   importTOMLFromChezmoi = src: importTOML (chezmoiRoot + "/${src}");
   importJSONFromChezmoi = src: importJSON (chezmoiRoot + "/${src}");
   importFilesFromChezmoi =

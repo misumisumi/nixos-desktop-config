@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, getEncryptFile, ... }:
 {
   sops = {
     age = {
@@ -10,7 +10,7 @@
     secrets = {
       hashedPasswordFile.neededForUsers = true;
       wireless = {
-        sopsFile = ../../../sops/system/network/wireless;
+        sopsFile = getEncryptFile "system/network/wireless";
         format = "binary";
         owner = "wpa_supplicant";
         group = "wpa_supplicant";

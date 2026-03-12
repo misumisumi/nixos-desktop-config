@@ -1,15 +1,15 @@
-{ pkgs, ... }:
+{ pkgs, getEncryptFile, ... }:
 {
   sops.secrets = {
     "chap-secrets" = {
       path = "/etc/ppp/chap-secrets";
-      sopsFile = ../../../../../sops/system/ppp/chap-secrets;
+      sopsFile = getEncryptFile "system/ppp/chap-secrets";
       format = "binary";
       mode = "0600";
     };
     "pap-secrets" = {
       path = "/etc/ppp/pap-secrets";
-      sopsFile = ../../../../../sops/system/ppp/pap-secrets;
+      sopsFile = getEncryptFile "system/ppp/pap-secrets";
       format = "binary";
       mode = "0600";
     };

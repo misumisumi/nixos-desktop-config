@@ -6,8 +6,9 @@
     userDirs = {
       enable = pkgs.stdenv.hostPlatform.isLinux;
       createDirectories = true;
+      setSessionVariables = true;
       extraConfig = {
-        XDG_WORKSPACE_DIR = "${config.home.homeDirectory}/Workspace";
+        WORKSPACE = "${config.home.homeDirectory}/Workspace";
       };
     };
   };

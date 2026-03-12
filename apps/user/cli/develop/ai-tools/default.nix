@@ -46,21 +46,42 @@ in
       # mcp servers
       github-mcp-server
       mcp-nixos
-      mcp-server-filesystem
-      mcp-server-memory
-      mcp-server-sequential-thinking
+      mcp-obsidian
       paper-search-mcp
     ]
-    ++ (with inputs.mcp-servers-nix.packages.${system}; [
-      (mcp-server-fetch.overrideAttrs (old: {
-        postPatch = ''
-          substituteInPlace src/mcp_server_fetch/server.py \
-          --replace-fail "AsyncClient(proxies=" "AsyncClient(proxy="
-        '';
-      }))
-      mcp-server-git
-      context7-mcp
-    ]);
+    ++ (
+      with inputs.mcp-servers-nix.packages.${system};
+      let
+        postInstall =
+          {
+            service,
+            workspace ? service,
+          }:
+          ''
+            mv "$out/lib/node_modules/@modelcontextprotocol/servers" "$out/lib/node_modules/@modelcontextprotocol/servers-${service}"
+            cp -r src "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src"
+            makeWrapper "${nodejs_22}/bin/node" "$out/bin/mcp-server-${service}" \
+              --add-flags "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src/${workspace}/dist/index.js"
+          '';
+      in
+      [
+        (mcp-server-fetch.overrideAttrs (old: {
+          postPatch = ''
+            substituteInPlace src/mcp_server_fetch/server.py \
+            --replace-fail "AsyncClient(proxies=" "AsyncClient(proxy="
+          '';
+        }))
+        (mcp-server-filesystem.overrideAttrs (old: {
+          postInstall = postInstall { service = "filesystem"; };
+        }))
+        (mcp-server-memory.overrideAttrs (old: {
+          postInstall = postInstall { service = "memory"; };
+        }))
+        context7-mcp
+        mcp-server-git
+        mcp-server-sequential-thinking
+      ]
+    );
   xdg.configFile = {
     "aichat/roles" = {
       source = ./roles;
@@ -81,7 +102,7 @@ in
   };
   programs.gemini-cli = {
     enable = true;
-    defaultModel = "gemini-2.5-flash";
+    defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
     settings = gemini-cli.settings // mcp;
   };
 }

@@ -59,14 +59,15 @@ context7-mcp = "@upstash/context7-mcp"
 copilot = "@github/copilot"
 gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
+mcp-obsidian = "@mauricio.wolff/mcp-obsidian@latest"
 [linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
 mcp-server-git = "mcp_server_git"
 mcp-nixos = "mcp_nixos"
 [linux.users.sumi.packages.mcpServers.github] # name = "module_name", name is executable name
 owner = "github"
 repo = "github-mcp-server"
-srcFile = "github-mcp-server_Windows_x86_64.zip"
-exeFile = "github-mcp-server.exe"
+srcFile = "github-mcp-server_Linux_arm64.tar.gz"
+exeFile = "github-mcp-server"
 
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true

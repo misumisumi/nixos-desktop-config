@@ -1,4 +1,7 @@
 { pkgs, config, ... }:
+let
+  inherit (config.lib.ndchm.chezmoi) getChezmoiFilePath;
+in
 {
   home = {
     packages = [
@@ -35,7 +38,7 @@
     };
   };
   xdg.configFile."vivaldi/CommonPreferences" = {
-    source = ../../../../../../chezmoi/dot_config/vivaldi/CommonPreferences;
+    source = getChezmoiFilePath "dot_config/vivaldi/CommonPreferences";
     onChange = ''
       find "${config.xdg.configHome}/vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
         TMP="''${profile}/Preferences.bak"

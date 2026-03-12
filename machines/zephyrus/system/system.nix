@@ -31,10 +31,7 @@
   programs.poweroff'.enable = true;
   services = {
     upower.enable = true;
-    asusd = {
-      enableUserService = true;
-      profileConfig.text = "quiet";
-    };
+    asusd.profileConfig.text = "quiet";
     supergfxd = {
       enable = true;
       settings = {
@@ -65,9 +62,9 @@
       };
     };
   };
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "30m";
+  };
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "performance";

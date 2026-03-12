@@ -123,13 +123,13 @@ let
     };
 in
 {
-  work = settings {
+  univmac = settings {
     colorTheme = "tokyonight-moon";
-    hostname = "work";
+    hostname = "univmac";
     schemes = [
-      "presets/medium"
+      "presets/large"
       "shell"
     ];
-    user = "kobayashis1033";
+    user = "sumi";
   };
 }

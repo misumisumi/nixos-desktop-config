@@ -15,30 +15,14 @@
         Option "DRI" "3"
       '';
       extraConfig = ''
-        Section "Device"
-          Identifier     "amdgpu"
-          BusID          "PCI:30:0:0"
-          Driver         "amdgpu"
-        EndSection
-
         Section "Monitor"
           Identifier     "DVI-D-0"
-          Option         "Primary" "true"
-          Option         "PreferredMode" "1920x1200"
-        EndSection
-
-        Section "Monitor"
-          Identifier     "HDMI-A-0"
-          Option         "PreferredMode" "1920x1080"
-          Option         "LeftOf" "DVI-D-0"
           Option         "Rotate" "left"
         EndSection
 
         Section "Monitor"
-          Identifier     "HDMI-A-1"
-          Option         "PreferredMode" "1920x1080"
-          Option         "LeftOf" "DVI-D-0"
-          Option         "Rotate" "left"
+            Identifier "HDMI-A-1"
+            Option "Primary" "true"
         EndSection
       '';
     };

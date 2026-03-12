@@ -1,0 +1,21 @@
+{
+	"data": "ENC[AES256_GCM,data:aiX2rJ4UYn68ehnDxgsIUSnHr8l8iBV1pc4ClP7V1nYDsT01ct2BYvPpFrVXo/Tnv3Mk1eO4pWVZ2uqKo0FQT05tpo9G3fLmOy0XFUrzSS7tOYfRg3dtizFl9vOidKzwSJ/A4wWkBP5pBDY4ZlkDY93s4l1m4CLmanZJ165VNEGxD7u5jJ4XdZNikckWtEWPfOJiiFLROlQQ++mo6xbLQr1DHPeabSu0ULYxp02xw79rMkyHyVZeButYu2h/yLFQ7VewxkKdnLn4gZuEqNDbdbuOaavZqFEi+NV8D3okrLWS0lnSnC6AOYhHN1b96SujUgvWoYowi/H/CyYrCvqu4omIQNP77UmYz7dtuSgyc+dZIKztvygKaJ1QbkkfytIQSuHsOXyootGn5IPlKaVPy6t3v/xlIXOtGoh/KejVf8jqPbAp71vwwuZTTqodtZR8oQ9TATDAk9nxQLxLKOjIwnPySh39J1NSq8BOfPdyOdHIvS/BbmixUOTXsZ3V5b8nBxCdtiZzdTsUifMTDJOLd5RH5xtAlml2sQu1YxT8rjZ2W4rlpcbRBGFkuOMwOa3WQ4V7G6snfNVmtYNDqoyHKohI8bhat7h6suAmzgHIs+c0zE2D1ZCj3Mkof52nQ7d8oFAxMC0ofzoW6aagEqL92IHtSiISnki/vGIB4B5ZZ/Mr0KcK8HvTV3JXr7tg8fbBMPXnSO7J5Upt/2/cDqLKmtkGqEEhCoIV6cq9eEDd/jOpeXRb/oI5+xuo4HJAs2MkoVFEHp6d2fBKj3tbmAYL7ut/pSzEok7wUBcYo+YvKCVT1frfCMHSl/3YZWtu8T0SyFMcK8idrinp1Q+6eT69kLro8m5/UcG8XcLXxKW2wTkpy8F9dNA4ItdDnmVZaxW2lFT77A6RwghYM5ogDOgKet7/I7Wq20nQ1kR77q6hQ8zpz5dbZuowk4/m9Z92WtsHStkNg0kAZSqiKkeTjD02KRg=,iv:nI/z897n6pqQVJm/pD8+EbB6OW0jamgLjtWwkTr5kdU=,tag:fcyMBiBU17wo8WOgfuEkMg==,type:str]",
+	"sops": {
+		"age": [
+			{
+				"recipient": "age1dx0hn7ug2nfd9sxw0q3hvegh8llqt0084x7gzk20s20lptrujs6sv48akw",
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHT1ZTVTVGR1dHeVZsd0xn\nQVd6Q2dOQjFJSk41RForbkEvWkRkQ1YrN25jCmRXYXV2blBRa2ZGdkNHZU9sKzJi\nVE8vaEQ4Z0wwWEVYYzd0QXR4aFhDbGMKLS0tIFdESENZZTZOU00zdnVROVVaQkVq\ndlZBQVZ2NVZzdWZHOUpBTHRtVktPWWMK6v6p2rbHwQh9Vla+N1Pe7ASjJfd0nL1o\n2F+GTL4zaJVlGOw5+TJ/1a2qMEs10g8I60qBzwztL8PkcSENOtlstQ==\n-----END AGE ENCRYPTED FILE-----\n"
+			}
+		],
+		"lastmodified": "2026-03-08T09:33:15Z",
+		"mac": "ENC[AES256_GCM,data:VQCwCh51VJdv+X4gCwk6PNd/yUTBHCfKrC+7q6lvgejPuqZhCbbWltedI8qkx2SomLxezJd1D9lBGGSFZfPEoc4vg2ZEkFcHULWfPVv39UiyOn3GOx4Oy2weaEubQft/wYvVyIeaS77IHTAYoot3bApgMGRcQxNA/1cEb8fhsuc=,iv:ZyME5JOVBCFcDb5EwUFqNseGYbq/DUtLBHrdWO54d+0=,tag:XZKCoVm0lcxd7wli+QYOEA==,type:str]",
+		"pgp": [
+			{
+				"created_at": "2026-03-08T09:33:15Z",
+				"enc": "-----BEGIN PGP MESSAGE-----\n\nhF4DAAAAAAAAAAASAQdAUnZwbGZ0PJUx94r3IREqE6H8KUynDl047SmVsAVsqygw\neDJgWPd49ki2Y2y+vAclSUlIyBvFnOHqQO/oLH4BaAA8Mwfi9C5/TSwcfefXv5kp\n0lwBjzRBYs6rzO08/iXHzcLAhJ1+bCrpxLj5+v2wY1sy5BfIOHQIY3JlHxC/cqqn\nQleRztuvNNgwEjdcI/T278B2Wxm5Ypx8P7jGZJlMi4wYi1ZxjLk9YHnGdbsgIg==\n=1RZz\n-----END PGP MESSAGE-----",
+				"fp": "2C0E62B7117471A5"
+			}
+		],
+		"version": "3.12.1"
+	}
+}

@@ -22,6 +22,9 @@ in
   ++ lib.optional (colorTheme != null) ../../apps/color-theme/user/${removeFlavor};
 
   config = lib.mkIf config.dotfilesActivation {
+    _module.args = {
+      inherit (import ../../sops) getEncryptFile;
+    };
     programs.home-manager.enable = true;
     assertions = [
       {

@@ -2,6 +2,6 @@
   imports = [
     ./mpv
     ./obs-studio
-    ./spicetify
+    ./spotify
   ];
 }
