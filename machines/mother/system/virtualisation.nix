@@ -7,6 +7,7 @@
   ];
   boot.kernelParams = [ "kvm_amd.avic=1" ];
   virtualisation = {
+    libvirtd.antiAntiCheat.amd.enable = true;
     vfio = {
       enable = true;
       IOMMUType = "amd";

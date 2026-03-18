@@ -55,7 +55,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flakes.url = "github:misumisumi/flakes";
+    # flakes.url = "github:misumisumi/flakes/feat/qemu-patch";
+    flakes.url = "path:/home/sumi/Workspace/nix/desktop/flakes";
     nvimdots = {
       url = "github:misumisumi/nvimdots";
       inputs = {

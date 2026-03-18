@@ -237,17 +237,14 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1773116197,
-        "narHash": "sha256-sLWs+2tr+jX48qojqHR5uska5TOOpLZsqXSDe9xugKk=",
-        "owner": "misumisumi",
-        "repo": "flakes",
-        "rev": "717fc2abe345b8d33f028bf953e4c730d09653c7",
-        "type": "github"
+        "lastModified": 1773701212,
+        "narHash": "sha256-0NZupb4B0x39gA8a3HIHAn6CFdBIO+/WJiQ1lVHXYTg=",
+        "path": "/home/sumi/Workspace/nix/desktop/flakes",
+        "type": "path"
       },
       "original": {
-        "owner": "misumisumi",
-        "repo": "flakes",
-        "type": "github"
+        "path": "/home/sumi/Workspace/nix/desktop/flakes",
+        "type": "path"
       }
     },
     "home-manager": {
@@ -485,11 +482,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1772624091,
-        "narHash": "sha256-QKyJ0QGWBn6r0invrMAK8dmJoBYWoOWy7lN+UHzW1jc=",
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "80bdc1e5ce51f56b19791b52b2901187931f5353",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
         "type": "github"
       },
       "original": {
@@ -651,11 +648,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1771980182,
-        "narHash": "sha256-i29I87WQV+500KOw1rnPxvWQHR7XEIZaED4wWFzDaT0=",
+        "lastModified": 1773379327,
+        "narHash": "sha256-Bj1ZaZVKTGyTOwwkp7TvAG0wxK9AAn717G/C8HnKFQM=",
         "owner": "berberman",
         "repo": "nvfetcher",
-        "rev": "203b8a4d99bd3c92ebfe29055f728499267b3353",
+        "rev": "e41af9779ea14adf1d8c3edb075713c2668d45b9",
         "type": "github"
       },
       "original": {
