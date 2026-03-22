@@ -1,5 +1,16 @@
 # Changelog
 
+## [8.3.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.0...v8.3.1) (2026-03-22)
+
+
+### Bug Fixes
+
+* add paached qemu and OVMF ([0247bf2](https://github.com/misumisumi/nixos-desktop-config/commit/0247bf2e33c6b500ea2b154e77389b37ba479ba1))
+* **qtile:** fix local_config and variables ([1797a23](https://github.com/misumisumi/nixos-desktop-config/commit/1797a2303e02748b4a3ec5803cfa162ea95a9c80))
+* **qtile:** fix weather widget setting ([6135197](https://github.com/misumisumi/nixos-desktop-config/commit/613519705c707f00bedde1be24a49aff8328b64a))
+* **sops:** fix wireless password ([9cf4f2c](https://github.com/misumisumi/nixos-desktop-config/commit/9cf4f2c4f0a061f8f1075f937e432dbb95351b38))
+* **wireshark:** install GUI app ([c43bfb4](https://github.com/misumisumi/nixos-desktop-config/commit/c43bfb4378e3d2d34435d3c23a7dca3e5e854ab5))
+
 ## [8.3.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.2.5...v8.3.0) (2026-03-12)
 
 
