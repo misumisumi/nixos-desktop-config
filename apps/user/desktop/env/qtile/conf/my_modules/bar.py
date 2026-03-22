@@ -14,8 +14,12 @@ fc = asdict(FontConf)
 ic = asdict(IconConf)
 
 
-right_corner = {"decorations": [widget.decorations.PowerLineDecoration(path="rounded_right")]}
-left_corner = {"decorations": [widget.decorations.PowerLineDecoration(path="rounded_left")]}
+right_corner = {
+    "decorations": [widget.decorations.PowerLineDecoration(path="rounded_right")]
+}
+left_corner = {
+    "decorations": [widget.decorations.PowerLineDecoration(path="rounded_left")]
+}
 only_one_group = {
     "background": ColorSet.transparent,
     "decorations": [
@@ -155,7 +159,9 @@ def sysctrl(is_tray=False):
 def lifeinfo():
     return [
         widget.TextBox(padding=0, background=ColorSet.transparent, **right_corner),
-        widget.Wttr(format="%c%t/%p", **fc, **left_corner),
+        widget.Wttr(
+            format="%c%t/%p", hide_crash=True, max_chars=15, **fc, **left_corner
+        ),
         widget.Clock(
             format="%y-%m-%d(%a) %H:%M:%S",
             foreground=ColorSet.background,
@@ -178,7 +184,9 @@ def tasklist():
         widget.TextBox(padding=0, **only_one_group),
         widget.TaskList(
             border=ColorSet.accent,
-            markup_focused="<span foreground=" + f'"{ColorSet.background}"' + ">{}</span>",
+            markup_focused="<span foreground="
+            + f'"{ColorSet.background}"'
+            + ">{}</span>",
             theme_mode="fallback",
             txt_floating="󱂬 ",
             txt_minimized=" ",
@@ -199,7 +207,9 @@ def chord():
     return [widget.Chord(chords_colors=BarConf.chords_colors, **fc, **only_one_group)]
 
 
-def make_bar(under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False) -> tuple:
+def make_bar(
+    under_fhd: bool = False, is_tray: bool = False, pentablet: bool = False
+) -> tuple:
     top_widgets = []
     if pentablet:
         top_widgets += lifeinfo()
