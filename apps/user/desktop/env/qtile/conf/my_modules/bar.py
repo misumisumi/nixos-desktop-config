@@ -159,7 +159,9 @@ def sysctrl(is_tray=False):
 def lifeinfo():
     return [
         widget.TextBox(padding=0, background=ColorSet.transparent, **right_corner),
-        widget.Wttr(format="%c%t/%p", hide_crash=True, **fc, **left_corner),
+        widget.Wttr(
+            format="%c%t/%p", hide_crash=True, max_chars=15, **fc, **left_corner
+        ),
         widget.Clock(
             format="%y-%m-%d(%a) %H:%M:%S",
             foreground=ColorSet.background,

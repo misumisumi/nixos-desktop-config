@@ -4,7 +4,7 @@
     extraConfig = "Xft.dpi:100";
   };
   xdg.configFile = {
-    "qtile/local_variables.py".source = ./qtile/local_variables.py;
+    "qtile/local_config.py".source = ./qtile/local_config.py;
   };
   sops.secrets = {
     "env" = {
