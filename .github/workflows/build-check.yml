@@ -81,6 +81,11 @@ jobs:
         #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
       - run: nix profile add nixpkgs#cpulimit
 
+      - name: Creating build cache
+        run: |
+          #NOTE: Probably pytest will fail when CPU usage is high, so create build cache first
+          nix build --no-link nixpkgs#qtile-extra
+
       - name: Build check
         timeout-minutes: 150
         run: cpulimit -l 90 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
@@ -122,6 +127,11 @@ jobs:
 
         #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
       - run: nix profile add nixpkgs#cpulimit
+
+      - name: Creating build cache
+        run: |
+          #NOTE: Probably pytest will fail when CPU usage is high, so create build cache first
+          nix build --no-link github:misumisumi/flakes#paper-search-mcp
 
       - name: Build check
         timeout-minutes: 150
