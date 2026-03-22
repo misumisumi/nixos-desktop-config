@@ -84,7 +84,7 @@ jobs:
       - name: Creating build cache
         run: |
           #NOTE: Probably pytest will fail when CPU usage is high, so create build cache first
-          nix build --no-link nixpkgs#qtile-extra
+          nix build --no-link nixpkgs#python3Packages.qtile-extras
 
       - name: Build check
         timeout-minutes: 150
