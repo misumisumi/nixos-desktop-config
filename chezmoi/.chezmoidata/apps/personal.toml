@@ -76,7 +76,7 @@ command = "context7-mcp" # wrapped command made by me
 [apps.users.sumi.mcp.mcpServers.context7.env]
 CONTEXT7_API_KEY = "${CONTEXT7_API_KEY}"
 [apps.users.sumi.mcp.mcpServers.obsidian]
-command = "mcp-obsidian"           # wrapped command made by me
+command = "mcpvault"               # wrapped command made by me
 args = ["$HOME/Documents/memopad"]
 
 [apps.users.sumi.shell]

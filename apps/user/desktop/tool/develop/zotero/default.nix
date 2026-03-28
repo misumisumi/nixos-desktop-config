@@ -9,7 +9,7 @@
         "extensions.zotero.ZoteroPDFTranslate.targetLanguage" = "ja";
         "extensions.zotero.ZoteroPDFTranslate.translateSource" = "googleapi";
         "extensions.zotero.translators.better-bibtex.skipFields" =
-          "abstract,file,doi,issn,keywords,publisher,urldate,langid,month,shorttitle";
+          "abstract,file,doi,issn,keywords,urldate,langid,month,shorttitle";
       };
       extensions = with pkgs.zotero-addons; [
         zotero-better-bibtex
