@@ -28,6 +28,10 @@ system_serial=$(dmi_get system-serial-number)
 system_uuid=$(dmi_get system-uuid)
 system_sku=$(dmi_get system-sku-number)
 system_family=$(dmi_get system-family)
+baseboard_manufacturer=$(dmi_get baseboard-manufacturer)
+baseboard_product=$(dmi_get baseboard-product-name)
+baseboard_version=$(dmi_get baseboard-version)
+baseboard_serial=$(dmi_get baseboard-serial-number)
 cat <<EOF
   <sysinfo type="smbios">
     <bios>
@@ -44,6 +48,12 @@ cat <<EOF
       <entry name="sku">${system_sku}</entry>
       <entry name="family">${system_family}</entry>
     </system>
+    <baseBoard>
+      <entry name="manufacturer">${baseboard_manufacturer}</entry>
+      <entry name="product">${baseboard_product}</entry>
+      <entry name="version">${baseboard_version}</entry>
+      <entry name="serial">${baseboard_serial}</entry>
+    </baseBoard>
   </sysinfo>
 EOF
 
