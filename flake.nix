@@ -149,10 +149,12 @@
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            overlays = [ ];
+            overlays = [
+              self.overlays.default
+            ];
             config.allowUnfree = true;
           };
-          packages = import ./modules/packages.nix { inherit pkgs; };
+          packages = pkgs.callPackage ./modules/packages.nix { };
           devshells.default = {
             commands = [
               {

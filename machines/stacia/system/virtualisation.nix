@@ -5,7 +5,6 @@
     ../../../apps/system/virtualisation/podman
   ];
   virtualisation = {
-    libvirtd.antiAntiCheat.amd.enable = true;
     vfio = {
       enable = true;
       enableNestedVirtualization = true;
