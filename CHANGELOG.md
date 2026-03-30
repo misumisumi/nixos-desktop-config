@@ -1,5 +1,16 @@
 # Changelog
 
+## [8.3.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.1...v8.3.2) (2026-03-30)
+
+
+### Bug Fixes
+
+* fix config by upstream changes ([43df15d](https://github.com/misumisumi/nixos-desktop-config/commit/43df15df9c242fdec96709ca3dc87b5a9481486c))
+* **libvirt:** fix collecting system infomation script ([4100493](https://github.com/misumisumi/nixos-desktop-config/commit/4100493cf33deade88d9a2a0bdb5514303bf7765))
+* **qtile:** rm max_chars of Wttr widget ([8752f80](https://github.com/misumisumi/nixos-desktop-config/commit/8752f80ba5c8a66e23fbdf5043ca19e487fe9d76))
+* some fix ([a0c558f](https://github.com/misumisumi/nixos-desktop-config/commit/a0c558fa59c4ae832e96367c23337b93d941d260))
+* **stacia:** fix display layout ([4ba3223](https://github.com/misumisumi/nixos-desktop-config/commit/4ba3223628a7eed6fea9173bd1cd5b3331204c35))
+
 ## [8.3.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.0...v8.3.1) (2026-03-22)
 
 
