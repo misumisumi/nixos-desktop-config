@@ -1,6 +1,11 @@
-{ pkgs, ... }:
 {
-  cp-ssh-keys = pkgs.writeShellScriptBin "cp-ssh-keys" ''
+  findutils,
+  sops,
+  writeShellScriptBin,
+  ...
+}:
+{
+  cp-ssh-keys = writeShellScriptBin "cp-ssh-keys" ''
     usage() {
       cat <<EOF # remove the space between << and EOF, this is due to web plugin issue
     Usage: ''$(
@@ -67,7 +72,7 @@
 
     mkdir -p "''${target_dir}/.ssh"
     rsync --chmod=u+rw,go+r ${../sops/users}/''${username}/.ssh/* "''${target_dir}/.ssh/"
-    ${pkgs.findutils}/bin/find "''${target_dir}/.ssh" -type f -name "id_*" -exec ${pkgs.sops}/bin/sops decrypt -i {} \;
+    ${findutils}/bin/find "''${target_dir}/.ssh" -type f -name "id_*" -exec ${sops}/bin/sops decrypt -i {} \;
     chmod 600 ''${target_dir}/.ssh/id_*
     chmod 644 ''${target_dir}/.ssh/id_*.pub
     chmod 700 ''${target_dir}/.ssh

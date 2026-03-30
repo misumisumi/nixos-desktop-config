@@ -74,6 +74,11 @@ final: prev: {
               ./qtile.patch
             ];
           });
+          qtile-extras = pprev.qtile-extras.overrideAttrs (old: {
+            #NOTE: qtile-extras's test sometime failed.
+            # high-cpu load during test is the cause, but I don't know how to fix it yet. So I just disable the test for now.
+            doInstallCheck = false;
+          });
         })
       ];
       self = prev.python3.override {
@@ -82,6 +87,7 @@ final: prev: {
       };
     in
     self;
+  python3Packages = final.python3.pkgs;
   #BUG: https://bugs.kde.org/show_bug.cgi?id=513536
   # 25/01/10: Ver 25.12.1ではログイン毎にBT backendをON→OFFしなければ問題の一時解決も機能しない
   kdePackages = prev.kdePackages // {
