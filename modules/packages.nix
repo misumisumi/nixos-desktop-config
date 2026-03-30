@@ -1,9 +1,9 @@
 {
-  findutils,
-  sops,
-  writeShellScriptBin,
-  ...
+  pkgs,
 }:
+let
+  inherit (pkgs) findutils sops writeShellScriptBin;
+in
 {
   cp-ssh-keys = writeShellScriptBin "cp-ssh-keys" ''
     usage() {

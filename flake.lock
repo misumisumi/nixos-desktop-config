@@ -237,11 +237,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1774680556,
-        "narHash": "sha256-WXXjK0tK5ryr5fbfX+hzczMYtLSQIONhaSSH6X0MBMY=",
+        "lastModified": 1774887516,
+        "narHash": "sha256-mZOMCJnmiJTZv+jAu+BJz9o/DemsLVQn+lv9/q28bQA=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "35466b95c6c3615cfc5b0d87c94dd13564a4357d",
+        "rev": "d3bd093f3f63d1de38e01c2a7a82073a10f8d81d",
         "type": "github"
       },
       "original": {
@@ -711,6 +711,7 @@
         "nur": "nur",
         "nvimdots": "nvimdots",
         "sops-nix": "sops-nix",
+        "spicetify-djinfo": "spicetify-djinfo",
         "spicetify-nix": "spicetify-nix"
       }
     },
@@ -731,6 +732,22 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "spicetify-djinfo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773178656,
+        "narHash": "sha256-VQqD807STvFr+Q2XjEHa7yeW2mFuFlfqHaUJrP1J/iE=",
+        "owner": "L3-N0X",
+        "repo": "spicetify-dj-info",
+        "rev": "ea169e6712b5b2f8e70e120a8e6a21650afb4959",
+        "type": "github"
+      },
+      "original": {
+        "owner": "L3-N0X",
+        "repo": "spicetify-dj-info",
         "type": "github"
       }
     },
