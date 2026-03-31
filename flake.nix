@@ -78,6 +78,11 @@
       url = "github:natsukium/mcp-servers-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    spicetify-djinfo = {
+      url = "github:L3-N0X/spicetify-dj-info";
+      flake = false;
+    };
   };
 
   outputs =
@@ -154,7 +159,7 @@
             ];
             config.allowUnfree = true;
           };
-          packages = pkgs.callPackage ./modules/packages.nix { };
+          packages = import ./modules/packages.nix { inherit pkgs; };
           devshells.default = {
             commands = [
               {

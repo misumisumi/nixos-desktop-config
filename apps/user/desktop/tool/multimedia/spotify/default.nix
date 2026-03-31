@@ -17,7 +17,8 @@ in
       keyboardShortcut
       songStats
       {
-        inherit (pkgs.spicetify-dj-info) src name;
+        src = "${inputs.spicetify-djinfo}/dist";
+        name = "djinfo.mjs";
       }
     ];
   };
