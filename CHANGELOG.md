@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.3.3](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.2...v8.3.3) (2026-03-31)
+
+
+### Bug Fixes
+
+* **spotify:** include as inputs for spicitify-dj-info ([452828d](https://github.com/misumisumi/nixos-desktop-config/commit/452828d3997e24324192ac0b6d0a0f09bfa41cdc))
+* **spotify:** include as inputs for spicitify-dj-info ([969ac3a](https://github.com/misumisumi/nixos-desktop-config/commit/969ac3a8862f5e9882d79ae477958fddd1891e83))
+
 ## [8.3.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.1...v8.3.2) (2026-03-30)
 
 
