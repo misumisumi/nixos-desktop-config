@@ -13,12 +13,17 @@
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # NOTE: homebrew pkgs are managed by nix
+    };
     casks = [
       "gimp"
-      "google-japanese-ime"
       "krita"
+      "macSKK"
       "microsoft-office"
       "obs"
+      "obsidian"
       "vivaldi"
     ];
   };
