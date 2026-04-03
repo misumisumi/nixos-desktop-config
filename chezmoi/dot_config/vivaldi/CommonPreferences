@@ -1172,7 +1172,7 @@
         {
           "background": "semi-transparent",
           "folderPath": "Bookmarks/google",
-          "folderUUID": "f487a05e-cb79-465a-b18f-de914171f9a7",
+          "folderUUID": "15fd9b2a-9fd0-4a79-bdb7-b5df57a1f252",
           "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
           "position": {
             "height": 1,
@@ -1615,7 +1615,7 @@
         "position": 1,
         "slider_xpos": 90,
         "slider_ypos": 31,
-        "width": 158
+        "width": 177
       }
     },
     "toolbars": {
@@ -1660,7 +1660,7 @@
     "workspaces": {
       "link_routes": [
         {
-          "expression": "x.com",
+          "expression": "https://x.com",
           "id": "f3ae5431-1c60-4744-8a32-83af797a9b72",
           "type": "CONTAINS",
           "workspaceId": 1775197673798
@@ -1762,6 +1762,18 @@
           "workspaceId": 1775197522913
         },
         {
+          "expression": "post",
+          "id": "b6e7323c-3378-4a36-9102-502b38f0d118",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "blog",
+          "id": "955084a4-89ff-4158-bd4a-b92260049361",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
           "expression": "docs",
           "id": "47da722c-3326-4bc1-9682-3bace5cee0ce",
           "type": "CONTAINS",
@@ -1772,26 +1784,9 @@
           "id": "c41a1b02-ca2f-40d9-8b9c-7b9793f0aa17",
           "type": "CONTAINS",
           "workspaceId": 1775197133806
-        },
-        {
-          "expression": "http://",
-          "id": "385557f2-1831-41e7-9dab-fd87ae5417f5",
-          "type": "CONTAINS",
-          "workspaceId": 1775208048462
-        },
-        {
-          "expression": "https://",
-          "id": "76064dff-7fce-4565-bec6-0638579e09ef",
-          "type": "CONTAINS",
-          "workspaceId": 1775208048462
         }
       ],
       "list": [
-        {
-          "icon": "<svg width=\"16\" height=\"16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"m5.762 1.844-1.137.58C2.875 3.32 2 3.767 2 4.5s.875 1.181 2.625 2.075l1.137.58C6.863 7.719 7.415 8 8 8s1.137-.282 2.238-.844l1.137-.58C13.125 5.68 14 5.233 14 4.5s-.875-1.181-2.625-2.075l-1.137-.58C9.137 1.281 8.585 1 8 1s-1.137.282-2.238.844Z\" fill=\"currentColor\" fill-opacity=\"0.1\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M13.859 8a.696.696 0 0 1 .141.417c0 .647-.875 1.04-2.625 1.828l-1.137.511c-1.101.496-1.653.744-2.238.744s-1.137-.248-2.238-.744l-1.137-.51C2.875 9.457 2 9.063 2 8.415c0-.148.047-.286.141-.416m11.443 3.5c.277.201.416.403.416.641 0 .6-.875.966-2.625 1.695l-1.137.474C9.137 14.77 8.585 15 8 15s-1.137-.23-2.238-.69l-1.137-.474C2.875 13.106 2 12.741 2 12.141c0-.238.139-.439.416-.641\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
-          "id": 1775208048462,
-          "name": "StartSpace"
-        },
         {
           "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M3.5 4.5V14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M12.5 4.5V14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M5.5 4.5V1.5H10.5V4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M14 4.5H2C1.17157 4.5 0.5 5.17157 0.5 6V13C0.5 13.8284 1.17157 14.5 2 14.5H14C14.8284 14.5 15.5 13.8284 15.5 13V6C15.5 5.17157 14.8284 4.5 14 4.5Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
           "id": 1775197209184,
