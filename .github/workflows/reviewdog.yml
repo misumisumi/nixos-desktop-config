@@ -39,7 +39,7 @@ jobs:
         with:
           reviewdog_version: latest
 
-      - uses: DeterminateSystems/nix-installer-action@v21
+      - uses: DeterminateSystems/nix-installer-action@v22
 
       - run: nix profile install nixpkgs#statix nixpkgs#typos nixpkgs#actionlint
 
