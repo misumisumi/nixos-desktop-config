@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.3.4](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.3...v8.3.4) (2026-04-04)
+
+
+### Bug Fixes
+
+* **univmac:** fix macos config ([d1061bf](https://github.com/misumisumi/nixos-desktop-config/commit/d1061bf6217f5e334edd80eea5576bb0fb6ea1a3))
+* **vivaldi:** incloude workspace config ([f4603c2](https://github.com/misumisumi/nixos-desktop-config/commit/f4603c2c1d0366c3d18b1ba53aecfc4b80a94996))
+* **vivaldi:** incloude workspace config ([b4bb690](https://github.com/misumisumi/nixos-desktop-config/commit/b4bb69038a0ae2e540a1cc5742bf0f967d486c74))
+
 ## [8.3.3](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.2...v8.3.3) (2026-03-31)
 
 
