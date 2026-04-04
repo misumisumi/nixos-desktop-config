@@ -237,11 +237,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1774887516,
-        "narHash": "sha256-mZOMCJnmiJTZv+jAu+BJz9o/DemsLVQn+lv9/q28bQA=",
+        "lastModified": 1775135851,
+        "narHash": "sha256-nwuXYk5PfqBK5c5M5U+lZZVIODcfnEZIF7zdYbrtbWo=",
         "owner": "misumisumi",
         "repo": "flakes",
-        "rev": "d3bd093f3f63d1de38e01c2a7a82073a10f8d81d",
+        "rev": "88a6852e2aefc8a9ee65077f311e44f59e928b61",
         "type": "github"
       },
       "original": {
@@ -678,11 +678,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774700875,
-        "narHash": "sha256-kUzCIRExnEjnXo2ZjM//NoD1YZGvi+S1cJKJSXsfESw=",
+        "lastModified": 1775104011,
+        "narHash": "sha256-l6DOGG+vEcQMaOFsMLaa3ZZBYI5rP6bt8pC/AFaSuoM=",
         "owner": "misumisumi",
         "repo": "nvimdots",
-        "rev": "602b8eedd3befc393e9905e5af2bbaf105970404",
+        "rev": "9bce6d975d6569347d444807f8bb30131b41a4aa",
         "type": "github"
       },
       "original": {

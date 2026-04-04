@@ -11,8 +11,10 @@ in
 {
   imports = [
     ../../../apps/user/desktop/tool/browser/firefox
+    ../../../apps/user/desktop/tool/browser/vivaldi
     ../../../apps/user/desktop/tool/develop/zotero
     ../../../apps/user/desktop/tool/multimedia/mpv
+    ./macSKK.nix
   ];
   home =
     let

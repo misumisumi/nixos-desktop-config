@@ -254,7 +254,9 @@
           "shortcuts": []
         },
         "COMMAND_HIBERNATE_INACTIVE_WORKSPACES": {
-          "shortcuts": []
+          "shortcuts": [
+            "ctrl+backspace"
+          ]
         },
         "COMMAND_MAIL_COMPOSER_CHOOSE_ATTACHMENTS": {
           "shortcuts": []
@@ -674,7 +676,11 @@
           ]
         },
         "COMMAND_SHOW_WINDOW_PANEL": {},
-        "COMMAND_SHOW_WORKSPACE_MENU": {},
+        "COMMAND_SHOW_WORKSPACE_MENU": {
+          "shortcuts": [
+            "ctrl+shift+space"
+          ]
+        },
         "COMMAND_SPATNAV_DOWN": {
           "shortcuts": [
             "shift+down",
@@ -878,6 +884,46 @@
         "COMMAND_WORKSPACE_CREATE_NEW": {
           "shortcuts": [
             "shift+enter"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_1": {
+          "shortcuts": [
+            "ctrl+alt+2"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_2": {
+          "shortcuts": [
+            "ctrl+alt+3"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_3": {
+          "shortcuts": [
+            "ctrl+alt+4"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_4": {
+          "shortcuts": [
+            "ctrl+alt+5"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_5": {
+          "shortcuts": [
+            "ctrl+alt+6"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_6": {
+          "shortcuts": [
+            "ctrl+alt+7"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_7": {
+          "shortcuts": [
+            "ctrl+alt+8"
+          ]
+        },
+        "COMMAND_WORKSPACE_MOVE_TABS_TO_8": {
+          "shortcuts": [
+            "ctrl+alt+9"
           ]
         },
         "COMMAND_WORKSPACE_SWITCH_1": {
@@ -1121,11 +1167,12 @@
       "column_limit": 3,
       "columns": 3,
       "enabled": true,
+      "sticky_notes": [],
       "widgets": [
         {
           "background": "semi-transparent",
-          "folderPath": "/Bookmarks/Speed Dial",
-          "folderUUID": "44641543-f123-438f-bc5c-8da7bb7c6819",
+          "folderPath": "Bookmarks/google",
+          "folderUUID": "15fd9b2a-9fd0-4a79-bdb7-b5df57a1f252",
           "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
           "position": {
             "height": 1,
@@ -1205,6 +1252,15 @@
         },
         "status_button_enabled": true
       },
+      "label_items": {
+        "order": [
+          "$label1",
+          "$label2",
+          "$label3",
+          "$label4",
+          "$label5"
+        ]
+      },
       "mailto_in_vivaldi": true,
       "notifications": true,
       "notifications_sound_on": false,
@@ -1240,7 +1296,7 @@
         {
           "id": "PanelDownloads",
           "resizable": false,
-          "width": 534
+          "width": 400
         },
         {
           "id": "PanelHistory",
@@ -1523,8 +1579,8 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "PanelHistory",
-        "width": 534
+        "selectedPanel": "PanelDownloads",
+        "width": 400
       }
     },
     "quick_commands": {
@@ -1557,8 +1613,9 @@
       "bar": {
         "height": 30,
         "position": 1,
+        "slider_xpos": 90,
         "slider_ypos": 31,
-        "width": 183
+        "width": 177
       }
     },
     "toolbars": {
@@ -1598,6 +1655,169 @@
         "NewTab",
         "FlexibleSpacer",
         "TabButton"
+      ]
+    },
+    "workspaces": {
+      "link_routes": [
+        {
+          "expression": "https://x.com",
+          "id": "f3ae5431-1c60-4744-8a32-83af797a9b72",
+          "type": "CONTAINS",
+          "workspaceId": 1775197673798
+        },
+        {
+          "expression": "mail.google.com",
+          "id": "1e233743-0e8d-4ae1-87be-ba2be0a06086",
+          "type": "CONTAINS",
+          "workspaceId": 1775197673798
+        },
+        {
+          "expression": "github.com",
+          "id": "dc111d57-e117-462a-8d49-e25226fffbc6",
+          "type": "CONTAINS",
+          "workspaceId": 1775197209184
+        },
+        {
+          "expression": "arxiv",
+          "id": "46b7d11c-08a6-4948-8a72-9a4942383267",
+          "type": "CONTAINS",
+          "workspaceId": 1775197460931
+        },
+        {
+          "expression": "ieeexplore.ieee.org",
+          "id": "9a6c2aa9-3440-4e24-bc52-a42e65ccd01e",
+          "type": "CONTAINS",
+          "workspaceId": 1775197460931
+        },
+        {
+          "expression": "openreview.net",
+          "id": "1590de3a-8ad3-46c9-b1a0-ceced6b477da",
+          "type": "CONTAINS",
+          "workspaceId": 1775197460931
+        },
+        {
+          "expression": "jstage.jst.go.jp",
+          "id": "fc34a238-9442-4f62-8b3e-074c7932f011",
+          "type": "CONTAINS",
+          "workspaceId": 1775197460931
+        },
+        {
+          "expression": "chatgpt.com",
+          "id": "ab509e04-3edb-4c31-99dd-9f96ea4c93e2",
+          "type": "CONTAINS",
+          "workspaceId": 1.77519879291E+12
+        },
+        {
+          "expression": "notebooklm.google.com",
+          "id": "565015a0-a79b-4ad1-a026-26d9352856cf",
+          "type": "CONTAINS",
+          "workspaceId": 1.77519879291E+12
+        },
+        {
+          "expression": "gemini.google.com",
+          "id": "3ae73461-dfef-4057-a8af-34604cc5b8a5",
+          "type": "CONTAINS",
+          "workspaceId": 1.77519879291E+12
+        },
+        {
+          "expression": "github.com/copilot",
+          "id": "48345647-ac2f-4adf-ab64-713f4fc2e924",
+          "type": "CONTAINS",
+          "workspaceId": 1.77519879291E+12
+        },
+        {
+          "expression": "zenn",
+          "id": "0d5cc7b0-d758-4d21-981d-b4da1103a06b",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "qiita",
+          "id": "dfd7aa79-8abb-49bd-b708-f0f76127943f",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "archwiki",
+          "id": "d63b367d-fa1a-47d7-b2f0-f017a0dc0582",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "github.io",
+          "id": "68a29aef-76f9-4a6e-ba30-15d6896b5b5d",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "reddit.com",
+          "id": "cb886b67-5c0a-4287-967b-26387582950e",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "huggingface",
+          "id": "e4bbc592-ffe1-45b1-a9e3-be6707a6e21c",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "post",
+          "id": "b6e7323c-3378-4a36-9102-502b38f0d118",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "blog",
+          "id": "955084a4-89ff-4158-bd4a-b92260049361",
+          "type": "CONTAINS",
+          "workspaceId": 1775197522913
+        },
+        {
+          "expression": "docs",
+          "id": "47da722c-3326-4bc1-9682-3bace5cee0ce",
+          "type": "CONTAINS",
+          "workspaceId": 1775197133806
+        },
+        {
+          "expression": ".pdf",
+          "id": "c41a1b02-ca2f-40d9-8b9c-7b9793f0aa17",
+          "type": "CONTAINS",
+          "workspaceId": 1775197133806
+        }
+      ],
+      "list": [
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M3.5 4.5V14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M12.5 4.5V14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M5.5 4.5V1.5H10.5V4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M14 4.5H2C1.17157 4.5 0.5 5.17157 0.5 6V13C0.5 13.8284 1.17157 14.5 2 14.5H14C14.8284 14.5 15.5 13.8284 15.5 13V6C15.5 5.17157 14.8284 4.5 14 4.5Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
+          "id": 1775197209184,
+          "name": "GitHub"
+        },
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M3.5 8.5V11.9648C3.5 12.2992 3.66819 12.6099 3.97304 12.7472C4.63034 13.0433 5.97266 13.5 8 13.5C10.0273 13.5 11.3697 13.0433 12.027 12.7472C12.3318 12.6099 12.5 12.2992 12.5 11.9648V8.5M14.4182 5.54402L8.0237 8.98724C8.00891 8.9952 7.99109 8.9952 7.9763 8.98724L1.58176 5.54402C1.5467 5.52515 1.5467 5.47485 1.58176 5.45598L7.9763 2.01276C7.99109 2.0048 8.00891 2.0048 8.0237 2.01276L14.4182 5.45598C14.4533 5.47485 14.4533 5.52515 14.4182 5.54402Z\" stroke-linecap=\"round\"/>\n  <path d=\"M14.5 5.5V10.5\" stroke-linecap=\"round\"/>\n  <path d=\"M14.5 12.5V13.5\" stroke-linecap=\"round\"/>\n</svg>\n",
+          "id": 1775197460931,
+          "name": "Papers"
+        },
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M13.5 3.5H15.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M10.5 6.5H2C1.60218 6.5 1.22064 6.34196 0.93934 6.06066C0.658035 5.77936 0.5 5.39782 0.5 5V2C0.5 1.60218 0.658035 1.22064 0.93934 0.93934C1.22064 0.658035 1.60218 0.5 2 0.5H10.5L13.5 1.5V5.5L10.5 6.5Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M7.5 6.5L6.687 10.565C6.63667 10.8169 6.68525 11.0786 6.82266 11.2957C6.96006 11.5128 7.17575 11.6687 7.425 11.731L9.364 12.216C9.68846 12.2972 9.97649 12.4844 10.1823 12.7481C10.3881 13.0117 10.5 13.3365 10.5 13.671V15.5H0.5V13.427C0.499917 13.1484 0.57743 12.8753 0.723853 12.6382C0.870276 12.4012 1.07982 12.2096 1.329 12.085L2.063 11.719C2.19933 11.6507 2.31824 11.5521 2.41062 11.4308C2.503 11.3094 2.56641 11.1686 2.596 11.019L3.5 6.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M10.5 0.5V6.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M2.5 4.5H5.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M2.5 2.5H5.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
+          "id": 1775197522913,
+          "name": "Posts"
+        },
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M4.5 3.5H11.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M4.5 6.5H11.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M4.5 9.5H7.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M13.5 0.5H2.5C1.94772 0.5 1.5 0.947715 1.5 1.5V14.5C1.5 15.0523 1.94772 15.5 2.5 15.5H13.5C14.0523 15.5 14.5 15.0523 14.5 14.5V1.5C14.5 0.947715 14.0523 0.5 13.5 0.5Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M1.5 12.5H14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
+          "id": 1775197133806,
+          "name": "Docs"
+        },
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M8 0.73999L9.731 6.26899H15.5L10.916 9.71399L12.718 15.26L8 11.832L3.282 15.26L5.084 9.71399L0.5 6.26899H6.269L8 0.73999Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
+          "iconId": 14,
+          "id": 1775197673798,
+          "name": "SNS"
+        },
+        {
+          "icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M7.729 11.229L14.5 5.5L15.5 0.5L10.5 1.5L4.771 8.271\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M12.5 3.5L7.5 8.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <path d=\"M0.5 14L4.086 10.414L1.586 7.914L3 6.5L9.5 13L8.086 14.414L5.586 11.914L2 15.5L0.5 14Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n",
+          "id": 1.77519879291E+12,
+          "name": "Tools"
+        }
       ]
     }
   }

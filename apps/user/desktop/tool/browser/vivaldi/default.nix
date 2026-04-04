@@ -1,5 +1,11 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
+  inherit (lib) hm optionalString optionalAttrs;
   inherit (config.lib.ndchm.chezmoi) getChezmoiFilePath;
 in
 {
@@ -24,6 +30,7 @@ in
             ".vivaldi.quick_commands"
             ".vivaldi.tabs.bar"
             ".vivaldi.toolbars"
+            ".vivaldi.workspaces"
           )
           # ITEMSを", "で連結、ただし、末尾に,を付けない
           joined_string=''$(printf ", %s" "''${ITEMS[@]}")
@@ -33,11 +40,26 @@ in
         '';
       })
     ];
-    sessionVariables = {
+    sessionVariables = optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
       CHROME_PATH = "${pkgs.vivaldi}/bin/vivaldi";
     };
+    activation.apply-vivaldi-config = hm.dag.entryAfter [ "writeBoundary" ] (
+      optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+        find "$HOME/Library/Application Support/Vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
+          TMP="''${profile}/Preferences.bak"
+          mv "''${profile}/Preferences" "''${TMP}"
+          ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' "''${TMP}" ${getChezmoiFilePath "dot_config/vivaldi/CommonPreferences"} > "''${profile}/Preferences.new"
+          if [ -s "''${profile}/Preferences.new" ]; then
+            mv "''${profile}/Preferences.new" "''${profile}/Preferences"
+          else
+            rm "''${profile}/Preferences.new"
+          fi
+        done
+      ''
+    );
   };
   xdg.configFile."vivaldi/CommonPreferences" = {
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     source = getChezmoiFilePath "dot_config/vivaldi/CommonPreferences";
     onChange = ''
       find "${config.xdg.configHome}/vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
@@ -53,7 +75,7 @@ in
     '';
   };
   programs.vivaldi = {
-    enable = true;
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     dictionaries = with pkgs; [ hunspellDictsChromium.en_US ];
     extensions = [
       { id = "joaffhoebddkohkafembmdkfmmcgmepj"; } # better vrchat
@@ -71,6 +93,7 @@ in
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
+      # { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # ublock origin lite
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
       { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
