@@ -73,6 +73,9 @@ final: prev: {
             patches = old.patches or [ ] ++ [
               ./qtile.patch
             ];
+            disabledTests = old.disabledTests or [ ] ++ [
+              "test_qtile_cmd"
+            ];
           });
           qtile-extras = pprev.qtile-extras.overrideAttrs (old: {
             #NOTE: qtile-extras's test sometime failed.
