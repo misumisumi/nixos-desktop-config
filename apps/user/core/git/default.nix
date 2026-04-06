@@ -9,8 +9,8 @@ let
 in
 {
   home.packages = with pkgs; [
-    git-ignore
     git-crypt
+    git-ignore
     git-secret
     github-cli
   ];

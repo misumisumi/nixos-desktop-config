@@ -9,6 +9,7 @@
       duf # Show storage usage
       gptfdisk # GPT partition tools
       killall # Process killer
+      license-go # License generator
       progress # Show progress of coreutils programs
       tree # Show file tree
       yq # YAML processor
