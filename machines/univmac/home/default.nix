@@ -38,6 +38,10 @@ in
       activation.restoreVivaldiConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         ${restore-vivaldi-config}/bin/restore-vivaldi-config
       '';
+      file = {
+        ".config/karabiner/assets/complex_modifications/SandS.json".source = ./karabiner/SandS.json;
+        ".config/karabiner/assets/complex_modifications/Caps2Any.json".source = ./karabiner/Caps2Any.json;
+      };
       packages = with pkgs; [
         restore-vivaldi-config
         # comms
