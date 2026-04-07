@@ -1,5 +1,15 @@
 # Changelog
 
+## [8.3.5](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.4...v8.3.5) (2026-04-07)
+
+
+### Bug Fixes
+
+* add license-go ([b896fd0](https://github.com/misumisumi/nixos-desktop-config/commit/b896fd0a469a2c4a22b0b3bd5265ac9d7b8ebad9))
+* **patches:** disable test_qtile_cmd of qtile ([f470e1e](https://github.com/misumisumi/nixos-desktop-config/commit/f470e1ebceb2ae6f0d2f75ba0e10980a12675fd7))
+* **univmac:** fix keymap for mac ([796022a](https://github.com/misumisumi/nixos-desktop-config/commit/796022a41dc7ce5d23ee66099cea337da81f04e4))
+* **vivaldi:** fix home-manager activation script name ([acc2dff](https://github.com/misumisumi/nixos-desktop-config/commit/acc2dff6b23bff1afd8b4555e8d4585a2dc4d3d1))
+
 ## [8.3.4](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.3...v8.3.4) (2026-04-04)
 
 
