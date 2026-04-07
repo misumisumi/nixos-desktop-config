@@ -19,6 +19,7 @@
     };
     casks = [
       "gimp"
+      "karabiner-elements"
       "krita"
       "macSKK"
       "microsoft-office"
