@@ -43,7 +43,7 @@ in
     sessionVariables = optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
       CHROME_PATH = "${pkgs.vivaldi}/bin/vivaldi";
     };
-    activation.apply-vivaldi-config = hm.dag.entryAfter [ "writeBoundary" ] (
+    activation.applyVivaldiConfig = hm.dag.entryAfter [ "writeBoundary" ] (
       optionalString pkgs.stdenv.hostPlatform.isDarwin ''
         find "$HOME/Library/Application Support/Vivaldi" -maxdepth 1 -type d -name "Default" -or -name "Profile *" | while read -r profile; do
           TMP="''${profile}/Preferences.bak"
