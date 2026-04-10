@@ -128,7 +128,7 @@ jobs:
       GH_REPO: ${{ github.repository }}
       PR_NUM: ${{ inputs.pr-number }}
     steps:
-      - uses: dependabot/fetch-metadata@v2
+      - uses: dependabot/fetch-metadata@v3
         id: metadata
         with:
           github-token: ${{ github.token }}
