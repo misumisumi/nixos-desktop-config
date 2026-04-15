@@ -47,7 +47,6 @@ in
         # comms
         discord
         slack
-        zoom-us
         # develop
         inkscape
         (google-fonts.override {
