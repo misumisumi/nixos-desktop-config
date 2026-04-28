@@ -13,6 +13,11 @@
   ];
   boot = {
     initrd = {
+      services.udev.rules = ''
+        ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="28de", ATTR{idProduct}=="2102", ATTRS{serial}=="88095483C7-2YX", SYMLINK+="valve-dongle-1", TAG+="uaccess"
+        ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="28de", ATTR{idProduct}=="2102", ATTRS{serial}=="C74DB3BB87-3YX", SYMLINK+="valve-dongle-2", TAG+="uaccess"
+        ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="28de", ATTR{idProduct}=="2102", ATTRS{serial}=="8EB17F6E38-1YX", SYMLINK+="valve-dongle-3", TAG+="uaccess"
+      '';
       availableKernelModules = [
         "nvme"
         "xhci_pci"

@@ -51,7 +51,10 @@ async def move_speclific_apps(window):
     if window.name == "KDE Connect Daemon":
         window.toggle_maximize()
     await asyncio.sleep(0.01)
-    if window.name is not None and window.name.split(" - ")[-1] in PinPConf.target_cls_name:
+    if (
+        window.name is not None
+        and window.name.split(" - ")[-1] in PinPConf.target_cls_name
+    ):
         # 画面サイズに合わせて自動的にPinPのサイズとポジションを決定する
         pinp_size, pinp_pos = get_pinp_size_pos()
 
@@ -302,11 +305,13 @@ def move_n_screen_group(qtile, idx):
     groups = qtile.groups
     s_idx = qtile.current_screen.index
     if s_idx < GlobalConf.monitors and idx < GROUP_PER_SCREEN:
-        qtile.current_window.togroup(groups[int(idx + GROUP_PER_SCREEN * s_idx)].name, switch_group=True)
+        qtile.current_window.togroup(
+            groups[int(idx + GROUP_PER_SCREEN * s_idx)].name, switch_group=True
+        )
 
 
 @lazy.function
-def focus_cycle_screen(qtile, backward=False, pentablet=False):
+def focus_cycle_screen(qtile, backward=False, to_pentablet=False):
     idx = qtile.current_screen.index
     monitors = GlobalConf.monitors
     pentablet = GlobalConf.pentablet
@@ -335,12 +340,18 @@ def move_cycle_screen(qtile, backward=False):
         if backward:
             to_idx = monitors - 1 if idx == 0 else idx - 1
             to_group = qtile.groups.index(qtile.current_screen.group) - GROUP_PER_SCREEN
-            to_group = to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * monitors)
+            to_group = (
+                to_group if to_group >= 0 else to_group + (GROUP_PER_SCREEN * monitors)
+            )
 
         else:
             to_idx = 0 if idx + 1 >= monitors else idx + 1
             to_group = qtile.groups.index(qtile.current_screen.group) + GROUP_PER_SCREEN
-            to_group = to_group if to_group < GROUP_PER_SCREEN * monitors else to_group - (GROUP_PER_SCREEN * monitors)
+            to_group = (
+                to_group
+                if to_group < GROUP_PER_SCREEN * monitors
+                else to_group - (GROUP_PER_SCREEN * monitors)
+            )
         group = qtile.groups[to_group]
         qtile.current_window.togroup(group.name)
         qtile.to_screen(to_idx)
@@ -348,17 +359,20 @@ def move_cycle_screen(qtile, backward=False):
 
 
 @lazy.function
-def to_from_pentablet(qtile):
+def to_from_pentablet(qtile, move=False):
     idx = qtile.current_screen.index
     monitors = GlobalConf.monitors
     if idx == monitors:
         to_idx = list(group_and_rule.keys()).index("full")
         group = qtile.groups[to_idx]
-        qtile.current_window.togroup(group.name)
+        if move:
+            qtile.current_window.togroup(group.name)
         qtile.to_screen(0)
-        qtile.current_screen.set_group(group)
+        if move:
+            qtile.current_screen.set_group(group)
     else:
-        qtile.current_window.togroup(qtile.groups[-2].name)
+        if move:
+            qtile.current_window.togroup(qtile.groups[-2].name)
         qtile.to_screen(monitors)
 
 
@@ -425,8 +439,18 @@ def set_mouse(mod=None):
     # Drag floating layouts.
     mod = mod or GlobalConf.mod
     return [
-        Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-        Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+        Drag(
+            [mod],
+            "Button1",
+            lazy.window.set_position_floating(),
+            start=lazy.window.get_position(),
+        ),
+        Drag(
+            [mod, "shift"],
+            "Button1",
+            lazy.window.set_size_floating(),
+            start=lazy.window.get_size(),
+        ),
     ]
 
 
