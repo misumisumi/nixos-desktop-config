@@ -20,12 +20,14 @@
       enable = true;
       ui.enable = true;
       startTimeout = 300;
+      bucketSupport = false;
+      package = pkgs.incus;
       preseed = {
         networks = [
           {
             description = "Default Incus network";
             config = {
-              "ipv4.address" = "10.0.100.1/24";
+              "ipv4.address" = "10.10.10.1/24";
               "ipv4.nat" = "true";
             };
             name = "incusbr0";

@@ -50,10 +50,7 @@
     ];
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [
-        #WARN: incusの依存で次期LTSでこれの依存が解消する予定
-        "minio-2025-10-15T17-29-55Z"
-      ];
+      permittedInsecurePackages = [ ];
     };
   };
 
