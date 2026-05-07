@@ -41,7 +41,6 @@ def have_pentablet(pentab_output_name: str) -> tuple[int, str] | None:
         cmd, shell=True, capture_output=True, text=True
     ).stdout.split("\n")[:-1]
     for i, (output, resolution) in enumerate(map(lambda x: x.split(" "), cmd_result)):
-        logger.warning(f"Idx: {i}, Output: {output}, Resolution: {resolution}")
         if pentab_output_name == output:
             return (i, pentab_output_name)
 

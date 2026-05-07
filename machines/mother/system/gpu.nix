@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   services = {
     xserver = {
@@ -8,11 +8,10 @@
         "amdgpu"
         "fbdev"
       ];
-      # deviceSection = ''
-      # '';
-      # serverFlagsSection = ''
-      #   Option "AutoAddGPU" "false"
-      # '';
+      deviceSection = "";
+      serverFlagsSection = ''
+        Option "AutoAddGPU" "false"
+      '';
       extraConfig = ''
         Section "Device"
           Identifier     "Intel Arc B580"
@@ -21,8 +20,8 @@
           BoardName      "Battlemage G21 [Arc B570]"
           BusID          "PCI:05:0:0"
           Option         "Monitor-DP-1" "DP-1"
+          Option         "Monitor-HDMI-2" "HDMI-2"
           Option         "Monitor-HDMI-3" "HDMI-3"
-          Option         "Monitor-HDMI-4" "HDMI-4"
         EndSection
 
         Section "Device"
@@ -39,13 +38,13 @@
         EndSection
 
         Section "Monitor"
-          Identifier     "HDMI-3"
+          Identifier     "HDMI-2"
           Option         "RightOf" "DP-1"
         EndSection
 
         Section "Monitor"
-          Identifier     "HDMI-4"
-          Option         "RightOf" "HDMI-3"
+          Identifier     "HDMI-3"
+          Option         "RightOf" "HDMI-2"
         EndSection
       '';
       # screenSection = ''
