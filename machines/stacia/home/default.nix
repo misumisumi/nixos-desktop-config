@@ -10,7 +10,7 @@
     extraConfig = "Xft.dpi:150";
   };
   xsession.windowManager.command = lib.mkForce ''
-    ${pkgs.xrandr}/bin/xrandr --fbmm 5640x2880 --output HDMI-A-1 --pos 0x0 --mode 3840x2160 --scale 1 --primary --output DVI-D-0 --pos 3840x0 --mode 1920x1200 --scale 1.35
+    ${pkgs.xrandr}/bin/xrandr --fbmm 5640x2880 --output HDMI-A-0 --pos 0x0 --mode 3840x2160 --scale 1 --primary --output DVI-D-0 --pos 3840x0 --mode 1920x1200 --scale 1.35
     ${config.xsession.windowManager.qtile.finalPackage}/bin/qtile start -b x11
   '';
   home.pointerCursor = {
