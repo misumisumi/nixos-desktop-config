@@ -236,7 +236,7 @@ def set_keys():
                     [],
                     "XF86Launch4",
                     lazy.spawn(
-                        "sh -c \"asusctl profile -n && dunstify -h string:x-dunst-stack-tag:asusctl -a asusctl $(asusctl profile -p | tail -n1 | awk -F' ' '{print $4}')\""
+                        "sh -c \"asusctl profile next && dunstify -h string:x-dunst-stack-tag:asusctl -a asusctl $(asusctl profile get | head -n1 | awk -F': ' '{print $2}')\""
                     ),
                 ),
                 # Attach Screen
