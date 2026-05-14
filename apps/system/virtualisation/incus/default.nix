@@ -20,7 +20,6 @@
       enable = true;
       ui.enable = true;
       startTimeout = 300;
-      bucketSupport = false;
       package = pkgs.incus;
       preseed = {
         networks = [
