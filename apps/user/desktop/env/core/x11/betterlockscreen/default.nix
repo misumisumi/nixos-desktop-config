@@ -40,12 +40,8 @@
 
   systemd.user.services = {
     betterlockscreen-update = {
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
       Unit = {
-        Description = "Update lock screen picture";
-        After = [ "graphical-session.target" ];
+        Description = "Update lock screen picture (self running)";
       };
       Service = {
         Type = "oneshot";
