@@ -311,7 +311,7 @@ def move_n_screen_group(qtile, idx):
 
 
 @lazy.function
-def focus_cycle_screen(qtile, backward=False, to_pentablet=False):
+def focus_cycle_screen(qtile, backward=False):
     idx = qtile.current_screen.index
     monitors = GlobalConf.monitors
     pentablet = GlobalConf.pentablet
@@ -336,6 +336,8 @@ def focus_cycle_screen(qtile, backward=False, to_pentablet=False):
 def move_cycle_screen(qtile, backward=False):
     idx = qtile.current_screen.index
     monitors = GlobalConf.monitors
+    if GlobalConf.pentablet is not None:
+        monitors = monitors - 1
     if idx <= monitors:
         if backward:
             to_idx = monitors - 1 if idx == 0 else idx - 1
@@ -361,7 +363,7 @@ def move_cycle_screen(qtile, backward=False):
 @lazy.function
 def to_from_pentablet(qtile, move=False):
     idx = qtile.current_screen.index
-    monitors = GlobalConf.monitors
+    monitors = GlobalConf.monitors - 1
     if idx == monitors:
         to_idx = list(group_and_rule.keys()).index("full")
         group = qtile.groups[to_idx]

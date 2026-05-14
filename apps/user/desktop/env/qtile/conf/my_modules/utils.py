@@ -4,7 +4,7 @@ from pathlib import Path
 from libqtile.log_utils import logger
 
 
-def get_n_monitors() -> str:
+def get_n_monitors() -> int:
     cmd = [r"xrandr --listactivemonitors | head -n1 | awk -F' ' '{print $2}'"]
     num_monitors = subprocess.run(
         cmd, shell=True, capture_output=True, text=True
@@ -14,7 +14,7 @@ def get_n_monitors() -> str:
     return num_monitors
 
 
-def get_phy_monitors() -> list[tuple[str, tuple[str]]]:
+def get_phy_monitors() -> list[tuple[str, tuple[int, ...]]]:
     xrandr = "xrandr --listactivemonitors"
     cmd = (
         xrandr
