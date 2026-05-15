@@ -16,11 +16,4 @@
       wait = "background";
     };
   };
-
-  services = {
-    nscd = {
-      enable = false;
-    };
-  };
-  system.nssModules = lib.mkForce [ ];
 }

@@ -14,11 +14,6 @@
       "24be05ffff84ff61"
     ];
   };
-  services = {
-    nscd = {
-      enable = true;
-    };
-  };
   networking = {
     hostName = "${hostname}";
     hostId = "bcf1bfe4";

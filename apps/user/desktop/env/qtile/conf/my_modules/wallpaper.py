@@ -29,7 +29,12 @@ if not GlobalConf.laptop:
 
     @hook.subscribe.setgroup
     def change_wallpaper():
-        global MONITORS, horiz_wallpaper, verti_wallpaper, num_horiz_wallpaper, num_verti_wallpaper
+        global \
+            MONITORS, \
+            horiz_wallpaper, \
+            verti_wallpaper, \
+            num_horiz_wallpaper, \
+            num_verti_wallpaper
         feh = "feh --no-fehbg " + r" --bg-fill {}" * len(qtile.screens)
         group = qtile.current_screen.group
         gidx = qtile.groups.index(group)
@@ -90,9 +95,15 @@ def mk_wallpaper_cache():
         wallpapers = filter(lambda x: direc in x.name, GlobalConf.wallpapers)
         for wallpaper in wallpapers:
             if GlobalConf.use_cached_wallpapers:
-                cached = GlobalConf.wallpapers_cache_path.joinpath(f"{screen.index}_{wallpaper.name}")
+                cached = GlobalConf.wallpapers_cache_path.joinpath(
+                    f"{screen.index}_{wallpaper.name}"
+                )
                 if not cached.exists():
-                    subprocess.run(f"{cmd} {wallpaper} -resize {width}x{height} {cached}", shell=True)
+                    logger.info(f"Creating wallpaper cache: {cached}")
+                    subprocess.run(
+                        f"{cmd} {wallpaper} -resize {width}x{height} {cached}",
+                        shell=True,
+                    )
             else:
                 cached = wallpaper
             if direc == "_verti":

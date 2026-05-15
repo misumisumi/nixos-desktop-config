@@ -26,6 +26,7 @@
       "obs"
       "obsidian"
       "vivaldi"
+      "zoom"
     ];
   };
 }

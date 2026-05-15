@@ -50,18 +50,11 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
-  vivaldi =
-    (prev.vivaldi.override {
-      commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
-      proprietaryCodecs = true;
-      enableWidevine = true;
-    }).overrideAttrs
-      (old: {
-        postInstall = prev.lib.optionalString prev.stdenv.hostPlatform.isLinux ''
-          rm $out/opt/vivaldi/libvulkan.so.1
-          ln -s -t $out/opt/vivaldi "${prev.lib.getLib prev.vulkan-loader}/lib/libvulkan.so.1"
-        '';
-      });
+  vivaldi = prev.vivaldi.override {
+    commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
+    proprietaryCodecs = true;
+    enableWidevine = true;
+  };
   flameshot = prev.flameshot.overrideAttrs (old: {
     qtWrapperArgs = [ "--set QT_SCALE_FACTOR_ROUNDING_POLICY Round" ] ++ old.qtWrapperArgs or [ ];
   });

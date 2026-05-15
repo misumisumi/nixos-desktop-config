@@ -1,4 +1,7 @@
 { lib, ... }:
+let
+  inherit (lib) mkDefault mkForce;
+in
 {
   systemd = {
     network = {
@@ -10,10 +13,11 @@
     };
   };
   services = {
+    nscd.enable = true;
     resolved = {
       enable = true;
       settings.Resolve = {
-        DNSSEC = lib.mkDefault "false";
+        DNSSEC = mkDefault "false";
         FallbackDNS = [
           "1.1.1.1"
           "2606:4700:4700::1111"
@@ -25,7 +29,7 @@
   };
 
   networking = {
-    useDHCP = lib.mkDefault false; # Setting each network interafces
+    useDHCP = mkDefault false; # Setting each network interafces
     nameservers = [
       "1.1.1.1"
       "2606:4700:4700::1111"

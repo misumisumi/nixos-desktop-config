@@ -1,10 +1,5 @@
 { hostname, ... }:
 {
-  services = {
-    nscd = {
-      enable = true;
-    };
-  };
   networking = {
     hostName = "${hostname}";
     hostId = "7dfa348e";

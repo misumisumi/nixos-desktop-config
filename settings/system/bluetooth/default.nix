@@ -1,3 +1,7 @@
+{ lib, config, ... }:
+let
+  inherit (lib) hasAttr;
+in
 {
   hardware = {
     bluetooth = {
@@ -9,4 +13,5 @@
       };
     };
   };
+  services.blueman.withApplet = !hasAttr "home-manager" config;
 }

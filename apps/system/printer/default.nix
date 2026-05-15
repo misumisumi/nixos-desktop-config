@@ -1,4 +1,4 @@
-{ user, ... }:
+{ config, user, ... }:
 {
   users.groups = {
     lp.members = [ "${user}" ];
@@ -9,7 +9,7 @@
     printing.enable = true; # drivers are set on each machine
     avahi = {
       enable = true;
-      nssmdns4 = true;
+      nssmdns4 = config.services.nscd.enable;
       openFirewall = true;
     };
     system-config-printer = {

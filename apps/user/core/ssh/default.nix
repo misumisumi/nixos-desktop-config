@@ -7,6 +7,8 @@
 }:
 {
   home.activation.sshActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p ${config.home.homeDirectory}/.ssh
+    chmod 700 ${config.home.homeDirectory}/.ssh
     if [ ! -f ${config.home.homeDirectory}/.ssh/id_ed25519.pub ]; then
       ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -N "" -C "$(whoami)@${hostname}-$(date -I)" -f ${config.home.homeDirectory}/.ssh/id_ed25519
     fi

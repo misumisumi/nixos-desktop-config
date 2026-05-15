@@ -18,9 +18,6 @@
         };
       };
     };
-    nscd = {
-      enable = true;
-    };
   };
   networking = {
     wireless = {
