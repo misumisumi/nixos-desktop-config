@@ -1,5 +1,28 @@
 # Changelog
 
+## [8.3.6](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.5...v8.3.6) (2026-05-15)
+
+
+### Bug Fixes
+
+* **betterlockscreen:** disable automatic start ([18bc897](https://github.com/misumisumi/nixos-desktop-config/commit/18bc8978fe3987fcbf48c991d0d534af97d16a85))
+* **bluetooth:** disable blueman-applet when using home-manager ([53010d5](https://github.com/misumisumi/nixos-desktop-config/commit/53010d50d355e71005c24487b378bf8beb3247e3))
+* fix mother and qtile config ([c5104b6](https://github.com/misumisumi/nixos-desktop-config/commit/c5104b612c0df8d4ffb4338d9428404824b25ebb))
+* **nscd:** collect nscd to settings/system/network/ ([34832aa](https://github.com/misumisumi/nixos-desktop-config/commit/34832aaad2ce5772b2cf1c72366cd8be793c4447))
+* **patch:** useless parentheses around value in binding ([55eaa1e](https://github.com/misumisumi/nixos-desktop-config/commit/55eaa1e00ef85707e1837a99bd07f0c91e0f20c4))
+* **qtile:** fix asusctl command ([04f129b](https://github.com/misumisumi/nixos-desktop-config/commit/04f129b62a5617a7e1a33ae3beca3f3cf2882be0))
+* **qtile:** fix cycle and move window when existing pentablet ([5d12e0d](https://github.com/misumisumi/nixos-desktop-config/commit/5d12e0de6ae50b2d6ae53e0127bdef13d1de1b14))
+* **qtile:** fix missing functions ([84faed5](https://github.com/misumisumi/nixos-desktop-config/commit/84faed56374c9b7cdc15b98f4b7e122e9dcec0b8))
+* **settings/nix:** fix permittedInsecurePackages ([d9a4a1e](https://github.com/misumisumi/nixos-desktop-config/commit/d9a4a1e55747b33a46f9fc22a276e1c6e4ad932c))
+* **ssh:** add chmod for .ssh ([26e378c](https://github.com/misumisumi/nixos-desktop-config/commit/26e378cf888cfd73484ea18f587c066e42442a1b))
+* **ssh:** add ssh keys ([a51a563](https://github.com/misumisumi/nixos-desktop-config/commit/a51a563377cecc2af28b017c3816eaec6be8b617))
+* **stacia:** fix output source name ([4b3bd4e](https://github.com/misumisumi/nixos-desktop-config/commit/4b3bd4ec66496d7dd0eaf88a7a9d15cd5e2cd9d8))
+* **stacia:** fix subdisplay scale ([fe2f39b](https://github.com/misumisumi/nixos-desktop-config/commit/fe2f39bfcf22f96054212928006872bf73368b48))
+* **univmac:** install zoom from homebrew ([0d9f5b4](https://github.com/misumisumi/nixos-desktop-config/commit/0d9f5b4f3941d5c4963f330476ddca7d69364ba6))
+* **univmac:** install zoom from homebrew and fix keymap of wezterm ([0ef7ece](https://github.com/misumisumi/nixos-desktop-config/commit/0ef7ece480fa3e12d4f32bb2495421f8ba8eef1f))
+* **virtualisation:** fix podman and incus settings ([0cbb5a2](https://github.com/misumisumi/nixos-desktop-config/commit/0cbb5a231f540baf612ca321a1ca8171547d6f9b))
+* **yaskkserv2:** update config ([f6d8492](https://github.com/misumisumi/nixos-desktop-config/commit/f6d84922fd455b7b66fc0733360c007ac21d2fff))
+
 ## [8.3.5](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.4...v8.3.5) (2026-04-07)
 
 
