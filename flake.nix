@@ -57,7 +57,7 @@
     };
     flakes.url = "github:misumisumi/flakes";
     nvimdots = {
-      url = "github:misumisumi/nvimdots";
+      url = "github:misumisumi/nvimdots/0.12";
       inputs = {
         flake-parts.follows = "flake-parts";
         home-manager.follows = "home-manager";
