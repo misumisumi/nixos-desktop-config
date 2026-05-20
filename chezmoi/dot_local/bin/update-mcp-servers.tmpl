@@ -41,7 +41,11 @@ function install_node_package() {
 
   logging "Installing package: $1 ..."
 
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
   mkdir -p "${_PKGDIR}"
+  
   pushd "${_PKGDIR}" || return
   npm install "${pname}"
   ln -sf "${_PKGDIR}/node_modules/.bin/${name}" "${BINDIR}/${name}"
@@ -54,6 +58,10 @@ function install_node_package() {
 function install_pip_package() {
   name=$1
   pname=$2
+  
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
   _PKGDIR="${PKGDIR}/${name}"
 
   logging "Installing package: $name ..."
@@ -72,6 +80,10 @@ function install_python_package() {
   name=$1
   giturl=$2
   mname=$3
+  
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
   _PKGDIR="${PKGDIR}/${name}"
 
   logging "Installing package: $name ..."
