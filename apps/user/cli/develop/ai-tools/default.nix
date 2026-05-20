@@ -12,6 +12,7 @@ let
   inherit (importChezmoiUserAppData user) mcp gemini-cli;
   inherit (builtins) toJSON;
   inherit (lib)
+    filterAttrs
     getExe
     getExe'
     last
@@ -93,7 +94,7 @@ in
             args = [ ];
           }
           // x
-        ) mcp.mcpServers;
+        ) (filterAttrs (k: _: k != "github-mcp-server") mcp.mcpServers);
       };
     };
   };
