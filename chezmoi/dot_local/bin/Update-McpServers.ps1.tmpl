@@ -45,6 +45,11 @@ function Install-NodePackage {
     param($name, $pname)
     $pkgDir = Join-Path $PKGDIR $name
     Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
     New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
     Push-Location $pkgDir
     npm install $pname
@@ -59,6 +64,11 @@ function Install-PipPackage {
     param($name, $pname)
     $pkgDir = Join-Path $PKGDIR $name
     Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
     New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
     Push-Location $pkgDir
     python -m venv venv
@@ -74,6 +84,11 @@ function Install-PythonPackage {
     param($name, $giturl, $mname)
     $pkgDir = Join-Path $PKGDIR $name
     Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
     New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
     Push-Location $pkgDir
     git clone $giturl .
@@ -99,8 +114,8 @@ function Install-GitHubPackage {
     if (Test-Path "$pkgDir") {
         Remove-Item -Force -Recurse $pkgDir
     }
-    New-Item -ItemType Directory -Force -Path $PKGDIR | Out-Null
 
+    New-Item -ItemType Directory -Force -Path $PKGDIR | Out-Null
     $tmpFile = Join-Path $env:TEMP $srcFile
     $url = "https://api.github.com/repos/$owner/$repo/releases/latest"
     $response = Invoke-RestMethod -Uri $url
