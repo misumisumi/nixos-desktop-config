@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   user,
   ...
@@ -43,6 +42,10 @@
       };
     };
   };
+  systemd.tmpfiles.rules = [
+    "d /var/lib/nocow 0711 root root - -"
+    "h /var/lib/nocow - - - - +C"
+  ];
   nix = {
     settings = {
       cores = 4;
