@@ -43,7 +43,6 @@ in
         aichat
         github-copilot-cli
         mcp-hub
-        antigravity-cli
       ])
       ++ [
         # mcp servers
@@ -97,7 +96,6 @@ in
           // x
         ) (filterAttrs (k: _: k != "github-mcp-server") mcp.mcpServers);
       };
-      ".gemini/config/mcp_config.json".text = toJSON mcp;
     };
   };
   xdg.configFile = {
@@ -107,9 +105,10 @@ in
     };
     "mcphub/servers.json".text = toJSON mcp;
   };
-  programs.gemini-cli = {
+  programs.antigravity-cli = {
     enable = true;
     defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
-    inherit (gemini-cli) settings;
+    enableMcpIntegration = true;
+    mcpServers = mcp;
   };
 }

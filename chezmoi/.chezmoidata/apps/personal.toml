@@ -31,24 +31,10 @@ paper = "delta --paging=never"
 
 [apps.users.sumi.gemini-cli]
 #NOTE: need chang `sops/pkgs/ai-tools/env` when change this
-defaultModel = "gemini-3-flash-preview"
+defaultModel = "gemini-3.5-flash"
 [apps.users.sumi.gemini-cli.settings]
-[apps.users.sumi.gemini-cli.settings.general]
-enableAutoUpdate = false
-enableAutoUpdateNotification = false
-previewFeatures = true
-vimMode = true
-[apps.users.sumi.gemini-cli.settings.general.sessionRetention]
-warningAcknowledged = true
-enabled = true
-maxAge = "120d"
-[apps.users.sumi.gemini-cli.settings.ui]
-theme = "GitHub"
-useAlternateBuffer = true
-[apps.users.sumi.gemini-cli.settings.security]
-[apps.users.sumi.gemini-cli.settings.security.auth]
-selectedType = "gemini-api-key"
-
+colorScheme = "tokyo night"
+enableTelemetry = false
 # MCP Servers settings
 [apps.users.sumi.mcp.mcpServers]
 [apps.users.sumi.mcp.mcpServers.github-mcp-server]

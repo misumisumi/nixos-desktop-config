@@ -15,6 +15,7 @@ let
 in
 {
   imports = [ ./rofi.nix ];
+  catppuccin.autoEnable = false;
   programs = {
     alacritty.settings = lib.importTOML "${pack}/alacritty/tokyonight_${flavor}.toml";
     starship.settings = lib.importTOML ./starship/${flavor}.toml;
