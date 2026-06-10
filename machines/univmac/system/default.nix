@@ -18,6 +18,7 @@
       cleanup = "zap"; # NOTE: homebrew pkgs are managed by nix
     };
     casks = [
+      "audacity"
       "gimp"
       "karabiner-elements"
       "krita"
