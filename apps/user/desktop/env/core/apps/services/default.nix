@@ -1,5 +1,10 @@
 # Auto launch apps
-{ lib, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   home.activation.mkSnapshotsDirAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     [ -d ${config.xdg.userDirs.pictures}/Screenshots ] || mkdir -p ${config.xdg.userDirs.pictures}/Screenshots
@@ -23,4 +28,9 @@
       indicator = true; # launch from qtile
     };
   };
+  #BUG: https://bugs.kde.org/show_bug.cgi?id=513536
+  #NOTE: 25/01/10: Ver 25.12.1ではログイン毎にBT backendをON→OFFしなければ問題の一時解決も機能しない
+  #NOTE: 26/06/11: 依然として修正されていないので、BT backendをdisableする。
+  systemd.user.services.kdeconnect.Service.ExecStartPost =
+    "${config.services.kdeconnect.package}/bin/kdeconnect-cli --disable-backend BluetoothLinkProvider";
 }
