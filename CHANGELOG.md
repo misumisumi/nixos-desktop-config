@@ -1,5 +1,25 @@
 # Changelog
 
+## [8.3.7](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.6...v8.3.7) (2026-06-13)
+
+
+### Bug Fixes
+
+* **bluetooth:** rm option by reverting upstream ([bb0084d](https://github.com/misumisumi/nixos-desktop-config/commit/bb0084d6a8527728981d5e1e77136eee64e9ecb5))
+* **chezmoi:** fix to runable script ([95318e6](https://github.com/misumisumi/nixos-desktop-config/commit/95318e69066aa714406b3d16e742e60207be52fc))
+* **chezmoi:** fix update scripts and filter mcp server for copilot ([7bf6482](https://github.com/misumisumi/nixos-desktop-config/commit/7bf64828f701f2fa0c33caee4f36246b8c792dd2))
+* **chezmoi:** fix update scripts and filter mcp server for copilot ([ce8226d](https://github.com/misumisumi/nixos-desktop-config/commit/ce8226d8529d0046a01e4637e6c561dddbb8dadc))
+* **chezmoi:** update script ([37567a2](https://github.com/misumisumi/nixos-desktop-config/commit/37567a2f2ea538c0f025005ce40bf386302feb38))
+* fix deprecated option and add tmpfiles ([ed184cc](https://github.com/misumisumi/nixos-desktop-config/commit/ed184cc4b30a942e5f1227a47ff4aa3bfdaa08d7))
+* fix deprecated option and catppuccin-nix option ([86355e1](https://github.com/misumisumi/nixos-desktop-config/commit/86355e130e91e08e268ae295f3289a41277402da))
+* fix old style url and theme ([073b206](https://github.com/misumisumi/nixos-desktop-config/commit/073b2066033d2eb423bbc77d524fde4659278a08))
+* fix some deprecated options ([f21948d](https://github.com/misumisumi/nixos-desktop-config/commit/f21948dc6521fd3492798b79c44a15ab382846d7))
+* **ssh:** update ssh host ([7eeee69](https://github.com/misumisumi/nixos-desktop-config/commit/7eeee69453d04116c286bccbdfab7894473ca20b))
+* **univmac:** add audacity from brew --cask ([b88994a](https://github.com/misumisumi/nixos-desktop-config/commit/b88994a3e6b13057bf9a6301383b7c5f50f3a9b9))
+* **univmac:** add brew's extraFlags ref from nix-darwin/nix-darwin/[#1787](https://github.com/misumisumi/nixos-desktop-config/issues/1787) ([59a87de](https://github.com/misumisumi/nixos-desktop-config/commit/59a87dea0b4900755ddc2ec13df658176d41bf38))
+* update to 26.05 and fix patches ([ea70b3c](https://github.com/misumisumi/nixos-desktop-config/commit/ea70b3c5dd70ff70ed22f2c484f864d63e28ff74))
+* **vivaldi:** replace to ublock origin lite ([6385aed](https://github.com/misumisumi/nixos-desktop-config/commit/6385aed180daf8fdfe8f95237f695fe658552e58))
+
 ## [8.3.6](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.5...v8.3.6) (2026-05-15)
 
 
