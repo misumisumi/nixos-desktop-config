@@ -93,8 +93,7 @@ in
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
-      # { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # ublock origin lite
-      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+      { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # ublock origin lite
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
       { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
       { id = "oingodpdjohhkelnginmkagmkbplgema"; } # weblioポップアップ英和辞典

@@ -20,7 +20,7 @@
     enable = true;
     includes = [ "conf.d/hosts/*" ];
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
         forwardAgent = true;
         serverAliveInterval = 30;

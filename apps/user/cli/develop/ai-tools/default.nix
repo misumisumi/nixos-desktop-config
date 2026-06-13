@@ -12,6 +12,7 @@ let
   inherit (importChezmoiUserAppData user) mcp gemini-cli;
   inherit (builtins) toJSON;
   inherit (lib)
+    filterAttrs
     getExe
     getExe'
     last
@@ -93,7 +94,7 @@ in
             args = [ ];
           }
           // x
-        ) mcp.mcpServers;
+        ) (filterAttrs (k: _: k != "github-mcp-server") mcp.mcpServers);
       };
     };
   };
@@ -104,9 +105,10 @@ in
     };
     "mcphub/servers.json".text = toJSON mcp;
   };
-  programs.gemini-cli = {
+  programs.antigravity-cli = {
     enable = true;
     defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
-    settings = gemini-cli.settings // mcp;
+    enableMcpIntegration = true;
+    mcpServers = mcp;
   };
 }

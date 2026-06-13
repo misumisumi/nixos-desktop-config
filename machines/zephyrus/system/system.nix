@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   config,
   ...
@@ -70,6 +69,10 @@
     cpuFreqGovernor = "performance";
     powertop.enable = true;
   };
+  systemd.tmpfiles.rules = [
+    "d /var/lib/nocow 0711 root root - -"
+    "h /var/lib/nocow - - - - +C"
+  ];
   nix = {
     settings = {
       cores = 4;

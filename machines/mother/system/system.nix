@@ -31,6 +31,11 @@
       displayManager.lightdm.greeters.slick.cursorTheme.size = 32;
     };
   };
+  systemd.tmpfiles.rules = [
+    # increase the speed of resuming a hibernating system
+    "d /var/lib/nocow 0711 root root - -"
+    "h /var/lib/nocow - - - - +C"
+  ];
   nix = {
     settings = {
       cores = 4;

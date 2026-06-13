@@ -15,18 +15,9 @@ in
     ./rofi.nix
   ];
   catppuccin = {
+    enable = true;
+    autoEnable = true;
     inherit flavor;
-    cursors.enable = true;
-    alacritty.enable = true;
-    bat.enable = true;
-    btop.enable = true;
-    dunst.enable = true;
-    delta.enable = true;
-    kitty.enable = true;
-    obs.enable = true;
-    starship.enable = true;
-    yazi.enable = true;
-    zathura.enable = true;
   };
   programs = {
     starship.settings = {

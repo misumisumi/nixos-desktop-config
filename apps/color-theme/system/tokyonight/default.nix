@@ -7,6 +7,7 @@ let
   flavor = builtins.replaceStrings [ "tokyonight-" ] [ "" ] colorTheme;
 in
 {
+  catppuccin.autoEnable = false;
   programs.dconf = {
     enable = true;
     profiles = {

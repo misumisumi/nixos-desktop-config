@@ -19,6 +19,9 @@ function Check-Command {
         exit 1
     }
 }
+if (Get-Command * | Where-Object { $_.Name -match "mise" }) {
+  Invoke-Expression "$(mise activate pwsh)"
+}
 
 Check-Command "npm"
 Check-Command "python"
@@ -38,55 +41,81 @@ goto #_undefined_# 2>NUL || title %COMSPEC% & "$CommandPath" %*
     Set-Content -Path $OutputPath -Value $scriptContent -Encoding ASCII
 }
 
-function Update-NodePackage {
+function Install-NodePackage {
     param($name, $pname)
     $pkgDir = Join-Path $PKGDIR $name
-    Logging "Updating package: $name ..."
-    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
-    Push-Location $pkgDir
-    npm update $pname
-    Pop-Location
-    Logging "Package '$name' update successfully."
-}
-
-function Update-PipPackage {
-    param($name, $pname)
-    $pkgDir = Join-Path $PKGDIR $name
-    Logging "Updating package: $name ..."
-    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
-    Push-Location $pkgDir
-    & "$pkgDir\venv\Scripts\python.exe" -m venv venv --upgrade
-    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U pip
-    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U $pname
-    Pop-Location
-    Logging "Package '$name' update successfully."
-}
-
-function Update-PythonPackage {
-    param($name, $giturl, $mname)
-    $pkgDir = Join-Path $PKGDIR $name
-    Logging "Updating package: $name ..."
-    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
-    Push-Location $pkgDir
-    $branch = git rev-parse --abbrev-ref HEAD
-    git pull origin $branch
-    & "$pkgDir\venv\Scripts\python.exe" -m pip install -U pip
-    & "$pkgDir\venv\Scripts\python.exe" -m pip install -e .
-    Pop-Location
-    Logging "Package '$name' update successfully."
-}
-
-function Update-GitHubPackage {
-    param($name, $owner, $repo, $srcFile, $exeFile)
-
-    $pkgDir = Join-Path $PKGDIR $name
-    Logging "Updating package: $name ..."
+    Logging "Installing package: $name ..."
 
     if (Test-Path "$pkgDir") {
         Remove-Item -Force -Recurse $pkgDir
     }
-    New-Item -ItemType Directory -Force -Path $PKGDIR | Out-Null
 
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    npm install $pname
+    $binPath = Join-Path $BINDIR "$name.cmd"
+    $target = Join-Path $pkgDir "node_modules\.bin\$name.cmd"
+    BinWrapper -OutputPath $binPath -Command "$target"
+    Pop-Location
+    Logging "Package '$name' installed successfully."
+}
+
+function Install-PipPackage {
+    param($name, $pname)
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    python -m venv venv
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install $pname
+    $binPath = Join-Path $BINDIR "$name.cmd"
+    $target = "$pkgDir\venv\Scripts\$name.exe"
+    BinWrapper -OutputPath $binPath -Command "$target"
+    Pop-Location
+    Logging "Package '$name' installed successfully."
+}
+
+function Install-PythonPackage {
+    param($name, $giturl, $mname)
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
+    New-Item -ItemType Directory -Force -Path $pkgDir | Out-Null
+    Push-Location $pkgDir
+    git clone $giturl .
+    python -m venv venv
+    & "$pkgDir\venv\Scripts\python.exe" -m pip install -e .
+    $binPath = Join-Path $BINDIR "$name.cmd"
+    if ($mname -match "\.py") {
+        $script = Get-ChildItem -Path $pkgDir -Filter $mname -Recurse | Select-Object -First 1
+        BinWrapper -OutputPath $binPath -Command "\"$pkgDir\venv\Scripts\python.exe`\" $script.FullName `$args"
+    } else {
+        BinWrapper -OutputPath $binPath -Command "\"$pkgDir\venv\Scripts\python.exe`\" -m $mname `$args"
+    }
+    Pop-Location
+    Logging "Package '$name' installed successfully."
+}
+
+function Install-GitHubPackage {
+    param($name, $owner, $repo, $srcFile, $exeFile)
+
+    $pkgDir = Join-Path $PKGDIR $name
+    Logging "Installing package: $name ..."
+
+    if (Test-Path "$pkgDir") {
+        Remove-Item -Force -Recurse $pkgDir
+    }
+
+    New-Item -ItemType Directory -Force -Path $PKGDIR | Out-Null
     $tmpFile = Join-Path $env:TEMP $srcFile
     $url = "https://api.github.com/repos/$owner/$repo/releases/latest"
     $response = Invoke-RestMethod -Uri $url
@@ -120,27 +149,28 @@ New-Item -ItemType Directory -Force -Path $BINDIR | Out-Null
 {{ range $type, $pkgs := $mcpServers -}}
 {{ if (eq $type "node") -}}
 {{ range $name, $pname := $pkgs -}}
-Update-NodePackage "{{ $name }}" "{{ $pname }}"
+Install-NodePackage "{{ $name }}" "{{ $pname }}"
 {{ end -}}
 {{ else if (eq $type "pip") -}}
 {{ range $name, $pname := $pkgs -}}
-Update-PipPackage "{{ $name }}" "{{ $pname }}"
+Install-PipPackage "{{ $name }}" "{{ $pname }}"
 {{ end -}}
 {{ else if (eq $type "python") -}}
 {{ range $name, $value := $pkgs -}}
-Update-PythonPackage "{{ $name }}" "{{ $value.giturl }}" "{{ $value.module }}"
+Install-PythonPackage "{{ $name }}" "{{ $value.giturl }}" "{{ $value.module }}"
 {{ end -}}
 {{ else if (eq $type "github") -}}
 {{ range $name, $value := $pkgs -}}
-Update-GitHubPackage "{{ $name }}" "{{ $value.owner }}" "{{ $value.repo }}" "{{ $value.srcFile }}" "{{ $value.exeFile }}"
+Install-GitHubPackage "{{ $name }}" "{{ $value.owner }}" "{{ $value.repo }}" "{{ $value.srcFile }}" "{{ $value.exeFile }}"
 {{ end -}}
 {{ else if (eq $type "general") -}}
 {{ range $name, $value := $pkgs -}}
 $name = "{{ $name }}"
 $pkgDir = Join-Path $PKGDIR $name
-Logging "Updating package: $name ..."
+Logging "Installing package: $name ..."
+$pkgDir = Join-Path $PKGDIR $name
 {{ $value }}
-Logging "Package '$name' update successfully."
+Logging "Package '$name' installed successfully."
 {{ end -}}
 {{ end -}}
 {{ end -}}
