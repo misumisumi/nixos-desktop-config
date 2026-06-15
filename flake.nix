@@ -83,6 +83,10 @@
       url = "github:L3-N0X/spicetify-dj-info";
       flake = false;
     };
+    spotify-ai-band-blocker = {
+      url = "github:synap5e/Spotify-AI-Band-Blocker";
+      flake = false;
+    };
   };
 
   outputs =
