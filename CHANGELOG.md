@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.3.8](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.7...v8.3.8) (2026-06-16)
+
+
+### Bug Fixes
+
+* **spotify:** add filter for ai generated songs ([7cf27b7](https://github.com/misumisumi/nixos-desktop-config/commit/7cf27b7ab19b142daee522a4a534eddc8feeb9fa))
+* **spotify:** add filter for ai generated songs ([ae2d397](https://github.com/misumisumi/nixos-desktop-config/commit/ae2d397c4ba6a4d7a0ace224b7fc7415c6d47546))
+
 ## [8.3.7](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.6...v8.3.7) (2026-06-13)
 
 
