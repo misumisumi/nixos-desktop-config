@@ -20,6 +20,10 @@ in
         src = "${inputs.spicetify-djinfo}/dist";
         name = "djinfo.mjs";
       }
+      {
+        src = "${inputs.spotify-ai-band-blocker}/dist";
+        name = "ai_band_blocker.js";
+      }
     ];
   };
 }

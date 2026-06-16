@@ -706,7 +706,8 @@
         "nvimdots": "nvimdots",
         "sops-nix": "sops-nix",
         "spicetify-djinfo": "spicetify-djinfo",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "spotify-ai-band-blocker": "spotify-ai-band-blocker"
       }
     },
     "sops-nix": {
@@ -763,6 +764,22 @@
       "original": {
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
+        "type": "github"
+      }
+    },
+    "spotify-ai-band-blocker": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775670529,
+        "narHash": "sha256-21PHghM1GQ2epOP+XV/Fke2wBAVXRwHNU6wFVBKRegE=",
+        "owner": "synap5e",
+        "repo": "Spotify-AI-Band-Blocker",
+        "rev": "b85500bb52c0b7971b1424c372bac402d8cb6ef9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "synap5e",
+        "repo": "Spotify-AI-Band-Blocker",
         "type": "github"
       }
     },
