@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.3.9](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.8...v8.3.9) (2026-06-22)
+
+
+### Bug Fixes
+
+* fix git branch-cleaar alias ([b19a280](https://github.com/misumisumi/nixos-desktop-config/commit/b19a2800af2ce5502bbff4234eb875875c2e9213))
+
 ## [8.3.8](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.7...v8.3.8) (2026-06-16)
 
 
