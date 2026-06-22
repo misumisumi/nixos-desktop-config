@@ -54,6 +54,8 @@ jobs:
             "liveimg-gnome-iso",
           ]
     steps:
+      - uses: actions/checkout@v7
+
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
@@ -61,11 +63,20 @@ jobs:
       - name: Check evaluation warning
         run: |
           TMPFILE=$(mktemp)
+          set +e
           nix run nixpkgs#nixos-rebuild -- dry-build --flake ".#${{ matrix.hostname }}" --option pure-eval false --option eval-cache false 2>>"${TMPFILE}"
+          NIX_EXIT_CODE=$?
+          set -e
 
-          START=$(grep -n "evaluation warning:" "${TMPFILE}" | head -n1 | awk -F":" '{print $1}')
+          if [ $NIX_EXIT_CODE -ne 0 ]; then
+            echo "Error occured!"
+            cat "${TMPFILE}"
+            exit $NIX_EXIT_CODE
+          fi
+
+          START=$(grep -n "evaluation warning:" "${TMPFILE}" | head -n1 | awk -F":" '{print $1}' || true)
           if [ -n "${START}" ]; then
-            LAST=$(grep -n "will be built" "${TMPFILE}" | awk -F":" '{print $1}')
+            LAST=$(grep -n "will be built" "${TMPFILE}" | head -n1 | awk -F":" '{print $1}')
             if [ -n "${LAST}" ]; then
               LAST=$(("${LAST}" - 1))
             else
