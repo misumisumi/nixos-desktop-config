@@ -53,8 +53,6 @@ command = "mcp-nixos" # wrapped command made by me
 [apps.users.sumi.mcp.mcpServers.filesystem]
 command = "mcp-server-filesystem"      # wrapped command made by me
 args = ["~/Documents/", "~/Workspace"]
-[apps.users.sumi.mcp.mcpServers.fetch]
-command = "mcp-server-fetch" # wrapped command made by me
 [apps.users.sumi.mcp.mcpServers.git]
 command = "mcp-server-git" # wrapped command made by me
 [apps.users.sumi.mcp.mcpServers.context7]

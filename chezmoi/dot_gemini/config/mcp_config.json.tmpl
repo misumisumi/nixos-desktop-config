@@ -1,0 +1,19 @@
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $mcpConfig := or (get $userConfig "mcp") dict -}}
+{{- $mcpServers := or (get $mcpConfig "mcpServers") dict -}}
+
+{
+  "mcpServers": {
+    {{- $first := true }}
+    {{- range $name, $config := $mcpServers }}
+    {{- if not $first }},{{ end }}
+    "{{ $name }}": {{ merge (dict "type" "stdio") $config | toJson }}
+    {{- $first = false }}
+    {{- end }}
+  }
+}
+

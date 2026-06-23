@@ -41,7 +41,11 @@ function install_node_package() {
 
   logging "Installing package: $1 ..."
 
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
   mkdir -p "${_PKGDIR}"
+
   pushd "${_PKGDIR}" || return
   npm install "${pname}"
   ln -sf "${_PKGDIR}/node_modules/.bin/${name}" "${BINDIR}/${name}"
@@ -58,7 +62,11 @@ function install_pip_package() {
 
   logging "Installing package: $name ..."
 
+  if [ -d "${_PKGDIR}" ]; then
+      rm -rf "${_PKGDIR}"
+  fi
   mkdir -p "${_PKGDIR}"
+
   pushd "${_PKGDIR}" || return
   python -m venv venv
   "${_PKGDIR}/venv/bin/python" -m pip install "${pname}"

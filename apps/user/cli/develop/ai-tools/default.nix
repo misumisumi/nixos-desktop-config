@@ -73,12 +73,6 @@ in
             '';
         in
         [
-          (mcp-server-fetch.overrideAttrs (old: {
-            postPatch = ''
-              substituteInPlace src/mcp_server_fetch/server.py \
-              --replace-fail "AsyncClient(proxies=" "AsyncClient(proxy="
-            '';
-          }))
           (mcp-server-filesystem.overrideAttrs (old: {
             postInstall = postInstall { service = "filesystem"; };
           }))
