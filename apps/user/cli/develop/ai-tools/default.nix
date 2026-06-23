@@ -41,10 +41,16 @@ in
       in
       (map wrapExe [
         aichat
-        github-copilot-cli
         mcp-hub
       ])
       ++ [
+        (writeShellScriptBin "copilot-oc" ''
+          export COPILOT_PROVIDER_API_KEY=$(${getExe' pkgs.gnugrep "grep"} OPENCODE_API_KEY ${config.home.homeDirectory}/.env | ${getExe' pkgs.coreutils "cut"} -d'=' -f2)
+          export COPILOT_PROVIDER_TYPE=openai
+          export COPILOT_PROVIDER_BASE_URL=https://opencode.ai/zen/go/v1
+          export COPILOT_MODEL=deepseek-v4-flash
+          ${pkgs.github-copilot-cli}/bin/copilot "$@"
+        '')
         # mcp servers
         github-mcp-server
         mcp-nixos
@@ -105,10 +111,22 @@ in
     };
     "mcphub/servers.json".text = toJSON mcp;
   };
-  programs.antigravity-cli = {
-    enable = true;
-    defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
-    enableMcpIntegration = true;
-    mcpServers = mcp;
+  programs = {
+    mcp = {
+      enable = true;
+      servers = mcp.mcpServers;
+    };
+    opencode = {
+      enable = true;
+      enableMcpIntegration = true;
+    };
+    antigravity-cli = {
+      enable = true;
+      defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
+      enableMcpIntegration = true;
+    };
+    github-copilot-cli = {
+      enable = true;
+    };
   };
 }
