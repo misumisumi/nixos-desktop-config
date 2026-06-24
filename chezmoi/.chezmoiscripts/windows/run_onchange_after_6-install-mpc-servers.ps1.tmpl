@@ -35,7 +35,7 @@ function BinWrapper {
 
     $scriptContent = @"
 @ECHO off
-goto #_undefined_# 2>NUL || title %COMSPEC% & "$CommandPath" %*
+goto #_undefined_# 2>NUL || title %COMSPEC% & $CommandPath %*
 "@
 
     Set-Content -Path $OutputPath -Value $scriptContent -Encoding ASCII
@@ -82,9 +82,9 @@ function Install-PythonPackage {
     $binPath = Join-Path $BINDIR "$name.cmd"
     if ($mname -match "\.py") {
         $script = Get-ChildItem -Path $pkgDir -Filter $mname -Recurse | Select-Object -First 1
-        BinWrapper -OutputPath $binPath -Command "\"$pkgDir\venv\Scripts\python.exe`\" $script.FullName `$args"
+        BinWrapper -OutputPath $binPath -Command "$pkgDir\venv\Scripts\python.exe $script.FullName $args"
     } else {
-        BinWrapper -OutputPath $binPath -Command "\"$pkgDir\venv\Scripts\python.exe`\" -m $mname `$args"
+        BinWrapper -OutputPath $binPath -Command "$pkgDir\venv\Scripts\python.exe -m $mname $args"
     }
     Pop-Location
     Logging "Package '$name' installed successfully."

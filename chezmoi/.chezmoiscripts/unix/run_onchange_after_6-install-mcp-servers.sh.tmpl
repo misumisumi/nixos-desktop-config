@@ -128,12 +128,13 @@ function install_github_package() {
   curl -L "https://github.com/${owner}/${repo}/releases/download/${latestReleaseTag}/${srcFile}" -o "${tmpFile}"
 
   if [ "${srcFile##*.}" == "zip" ]; then
-      unzip "${tmpFile}" -d "${_PKGDIR}"
-  elif [[ "${srcFile}" == "*.tar.gz" ]]; then
-      tar -xvf "${tmpFile}" -C "${_PKGDIR}"
+    unzip "${tmpFile}" -d "${_PKGDIR}"
+  elif [[ "${srcFile}" == *.tar.gz ]]; then
+    tar -xvf "${tmpFile}" -C "${_PKGDIR}"
   else
     logging "Unsupported source file format: ${srcFile}"
   fi
+
   pushd "${_PKGDIR}" || return
   ln -sf "${_PKGDIR}/${exeFile}" "${BINDIR}/${name}"
   popd || return
