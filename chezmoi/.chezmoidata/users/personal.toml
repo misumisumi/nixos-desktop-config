@@ -56,8 +56,6 @@ mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
 mcp-server-memory = "@modelcontextprotocol/server-memory"
 mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
-copilot = "@github/copilot"
-gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
 mcp-obsidian = "@bitbonsai/mcpvault@latest"
 [linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
@@ -91,6 +89,7 @@ neovim = "asdf:neovim"
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"
 btop = "latest"
+copilot = "latest"
 cmake = "latest"
 delta = "latest"
 deno = "latest"
@@ -217,8 +216,6 @@ mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
 mcp-server-memory = "@modelcontextprotocol/server-memory"
 mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
-copilot = "@github/copilot"
-gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
 [windows.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
 mcp-server-git = "mcp_server_git"
@@ -319,6 +316,7 @@ apps = [
     "bat",
     "btop",
     "cmake",
+    "copilot-cli",
     "ctags",
     "curl",
     "delta",
