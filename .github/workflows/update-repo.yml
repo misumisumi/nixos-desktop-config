@@ -121,4 +121,6 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           cat downloaded_eval-warnings/*.log | sort -k 5 -u > eval_warning.log
-          gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
+          if [[ $(wc -l <eval_warning.log) -ne 0 ]]; then
+            gh issue create -t "Evaluation Warning" -F eval_warning.log -l deprecated
+          fi
