@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.3.10](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.9...v8.3.10) (2026-06-24)
+
+
+### Bug Fixes
+
+* add support for opencode ([8849e2e](https://github.com/misumisumi/nixos-desktop-config/commit/8849e2ebf39d0735d35e616ea22c850fb31f684d))
+* **chezmoi:** install copilot-cli using mise or scoop and rm work profile ([72ac882](https://github.com/misumisumi/nixos-desktop-config/commit/72ac88228ea6d72ca3a0174a42ace343bbe8cc5a))
+* **chezmoi:** support mcp for non-NixOS ([044f0ea](https://github.com/misumisumi/nixos-desktop-config/commit/044f0eaef95e8ca1cbaf0f9e4c791f8988ac2037))
+* **chezmoi:** update chezmoiignore ([557eac0](https://github.com/misumisumi/nixos-desktop-config/commit/557eac0465292d34605f0068c603342b1bc86258))
+* **patches:** add patch for github-copilot-cli ([3d3eeeb](https://github.com/misumisumi/nixos-desktop-config/commit/3d3eeebbe3a1243d95d6060076841357ad70d7c5))
+* **patches:** pin github-copilot-cli until merging upstream ([92b9a89](https://github.com/misumisumi/nixos-desktop-config/commit/92b9a898f0f737a4771bda5769f89d801eb5f619))
+
 ## [8.3.9](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.8...v8.3.9) (2026-06-22)
 
 
