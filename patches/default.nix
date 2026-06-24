@@ -84,4 +84,34 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
+  github-copilot-cli = prev.github-copilot-cli.overrideAttrs (
+    old:
+    let
+      arch =
+        with prev.stdenv.hostPlatform;
+        if isx86_64 then
+          "x64"
+        else if isAarch64 then
+          "arm64"
+        else
+          throw "Unsupported arch: ${prev.stdenv.hostPlatform.system}";
+      platform = if prev.stdenv.hostPlatform.isDarwin then "darwin-${arch}" else "linux-${arch}";
+      version = "1.0.64";
+    in
+    {
+      inherit version;
+      src = prev.fetchurl {
+        url = "https://github.com/github/copilot-cli/releases/download/v${version}/github-copilot-${version}-${platform}.tgz";
+        hash =
+          {
+            "x86_64-darwin" = "sha256-DKp85sN0IuJyIHSLOCZa8uabOZtiEAVUennNlYr7nL0=";
+            "aarch64-darwin" = "sha256-2JkfpBNV4MAJ2U2TgzOvJP4cwaGFDx58MbxmROX/8Sc=";
+            "x86_64-linux" = "sha256-p2I4BHdW9wRLP8ns7wmuWBwUW2RGOuARgDtItMovxGA=";
+            "aarch64-linux" = "sha256-xcFHefIgy0BQTnIbgwH48+VK2fYHhQf8wWBq9SixNeY=";
+          }
+          .${prev.stdenv.hostPlatform.system}
+            or (throw "Unsupported system: ${prev.stdenv.hostPlatform.system}");
+      };
+    }
+  );
 }
