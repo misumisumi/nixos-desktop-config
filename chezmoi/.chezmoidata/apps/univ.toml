@@ -29,6 +29,30 @@ signByDefault = false
 [apps.users."kobayashi.sumiharu.r4".lazygit]
 paper = "delta --paging=never"
 
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers]
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server]
+command = "github-mcp-server"
+args = ["stdio"]
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server.env]
+GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT}"
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.paper_search]
+command = "paper-search-mcp" # wrapped command made by me
+# [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.discord]
+# command = "discord-mcp" # wrapped command made by me
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.nixos]
+command = "mcp-nixos" # wrapped command made by me
+# [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.terraform]
+# command = "terraform-mcp-server" # wrapped command made by me
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.filesystem]
+command = "mcp-server-filesystem"      # wrapped command made by me
+args = ["~/Documents/", "~/Workspace"]
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.git]
+command = "mcp-server-git" # wrapped command made by me
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7]
+command = "context7-mcp" # wrapped command made by me
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7.env]
+CONTEXT7_API_KEY = "${CONTEXT7_API_KEY}"
+
 [apps.users."kobayashi.sumiharu.r4".shell]
 historyIgnore = [
     "builtin *",

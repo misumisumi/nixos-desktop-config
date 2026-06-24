@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export COPILOT_PROVIDER_API_KEY=$(grep OPENCODE_API_KEY $HOME/.env | cut -d'=' -f2)
+export COPILOT_PROVIDER_TYPE=openai
+export COPILOT_PROVIDER_BASE_URL=https://opencode.ai/zen/go/v1
+export COPILOT_MODEL=deepseek-v4-flash
+
+copilot "$@"

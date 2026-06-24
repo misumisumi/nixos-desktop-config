@@ -56,13 +56,14 @@ mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
 mcp-server-memory = "@modelcontextprotocol/server-memory"
 mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
-copilot = "@github/copilot"
-gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
-mcp-obsidian = "@bitbonsai/mcpvault@latest"
+mcpvault = "@bitbonsai/mcpvault@latest"
 [linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
-mcp-server-git = "mcp_server_git"
 mcp-nixos = "mcp_nixos"
+mcp-server-git = "mcp_server_git"
+[linux.users.sumi.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
+giturl = "https://github.com/openags/paper-search-mcp"
+module = "paper_search_mcp.server"
 [linux.users.sumi.packages.mcpServers.github] # name = "module_name", name is executable name
 owner = "github"
 repo = "github-mcp-server"
@@ -88,6 +89,7 @@ neovim = "asdf:neovim"
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"
 btop = "latest"
+copilot = "latest"
 cmake = "latest"
 delta = "latest"
 deno = "latest"
@@ -180,7 +182,7 @@ function WrapCopilot {
         [Parameter(ValueFromRemainingArguments = $true)]
         $Args
     )
-    WrapEnv copilot.cmd $Args
+    WrapEnv copilot.exe $Args
 }
 function WrapMcpHub {
     param (
@@ -214,12 +216,14 @@ mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
 mcp-server-memory = "@modelcontextprotocol/server-memory"
 mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
-copilot = "@github/copilot"
-gemini = "@google/gemini-cli"
 mcp-hub = "mcp-hub@latest"
+mcpvault = "@bitbonsai/mcpvault@latest"
 [windows.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
 mcp-server-git = "mcp_server_git"
 mcp-nixos = "mcp_nixos"
+[windows.users.sumi.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
+giturl = "https://github.com/openags/paper-search-mcp"
+module = "paper_search_mcp.server"
 [windows.users.sumi.packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
 owner = "github"
 repo = "github-mcp-server"
@@ -316,6 +320,7 @@ apps = [
     "bat",
     "btop",
     "cmake",
+    "copilot-cli",
     "ctags",
     "curl",
     "delta",
