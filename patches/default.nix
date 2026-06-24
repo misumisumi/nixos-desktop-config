@@ -84,4 +84,22 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
+  github-copilot-cli = prev.github-copilot-cli.overrideAttrs (
+    old:
+    let
+      version = "1.0.63";
+    in
+    {
+      inherit version;
+      src = prev.fetchurl {
+        url = "https://github.com/github/copilot-cli/releases/download/v${version}/github-copilot-${version}.tgz";
+        hash = "sha256-0K+uVsaG9cndsqRhxIV8K399WsLjvVZAgbLreJdmJbs=";
+      };
+      postInstall = old.postInstall + ''
+        # Upstream bundles linuxmusl prebuilds in the universal tarball; they are
+        # not needed on glibc systems and make autoPatchelf fail on musl libc deps.
+        find "$out"/lib/github-copilot-cli -depth -path '*/linuxmusl-*' -exec rm -rf '{}' +
+      '';
+    }
+  );
 }
