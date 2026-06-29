@@ -50,6 +50,7 @@ TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 vimdiff = "nvim -d"
 copilot = "wrapEnv copilot"
 mcp-hub = "wrapEnv mcp-hub"
+opencode = "wrapEnv opencode"
 
 [linux.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
 mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
@@ -104,6 +105,7 @@ jq = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "latest"
+opencode = "latest"
 python = "latest"
 ripgrep = "latest"
 rust = "latest"
@@ -184,6 +186,13 @@ function WrapCopilot {
     )
     WrapEnv copilot.exe $Args
 }
+function WrapOpencode {
+    param (
+        [Parameter(ValueFromRemainingArguments = $true)]
+        $Args
+    )
+    WrapEnv opencode.exe $Args
+}
 function WrapMcpHub {
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
@@ -193,6 +202,7 @@ function WrapMcpHub {
 }
 
 Set-Alias -Name copilot -Value WrapCopilot
+Set-Alias -Name opencode -Value WrapOpencode
 Set-Alias -Name mcp-hub -Value WrapMcpHub
 '''
 [windows.users.sumi.env.export]
@@ -313,8 +323,6 @@ sudo = []
 no_sudo = []
 
 [windows.users.sumi.packages.scoop]
-extraPreInstall = ""
-extraPostInstall = ""
 apps = [
     "7zip",
     "bat",
@@ -337,8 +345,14 @@ apps = [
     "less",
     "make",
     "mingw",
+    "my-bucket/moralerspace-hw-nf",
+    "my-bucket/moralerspace-nf",
+    "my-bucket/wavesurfer",
+    "my-bucket/yaskkserv2",
     "neovim",
+    "nerd-fonts/FiraCode-NF",
     "nodejs-lts",
+    "opencode",
     "openssh",
     "poppler",
     "psutils",
@@ -366,12 +380,9 @@ apps = [
     "yubioath",
     "zip",
     "zoxide",
-    "my-bucket/moralerspace-hw-nf",
-    "my-bucket/moralerspace-nf",
-    "my-bucket/wavesurfer",
-    "my-bucket/yaskkserv2",
-    "nerd-fonts/FiraCode-NF",
 ]
+extraPreInstall = ""
+extraPostInstall = ""
 [windows.users.sumi.packages.scoop.buckets]
 extras = "https://github.com/ScoopInstaller/Extras"
 java = "https://github.com/ScoopInstaller/Java"

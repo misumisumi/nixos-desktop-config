@@ -9,7 +9,7 @@
 }:
 let
   inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData;
-  inherit (importChezmoiUserAppData user) mcp gemini-cli;
+  inherit (importChezmoiUserAppData user) mcp opencode;
   inherit (builtins) toJSON;
   inherit (lib)
     filterAttrs
@@ -19,6 +19,8 @@ let
     mapAttrs
     splitString
     ;
+
+  skills = pkgs.skills.imbad0202.academic-research-skills;
 in
 {
   home = {
@@ -112,12 +114,21 @@ in
     };
     opencode = {
       enable = true;
+      package = pkgs.writeShellScriptBin "opencode" ''
+        export OPENCODE_ENABLE_EXA=1
+        ${pkgs.opencode}/bin/opencode "$@"
+      '';
       enableMcpIntegration = true;
+      settings = opencode;
+      inherit skills;
     };
     antigravity-cli = {
       enable = true;
-      defaultModel = if gemini-cli.defaultModel != "" then gemini-cli.defaultModel else null;
       enableMcpIntegration = true;
+      settings = {
+        colorScheme = "tokyo night";
+        enableTelemetry = false;
+      };
     };
     github-copilot-cli = {
       enable = true;

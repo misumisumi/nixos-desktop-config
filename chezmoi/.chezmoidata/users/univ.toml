@@ -54,6 +54,7 @@ LC_ALL = "en_US.UTF-8"
 [linux.users."kobayashi.sumiharu.r4".env.alias]
 copilot = "wrapEnv copilot"
 mcp-hub = "wrapEnv mcp-hub"
+opencode = "wrapEnv opencode"
 
 [linux.users."kobayashi.sumiharu.r4".packages.mise.settings]
 idiomatic_version_file = true
@@ -87,6 +88,7 @@ jq = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "latest"
+opencode = "latest"
 python = "latest"
 ripgrep = "latest"
 sops = "latest"

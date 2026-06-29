@@ -70,6 +70,7 @@ let
               overlays = [
                 inputs.nur.overlays.default
                 inputs.flakes.overlays.default
+                inputs.nix-skills.overlays.default
               ];
               hostPlatform = {
                 inherit system;

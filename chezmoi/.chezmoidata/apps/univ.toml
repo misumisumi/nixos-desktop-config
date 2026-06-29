@@ -29,6 +29,17 @@ signByDefault = false
 [apps.users."kobayashi.sumiharu.r4".lazygit]
 paper = "delta --paging=never"
 
+[apps.users."kobayashi.sumiharu.r4".opencode]
+[apps.users."kobayashi.sumiharu.r4".opencode.permission]
+edit = "allow"
+glob = "allow"
+grep = "allow"
+read = "allow"
+skill = "allow"
+webfetch = "allow"
+websearch = "allow"
+question = "allow"
+
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers]
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server]
 command = "github-mcp-server"
