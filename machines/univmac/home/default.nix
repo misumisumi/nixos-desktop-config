@@ -44,9 +44,6 @@ in
       };
       packages = with pkgs; [
         restore-vivaldi-config
-        # comms
-        discord
-        slack
         # develop
         inkscape
         (google-fonts.override {
