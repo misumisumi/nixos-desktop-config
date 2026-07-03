@@ -1,9 +1,13 @@
 {
+  lib,
   pkgs,
   user,
   config,
   ...
 }:
+let
+  inherit (lib) hm optionalString optionalAttrs;
+in
 {
   #NOTE: Rename filename template is managed by sqlite3, so need manually update the template in Zotero GUI if you change the template here.
   # {{ authors max="1" initialize="given" replace="\s" "_" }}
@@ -40,4 +44,9 @@
       ];
     };
   };
+  home.activation.reSignZotero = hm.dag.entryAfter [ "writeBoundary" ] (
+    optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+      /usr/bin/codesign --force --deep --sign - ${config.home.homeDirectory}/Applications/Home\ Manager\ Apps/Zotero.app
+    ''
+  );
 }
