@@ -14,6 +14,7 @@ in
     ../../../apps/user/desktop/tool/browser/vivaldi
     ../../../apps/user/desktop/tool/develop/zotero
     ../../../apps/user/desktop/tool/multimedia/mpv
+    ../../../apps/user/desktop/tool/rclone
     ./macSKK.nix
   ];
   home =

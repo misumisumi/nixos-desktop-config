@@ -27,6 +27,7 @@
       "karabiner-elements"
       "krita"
       "macSKK"
+      "macfuse"
       "microsoft-office"
       "obs"
       "obsidian"

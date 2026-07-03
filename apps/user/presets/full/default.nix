@@ -7,6 +7,7 @@
     ../../desktop/tool/develop
     ../../desktop/tool/multimedia
     ../../desktop/tool/office
+    ../../desktop/tool/rclone
     ../../desktop/tool/terminal/alacritty
     ../../desktop/tool/terminal/kitty
     ../../desktop/tool/utils
