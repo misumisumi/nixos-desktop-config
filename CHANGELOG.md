@@ -1,5 +1,16 @@
 # Changelog
 
+## [8.3.11](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.10...v8.3.11) (2026-07-03)
+
+
+### Bug Fixes
+
+* add patch for darwin ([6940c82](https://github.com/misumisumi/nixos-desktop-config/commit/6940c82a1165b3617b8a40841b1bfe6750484327))
+* add rclone for zotero ([962bf22](https://github.com/misumisumi/nixos-desktop-config/commit/962bf22311520c7dd7ae8e8024367fb67911716a))
+* **ai-tools:** use opencode-cli ([39fb838](https://github.com/misumisumi/nixos-desktop-config/commit/39fb8384629177dfd70087cb2f331f4eaa774f96))
+* **patches:** bump github-copilot-cli ([4e96c04](https://github.com/misumisumi/nixos-desktop-config/commit/4e96c04a1f42c9284ec31eb7335fc62d73cfd5f4))
+* **univmac:** change install method for discord and slack to homebrew ([6b54dd6](https://github.com/misumisumi/nixos-desktop-config/commit/6b54dd6f01c503bb58f2950e5d7068192b5f2269))
+
 ## [8.3.10](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.9...v8.3.10) (2026-06-24)
 
 
