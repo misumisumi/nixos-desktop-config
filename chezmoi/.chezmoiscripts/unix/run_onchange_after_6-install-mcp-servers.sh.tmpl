@@ -120,7 +120,7 @@ function install_github_package() {
   if [ -d "${_PKGDIR}" ]; then
       rm -rf "${_PKGDIR}"
   fi
-  mkdir -p "${PKGDIR}"
+  mkdir -p "${_PKGDIR}"
 
   tmpFile="/tmp/${srcFile}"
   url="https://api.github.com/repos/${owner}/${repo}/releases/latest"

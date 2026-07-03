@@ -22,13 +22,16 @@
     };
     casks = [
       "audacity"
+      "discord"
       "gimp"
       "karabiner-elements"
       "krita"
       "macSKK"
+      "macfuse"
       "microsoft-office"
       "obs"
       "obsidian"
+      "slack"
       "vivaldi"
       "zoom"
     ];

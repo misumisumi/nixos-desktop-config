@@ -29,12 +29,17 @@ signByDefault = false
 [apps.users.sumi.lazygit]
 paper = "delta --paging=never"
 
-[apps.users.sumi.gemini-cli]
-#NOTE: need chang `sops/pkgs/ai-tools/env` when change this
-defaultModel = "gemini-3.5-flash"
-[apps.users.sumi.gemini-cli.settings]
-colorScheme = "tokyo night"
-enableTelemetry = false
+[apps.users.sumi.opencode]
+[apps.users.sumi.opencode.permission]
+edit = "allow"
+glob = "allow"
+grep = "allow"
+read = "allow"
+skill = "allow"
+webfetch = "allow"
+websearch = "allow"
+question = "allow"
+
 # MCP Servers settings
 [apps.users.sumi.mcp.mcpServers]
 [apps.users.sumi.mcp.mcpServers.github-mcp-server]

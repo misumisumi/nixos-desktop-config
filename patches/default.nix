@@ -96,7 +96,7 @@ final: prev: {
         else
           throw "Unsupported arch: ${prev.stdenv.hostPlatform.system}";
       platform = if prev.stdenv.hostPlatform.isDarwin then "darwin-${arch}" else "linux-${arch}";
-      version = "1.0.64";
+      version = "1.0.65";
     in
     {
       inherit version;
@@ -104,10 +104,10 @@ final: prev: {
         url = "https://github.com/github/copilot-cli/releases/download/v${version}/github-copilot-${version}-${platform}.tgz";
         hash =
           {
-            "x86_64-darwin" = "sha256-DKp85sN0IuJyIHSLOCZa8uabOZtiEAVUennNlYr7nL0=";
-            "aarch64-darwin" = "sha256-2JkfpBNV4MAJ2U2TgzOvJP4cwaGFDx58MbxmROX/8Sc=";
-            "x86_64-linux" = "sha256-p2I4BHdW9wRLP8ns7wmuWBwUW2RGOuARgDtItMovxGA=";
-            "aarch64-linux" = "sha256-xcFHefIgy0BQTnIbgwH48+VK2fYHhQf8wWBq9SixNeY=";
+            "x86_64-darwin" = "sha256-D72R1Vt/6eSg7INVYjPtC5W/6oPVzpVC1Tn4q831Wqs=";
+            "aarch64-darwin" = "sha256-Ly/Tay3iOMzsipaWLTTh3HKBYwvq7Nu3yQpYrC39UPI=";
+            "x86_64-linux" = "sha256-E8vo0HUyvw9U7cXbjeY7H9atxdMHHLMXcGgWEciuqK0=";
+            "aarch64-linux" = "sha256-3l260k1Uw79owiBP2bhNfGgqkE35JN7zPSb8OXIpeuI=";
           }
           .${prev.stdenv.hostPlatform.system}
             or (throw "Unsupported system: ${prev.stdenv.hostPlatform.system}");

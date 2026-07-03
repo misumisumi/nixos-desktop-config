@@ -1,0 +1,24 @@
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $mcpConfig := or (get $userConfig "mcp") dict -}}
+{{- $mcpServers := or (get $mcpConfig "mcpServers") dict -}}
+{{- $opencodeConfig := or (get $userConfig "opencode") dict -}}
+
+{{- $mcpConfig := dict }}
+{{- range $name, $config := $mcpServers }}
+  {{- $serverConfig := merge (dict "type" "local") $config }}
+  {{- $command := get $serverConfig "command" }}
+  {{- $args := get $serverConfig "args" }}
+  {{- if $command }}
+    {{- $cmdList := list $command }}
+    {{- if $args }}
+      {{- $cmdList = concat $cmdList $args }}
+    {{- end }}
+    {{- $_ := set $serverConfig "command" $cmdList }}
+  {{- end }}
+  {{- $mcpConfig = merge $mcpConfig (dict $name $serverConfig) }}
+{{- end }}
+{{ merge (dict "mcp" $mcpConfig) $opencodeConfig | toJson }}
