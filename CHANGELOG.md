@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.3.12](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.11...v8.3.12) (2026-07-04)
+
+
+### Bug Fixes
+
+* **fzf:** fix deprecated options ([12be405](https://github.com/misumisumi/nixos-desktop-config/commit/12be405803ddf5a23bd244153384129ce78cf2af))
+* **utils:** add yet another nix commands ([e8c4728](https://github.com/misumisumi/nixos-desktop-config/commit/e8c47289206ea8b9e0c29d532a7d9f966fac6c8d))
+
 ## [8.3.11](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.10...v8.3.11) (2026-07-03)
 
 
