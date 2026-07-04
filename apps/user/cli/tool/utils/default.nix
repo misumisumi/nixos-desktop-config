@@ -15,4 +15,5 @@
         tty-clock # CLI clock
       ];
   };
+  programs.nh.enable = true;
 }
