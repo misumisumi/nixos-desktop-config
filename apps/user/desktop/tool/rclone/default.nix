@@ -7,10 +7,11 @@
         config = {
           type = "drive";
           scope = "drive";
+          team_drive = "";
+          service_account_file = config.sops.secrets."rclone/gdrive/service_account_file".path;
         };
         secrets = {
-          client_id = config.sops.secrets."rclone/gdrive/client_id".path;
-          client_secret = config.sops.secrets."rclone/gdrive/client_secret".path;
+          impersonate = config.sops.secrets."rclone/gdrive/impersonate".path;
         };
         mounts = {
           "rclone" = {

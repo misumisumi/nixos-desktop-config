@@ -25,8 +25,8 @@
     secrets = {
       "bw/personal".mode = "0400";
       "bw/univ".mode = "0400";
-      "rclone/gdrive/client_id".mode = "0400";
-      "rclone/gdrive/client_secret".mode = "0400";
+      "rclone/gdrive/service_account_file".mode = "0400";
+      "rclone/gdrive/impersonate".mode = "0400";
       "ssh.lua" = {
         path = "${config.xdg.configHome}/wezterm/ssh.lua";
         sopsFile = getEncryptFile "pkgs/wezterm/ssh.lua";
