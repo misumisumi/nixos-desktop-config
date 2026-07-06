@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.3.13](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.12...v8.3.13) (2026-07-06)
+
+
+### Bug Fixes
+
+* **rclone:** use service account for mounting gdrive ([18e56c8](https://github.com/misumisumi/nixos-desktop-config/commit/18e56c89b07c556064f78e1999b628e87fd65a0f))
+* **xsession:** remove NIXOS_OZONE_WL because this option use only wayland ([373b966](https://github.com/misumisumi/nixos-desktop-config/commit/373b966e7967273d0543f345c203e60d7542ceb6))
+* **xsession:** remove NIXOS_OZONE_WL because this option use only wayland ([e3c386b](https://github.com/misumisumi/nixos-desktop-config/commit/e3c386b852d5e06ca8e123db93df73dbf14dadfd))
+
 ## [8.3.12](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.11...v8.3.12) (2026-07-04)
 
 
