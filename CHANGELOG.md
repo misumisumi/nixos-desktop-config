@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.3.14](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.13...v8.3.14) (2026-07-08)
+
+
+### Bug Fixes
+
+* **flameshot:** use legacy x11 capture when using qtile ([f79d160](https://github.com/misumisumi/nixos-desktop-config/commit/f79d160a09b6065367114a1aa172f152e699b800))
+* **gnome:** add gnome-keyring's portal config to xdg-desktop-portal ([27d4af5](https://github.com/misumisumi/nixos-desktop-config/commit/27d4af5759d1e3f8a0b217c2f14b97812eb57145))
+* **mother:** remove pentablet ([1002995](https://github.com/misumisumi/nixos-desktop-config/commit/100299560efb3f1c0fa9600abbda1c5b008641dc))
+
 ## [8.3.13](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.12...v8.3.13) (2026-07-06)
 
 
