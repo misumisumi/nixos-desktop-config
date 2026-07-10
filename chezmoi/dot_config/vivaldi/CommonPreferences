@@ -2,6 +2,11 @@
   "vivaldi": {
     "actions": [
       {
+        "COMMAND_0e5c9ebf-669f-4859-ac90-32038116a2a7": {
+          "shortcuts": [
+            "alt+d"
+          ]
+        },
         "COMMAND_414958ec-0797-4036-af4c-4083adfb8bb0": {
           "shortcuts": [
             "shift+y"
@@ -731,6 +736,11 @@
             "ctrl+z"
           ]
         },
+        "COMMAND_TAB_STACK_CREATE_BY_HOSTS": {
+          "shortcuts": [
+            "alt+g"
+          ]
+        },
         "COMMAND_TAB_STACK_REMOVE": {
           "shortcuts": [
             "ctrl+,"
@@ -1027,13 +1037,17 @@
           "chain": [
             {
               "defaultValue": "https://vivaldi.com",
-              "key": "f57b8092-9426-4bc8-8e39-fcf3e315b065",
-              "label": "COMMAND_OPEN_LINK_DEFAULT",
-              "name": "Open Link in New Tab",
+              "isVisible": true,
+              "key": "0b01337b-4c13-4197-90c8-179c5c91cfff",
+              "label": "Open Link in Current Tab",
+              "name": "COMMAND_OPEN_LINK_CURRENT",
               "param": "https://vivaldi.com"
             },
             {
-              "key": "275ca3f7-ecfb-4445-bf87-686cd473536e"
+              "isVisible": true,
+              "key": "275ca3f7-ecfb-4445-bf87-686cd473536e",
+              "label": "Close Other Tabs",
+              "name": "COMMAND_CLOSE_ALL_BUT_ACTIVE_TAB"
             }
           ],
           "key": "ckqjhvf430003c5429ni7i7bz",
@@ -1159,6 +1173,8 @@
         }
       ],
       "deleted_command_list": [
+        "0e5c9ebf-669f-4859-ac90-32038116a2a7",
+        "0db39749-6d6d-486b-9666-c863b23fcaf2",
         "f07ebcd1-5447-475e-92c7-26cbbc718c67"
       ],
       "version": 1
@@ -1172,7 +1188,7 @@
         {
           "background": "semi-transparent",
           "folderPath": "Bookmarks/google",
-          "folderUUID": "15fd9b2a-9fd0-4a79-bdb7-b5df57a1f252",
+          "folderUUID": "f487a05e-cb79-465a-b18f-de914171f9a7",
           "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
           "position": {
             "height": 1,
@@ -1385,9 +1401,9 @@
             "mobileMode": false,
             "origin": "user",
             "resizable": false,
-            "title": "",
+            "title": "X",
             "url": "https://x.com/home",
-            "width": 495,
+            "width": 524,
             "zoom": 1
           },
           {
@@ -1579,8 +1595,8 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "PanelDownloads",
-        "width": 400
+        "selectedPanel": "WEBPANEL_c4d18e41-ff82-418f-93d9-2e0c19616edf",
+        "width": 524
       }
     },
     "quick_commands": {
@@ -1615,7 +1631,7 @@
         "position": 1,
         "slider_xpos": 90,
         "slider_ypos": 31,
-        "width": 177
+        "width": 208
       }
     },
     "toolbars": {
