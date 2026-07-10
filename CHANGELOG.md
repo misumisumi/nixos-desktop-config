@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.3.15](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.14...v8.3.15) (2026-07-10)
+
+
+### Bug Fixes
+
+* **vivaldi:** fix script for darwin ([aaf7eff](https://github.com/misumisumi/nixos-desktop-config/commit/aaf7effb32049172da6f20c794603d546b255bda))
+* **vivaldi:** fix script for darwin ([f26e7d8](https://github.com/misumisumi/nixos-desktop-config/commit/f26e7d85ac47c53e75ee67ac42337fe5e000e34c))
+
 ## [8.3.14](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.13...v8.3.14) (2026-07-08)
 
 
