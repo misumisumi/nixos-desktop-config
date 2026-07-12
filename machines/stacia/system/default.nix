@@ -19,7 +19,6 @@ with builtins;
     ../../../settings/system/musnix
     ../../../settings/system/pipewire
     ../../init
-    ../../init/zfs.nix
     ./disks/rootfs.nix
     ./disks/system.nix
     ./fstab.nix

@@ -5,6 +5,7 @@
     keychronSupport = true;
   };
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];

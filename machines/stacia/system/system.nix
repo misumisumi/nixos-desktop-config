@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   user,
   ...
 }:
@@ -10,6 +11,7 @@
     keychronSupport = true;
   };
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
     kernel.sysctl = {
       "vm.swappiness" = lib.mkForce 10; # swap is only used when RAM is full
     };
