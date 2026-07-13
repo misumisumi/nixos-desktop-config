@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     asunder # CD ripper
     baobab # Disk Usage Analyzer
+    deskreen # share your screen to any device
     font-manager # font-manger
     nomacs # Image Viewer
     obsidian # Note taking app
