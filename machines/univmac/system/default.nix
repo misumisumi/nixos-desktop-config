@@ -20,8 +20,13 @@
         "--force-cleanup"
       ];
     };
+    brews = [
+      "pympress"
+      "gstreamer"
+    ];
     casks = [
       "audacity"
+      "deskreen"
       "discord"
       "gimp"
       "karabiner-elements"
