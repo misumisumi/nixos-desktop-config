@@ -15,6 +15,7 @@
     enableZshIntegration = true;
     onActivation = {
       autoUpdate = true;
+      upgrade = true;
       cleanup = "zap"; # NOTE: homebrew pkgs are managed by nix
       extraFlags = [
         "--force-cleanup"
