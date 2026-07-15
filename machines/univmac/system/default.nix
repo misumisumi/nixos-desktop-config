@@ -39,6 +39,7 @@
       "obsidian"
       "slack"
       "vivaldi"
+      "xquartz"
       "zoom"
     ];
   };
