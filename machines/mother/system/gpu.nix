@@ -21,6 +21,7 @@
           BusID          "PCI:05:0:0"
           Option         "Monitor-DP-1" "DP-1"
           Option         "Monitor-HDMI-2" "HDMI-2"
+          Option         "Monitor-HDMI-3" "HDMI-3"
         EndSection
 
         Section "Device"
@@ -39,6 +40,11 @@
         Section "Monitor"
           Identifier     "HDMI-2"
           Option         "RightOf" "DP-1"
+        EndSection
+
+        Section "Monitor"
+          Identifier     "HDMI-3"
+          Option         "RightOf" "HDMI-2"
         EndSection
       '';
       # screenSection = ''
