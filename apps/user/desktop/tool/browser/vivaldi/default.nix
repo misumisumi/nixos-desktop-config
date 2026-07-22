@@ -94,16 +94,13 @@ in
       { id = "mhpjgcccinlocgiklkfllehilgmcnimp"; } # paperpal for overleaf beta
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
       { id = "ejcfdikabeebbgbopoagpabbdokepnff"; } # rajiko
+      { id = "gkkkcomfmldkigajkmljnbpiajbpbgdg"; } # translate web pages [beta]
       { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # ublock list
       { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # ublock origin lite
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
       { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
       { id = "oingodpdjohhkelnginmkagmkbplgema"; } # weblioポップアップ英和辞典
       { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; } # zotero connector
-      {
-        id = "bolggfoncklhniejomgplkjcllmnonbh";
-        updateUrl = "https://raw.githubusercontent.com/FilipePS/Traduzir-paginas-web/master/updates.xml";
-      } # translate web pages
       {
         id = "ajdlpmoffekghhblfajmiacgbdknmbpa";
         updateUrl = "https://raw.githubusercontent.com/misumisumi/Chromium-Extensions-auto-packer/main/BetterTweetDeckOTD/updates.xml";
