@@ -74,59 +74,6 @@ final: prev: {
       cp spicetifyWrapper.js $out/share/spicetify/jsHelper/spicetifyWrapper.js
     '';
   });
-  deskreen = prev.callPackage (
-    {
-      lib,
-      stdenvNoCC,
-      fetchurl,
-      appimageTools,
-    }:
-    appimageTools.wrapType2 rec {
-      pname = "deskreen";
-      version = "3.2.16";
-
-      src =
-        let
-          sources = {
-            x86_64-linux = {
-              arch = "x86_64";
-              hash = "sha256-JcVKRINEWHJXzpdyiMSzx+cp/BzHBhrXRxYizQmkerI=";
-            };
-          };
-        in
-        fetchurl {
-          url = "https://github.com/pavlobu/deskreen/releases/download/v${version}/deskreen-ce-${version}-${
-            sources.${stdenvNoCC.hostPlatform.system}.arch
-          }.AppImage";
-          inherit (sources.${stdenvNoCC.hostPlatform.system}) hash;
-        };
-      extraInstallCommands =
-        let
-          contents = appimageTools.extractType2 { inherit pname version src; };
-        in
-        ''
-          install -m 444 -D ${contents}/deskreen-ce.desktop $out/share/applications/deskreen-ce.desktop
-          install -m 444 -D ${contents}/usr/share/icons/hicolor/256x256/apps/deskreen-ce.png \
-            $out/share/icons/hicolor/512x512/apps/deskreen-ce.png
-          substituteInPlace $out/share/applications/deskreen-ce.desktop \
-            --replace-fail 'Exec=AppRun' 'Exec=deskreen'
-        '';
-
-      meta = {
-        description = "Turn any device into a secondary screen for your computer";
-        homepage = "https://deskreen.com";
-        license = lib.licenses.agpl3Only;
-        mainProgram = "deskreen";
-        maintainers = with lib.maintainers; [
-          leo248
-        ];
-        platforms = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
-      };
-    }
-  ) { };
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
@@ -153,34 +100,4 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
-  github-copilot-cli = prev.github-copilot-cli.overrideAttrs (
-    old:
-    let
-      arch =
-        with prev.stdenv.hostPlatform;
-        if isx86_64 then
-          "x64"
-        else if isAarch64 then
-          "arm64"
-        else
-          throw "Unsupported arch: ${prev.stdenv.hostPlatform.system}";
-      platform = if prev.stdenv.hostPlatform.isDarwin then "darwin-${arch}" else "linux-${arch}";
-      version = "1.0.65";
-    in
-    {
-      inherit version;
-      src = prev.fetchurl {
-        url = "https://github.com/github/copilot-cli/releases/download/v${version}/github-copilot-${version}-${platform}.tgz";
-        hash =
-          {
-            "x86_64-darwin" = "sha256-D72R1Vt/6eSg7INVYjPtC5W/6oPVzpVC1Tn4q831Wqs=";
-            "aarch64-darwin" = "sha256-Ly/Tay3iOMzsipaWLTTh3HKBYwvq7Nu3yQpYrC39UPI=";
-            "x86_64-linux" = "sha256-E8vo0HUyvw9U7cXbjeY7H9atxdMHHLMXcGgWEciuqK0=";
-            "aarch64-linux" = "sha256-3l260k1Uw79owiBP2bhNfGgqkE35JN7zPSb8OXIpeuI=";
-          }
-          .${prev.stdenv.hostPlatform.system}
-            or (throw "Unsupported system: ${prev.stdenv.hostPlatform.system}");
-      };
-    }
-  );
 }
