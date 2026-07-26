@@ -50,11 +50,12 @@ in
           export COPILOT_PROVIDER_API_KEY=$(${getExe' pkgs.gnugrep "grep"} OPENCODE_API_KEY ${config.home.homeDirectory}/.env | ${getExe' pkgs.coreutils "cut"} -d'=' -f2)
           export COPILOT_PROVIDER_TYPE=openai
           export COPILOT_PROVIDER_BASE_URL=https://opencode.ai/zen/go/v1
-          export COPILOT_MODEL=''${COPILOT_MODEL:-deepseek-v4-flash}
+          export COPILOT_MODEL=deepseek-v4-flash
           ${pkgs.github-copilot-cli}/bin/copilot "$@"
         '')
         # mcp servers
         github-mcp-server
+        mcp-nixos
         mcpvault
         paper-search-mcp
       ]
@@ -81,7 +82,6 @@ in
             postInstall = postInstall { service = "memory"; };
           }))
           context7-mcp
-          mcp-nixos
           mcp-server-git
           mcp-server-sequential-thinking
         ]
