@@ -100,11 +100,4 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
-  mcp-nixos = prev.mcp-nixos.overrideAttrs (old: {
-    disabledTests =
-      (old.disabledTests or [ ])
-      ++ prev.lib.optionals prev.stdenv.hostPlatform.isDarwin [
-        "test_read_text_file"
-      ];
-  });
 }
