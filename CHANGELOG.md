@@ -1,5 +1,29 @@
 # Changelog
 
+## [8.3.16](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.15...v8.3.16) (2026-07-27)
+
+
+### Bug Fixes
+
+* **ai-tools:** fix mcp-nixos derivation src ([c9ed8f6](https://github.com/misumisumi/nixos-desktop-config/commit/c9ed8f697d0545e32106dc614c82d6a1dbf1e8ee))
+* **desktop/apps:** add deskreen ([0bbb768](https://github.com/misumisumi/nixos-desktop-config/commit/0bbb7680794148c7e3a051364d14a435ac0675b1))
+* fix ssh_config of univmac and add univmac to accesslist ([9bd49b6](https://github.com/misumisumi/nixos-desktop-config/commit/9bd49b6c0e4e33b3b92f6c1a5d06cc82bda80bf0))
+* **kdeconnect:** rm systemd.service post start command ([2acccdc](https://github.com/misumisumi/nixos-desktop-config/commit/2acccdc178b8517956f54e1470e752983266e745))
+* **mcp-nixos:** add patch ([fa3dcf4](https://github.com/misumisumi/nixos-desktop-config/commit/fa3dcf4d5f485002691846580d863143c2aafd71))
+* **neovim:** temporary workaround for packages that are no longer used ([8fbb735](https://github.com/misumisumi/nixos-desktop-config/commit/8fbb7358515cddf62d5bcaf23fca9e8914f1da09))
+* **patch:** add patch for mcp-nixos ([599a31c](https://github.com/misumisumi/nixos-desktop-config/commit/599a31ce4369375229d0681d743efbf9086508a7))
+* **patches:** add patches for spicetify-cli and deskreen until merge there ([c8bf10c](https://github.com/misumisumi/nixos-desktop-config/commit/c8bf10cf287e4948b2e40309d21abd08d10b5c5c))
+* **patches:** remove some pkg patches ([dffb273](https://github.com/misumisumi/nixos-desktop-config/commit/dffb2731fd1ff7ec7db7796622252ac242ae8a4d))
+* remove zfs support from ordinary machines ([9eaf7d5](https://github.com/misumisumi/nixos-desktop-config/commit/9eaf7d54ad2c8fe18ba8e4e0eb1f2c96395bb61b))
+* **stacia:** fix mail address for conneecting eduroam ([499fc24](https://github.com/misumisumi/nixos-desktop-config/commit/499fc245204e510091dfd271af0a4e70d81fc6e0))
+* **texlive:** add module's patch until merging nix-community/home-manager[#9699](https://github.com/misumisumi/nixos-desktop-config/issues/9699) ([426bfb8](https://github.com/misumisumi/nixos-desktop-config/commit/426bfb8adeb39c7a154521347c816fe6da47d3f9))
+* **univmac:** add pympress ([a4ad968](https://github.com/misumisumi/nixos-desktop-config/commit/a4ad96888e6edaa59b002c9667edb6a09a515261))
+* **univmac:** add xquartz ([8bbff8c](https://github.com/misumisumi/nixos-desktop-config/commit/8bbff8ce1b35bc0bfdf2dbcd62882fdc27fc0b9b))
+* **univmac:** enable auto upgrade ([9908533](https://github.com/misumisumi/nixos-desktop-config/commit/99085336033f48a1b2b1e4e9178688182c372218))
+* **vivaldi:** replace to TWP MV3 version ([8b54e02](https://github.com/misumisumi/nixos-desktop-config/commit/8b54e0200a95e38f63ffa025a63d5a0e1ab7a071))
+* **xsession:** fix deprecated option ([c0d067e](https://github.com/misumisumi/nixos-desktop-config/commit/c0d067eec2ccfdcc5f32511c36b7061d87113830))
+* **zsh:** add patch for zsh-autocomplete ([48be630](https://github.com/misumisumi/nixos-desktop-config/commit/48be6300ffb51aad51efbd47465b6f077a23cd1d))
+
 ## [8.3.15](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.14...v8.3.15) (2026-07-10)
 
 
