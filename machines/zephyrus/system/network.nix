@@ -33,14 +33,6 @@
           pskRaw = "ext:SHIRASAGI";
           priority = 2;
         };
-        "kosakaken4" = {
-          pskRaw = "ext:KOSAKAKEN_NEW";
-          priority = 2;
-        };
-        "kosakaken2-5G" = {
-          pskRaw = "ext:KOSAKAKEN_SEMINAR";
-          priority = 2;
-        };
         "50G_NETWORK_secure50" = {
           pskRaw = "ext:HOME";
           priority = 5;
@@ -56,7 +48,7 @@
             key_mgmt=WPA-EAP
             eap=PEAP
             phase2="auth=MSCHAPV2"
-            identity="k4caffdb0y@student.tohoku.ac.jp"
+            identity="dizzy6572@student.tohoku.ac.jp"
             altsubject_match="DNS:radius1.tains.tohoku.ac.jp"
             anonymous_identity="anonymous@student.tohoku.ac.jp"
             password=ext:EDUROAM_PASSWD

@@ -1,5 +1,6 @@
 # This is need `https://github.com/ayamir/nvimdots`
 {
+  lib,
   inputs,
   config,
   pkgs,
@@ -43,7 +44,7 @@
         nixfmt
         statix
       ];
-      extraPython3Packages = ps: with ps; [ jupynium ];
+      extraPython3Packages = lib.mkForce (ps: with ps; [ jupynium ]);
       nvimdots = {
         enable = true;
         mergeLazyLock = true;

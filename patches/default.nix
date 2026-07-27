@@ -55,6 +55,33 @@ final: prev: {
     proprietaryCodecs = true;
     enableWidevine = true;
   };
+  spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
+    ldflags = old.ldflags ++ [
+      "-X 'main.version=${old.version}'"
+    ];
+    nativeBuildInputs = old.nativeBuildInputs ++ [
+      prev.nodejs
+      prev.esbuild
+    ];
+
+    postBuild = ''
+      esbuild ./src/jsHelper/spicetifyWrapper/index.js \
+        --bundle --minify --target=chrome108 --format=iife \
+        --outfile=spicetifyWrapper.js
+    '';
+    postInstall = old.postInstall + ''
+      chmod -R u+w $out/share/spicetify/jsHelper
+      cp spicetifyWrapper.js $out/share/spicetify/jsHelper/spicetifyWrapper.js
+    '';
+  });
+  mcp-nixos = prev.mcp-nixos.overrideAttrs (old: {
+    patches = old.patches or [ ] ++ [
+      (prev.fetchpatch {
+        url = "https://github.com/utensils/mcp-nixos/commit/86f8936f0c257153f8fba10cf8cba7fede6d2f30.patch";
+        sha256 = "sha256-55rQhE9CfTW1KQzUNM86U4S4Efu4yCN+1tZvdOz12oc=";
+      })
+    ];
+  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
@@ -81,34 +108,4 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
-  github-copilot-cli = prev.github-copilot-cli.overrideAttrs (
-    old:
-    let
-      arch =
-        with prev.stdenv.hostPlatform;
-        if isx86_64 then
-          "x64"
-        else if isAarch64 then
-          "arm64"
-        else
-          throw "Unsupported arch: ${prev.stdenv.hostPlatform.system}";
-      platform = if prev.stdenv.hostPlatform.isDarwin then "darwin-${arch}" else "linux-${arch}";
-      version = "1.0.65";
-    in
-    {
-      inherit version;
-      src = prev.fetchurl {
-        url = "https://github.com/github/copilot-cli/releases/download/v${version}/github-copilot-${version}-${platform}.tgz";
-        hash =
-          {
-            "x86_64-darwin" = "sha256-D72R1Vt/6eSg7INVYjPtC5W/6oPVzpVC1Tn4q831Wqs=";
-            "aarch64-darwin" = "sha256-Ly/Tay3iOMzsipaWLTTh3HKBYwvq7Nu3yQpYrC39UPI=";
-            "x86_64-linux" = "sha256-E8vo0HUyvw9U7cXbjeY7H9atxdMHHLMXcGgWEciuqK0=";
-            "aarch64-linux" = "sha256-3l260k1Uw79owiBP2bhNfGgqkE35JN7zPSb8OXIpeuI=";
-          }
-          .${prev.stdenv.hostPlatform.system}
-            or (throw "Unsupported system: ${prev.stdenv.hostPlatform.system}");
-      };
-    }
-  );
 }

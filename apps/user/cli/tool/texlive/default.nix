@@ -1,5 +1,11 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}:
+{
+  imports = [ ./module.nix ];
+
   home.packages =
     with pkgs;
     [
@@ -14,8 +20,8 @@
   };
   programs.texlive = {
     enable = true;
-    extraPackages = tpkgs: {
-      inherit (tpkgs)
+    extraPackages =
+      ps: with ps; [
         algorithms
         boondox
         collection-fontsrecommended
@@ -30,7 +36,6 @@
         scheme-medium
         tipa
         tlmgrbasics
-        ;
-    };
+      ];
   };
 }
