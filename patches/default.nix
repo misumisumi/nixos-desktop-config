@@ -74,6 +74,14 @@ final: prev: {
       cp spicetifyWrapper.js $out/share/spicetify/jsHelper/spicetifyWrapper.js
     '';
   });
+  mcp-nixos = prev.mcp-nixos.overrideAttrs (old: {
+    patches = old.patches or [ ] ++ [
+      (prev.fetchpatch {
+        url = "https://github.com/utensils/mcp-nixos/commit/86f8936f0c257153f8fba10cf8cba7fede6d2f30.patch";
+        sha256 = "sha256-55rQhE9CfTW1KQzUNM86U4S4Efu4yCN+1tZvdOz12oc=";
+      })
+    ];
+  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
