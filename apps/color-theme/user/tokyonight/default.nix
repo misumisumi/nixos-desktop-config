@@ -110,8 +110,8 @@ in
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     pointerCursor = {
-      name = "Dracula-cursors";
-      package = pkgs.dracula-theme;
+      name = "breeze_cursors";
+      package = pkgs.kdePackages.breeze;
     };
   };
   services.dunst.settings = lib.importTOML "${pack}/dunst/tokyonight_${flavor}.dunstrc";
