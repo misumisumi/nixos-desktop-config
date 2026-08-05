@@ -27,8 +27,8 @@ in
       greeters = {
         slick = {
           cursorTheme = {
-            name = "Dracula-cursors";
-            package = pkgs.dracula-theme;
+            name = "breeze_cursors";
+            package = pkgs.kdePackages.breeze;
           };
           theme =
             let
