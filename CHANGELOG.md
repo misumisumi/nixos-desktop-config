@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.3.17](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.16...v8.3.17) (2026-08-05)
+
+
+### Bug Fixes
+
+* **chezmoi:** add some package for windows ([0ef69d1](https://github.com/misumisumi/nixos-desktop-config/commit/0ef69d1370237a441b4ca62949508e3662c51d00))
+* fix gtk-theme by upstream change ([a260bf1](https://github.com/misumisumi/nixos-desktop-config/commit/a260bf1c73a18da82cb7f4da142952f6e380b2b5))
+* revert zsh-autocomplete by upstream change ([318939f](https://github.com/misumisumi/nixos-desktop-config/commit/318939f042b849d1819a04526235fd76db358428))
+
 ## [8.3.16](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.15...v8.3.16) (2026-07-27)
 
 
