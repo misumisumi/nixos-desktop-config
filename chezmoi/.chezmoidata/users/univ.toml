@@ -70,11 +70,10 @@ not_found_auto_install = true
 auto_install = true
 experimental = true
 idiomatic_version_file_enable_tools = []
-[linux.users.sumi.packages.mise.plugins]
-neovim = "asdf:neovim"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"
+cargo = "latest"
 cmake = "latest"
 copilot = "latest"
 delta = "latest"
@@ -91,10 +90,10 @@ node = "latest"
 opencode = "latest"
 python = "latest"
 ripgrep = "latest"
+rust = "latest"
 sops = "latest"
 starship = "latest"
 tmux = "3.3"
-tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
 yazi = "latest"
