@@ -1,0 +1,99 @@
+####################################################################################################
+# For linux
+####################################################################################################
+[linux.users.ach18207ao]
+externals = ["blesh", "fzf-options", "lesspipe", "tpm"]
+[linux.users.ach18207ao.sops]
+"pkgs/ai-tools/env" = ".env"
+
+[linux.users.ach18207ao.env]
+initExtra = ""
+extraConfig = """
+if [ "$SHELL" != "/usr/bin/zsh" ] && [ "${LOGIN:-1}" -eq 1 ]; then
+  exec /usr/bin/zsh -l
+fi
+"""
+PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
+[linux.users.ach18207ao.packages.mcpServers.node] # name = "package_name", name is executable name
+mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
+context7-mcp = "@upstash/context7-mcp"
+mcp-hub = "mcp-hub@latest"
+[linux.users.ach18207ao.packages.mcpServers.pip] # name = "module_name", name is executable name
+mcp-nixos = "mcp_nixos"
+mcp-server-git = "mcp_server_git"
+[linux.users.ach18207ao.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
+giturl = "https://github.com/openags/paper-search-mcp"
+module = "paper_search_mcp.server"
+[linux.users.ach18207ao.packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
+owner = "github"
+repo = "github-mcp-server"
+srcFile = "github-mcp-server_Linux_x86_64.tar.gz"
+exeFile = "github-mcp-server"
+[linux.users.ach18207ao.env.export]
+EDITOR = "nvim"
+FZF_ALT_C_COMMAND = "fd --type d"
+FZF_ALT_C_OPTS = "--preview 'tree -C {} | tree -200'"
+FZF_CTRL_R_OPTS = "--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+FZF_CTRL_T_COMMAND = "fd --type f"
+FZF_CTRL_T_OPTS = "--preview 'bat -n --color: always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+FZF_TMUX = "1"
+FZF_TMUX_OPTS = "-p -w 80% -h 70%"
+JQ_COLORS = "1;30:0;37:0;37:0;37:0;32:1;37:1;37"
+LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
+MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
+TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+CUDA_HOME = "/disk/fs1/soft/cuda/cuda-12.8.1_cudnn-9.8.0.87/lib64"
+LESSOPEN = "|lesspipe %s"
+LANG = "en-US.UTF-8"
+LANGUAGE = "en_US"
+LC_ALL = "en_US.UTF-8"
+
+[linux.users.ach18207ao.env.alias]
+copilot = "wrapEnv copilot"
+mcp-hub = "wrapEnv mcp-hub"
+opencode = "wrapEnv opencode"
+
+[linux.users.ach18207ao.packages.mise.settings]
+idiomatic_version_file = true
+always_keep_download = false
+always_keep_install = false
+plugin_autoupdate_last_check_duration = "1 week"
+verbose = false
+http_timeout = "30s"
+jobs = 4
+raw = false
+yes = false
+not_found_auto_install = true
+auto_install = true
+experimental = true
+idiomatic_version_file_enable_tools = []
+[linux.users.ach18207ao.packages.mise.tools]
+bat = "latest"
+btop = "latest"
+cmake = "latest"
+copilot = "latest"
+delta = "latest"
+deno = "latest"
+duf = "latest"
+fd = "latest"
+fzf = "latest"
+github-cli = "latest"
+go = "latest"
+jq = "latest"
+lazygit = "latest"
+neovim = "latest"
+node = "latest"
+opencode = "latest"
+python = "latest"
+ripgrep = "latest"
+sops = "latest"
+starship = "latest"
+tmux = "latest"
+tree-sitter = "latest"
+usage = "latest"
+uv = "latest"
+yazi = "latest"
+yt-dlp = "latest"
+zoxide = "latest"
