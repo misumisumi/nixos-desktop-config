@@ -29,6 +29,7 @@
   };
   programs.poweroff'.enable = true;
   services = {
+    cloudflare-warp.enable = true;
     upower.enable = true;
     asusd.profileConfig.text = "quiet";
     supergfxd = {

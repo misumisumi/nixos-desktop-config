@@ -13,7 +13,7 @@
           band = "2g";
           networks.wlp2s0 = {
             ssid = "zephyrus";
-            authentication.saePasswordsFile = [ { password = "FsP65sEZdvxMjZL"; } ]; # Use saePasswordsFile if possible.
+            authentication.saePasswordsFile = config.sops.secrets.AP_password.path;
           };
         };
       };
@@ -69,6 +69,10 @@
         "aitolab_wlan4-an_nose" = {
           pskRaw = "ext:ITONOSELAB";
           priority = 30;
+        };
+        "aist-guest" = {
+          pskRaw = "ext:AIST_GUEST";
+          priority = 40;
         };
       };
     };

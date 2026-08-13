@@ -9,6 +9,7 @@
     defaultSopsFile = ../../../sops/hosts/zephyrus/secrets.yaml;
     secrets = {
       hashedPasswordFile.neededForUsers = true;
+      AP_password = { };
       wireless = {
         sopsFile = getEncryptFile "system/network/wireless";
         format = "binary";
