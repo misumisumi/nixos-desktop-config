@@ -55,25 +55,6 @@ final: prev: {
     proprietaryCodecs = true;
     enableWidevine = true;
   };
-  spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
-    ldflags = old.ldflags ++ [
-      "-X 'main.version=${old.version}'"
-    ];
-    nativeBuildInputs = old.nativeBuildInputs ++ [
-      prev.nodejs
-      prev.esbuild
-    ];
-
-    postBuild = ''
-      esbuild ./src/jsHelper/spicetifyWrapper/index.js \
-        --bundle --minify --target=chrome108 --format=iife \
-        --outfile=spicetifyWrapper.js
-    '';
-    postInstall = old.postInstall + ''
-      chmod -R u+w $out/share/spicetify/jsHelper
-      cp spicetifyWrapper.js $out/share/spicetify/jsHelper/spicetifyWrapper.js
-    '';
-  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
