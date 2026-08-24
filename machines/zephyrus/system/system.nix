@@ -12,6 +12,7 @@
     };
   };
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     initrd.systemd.enable = true;
     kernel.sysctl = {
       "vm.swappiness" = 10; # swap is only used when RAM is full

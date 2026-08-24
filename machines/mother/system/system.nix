@@ -5,6 +5,7 @@
     keychronSupport = true;
   };
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
