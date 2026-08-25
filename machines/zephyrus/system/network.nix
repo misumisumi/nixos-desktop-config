@@ -20,6 +20,32 @@
     };
   };
   networking = {
+    wg-quick = {
+      interfaces = {
+        wg0 = {
+          autostart = false;
+          mtu = 1280;
+          address = [
+            "10.250.0.50/24"
+          ];
+          dns = [ "10.250.0.1" ];
+          peers = [
+            {
+              allowedIPs = [
+                "10.250.0.0/24"
+                "192.168.1.0/24"
+              ];
+              endpoint = "oci.misumi-sumi.com:443";
+              publicKey = "BR2XCDtghHRZYqGryTPbal+Ms7gYlgzN+b+AAlWGIms=";
+              presharedKeyFile = config.sops.secrets.wg_peer_oci_presharedKey.path;
+              persistentKeepalive = 25;
+            }
+          ];
+          privateKeyFile = config.sops.secrets.wg_privateKey.path;
+        };
+      };
+    };
+
     wireless = {
       enable = true;
       userControlled = true;
@@ -40,6 +66,10 @@
         "ASUS_RT-AC85U_5G" = {
           pskRaw = "ext:LOGGE";
           priority = 6;
+        };
+        "GL-MT3000-32f-5G" = {
+          pskRaw = "ext:TRAVEL";
+          priority = 7;
         };
         "eduroam" = {
           priority = 20;
@@ -81,6 +111,7 @@
     firewall = {
       enable = true;
       trustedInterfaces = [
+        "ap*"
         "br0"
         "dev*"
         "incus*"

@@ -22,5 +22,10 @@
       sopsFile = getEncryptFile "pkgs/ssh/univ";
       format = "binary";
     };
+    "homelab" = {
+      path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/homelab";
+      sopsFile = getEncryptFile "pkgs/ssh/homelab";
+      format = "binary";
+    };
   };
 }
