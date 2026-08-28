@@ -21,8 +21,9 @@
     nftables.enable = true;
     firewall = {
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [
-        "br0"
+        "br*"
         "dev*"
         "incus*"
         "waydroid0"
@@ -69,27 +70,20 @@
             Name = "br0";
             MACAddress = "56:47:6a:94:2d:34";
           };
-        };
-        "br1" = {
-          netdevConfig = {
-            Kind = "bridge";
-            Name = "br1";
-          };
           bridgeConfig = {
-            VLANFiltering = false;
+            VLANFiltering = true;
             DefaultPVID = 1;
           };
         };
-        # dev-cluster-lan = {
-        #   netdevConfig = {
-        #     Kind = "vlan";
-        #     Name = "dev-cluster-lan";
-        #     MACAddress = "6d:ff:2e:62:27:31";
-        #   };
-        #   vlanConfig = {
-        #     Id = 210;
-        #   };
-        # };
+        "br0.10" = {
+          netdevConfig = {
+            Name = "br0.10";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 10;
+          };
+        };
       };
       networks = {
         # "10-wired-2.5G" = {
@@ -103,40 +97,24 @@
             MACAddress = "60:cf:84:a1:c1:19"; # 1G
           };
           bridge = [ "br0" ];
+          bridgeVLANs = [
+            {
+              VLAN = 1;
+            }
+            {
+              VLAN = 10;
+            }
+          ];
         };
         "20-br0" = {
-          name = "br0";
+          matchConfig.Name = "br0";
           DHCP = "yes";
+          vlan = [ "br0.10" ];
         };
-        # "20-devnode" = {
-        #   name = "devnode";
-        #   bridge = [ "br1" ];
-        #   bridgeVLANs = [
-        #     {
-        #       PVID = 101;
-        #       EgressUntagged = 101;
-        #     }
-        #   ];
-        # };
-        # "20-dev-cluster-lan" = {
-        #   name = "devnode";
-        #   bridge = [ "br1" ];
-        # };
-        # "30-br1" = {
-        #   name = "br1";
-        #   networkConfig = {
-        #     LinkLocalAddressing = "no";
-        #     LLDP = "no";
-        #     EmitLLDP = "no";
-        #     IPv6AcceptRA = "no";
-        #     IPv6SendRA = "no";
-        #   };
-        #   bridgeVLANs = [
-        #     {
-        #       VLAN = "210";
-        #     }
-        #   ];
-        # };
+        "20-br0.10" = {
+          matchConfig.Name = "br0.10";
+          address = [ "192.168.2.11/24" ];
+        };
       };
     };
   };

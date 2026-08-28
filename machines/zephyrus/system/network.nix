@@ -110,9 +110,10 @@
     nftables.enable = true;
     firewall = {
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [
         "ap*"
-        "br0"
+        "br*"
         "dev*"
         "incus*"
         "waydroid0"
