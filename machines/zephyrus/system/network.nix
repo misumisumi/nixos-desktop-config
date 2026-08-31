@@ -19,6 +19,11 @@
       };
     };
   };
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    openFirewall = true;
+  };
   networking = {
     wg-quick = {
       interfaces = {
