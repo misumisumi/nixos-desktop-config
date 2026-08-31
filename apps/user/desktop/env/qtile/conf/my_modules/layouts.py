@@ -46,6 +46,12 @@ layout2 = [
         single_border_width=WindowConf.border,
         single_margin=WindowConf.margin,
     ),
+    layout.MonadThreeCol(
+        **_settings,
+        main_centered=True,
+        max_ratio=0.75,
+        min_ratio=0.25,
+    ),
     layout.Max(**_settings),
 ]
 
