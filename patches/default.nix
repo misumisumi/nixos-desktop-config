@@ -50,6 +50,8 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
+  #NOTE: electron 43 have issue of transparent window but resove at 43.5 or later.
+  obsidian = prev.obsidian.override { electron = prev.electron_42; };
   vivaldi = prev.vivaldi.override {
     commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
     proprietaryCodecs = true;
