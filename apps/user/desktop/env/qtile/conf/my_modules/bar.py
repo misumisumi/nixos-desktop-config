@@ -202,7 +202,13 @@ def tasklist():
 
 
 def chord():
-    return [widget.Chord(chords_colors=BarConf.chords_colors, **fc, **only_one_group)]
+    return [
+        widget.Chord(
+            foreground=ColorSet.red,
+            **fc,
+            **only_one_group,
+        )
+    ]
 
 
 def make_bar(
