@@ -83,7 +83,7 @@ jobs:
 
       - name: Build check
         timeout-minutes: 150
-        run: cpulimit -l 90 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+        run: cpulimit -l 85 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
 
   build-check-matrix-darwin:
     needs: [pre-build]
