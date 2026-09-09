@@ -5,7 +5,7 @@ style = "fg:fg bg:terminal_dark"
 [hostname]
 ssh_only = true
 format = '[$ssh_symbol$hostname ]($style)'
-style = "fg:fg bg:terminal_dark"
+style = "fg:magenta bg:terminal_dark"
 ssh_symbol = " "
 
 [username]

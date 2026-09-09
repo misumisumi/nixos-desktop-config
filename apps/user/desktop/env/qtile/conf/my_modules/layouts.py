@@ -46,6 +46,12 @@ layout2 = [
         single_border_width=WindowConf.border,
         single_margin=WindowConf.margin,
     ),
+    layout.MonadThreeCol(
+        **_settings,
+        main_centered=True,
+        max_ratio=0.75,
+        min_ratio=0.25,
+    ),
     layout.Max(**_settings),
 ]
 
@@ -99,6 +105,34 @@ layout6 = [
         **_settings,
         single_border_width=WindowConf.border,
         single_margin=WindowConf.margin,
+    ),
+    layout.Max(**_settings),
+]
+
+# layouts for ultra-wide display
+layout7 = [
+    layout.MonadThreeCol(
+        **_settings,
+        main_centered=True,
+        max_ratio=0.75,
+        min_ratio=0.25,
+    ),
+    layout.Max(**_settings),
+]
+layout8 = [
+    layout.Columns(
+        **_settings,
+        border_focus_stack=ColorSet.accent,
+        border_normal_stack=ColorSet.background,
+        border_on_single=True,
+        fair=False,
+        num_columns=3,
+        insert_position=1,
+        margin_on_single=WindowConf.margin,
+        split=False,
+        wrap_focus_columns=True,
+        wrap_focus_row=True,
+        wrap_focus_stacks=True,
     ),
     layout.Max(**_settings),
 ]

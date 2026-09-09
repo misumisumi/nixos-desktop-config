@@ -7,8 +7,9 @@
     nftables.enable = true;
     firewall = {
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [
-        "br0"
+        "br*"
         "dev*"
         "incus*"
         "k8sbr0"

@@ -6,13 +6,26 @@ from libqtile import qtile
 from libqtile.backend import base
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.log_utils import logger
-from my_modules.layouts import layout1, layout2, layout3, layout4, layout5, layout6
+from my_modules.layouts import (
+    layout1,
+    layout2,
+    layout3,
+    layout4,
+    layout5,
+    layout6,
+    layout7,
+    layout8,
+)
 from my_modules.utils import get_phy_monitors
 from my_modules.variables import GlobalConf
 
 _rule_code = [
     {"wm_class": "code"},
-    {"wm_class": GlobalConf.terminal_class if GlobalConf.terminal_class is not None else GlobalConf.terminal},
+    {
+        "wm_class": GlobalConf.terminal_class
+        if GlobalConf.terminal_class is not None
+        else GlobalConf.terminal
+    },
 ]
 
 _rule_browse = [
@@ -50,12 +63,13 @@ _rule_sns = [
 _rule_music = [{"wm_class": "spotify"}]
 
 group_and_rule = {
-    "code": ("", (layout2, layout5), _rule_code),
-    "browse": ("", (layout1, layout6), _rule_browse),
-    "analyze": ("󰉕", (layout4, layout6), _rule_analyze),
-    "full": ("󰓓", (layout3, layout3), _rule_full),
-    "sns": ("", (layout1, layout6), _rule_sns),
-    "music": ("", (layout1, layout6), _rule_music),
+    # wide display, vertical display, ultra-wide display
+    "code": ("", (layout2, layout5, layout7), _rule_code),
+    "browse": ("", (layout1, layout6, layout8), _rule_browse),
+    "analyze": ("󰉕", (layout4, layout6, layout8), _rule_analyze),
+    "full": ("󰓓", (layout3, layout3, layout3), _rule_full),
+    "sns": ("", (layout1, layout6, layout8), _rule_sns),
+    "music": ("", (layout1, layout6, layout8), _rule_music),
 }
 
 
@@ -99,7 +113,9 @@ class MatchWithCurrentScreen(Match):
             if value is None:
                 return False
 
-            is_focus = self.screen_id in re.sub("-[a-z0-9]+", "", qtile.current_group.name, flags=re.IGNORECASE)
+            is_focus = self.screen_id in re.sub(
+                "-[a-z0-9]+", "", qtile.current_group.name, flags=re.IGNORECASE
+            )
             match = self._get_property_predicate(property_name, value)
             if not match(rule_value) or not is_focus:
                 return False
@@ -120,14 +136,25 @@ def set_groups():
     for n, (output, resolutions) in enumerate(monitors):
         if GlobalConf.pentablet is not None and GlobalConf.pentablet[0] == n:
             name = list(_pentablet.keys())[0]
-            groups.append(Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0]))
+            groups.append(
+                Group(f"{name}", layouts=_pentablet[name][1], label=_pentablet[name][0])
+            )
 
             continue
 
         for k, (label, layouts, rules) in group_and_rule.items():
-            matches = [MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules]
-            select = 1 if resolutions[0] < resolutions[1] else 0  # get vertical or horizontal layout
-            groups.append(Group(f"{n}-{k}", layouts=layouts[select], matches=matches, label=label))
+            matches = [
+                MatchWithCurrentScreen(screen_id=str(n), **rule) for rule in rules
+            ]
+            # get layourt for wide or vertical or ultra-wide display
+            select = 0
+            if resolutions[0] < resolutions[1]:
+                select = 1
+            elif resolutions[0] / resolutions[1] > 2.3:  # 21:9 or wider
+                select = 2
+            groups.append(
+                Group(f"{n}-{k}", layouts=layouts[select], matches=matches, label=label)
+            )
     groups.append(ScratchPad("scratchpad", _rule_scratchpad))
 
     return groups

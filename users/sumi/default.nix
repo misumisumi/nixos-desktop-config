@@ -37,24 +37,19 @@
         sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.sshserver";
         format = "binary";
       };
-      "id_ed25519.homelab.dev" = {
-        path = "${config.home.homeDirectory}/.ssh/id_ed25519.homelab.dev";
-        sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.homelab.dev";
+      "id_ed25519.yubikey" = {
+        path = "${config.home.homeDirectory}/.ssh/id_ed25519.yubikey";
+        sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.yubikey";
         format = "binary";
       };
-      "id_ed25519.homelab.dev.pub" = {
-        path = "${config.home.homeDirectory}/.ssh/id_ed25519.homelab.dev.pub";
-        sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.homelab.dev.pub";
+      "id_rsa.oci" = {
+        path = "${config.home.homeDirectory}/.ssh/id_rsa.oci";
+        sopsFile = getEncryptFile "users/sumi/.ssh/id_rsa.oci";
         format = "binary";
       };
-      "id_ed25519.homelab" = {
-        path = "${config.home.homeDirectory}/.ssh/id_ed25519.homelab";
-        sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.homelab";
-        format = "binary";
-      };
-      "id_ed25519.homelab.pub" = {
-        path = "${config.home.homeDirectory}/.ssh/id_ed25519.homelab.pub";
-        sopsFile = getEncryptFile "users/sumi/.ssh/id_ed25519.homelab.pub";
+      "id_rsa.oci.pub" = {
+        path = "${config.home.homeDirectory}/.ssh/id_rsa.oci.pub";
+        sopsFile = getEncryptFile "users/sumi/.ssh/id_rsa.oci.pub";
         format = "binary";
       };
       "aichat/config.yaml" = {

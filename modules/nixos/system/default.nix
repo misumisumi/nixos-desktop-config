@@ -99,7 +99,7 @@ with lib;
           else
             cmd="''${cmd} --offline"
           fi
-          next_kernel="$(eval "''${cmd}")"
+          next_kernel="$(eval "''${cmd}" | ${pkgs.gnused}/bin/sed -E 's/^([0-9]+\.[0-9]+)$/\1.0/')"
           echo "Kernel version: ''${current_kernel} -> ''${next_kernel}"
           if [ "''${current_kernel}" != "''${next_kernel}" ] && [ "''${check_kernel}" -eq 1 ]; then
             echo "Need to reboot so use 'nixos-rebuild boot'"

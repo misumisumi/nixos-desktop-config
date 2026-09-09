@@ -1,6 +1,13 @@
 
 
 ### Created by https://www.apps.gitignore.io
+### direnv ###
+.direnv
+.envrc
+
+### devenv ###
+.devenv
+
 ### Linux ###
 *~
 

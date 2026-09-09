@@ -12,6 +12,8 @@
     };
   };
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     initrd.systemd.enable = true;
     kernel.sysctl = {
       "vm.swappiness" = 10; # swap is only used when RAM is full
@@ -29,6 +31,7 @@
   };
   programs.poweroff'.enable = true;
   services = {
+    cloudflare-warp.enable = true;
     upower.enable = true;
     asusd.profileConfig.text = "quiet";
     supergfxd = {

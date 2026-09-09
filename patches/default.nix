@@ -50,30 +50,13 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, ... }:
 final: prev: {
+  #NOTE: electron 43 have issue of transparent window but resove at 43.5 or later.
+  obsidian = prev.obsidian.override { electron = prev.electron_42; };
   vivaldi = prev.vivaldi.override {
     commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
     proprietaryCodecs = true;
     enableWidevine = true;
   };
-  spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
-    ldflags = old.ldflags ++ [
-      "-X 'main.version=${old.version}'"
-    ];
-    nativeBuildInputs = old.nativeBuildInputs ++ [
-      prev.nodejs
-      prev.esbuild
-    ];
-
-    postBuild = ''
-      esbuild ./src/jsHelper/spicetifyWrapper/index.js \
-        --bundle --minify --target=chrome108 --format=iife \
-        --outfile=spicetifyWrapper.js
-    '';
-    postInstall = old.postInstall + ''
-      chmod -R u+w $out/share/spicetify/jsHelper
-      cp spicetifyWrapper.js $out/share/spicetify/jsHelper/spicetifyWrapper.js
-    '';
-  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
