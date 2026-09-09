@@ -1,5 +1,27 @@
 # Changelog
 
+## [8.3.18](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.17...v8.3.18) (2026-09-09)
+
+
+### Bug Fixes
+
+* add wireguard and remove unused ssh keys ([bdf656a](https://github.com/misumisumi/nixos-desktop-config/commit/bdf656afaf5d6048355217de1d4ae9c8f3c33b53))
+* add work profile ([c494d9c](https://github.com/misumisumi/nixos-desktop-config/commit/c494d9c41842a7f368dfc30f9865e1a98fe4aa2f))
+* **chezmoi:** fix tree-sitter-cli instalation ([41472a0](https://github.com/misumisumi/nixos-desktop-config/commit/41472a0e863fc4f631ae8d134033cbf470e0e251))
+* fix bridge-network name ([1e146fe](https://github.com/misumisumi/nixos-desktop-config/commit/1e146fe7029f1e245afa12362093a5af8d736d7d))
+* fix ssh config ([1108366](https://github.com/misumisumi/nixos-desktop-config/commit/110836660f21221ca1847e2968b76082e333000a))
+* **module:** norm version if not have patch verison ([f85d71a](https://github.com/misumisumi/nixos-desktop-config/commit/f85d71aa58e00bb9bc950457035d71d5eb4aa65f))
+* **patches:** remove patch for spicetify by merging upstream ([0add794](https://github.com/misumisumi/nixos-desktop-config/commit/0add794dcbc016447882fc11a61d576b28162692))
+* **patch:** fix electron version for obsidian ([5ce4944](https://github.com/misumisumi/nixos-desktop-config/commit/5ce4944e015338861f09a202db3fa0f56504fbca))
+* **qtile:** add layouts for ultra-wide monitor ([764876f](https://github.com/misumisumi/nixos-desktop-config/commit/764876f28336fe02c6b7bf492381e27858d63498))
+* **qtile:** add ModadThreeCol for ultra wide monitor ([f745aff](https://github.com/misumisumi/nixos-desktop-config/commit/f745affbfe29142938e041ca955a63088e9de991))
+* **sops:** update ssh config ([e4fdb1e](https://github.com/misumisumi/nixos-desktop-config/commit/e4fdb1e653fdafa5591745262e01e026bfd582dc))
+* **starship:** use magenta for display hostname when login to ssh ([e1ea5b5](https://github.com/misumisumi/nixos-desktop-config/commit/e1ea5b5557aa00a8df03f1ab2dc154beae5b0604))
+* support aarch64-linux cross-compile ([111072f](https://github.com/misumisumi/nixos-desktop-config/commit/111072f820a0f9ea2ffeee8e76788483990566b9))
+* update wireguard's endpoint ([8152032](https://github.com/misumisumi/nixos-desktop-config/commit/81520324fbd39bffcb711ff2fc500e9fe3421e24))
+* **zephyrus:** fix wireless setting ([d0e658a](https://github.com/misumisumi/nixos-desktop-config/commit/d0e658a6455ba1f1f9eaf19271932b1273ae7e25))
+* **zephyrus:** support tailscale and use latest linuxKernel ([b79f09e](https://github.com/misumisumi/nixos-desktop-config/commit/b79f09e4dfc9367cc1dedb8b192468861fe8ecc2))
+
 ## [8.3.17](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.16...v8.3.17) (2026-08-05)
 
 
