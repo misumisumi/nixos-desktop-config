@@ -40,7 +40,7 @@
                 "10.250.0.0/24"
                 "192.168.1.0/24"
               ];
-              endpoint = "oci.misumi-sumi.com:443";
+              endpoint = "wg.oci.misumi-sumi.com:443";
               publicKey = "BR2XCDtghHRZYqGryTPbal+Ms7gYlgzN+b+AAlWGIms=";
               presharedKeyFile = config.sops.secrets.wg_peer_oci_presharedKey.path;
               persistentKeepalive = 25;
