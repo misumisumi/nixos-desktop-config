@@ -114,8 +114,9 @@ layout7 = [
     layout.MonadThreeCol(
         **_settings,
         main_centered=True,
-        max_ratio=0.75,
-        min_ratio=0.25,
+        max_ratio=0.65,
+        min_ratio=0.65,
+        ratio=0.65,
     ),
     layout.Max(**_settings),
 ]
