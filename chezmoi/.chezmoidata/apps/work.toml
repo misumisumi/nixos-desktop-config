@@ -149,6 +149,8 @@ ZVM_VI_OPPEND_ESCAPE_BINDKEY = "jj"
 ZVM_LINE_INIT_MODE = "$ZVM_MODE_INSERT"
 ZVM_LAZY_KEYBINDINGS = false
 ABBR_QUIET = 1
+JOB_QUEUE_TMPDIR = "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-job-queue/"
+ABBR_TMPDIR = "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-abbr/"
 
 [apps.users.ach18207ao.zsh.zinit]
 [apps.users.ach18207ao.zsh.zinit.plugins]
