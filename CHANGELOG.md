@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.3.19](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.18...v8.3.19) (2026-09-12)
+
+
+### Bug Fixes
+
+* **qtile:** fix default ratio ([c82d8aa](https://github.com/misumisumi/nixos-desktop-config/commit/c82d8aa67f481a88485e160080536c4eec18726c))
+* **work:** change tmpdirs for zsh plugins ([3e73eaa](https://github.com/misumisumi/nixos-desktop-config/commit/3e73eaa3242d5849311f79c23f1ae99d7608bfb4))
+* **work:** change tmpdirs for zsh plugins ([0147ed9](https://github.com/misumisumi/nixos-desktop-config/commit/0147ed949a35fb6e419a3f91df1997b8ef647630))
+
 ## [8.3.18](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.17...v8.3.18) (2026-09-09)
 
 
