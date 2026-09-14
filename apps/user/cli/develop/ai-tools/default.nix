@@ -75,15 +75,8 @@ in
             '';
         in
         [
-          (mcp-server-filesystem.overrideAttrs (old: {
-            postInstall = postInstall { service = "filesystem"; };
-          }))
-          (mcp-server-memory.overrideAttrs (old: {
-            postInstall = postInstall { service = "memory"; };
-          }))
           context7-mcp
           mcp-server-git
-          mcp-server-sequential-thinking
         ]
       );
     file = {

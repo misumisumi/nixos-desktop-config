@@ -54,9 +54,6 @@ command = "paper-search-mcp" # wrapped command made by me
 command = "mcp-nixos" # wrapped command made by me
 # [apps.users.ach18207ao.mcp.mcpServers.terraform]
 # command = "terraform-mcp-server" # wrapped command made by me
-[apps.users.ach18207ao.mcp.mcpServers.filesystem]
-command = "mcp-server-filesystem"      # wrapped command made by me
-args = ["~/Documents/", "~/Workspace"]
 [apps.users.ach18207ao.mcp.mcpServers.git]
 command = "mcp-server-git" # wrapped command made by me
 [apps.users.ach18207ao.mcp.mcpServers.context7]
