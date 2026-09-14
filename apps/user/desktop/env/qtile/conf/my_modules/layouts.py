@@ -3,6 +3,7 @@
 from libqtile import layout
 from libqtile.config import Match
 from libqtile.log_utils import logger
+from libqtile.layout.xmonad import MonadThreeCol
 from my_modules.colorset import ColorSet
 from my_modules.variables import WindowConf
 
@@ -18,6 +19,21 @@ _floating_settings = {
     "border_focus": ColorSet.accent,
     "border_normal": ColorSet.background,
 }
+
+
+class AutoClampedMonadThreeCol(MonadThreeCol):
+    def _get_main_width(self):
+        r = self.ratio
+        if len(self.clients) >= 3:  # 3カラムが立つ条件
+            r = min(r, self.max_ratio)  # 3窓時の上限
+            r = max(r, self.min_ratio)  # 下限も必要なら
+        return int(self.screen_rect.width * r)
+
+    def clone(self, group):  # Plan: per-groupのratioも保持
+        c = super().clone(group)
+        return c
+
+
 # for default
 layout1 = [
     layout.Columns(
@@ -111,11 +127,11 @@ layout6 = [
 
 # layouts for ultra-wide display
 layout7 = [
-    layout.MonadThreeCol(
+    AutoClampedMonadThreeCol(
         **_settings,
         main_centered=True,
-        max_ratio=0.65,
-        min_ratio=0.65,
+        max_ratio=0.50,
+        min_ratio=0.50,
         ratio=0.65,
     ),
     layout.Max(**_settings),
