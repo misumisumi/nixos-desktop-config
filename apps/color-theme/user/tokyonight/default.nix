@@ -110,6 +110,7 @@ in
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     pointerCursor = {
+      enable = true;
       name = "breeze_cursors";
       package = pkgs.kdePackages.breeze;
     };
