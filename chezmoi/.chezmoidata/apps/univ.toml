@@ -30,6 +30,7 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users."kobayashi.sumiharu.r4".opencode]
+plugin = ["@tarquinen/opencode-dcp@latest"]
 [apps.users."kobayashi.sumiharu.r4".opencode.permission]
 edit = "allow"
 glob = "allow"
