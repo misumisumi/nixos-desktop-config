@@ -59,26 +59,10 @@ in
         mcpvault
         paper-search-mcp
       ]
-      ++ (
-        with inputs.mcp-servers-nix.packages.${system};
-        let
-          postInstall =
-            {
-              service,
-              workspace ? service,
-            }:
-            ''
-              mv "$out/lib/node_modules/@modelcontextprotocol/servers" "$out/lib/node_modules/@modelcontextprotocol/servers-${service}"
-              cp -r src "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src"
-              makeWrapper "${nodejs_22}/bin/node" "$out/bin/mcp-server-${service}" \
-                --add-flags "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src/${workspace}/dist/index.js"
-            '';
-        in
-        [
-          context7-mcp
-          mcp-server-git
-        ]
-      );
+      ++ (with inputs.mcp-servers-nix.packages.${system}; [
+        context7-mcp
+        mcp-server-git
+      ]);
     file = {
       ".copilot/mcp-config.json".text = toJSON {
         mcpServers = mapAttrs (
