@@ -92,6 +92,9 @@ in
     opencode = {
       enable = true;
       package = pkgs.writeShellScriptBin "opencode" ''
+        if [ -f "${config.home.homeDirectory}/.env" ]; then
+          export $(${getExe' pkgs.gnugrep "grep"} -v '^#' ${config.home.homeDirectory}/.env | xargs)
+        fi
         export OPENCODE_ENABLE_EXA=1
         ${pkgs.opencode}/bin/opencode "$@"
       '';
