@@ -19,8 +19,6 @@ let
     mapAttrs
     splitString
     ;
-
-  skills = pkgs.skills.imbad0202.academic-research-skills;
 in
 {
   home = {
@@ -100,7 +98,7 @@ in
       '';
       enableMcpIntegration = true;
       settings = opencode;
-      inherit skills;
+      skills = pkgs.skills.imbad0202.academic-research-skills // pkgs.skills.coji.natural-japanese;
     };
     antigravity-cli = {
       enable = true;
