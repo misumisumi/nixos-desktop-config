@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.3.20](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.19...v8.3.20) (2026-09-18)
+
+
+### Bug Fixes
+
+* **ai-tools:** add natural japanese writing skill ([3b61270](https://github.com/misumisumi/nixos-desktop-config/commit/3b612703f21f414c03e04cdf1e2f2e910eac4947))
+* **ai-tools:** add token compression tool for opencode ([38d03a9](https://github.com/misumisumi/nixos-desktop-config/commit/38d03a9a8669422596aae6a471f4f5166c08b16d))
+* **ai-tools:** remove some mcp-tools ([85f21b3](https://github.com/misumisumi/nixos-desktop-config/commit/85f21b3a9b04c98df27c97635d92c615dc06a3c8))
+* fix warning for cursorPointer.enable ([ff7afcd](https://github.com/misumisumi/nixos-desktop-config/commit/ff7afcd2345accec6bf210da43a27e24138e9440))
+* **liveimg:** add ssh pub key to known_hosts ([c4cd5af](https://github.com/misumisumi/nixos-desktop-config/commit/c4cd5af608c2f04021f2299824fbe62698535db5))
+* **liveimg:** don't suspend when ac mode ([cee1ab5](https://github.com/misumisumi/nixos-desktop-config/commit/cee1ab5c238eb1273a1a7b71d80c16c939a55378))
+* **opencode:** add local llm settings ([bab3679](https://github.com/misumisumi/nixos-desktop-config/commit/bab3679f11b5ebc001fef0b2f843e65324c210c9))
+* **qtile:** add AutoClampedMonadThreeCol layout for ultra-wide monitor ([5d238ab](https://github.com/misumisumi/nixos-desktop-config/commit/5d238ab5ad7e6026503ac319c53ed0a05caa1ea6))
+* **zephyrus:** add mouse accelSpeed ([171fe6e](https://github.com/misumisumi/nixos-desktop-config/commit/171fe6ec9847cfe485fe54726d352c21121c5e86))
+
 ## [8.3.19](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.18...v8.3.19) (2026-09-12)
 
 
