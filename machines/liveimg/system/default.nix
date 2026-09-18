@@ -4,7 +4,10 @@
   colorTheme,
   ...
 }:
-with builtins;
+let
+  inherit (builtins) head split;
+  inherit (lib) mkForce;
+in
 {
   imports = [
     ../../../apps/system/documentation
@@ -21,7 +24,7 @@ with builtins;
     ../../../settings/system/security
     ../../init
     ../../init/zfs.nix
-    ./iso.nix
+    ./dconf.nix
     ./network.nix
     ./ssh.nix
     ./system.nix
@@ -29,4 +32,5 @@ with builtins;
   ]
   ++ lib.optional (colorTheme != null) ../../../apps/color-theme/system/${head (split "-" colorTheme)}
   ++ lib.optional ((lib.match ".*(gnome).*" hostname) != null) ../../../apps/system/gnome;
+  image.modules.iso = mkForce ./iso.nix;
 }
