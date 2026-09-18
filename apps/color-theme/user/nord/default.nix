@@ -29,7 +29,8 @@
       };
   };
   home = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    home.pointerCursor = {
+    pointerCursor = {
+      enable = true;
       name = "Nordzy-cursors";
       package = pkgs.nordzy-cursor-theme;
     };

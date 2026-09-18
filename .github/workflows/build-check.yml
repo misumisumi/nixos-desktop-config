@@ -82,8 +82,13 @@ jobs:
       - run: nix profile add nixpkgs#cpulimit
 
       - name: Build check
+        if: ${{ contains(matrix.hostname, 'iso') }}
         timeout-minutes: 150
-        run: cpulimit -l 85 -i -- nix build --no-link ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+        run: cpulimit -l 85 -i -- nix run nixpkgs#nixos-rebuild -- build-image --flake .#${{ matrix.hostname }} --image-variant iso --no-build-output
+      - name: Build check
+        if: ${{ !contains(matrix.hostname, 'iso') }}
+        timeout-minutes: 150
+        run: cpulimit -l 85 -i -- nix run nixpkgs#nixos-rebuild -- build --flake .#${{ matrix.hostname }} --no-build-output
 
   build-check-matrix-darwin:
     needs: [pre-build]

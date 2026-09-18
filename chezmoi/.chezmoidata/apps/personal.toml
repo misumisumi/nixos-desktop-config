@@ -30,6 +30,24 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users.sumi.opencode]
+plugin = ["@tarquinen/opencode-dcp@latest"]
+[apps.users.sumi.opencode.provider.litellm]
+npm = "@ai-sdk/openai-compatible"
+name = "LiteLLM (local)"
+[apps.users.sumi.opencode.provider.litellm.options]
+baseURL = "https://llm.misumi-sumi.com/v1"
+apiKey = "sk-litellm-dummy"
+timeout = 600000
+chunkTimeout = 120000
+[apps.users.sumi.opencode.provider.litellm.options.headers]
+CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
+CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-27b"]
+name = "Qwen3.8 27B"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.5-0.8b"]
+name = "Qwen3.5 0.8B"
+[apps.users.sumi.opencode.provider.litellm.models."gemma4-26b-a4b"]
+name = "Gemma 4 26B A4B"
 [apps.users.sumi.opencode.permission]
 edit = "allow"
 glob = "allow"
@@ -55,9 +73,6 @@ command = "paper-search-mcp" # wrapped command made by me
 command = "mcp-nixos" # wrapped command made by me
 # [apps.users.sumi.mcp.mcpServers.terraform]
 # command = "terraform-mcp-server" # wrapped command made by me
-[apps.users.sumi.mcp.mcpServers.filesystem]
-command = "mcp-server-filesystem"      # wrapped command made by me
-args = ["~/Documents/", "~/Workspace"]
 [apps.users.sumi.mcp.mcpServers.git]
 command = "mcp-server-git" # wrapped command made by me
 [apps.users.sumi.mcp.mcpServers.context7]

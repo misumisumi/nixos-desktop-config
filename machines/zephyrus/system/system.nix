@@ -34,6 +34,7 @@
     cloudflare-warp.enable = true;
     upower.enable = true;
     asusd.profileConfig.text = "quiet";
+    libinput.mouse.accelSpeed = "0.6";
     supergfxd = {
       enable = true;
       settings = {

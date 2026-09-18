@@ -19,8 +19,6 @@ let
     mapAttrs
     splitString
     ;
-
-  skills = pkgs.skills.imbad0202.academic-research-skills;
 in
 {
   home = {
@@ -59,33 +57,10 @@ in
         mcpvault
         paper-search-mcp
       ]
-      ++ (
-        with inputs.mcp-servers-nix.packages.${system};
-        let
-          postInstall =
-            {
-              service,
-              workspace ? service,
-            }:
-            ''
-              mv "$out/lib/node_modules/@modelcontextprotocol/servers" "$out/lib/node_modules/@modelcontextprotocol/servers-${service}"
-              cp -r src "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src"
-              makeWrapper "${nodejs_22}/bin/node" "$out/bin/mcp-server-${service}" \
-                --add-flags "$out/lib/node_modules/@modelcontextprotocol/servers-${service}/src/${workspace}/dist/index.js"
-            '';
-        in
-        [
-          (mcp-server-filesystem.overrideAttrs (old: {
-            postInstall = postInstall { service = "filesystem"; };
-          }))
-          (mcp-server-memory.overrideAttrs (old: {
-            postInstall = postInstall { service = "memory"; };
-          }))
-          context7-mcp
-          mcp-server-git
-          mcp-server-sequential-thinking
-        ]
-      );
+      ++ (with inputs.mcp-servers-nix.packages.${system}; [
+        context7-mcp
+        mcp-server-git
+      ]);
     file = {
       ".copilot/mcp-config.json".text = toJSON {
         mcpServers = mapAttrs (
@@ -115,12 +90,15 @@ in
     opencode = {
       enable = true;
       package = pkgs.writeShellScriptBin "opencode" ''
+        if [ -f "${config.home.homeDirectory}/.env" ]; then
+          export $(${getExe' pkgs.gnugrep "grep"} -v '^#' ${config.home.homeDirectory}/.env | xargs)
+        fi
         export OPENCODE_ENABLE_EXA=1
         ${pkgs.opencode}/bin/opencode "$@"
       '';
       enableMcpIntegration = true;
       settings = opencode;
-      inherit skills;
+      skills = pkgs.skills.imbad0202.academic-research-skills // pkgs.skills.coji.natural-japanese;
     };
     antigravity-cli = {
       enable = true;
