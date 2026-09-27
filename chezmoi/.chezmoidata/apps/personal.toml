@@ -31,19 +31,26 @@ paper = "delta --paging=never"
 
 [apps.users.sumi.opencode]
 plugin = ["@tarquinen/opencode-dcp@latest"]
+scrollbar = true
 [apps.users.sumi.opencode.provider.litellm]
 npm = "@ai-sdk/openai-compatible"
 name = "LiteLLM (local)"
 [apps.users.sumi.opencode.provider.litellm.options]
 baseURL = "https://llm.misumi-sumi.com/v1"
 apiKey = "sk-litellm-dummy"
-timeout = 600000
-chunkTimeout = 120000
+timeout = false
+chunkTimeout = false
 [apps.users.sumi.opencode.provider.litellm.options.headers]
 CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-27b"]
-name = "Qwen3.8 27B"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next"]
+name = "Qwen3.8 Flash Next"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.low]
+"reasoningEffort" = "low"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.medium]
+"reasoningEffort" = "medium"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.xhigh]
+"reasoningEffort" = "xhigh"
 [apps.users.sumi.opencode.provider.litellm.models."qwen3.5-0.8b"]
 name = "Qwen3.5 0.8B"
 [apps.users.sumi.opencode.provider.litellm.models."gemma4-26b-a4b"]
@@ -64,7 +71,7 @@ question = "allow"
 command = "github-mcp-server"
 args = ["stdio"]
 [apps.users.sumi.mcp.mcpServers.github-mcp-server.env]
-GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT}"
+GITHUB_PERSONAL_ACCESS_TOKEN = "{env:GITHUB_PAT}"
 [apps.users.sumi.mcp.mcpServers.paper_search]
 command = "paper-search-mcp" # wrapped command made by me
 # [apps.users.sumi.mcp.mcpServers.discord]
