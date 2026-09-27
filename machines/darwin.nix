@@ -69,7 +69,7 @@ let
             nixpkgs = {
               overlays = [
                 inputs.flakes.overlays.default
-                inputs.nix-skills.overlays.default
+                inputs.agent-skills.overlays.default
                 inputs.nur.overlays.default
                 self.overlays.default
               ];
