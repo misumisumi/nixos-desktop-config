@@ -79,6 +79,12 @@
       url = "github:natsukium/mcp-servers-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Paseo daemon + its official NixOS module (services.paseo).
+    # The daemon talks to the self-hosted relay on cloud.oci.
+    paseo = {
+      url = "github:getpaseo/paseo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     spicetify-djinfo = {
       url = "github:L3-N0X/spicetify-dj-info";

@@ -719,6 +719,26 @@
         "type": "github"
       }
     },
+    "paseo": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790510497,
+        "narHash": "sha256-gJdkv8GvKOYrIrW3iH6P80GT3UI4epgd7Wz923c9Rkg=",
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "rev": "30178c4f58b67f8472901356e1484022bd835de0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agent-skills": "agent-skills",
@@ -739,6 +759,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "nvimdots": "nvimdots",
+        "paseo": "paseo",
         "sops-nix": "sops-nix",
         "spicetify-djinfo": "spicetify-djinfo",
         "spicetify-nix": "spicetify-nix",

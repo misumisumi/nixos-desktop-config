@@ -30,6 +30,7 @@ let
         inputs.impermanence.nixosModules.impermanence
         inputs.musnix.nixosModules.musnix
         inputs.nur.modules.nixos.default
+        inputs.paseo.nixosModules.paseo
         inputs.sops-nix.nixosModules.sops
         self.nixosModules.default
         (./. + "/${if (lib.match "(liveimg)-.*" hostname != null) then "liveimg" else hostname}/system") # Each machine conf

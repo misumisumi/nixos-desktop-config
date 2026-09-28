@@ -4,6 +4,9 @@ let
     ".config"
     ".local/share"
     ".mozilla"
+    # Paseo daemon state. daemon-keypair.json must survive reboots or the
+    # device loses its pairing and has to scan the QR again.
+    ".paseo"
     ".thunderbird"
     ".vst3"
     ".zinit"
