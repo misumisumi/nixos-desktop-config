@@ -1,6 +1,7 @@
 {
   imports = [
     ../../cli/common
+    ../../cli/develop/ai-tools
     ../../cli/develop/direnv
     ../../cli/develop/editorconfig
     ../../cli/develop/fastfetch
