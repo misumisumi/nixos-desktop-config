@@ -1,24 +1,16 @@
-{ config, hostname, ... }:
+{
+  pkgs,
+  config,
+  hostname,
+  ...
+}:
 {
   imports = [
     ../../../settings/system/network/vpn/l2tp
     ../../../settings/system/network/vpn/l2tp/tains.nix
   ];
-  services = {
-    hostapd = {
-      enable = false;
-      radios = {
-        wlp2s0 = {
-          countryCode = "JP";
-          band = "2g";
-          networks.wlp2s0 = {
-            ssid = "zephyrus";
-            authentication.saePasswordsFile = config.sops.secrets.AP_password.path;
-          };
-        };
-      };
-    };
-  };
+  environment.systemPackages = [ pkgs.hostapd ];
+
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";
@@ -42,11 +34,11 @@
               ];
               endpoint = "wg.oci.misumi-sumi.com:443";
               publicKey = "BR2XCDtghHRZYqGryTPbal+Ms7gYlgzN+b+AAlWGIms=";
-              presharedKeyFile = config.sops.secrets.wg_peer_oci_presharedKey.path;
+              presharedKeyFile = config.sops.secrets."wireguard/presharedKey".path;
               persistentKeepalive = 25;
             }
           ];
-          privateKeyFile = config.sops.secrets.wg_privateKey.path;
+          privateKeyFile = config.sops.secrets."wireguard/privateKey".path;
         };
       };
     };

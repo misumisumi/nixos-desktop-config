@@ -17,10 +17,9 @@
       enable = true;
       plugins = with pkgs; [ rofi-calc ];
 
-      font = "Moralerspace Neon 16";
-      terminal = "wezterm";
-
-      extraConfig = {
+      settings = {
+        font = "Moralerspace Neon 16";
+        terminal = "wezterm";
         modi = "window,drun,run";
         combi-modi = "window,drun";
         show-icons = true;

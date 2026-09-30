@@ -5,6 +5,7 @@ with builtins;
     ../../../apps/color-theme/system/${head (split "-" colorTheme)}
     ../../../apps/system/documentation
     ../../../apps/system/nix-ld
+    ../../../apps/system/paseo
     ../../../apps/system/pkgs
     ../../../apps/system/printer
     ../../../apps/system/programs

@@ -23,7 +23,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     impermanence.url = "github:nix-community/impermanence";
     nur.url = "github:nix-community/NUR";
-    nix-skills.url = "github:sudosubin/nix-skills";
+    agent-skills.url = "github:sudosubin/agents.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +77,12 @@
     };
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Paseo daemon + its official NixOS module (services.paseo).
+    # The daemon talks to the self-hosted relay on cloud.oci.
+    paseo = {
+      url = "github:getpaseo/paseo";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

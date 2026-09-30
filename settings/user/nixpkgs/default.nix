@@ -14,7 +14,7 @@
       inputs.flakes.overlays.default
       inputs.nixgl.overlay
       inputs.nur.overlays.default
-      inputs.nix-skills.overlays.default
+      inputs.agent-skills.overlays.default
       self.overlays.default
     ];
   };
