@@ -1,5 +1,21 @@
 # Changelog
 
+## [8.4.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.20...v8.4.0) (2026-09-30)
+
+
+### Features
+
+* **paseo:** add remote multiple coding agents ([f3db79e](https://github.com/misumisumi/nixos-desktop-config/commit/f3db79e04cd6f3f994bbe124b5caa93d8748e57a))
+
+
+### Bug Fixes
+
+* **ai-tools:** replace to new skills flakes ([fac47a8](https://github.com/misumisumi/nixos-desktop-config/commit/fac47a87672294ce2eed0a06622164491c6359e4))
+* **opencode:** optimize using local LLM models ([13c5e49](https://github.com/misumisumi/nixos-desktop-config/commit/13c5e498ca82d4be629dedbf76f0bcc52ba9ab2a))
+* **presets:** move ai-tools to medium ([2799d8b](https://github.com/misumisumi/nixos-desktop-config/commit/2799d8b4b999f1d1e1d05118e69f5ff4cf51c36f))
+* rename nix-skills to agents-nix and pin commit hash ([87c23e1](https://github.com/misumisumi/nixos-desktop-config/commit/87c23e1a7f3ffa569e8cd4cbd9cad205c16b7808))
+* **rofi:** fix deprecated options ([647f1e2](https://github.com/misumisumi/nixos-desktop-config/commit/647f1e26661f7033204bd9dec6c0c8d7d43a9982))
+
 ## [8.3.20](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.19...v8.3.20) (2026-09-18)
 
 
