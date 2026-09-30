@@ -23,7 +23,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     impermanence.url = "github:nix-community/impermanence";
     nur.url = "github:nix-community/NUR";
-    agent-skills.url = "github:sudosubin/nix-skills/3f79cccf12afbd556a7c58111682c6cb6f1905fa";
+    agent-skills.url = "github:sudosubin/agents.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

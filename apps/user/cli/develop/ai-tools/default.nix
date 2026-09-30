@@ -18,6 +18,7 @@ let
     last
     mapAttrs
     splitString
+    importJSON
     ;
 in
 {
@@ -98,7 +99,9 @@ in
       '';
       enableMcpIntegration = true;
       settings = opencode;
-      skills = pkgs.skills.imbad0202.academic-research-skills // pkgs.skills.coji.natural-japanese;
+      skills =
+        pkgs.agent-skills.github.imbad0202.academic-research-skills
+        // pkgs.agent-skills.github.coji.natural-japanese;
     };
     antigravity-cli = {
       enable = true;
