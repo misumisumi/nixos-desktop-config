@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.4.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.4.0...v8.4.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* fix local llm config for opencode ([417bd5d](https://github.com/misumisumi/nixos-desktop-config/commit/417bd5d06a85a666e820531df33a3118cb96a07e))
+* remove CUDA_HOME from work profile ([b78b8a1](https://github.com/misumisumi/nixos-desktop-config/commit/b78b8a119e2a7275fbd1ad124215d943d03bdfde))
+
 ## [8.4.0](https://github.com/misumisumi/nixos-desktop-config/compare/v8.3.20...v8.4.0) (2026-09-30)
 
 
