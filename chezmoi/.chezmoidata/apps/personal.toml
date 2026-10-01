@@ -45,14 +45,16 @@ CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
 [apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next"]
 name = "Qwen3.8 Flash Next"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.low]
-"reasoningEffort" = "low"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.medium]
-"reasoningEffort" = "medium"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.xhigh]
-"reasoningEffort" = "xhigh"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.5-0.8b"]
-name = "Qwen3.5 0.8B"
+[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".settings]
+reasoningEffort = "medium"
+[[variants]]
+id = "low"
+[variants.settings]
+reasoningEffort = "low"
+[[variants]]
+id = "xhigh"
+[variants.settings]
+reasoningEffort = "xhigh"
 [apps.users.sumi.opencode.provider.litellm.models."gemma4-26b-a4b"]
 name = "Gemma 4 26B A4B"
 [apps.users.sumi.opencode.permission]
