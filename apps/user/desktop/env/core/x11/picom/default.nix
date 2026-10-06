@@ -49,7 +49,7 @@
       shadow = true;
       shadowExclude = [
         "QTILE_INTERNAL = 1"
-        "_GTK_FRAME_EXTENTS@"
+        "_GTK_FRAME_EXTENTS@ && WM_WINDOW_ROLE != 'browser-window'"
         "class_g = 'Cairo-clock'"
         "class_g = 'Conky'"
         "class_g = 'Pdfpc'"
@@ -98,7 +98,7 @@
           "QTILE_INTERNAL = 1"
           "window_type = 'dock'"
           "window_type = 'desktop'"
-          "_GTK_FRAME_EXTENTS@"
+          "_GTK_FRAME_EXTENTS@ && WM_WINDOW_ROLE != 'browser-window'"
         ];
         mark-wmwin-focused = true;
         mark-overdir-focused = false;
