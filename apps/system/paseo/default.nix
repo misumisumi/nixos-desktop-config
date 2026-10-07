@@ -26,12 +26,8 @@ in
 
   # paseo-desktop
   environment.systemPackages =
-    let
-      paseo-desktop = inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop.override {
-        electron = pkgs.electron_42;
-      };
-    in
-    optional config.services.xserver.enable paseo-desktop;
+    optional config.services.xserver.enable
+      inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop;
 
   services.paseo = {
     enable = true;
