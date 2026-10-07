@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.4.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.4.1...v8.4.2) (2026-10-07)
+
+
+### Bug Fixes
+
+* disable post-quantize check for abci and ix2215 ([36bb7fb](https://github.com/misumisumi/nixos-desktop-config/commit/36bb7fbcdd405be372ff0a33ce157e5f17af1211))
+* **picom:** fix "_GTK_FRAME_EXTENTS@" rule from blur ([0fe7f24](https://github.com/misumisumi/nixos-desktop-config/commit/0fe7f2483b4c10c50323ad20466e0d851008a516))
+* **picom:** remove "_GTK_FRAME_EXTENTS@" rule from blur and shadow ([6a87a41](https://github.com/misumisumi/nixos-desktop-config/commit/6a87a41654bb3bcfe03034e44d0c850637790301))
+
 ## [8.4.1](https://github.com/misumisumi/nixos-desktop-config/compare/v8.4.0...v8.4.1) (2026-10-01)
 
 
