@@ -81,4 +81,14 @@ final: prev: {
     in
     self;
   python3Packages = final.python3.pkgs;
+  zotero = prev.zotero.overrideAttrs (
+    old:
+    let
+      inherit (builtins) replaceStrings;
+      firefox = prev.callPackage ./zotero/firefox-esr-140.nix { };
+    in
+    {
+      buildPhase = replaceStrings [ "${prev.firefox-esr-153-unwrapped}" ] [ "${firefox}" ] old.buildPhase;
+    }
+  );
 }
