@@ -3,6 +3,7 @@
     ../../../apps/system/virtualisation/incus
     ../../../apps/system/virtualisation/libvirt
     ../../../apps/system/virtualisation/podman
+    ../../../apps/system/virtualisation/singularity
   ];
   virtualisation = {
     vfio = {
