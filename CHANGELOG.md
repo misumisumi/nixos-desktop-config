@@ -1,5 +1,18 @@
 # Changelog
 
+## [8.4.3](https://github.com/misumisumi/nixos-desktop-config/compare/v8.4.2...v8.4.3) (2026-10-18)
+
+
+### Bug Fixes
+
+* **opencode:** fix local LLM model variant setting ([b9c7f7d](https://github.com/misumisumi/nixos-desktop-config/commit/b9c7f7dda44284e4f001a3590d06c383184edac8))
+* **singularity:** replace package version to official from ce ([91badfc](https://github.com/misumisumi/nixos-desktop-config/commit/91badfc008c48fe0d2fdf74ad55c5b83917cf8ee))
+* **sops:** disable WarnWeakCrypto for ix2215 ([6ccc9d1](https://github.com/misumisumi/nixos-desktop-config/commit/6ccc9d1264fdf1e5402e31acaaa602aead511dde))
+* **vivaldi:** fix toolbar ([950564a](https://github.com/misumisumi/nixos-desktop-config/commit/950564ac450523ec22fb507d92d9a17a66440d06))
+* **zotero:** add firefox-140 for issue of building zotero (NixOS/nixpkgs[#569006](https://github.com/misumisumi/nixos-desktop-config/issues/569006)) ([1eebfe9](https://github.com/misumisumi/nixos-desktop-config/commit/1eebfe99b0adcd8434f9701fc80a1425425bfd7b))
+* **zotero:** merge upstream for fixing zotero ([8f32793](https://github.com/misumisumi/nixos-desktop-config/commit/8f327939a8f8eec18e1e16ef765416a1c28049fd))
+* **zotero:** replace to firefox-esr binary package ([8e2d94c](https://github.com/misumisumi/nixos-desktop-config/commit/8e2d94c018a8919f11678ef4645e8517145ae847))
+
 ## [8.4.2](https://github.com/misumisumi/nixos-desktop-config/compare/v8.4.1...v8.4.2) (2026-10-07)
 
 
