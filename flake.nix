@@ -94,9 +94,6 @@
       url = "github:synap5e/Spotify-AI-Band-Blocker";
       flake = false;
     };
-
-    #NOTE: Pin version 140 ESR binary
-    firefox.url = "github:nix-community/flake-firefox-nightly/d737ae8b2a7ced14af9f355fb4cb16e2a4e46265";
   };
 
   outputs =
