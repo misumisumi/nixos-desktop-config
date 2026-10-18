@@ -48,7 +48,7 @@
 #   spotify = pkgs-stable.spotify;
 # })
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
-{ nixpkgs-stable, ... }:
+{ nixpkgs-stable, inputs, ... }:
 final: prev: {
   vivaldi = prev.vivaldi.override {
     commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";

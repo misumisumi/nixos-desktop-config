@@ -1188,7 +1188,7 @@
         {
           "background": "semi-transparent",
           "folderPath": "Bookmarks/google",
-          "folderUUID": "f487a05e-cb79-465a-b18f-de914171f9a7",
+          "folderUUID": "15fd9b2a-9fd0-4a79-bdb7-b5df57a1f252",
           "id": "3f28ebad-9845-4f37-841b-d0aec7ba033c",
           "position": {
             "height": 1,
@@ -1288,6 +1288,7 @@
         }
       },
       "search_sort_field": 0,
+      "search_sort_field_per_folder": {},
       "search_sort_order": 1,
       "view_layout": 1
     },
@@ -1312,7 +1313,7 @@
         {
           "id": "PanelDownloads",
           "resizable": false,
-          "width": 400
+          "width": 524
         },
         {
           "id": "PanelHistory",
@@ -1375,6 +1376,7 @@
       "show_folder_badge": true,
       "show_toggle": false,
       "translate": {
+        "automatic": false,
         "paste": false,
         "redirect": false
       },
@@ -1429,6 +1431,18 @@
             "title": "Obsidian Web Clipper",
             "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
             "width": 534,
+            "zoom": 1
+          },
+          {
+            "faviconUrl": "https://radiko.jp/#!/live/ALPHA-STATION",
+            "faviconUrlValid": true,
+            "id": "WEBPANEL_d3d56940-2f6f-448c-99f2-9fab7d70382a",
+            "mobileMode": false,
+            "origin": "user",
+            "resizable": false,
+            "title": "2026/10/10/土 21:00-23:00 | YUME. COM | α-STATION FM KYOTO | radiko",
+            "url": "https://radiko.jp/",
+            "width": -1,
             "zoom": 1
           }
         ],
@@ -1586,6 +1600,18 @@
             "url": "chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html",
             "width": -1,
             "zoom": 1
+          },
+          {
+            "faviconUrl": "chrome-extension://nngceckbapebfimnlniiiahkandclblb/sidepanel-disabled.html",
+            "faviconUrlValid": true,
+            "id": "EXT_PANEL_nngceckbapebfimnlniiiahkandclblb",
+            "mobileMode": true,
+            "origin": "user",
+            "resizable": false,
+            "title": "Bitwarden",
+            "url": "chrome-extension://nngceckbapebfimnlniiiahkandclblb/sidepanel-disabled.html",
+            "width": -1,
+            "zoom": 1
           }
         ]
       },
@@ -1595,7 +1621,6 @@
       "window_defaults": {
         "barVisible": true,
         "contentVisible": false,
-        "selectedPanel": "WEBPANEL_c4d18e41-ff82-418f-93d9-2e0c19616edf",
         "width": 524
       }
     },
@@ -1631,7 +1656,7 @@
         "position": 1,
         "slider_xpos": 90,
         "slider_ypos": 31,
-        "width": 208
+        "width": 182
       }
     },
     "toolbars": {
@@ -1663,14 +1688,33 @@
         "WEBPANEL_4f2d325a-486d-44ba-a93f-f9fd487a3a44",
         "WEBPANEL_2fdea115-026f-44d6-babc-e8fa7c038273",
         "WEBPANEL_c4d18e41-ff82-418f-93d9-2e0c19616edf",
+        "WEBPANEL_d3d56940-2f6f-448c-99f2-9fab7d70382a",
         "EXT_PANEL_cnjifjpddelmedmihgijeibhnjfabmlf",
         "PanelWeb",
         "FlexibleSpacer"
+      ],
+      "status": [
+        "Settings",
+        "BreakMode",
+        "SyncStatus",
+        "MailStatus",
+        "CalendarStatus",
+        "StatusInfo",
+        "VersionInfo",
+        "AutoHideToggle",
+        "CaptureImages",
+        "TilingToggle",
+        "PageActions",
+        "Zoom",
+        "Clock"
       ],
       "tabbar_after": [
         "NewTab",
         "FlexibleSpacer",
         "TabButton"
+      ],
+      "tabbar_before": [
+        "WorkspaceButton"
       ]
     },
     "workspaces": {

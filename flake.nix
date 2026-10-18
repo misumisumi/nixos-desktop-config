@@ -121,7 +121,7 @@
                 };
               };
             in
-            import ./patches { inherit nixpkgs-stable; };
+            import ./patches { inherit nixpkgs-stable inputs; };
           homeManagerModules =
             let
               modulePath = ./modules/home-manager;

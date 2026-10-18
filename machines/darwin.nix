@@ -80,6 +80,7 @@ let
                 allowUnfree = true;
                 permittedInsecurePackages = [
                   "libxml2-2.13.8"
+                  "firefox-esr-140-bin-unwrapped-140.17.0esr"
                 ];
               };
             };
