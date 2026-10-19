@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData;
+  inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData getChezmoiFilePath;
   inherit (importChezmoiUserAppData user) mcp opencode;
   inherit (builtins) toJSON;
   inherit (lib)
@@ -18,7 +18,6 @@ let
     last
     mapAttrs
     splitString
-    importJSON
     ;
 in
 {
@@ -82,6 +81,7 @@ in
       recursive = true;
     };
     "mcphub/servers.json".text = toJSON mcp;
+    "opencode/dcp.jsonc".source = getChezmoiFilePath "dot_config/opencode/dcp.jsonc";
   };
   programs = {
     mcp = {
