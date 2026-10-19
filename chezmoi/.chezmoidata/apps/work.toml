@@ -31,6 +31,7 @@ paper = "delta --paging=never"
 
 [apps.users.ach18207ao.opencode]
 plugin = ["@tarquinen/opencode-dcp@latest"]
+[apps.users.sumi.opencode.session]
 scrollbar = true
 [apps.users.sumi.opencode.theme]
 name = "tokyonight"
