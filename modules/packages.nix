@@ -5,6 +5,7 @@ let
   inherit (pkgs) findutils sops writeShellScriptBin;
 in
 {
+  mcp-server-git = pkgs.mcp-server-git;
   cp-ssh-keys = writeShellScriptBin "cp-ssh-keys" ''
     usage() {
       cat <<EOF # remove the space between << and EOF, this is due to web plugin issue
