@@ -103,14 +103,6 @@ in
         pkgs.agent-skills.github.imbad0202.academic-research-skills
         // pkgs.agent-skills.github.coji.natural-japanese;
     };
-    antigravity-cli = {
-      enable = true;
-      enableMcpIntegration = true;
-      settings = {
-        colorScheme = "tokyo night";
-        enableTelemetry = false;
-      };
-    };
     github-copilot-cli = {
       enable = true;
     };

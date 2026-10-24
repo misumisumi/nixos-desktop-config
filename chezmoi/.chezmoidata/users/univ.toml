@@ -26,7 +26,7 @@ mcp-nixos = "mcp_nixos"
 mcp-server-git = "mcp_server_git"
 [linux.users."kobayashi.sumiharu.r4".packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
 giturl = "https://github.com/openags/paper-search-mcp"
-module = "paper_search_mcp.server"
+module = "paper-search-mcp"
 [linux.users."kobayashi.sumiharu.r4".packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
 owner = "github"
 repo = "github-mcp-server"
@@ -60,7 +60,6 @@ opencode = "wrapEnv opencode"
 idiomatic_version_file = true
 always_keep_download = false
 always_keep_install = false
-plugin_autoupdate_last_check_duration = "1 week"
 verbose = false
 http_timeout = "30s"
 jobs = 4
@@ -70,6 +69,8 @@ not_found_auto_install = true
 auto_install = true
 experimental = true
 idiomatic_version_file_enable_tools = []
+[linux.users.sumi.packages.mise.tool_update]
+check_duration = "7d"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"

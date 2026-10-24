@@ -33,6 +33,8 @@ paper = "delta --paging=never"
 plugin = ["@tarquinen/opencode-dcp@latest"]
 [apps.users.sumi.opencode.session]
 scrollbar = true
+[apps.users.sumi.opencode.compaction]
+auto = false
 [apps.users.sumi.opencode.theme]
 name = "tokyonight"
 mode = "dark"
@@ -88,7 +90,7 @@ command = "mcp-server-git" # wrapped command made by me
 [apps.users.ach18207ao.mcp.mcpServers.context7]
 command = "context7-mcp" # wrapped command made by me
 [apps.users.ach18207ao.mcp.mcpServers.context7.env]
-CONTEXT7_API_KEY = "${CONTEXT7_API_KEY}"
+CONTEXT7_API_KEY = "${env:CONTEXT7_API_KEY}"
 
 [apps.users.ach18207ao.shell]
 historyIgnore = [
