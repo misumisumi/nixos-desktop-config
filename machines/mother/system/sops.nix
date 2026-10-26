@@ -9,6 +9,8 @@
     defaultSopsFile = getEncryptFile "hosts/mother/secrets.yaml";
     secrets = {
       hashedPasswordFile.neededForUsers = true;
+      "wireguard/privateKey" = { };
+      "wireguard/presharedKey" = { };
     };
   };
 }

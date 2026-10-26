@@ -1,4 +1,9 @@
-{ hostname, pkgs, ... }:
+{
+  config,
+  hostname,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../../settings/system/network/vpn/l2tp
@@ -58,6 +63,29 @@
         #   to = 60011; # Mosh
         # }
       ];
+    };
+    wg-quick = {
+      interfaces = {
+        wg0 = {
+          autostart = false;
+          mtu = 1280;
+          address = [
+            "10.250.0.30/24"
+          ];
+          peers = [
+            {
+              allowedIPs = [
+                "10.250.0.0/24"
+              ];
+              endpoint = "wg.oci.misumi-sumi.com:443";
+              publicKey = "BR2XCDtghHRZYqGryTPbal+Ms7gYlgzN+b+AAlWGIms=";
+              presharedKeyFile = config.sops.secrets."wireguard/presharedKey".path;
+              persistentKeepalive = 25;
+            }
+          ];
+          privateKeyFile = config.sops.secrets."wireguard/privateKey".path;
+        };
+      };
     };
   };
 
