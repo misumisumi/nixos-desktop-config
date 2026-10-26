@@ -16,9 +16,6 @@ fi
 """
 PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
 [linux.users."kobayashi.sumiharu.r4".packages.mcpServers.node] # name = "package_name", name is executable name
-mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
-mcp-server-memory = "@modelcontextprotocol/server-memory"
-mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
 mcp-hub = "mcp-hub@latest"
 [linux.users."kobayashi.sumiharu.r4".packages.mcpServers.pip] # name = "module_name", name is executable name
@@ -32,6 +29,12 @@ owner = "github"
 repo = "github-mcp-server"
 srcFile = "github-mcp-server_Linux_x86_64.tar.gz"
 exeFile = "github-mcp-server"
+[linux.users."kobayashi.sumiharu.r4".packages.mcpServers.github.codebase-memory-mcp] # name = "module_name", name is executable name
+owner = "DeusData"
+repo = "codebase-memory-mcp"
+srcFile = "codebase-memory-mcp-linux-amd64-portable.tar.gz"
+exeFile = "codebase-memory-mcp"
+
 [linux.users."kobayashi.sumiharu.r4".env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
@@ -69,7 +72,7 @@ not_found_auto_install = true
 auto_install = true
 experimental = true
 idiomatic_version_file_enable_tools = []
-[linux.users.sumi.packages.mise.tool_update]
+[linux.users."kobayashi.sumiharu.r4".packages.mise.tool_update]
 check_duration = "7d"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"

@@ -30,46 +30,73 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users.ach18207ao.opencode]
-plugin = ["@tarquinen/opencode-dcp@latest"]
-[apps.users.sumi.opencode.session]
-scrollbar = true
-[apps.users.sumi.opencode.compaction]
-auto = false
-[apps.users.sumi.opencode.theme]
+plugins = ["@tarquinen/opencode-dcp@latest"]
+[apps.users.ach18207ao.opencode.theme]
 name = "tokyonight"
 mode = "dark"
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm]
-npm = "@ai-sdk/openai-compatible"
+[apps.users.ach18207ao.opencode.compaction]
+auto = false
+[apps.users.ach18207ao.opencode.providers.litellm]
 name = "LiteLLM (local)"
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm.options]
+package = "@opencode/ai/providers/openai-compatible"
+[apps.users.ach18207ao.opencode.providers.litellm.settings]
 baseURL = "https://llm.misumi-sumi.com/v1"
 apiKey = "sk-litellm-dummy"
 timeout = false
 chunkTimeout = false
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm.options.headers]
+[apps.users.ach18207ao.opencode.providers.litellm.headers]
 CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next"]
+[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next"]
 name = "Qwen3.8 Flash Next"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".settings]
+[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".settings]
 reasoningEffort = "medium"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.low.settings]
+[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
+id = "low"
+[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
 reasoningEffort = "low"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.medium.settings]
+[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
+id = "medium"
+[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
 reasoningEffort = "medium"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.xhigh.settings]
+[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
+id = "xhigh"
+[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
 reasoningEffort = "xhigh"
-[apps.users.ach18207ao.opencode.provider.litellm.models."gemma4-26b-a4b"]
+[apps.users.ach18207ao.opencode.providers.litellm.models."gemma4-26b-a4b"]
 name = "Gemma 4 26B A4B"
-[apps.users.ach18207ao.opencode.permission]
-edit = "allow"
-glob = "allow"
-grep = "allow"
-read = "allow"
-skill = "allow"
-webfetch = "allow"
-websearch = "allow"
-question = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "edit"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "glob"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "grep"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "question"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "read"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "skill"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "webfetch"
+resource = "*"
+effect = "allow"
+[[apps.users.ach18207ao.opencode.permissions]]
+action = "websearch"
+resource = "*"
+effect = "allow"
 
 [apps.users.ach18207ao.mcp.mcpServers]
 [apps.users.ach18207ao.mcp.mcpServers.github-mcp-server]

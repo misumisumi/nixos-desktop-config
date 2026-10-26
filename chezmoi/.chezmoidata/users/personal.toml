@@ -53,9 +53,6 @@ mcp-hub = "wrapEnv mcp-hub"
 opencode = "wrapEnv opencode"
 
 [linux.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
-mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
-mcp-server-memory = "@modelcontextprotocol/server-memory"
-mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
 context7-mcp = "@upstash/context7-mcp"
 mcp-hub = "mcp-hub@latest"
 mcpvault = "@bitbonsai/mcpvault@latest"
@@ -70,6 +67,11 @@ owner = "github"
 repo = "github-mcp-server"
 srcFile = "github-mcp-server_Linux_arm64.tar.gz"
 exeFile = "github-mcp-server"
+[linux.users.sumi.packages.mcpServers.github.codebase-memory-mcp] # name = "module_name", name is executable name
+owner = "DeusData"
+repo = "codebase-memory-mcp"
+srcFile = "codebase-memory-mcp-linux-arm64-portable.tar.gz"
+exeFile = "codebase-memory-mcp"
 
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true
@@ -331,6 +333,7 @@ apps = [
     "bat",
     "btop",
     "cmake",
+    "codebase-memory-mcp",
     "copilot-cli",
     "ctags",
     "curl",
@@ -357,6 +360,7 @@ apps = [
     "nodejs-lts",
     "opencode",
     "openssh",
+    "paseo",
     "poppler",
     "psutils",
     "python",

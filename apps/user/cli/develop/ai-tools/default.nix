@@ -52,15 +52,14 @@ in
           ${pkgs.github-copilot-cli}/bin/copilot "$@"
         '')
         # mcp servers
+        context7-mcp
         github-mcp-server
         mcp-nixos
+        mcp-server-git
         mcpvault
         paper-search-mcp
-      ]
-      ++ (with inputs.mcp-servers-nix.packages.${system}; [
-        context7-mcp
-        mcp-server-git
-      ]);
+        codebase-memory-mcp
+      ];
     file = {
       ".copilot/mcp-config.json".text = toJSON {
         mcpServers = mapAttrs (
@@ -101,7 +100,7 @@ in
       settings = opencode;
       skills =
         pkgs.agent-skills.github.imbad0202.academic-research-skills
-        // pkgs.agent-skills.github.coji.natural-japanese;
+        // pkgs.agent-skills.github.nanaism.yomiyasu;
     };
     github-copilot-cli = {
       enable = true;
