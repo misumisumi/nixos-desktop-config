@@ -11,9 +11,11 @@ let
 in
 {
   # paseo-desktop
-  environment.systemPackages =
-    optional config.services.xserver.enable
-      inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop;
+  environment.systemPackages = optional config.services.xserver.enable (
+    inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop.overrideAttrs (old: {
+      preBuild = (old.preBuild or "") + "npm run postinstall";
+    })
+  );
 
   services.paseo = {
     enable = true;
