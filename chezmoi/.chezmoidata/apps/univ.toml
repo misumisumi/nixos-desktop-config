@@ -30,41 +30,22 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users."kobayashi.sumiharu.r4".opencode]
-plugins = ["@tarquinen/opencode-dcp@latest"]
+plugins = ["opencode-plugin-litellm@latest"]
 [apps.users."kobayashi.sumiharu.r4".opencode.theme]
 name = "tokyonight"
 mode = "dark"
-[apps.users."kobayashi.sumiharu.r4".opencode.compaction]
-auto = false
 [apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm]
-name = "LiteLLM (local)"
+name = "LiteLLM"
 package = "@opencode/ai/providers/openai-compatible"
 [apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.settings]
 baseURL = "https://llm.misumi-sumi.com/v1"
-apiKey = "sk-litellm-dummy"
+apiKey = "{env:LITELLM_API_KEY}"
 timeout = false
 chunkTimeout = false
+formatModelNames = false
 [apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.headers]
 CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next"]
-name = "Qwen3.8 Flash Next"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".settings]
-reasoningEffort = "medium"
-[[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "low"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "low"
-[[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "medium"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "medium"
-[[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "xhigh"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "xhigh"
-[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.models."gemma4-26b-a4b"]
-name = "Gemma 4 26B A4B"
 [[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
 action = "edit"
 resource = "*"
@@ -98,6 +79,10 @@ action = "websearch"
 resource = "*"
 effect = "allow"
 
+# omo (oh-my-openagent) settings
+[apps.users."kobayashi.sumiharu.r4".omo]
+disabled_mcps = ["codebase-memory", "context7"]
+
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers]
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server]
 command = "github-mcp-server"
@@ -117,7 +102,9 @@ command = "mcp-server-git" # wrapped command made by me
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7]
 command = "context7-mcp" # wrapped command made by me
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7.env]
-CONTEXT7_API_KEY = "${env:CONTEXT7_API_KEY}"
+CONTEXT7_API_KEY = "{env:CONTEXT7_API_KEY}"
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.codebase-memory]
+command = "codebase-memory-mcp" # wrapped command made by me
 
 [apps.users."kobayashi.sumiharu.r4".shell]
 historyIgnore = [

@@ -30,41 +30,22 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users.ach18207ao.opencode]
-plugins = ["@tarquinen/opencode-dcp@latest"]
+plugins = ["opencode-plugin-litellm@latest"]
 [apps.users.ach18207ao.opencode.theme]
 name = "tokyonight"
 mode = "dark"
-[apps.users.ach18207ao.opencode.compaction]
-auto = false
 [apps.users.ach18207ao.opencode.providers.litellm]
-name = "LiteLLM (local)"
+name = "LiteLLM"
 package = "@opencode/ai/providers/openai-compatible"
 [apps.users.ach18207ao.opencode.providers.litellm.settings]
 baseURL = "https://llm.misumi-sumi.com/v1"
-apiKey = "sk-litellm-dummy"
+apiKey = "{env:LITELLM_API_KEY}"
 timeout = false
 chunkTimeout = false
+formatModelNames = false
 [apps.users.ach18207ao.opencode.providers.litellm.headers]
 CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
-[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next"]
-name = "Qwen3.8 Flash Next"
-[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".settings]
-reasoningEffort = "medium"
-[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "low"
-[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "low"
-[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "medium"
-[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "medium"
-[[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants]]
-id = "xhigh"
-[apps.users.ach18207ao.opencode.providers.litellm.models."qwen3.8-flash-next".variants.settings]
-reasoningEffort = "xhigh"
-[apps.users.ach18207ao.opencode.providers.litellm.models."gemma4-26b-a4b"]
-name = "Gemma 4 26B A4B"
 [[apps.users.ach18207ao.opencode.permissions]]
 action = "edit"
 resource = "*"
@@ -98,6 +79,10 @@ action = "websearch"
 resource = "*"
 effect = "allow"
 
+# omo (oh-my-openagent) settings
+[apps.users.ach18207ao.omo]
+disabled_mcps = ["codebase-memory", "context7"]
+
 [apps.users.ach18207ao.mcp.mcpServers]
 [apps.users.ach18207ao.mcp.mcpServers.github-mcp-server]
 command = "github-mcp-server"
@@ -117,7 +102,9 @@ command = "mcp-server-git" # wrapped command made by me
 [apps.users.ach18207ao.mcp.mcpServers.context7]
 command = "context7-mcp" # wrapped command made by me
 [apps.users.ach18207ao.mcp.mcpServers.context7.env]
-CONTEXT7_API_KEY = "${env:CONTEXT7_API_KEY}"
+CONTEXT7_API_KEY = "{env:CONTEXT7_API_KEY}"
+[apps.users.ach18207ao.mcp.mcpServers.codebase-memory]
+command = "codebase-memory-mcp" # wrapped command made by me
 
 [apps.users.ach18207ao.shell]
 historyIgnore = [
