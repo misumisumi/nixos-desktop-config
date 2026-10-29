@@ -3,8 +3,6 @@
   pkgs,
   config,
   user,
-  inputs,
-  system,
   ...
 }:
 let
@@ -81,6 +79,11 @@ in
     };
     "mcphub/servers.json".text = toJSON mcp;
     "opencode/dcp.jsonc".source = getChezmoiFilePath "dot_config/opencode/dcp.jsonc";
+    "opencode/plugins/cbm-augment.ts".source =
+      pkgs.replaceVars ./codebase-memory-mcp/plugins/cbm-augment.ts
+        {
+          inherit (pkgs) codebase-memory-mcp;
+        };
   };
   programs = {
     mcp = {
@@ -98,9 +101,16 @@ in
       '';
       enableMcpIntegration = true;
       settings = opencode;
-      skills =
-        pkgs.agent-skills.github.imbad0202.academic-research-skills
-        // pkgs.agent-skills.github.nanaism.yomiyasu;
+      agents = {
+        codebase-memory-auditor = ./codebase-memory-mcp/agents/codebase-memory-auditor.md;
+        codebase-memory-scout = ./codebase-memory-mcp/agents/codebase-memory-scout.md;
+        codebase-memory = ./codebase-memory-mcp/agents/codebase-memory.md;
+      };
+      skills = {
+        codebase-memory-mcp = ./codebase-memory-mcp;
+      }
+      // pkgs.agent-skills.github.imbad0202.academic-research-skills
+      // pkgs.agent-skills.github.nanaism.yomiyasu;
     };
     github-copilot-cli = {
       enable = true;
