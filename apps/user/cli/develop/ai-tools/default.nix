@@ -7,7 +7,9 @@
 }:
 let
   inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData getChezmoiFilePath;
-  inherit (importChezmoiUserAppData user) mcp opencode;
+  appData = importChezmoiUserAppData user;
+  inherit (appData) mcp opencode omo;
+  omoModels = appData.omo_models or { };
   inherit (builtins) toJSON;
   inherit (lib)
     filterAttrs
@@ -40,6 +42,7 @@ in
       (map wrapExe [
         aichat
         mcp-hub
+        oh-my-openagent
       ])
       ++ [
         (writeShellScriptBin "copilot-oc" ''
@@ -69,6 +72,15 @@ in
           }
           // x
         ) (filterAttrs (k: _: k != "github-mcp-server") mcp.mcpServers);
+      };
+      ".omo/omo.jsonc".text = toJSON omo.settings;
+      ".omo/agent/settings.jsonc".text = toJSON omo.agent.settings;
+    }
+    // lib.optionalAttrs (omoModels != { }) {
+      # omo native (senpi) reads providers from its own models.json, not opencode.json
+      ".omo/agent/models.json" = {
+        force = true;
+        text = toJSON omoModels;
       };
     };
   };

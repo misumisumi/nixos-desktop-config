@@ -80,8 +80,125 @@ resource = "*"
 effect = "allow"
 
 # omo (oh-my-openagent) settings
-[apps.users.sumi.omo]
-disabled_mcps = ["codebase-memory", "context7"]
+# litellm の combo alias を category / agent に割り当てる
+# main は agent combo を廃止し GLM-5.2 を直接ピン留め
+[apps.users.sumi.omo.agent.settings]
+defaultProvider = "litellm"
+defaultModel = "glm-5.2"
+
+[apps.users.sumi.omo.settings]
+model_profile = "litellm/glm-5.2"
+exclude_models = [
+    "anthropic/claude-fable-5-1",
+    "anthropic/claude-opus-5-5",
+    "anthropic/claude-opus-4-6",
+    "openai/gpt-6-astra",
+    "openai/gpt-6-sol",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6.1-sol-fast",
+]
+
+# ── main (native harness: 新規セッション時に適用。TUI では /model litellm/glm-5.2)──
+[[apps.users.sumi.omo.settings.model_profiles."daily-normal".models]]
+model = "litellm/glm-5.2"
+reasoning = "medium"
+[[apps.users.sumi.omo.settings.model_profiles."daily-normal".models]]
+model = "litellm/superbrain"
+reasoning = "max"
+
+# ── category (委派ピラミッド。omo-native の reviewer 3 体はここを自動継承)──
+[apps.users.sumi.omo.settings.categories.quick]
+models = ["litellm/quick"]
+[apps.users.sumi.omo.settings.categories."unspecified-low"]
+models = ["litellm/auto"] # Jev 裁定プール
+[apps.users.sumi.omo.settings.categories."unspecified-high"]
+models = ["litellm/superbrain", "litellm/complex"]
+[apps.users.sumi.omo.settings.categories."deep-low"]
+models = ["litellm/coding"] # → qa-executor が自動追従
+[apps.users.sumi.omo.settings.categories."deep-high"]
+models = [
+    "litellm/superbrain",
+    "litellm/ultrabrain",
+] # gate-reviewer は先頭 superbrain、難案件は sonnet へ二段昇格
+[apps.users.sumi.omo.settings.categories.ultrabrain]
+models = ["litellm/ultrabrain"] # Sonnet → K3.1 Pro → local
+[apps.users.sumi.omo.settings.categories."visual-engineering"]
+models = ["litellm/coding"]
+[apps.users.sumi.omo.settings.categories.writing]
+models = ["litellm/writing"]
+[apps.users.sumi.omo.settings.categories.artistry]
+models = ["litellm/ultrabrain"]
+[apps.users.sumi.omo.settings.categories.architect]
+models = ["litellm/ultrabrain"]
+
+# ── 名前付きエージェント ──
+[apps.users.sumi.omo.settings.agents.sisyphus]
+prompt_append = "You NEVER implement. Route ALL code changes through task(category=...). Self-edit only single-line typos."
+[apps.users.sumi.omo.settings.agents.explore]
+model = "litellm/coding"
+[apps.users.sumi.omo.settings.agents.librarian]
+model = "litellm/coding"
+[apps.users.sumi.omo.settings.agents."plan-consultant"]
+model = "litellm/ultrabrain"
+[apps.users.sumi.omo.settings.agents."plan-reviewer"]
+model = "litellm/reviewer" # Sol high (初回 + 最大 2 ラウンド)
+
+# omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
+# omo native は opencode の providers 設定を読まないため、LiteLLM をここで定義する
+[apps.users.sumi.omo.settings_models.providers.litellm]
+name = "LiteLLM"
+baseUrl = "https://llm.misumi-sumi.com/v1"
+api = "openai-completions"
+apiKey = "${LITELLM_API_KEY}"
+[apps.users.sumi.omo.settings_models.providers.litellm.compat]
+supportsReasoningEffort = true
+[apps.users.sumi.omo.settings_models.providers.litellm.headers]
+CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID}"
+CF-Access-Client-Secret = "${CF_ACCESS_SECRET}"
+
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "glm-5.2"
+name = "GLM-5.2"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "superbrain"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "ultrabrain"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "reviewer"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "complex"
+reasoning = true
+contextWindow = 922000
+maxTokens = 128000
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "coding"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 384000
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "quick"
+contextWindow = 1048576
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "auto"
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+id = "writing"
+contextWindow = 1000000
+maxTokens = 131072
 
 # MCP Servers settings
 [apps.users.sumi.mcp.mcpServers]
