@@ -1,5 +1,13 @@
-{ config, getEncryptFile, ... }:
 {
+  pkgs,
+  config,
+  getEncryptFile,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    moonlight-qt
+  ];
   xresources = {
     extraConfig = "Xft.dpi:100";
   };

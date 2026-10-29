@@ -1,10 +1,20 @@
-{ config, getEncryptFile, ... }:
 {
+  pkgs,
+  config,
+  getEncryptFile,
+  ...
+}:
+{
+  home = {
+    packages = with pkgs; [
+      moonlight-qt
+    ];
+    pointerCursor = {
+      size = 32;
+    };
+  };
   xresources = {
     extraConfig = "Xft.dpi:125";
-  };
-  home.pointerCursor = {
-    size = 32;
   };
   xdg.configFile = {
     "qtile/local_config.py".source = ./qtile/local_config.py;
