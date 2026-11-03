@@ -50,13 +50,6 @@
 # Patch from https://github.com/NixOS/nixpkgs/pull/211600
 { nixpkgs-stable, inputs, ... }:
 final: prev: {
-  mcp-server-git = prev.mcp-server-git.overridePythonAttrs (old: {
-    dependencies =
-      (builtins.filter (x: x != prev.python3Packages.mcp) old.dependencies)
-      ++ (with prev.python3Packages; [
-        mcp_1
-      ]);
-  });
   vivaldi = prev.vivaldi.override {
     commandLineArgs = "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo";
     proprietaryCodecs = true;

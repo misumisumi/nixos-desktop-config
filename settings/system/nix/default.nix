@@ -54,6 +54,8 @@
       permittedInsecurePackages = [
         "firefox-esr-140-bin-unwrapped-140.17.0esr"
       ];
+      #WARN: https://github.com/NixOS/nixpkgs/issues/410814
+      problems.handlers."gtk+".broken = "warn";
     };
   };
 
