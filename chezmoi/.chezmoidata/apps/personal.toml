@@ -34,6 +34,8 @@ plugins = ["opencode-plugin-litellm@latest"]
 [apps.users.sumi.opencode.theme]
 name = "tokyonight"
 mode = "dark"
+[apps.users.sumi.opencode.websearch]
+provider = "exa"
 [apps.users.sumi.opencode.providers.litellm]
 name = "LiteLLM"
 package = "@opencode/ai/providers/openai-compatible"
@@ -132,73 +134,71 @@ models = ["litellm/ultrabrain"]
 models = ["litellm/ultrabrain"]
 
 # ── 名前付きエージェント ──
-[apps.users.sumi.omo.settings.agents.sisyphus]
+[apps.users.sumi.omo.agent.settings.sisyphus]
 prompt_append = "You NEVER implement. Route ALL code changes through task(category=...). Self-edit only single-line typos."
-[apps.users.sumi.omo.settings.agents.explore]
+[apps.users.sumi.omo.agent.settings.explore]
 model = "litellm/coding"
-[apps.users.sumi.omo.settings.agents.librarian]
+[apps.users.sumi.omo.agent.settings.librarian]
 model = "litellm/coding"
-[apps.users.sumi.omo.settings.agents."plan-consultant"]
+[apps.users.sumi.omo.agent.settings."plan-consultant"]
 model = "litellm/ultrabrain"
-[apps.users.sumi.omo.settings.agents."plan-reviewer"]
+[apps.users.sumi.omo.agent.settings."plan-reviewer"]
 model = "litellm/reviewer" # Sol high (初回 + 最大 2 ラウンド)
 
 # omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
 # omo native は opencode の providers 設定を読まないため、LiteLLM をここで定義する
-[apps.users.sumi.omo.settings_models.providers.litellm]
+[apps.users.sumi.omo.agent.models.providers.litellm]
 name = "LiteLLM"
 baseUrl = "https://llm.misumi-sumi.com/v1"
 api = "openai-completions"
 apiKey = "${LITELLM_API_KEY}"
-[apps.users.sumi.omo.settings_models.providers.litellm.compat]
+[apps.users.sumi.omo.agent.models.providers.litellm.compat]
 supportsReasoningEffort = true
-[apps.users.sumi.omo.settings_models.providers.litellm.headers]
+[apps.users.sumi.omo.agent.models.providers.litellm.headers]
 CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID}"
 CF-Access-Client-Secret = "${CF_ACCESS_SECRET}"
 
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "glm-5.2"
 name = "GLM-5.2"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "superbrain"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "ultrabrain"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "reviewer"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "complex"
 reasoning = true
 contextWindow = 922000
 maxTokens = 128000
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "coding"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 384000
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "quick"
 contextWindow = 1048576
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "auto"
 contextWindow = 1000000
 maxTokens = 131072
-[[apps.users.sumi.omo.settings_models.providers.litellm.models]]
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "writing"
-contextWindow = 1000000
-maxTokens = 131072
 
 # MCP Servers settings
 [apps.users.sumi.mcp.mcpServers]

@@ -4,4 +4,5 @@
 {{- end -}}
 {{- $userConfig := or (get .apps.users $userName) dict -}}
 {{- $omoConfig := or (get $userConfig "omo") dict -}}
-{{ merge (dict "$schema" "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json") $omoConfig | toJson }}
+{{- $omoSettings := or (get $omoConfig "settings") dict -}}
+{{ merge (dict "$schema" "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json") $omoSettings | toJson }}

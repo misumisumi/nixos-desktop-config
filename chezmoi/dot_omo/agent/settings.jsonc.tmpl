@@ -1,0 +1,9 @@
+{{- $userName := .chezmoi.username -}}
+{{ if eq .chezmoi.os "windows" }}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
+{{- end -}}
+{{- $userConfig := or (get .apps.users $userName) dict -}}
+{{- $omoConfig := or (get $userConfig "omo") dict -}}
+{{- $agentConfig := or (get $omoConfig "agent") dict -}}
+{{- $agentSettings := or (get $agentConfig "settings") dict -}}
+{{ $agentSettings | toJson }}
