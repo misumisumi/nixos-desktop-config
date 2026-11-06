@@ -136,7 +136,7 @@ in
         codebase-memory-mcp = ./codebase-memory-mcp;
       }
       // pkgs.agent-skills.github.imbad0202.academic-research-skills
-      // pkgs.agent-skills.github.nanaism.yomiyasu;
+      // pkgs.agent-skills.github.coji.natural-japanese;
     };
     github-copilot-cli = {
       enable = true;
