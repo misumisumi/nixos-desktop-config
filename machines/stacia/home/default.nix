@@ -21,11 +21,6 @@
     "qtile/local_variables.py".source = ./qtile/local_variables.py;
   };
   sops.secrets = {
-    "env" = {
-      path = "${config.home.homeDirectory}/.env";
-      sopsFile = getEncryptFile "pkgs/ai-tools/env";
-      format = "binary";
-    };
     "univ" = {
       path = "${config.home.homeDirectory}/.ssh/conf.d/hosts/univ";
       sopsFile = getEncryptFile "pkgs/ssh/univ";

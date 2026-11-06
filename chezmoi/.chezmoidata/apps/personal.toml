@@ -46,8 +46,8 @@ timeout = false
 chunkTimeout = false
 formatModelNames = false
 [apps.users.sumi.opencode.providers.litellm.headers]
-CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
-CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
+CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID_API_KEY}"
+CF-Access-Client-Secret = "{env:CF_ACCESS_CLIENT_SECRET_API_KEY}"
 [[apps.users.sumi.opencode.permissions]]
 action = "edit"
 resource = "*"
@@ -155,8 +155,8 @@ apiKey = "${LITELLM_API_KEY}"
 [apps.users.sumi.omo.agent.models.providers.litellm.compat]
 supportsReasoningEffort = true
 [apps.users.sumi.omo.agent.models.providers.litellm.headers]
-CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID}"
-CF-Access-Client-Secret = "${CF_ACCESS_SECRET}"
+CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID_API_KEY}"
+CF-Access-Client-Secret = "${CF_ACCESS_CLIENT_SECRET_API_KEY}"
 
 [[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "glm-5.2"
@@ -206,7 +206,7 @@ id = "writing"
 command = "github-mcp-server"
 args = ["stdio"]
 [apps.users.sumi.mcp.mcpServers.github-mcp-server.env]
-GITHUB_PERSONAL_ACCESS_TOKEN = "{env:GITHUB_PAT}"
+GITHUB_PERSONAL_ACCESS_TOKEN = "{env:GITHUB_PAT_API_KEY}"
 [apps.users.sumi.mcp.mcpServers.paper_search]
 command = "paper-search-mcp" # wrapped command made by me
 # [apps.users.sumi.mcp.mcpServers.discord]

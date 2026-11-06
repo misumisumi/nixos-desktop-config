@@ -57,6 +57,12 @@
         sopsFile = getEncryptFile "pkgs/ai-tools/config.yaml.txt";
         format = "binary";
       };
+      "env" = {
+        path = "${config.home.homeDirectory}/.env";
+        sopsFile = getEncryptFile "pkgs/ai-tools/env";
+        format = "binary";
+        mode = "0400";
+      };
     };
   };
 }
