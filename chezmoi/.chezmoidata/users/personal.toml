@@ -47,10 +47,11 @@ LG_CONFIG_FILE = "$XDG_CONFIG_HOME/lazygit/config.yml"
 MANPAGER = "sh -c 'sed -u -e \\\"s%\\\\x1B\\[[0-9;]*m%%g; s%.\\\\x08%%g\\\" | bat -p -lman'"
 TMUX_TMPDIR = "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 [linux.users.sumi.env.alias]
-vimdiff = "nvim -d"
 copilot = "wrapEnv copilot"
 mcp-hub = "wrapEnv mcp-hub"
+omo = "wrapEnv omo"
 opencode = "wrapEnv opencode"
+vimdiff = "nvim -d"
 
 [linux.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
 context7-mcp = "@upstash/context7-mcp"
@@ -359,6 +360,7 @@ apps = [
     "neovim",
     "nerd-fonts/FiraCode-NF",
     "nodejs-lts",
+    "oh-my-openagent",
     "opencode",
     "openssh",
     "paseo",
