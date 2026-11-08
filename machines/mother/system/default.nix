@@ -3,6 +3,7 @@ with builtins;
 {
   imports = [
     ../../../apps/color-theme/system/${head (split "-" colorTheme)}
+    ../../../apps/system/carla
     ../../../apps/system/documentation
     ../../../apps/system/nix-ld
     ../../../apps/system/paseo
