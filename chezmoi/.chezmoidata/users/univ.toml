@@ -77,7 +77,6 @@ check_duration = "7d"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"
-cargo = "latest"
 cmake = "latest"
 copilot = "latest"
 delta = "latest"
