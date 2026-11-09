@@ -52,7 +52,6 @@ in
           '';
       in
       (map wrapExe [
-        aichat
         mcp-hub
         oh-my-openagent
       ])
@@ -101,10 +100,6 @@ in
     };
   };
   xdg.configFile = {
-    "aichat/roles" = {
-      source = ./roles;
-      recursive = true;
-    };
     "mcphub/servers.json".text = toJSON mcp;
     "opencode/dcp.jsonc".source = getChezmoiFilePath "dot_config/opencode/dcp.jsonc";
     "opencode/plugins/cbm-augment.ts".source =
