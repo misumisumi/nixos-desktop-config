@@ -59,7 +59,7 @@ opencode = "wrapEnv opencode"
 
 [linux.users.ach18207ao.packages.mise.settings]
 idiomatic_version_file = true
-always_keep_download = false
+download_cache = false
 always_keep_install = false
 verbose = false
 http_timeout = "30s"
