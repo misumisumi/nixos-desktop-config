@@ -55,6 +55,9 @@ final: prev: {
     proprietaryCodecs = true;
     enableWidevine = true;
   };
+  vrc-get = prev.vrc-get.overrideAttrs (old: {
+    buildInputs = (old.buildInputs or [ ]) ++ [ final.aws-lc ];
+  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
