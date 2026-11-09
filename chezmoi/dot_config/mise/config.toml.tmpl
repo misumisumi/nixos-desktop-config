@@ -7,7 +7,7 @@
 
 {{- $userName := .chezmoi.username -}}
 {{ if eq .chezmoi.os "windows" }}
-{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "/") $userName -}}
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
 {{- end -}}
 {{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
 {{- $userMiseConfigs := or (get (or (get $userConfig "packages") dict) "mise") dict -}}
@@ -16,6 +16,11 @@
 [tools]
 {{ $miseTools := merge (or (get $hostMiseConfigs "tools") dict) (or (get $userMiseConfigs "tools") dict) -}}
 {{ toToml $miseTools }}
+
+# [tool_alias] maps a shorthand tool name to a backend identifier (e.g. mcp-hub = "npm:mcp-hub")
+[tool_alias]
+{{ $miseToolAlias := merge (or (get $hostMiseConfigs "tool_alias") dict) (or (get $userMiseConfigs "tool_alias") dict) -}}
+{{ toToml $miseToolAlias }}
 
 [plugins]
 {{ $miseTools := merge (or (get $hostMiseConfigs "plugins") dict) (or (get $userMiseConfigs "plugins") dict) -}}

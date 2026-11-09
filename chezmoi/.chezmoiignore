@@ -12,7 +12,6 @@ README-ja.md
 {{ if eq $os "windows" -}}
 .chezmoiscripts/unix/**
 .local/bin/copilot
-.local/bin/update-mcp-servers
 **/*.sh
 **/*.sh.tmpl
 *bash*
