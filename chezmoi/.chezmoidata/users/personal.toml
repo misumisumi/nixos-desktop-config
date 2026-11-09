@@ -32,7 +32,7 @@ externals = ["blesh", "tpm"]
 [linux.users.sumi.env]
 initExtra = ""
 extraConfig = ""
-PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
 [linux.users.sumi.env.export]
 EDITOR = "nvim"
 FZF_ALT_C_COMMAND = "fd --type d"
@@ -53,27 +53,6 @@ omo = "wrapEnv omo"
 opencode = "wrapEnv opencode"
 vimdiff = "nvim -d"
 
-[linux.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
-context7-mcp = "@upstash/context7-mcp"
-mcp-hub = "mcp-hub@latest"
-mcpvault = "@bitbonsai/mcpvault@latest"
-[linux.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
-mcp-nixos = "mcp_nixos"
-mcp-server-git = "mcp_server_git"
-[linux.users.sumi.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
-giturl = "https://github.com/openags/paper-search-mcp"
-module = "paper_search_mcp.server"
-[linux.users.sumi.packages.mcpServers.github] # name = "module_name", name is executable name
-owner = "github"
-repo = "github-mcp-server"
-srcFile = "github-mcp-server_Linux_arm64.tar.gz"
-exeFile = "github-mcp-server"
-[linux.users.sumi.packages.mcpServers.github.codebase-memory-mcp] # name = "module_name", name is executable name
-owner = "DeusData"
-repo = "codebase-memory-mcp"
-srcFile = "codebase-memory-mcp-linux-arm64-portable.tar.gz"
-exeFile = "codebase-memory-mcp"
-
 [linux.users.sumi.packages.mise.settings]
 idiomatic_version_file = true
 download_cache = false
@@ -89,9 +68,21 @@ experimental = true
 idiomatic_version_file_enable_tools = []
 [linux.users.sumi.packages.mise.tool_update]
 check_duration = "7d"
+# mcp servers migrated from packages.mcpServers: alias name = backend identifier, alias name is executable name
+[linux.users.sumi.packages.mise.tool_alias]
+context7-mcp = "npm:@upstash/context7-mcp"
+mcp-hub = "npm:mcp-hub"
+mcp-nixos = "pypi:mcp-nixos"
+mcp-server-git = "pypi:mcp-server-git"
+mcpvault = "npm:@bitbonsai/mcpvault"
+paper-search-mcp = "pypi:git+https://github.com/openags/paper-search-mcp.git"
+github-mcp-server = "github:github/github-mcp-server"
+codebase-memory-mcp = "pypi:codebase-memory-mcp"
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"
 btop = "latest"
+codebase-memory-mcp = "latest"
+context7-mcp = "latest"
 copilot = "latest"
 cmake = "latest"
 delta = "latest"
@@ -101,13 +92,19 @@ fd = "latest"
 ffmpeg = "latest"
 fzf = "latest"
 github-cli = "latest"
+github-mcp-server = "latest"
 go = "latest"
 imagemagick = "latest"
 jq = "latest"
 lazygit = "latest"
+mcp-hub = "latest"
+mcp-nixos = "latest"
+mcp-server-git = "latest"
+mcpvault = "latest"
 neovim = "latest"
 node = "latest"
 opencode = "latest"
+paper-search-mcp = "latest"
 python = "latest"
 ripgrep = "latest"
 rust = "latest"
@@ -137,8 +134,9 @@ zoxide = "latest"
 ####################################################################################################
 # For windows
 ####################################################################################################
+[windows.users.sumi]
+externals = ["mise"] # fetch mise.exe via .chezmoiexternals and activate run_onchange_after_5-install-mise.ps1
 [windows.users.sumi.sops]
-"pkgs\\ai-tools\\api-keys.yaml" = ".config\\codecompanion\\api-keys.yaml"
 "pkgs\\ai-tools\\env" = ".env"
 "pkgs\\ssh\\desktops" = ".ssh\\conf.d\\hosts\\desktops"
 
@@ -146,7 +144,7 @@ zoxide = "latest"
 PATH = [
     "$env:USERPROFILE\\bin",
     "$env:USERPROFILE\\.local\\bin",
-    "$env:USERPROFILE\\.local\\share\\mcp-servers\\bin",
+    "$env:USERPROFILE\\.local\\share\\mise\\shims",
     "$env:USERPROFILE\\.dotnet\\tools",
     "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\bin",
     "$env:USERPROFILE\\scoop\\apps\\git\\current\\mingw64\\libexec\\git-core",
@@ -223,24 +221,30 @@ XDG_DATA_HOME = "$env:USERPROFILE\\.local\\share"
 XDG_STATE_HOME = "$env:USERPROFILE\\.local/state"
 YAZI_FILE_ONE = "$env:USERPROFILE\\scoop\\apps\\git\\current\\usr\\bin\\file.exe"
 
-[windows.users.sumi.packages.mcpServers.node] # name = "package_name", name is executable name
-mcp-server-filesystem = "@modelcontextprotocol/server-filesystem"
-mcp-server-memory = "@modelcontextprotocol/server-memory"
-mcp-server-sequential-thinking = "@modelcontextprotocol/server-sequential-thinking"
-context7-mcp = "@upstash/context7-mcp"
-mcp-hub = "mcp-hub@latest"
-mcpvault = "@bitbonsai/mcpvault@latest"
-[windows.users.sumi.packages.mcpServers.pip] # name = "module_name", name is executable name
-mcp-server-git = "mcp_server_git"
-mcp-nixos = "mcp_nixos"
-[windows.users.sumi.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
-giturl = "https://github.com/openags/paper-search-mcp"
-module = "paper-search-mcp"
-[windows.users.sumi.packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
-owner = "github"
-repo = "github-mcp-server"
-srcFile = "github-mcp-server_Windows_x86_64.zip"
-exeFile = "github-mcp-server.exe"
+# mcp servers migrated from packages.mcpServers: alias name = backend identifier, alias name is executable name
+# codebase-memory-mcp is installed via scoop on windows, not migrated here
+[windows.users.sumi.packages.mise.tool_alias]
+context7-mcp = "npm:@upstash/context7-mcp"
+mcp-hub = "npm:mcp-hub"
+mcp-server-filesystem = "npm:@modelcontextprotocol/server-filesystem"
+mcp-server-memory = "npm:@modelcontextprotocol/server-memory"
+mcp-server-sequential-thinking = "npm:@modelcontextprotocol/server-sequential-thinking"
+mcp-nixos = "pypi:mcp-nixos"
+mcp-server-git = "pypi:mcp-server-git"
+mcpvault = "npm:@bitbonsai/mcpvault"
+paper-search-mcp = "pypi:git+https://github.com/openags/paper-search-mcp.git"
+github-mcp-server = "github:github/github-mcp-server"
+[windows.users.sumi.packages.mise.tools]
+context7-mcp = "latest"
+github-mcp-server = "latest"
+mcp-hub = "latest"
+mcp-nixos = "latest"
+mcp-server-filesystem = "latest"
+mcp-server-git = "latest"
+mcp-server-memory = "latest"
+mcp-server-sequential-thinking = "latest"
+mcpvault = "latest"
+paper-search-mcp = "latest"
 
 [windows.users.sumi.packages.powershell]
 extraPreInstall = ""

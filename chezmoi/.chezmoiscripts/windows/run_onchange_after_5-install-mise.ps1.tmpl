@@ -6,6 +6,8 @@
 {{- $hostPkgConfigs := or (get $hostConfig "packages") dict -}}
 
 {{- $userName := .chezmoi.username -}}
+# chezmoi.username on windows is "HOST\user"; normalize to the bare name used as data key (same as the other windows scripts)
+{{- $userName = trimPrefix (print (upper .chezmoi.hostname) "\\") $userName -}}
 {{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
 {{- $userPkgConfigs := or (get $userConfig "packages") dict -}}
 

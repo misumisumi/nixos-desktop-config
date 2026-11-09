@@ -13,26 +13,7 @@ if [ "$SHELL" != "/usr/bin/zsh" ] && [ "${LOGIN:-1}" -eq 1 ]; then
   exec /usr/bin/zsh -l
 fi
 """
-PATH = ["$HOME/bin", "$HOME/.local/bin", "$HOME/.local/share/mcp-servers/bin"]
-[linux.users.ach18207ao.packages.mcpServers.node] # name = "package_name", name is executable name
-context7-mcp = "@upstash/context7-mcp"
-mcp-hub = "mcp-hub@latest"
-[linux.users.ach18207ao.packages.mcpServers.pip] # name = "module_name", name is executable name
-mcp-nixos = "mcp_nixos"
-mcp-server-git = "mcp_server_git"
-[linux.users.ach18207ao.packages.mcpServers.python.paper-search-mcp] # name = "module_name", name is executable name
-giturl = "https://github.com/openags/paper-search-mcp"
-module = "paper-search-mcp"
-[linux.users.ach18207ao.packages.mcpServers.github.github-mcp-server] # name = "module_name", name is executable name
-owner = "github"
-repo = "github-mcp-server"
-srcFile = "github-mcp-server_Linux_x86_64.tar.gz"
-exeFile = "github-mcp-server"
-[linux.users.ach18207ao.packages.mcpServers.github.codebase-memory-mcp] # name = "module_name", name is executable name
-owner = "DeusData"
-repo = "codebase-memory-mcp"
-srcFile = "codebase-memory-mcp-linux-amd64-portable.tar.gz"
-exeFile = "codebase-memory-mcp"
+PATH = ["$HOME/bin", "$HOME/.local/bin"]
 
 [linux.users.ach18207ao.env.export]
 EDITOR = "nvim"
@@ -72,11 +53,22 @@ experimental = true
 idiomatic_version_file_enable_tools = []
 [linux.users.ach18207ao.packages.mise.tool_update]
 check_duration = "7d"
+# mcp servers migrated from packages.mcpServers: alias name = backend identifier, alias name is executable name
+[linux.users.ach18207ao.packages.mise.tool_alias]
+context7-mcp = "npm:@upstash/context7-mcp"
+mcp-hub = "npm:mcp-hub"
+mcp-nixos = "pypi:mcp-nixos"
+mcp-server-git = "pypi:mcp-server-git"
+paper-search-mcp = "pypi:git+https://github.com/openags/paper-search-mcp.git"
+github-mcp-server = "github:github/github-mcp-server"
+codebase-memory-mcp = "pypi:codebase-memory-mcp"
 [linux.users.ach18207ao.packages.mise.tools]
 bat = "latest"
 btop = "latest"
 clang = "latest"
 cmake = "latest"
+codebase-memory-mcp = "latest"
+context7-mcp = "latest"
 copilot = "latest"
 delta = "latest"
 deno = "latest"
@@ -84,12 +76,17 @@ duf = "latest"
 fd = "latest"
 fzf = "latest"
 github-cli = "latest"
+github-mcp-server = "latest"
 go = "latest"
 jq = "latest"
 lazygit = "latest"
+mcp-hub = "latest"
+mcp-nixos = "latest"
+mcp-server-git = "latest"
 neovim = "latest"
 node = "latest"
 opencode = "latest"
+paper-search-mcp = "latest"
 python = "latest"
 ripgrep = "latest"
 rust = "latest"
