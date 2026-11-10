@@ -135,7 +135,7 @@ zoxide = "latest"
 # For windows
 ####################################################################################################
 [windows.users.sumi]
-externals = ["mise"] # fetch mise.exe via .chezmoiexternals and activate run_onchange_after_5-install-mise.ps1
+externals = []
 [windows.users.sumi.sops]
 "pkgs\\ai-tools\\env" = ".env"
 "pkgs\\ssh\\desktops" = ".ssh\\conf.d\\hosts\\desktops"
@@ -323,7 +323,7 @@ sudo = [
     "stnkl.EverythingToolbar",
     "voidtools.Everything.alpha",
 ]
-no_sudo = ["Spotify.Spotify"]
+no_sudo = ["Microsoft.PowerShell", "Spotify.Spotify"]
 
 [windows.users.sumi.packages.chocolatey]
 extraPreInstall = ""
@@ -357,6 +357,7 @@ apps = [
     "less",
     "make",
     "mingw",
+    "mise",
     "my-bucket/moralerspace-hw-nf",
     "my-bucket/moralerspace-nf",
     "my-bucket/wavesurfer",
