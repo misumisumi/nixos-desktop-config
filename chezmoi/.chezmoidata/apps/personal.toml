@@ -83,20 +83,6 @@ effect = "allow"
 
 # omo (oh-my-openagent) settings
 # litellm の combo alias を category / agent に割り当てる
-# グローバル指示 (native omo: ~/.omo/agent/AGENTS.md として system prompt に注入)
-[apps.users.sumi.omo.agent]
-instructions = '''
-# Global Instructions
-
-## Delegation (top-level session only)
-
-- In the top-level session you NEVER implement code changes yourself.
-- Route ALL code changes through `task` delegation (`category: ...`).
-- The only exception is a self-edit of a single-line typo.
-
-If you are a subagent spawned by `task`, this section does not apply: implement and verify the assigned work yourself.
-'''
-
 # main は agent combo を廃止し GLM-5.3 を直接ピン留め
 [apps.users.sumi.omo.agent.settings]
 defaultProvider = "litellm"
@@ -143,7 +129,7 @@ models = ["litellm/superbrain", "litellm/ultrabrain"]
 [apps.users.sumi.omo.settings.categories.ultrabrain]
 models = ["litellm/ultrabrain"] # Sonnet → K3.1 Pro → local
 [apps.users.sumi.omo.settings.categories."visual-engineering"]
-models = ["litellm/coding"]
+models = ["litellm/visual-engineering"]
 [apps.users.sumi.omo.settings.categories.writing]
 models = ["litellm/writing"]
 [apps.users.sumi.omo.settings.categories.artistry]
@@ -159,8 +145,10 @@ model = "litellm/coding"
 model = "litellm/coding"
 [apps.users.sumi.omo.settings.agents."plan-consultant"]
 model = "litellm/ultrabrain"
-[apps.users.sumi.omo.settings.agents."plan-reviewer"]
-model = "litellm/reviewer" # Sol high (初回 + 最大 2 ラウンド)
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-reviewer"]
+model = "litellm/reviewer"
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."omo-native-gate-reviewer"]
+model = "litellm/reviewer"
 
 # omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
 # omo native は opencode の providers 設定を読まないため、LiteLLM をここで定義する
@@ -216,6 +204,11 @@ contextWindow = 1000000
 maxTokens = 131072
 [[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "writing"
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
+id = "visual-engineering"
+reasoning = true
+contextWindow = 1048576
+maxTokens = 65536
 
 # MCP Servers settings
 [apps.users.sumi.mcp.mcpServers]
