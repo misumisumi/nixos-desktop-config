@@ -100,7 +100,7 @@
         # clipboard
         set -g set-clipboard external
         set -g allow-passthrough on
-        set -g terminal-features 'xterm*:clipboard'
+        set -as terminal-features 'xterm*:clipboard:extkeys'
 
         # For oh-my-opencode
         set -g extended-keys on
