@@ -2,7 +2,7 @@
 # For linux
 ####################################################################################################
 [linux.users.ach18207ao]
-externals = ["blesh", "fzf-options", "lesspipe", "tpm"]
+externals = ["blesh", "fzf-options", "lesspipe", "opencode-skills", "tpm"]
 [linux.users.ach18207ao.sops]
 "pkgs/ai-tools/env" = ".env"
 

@@ -1,4 +1,14 @@
 [apps.users."kobayashi.sumiharu.r4"]
+skills = [
+    "https://github.com/coji/natural-japanese/skills",
+    "https://github.com/Imbad0202/academic-research-skills",
+    # academic-paper,
+    # academic-paper-reviewer,
+    # academic-pipeline
+    # critical-thinking
+    # deep-research
+    # sr-screener
+]
 
 [apps.users."kobayashi.sumiharu.r4".delta]
 [apps.users."kobayashi.sumiharu.r4".delta.git]
@@ -81,6 +91,9 @@ action = "websearch"
 resource = "*"
 effect = "allow"
 
+# omo (oh-my-openagent) settings
+[apps.users."kobayashi.sumiharu.r4".omo]
+disabled_mcps = []
 # omo (oh-my-openagent) settings
 # litellm の combo alias を category / agent に割り当てる
 # main は agent combo を廃止し GLM-5.2 を直接ピン留め
@@ -199,10 +212,6 @@ contextWindow = 1000000
 maxTokens = 131072
 [[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
 id = "writing"
-
-# omo (oh-my-openagent) settings
-[apps.users."kobayashi.sumiharu.r4".omo]
-disabled_mcps = ["codebase-memory", "context7"]
 
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers]
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server]

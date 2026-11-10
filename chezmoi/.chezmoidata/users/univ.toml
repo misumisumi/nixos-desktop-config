@@ -2,7 +2,7 @@
 # For linux
 ####################################################################################################
 [linux.users."kobayashi.sumiharu.r4"]
-externals = ["blesh", "fzf-options", "lesspipe", "tpm"]
+externals = ["blesh", "fzf-options", "lesspipe", "opencode-skills", "tpm"]
 [linux.users."kobayashi.sumiharu.r4".sops]
 "pkgs/ai-tools/env" = ".env"
 "pkgs/ssh/univ" = ".ssh/conf.d/hosts/univ"
