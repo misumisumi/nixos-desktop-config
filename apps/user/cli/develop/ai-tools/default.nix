@@ -14,8 +14,7 @@ let
   cbmSettings = appData.codebaseMemory or { };
   # Nix's toString renders booleans as "1"/""; the CLI expects "true"/"false".
   cbmSettingValue =
-    value:
-    if builtins.isBool value then (if value then "true" else "false") else toString value;
+    value: if builtins.isBool value then (if value then "true" else "false") else toString value;
   inherit (builtins) toJSON;
   inherit (lib)
     escapeShellArg
@@ -57,10 +56,21 @@ in
             export SSL_CERT_DIR="${pkgs.cacert}/etc/ssl/certs"
             exec ${getExe' p exeName} "$@"
           '';
+        oh-my-openagent' = pkgs.symlinkJoin {
+          inherit (pkgs.oh-my-openagent) meta;
+          name = "${lib.getName pkgs.oh-my-openagent}-wrapped-${lib.getVersion pkgs.oh-my-openagent}";
+          paths = [ pkgs.oh-my-openagent ];
+          preferLocalBuild = true;
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/${pkgs.oh-my-openagent.meta.mainProgram} \
+              --suffix PATH : ${lib.makeBinPath config.programs.opencode.extraPackages} \
+          '';
+        };
       in
       (map wrapExe [
         mcp-hub
-        oh-my-openagent
+        oh-my-openagent'
       ])
       ++ [
         (writeShellScriptBin "copilot-oc" ''
@@ -107,16 +117,15 @@ in
     };
   }
   // lib.optionalAttrs (cbmSettings != { }) {
-    activation.codebaseMemorySettings =
-      lib.hm.dag.entryAfter [ "writeBoundary" ] (
-        lib.concatStringsSep "\n" (
-          lib.mapAttrsToList (
-            key: value:
-            "${getExe pkgs.codebase-memory-mcp} config set ${key} ${lib.escapeShellArg (cbmSettingValue value)} || "
-            + "echo 'codebase-memory: failed to set ${key}; a running daemon may be a different build' >&2"
-          ) cbmSettings
-        )
-      );
+    activation.codebaseMemorySettings = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+      lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (
+          key: value:
+          "${getExe pkgs.codebase-memory-mcp} config set ${key} ${lib.escapeShellArg (cbmSettingValue value)} || "
+          + "echo 'codebase-memory: failed to set ${key}; a running daemon may be a different build' >&2"
+        ) cbmSettings
+      )
+    );
   };
   xdg.configFile = {
     "mcphub/servers.json".text = toJSON mcp;
@@ -134,6 +143,7 @@ in
     };
     opencode = {
       enable = true;
+      extraPackages = with pkgs; [ uv ];
       package = pkgs.writeShellScriptBin "opencode" ''
         ${loadEnv}
         export OPENCODE_ENABLE_EXA=1
