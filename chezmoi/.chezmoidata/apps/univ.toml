@@ -111,6 +111,15 @@ exclude_models = [
     "openai/gpt-6-sol",
     "openai/gpt-6.1-sol",
     "openai/gpt-6.1-sol-fast",
+    "opencode/claude-fable-5-1",
+    "opencode/claude-opus-5-5",
+    "opencode/claude-opus-4-6",
+    "opencode/claude-sonnet-5-5",
+    "opencode/claude-sonnet-5",
+    "opencode/gpt-6-astra",
+    "opencode/gpt-5.6-sol",
+    "opencode/gpt-5.6-sol-fast",
+    "opencode/kimi-k3",
 ]
 
 # ── main (native harness: 新規セッション時に適用。TUI では /model litellm/glm-5.3)──
@@ -127,7 +136,7 @@ models = ["litellm/quick"]
 [apps.users."kobayashi.sumiharu.r4".omo.settings.categories."unspecified-low"]
 models = ["litellm/auto"] # Jev 裁定プール
 [apps.users."kobayashi.sumiharu.r4".omo.settings.categories."unspecified-high"]
-models = ["litellm/superbrain", "litellm/complex"]
+models = ["litellm/complex", "litellm/superbrain"]
 [apps.users."kobayashi.sumiharu.r4".omo.settings.categories."deep-low"]
 models = ["litellm/coding"] # → qa-executor が自動追従
 [apps.users."kobayashi.sumiharu.r4".omo.settings.categories."deep-high"]
@@ -147,15 +156,18 @@ models = ["litellm/ultrabrain"]
 models = ["litellm/ultrabrain"]
 
 # ── 名前付きエージェント ──
+# senpi engine 用 (settings.jsonc -> ~/.omo/agent/settings.jsonc)
 [apps.users."kobayashi.sumiharu.r4".omo.agent.settings.sisyphus]
 prompt_append = "You NEVER implement. Route ALL code changes through task(category=...). Self-edit only single-line typos."
-[apps.users."kobayashi.sumiharu.r4".omo.agent.settings.explore]
+
+# omo 本体用 (omo.jsonc -> ~/.omo/omo.jsonc)
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents.explore]
 model = "litellm/coding"
-[apps.users."kobayashi.sumiharu.r4".omo.agent.settings.librarian]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents.librarian]
 model = "litellm/coding"
-[apps.users."kobayashi.sumiharu.r4".omo.agent.settings."plan-consultant"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-consultant"]
 model = "litellm/ultrabrain"
-[apps.users."kobayashi.sumiharu.r4".omo.agent.settings."plan-reviewer"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-reviewer"]
 model = "litellm/reviewer" # Sol high (初回 + 最大 2 ラウンド)
 
 # omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
