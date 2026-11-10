@@ -66,6 +66,7 @@ mcp-nixos = "pypi:mcp-nixos"
 mcp-server-git = "pypi:mcp-server-git"
 oh-my-openagent = "github:code-yeongyu/oh-my-openagent"
 paper-search-mcp = "pypi:git+https://github.com/openags/paper-search-mcp.git"
+tmux = "aqua:tmux/tmux-builds"
 [linux.users."kobayashi.sumiharu.r4".packages.mise.tools]
 bat = "latest"
 btop = "latest"

@@ -79,6 +79,7 @@ mcp-server-git = "pypi:mcp-server-git"
 mcpvault = "npm:@bitbonsai/mcpvault"
 oh-my-openagent = "github:code-yeongyu/oh-my-openagent"
 paper-search-mcp = "pypi:git+https://github.com/openags/paper-search-mcp.git"
+tmux = "aqua:tmux/tmux-builds"
 [linux.users.sumi.packages.mise.tools]
 bat = "latest"
 btop = "latest"
