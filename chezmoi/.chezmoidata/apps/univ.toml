@@ -96,13 +96,13 @@ effect = "allow"
 disabled_mcps = []
 # omo (oh-my-openagent) settings
 # litellm の combo alias を category / agent に割り当てる
-# main は agent combo を廃止し GLM-5.2 を直接ピン留め
+# main は agent combo を廃止し GLM-5.3 を直接ピン留め
 [apps.users."kobayashi.sumiharu.r4".omo.agent.settings]
 defaultProvider = "litellm"
-defaultModel = "glm-5.2"
+defaultModel = "glm-5.3"
 
 [apps.users."kobayashi.sumiharu.r4".omo.settings]
-model_profile = "litellm/glm-5.2"
+model_profile = "litellm/glm-5.3"
 exclude_models = [
     "anthropic/claude-fable-5-1",
     "anthropic/claude-opus-5-5",
@@ -113,10 +113,10 @@ exclude_models = [
     "openai/gpt-6.1-sol-fast",
 ]
 
-# ── main (native harness: 新規セッション時に適用。TUI では /model litellm/glm-5.2)──
+# ── main (native harness: 新規セッション時に適用。TUI では /model litellm/glm-5.3)──
 [[apps.users."kobayashi.sumiharu.r4".omo.settings.model_profiles."daily-normal".models]]
-model = "litellm/glm-5.2"
-reasoning = "medium"
+model = "litellm/glm-5.3"
+reasoning = "max"
 [[apps.users."kobayashi.sumiharu.r4".omo.settings.model_profiles."daily-normal".models]]
 model = "litellm/superbrain"
 reasoning = "max"
@@ -172,8 +172,8 @@ CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID_API_KEY}"
 CF-Access-Client-Secret = "${CF_ACCESS_CLIENT_SECRET_API_KEY}"
 
 [[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
-id = "glm-5.2"
-name = "GLM-5.2"
+id = "glm-5.3"
+name = "GLM-5.3"
 reasoning = true
 contextWindow = 1000000
 maxTokens = 131072

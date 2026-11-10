@@ -9,6 +9,13 @@ let
   inherit (config.lib.ndchm.chezmoi) importChezmoiUserAppData getChezmoiFilePath;
   appData = importChezmoiUserAppData user;
   inherit (appData) mcp opencode omo;
+  # codebase-memory-mcp has no env/flag for these; they are written to
+  # ${CBM_CACHE_DIR}/_config.db via `config set` (see chezmoiscripts too).
+  cbmSettings = appData.codebaseMemory or { };
+  # Nix's toString renders booleans as "1"/""; the CLI expects "true"/"false".
+  cbmSettingValue =
+    value:
+    if builtins.isBool value then (if value then "true" else "false") else toString value;
   inherit (builtins) toJSON;
   inherit (lib)
     escapeShellArg
@@ -98,6 +105,18 @@ in
         text = toJSON omo.agent.models;
       };
     };
+  }
+  // lib.optionalAttrs (cbmSettings != { }) {
+    activation.codebaseMemorySettings =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] (
+        lib.concatStringsSep "\n" (
+          lib.mapAttrsToList (
+            key: value:
+            "${getExe pkgs.codebase-memory-mcp} config set ${key} ${lib.escapeShellArg (cbmSettingValue value)} || "
+            + "echo 'codebase-memory: failed to set ${key}; a running daemon may be a different build' >&2"
+          ) cbmSettings
+        )
+      );
   };
   xdg.configFile = {
     "mcphub/servers.json".text = toJSON mcp;
