@@ -83,6 +83,20 @@ effect = "allow"
 
 # omo (oh-my-openagent) settings
 # litellm の combo alias を category / agent に割り当てる
+# グローバル指示 (native omo: ~/.omo/agent/AGENTS.md として system prompt に注入)
+[apps.users.ach18207ao.omo.agent]
+instructions = '''
+# Global Instructions
+
+## Delegation (top-level session only)
+
+- In the top-level session you NEVER implement code changes yourself.
+- Route ALL code changes through `task` delegation (`category: ...`).
+- The only exception is a self-edit of a single-line typo.
+
+If you are a subagent spawned by `task`, this section does not apply: implement and verify the assigned work yourself.
+'''
+
 # main は agent combo を廃止し GLM-5.3 を直接ピン留め
 [apps.users.ach18207ao.omo.agent.settings]
 defaultProvider = "litellm"
@@ -113,9 +127,6 @@ exclude_models = [
 [[apps.users.ach18207ao.omo.settings.model_profiles."daily-normal".models]]
 model = "litellm/glm-5.3"
 reasoning = "max"
-[[apps.users.ach18207ao.omo.settings.model_profiles."daily-normal".models]]
-model = "litellm/superbrain"
-reasoning = "max"
 
 # ── category (委派ピラミッド。omo-native の reviewer 3 体はここを自動継承)──
 [apps.users.ach18207ao.omo.settings.categories.quick]
@@ -143,10 +154,6 @@ models = ["litellm/ultrabrain"]
 models = ["litellm/ultrabrain"]
 
 # ── 名前付きエージェント ──
-# senpi engine 用 (settings.jsonc -> ~/.omo/agent/settings.jsonc)
-[apps.users.ach18207ao.omo.agent.settings.sisyphus]
-prompt_append = "You NEVER implement. Route ALL code changes through task(category=...). Self-edit only single-line typos."
-
 # omo 本体用 (omo.jsonc -> ~/.omo/omo.jsonc)
 [apps.users.ach18207ao.omo.settings.agents.explore]
 model = "litellm/coding"

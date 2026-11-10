@@ -104,6 +104,13 @@ in
         force = true;
         text = toJSON omo.agent.models;
       };
+    }
+    // lib.optionalAttrs (omo.agent ? instructions) {
+      # omo native (senpi) injects ~/.omo/agent/AGENTS.md into every system prompt
+      ".omo/agent/AGENTS.md" = {
+        force = true;
+        text = omo.agent.instructions;
+      };
     };
   }
   // lib.optionalAttrs (cbmSettings != { }) {
