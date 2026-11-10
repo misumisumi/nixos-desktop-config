@@ -1,38 +1,39 @@
 {
-    "profiles": {
-        "defaults": {
-            "acrylicOpacity": 0.8,
-            "colorScheme": "Tokyo Night Moon",
-            "fontFace": "Moralerspace Neon HW",
-            "fontSize": 11,
-            "useAcrylic": true
-        }
-    },
-    "schemes": [
-        {
-            "background": "#222436",
-            "black": "#1b1d2b",
-            "blue": "#82aaff",
-            "brightBlack": "#444a73",
-            "brightBlue": "#82aaff",
-            "brightCyan": "#86e1fc",
-            "brightGreen": "#c3e88d",
-            "brightPurple": "#fca7ea",
-            "brightRed": "#ff757f",
-            "brightWhite": "#c8d3f5",
-            "brightYellow": "#ffc777",
-            "cursorColor": "#c8d3f5",
-            "cyan": "#86e1fc",
-            "foreground": "#c8d3f5",
-            "green": "#c3e88d",
-            "name": "Tokyo Night Moon",
-            "purple": "#c099ff",
-            "red": "#ff757f",
-            "selectionBackground": "#2d3f76",
-            "white": "#828bb8",
-            "yellow": "#ffc777"
-        }
-    ],
-    "theme": "system",
-    "themes": []
+  "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+  "profiles": {
+    "defaults": {
+      "acrylicOpacity": 0.8,
+      "colorScheme": "Tokyo Night Moon",
+      "fontFace": "Moralerspace Neon HW",
+      "fontSize": 11,
+      "useAcrylic": true
+    }
+  },
+  "schemes": [
+    {
+      "background": "#222436",
+      "black": "#1b1d2b",
+      "blue": "#82aaff",
+      "brightBlack": "#444a73",
+      "brightBlue": "#82aaff",
+      "brightCyan": "#86e1fc",
+      "brightGreen": "#c3e88d",
+      "brightPurple": "#fca7ea",
+      "brightRed": "#ff757f",
+      "brightWhite": "#c8d3f5",
+      "brightYellow": "#ffc777",
+      "cursorColor": "#c8d3f5",
+      "cyan": "#86e1fc",
+      "foreground": "#c8d3f5",
+      "green": "#c3e88d",
+      "name": "Tokyo Night Moon",
+      "purple": "#c099ff",
+      "red": "#ff757f",
+      "selectionBackground": "#2d3f76",
+      "white": "#828bb8",
+      "yellow": "#ffc777"
+    }
+  ],
+  "theme": "system",
+  "themes": []
 }
