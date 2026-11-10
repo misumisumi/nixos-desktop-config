@@ -128,8 +128,6 @@ models = ["litellm/coding"] # → qa-executor が自動追従
 models = ["litellm/superbrain", "litellm/ultrabrain"]
 [apps.users.sumi.omo.settings.categories.ultrabrain]
 models = ["litellm/ultrabrain"] # Sonnet → K3.1 Pro → local
-[apps.users.sumi.omo.settings.categories."visual-engineering"]
-models = ["litellm/visual-engineering"]
 [apps.users.sumi.omo.settings.categories.writing]
 models = ["litellm/writing"]
 [apps.users.sumi.omo.settings.categories.artistry]
@@ -145,10 +143,10 @@ model = "litellm/coding"
 model = "litellm/coding"
 [apps.users.sumi.omo.settings.agents."plan-consultant"]
 model = "litellm/ultrabrain"
-[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-reviewer"]
-model = "litellm/reviewer"
-[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."omo-native-gate-reviewer"]
-model = "litellm/reviewer"
+[apps.users.sumi.omo.settings.agents."plan-reviewer"]
+model = "litellm/otherbrain"
+[apps.users.sumi.omo.settings.agents."omo-native-gate-reviewer"]
+model = "litellm/otherbrain"
 
 # omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
 # omo native は opencode の providers 設定を読まないため、LiteLLM をここで定義する
@@ -180,11 +178,6 @@ reasoning = true
 contextWindow = 1000000
 maxTokens = 131072
 [[apps.users.sumi.omo.agent.models.providers.litellm.models]]
-id = "reviewer"
-reasoning = true
-contextWindow = 1000000
-maxTokens = 131072
-[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
 id = "complex"
 reasoning = true
 contextWindow = 922000
@@ -203,10 +196,12 @@ id = "auto"
 contextWindow = 1000000
 maxTokens = 131072
 [[apps.users.sumi.omo.agent.models.providers.litellm.models]]
-id = "writing"
-[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
-id = "visual-engineering"
+id = "otherbrain"
 reasoning = true
+contextWindow = 1048576
+maxTokens = 65536
+[[apps.users.sumi.omo.agent.models.providers.litellm.models]]
+id = "writing"
 contextWindow = 1048576
 maxTokens = 65536
 
