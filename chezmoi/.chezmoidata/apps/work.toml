@@ -90,6 +90,7 @@ defaultModel = "glm-5.3"
 
 [apps.users.ach18207ao.omo.settings]
 model_profile = "litellm/glm-5.3"
+telemetry = { enabled = false }
 exclude_models = [
     "anthropic/claude-fable-5-1",
     "anthropic/claude-opus-5-5",

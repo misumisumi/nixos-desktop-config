@@ -107,6 +107,10 @@ in
         force = true;
         text = toJSON omo.agent.settings;
       };
+      ".omo/agent/skills/glm-delegation/SKILL.md" = {
+        force = true;
+        source = getChezmoiFilePath "dot_omo/agent/skills/glm-delegation/SKILL.md";
+      };
     }
     // lib.optionalAttrs (omo.agent.models != { }) {
       # omo native (senpi) reads providers from its own models.json, not opencode.json
