@@ -55,9 +55,6 @@ final: prev: {
     proprietaryCodecs = true;
     enableWidevine = true;
   };
-  vrc-get = prev.vrc-get.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or [ ]) ++ [ final.aws-lc ];
-  });
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
@@ -75,10 +72,6 @@ final: prev: {
             # high-cpu load during test is the cause, but I don't know how to fix it yet. So I just disable the test for now.
             doInstallCheck = false;
           });
-          #NOTE: fastmcpのバージョンがv4になったら削除する
-          fastmcp-slim = pprev.fastmcp-slim.override {
-            mcp = pprev.mcp_1;
-          };
         })
       ];
       self = prev.python3.override {
