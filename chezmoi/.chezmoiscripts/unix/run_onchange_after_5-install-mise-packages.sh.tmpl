@@ -23,7 +23,7 @@ logging "Start"
 
 if ! command -v mise &>/dev/null; then
   logging "mise is not installed, installing it now"
-  curl https://mise.run | sh
+  curl -fsSL https://mise.run | sh
 fi
 
 logging "Installing packages..."

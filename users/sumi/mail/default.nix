@@ -93,21 +93,17 @@
     settings = {
       "extensions.autoDisableScopes" = 0;
       "font.language.group" = "ja";
-      "intl.accept_languages" = "ja,en-US,en";
+      "intl.accept_languages" = "ja,en";
       "intl.locale.requested" = "ja";
       "mail.identity.default.suppress_signature_separator" = true;
     };
     profiles =
       let
-        inherit (lib) optional;
-        extensions =
-          with pkgs.nur.repos.rycee.firefox-addons;
-          [
-            darkreader
-            languagetool
-            translate-web-pages
-          ]
-          ++ optional pkgs.stdenv.hostPlatform.isLinux pkgs.nur.repos.sigprof.thunderbird-langpack-ja;
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          darkreader
+          languagetool
+          translate-web-pages
+        ];
       in
       {
         private = {

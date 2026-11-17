@@ -1,4 +1,14 @@
 [apps.users."kobayashi.sumiharu.r4"]
+skills = [
+    "https://github.com/coji/natural-japanese/skills",
+    "https://github.com/Imbad0202/academic-research-skills",
+    # academic-paper,
+    # academic-paper-reviewer,
+    # academic-pipeline
+    # critical-thinking
+    # deep-research
+    # sr-screener
+]
 
 [apps.users."kobayashi.sumiharu.r4".delta]
 [apps.users."kobayashi.sumiharu.r4".delta.git]
@@ -30,50 +40,192 @@ signByDefault = false
 paper = "delta --paging=never"
 
 [apps.users."kobayashi.sumiharu.r4".opencode]
-plugin = ["@tarquinen/opencode-dcp@latest"]
-scrollbar = true
-[apps.users.sumi.opencode.theme]
+plugins = ["opencode-plugin-litellm@latest"]
+[apps.users."kobayashi.sumiharu.r4".opencode.theme]
 name = "tokyonight"
 mode = "dark"
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm]
-npm = "@ai-sdk/openai-compatible"
-name = "LiteLLM (local)"
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm.options]
+[apps.users."kobayashi.sumiharu.r4".opencode.websearch]
+provider = "exa"
+[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm]
+name = "LiteLLM"
+package = "@opencode/ai/providers/openai-compatible"
+[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.settings]
 baseURL = "https://llm.misumi-sumi.com/v1"
-apiKey = "sk-litellm-dummy"
+apiKey = "{env:LITELLM_API_KEY}"
 timeout = false
 chunkTimeout = false
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm.options.headers]
-CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID}"
-CF-Access-Client-Secret = "{env:CF_ACCESS_SECRET}"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next"]
-name = "Qwen3.8 Flash Next"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".settings]
-reasoningEffort = "medium"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.low.settings]
-reasoningEffort = "low"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.medium.settings]
-reasoningEffort = "medium"
-[apps.users.sumi.opencode.provider.litellm.models."qwen3.8-flash-next".variants.xhigh.settings]
-reasoningEffort = "xhigh"
-[apps.users."kobayashi.sumiharu.r4".opencode.provider.litellm.models."gemma4-26b-a4b"]
-name = "Gemma 4 26B A4B"
-[apps.users."kobayashi.sumiharu.r4".opencode.permission]
-edit = "allow"
-glob = "allow"
-grep = "allow"
-read = "allow"
-skill = "allow"
-webfetch = "allow"
-websearch = "allow"
-question = "allow"
+formatModelNames = false
+[apps.users."kobayashi.sumiharu.r4".opencode.providers.litellm.headers]
+CF-Access-Client-Id = "{env:CF_ACCESS_CLIENT_ID_API_KEY}"
+CF-Access-Client-Secret = "{env:CF_ACCESS_CLIENT_SECRET_API_KEY}"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "edit"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "glob"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "grep"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "question"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "read"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "skill"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "webfetch"
+resource = "*"
+effect = "allow"
+[[apps.users."kobayashi.sumiharu.r4".opencode.permissions]]
+action = "websearch"
+resource = "*"
+effect = "allow"
+
+# omo (oh-my-openagent) settings
+[apps.users."kobayashi.sumiharu.r4".omo]
+disabled_mcps = []
+# omo (oh-my-openagent) settings
+# litellm の combo alias を category / agent に割り当てる
+# main は agent combo を廃止し GLM-5.3 を直接ピン留め
+[apps.users."kobayashi.sumiharu.r4".omo.agent.settings]
+defaultProvider = "litellm"
+defaultModel = "glm-5.3"
+
+[apps.users."kobayashi.sumiharu.r4".omo.settings]
+model_profile = "litellm/glm-5.3"
+telemetry = { enabled = false }
+exclude_models = [
+    "anthropic/claude-fable-5-1",
+    "anthropic/claude-opus-5-5",
+    "anthropic/claude-opus-4-6",
+    "openai/gpt-6-astra",
+    "openai/gpt-6-sol",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6.1-sol-fast",
+    "opencode/claude-fable-5-1",
+    "opencode/claude-opus-5-5",
+    "opencode/claude-opus-4-6",
+    "opencode/claude-sonnet-5-5",
+    "opencode/claude-sonnet-5",
+    "opencode/gpt-6-astra",
+    "opencode/gpt-5.6-sol",
+    "opencode/gpt-5.6-sol-fast",
+    "opencode/kimi-k3",
+]
+
+# ── main (native harness: 新規セッション時に適用。TUI では /model litellm/glm-5.3)──
+[[apps.users."kobayashi.sumiharu.r4".omo.settings.model_profiles."daily-normal".models]]
+model = "litellm/glm-5.3"
+reasoning = "max"
+
+# ── category (委派ピラミッド。omo-native の reviewer 3 体はここを自動継承)──
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories.quick]
+models = ["litellm/quick"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories."unspecified-low"]
+models = ["litellm/auto"] # Jev 裁定プール
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories."unspecified-high"]
+models = ["litellm/complex", "litellm/superbrain"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories."deep-low"]
+models = ["litellm/coding"] # → qa-executor が自動追従
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories."deep-high"]
+models = ["litellm/superbrain", "litellm/ultrabrain"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories.ultrabrain]
+models = ["litellm/ultrabrain"] # Sonnet → K3.1 Pro → local
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories."visual-engineering"]
+models = ["litellm/visual-engineering"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories.writing]
+models = ["litellm/writing"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories.artistry]
+models = ["litellm/ultrabrain"]
+[apps.users."kobayashi.sumiharu.r4".omo.settings.categories.architect]
+models = ["litellm/ultrabrain"]
+
+# ── 名前付きエージェント ──
+# omo 本体用 (omo.jsonc -> ~/.omo/omo.jsonc)
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents.explore]
+model = "litellm/coding"
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents.librarian]
+model = "litellm/coding"
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-consultant"]
+model = "litellm/ultrabrain"
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."plan-reviewer"]
+model = "litellm/otherbrain"
+[apps.users."kobayashi.sumiharu.r4".omo.settings.agents."omo-native-gate-reviewer"]
+model = "litellm/otherbrain"
+
+# omo (senpi engine) provider catalogue -> ~/.omo.settings/agent/models.json
+# omo native は opencode の providers 設定を読まないため、LiteLLM をここで定義する
+[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm]
+name = "LiteLLM"
+baseUrl = "https://llm.misumi-sumi.com/v1"
+api = "openai-completions"
+apiKey = "${LITELLM_API_KEY}"
+[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.compat]
+supportsReasoningEffort = true
+[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.headers]
+CF-Access-Client-Id = "${CF_ACCESS_CLIENT_ID_API_KEY}"
+CF-Access-Client-Secret = "${CF_ACCESS_CLIENT_SECRET_API_KEY}"
+
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "glm-5.3"
+name = "GLM-5.3"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "superbrain"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "ultrabrain"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "complex"
+reasoning = true
+contextWindow = 922000
+maxTokens = 128000
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "coding"
+reasoning = true
+contextWindow = 1000000
+maxTokens = 384000
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "quick"
+contextWindow = 1048576
+maxTokens = 131072
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "auto"
+contextWindow = 1000000
+maxTokens = 131072
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "otherbrain"
+reasoning = true
+contextWindow = 1048576
+maxTokens = 65536
+[[apps.users."kobayashi.sumiharu.r4".omo.agent.models.providers.litellm.models]]
+id = "writing"
+contextWindow = 1048576
+maxTokens = 65536
 
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers]
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server]
 command = "github-mcp-server"
 args = ["stdio"]
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.github-mcp-server.env]
-GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT}"
+GITHUB_PERSONAL_ACCESS_TOKEN = "${GITHUB_PAT_API_KEY}"
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.paper_search]
 command = "paper-search-mcp" # wrapped command made by me
 # [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.discord]
@@ -87,7 +239,9 @@ command = "mcp-server-git" # wrapped command made by me
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7]
 command = "context7-mcp" # wrapped command made by me
 [apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.context7.env]
-CONTEXT7_API_KEY = "${CONTEXT7_API_KEY}"
+CONTEXT7_API_KEY = "{env:CONTEXT7_API_KEY}"
+[apps.users."kobayashi.sumiharu.r4".mcp.mcpServers.codebase-memory]
+command = "codebase-memory-mcp" # wrapped command made by me
 
 [apps.users."kobayashi.sumiharu.r4".shell]
 historyIgnore = [

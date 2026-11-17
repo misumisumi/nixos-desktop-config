@@ -159,7 +159,9 @@ if (Test-Path $localrc) {
 
 # miseの有効化
 if (Get-Command * | Where-Object { $_.Name -match "mise" }) {
-  Invoke-Expression "$(mise activate pwsh)"
+  # "$(mise activate pwsh)" joins the multi-line script into one line (array -> $OFS),
+  # which breaks Invoke-Expression parsing; pipe through Out-String instead.
+  mise activate pwsh | Out-String | Invoke-Expression
 }
 
 # WSLのコマンドをpowershellから呼び出す

@@ -1,0 +1,31 @@
+{{- $userName := trimPrefix (print (upper .chezmoi.hostname) "\\") .chezmoi.username -}}
+{{- $user := or (index (or (index .apps "users") dict) $userName) dict -}}
+{{- $cbm := or (get $user "codebaseMemory") dict -}}
+{{- if $cbm -}}
+$env:PATH="$env:USERPROFILE\scoop\shims;$env:USERPROFILE\.local\bin;"+$env:PATH
+$FNAME=Split-Path -Path $MyInvocation.MyCommand.Path -Leaf
+function Logging($1) {
+    Write-Output "${FNAME}: $1"
+}
+
+Logging "Start"
+
+try {
+    Get-Command -Name codebase-memory-mcp -ErrorAction Stop | Out-Null
+} catch [System.Management.Automation.CommandNotFoundException] {
+    Logging "codebase-memory-mcp is not installed, skipping"
+    exit 0
+}
+
+# No env var or CLI flag exists for these keys; setting them is the only way
+# (`config set` writes the config database). Changes apply from the next MCP
+# session, not to sessions that are already connected.
+{{- range $key, $value := $cbm }}
+codebase-memory-mcp config set {{ $key }} {{ $value | quote }}
+if ($LASTEXITCODE -ne 0) {
+    Logging "failed to set {{ $key }}"
+}
+{{- end }}
+
+Logging "Finish"
+{{- end }}

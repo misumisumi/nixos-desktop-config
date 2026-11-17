@@ -1,0 +1,33 @@
+{{- $userName := .chezmoi.username -}}
+{{- $user := or (index (or (index .apps "users") dict) $userName) dict -}}
+{{- $cbm := or (get $user "codebaseMemory") dict -}}
+{{- if $cbm -}}
+#!/usr/bin/env bash
+function logging() {
+    echo "$(basename "$0"): $*"
+}
+
+PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+
+logging "Start"
+
+if command -v codebase-memory-mcp >/dev/null 2>&1; then
+    cbm_cmd=(codebase-memory-mcp)
+elif command -v mise >/dev/null 2>&1; then
+    cbm_cmd=(mise exec -- codebase-memory-mcp)
+else
+    logging "codebase-memory-mcp is not installed, skipping"
+    exit 0
+fi
+
+# No env var or CLI flag exists for these keys; setting them is the only way
+# (`config set` writes ${CBM_CACHE_DIR}/_config.db). Changes apply from the
+# next MCP session, not to sessions that are already connected.
+{{- range $key, $value := $cbm }}
+if ! "${cbm_cmd[@]}" config set {{ $key }} {{ $value | quote }}; then
+    logging "failed to set {{ $key }}"
+fi
+{{- end }}
+
+logging "Finish"
+{{- end }}

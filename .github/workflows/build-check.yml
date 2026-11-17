@@ -120,9 +120,10 @@ jobs:
           brew cleanup
 
           sudo rm -rf /Applications/Xcode.app
-          sudo xcode-select --reset
-          sudo rm -rf /Library/Developer/CommandLineTools
           sudo rm -rf ~/Library/Developer/Xcode
+          # xcodes のビルドで dsymutil を使うため CommandLineTools は残す
+          sudo xcode-select --switch /Library/Developer/CommandLineTools
+          xcode-select -p
           df -h
 
         #NOTE: Limit cpu usage because pytest often cannot connect to the server under high cpu load.
@@ -146,15 +147,30 @@ jobs:
     if: ${{ !cancelled() }}
     steps:
       - name: build-check-skipped
-        if: ${{ needs.pre-build.outputs.check == 'false' && needs.build-check-matrix.result == 'skipped' }}
+        if: >-
+          ${{
+            needs.pre-build.outputs.check == 'false' &&
+            needs.build-check-matrix.result == 'skipped' &&
+            needs.build-check-matrix-darwin.result == 'skipped'
+          }}
         run: |
           exit 0
       - name: build-check-success
-        if: ${{ needs.pre-build.outputs.check == 'true' && needs.build-check-matrix.result == 'success' }}
+        if: >-
+          ${{
+            needs.pre-build.outputs.check == 'true' &&
+            needs.build-check-matrix.result == 'success' &&
+            needs.build-check-matrix-darwin.result == 'success'
+          }}
         run: |
           exit 0
       - name: build-check-failed
-        if: ${{ needs.pre-build.outputs.check == 'true' && needs.build-check-matrix.result != 'success' }}
+        if: >-
+          ${{
+            needs.pre-build.outputs.check == 'true' &&
+            (needs.build-check-matrix.result != 'success' ||
+             needs.build-check-matrix-darwin.result != 'success')
+          }}
         run: |
           exit 1
 

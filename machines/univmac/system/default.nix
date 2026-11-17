@@ -37,6 +37,7 @@
       "microsoft-office"
       "obs"
       "obsidian"
+      "paseo"
       "slack"
       "vivaldi"
       "xquartz"

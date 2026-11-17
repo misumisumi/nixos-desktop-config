@@ -100,7 +100,11 @@
         # clipboard
         set -g set-clipboard external
         set -g allow-passthrough on
-        set -g terminal-features 'xterm*:clipboard'
+        set -as terminal-features 'xterm*:clipboard:extkeys'
+
+        # For oh-my-opencode
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
 
         setw -g window-active-style fg='#c0caf5',bg='#24283b'
         setw -g window-style fg='#a9b1d6',bg='#1d202f'

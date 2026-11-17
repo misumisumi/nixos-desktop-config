@@ -1,0 +1,44 @@
+{{- if (ne .chezmoi.os "windows") -}}
+{{- $os := .chezmoi.os -}}
+{{- $osConfig := or (get . $os) dict -}}
+
+{{- $hostName := .chezmoi.hostname -}}
+{{- $hostConfig := or (get (or (get $osConfig "hosts") dict) $hostName) dict -}}
+{{- $hostExternals := or (get $hostConfig "externals") list -}}
+
+{{- $userName := .chezmoi.username -}}
+{{- $userConfig := or (get (or (get $osConfig "users") dict) $userName) dict -}}
+{{- $userExternals := or (get $userConfig "externals") list -}}
+
+{{- $externals := concat $hostExternals $userExternals | uniq -}}
+{{- if (has "opencode-skills" $externals) -}}
+# Skills live directly under `~/.config/opencode/skills`, and `shared/` is placed
+# next to them because SKILL.md links it as `../shared/...`.
+# https://github.com/imbad0202/academic-research-skills
+{{- range $skill := splitList "," "academic-paper,academic-paper-reviewer,academic-pipeline,deep-research,sr-screener" }}
+[".config/opencode/skills/{{ $skill }}"]
+type = "archive"
+url = "https://github.com/imbad0202/academic-research-skills/archive/refs/tags/v3.24.2.tar.gz"
+stripComponents = 2
+exact = true
+include = ["*/{{ $skill }}/**"]
+{{- end }}
+
+[".config/opencode/skills/shared"]
+type = "archive"
+url = "https://github.com/imbad0202/academic-research-skills/archive/refs/tags/v3.24.2.tar.gz"
+stripComponents = 2
+exact = true
+include = ["*/shared/**"]
+
+# https://github.com/coji/natural-japanese
+{{- range $skill := splitList "," "critical-thinking,natural-japanese" }}
+[".config/opencode/skills/{{ $skill }}"]
+type = "archive"
+url = "https://github.com/coji/natural-japanese/archive/refs/tags/v2.0.0.tar.gz"
+stripComponents = 3
+exact = true
+include = ["*/skills/{{ $skill }}/**"]
+{{- end }}
+{{- end }}
+{{- end }}

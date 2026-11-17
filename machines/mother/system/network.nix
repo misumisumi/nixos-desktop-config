@@ -1,4 +1,9 @@
-{ hostname, pkgs, ... }:
+{
+  config,
+  hostname,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../../settings/system/network/vpn/l2tp
@@ -59,6 +64,29 @@
         # }
       ];
     };
+    wg-quick = {
+      interfaces = {
+        wg0 = {
+          autostart = false;
+          mtu = 1280;
+          address = [
+            "10.250.0.30/24"
+          ];
+          peers = [
+            {
+              allowedIPs = [
+                "10.250.0.0/24"
+              ];
+              endpoint = "wg.oci.misumi-sumi.com:443";
+              publicKey = "BR2XCDtghHRZYqGryTPbal+Ms7gYlgzN+b+AAlWGIms=";
+              presharedKeyFile = config.sops.secrets."wireguard/presharedKey".path;
+              persistentKeepalive = 25;
+            }
+          ];
+          privateKeyFile = config.sops.secrets."wireguard/privateKey".path;
+        };
+      };
+    };
   };
 
   systemd = {
@@ -84,6 +112,13 @@
             Id = 10;
           };
         };
+        "br1" = {
+          netdevConfig = {
+            Kind = "bridge";
+            Name = "br1";
+            MACAddress = "56:47:6a:94:2d:aa";
+          };
+        };
       };
       networks = {
         # "10-wired-2.5G" = {
@@ -100,6 +135,8 @@
           bridgeVLANs = [
             {
               VLAN = 1;
+              PVID = 1;
+              EgressUntagged = 1;
             }
             {
               VLAN = 10;
@@ -108,12 +145,40 @@
         };
         "20-br0" = {
           matchConfig.Name = "br0";
-          DHCP = "yes";
-          vlan = [ "br0.10" ];
+          # DHCP = "yes";
+          # vlan = [ "br0.10" ];
+          address = [ "192.168.1.10/24" ];
+          routes = [
+            {
+              Destination = "192.168.1.0/24";
+              Gateway = "192.168.1.254";
+            }
+            {
+              Destination = "192.168.2.0/24";
+              Gateway = "192.168.1.254";
+            }
+          ];
         };
-        "20-br0.10" = {
-          matchConfig.Name = "br0.10";
-          address = [ "192.168.2.11/24" ];
+        # "20-br0.10" = {
+        #   matchConfig.Name = "br0.10";
+        #   address = [ "192.168.2.10/24" ];
+        # };
+        "10-wired-40G" = {
+          matchConfig = {
+            MACAddress = "50:6b:4b:59:e3:42";
+          };
+          bridge = [ "br1" ];
+        };
+        "20-br1" = {
+          matchConfig.Name = "br1";
+          address = [ "192.168.10.200/24" ];
+          dns = [ "192.168.254.253" ];
+          routes = [
+            {
+              Gateway = "192.168.10.254";
+              Destination = "0.0.0.0/0";
+            }
+          ];
         };
       };
     };
