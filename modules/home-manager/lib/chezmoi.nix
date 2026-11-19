@@ -106,5 +106,5 @@ in
         mapAttrsToList (x: _: importTOML (path + "/${x}")) (filterAttrs (n: _: hasSuffix ".toml" n) files)
       );
     in
-    conf.apps.users.${username};
+    conf.apps.users.${username} or { };
 }

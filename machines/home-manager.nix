@@ -18,6 +18,7 @@ let
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
+        pkgsPath = pkgs.path;
         inherit
           self
           inputs
@@ -32,7 +33,6 @@ let
       modules = [
         inputs.catppuccin.homeModules.catppuccin
         inputs.flakes.homeManagerModules.default
-        inputs.impermanence.homeManagerModules.impermanence
         inputs.nvimdots.homeManagerModules.default
         inputs.sops-nix.homeManagerModules.sops
         inputs.spicetify-nix.homeManagerModules.default
@@ -85,3 +85,15 @@ listToAttrs (
       };
   }) presetAndShell
 )
+// {
+  steam-frame = settings {
+    hostname = "frame";
+    user = "sumi";
+    homeDirectory = "/home/sumi";
+    colorTheme = "tokyonight-moon";
+    schemes = [
+      "presets/large"
+      "shell/zsh"
+    ];
+  };
+}
