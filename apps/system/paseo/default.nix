@@ -12,12 +12,9 @@ in
 {
   # paseo-desktop
   environment.systemPackages = optional config.services.xserver.enable (
-    (inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop.override {
-      electron = pkgs.electron_44;
-    }).overrideAttrs
-      (old: {
-        preBuild = (old.preBuild or "") + "npm run postinstall";
-      })
+    inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.desktop.overrideAttrs (old: {
+      preBuild = (old.preBuild or "") + "npm run postinstall";
+    })
   );
 
   services.paseo = {

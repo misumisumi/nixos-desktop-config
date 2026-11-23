@@ -55,10 +55,6 @@ final: prev: {
     proprietaryCodecs = true;
     enableWidevine = true;
   };
-  #NOTE: maybe resolved on electron 45.3.2 (electron/electron#55737)
-  obsidian = prev.obsidian.override {
-    electron = prev.electron_44;
-  };
   python3 =
     let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
