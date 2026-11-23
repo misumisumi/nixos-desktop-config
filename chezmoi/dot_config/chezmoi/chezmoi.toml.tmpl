@@ -1,5 +1,12 @@
 {{ if eq .chezmoi.os "windows" -}}
 [cd]
-command = "C:/Windows/System32/WindowsPowerShell/v1.0/powershell"
+command = "pwsh"
 args = ["-NoLogo"]
+
+# Run .ps1 scripts with PowerShell 7 even if chezmoi is older than 2.69.4
+# (whose default is Windows PowerShell 5.1). PowerShell 7 is installed by the
+# winget step, so this takes effect from the second apply onwards.
+[interpreters.ps1]
+command = "pwsh"
+args = ["-NoLogo", "-File"]
 {{ end }}

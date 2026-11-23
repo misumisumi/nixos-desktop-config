@@ -14,6 +14,30 @@
 {{ or (get $userEnvConfig "initExtra") "" }}
 {{ or (get $hostEnvConfig "initExtra") "" }}
 
+# Normalize PSModulePath before importing modules.
+# chezmoi runs .ps1 scripts with `-File` without `-NoProfile`, so this profile is
+# also loaded by non-interactive scripts (and by elevated processes that inherit
+# their environment from them).
+$winpsUserModules = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'WindowsPowerShell\Modules'
+if ($PSVersionTable.PSEdition -eq 'Desktop') {
+    # Windows PowerShell 5.1 inherits PowerShell 7 module paths when it is started
+    # through an intermediate process (chezmoi, VS Code, elevation, ...). The PS7
+    # Microsoft.PowerShell.Utility then shadows the 5.1 one, and cmdlets such as
+    # Import-PowerShellDataFile disappear.
+    $env:PSModulePath = (($env:PSModulePath -split ';') | Where-Object {
+        $_ -and
+        $_ -notmatch '\\Documents\\PowerShell\\Modules$' -and
+        $_ -notmatch '\\Program Files\\PowerShell\\' -and
+        $_ -notmatch '\\PowerShell\\[0-9][^\\]*\\Modules$' -and
+        $_ -notmatch '\\WindowsApps\\Microsoft\.PowerShell_'
+    }) -join ';'
+}
+if ((Test-Path $winpsUserModules) -and (($env:PSModulePath -split ';') -notcontains $winpsUserModules)) {
+    # Modules installed by run_onchange_*_install-ps-modules under 5.1 live here.
+    # Append so that PowerShell 7's own modules keep precedence.
+    $env:PSModulePath = "$env:PSModulePath;$winpsUserModules"
+}
+
 # Import modules
 Import-Module PSReadline
 Import-Module syntax-highlighting
